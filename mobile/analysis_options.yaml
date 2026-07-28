@@ -1,0 +1,22 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  language:
+    strict-casts: true
+    strict-inference: true
+    strict-raw-types: true
+  errors:
+    # Le moteur SRS est un contrat : toute API publique doit être documentée.
+    public_member_api_docs: ignore
+    todo: info
+
+linter:
+  rules:
+    always_declare_return_types: true
+    avoid_dynamic_calls: true
+    prefer_final_locals: true
+    prefer_const_constructors: true
+    unawaited_futures: true
+    # Les valeurs numériques du protocole (ratings 1..4) ne doivent jamais
+    # être écrites en dur ailleurs que dans les enums.
+    avoid_field_initializers_in_const_classes: false

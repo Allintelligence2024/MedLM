@@ -1,0 +1,130 @@
+{
+  "deck_id": "deck_biochim_glycolyse",
+  "module_id": "biochimie",
+  "programme": "medecine_dz",
+  "study_year": 1,
+  "version": 1,
+  "name_fr": "Glycolyse et régulation métabolique",
+  "name_en": "Glycolysis and metabolic regulation",
+  "description_fr": "Enzymes clés, bilan énergétique, voie anaérobie et contrôle hormonal de la glycolyse.",
+  "is_premium": true,
+  "is_demo": false,
+  "license": "medankidz_internal_v1",
+  "cards": [
+    {
+      "id": "biochim_glyc_001",
+      "type": "basic",
+      "version": 1,
+      "is_premium": true,
+      "difficulty_hint": 3,
+      "tags": ["biochimie", "metabolisme", "glucides"],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Biochimie",
+        "can_distribute_offline": true
+      },
+      "content": {
+        "front": {
+          "fr": "Quelle est l'enzyme limitante de la glycolyse et comment est-elle régulée ?",
+          "en": "Which enzyme is rate-limiting in glycolysis, and how is it regulated?"
+        },
+        "back": {
+          "fr": "La phosphofructokinase-1 (PFK-1).\nActivateurs : AMP, ADP, fructose-2,6-bisphosphate.\nInhibiteurs : ATP, citrate, H+ (acidose).",
+          "en": "Phosphofructokinase-1 (PFK-1).\nActivators: AMP, ADP, fructose-2,6-bisphosphate.\nInhibitors: ATP, citrate, H+."
+        },
+        "explanation": {
+          "fr": "La PFK-1 est le véritable point de contrôle : elle intègre l'état énergétique de la cellule. Un rapport ATP/AMP élevé signale que l'énergie est suffisante et freine la voie ; le citrate, issu du cycle de Krebs, signale que les substrats abondent déjà. Le fructose-2,6-bisphosphate est le levier hormonal, sous contrôle insuline/glucagon.",
+          "en": "PFK-1 integrates the cell's energy state. High ATP or citrate signals sufficiency and inhibits the pathway."
+        },
+        "medical_term_en": "phosphofructokinase-1"
+      }
+    },
+    {
+      "id": "biochim_glyc_002",
+      "type": "basic",
+      "version": 1,
+      "is_premium": true,
+      "difficulty_hint": 2,
+      "tags": ["biochimie", "metabolisme"],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "can_distribute_offline": true
+      },
+      "content": {
+        "front": {
+          "fr": "Quel est le bilan net en ATP et NADH de la glycolyse pour une molécule de glucose ?",
+          "en": "What is the net ATP and NADH yield of glycolysis per glucose molecule?"
+        },
+        "back": {
+          "fr": "Net : 2 ATP et 2 NADH.\n(4 ATP produits − 2 ATP consommés en phase d'investissement.)",
+          "en": "Net: 2 ATP and 2 NADH (4 produced minus 2 invested)."
+        },
+        "explanation": {
+          "fr": "La phase d'investissement consomme 2 ATP (hexokinase et PFK-1), la phase de rendement en produit 4 (phosphoglycérate kinase et pyruvate kinase, ×2 puisqu'il y a deux trioses). En aérobiose, les 2 NADH rejoignent la chaîne respiratoire via les navettes malate-aspartate ou glycérol-3-phosphate.",
+          "en": "Investment phase costs 2 ATP; payoff phase yields 4. NADH enters the respiratory chain via shuttles."
+        },
+        "medical_term_en": "substrate-level phosphorylation"
+      }
+    },
+    {
+      "id": "biochim_glyc_003",
+      "type": "qcm",
+      "version": 1,
+      "is_premium": true,
+      "difficulty_hint": 4,
+      "tags": ["biochimie", "metabolisme", "qcm"],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Biochimie",
+        "can_distribute_offline": true
+      },
+      "content": {
+        "question": {
+          "fr": "Le globule rouge dépend exclusivement de la glycolyse anaérobie parce qu'il :",
+          "en": "The red blood cell relies exclusively on anaerobic glycolysis because it:"
+        },
+        "is_multiple": false,
+        "options": [
+          {
+            "id": "A",
+            "fr": "Est dépourvu de mitochondries",
+            "en": "Lacks mitochondria",
+            "is_correct": true,
+            "explanation_fr": "Exact. Sans mitochondrie, ni cycle de Krebs ni phosphorylation oxydative ne sont possibles : le pyruvate est nécessairement réduit en lactate par la LDH, ce qui régénère le NAD+ indispensable à la poursuite de la glycolyse.",
+            "explanation_en": "Correct. Without mitochondria, pyruvate must be reduced to lactate to regenerate NAD+."
+          },
+          {
+            "id": "B",
+            "fr": "Ne possède pas d'hexokinase",
+            "en": "Lacks hexokinase",
+            "is_correct": false,
+            "explanation_fr": "Non. Le globule rouge possède bien une hexokinase — sans elle, aucune glycolyse ne serait possible.",
+            "explanation_en": "No. The red cell does have hexokinase."
+          },
+          {
+            "id": "C",
+            "fr": "Ne consomme pas de glucose",
+            "en": "Does not consume glucose",
+            "is_correct": false,
+            "explanation_fr": "Non, c'est l'inverse : le glucose est son unique substrat énergétique.",
+            "explanation_en": "No — glucose is its only energy substrate."
+          },
+          {
+            "id": "D",
+            "fr": "Utilise préférentiellement les acides gras",
+            "en": "Preferentially uses fatty acids",
+            "is_correct": false,
+            "explanation_fr": "Non. La bêta-oxydation est mitochondriale, donc impossible dans le globule rouge.",
+            "explanation_en": "No. Beta-oxidation is mitochondrial and therefore impossible here."
+          }
+        ]
+      }
+    }
+  ]
+}
