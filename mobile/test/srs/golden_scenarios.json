@@ -1,0 +1,2731 @@
+{
+  "_comment": "Généré par tools/generate_golden.py — NE PAS ÉDITER À LA MAIN.",
+  "t0": 1700000000000,
+  "weights": [
+    0.40255,
+    1.18385,
+    3.173,
+    15.69105,
+    7.1949,
+    0.5345,
+    1.4604,
+    0.0046,
+    1.54575,
+    0.1192,
+    1.01925,
+    1.9395,
+    0.11,
+    0.29605,
+    2.2698,
+    0.2315,
+    2.9898,
+    0.51655,
+    0.6621
+  ],
+  "scenarios": [
+    {
+      "name": "repeat_again",
+      "description": "Six revues consécutives notées again",
+      "cardType": "basic",
+      "t0": 1700000000000,
+      "steps": [
+        {
+          "state": "learning",
+          "stability": 0.40255,
+          "difficulty": 7.1949,
+          "elapsedDays": 0,
+          "scheduledDays": 0,
+          "reps": 1,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 1,
+          "ratingName": "again",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700000060000
+        },
+        {
+          "state": "learning",
+          "stability": 0.20168903,
+          "difficulty": 8.08279702,
+          "elapsedDays": 1,
+          "scheduledDays": 0,
+          "reps": 2,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 1,
+          "ratingName": "again",
+          "gapDays": 1,
+          "nowMs": 1700086400000,
+          "dueMs": 1700086460000
+        },
+        {
+          "state": "learning",
+          "stability": 0.10105196,
+          "difficulty": 8.67978303,
+          "elapsedDays": 1,
+          "scheduledDays": 0,
+          "reps": 3,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 1,
+          "ratingName": "again",
+          "gapDays": 1,
+          "nowMs": 1700172800000,
+          "dueMs": 1700172860000
+        },
+        {
+          "state": "learning",
+          "stability": 0.05062991,
+          "difficulty": 9.08117226,
+          "elapsedDays": 1,
+          "scheduledDays": 0,
+          "reps": 4,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 1,
+          "ratingName": "again",
+          "gapDays": 1,
+          "nowMs": 1700259200000,
+          "dueMs": 1700259260000
+        },
+        {
+          "state": "learning",
+          "stability": 0.02536703,
+          "difficulty": 9.35105013,
+          "elapsedDays": 1,
+          "scheduledDays": 0,
+          "reps": 5,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 1,
+          "ratingName": "again",
+          "gapDays": 1,
+          "nowMs": 1700345600000,
+          "dueMs": 1700345660000
+        },
+        {
+          "state": "learning",
+          "stability": 0.01270961,
+          "difficulty": 9.53250508,
+          "elapsedDays": 1,
+          "scheduledDays": 0,
+          "reps": 6,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 1,
+          "ratingName": "again",
+          "gapDays": 1,
+          "nowMs": 1700432000000,
+          "dueMs": 1700432060000
+        }
+      ]
+    },
+    {
+      "name": "repeat_hard",
+      "description": "Six revues consécutives notées hard",
+      "cardType": "basic",
+      "t0": 1700000000000,
+      "steps": [
+        {
+          "state": "learning",
+          "stability": 1.18385,
+          "difficulty": 6.48830527,
+          "elapsedDays": 0,
+          "scheduledDays": 0,
+          "reps": 1,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 2,
+          "ratingName": "hard",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700000360000
+        },
+        {
+          "state": "learning",
+          "stability": 0.99424621,
+          "difficulty": 7.04050155,
+          "elapsedDays": 1,
+          "scheduledDays": 0,
+          "reps": 2,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 2,
+          "ratingName": "hard",
+          "gapDays": 1,
+          "nowMs": 1700086400000,
+          "dueMs": 1700087000000
+        },
+        {
+          "state": "learning",
+          "stability": 0.8350091,
+          "difficulty": 7.50096685,
+          "elapsedDays": 1,
+          "scheduledDays": 0,
+          "reps": 3,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 2,
+          "ratingName": "hard",
+          "gapDays": 1,
+          "nowMs": 1700172800000,
+          "dueMs": 1700173400000
+        },
+        {
+          "state": "learning",
+          "stability": 0.70127519,
+          "difficulty": 7.88493954,
+          "elapsedDays": 1,
+          "scheduledDays": 0,
+          "reps": 4,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 2,
+          "ratingName": "hard",
+          "gapDays": 1,
+          "nowMs": 1700259200000,
+          "dueMs": 1700259800000
+        },
+        {
+          "state": "learning",
+          "stability": 0.58895992,
+          "difficulty": 8.2051266,
+          "elapsedDays": 1,
+          "scheduledDays": 0,
+          "reps": 5,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 2,
+          "ratingName": "hard",
+          "gapDays": 1,
+          "nowMs": 1700345600000,
+          "dueMs": 1700346200000
+        },
+        {
+          "state": "learning",
+          "stability": 0.49463291,
+          "difficulty": 8.47212411,
+          "elapsedDays": 1,
+          "scheduledDays": 0,
+          "reps": 6,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 2,
+          "ratingName": "hard",
+          "gapDays": 1,
+          "nowMs": 1700432000000,
+          "dueMs": 1700432600000
+        }
+      ]
+    },
+    {
+      "name": "repeat_good",
+      "description": "Six revues consécutives notées good",
+      "cardType": "basic",
+      "t0": 1700000000000,
+      "steps": [
+        {
+          "state": "learning",
+          "stability": 3.173,
+          "difficulty": 5.28243442,
+          "elapsedDays": 0,
+          "scheduledDays": 0,
+          "reps": 1,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700000600000
+        },
+        {
+          "state": "review",
+          "stability": 4.46685806,
+          "difficulty": 5.27296793,
+          "elapsedDays": 1,
+          "scheduledDays": 4,
+          "reps": 2,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 1,
+          "nowMs": 1700086400000,
+          "dueMs": 1700432000000
+        },
+        {
+          "state": "review",
+          "stability": 7.08610956,
+          "difficulty": 5.26354499,
+          "elapsedDays": 1,
+          "scheduledDays": 7,
+          "reps": 3,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 1,
+          "nowMs": 1700172800000,
+          "dueMs": 1700777600000
+        },
+        {
+          "state": "review",
+          "stability": 9.59258045,
+          "difficulty": 5.25416539,
+          "elapsedDays": 1,
+          "scheduledDays": 10,
+          "reps": 4,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 1,
+          "nowMs": 1700259200000,
+          "dueMs": 1701123200000
+        },
+        {
+          "state": "review",
+          "stability": 12.02433415,
+          "difficulty": 5.24482893,
+          "elapsedDays": 1,
+          "scheduledDays": 12,
+          "reps": 5,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 1,
+          "nowMs": 1700345600000,
+          "dueMs": 1701382400000
+        },
+        {
+          "state": "review",
+          "stability": 14.40104557,
+          "difficulty": 5.23553543,
+          "elapsedDays": 1,
+          "scheduledDays": 14,
+          "reps": 6,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 1,
+          "nowMs": 1700432000000,
+          "dueMs": 1701641600000
+        }
+      ]
+    },
+    {
+      "name": "repeat_easy",
+      "description": "Six revues consécutives notées easy",
+      "cardType": "basic",
+      "t0": 1700000000000,
+      "steps": [
+        {
+          "state": "review",
+          "stability": 15.69105,
+          "difficulty": 3.22450159,
+          "elapsedDays": 0,
+          "scheduledDays": 16,
+          "reps": 1,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 4,
+          "ratingName": "easy",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1701382400000
+        },
+        {
+          "state": "review",
+          "stability": 25.01241449,
+          "difficulty": 2.13012146,
+          "elapsedDays": 1,
+          "scheduledDays": 25,
+          "reps": 2,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 4,
+          "ratingName": "easy",
+          "gapDays": 1,
+          "nowMs": 1700086400000,
+          "dueMs": 1702246400000
+        },
+        {
+          "state": "review",
+          "stability": 35.09841672,
+          "difficulty": 1.0,
+          "elapsedDays": 1,
+          "scheduledDays": 35,
+          "reps": 3,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 4,
+          "ratingName": "easy",
+          "gapDays": 1,
+          "nowMs": 1700172800000,
+          "dueMs": 1703196800000
+        },
+        {
+          "state": "review",
+          "stability": 46.03394501,
+          "difficulty": 1.0,
+          "elapsedDays": 1,
+          "scheduledDays": 46,
+          "reps": 4,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 4,
+          "ratingName": "easy",
+          "gapDays": 1,
+          "nowMs": 1700259200000,
+          "dueMs": 1704233600000
+        },
+        {
+          "state": "review",
+          "stability": 56.62987853,
+          "difficulty": 1.0,
+          "elapsedDays": 1,
+          "scheduledDays": 57,
+          "reps": 5,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 4,
+          "ratingName": "easy",
+          "gapDays": 1,
+          "nowMs": 1700345600000,
+          "dueMs": 1705270400000
+        },
+        {
+          "state": "review",
+          "stability": 66.97223548,
+          "difficulty": 1.0,
+          "elapsedDays": 1,
+          "scheduledDays": 67,
+          "reps": 6,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 4,
+          "ratingName": "easy",
+          "gapDays": 1,
+          "nowMs": 1700432000000,
+          "dueMs": 1706220800000
+        }
+      ]
+    },
+    {
+      "name": "learn_then_review",
+      "description": "Apprentissage nominal puis espacement croissant",
+      "cardType": "basic",
+      "t0": 1700000000000,
+      "steps": [
+        {
+          "state": "learning",
+          "stability": 3.173,
+          "difficulty": 5.28243442,
+          "elapsedDays": 0,
+          "scheduledDays": 0,
+          "reps": 1,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700000600000
+        },
+        {
+          "state": "review",
+          "stability": 4.46685806,
+          "difficulty": 5.27296793,
+          "elapsedDays": 0,
+          "scheduledDays": 4,
+          "reps": 2,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700345600000
+        },
+        {
+          "state": "review",
+          "stability": 14.21728411,
+          "difficulty": 5.26354499,
+          "elapsedDays": 4,
+          "scheduledDays": 14,
+          "reps": 3,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 4,
+          "nowMs": 1700345600000,
+          "dueMs": 1701555200000
+        },
+        {
+          "state": "review",
+          "stability": 43.72509406,
+          "difficulty": 5.25416539,
+          "elapsedDays": 14,
+          "scheduledDays": 44,
+          "reps": 4,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 14,
+          "nowMs": 1701555200000,
+          "dueMs": 1705356800000
+        },
+        {
+          "state": "review",
+          "stability": 118.11201597,
+          "difficulty": 5.24482893,
+          "elapsedDays": 40,
+          "scheduledDays": 118,
+          "reps": 5,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 40,
+          "nowMs": 1705011200000,
+          "dueMs": 1715206400000
+        }
+      ]
+    },
+    {
+      "name": "lapse_and_recover",
+      "description": "Oubli en révision puis ré-apprentissage",
+      "cardType": "basic",
+      "t0": 1700000000000,
+      "steps": [
+        {
+          "state": "learning",
+          "stability": 3.173,
+          "difficulty": 5.28243442,
+          "elapsedDays": 0,
+          "scheduledDays": 0,
+          "reps": 1,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700000600000
+        },
+        {
+          "state": "review",
+          "stability": 4.46685806,
+          "difficulty": 5.27296793,
+          "elapsedDays": 0,
+          "scheduledDays": 4,
+          "reps": 2,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700345600000
+        },
+        {
+          "state": "review",
+          "stability": 14.21728411,
+          "difficulty": 5.26354499,
+          "elapsedDays": 4,
+          "scheduledDays": 14,
+          "reps": 3,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 4,
+          "nowMs": 1700345600000,
+          "dueMs": 1701555200000
+        },
+        {
+          "state": "relearning",
+          "stability": 2.50417014,
+          "difficulty": 6.78423209,
+          "elapsedDays": 14,
+          "scheduledDays": 0,
+          "reps": 4,
+          "lapses": 1,
+          "isLeech": false,
+          "rating": 1,
+          "ratingName": "again",
+          "gapDays": 14,
+          "nowMs": 1701555200000,
+          "dueMs": 1701555800000
+        },
+        {
+          "state": "review",
+          "stability": 3.52529864,
+          "difficulty": 6.76785733,
+          "elapsedDays": 0,
+          "scheduledDays": 4,
+          "reps": 5,
+          "lapses": 1,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1701555200000,
+          "dueMs": 1701900800000
+        },
+        {
+          "state": "review",
+          "stability": 9.10934189,
+          "difficulty": 6.75155789,
+          "elapsedDays": 3,
+          "scheduledDays": 9,
+          "reps": 6,
+          "lapses": 1,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 3,
+          "nowMs": 1701814400000,
+          "dueMs": 1702592000000
+        }
+      ]
+    },
+    {
+      "name": "hard_struggler",
+      "description": "Étudiant qui peine : la difficulté doit monter",
+      "cardType": "basic",
+      "t0": 1700000000000,
+      "steps": [
+        {
+          "state": "learning",
+          "stability": 1.18385,
+          "difficulty": 6.48830527,
+          "elapsedDays": 0,
+          "scheduledDays": 0,
+          "reps": 1,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 2,
+          "ratingName": "hard",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700000360000
+        },
+        {
+          "state": "learning",
+          "stability": 0.99424621,
+          "difficulty": 7.04050155,
+          "elapsedDays": 0,
+          "scheduledDays": 0,
+          "reps": 2,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 2,
+          "ratingName": "hard",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700000600000
+        },
+        {
+          "state": "learning",
+          "stability": 0.8350091,
+          "difficulty": 7.50096685,
+          "elapsedDays": 2,
+          "scheduledDays": 0,
+          "reps": 3,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 2,
+          "ratingName": "hard",
+          "gapDays": 2,
+          "nowMs": 1700172800000,
+          "dueMs": 1700173400000
+        },
+        {
+          "state": "learning",
+          "stability": 0.70127519,
+          "difficulty": 7.88493954,
+          "elapsedDays": 3,
+          "scheduledDays": 0,
+          "reps": 4,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 2,
+          "ratingName": "hard",
+          "gapDays": 3,
+          "nowMs": 1700432000000,
+          "dueMs": 1700432600000
+        },
+        {
+          "state": "learning",
+          "stability": 0.58895992,
+          "difficulty": 8.2051266,
+          "elapsedDays": 4,
+          "scheduledDays": 0,
+          "reps": 5,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 2,
+          "ratingName": "hard",
+          "gapDays": 4,
+          "nowMs": 1700777600000,
+          "dueMs": 1700778200000
+        }
+      ]
+    },
+    {
+      "name": "easy_fast_track",
+      "description": "Carte déjà connue : sortie immédiate de l'apprentissage",
+      "cardType": "basic",
+      "t0": 1700000000000,
+      "steps": [
+        {
+          "state": "review",
+          "stability": 15.69105,
+          "difficulty": 3.22450159,
+          "elapsedDays": 0,
+          "scheduledDays": 16,
+          "reps": 1,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 4,
+          "ratingName": "easy",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1701382400000
+        },
+        {
+          "state": "review",
+          "stability": 179.74814869,
+          "difficulty": 2.13012146,
+          "elapsedDays": 20,
+          "scheduledDays": 180,
+          "reps": 2,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 4,
+          "ratingName": "easy",
+          "gapDays": 20,
+          "nowMs": 1701728000000,
+          "dueMs": 1717280000000
+        },
+        {
+          "state": "review",
+          "stability": 861.37589694,
+          "difficulty": 1.0,
+          "elapsedDays": 90,
+          "scheduledDays": 861,
+          "reps": 3,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 4,
+          "ratingName": "easy",
+          "gapDays": 90,
+          "nowMs": 1709504000000,
+          "dueMs": 1783894400000
+        }
+      ]
+    },
+    {
+      "name": "mixed_realistic",
+      "description": "Parcours mixte représentatif",
+      "cardType": "basic",
+      "t0": 1700000000000,
+      "steps": [
+        {
+          "state": "learning",
+          "stability": 3.173,
+          "difficulty": 5.28243442,
+          "elapsedDays": 0,
+          "scheduledDays": 0,
+          "reps": 1,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700000600000
+        },
+        {
+          "state": "learning",
+          "stability": 2.66481668,
+          "difficulty": 6.03495026,
+          "elapsedDays": 0,
+          "scheduledDays": 0,
+          "reps": 2,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 2,
+          "ratingName": "hard",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700000600000
+        },
+        {
+          "state": "review",
+          "stability": 3.75145222,
+          "difficulty": 6.02202219,
+          "elapsedDays": 2,
+          "scheduledDays": 4,
+          "reps": 3,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 2,
+          "nowMs": 1700172800000,
+          "dueMs": 1700518400000
+        },
+        {
+          "state": "review",
+          "stability": 39.98306114,
+          "difficulty": 5.36662967,
+          "elapsedDays": 6,
+          "scheduledDays": 40,
+          "reps": 4,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 4,
+          "ratingName": "easy",
+          "gapDays": 6,
+          "nowMs": 1700691200000,
+          "dueMs": 1704147200000
+        },
+        {
+          "state": "relearning",
+          "stability": 3.85159497,
+          "difficulty": 6.85354205,
+          "elapsedDays": 30,
+          "scheduledDays": 0,
+          "reps": 5,
+          "lapses": 1,
+          "isLeech": false,
+          "rating": 1,
+          "ratingName": "again",
+          "gapDays": 30,
+          "nowMs": 1703283200000,
+          "dueMs": 1703283800000
+        },
+        {
+          "state": "review",
+          "stability": 5.42216452,
+          "difficulty": 6.83684847,
+          "elapsedDays": 0,
+          "scheduledDays": 5,
+          "reps": 6,
+          "lapses": 1,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1703283200000,
+          "dueMs": 1703715200000
+        },
+        {
+          "state": "review",
+          "stability": 9.08378001,
+          "difficulty": 6.82023167,
+          "elapsedDays": 2,
+          "scheduledDays": 9,
+          "reps": 7,
+          "lapses": 1,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 2,
+          "nowMs": 1703456000000,
+          "dueMs": 1704233600000
+        },
+        {
+          "state": "review",
+          "stability": 20.67484411,
+          "difficulty": 6.80369131,
+          "elapsedDays": 7,
+          "scheduledDays": 21,
+          "reps": 8,
+          "lapses": 1,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 7,
+          "nowMs": 1704060800000,
+          "dueMs": 1705875200000
+        }
+      ]
+    },
+    {
+      "name": "again_then_good_new",
+      "description": "Échec à la première vue puis progression",
+      "cardType": "basic",
+      "t0": 1700000000000,
+      "steps": [
+        {
+          "state": "learning",
+          "stability": 0.40255,
+          "difficulty": 7.1949,
+          "elapsedDays": 0,
+          "scheduledDays": 0,
+          "reps": 1,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 1,
+          "ratingName": "again",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700000060000
+        },
+        {
+          "state": "review",
+          "stability": 0.5666983,
+          "difficulty": 7.17663617,
+          "elapsedDays": 0,
+          "scheduledDays": 1,
+          "reps": 2,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700086400000
+        },
+        {
+          "state": "review",
+          "stability": 2.48051859,
+          "difficulty": 7.15845635,
+          "elapsedDays": 1,
+          "scheduledDays": 2,
+          "reps": 3,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 1,
+          "nowMs": 1700086400000,
+          "dueMs": 1700259200000
+        },
+        {
+          "state": "review",
+          "stability": 10.36311585,
+          "difficulty": 7.14036016,
+          "elapsedDays": 5,
+          "scheduledDays": 10,
+          "reps": 4,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 5,
+          "nowMs": 1700518400000,
+          "dueMs": 1701382400000
+        }
+      ]
+    },
+    {
+      "name": "same_day_reviews",
+      "description": "Quatre revues le même jour (stabilité court terme)",
+      "cardType": "basic",
+      "t0": 1700000000000,
+      "steps": [
+        {
+          "state": "learning",
+          "stability": 3.173,
+          "difficulty": 5.28243442,
+          "elapsedDays": 0,
+          "scheduledDays": 0,
+          "reps": 1,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700000600000
+        },
+        {
+          "state": "review",
+          "stability": 4.46685806,
+          "difficulty": 5.27296793,
+          "elapsedDays": 0,
+          "scheduledDays": 4,
+          "reps": 2,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700345600000
+        },
+        {
+          "state": "review",
+          "stability": 4.46685806,
+          "difficulty": 5.26354499,
+          "elapsedDays": 0,
+          "scheduledDays": 4,
+          "reps": 3,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700345600000
+        },
+        {
+          "state": "review",
+          "stability": 4.46685806,
+          "difficulty": 5.25416539,
+          "elapsedDays": 0,
+          "scheduledDays": 4,
+          "reps": 4,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700345600000
+        }
+      ]
+    },
+    {
+      "name": "long_gap_overdue",
+      "description": "Révision très en retard : R faible, gros gain de stabilité",
+      "cardType": "basic",
+      "t0": 1700000000000,
+      "steps": [
+        {
+          "state": "learning",
+          "stability": 3.173,
+          "difficulty": 5.28243442,
+          "elapsedDays": 0,
+          "scheduledDays": 0,
+          "reps": 1,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700000600000
+        },
+        {
+          "state": "review",
+          "stability": 4.46685806,
+          "difficulty": 5.27296793,
+          "elapsedDays": 0,
+          "scheduledDays": 4,
+          "reps": 2,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700345600000
+        },
+        {
+          "state": "review",
+          "stability": 14.21728411,
+          "difficulty": 5.26354499,
+          "elapsedDays": 4,
+          "scheduledDays": 14,
+          "reps": 3,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 4,
+          "nowMs": 1700345600000,
+          "dueMs": 1701555200000
+        },
+        {
+          "state": "review",
+          "stability": 208.02406714,
+          "difficulty": 5.25416539,
+          "elapsedDays": 200,
+          "scheduledDays": 208,
+          "reps": 4,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 200,
+          "nowMs": 1717625600000,
+          "dueMs": 1735596800000
+        }
+      ]
+    },
+    {
+      "name": "leech_card",
+      "description": "Huit lapses : la carte doit être marquée leech",
+      "cardType": "basic",
+      "t0": 1700000000000,
+      "steps": [
+        {
+          "state": "learning",
+          "stability": 3.173,
+          "difficulty": 5.28243442,
+          "elapsedDays": 0,
+          "scheduledDays": 0,
+          "reps": 1,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700000600000
+        },
+        {
+          "state": "review",
+          "stability": 4.46685806,
+          "difficulty": 5.27296793,
+          "elapsedDays": 0,
+          "scheduledDays": 4,
+          "reps": 2,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700345600000
+        },
+        {
+          "state": "relearning",
+          "stability": 1.2389379,
+          "difficulty": 6.79056769,
+          "elapsedDays": 3,
+          "scheduledDays": 0,
+          "reps": 3,
+          "lapses": 1,
+          "isLeech": false,
+          "rating": 1,
+          "ratingName": "again",
+          "gapDays": 3,
+          "nowMs": 1700259200000,
+          "dueMs": 1700259800000
+        },
+        {
+          "state": "review",
+          "stability": 1.74414112,
+          "difficulty": 6.77416379,
+          "elapsedDays": 0,
+          "scheduledDays": 2,
+          "reps": 4,
+          "lapses": 1,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700259200000,
+          "dueMs": 1700432000000
+        },
+        {
+          "state": "relearning",
+          "stability": 0.77971186,
+          "difficulty": 7.79991102,
+          "elapsedDays": 3,
+          "scheduledDays": 0,
+          "reps": 5,
+          "lapses": 2,
+          "isLeech": false,
+          "rating": 1,
+          "ratingName": "again",
+          "gapDays": 3,
+          "nowMs": 1700518400000,
+          "dueMs": 1700519000000
+        },
+        {
+          "state": "review",
+          "stability": 1.09765592,
+          "difficulty": 7.77886414,
+          "elapsedDays": 0,
+          "scheduledDays": 1,
+          "reps": 6,
+          "lapses": 2,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700518400000,
+          "dueMs": 1700604800000
+        },
+        {
+          "state": "relearning",
+          "stability": 0.62449681,
+          "difficulty": 8.47543087,
+          "elapsedDays": 3,
+          "scheduledDays": 0,
+          "reps": 7,
+          "lapses": 3,
+          "isLeech": false,
+          "rating": 1,
+          "ratingName": "again",
+          "gapDays": 3,
+          "nowMs": 1700777600000,
+          "dueMs": 1700778200000
+        },
+        {
+          "state": "review",
+          "stability": 0.87914864,
+          "difficulty": 8.45127659,
+          "elapsedDays": 0,
+          "scheduledDays": 1,
+          "reps": 8,
+          "lapses": 3,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700777600000,
+          "dueMs": 1700864000000
+        },
+        {
+          "state": "relearning",
+          "stability": 0.56142232,
+          "difficulty": 8.92753378,
+          "elapsedDays": 3,
+          "scheduledDays": 0,
+          "reps": 9,
+          "lapses": 4,
+          "isLeech": false,
+          "rating": 1,
+          "ratingName": "again",
+          "gapDays": 3,
+          "nowMs": 1701036800000,
+          "dueMs": 1701037400000
+        },
+        {
+          "state": "review",
+          "stability": 0.79035418,
+          "difficulty": 8.90129983,
+          "elapsedDays": 0,
+          "scheduledDays": 1,
+          "reps": 10,
+          "lapses": 4,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1701036800000,
+          "dueMs": 1701123200000
+        },
+        {
+          "state": "relearning",
+          "stability": 0.5328688,
+          "difficulty": 9.23011119,
+          "elapsedDays": 3,
+          "scheduledDays": 0,
+          "reps": 11,
+          "lapses": 5,
+          "isLeech": false,
+          "rating": 1,
+          "ratingName": "again",
+          "gapDays": 3,
+          "nowMs": 1701296000000,
+          "dueMs": 1701296600000
+        },
+        {
+          "state": "review",
+          "stability": 0.75015736,
+          "difficulty": 9.20248539,
+          "elapsedDays": 0,
+          "scheduledDays": 1,
+          "reps": 12,
+          "lapses": 5,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1701296000000,
+          "dueMs": 1701382400000
+        },
+        {
+          "state": "relearning",
+          "stability": 0.51896471,
+          "difficulty": 9.43261616,
+          "elapsedDays": 3,
+          "scheduledDays": 0,
+          "reps": 13,
+          "lapses": 6,
+          "isLeech": false,
+          "rating": 1,
+          "ratingName": "again",
+          "gapDays": 3,
+          "nowMs": 1701555200000,
+          "dueMs": 1701555800000
+        },
+        {
+          "state": "review",
+          "stability": 0.73058358,
+          "difficulty": 9.40405884,
+          "elapsedDays": 0,
+          "scheduledDays": 1,
+          "reps": 14,
+          "lapses": 6,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1701555200000,
+          "dueMs": 1701641600000
+        },
+        {
+          "state": "relearning",
+          "stability": 0.51178923,
+          "difficulty": 9.56814599,
+          "elapsedDays": 3,
+          "scheduledDays": 0,
+          "reps": 15,
+          "lapses": 7,
+          "isLeech": false,
+          "rating": 1,
+          "ratingName": "again",
+          "gapDays": 3,
+          "nowMs": 1701814400000,
+          "dueMs": 1701815000000
+        },
+        {
+          "state": "review",
+          "stability": 0.72048215,
+          "difficulty": 9.53896523,
+          "elapsedDays": 0,
+          "scheduledDays": 1,
+          "reps": 16,
+          "lapses": 7,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1701814400000,
+          "dueMs": 1701900800000
+        },
+        {
+          "state": "relearning",
+          "stability": 0.50789169,
+          "difficulty": 9.65885159,
+          "elapsedDays": 3,
+          "scheduledDays": 0,
+          "reps": 17,
+          "lapses": 8,
+          "isLeech": true,
+          "rating": 1,
+          "ratingName": "again",
+          "gapDays": 3,
+          "nowMs": 1702073600000,
+          "dueMs": 1702074200000
+        },
+        {
+          "state": "review",
+          "stability": 0.7149953,
+          "difficulty": 9.62925358,
+          "elapsedDays": 0,
+          "scheduledDays": 1,
+          "reps": 18,
+          "lapses": 8,
+          "isLeech": true,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1702073600000,
+          "dueMs": 1702160000000
+        }
+      ]
+    },
+    {
+      "name": "qcm_weighted",
+      "description": "QCM : gain de stabilité tempéré à 0.85",
+      "cardType": "qcm",
+      "t0": 1700000000000,
+      "steps": [
+        {
+          "state": "learning",
+          "stability": 3.173,
+          "difficulty": 5.28243442,
+          "elapsedDays": 0,
+          "scheduledDays": 0,
+          "reps": 1,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700000600000
+        },
+        {
+          "state": "review",
+          "stability": 4.46685806,
+          "difficulty": 5.27296793,
+          "elapsedDays": 0,
+          "scheduledDays": 4,
+          "reps": 2,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700345600000
+        },
+        {
+          "state": "review",
+          "stability": 12.7547202,
+          "difficulty": 5.26354499,
+          "elapsedDays": 4,
+          "scheduledDays": 13,
+          "reps": 3,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 4,
+          "nowMs": 1700345600000,
+          "dueMs": 1701468800000
+        },
+        {
+          "state": "review",
+          "stability": 34.63019738,
+          "difficulty": 5.25416539,
+          "elapsedDays": 12,
+          "scheduledDays": 35,
+          "reps": 4,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 12,
+          "nowMs": 1701382400000,
+          "dueMs": 1704406400000
+        },
+        {
+          "state": "review",
+          "stability": 83.63078299,
+          "difficulty": 5.24482893,
+          "elapsedDays": 30,
+          "scheduledDays": 84,
+          "reps": 5,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 30,
+          "nowMs": 1703974400000,
+          "dueMs": 1711232000000
+        }
+      ]
+    },
+    {
+      "name": "basic_baseline",
+      "description": "Même séquence en BASIC (référence)",
+      "cardType": "basic",
+      "t0": 1700000000000,
+      "steps": [
+        {
+          "state": "learning",
+          "stability": 3.173,
+          "difficulty": 5.28243442,
+          "elapsedDays": 0,
+          "scheduledDays": 0,
+          "reps": 1,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700000600000
+        },
+        {
+          "state": "review",
+          "stability": 4.46685806,
+          "difficulty": 5.27296793,
+          "elapsedDays": 0,
+          "scheduledDays": 4,
+          "reps": 2,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700345600000
+        },
+        {
+          "state": "review",
+          "stability": 14.21728411,
+          "difficulty": 5.26354499,
+          "elapsedDays": 4,
+          "scheduledDays": 14,
+          "reps": 3,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 4,
+          "nowMs": 1700345600000,
+          "dueMs": 1701555200000
+        },
+        {
+          "state": "review",
+          "stability": 39.87465614,
+          "difficulty": 5.25416539,
+          "elapsedDays": 12,
+          "scheduledDays": 40,
+          "reps": 4,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 12,
+          "nowMs": 1701382400000,
+          "dueMs": 1704838400000
+        },
+        {
+          "state": "review",
+          "stability": 97.23260834,
+          "difficulty": 5.24482893,
+          "elapsedDays": 30,
+          "scheduledDays": 97,
+          "reps": 5,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 30,
+          "nowMs": 1703974400000,
+          "dueMs": 1712355200000
+        }
+      ]
+    },
+    {
+      "name": "from_new_rate_again",
+      "description": "Transition from_new + again",
+      "cardType": "basic",
+      "t0": 1700000000000,
+      "steps": [
+        {
+          "state": "learning",
+          "stability": 0.40255,
+          "difficulty": 7.1949,
+          "elapsedDays": 0,
+          "scheduledDays": 0,
+          "reps": 1,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 1,
+          "ratingName": "again",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700000060000
+        }
+      ]
+    },
+    {
+      "name": "from_new_rate_hard",
+      "description": "Transition from_new + hard",
+      "cardType": "basic",
+      "t0": 1700000000000,
+      "steps": [
+        {
+          "state": "learning",
+          "stability": 1.18385,
+          "difficulty": 6.48830527,
+          "elapsedDays": 0,
+          "scheduledDays": 0,
+          "reps": 1,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 2,
+          "ratingName": "hard",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700000360000
+        }
+      ]
+    },
+    {
+      "name": "from_new_rate_good",
+      "description": "Transition from_new + good",
+      "cardType": "basic",
+      "t0": 1700000000000,
+      "steps": [
+        {
+          "state": "learning",
+          "stability": 3.173,
+          "difficulty": 5.28243442,
+          "elapsedDays": 0,
+          "scheduledDays": 0,
+          "reps": 1,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700000600000
+        }
+      ]
+    },
+    {
+      "name": "from_new_rate_easy",
+      "description": "Transition from_new + easy",
+      "cardType": "basic",
+      "t0": 1700000000000,
+      "steps": [
+        {
+          "state": "review",
+          "stability": 15.69105,
+          "difficulty": 3.22450159,
+          "elapsedDays": 0,
+          "scheduledDays": 16,
+          "reps": 1,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 4,
+          "ratingName": "easy",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1701382400000
+        }
+      ]
+    },
+    {
+      "name": "from_learning_rate_again",
+      "description": "Transition from_learning + again",
+      "cardType": "basic",
+      "t0": 1700000000000,
+      "steps": [
+        {
+          "state": "learning",
+          "stability": 3.173,
+          "difficulty": 5.28243442,
+          "elapsedDays": 0,
+          "scheduledDays": 0,
+          "reps": 1,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700000600000
+        },
+        {
+          "state": "learning",
+          "stability": 1.58976351,
+          "difficulty": 6.79693258,
+          "elapsedDays": 1,
+          "scheduledDays": 0,
+          "reps": 2,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 1,
+          "ratingName": "again",
+          "gapDays": 1,
+          "nowMs": 1700086400000,
+          "dueMs": 1700086460000
+        }
+      ]
+    },
+    {
+      "name": "from_learning_rate_hard",
+      "description": "Transition from_learning + hard",
+      "cardType": "basic",
+      "t0": 1700000000000,
+      "steps": [
+        {
+          "state": "learning",
+          "stability": 3.173,
+          "difficulty": 5.28243442,
+          "elapsedDays": 0,
+          "scheduledDays": 0,
+          "reps": 1,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700000600000
+        },
+        {
+          "state": "learning",
+          "stability": 2.66481668,
+          "difficulty": 6.03495026,
+          "elapsedDays": 1,
+          "scheduledDays": 0,
+          "reps": 2,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 2,
+          "ratingName": "hard",
+          "gapDays": 1,
+          "nowMs": 1700086400000,
+          "dueMs": 1700087000000
+        }
+      ]
+    },
+    {
+      "name": "from_learning_rate_good",
+      "description": "Transition from_learning + good",
+      "cardType": "basic",
+      "t0": 1700000000000,
+      "steps": [
+        {
+          "state": "learning",
+          "stability": 3.173,
+          "difficulty": 5.28243442,
+          "elapsedDays": 0,
+          "scheduledDays": 0,
+          "reps": 1,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700000600000
+        },
+        {
+          "state": "review",
+          "stability": 4.46685806,
+          "difficulty": 5.27296793,
+          "elapsedDays": 1,
+          "scheduledDays": 4,
+          "reps": 2,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 1,
+          "nowMs": 1700086400000,
+          "dueMs": 1700432000000
+        }
+      ]
+    },
+    {
+      "name": "from_learning_rate_easy",
+      "description": "Transition from_learning + easy",
+      "cardType": "basic",
+      "t0": 1700000000000,
+      "steps": [
+        {
+          "state": "learning",
+          "stability": 3.173,
+          "difficulty": 5.28243442,
+          "elapsedDays": 0,
+          "scheduledDays": 0,
+          "reps": 1,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700000600000
+        },
+        {
+          "state": "review",
+          "stability": 7.48750228,
+          "difficulty": 4.51098561,
+          "elapsedDays": 1,
+          "scheduledDays": 7,
+          "reps": 2,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 4,
+          "ratingName": "easy",
+          "gapDays": 1,
+          "nowMs": 1700086400000,
+          "dueMs": 1700691200000
+        }
+      ]
+    },
+    {
+      "name": "from_review_rate_again",
+      "description": "Transition from_review + again",
+      "cardType": "basic",
+      "t0": 1700000000000,
+      "steps": [
+        {
+          "state": "learning",
+          "stability": 3.173,
+          "difficulty": 5.28243442,
+          "elapsedDays": 0,
+          "scheduledDays": 0,
+          "reps": 1,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700000600000
+        },
+        {
+          "state": "review",
+          "stability": 4.46685806,
+          "difficulty": 5.27296793,
+          "elapsedDays": 0,
+          "scheduledDays": 4,
+          "reps": 2,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700345600000
+        },
+        {
+          "state": "review",
+          "stability": 16.383477,
+          "difficulty": 5.26354499,
+          "elapsedDays": 5,
+          "scheduledDays": 16,
+          "reps": 3,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 5,
+          "nowMs": 1700432000000,
+          "dueMs": 1701814400000
+        },
+        {
+          "state": "relearning",
+          "stability": 2.18176833,
+          "difficulty": 6.78423209,
+          "elapsedDays": 1,
+          "scheduledDays": 0,
+          "reps": 4,
+          "lapses": 1,
+          "isLeech": false,
+          "rating": 1,
+          "ratingName": "again",
+          "gapDays": 1,
+          "nowMs": 1700518400000,
+          "dueMs": 1700519000000
+        }
+      ]
+    },
+    {
+      "name": "from_review_rate_hard",
+      "description": "Transition from_review + hard",
+      "cardType": "basic",
+      "t0": 1700000000000,
+      "steps": [
+        {
+          "state": "learning",
+          "stability": 3.173,
+          "difficulty": 5.28243442,
+          "elapsedDays": 0,
+          "scheduledDays": 0,
+          "reps": 1,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700000600000
+        },
+        {
+          "state": "review",
+          "stability": 4.46685806,
+          "difficulty": 5.27296793,
+          "elapsedDays": 0,
+          "scheduledDays": 4,
+          "reps": 2,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700345600000
+        },
+        {
+          "state": "review",
+          "stability": 16.383477,
+          "difficulty": 5.26354499,
+          "elapsedDays": 5,
+          "scheduledDays": 16,
+          "reps": 3,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 5,
+          "nowMs": 1700432000000,
+          "dueMs": 1701814400000
+        },
+        {
+          "state": "review",
+          "stability": 16.91338782,
+          "difficulty": 6.01919874,
+          "elapsedDays": 1,
+          "scheduledDays": 17,
+          "reps": 4,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 2,
+          "ratingName": "hard",
+          "gapDays": 1,
+          "nowMs": 1700518400000,
+          "dueMs": 1701987200000
+        }
+      ]
+    },
+    {
+      "name": "from_review_rate_good",
+      "description": "Transition from_review + good",
+      "cardType": "basic",
+      "t0": 1700000000000,
+      "steps": [
+        {
+          "state": "learning",
+          "stability": 3.173,
+          "difficulty": 5.28243442,
+          "elapsedDays": 0,
+          "scheduledDays": 0,
+          "reps": 1,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700000600000
+        },
+        {
+          "state": "review",
+          "stability": 4.46685806,
+          "difficulty": 5.27296793,
+          "elapsedDays": 0,
+          "scheduledDays": 4,
+          "reps": 2,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700345600000
+        },
+        {
+          "state": "review",
+          "stability": 16.383477,
+          "difficulty": 5.26354499,
+          "elapsedDays": 5,
+          "scheduledDays": 16,
+          "reps": 3,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 5,
+          "nowMs": 1700432000000,
+          "dueMs": 1701814400000
+        },
+        {
+          "state": "review",
+          "stability": 18.67250865,
+          "difficulty": 5.25416539,
+          "elapsedDays": 1,
+          "scheduledDays": 19,
+          "reps": 4,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 1,
+          "nowMs": 1700518400000,
+          "dueMs": 1702160000000
+        }
+      ]
+    },
+    {
+      "name": "from_review_rate_easy",
+      "description": "Transition from_review + easy",
+      "cardType": "basic",
+      "t0": 1700000000000,
+      "steps": [
+        {
+          "state": "learning",
+          "stability": 3.173,
+          "difficulty": 5.28243442,
+          "elapsedDays": 0,
+          "scheduledDays": 0,
+          "reps": 1,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700000600000
+        },
+        {
+          "state": "review",
+          "stability": 4.46685806,
+          "difficulty": 5.27296793,
+          "elapsedDays": 0,
+          "scheduledDays": 4,
+          "reps": 2,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700345600000
+        },
+        {
+          "state": "review",
+          "stability": 16.383477,
+          "difficulty": 5.26354499,
+          "elapsedDays": 5,
+          "scheduledDays": 16,
+          "reps": 3,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 5,
+          "nowMs": 1700432000000,
+          "dueMs": 1701814400000
+        },
+        {
+          "state": "review",
+          "stability": 23.22722383,
+          "difficulty": 4.48913204,
+          "elapsedDays": 1,
+          "scheduledDays": 23,
+          "reps": 4,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 4,
+          "ratingName": "easy",
+          "gapDays": 1,
+          "nowMs": 1700518400000,
+          "dueMs": 1702505600000
+        }
+      ]
+    },
+    {
+      "name": "from_relearning_rate_again",
+      "description": "Transition from_relearning + again",
+      "cardType": "basic",
+      "t0": 1700000000000,
+      "steps": [
+        {
+          "state": "learning",
+          "stability": 3.173,
+          "difficulty": 5.28243442,
+          "elapsedDays": 0,
+          "scheduledDays": 0,
+          "reps": 1,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700000600000
+        },
+        {
+          "state": "review",
+          "stability": 4.46685806,
+          "difficulty": 5.27296793,
+          "elapsedDays": 0,
+          "scheduledDays": 4,
+          "reps": 2,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700345600000
+        },
+        {
+          "state": "review",
+          "stability": 16.383477,
+          "difficulty": 5.26354499,
+          "elapsedDays": 5,
+          "scheduledDays": 16,
+          "reps": 3,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 5,
+          "nowMs": 1700432000000,
+          "dueMs": 1701814400000
+        },
+        {
+          "state": "relearning",
+          "stability": 2.4866829,
+          "difficulty": 6.78423209,
+          "elapsedDays": 10,
+          "scheduledDays": 0,
+          "reps": 4,
+          "lapses": 1,
+          "isLeech": false,
+          "rating": 1,
+          "ratingName": "again",
+          "gapDays": 10,
+          "nowMs": 1701296000000,
+          "dueMs": 1701296600000
+        },
+        {
+          "state": "relearning",
+          "stability": 1.24589906,
+          "difficulty": 7.80668054,
+          "elapsedDays": 1,
+          "scheduledDays": 0,
+          "reps": 5,
+          "lapses": 1,
+          "isLeech": false,
+          "rating": 1,
+          "ratingName": "again",
+          "gapDays": 1,
+          "nowMs": 1701382400000,
+          "dueMs": 1701382460000
+        }
+      ]
+    },
+    {
+      "name": "from_relearning_rate_hard",
+      "description": "Transition from_relearning + hard",
+      "cardType": "basic",
+      "t0": 1700000000000,
+      "steps": [
+        {
+          "state": "learning",
+          "stability": 3.173,
+          "difficulty": 5.28243442,
+          "elapsedDays": 0,
+          "scheduledDays": 0,
+          "reps": 1,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700000600000
+        },
+        {
+          "state": "review",
+          "stability": 4.46685806,
+          "difficulty": 5.27296793,
+          "elapsedDays": 0,
+          "scheduledDays": 4,
+          "reps": 2,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700345600000
+        },
+        {
+          "state": "review",
+          "stability": 16.383477,
+          "difficulty": 5.26354499,
+          "elapsedDays": 5,
+          "scheduledDays": 16,
+          "reps": 3,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 5,
+          "nowMs": 1700432000000,
+          "dueMs": 1701814400000
+        },
+        {
+          "state": "relearning",
+          "stability": 2.4866829,
+          "difficulty": 6.78423209,
+          "elapsedDays": 10,
+          "scheduledDays": 0,
+          "reps": 4,
+          "lapses": 1,
+          "isLeech": false,
+          "rating": 1,
+          "ratingName": "again",
+          "gapDays": 10,
+          "nowMs": 1701296000000,
+          "dueMs": 1701296600000
+        },
+        {
+          "state": "relearning",
+          "stability": 2.08841918,
+          "difficulty": 7.28726893,
+          "elapsedDays": 1,
+          "scheduledDays": 0,
+          "reps": 5,
+          "lapses": 1,
+          "isLeech": false,
+          "rating": 2,
+          "ratingName": "hard",
+          "gapDays": 1,
+          "nowMs": 1701382400000,
+          "dueMs": 1701383000000
+        }
+      ]
+    },
+    {
+      "name": "from_relearning_rate_good",
+      "description": "Transition from_relearning + good",
+      "cardType": "basic",
+      "t0": 1700000000000,
+      "steps": [
+        {
+          "state": "learning",
+          "stability": 3.173,
+          "difficulty": 5.28243442,
+          "elapsedDays": 0,
+          "scheduledDays": 0,
+          "reps": 1,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700000600000
+        },
+        {
+          "state": "review",
+          "stability": 4.46685806,
+          "difficulty": 5.27296793,
+          "elapsedDays": 0,
+          "scheduledDays": 4,
+          "reps": 2,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700345600000
+        },
+        {
+          "state": "review",
+          "stability": 16.383477,
+          "difficulty": 5.26354499,
+          "elapsedDays": 5,
+          "scheduledDays": 16,
+          "reps": 3,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 5,
+          "nowMs": 1700432000000,
+          "dueMs": 1701814400000
+        },
+        {
+          "state": "relearning",
+          "stability": 2.4866829,
+          "difficulty": 6.78423209,
+          "elapsedDays": 10,
+          "scheduledDays": 0,
+          "reps": 4,
+          "lapses": 1,
+          "isLeech": false,
+          "rating": 1,
+          "ratingName": "again",
+          "gapDays": 10,
+          "nowMs": 1701296000000,
+          "dueMs": 1701296600000
+        },
+        {
+          "state": "review",
+          "stability": 3.50068061,
+          "difficulty": 6.76785733,
+          "elapsedDays": 1,
+          "scheduledDays": 4,
+          "reps": 5,
+          "lapses": 1,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 1,
+          "nowMs": 1701382400000,
+          "dueMs": 1701728000000
+        }
+      ]
+    },
+    {
+      "name": "from_relearning_rate_easy",
+      "description": "Transition from_relearning + easy",
+      "cardType": "basic",
+      "t0": 1700000000000,
+      "steps": [
+        {
+          "state": "learning",
+          "stability": 3.173,
+          "difficulty": 5.28243442,
+          "elapsedDays": 0,
+          "scheduledDays": 0,
+          "reps": 1,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700000600000
+        },
+        {
+          "state": "review",
+          "stability": 4.46685806,
+          "difficulty": 5.27296793,
+          "elapsedDays": 0,
+          "scheduledDays": 4,
+          "reps": 2,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 0,
+          "nowMs": 1700000000000,
+          "dueMs": 1700345600000
+        },
+        {
+          "state": "review",
+          "stability": 16.383477,
+          "difficulty": 5.26354499,
+          "elapsedDays": 5,
+          "scheduledDays": 16,
+          "reps": 3,
+          "lapses": 0,
+          "isLeech": false,
+          "rating": 3,
+          "ratingName": "good",
+          "gapDays": 5,
+          "nowMs": 1700432000000,
+          "dueMs": 1701814400000
+        },
+        {
+          "state": "relearning",
+          "stability": 2.4866829,
+          "difficulty": 6.78423209,
+          "elapsedDays": 10,
+          "scheduledDays": 0,
+          "reps": 4,
+          "lapses": 1,
+          "isLeech": false,
+          "rating": 1,
+          "ratingName": "again",
+          "gapDays": 10,
+          "nowMs": 1701296000000,
+          "dueMs": 1701296600000
+        },
+        {
+          "state": "review",
+          "stability": 5.86796214,
+          "difficulty": 6.24844572,
+          "elapsedDays": 1,
+          "scheduledDays": 6,
+          "reps": 5,
+          "lapses": 1,
+          "isLeech": false,
+          "rating": 4,
+          "ratingName": "easy",
+          "gapDays": 1,
+          "nowMs": 1701382400000,
+          "dueMs": 1701900800000
+        }
+      ]
+    }
+  ],
+  "previews": [
+    {
+      "name": "new",
+      "buildSteps": [],
+      "probeMs": 1700000000000,
+      "intervals": {
+        "again": 0,
+        "hard": 0,
+        "good": 0,
+        "easy": 16
+      }
+    },
+    {
+      "name": "learning",
+      "buildSteps": [
+        {
+          "rating": 3,
+          "gapDays": 0
+        }
+      ],
+      "probeMs": 1700000000000,
+      "intervals": {
+        "again": 0,
+        "hard": 0,
+        "good": 4,
+        "easy": 7
+      }
+    },
+    {
+      "name": "young_review",
+      "buildSteps": [
+        {
+          "rating": 3,
+          "gapDays": 0
+        },
+        {
+          "rating": 3,
+          "gapDays": 0
+        }
+      ],
+      "probeMs": 1700345600000,
+      "intervals": {
+        "again": 0,
+        "hard": 7,
+        "good": 14,
+        "easy": 34
+      }
+    },
+    {
+      "name": "mature_review",
+      "buildSteps": [
+        {
+          "rating": 3,
+          "gapDays": 0
+        },
+        {
+          "rating": 3,
+          "gapDays": 0
+        },
+        {
+          "rating": 3,
+          "gapDays": 4
+        },
+        {
+          "rating": 3,
+          "gapDays": 15
+        },
+        {
+          "rating": 3,
+          "gapDays": 45
+        }
+      ],
+      "probeMs": 1716588800000,
+      "intervals": {
+        "again": 0,
+        "hard": 176,
+        "good": 336,
+        "easy": 750
+      }
+    }
+  ],
+  "math": {
+    "retrievability": [
+      {
+        "elapsedDays": 0.0,
+        "stability": 1.0,
+        "expected": 1.0
+      },
+      {
+        "elapsedDays": 1.0,
+        "stability": 1.0,
+        "expected": 0.9
+      },
+      {
+        "elapsedDays": 5.0,
+        "stability": 1.0,
+        "expected": 0.6784005252999682
+      },
+      {
+        "elapsedDays": 20.0,
+        "stability": 1.0,
+        "expected": 0.41917178954936013
+      },
+      {
+        "elapsedDays": 100.0,
+        "stability": 1.0,
+        "expected": 0.20220890233055125
+      },
+      {
+        "elapsedDays": 0.0,
+        "stability": 5.0,
+        "expected": 1.0
+      },
+      {
+        "elapsedDays": 1.0,
+        "stability": 5.0,
+        "expected": 0.977337546216906
+      },
+      {
+        "elapsedDays": 5.0,
+        "stability": 5.0,
+        "expected": 0.9
+      },
+      {
+        "elapsedDays": 20.0,
+        "stability": 5.0,
+        "expected": 0.71827819602086
+      },
+      {
+        "elapsedDays": 100.0,
+        "stability": 5.0,
+        "expected": 0.41917178954936013
+      },
+      {
+        "elapsedDays": 0.0,
+        "stability": 20.0,
+        "expected": 1.0
+      },
+      {
+        "elapsedDays": 1.0,
+        "stability": 20.0,
+        "expected": 0.9941868866509825
+      },
+      {
+        "elapsedDays": 5.0,
+        "stability": 20.0,
+        "expected": 0.97190864488087
+      },
+      {
+        "elapsedDays": 20.0,
+        "stability": 20.0,
+        "expected": 0.9
+      },
+      {
+        "elapsedDays": 100.0,
+        "stability": 20.0,
+        "expected": 0.6784005252999682
+      },
+      {
+        "elapsedDays": 0.0,
+        "stability": 100.0,
+        "expected": 1.0
+      },
+      {
+        "elapsedDays": 1.0,
+        "stability": 100.0,
+        "expected": 0.9988292197975929
+      },
+      {
+        "elapsedDays": 5.0,
+        "stability": 100.0,
+        "expected": 0.9941868866509825
+      },
+      {
+        "elapsedDays": 20.0,
+        "stability": 100.0,
+        "expected": 0.977337546216906
+      },
+      {
+        "elapsedDays": 100.0,
+        "stability": 100.0,
+        "expected": 0.9
+      }
+    ],
+    "intervalFromStability": [
+      {
+        "stability": 1.0,
+        "requestRetention": 0.8,
+        "expected": 2.3980263157894735
+      },
+      {
+        "stability": 1.0,
+        "requestRetention": 0.9,
+        "expected": 1.0
+      },
+      {
+        "stability": 1.0,
+        "requestRetention": 0.95,
+        "expected": 0.46056276425134907
+      },
+      {
+        "stability": 3.173,
+        "requestRetention": 0.8,
+        "expected": 7.6089375
+      },
+      {
+        "stability": 3.173,
+        "requestRetention": 0.9,
+        "expected": 3.173
+      },
+      {
+        "stability": 3.173,
+        "requestRetention": 0.95,
+        "expected": 1.4613656509695307
+      },
+      {
+        "stability": 10.0,
+        "requestRetention": 0.8,
+        "expected": 23.980263157894733
+      },
+      {
+        "stability": 10.0,
+        "requestRetention": 0.9,
+        "expected": 10.0
+      },
+      {
+        "stability": 10.0,
+        "requestRetention": 0.95,
+        "expected": 4.6056276425134905
+      },
+      {
+        "stability": 50.0,
+        "requestRetention": 0.8,
+        "expected": 119.90131578947367
+      },
+      {
+        "stability": 50.0,
+        "requestRetention": 0.9,
+        "expected": 50.0
+      },
+      {
+        "stability": 50.0,
+        "requestRetention": 0.95,
+        "expected": 23.028138212567452
+      },
+      {
+        "stability": 365.0,
+        "requestRetention": 0.8,
+        "expected": 875.2796052631578
+      },
+      {
+        "stability": 365.0,
+        "requestRetention": 0.9,
+        "expected": 365.0
+      },
+      {
+        "stability": 365.0,
+        "requestRetention": 0.95,
+        "expected": 168.1054089517424
+      }
+    ],
+    "initialStability": [
+      {
+        "rating": 1,
+        "expected": 0.40255
+      },
+      {
+        "rating": 2,
+        "expected": 1.18385
+      },
+      {
+        "rating": 3,
+        "expected": 3.173
+      },
+      {
+        "rating": 4,
+        "expected": 15.69105
+      }
+    ],
+    "initialDifficulty": [
+      {
+        "rating": 1,
+        "expected": 7.1949
+      },
+      {
+        "rating": 2,
+        "expected": 6.488305268471453
+      },
+      {
+        "rating": 3,
+        "expected": 5.282434422319005
+      },
+      {
+        "rating": 4,
+        "expected": 3.2245015893713678
+      }
+    ]
+  },
+  "fold": {
+    "events": [
+      {
+        "id": "00000000-0000-7000-8000-000000000000",
+        "rating": 3,
+        "reviewedAt": 1700000000000,
+        "cardType": "basic",
+        "examMode": false
+      },
+      {
+        "id": "00000001-0000-7000-8000-000000000000",
+        "rating": 3,
+        "reviewedAt": 1700000001000,
+        "cardType": "basic",
+        "examMode": false
+      },
+      {
+        "id": "00000002-0000-7000-8000-000000000000",
+        "rating": 3,
+        "reviewedAt": 1700345602000,
+        "cardType": "basic",
+        "examMode": false
+      },
+      {
+        "id": "00000003-0000-7000-8000-000000000000",
+        "rating": 1,
+        "reviewedAt": 1701555203000,
+        "cardType": "basic",
+        "examMode": false
+      },
+      {
+        "id": "00000004-0000-7000-8000-000000000000",
+        "rating": 3,
+        "reviewedAt": 1701555204000,
+        "cardType": "basic",
+        "examMode": false
+      },
+      {
+        "id": "00000005-0000-7000-8000-000000000000",
+        "rating": 3,
+        "reviewedAt": 1701900805000,
+        "cardType": "basic",
+        "examMode": false
+      }
+    ],
+    "examEvent": {
+      "id": "99999999-0000-7000-8000-000000000000",
+      "rating": 1,
+      "reviewedAt": 1700864000000,
+      "cardType": "qcm",
+      "examMode": true
+    },
+    "expected": {
+      "state": "review",
+      "stability": 10.7608261,
+      "difficulty": 6.75155789,
+      "elapsedDays": 4,
+      "scheduledDays": 11,
+      "reps": 6,
+      "lapses": 1,
+      "isLeech": false
+    },
+    "expectedWithExam": {
+      "state": "review",
+      "stability": 10.7608261,
+      "difficulty": 6.75155789,
+      "elapsedDays": 4,
+      "scheduledDays": 11,
+      "reps": 6,
+      "lapses": 1,
+      "isLeech": false
+    }
+  }
+}

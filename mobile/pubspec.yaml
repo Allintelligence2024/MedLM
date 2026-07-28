@@ -1,0 +1,25 @@
+name: medanki_dz
+description: "MedAnki DZ — Révise mieux, retiens plus, réussis en 1ère année."
+publish_to: "none"
+version: 0.1.0+1
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  # Phase 1 : le moteur SRS est du Dart pur, sans dépendance externe.
+  # Les paquets ci-dessous seront ajoutés aux phases suivantes :
+  #   Phase 2 : drift, sqlite3_flutter_libs, path_provider
+  #   Phase 4 : flutter_riverpod
+  #   Phase 8 : dio, flutter_secure_storage, workmanager
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  test: ^1.25.0
+
+flutter:
+  uses-material-design: true
