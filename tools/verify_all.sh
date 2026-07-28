@@ -15,7 +15,7 @@ cd "$(dirname "$0")/.."
 ROOT="$PWD"
 TS_DIR="${TS_FSRS_DIR:-/tmp/tsf}"
 
-echo "════ Phase 1 — Vérification du moteur FSRS-5 ════"
+echo "════ MedAnki DZ — Vérification (phases 1 à 3) ════"
 echo
 
 if [ -d "$TS_DIR/node_modules/ts-fsrs" ]; then
@@ -25,21 +25,31 @@ if [ -d "$TS_DIR/node_modules/ts-fsrs" ]; then
   (cd "$TS_DIR" && NODE_PATH="$TS_DIR/node_modules" \
       node "$ROOT/tools/verify_sequences_ts.js" > /tmp/tsseq.json)
 
-  echo "▸ 1/4 Primitives du modèle"
+  echo "▸ 1/7 Primitives du modèle"
   python3 tools/cross_check.py /tmp/tsref.json
 
-  echo "▸ 2/4 Séquences de révision complètes"
+  echo "▸ 2/7 Séquences de révision complètes"
   python3 tools/cross_check_sequences.py /tmp/tsseq.json
 else
   echo "⚠  ts-fsrs absent de $TS_DIR — étapes 1 et 2 ignorées."
   echo "   Pour les activer : mkdir -p $TS_DIR && cd $TS_DIR && npm install ts-fsrs"
 fi
 
-echo "▸ 3/4 Parité Dart / référence"
+echo "▸ 3/7 Parité Dart / référence"
 python3 tools/dart_parity_check.py
 
-echo "▸ 4/4 Régénération des scénarios golden"
+echo "▸ 4/7 Régénération des scénarios golden"
 python3 tools/generate_golden.py
+
+echo "▸ 5/7 Schéma local, migrations et append-only"
+python3 tools/test_migrations.py
+
+echo "▸ 6/7 Logique du dépôt SRS"
+python3 tools/test_repository_logic.py
+
+echo "▸ 7/7 Content Policy et contenu embarqué"
+python3 tools/check_schema_parity.py
+python3 tools/validate_content.py
 
 if command -v dart >/dev/null 2>&1; then
   echo "▸ Tests Dart"

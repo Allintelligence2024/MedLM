@@ -1,0 +1,162 @@
+{
+  "deck_id": "deck_anat_membre_sup",
+  "module_id": "anatomie",
+  "programme": "medecine_dz",
+  "study_year": 1,
+  "version": 1,
+  "name_fr": "Membre supérieur — Artère axillaire",
+  "name_en": "Upper limb — Axillary artery",
+  "description_fr": "Trajet, branches collatérales et rapports de l'artère axillaire avec le plexus brachial.",
+  "is_premium": false,
+  "is_demo": true,
+  "license": "medankidz_internal_v1",
+  "cards": [
+    {
+      "id": "anat_axil_001",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 3,
+      "tags": ["anatomie", "membre_superieur", "vascularisation"],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "Quelles sont les six branches collatérales de l'artère axillaire ?",
+          "en": "What are the six branches of the axillary artery?"
+        },
+        "back": {
+          "fr": "1. Thoracique supérieure\n2. Thoraco-acromiale\n3. Thoracique latérale\n4. Subscapulaire\n5. Circonflexe humérale antérieure\n6. Circonflexe humérale postérieure",
+          "en": "1. Superior thoracic\n2. Thoracoacromial\n3. Lateral thoracic\n4. Subscapular\n5. Anterior circumflex humeral\n6. Posterior circumflex humeral"
+        },
+        "explanation": {
+          "fr": "Moyen mnémotechnique : « Sur Thomas Tout Se Casse Comme ça ». La subscapulaire est la plus volumineuse ; les deux circonflexes naissent en regard du col chirurgical de l'humérus, ce qui explique leur lésion fréquente lors des fractures à ce niveau.",
+          "en": "The subscapular artery is the largest branch. The two circumflex arteries arise at the surgical neck of the humerus, explaining their frequent injury in fractures at this level."
+        },
+        "medical_term_en": "axillary artery"
+      }
+    },
+    {
+      "id": "anat_axil_002",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": ["anatomie", "membre_superieur"],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true
+      },
+      "content": {
+        "front": {
+          "fr": "Quel muscle divise l'artère axillaire en trois portions ?",
+          "en": "Which muscle divides the axillary artery into three parts?"
+        },
+        "back": {
+          "fr": "Le muscle petit pectoral (pectoralis minor).",
+          "en": "The pectoralis minor muscle."
+        },
+        "explanation": {
+          "fr": "La première portion est en amont du petit pectoral, la deuxième derrière lui, la troisième en aval. Cette division est un repère chirurgical constant : le nombre de branches de chaque portion suit la règle 1-2-3.",
+          "en": "Part one lies proximal to pectoralis minor, part two behind it, part three distal to it. Each part gives off 1, 2 and 3 branches respectively."
+        },
+        "medical_term_en": "pectoralis minor"
+      }
+    },
+    {
+      "id": "anat_axil_003",
+      "type": "qcm",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 4,
+      "tags": ["anatomie", "membre_superieur", "qcm"],
+      "source_meta": {
+        "source_type": "inspired",
+        "faculty": "Alger",
+        "year": 2022,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "notes": "Thème d'annale 2022 entièrement reformulé : énoncé réécrit, distracteurs recréés et explications rédigées par l'équipe."
+      },
+      "content": {
+        "question": {
+          "fr": "Une fracture du col chirurgical de l'humérus menace en premier lieu :",
+          "en": "A fracture of the surgical neck of the humerus primarily endangers:"
+        },
+        "is_multiple": false,
+        "options": [
+          {
+            "id": "A",
+            "fr": "Le nerf axillaire et l'artère circonflexe humérale postérieure",
+            "en": "The axillary nerve and posterior circumflex humeral artery",
+            "is_correct": true,
+            "explanation_fr": "Exact. Tous deux contournent le col chirurgical dans l'espace huméro-tricipital ; leur lésion entraîne une anesthésie du moignon de l'épaule et un déficit du deltoïde.",
+            "explanation_en": "Correct. Both structures wind around the surgical neck within the quadrangular space."
+          },
+          {
+            "id": "B",
+            "fr": "Le nerf radial et l'artère brachiale profonde",
+            "en": "The radial nerve and deep brachial artery",
+            "is_correct": false,
+            "explanation_fr": "Non. Ces structures accompagnent la gouttière radiale, au niveau de la diaphyse humérale, et sont menacées par les fractures diaphysaires moyennes.",
+            "explanation_en": "No. These run in the radial groove of the humeral shaft."
+          },
+          {
+            "id": "C",
+            "fr": "Le nerf médian et l'artère brachiale",
+            "en": "The median nerve and brachial artery",
+            "is_correct": false,
+            "explanation_fr": "Non. Ce paquet est menacé par les fractures supracondyliennes, à l'extrémité distale de l'humérus.",
+            "explanation_en": "No. This neurovascular bundle is at risk in supracondylar fractures."
+          },
+          {
+            "id": "D",
+            "fr": "Le nerf ulnaire au niveau de l'épitrochlée",
+            "en": "The ulnar nerve at the medial epicondyle",
+            "is_correct": false,
+            "explanation_fr": "Non. Le nerf ulnaire est vulnérable au coude, dans le sillon rétro-épitrochléen, très à distance du col chirurgical.",
+            "explanation_en": "No. The ulnar nerve is vulnerable at the elbow, far from the surgical neck."
+          }
+        ]
+      }
+    },
+    {
+      "id": "anat_axil_004",
+      "type": "cloze",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": ["anatomie", "membre_superieur"],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "can_distribute_offline": true
+      },
+      "content": {
+        "front": {
+          "fr": "L'artère axillaire fait suite à l'artère {{c1::subclavière}} au bord latéral de la {{c2::première côte}}.",
+          "en": "The axillary artery continues from the {{c1::subclavian}} artery at the lateral border of the {{c2::first rib}}."
+        },
+        "back": {
+          "fr": "subclavière / première côte",
+          "en": "subclavian / first rib"
+        },
+        "explanation": {
+          "fr": "Elle devient artère brachiale au bord inférieur du muscle grand rond. Ces deux limites — première côte en haut, grand rond en bas — encadrent toute la région axillaire.",
+          "en": "It becomes the brachial artery at the inferior border of teres major."
+        },
+        "medical_term_en": "subclavian artery"
+      }
+    }
+  ]
+}
