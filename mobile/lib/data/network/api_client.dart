@@ -254,6 +254,21 @@ class ApiClient {
     }
   }
 
+  // ── Stats (Phase 15.2) ───────────────────────────────────────
+
+  /// GET /v1/stats/me — statistiques utilisateur.
+  Future<Map<String, dynamic>> fetchStats({String period = 'all'}) async {
+    try {
+      final res = await _dio.get<dynamic>(
+        '/v1/stats/me',
+        queryParameters: {'period': period},
+      );
+      return Map<String, dynamic>.from(res.data as Map);
+    } on DioException catch (e) {
+      throw _translate(e);
+    }
+  }
+
   // ── Examens (Phase 10 bis) ─────────────────────────────────────
 
   /// GET /v1/decks/:id/wrap-key — récupère la clé AES wrappée.

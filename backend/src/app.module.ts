@@ -17,6 +17,7 @@ import { NotificationsModule } from './notifications/notifications.module';
 import { ObservabilityModule } from './observability/observability.module';
 import { GamificationModule } from './gamification/gamification.module';
 import { DeckKeysModule } from './deck-keys/deck-keys.module';
+import { StatsModule } from './stats/stats.module';
 
 @Module({
   imports: [
@@ -46,6 +47,7 @@ import { DeckKeysModule } from './deck-keys/deck-keys.module';
     NotificationsModule, // Phase 10 (FCM)
     GamificationModule, // Phase 9 bis (leaderboard)
     DeckKeysModule, // Phase 14 (RSA-OAEP key exchange)
+    StatsModule, // Phase 15.2 (statistiques utilisateur)
   ],
 })
 export class AppModule {}
