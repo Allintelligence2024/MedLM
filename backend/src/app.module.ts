@@ -20,6 +20,7 @@ import { DeckKeysModule } from './deck-keys/deck-keys.module';
 import { StatsModule } from './stats/stats.module';
 import { OnboardingModule } from './onboarding/onboarding.module';
 import { ShareModule } from './share/share.module';
+import { GroupPacksModule } from './group-packs/group-packs.module';
 
 @Module({
   imports: [
@@ -52,6 +53,7 @@ import { ShareModule } from './share/share.module';
     StatsModule, // Phase 15.2 (statistiques utilisateur)
     OnboardingModule, // Phase 15.3 (onboarding adaptatif)
     ShareModule, // Phase 15.5 (partage social)
+    GroupPacksModule, // Phase 16.3 (pack groupe)
   ],
 })
 export class AppModule {}
