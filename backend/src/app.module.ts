@@ -22,6 +22,7 @@ import { OnboardingModule } from './onboarding/onboarding.module';
 import { ShareModule } from './share/share.module';
 import { GroupPacksModule } from './group-packs/group-packs.module';
 import { TenantsModule } from './tenants/tenants.module';
+import { I18nModule } from './i18n/i18n.module';
 
 @Module({
   imports: [
@@ -56,6 +57,7 @@ import { TenantsModule } from './tenants/tenants.module';
     ShareModule, // Phase 15.5 (partage social)
     GroupPacksModule, // Phase 16.3 (pack groupe)
     TenantsModule, // Phase 16.4 (B2B multi-tenants)
+    I18nModule, // Phase 17.5 (internationalisation FR/AR/EN)
   ],
 })
 export class AppModule {}

@@ -6,7 +6,16 @@ namespace: medanki-prod
 resources:
   - ../../base
   - backup-cronjob.yaml
+  # Phase 17.1 — composants prod additionnels
+  - db/postgres-primary-svc.yaml
+  - db/postgres-replica-svc.yaml
+  - redis/redis-sentinel.yaml
+  - monitoring/prometheus-svc.yaml
+  - monitoring/alertmanager-config.yaml
+  - cdn/cors-policy.yaml
+  - secrets/prod-secrets.yaml
 
+# Réplicas production-ready (cf. phase 17.1 — SLA cible 99.5%).
 patches:
   - target:
       kind: Deployment
@@ -15,6 +24,11 @@ patches:
       - op: replace
         path: /spec/replicas
         value: 4
+      - op: add
+        path: /spec/template/spec/containers/0/env/-
+        value:
+          name: NODE_ENV
+          value: production
   - target:
       kind: Deployment
       name: cms
@@ -32,3 +46,53 @@ patches:
       - op: replace
         path: /spec/minReplicas
         value: 4
+  - target:
+      kind: HorizontalPodAutoscaler
+      name: cms-hpa
+    patch: |-
+      - op: replace
+        path: /spec/maxReplicas
+        value: 12
+      - op: replace
+        path: /spec/minReplicas
+        value: 3
+  # Phase 17.1 — readiness/liveness plus agressifs
+  - target:
+      kind: Deployment
+      name: backend
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/readinessProbe/initialDelaySeconds
+        value: 5
+      - op: replace
+        path: /spec/template/spec/containers/0/readinessProbe/periodSeconds
+        value: 5
+      - op: replace
+        path: /spec/template/spec/containers/0/readinessProbe/failureThreshold
+        value: 2
+      - op: replace
+        path: /spec/template/spec/containers/0/livenessProbe/periodSeconds
+        value: 15
+      - op: replace
+        path: /spec/template/spec/containers/0/livenessProbe/failureThreshold
+        value: 4
+
+configMapGenerator:
+  - name: medanki-config
+    behavior: merge
+    literals:
+      - log-level=info
+      - feature-r2-upload=true
+      - feature-leaderboard=true
+      - feature-anticheat=true
+      # Phase 17.5 — i18n
+      - i18n-default-language=fr
+      - i18n-supported-languages=fr,ar,en
+      # Phase 17.1 — feature flags prod
+      - feature-multi-tenant=true
+      - feature-group-packs=true
+      - feature-share-cards=true
+      # Phase 17.4 — CDN
+      - cdn-base-url=https://cdn.medanki-dz.com
+      # Phase 17.2 — read replicas
+      - db-read-replica-url=postgres://medanki:***@postgres-replica:5432/medanki

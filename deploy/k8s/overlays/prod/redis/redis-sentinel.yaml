@@ -1,0 +1,119 @@
+# Phase 17.3 — Redis Sentinel pour la haute disponibilité.
+#
+# Architecture : 1 master + 2 replicas + 3 sentinels pour le
+# failover automatique. C'est le minimum viable pour de la
+# prod (cf. Redis docs).
+#
+# Utilisé par :
+#   * Cache de sessions (Phase 16+)
+#   * Cache de stats (Phase 15.2 — remplacer le cache mémoire)
+#   * Rate limiting distribué (à brancher Phase 18+)
+#   * Pub/sub pour les events temps réel (Phase 18+)
+#
+# Note : on utilise des StatefulSets pour avoir des noms DNS
+# stables (redis-0, redis-1, redis-2) et un stockage persistant.
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-master
+  namespace: medanki-prod
+  labels:
+    app: redis
+    role: master
+spec:
+  type: ClusterIP
+  selector:
+    app: redis
+    role: master
+  ports:
+    - port: 6379
+      targetPort: 6379
+      name: redis
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-replica
+  namespace: medanki-prod
+  labels:
+    app: redis
+    role: replica
+spec:
+  type: ClusterIP
+  selector:
+    app: redis
+    role: replica
+  ports:
+    - port: 6379
+      targetPort: 6379
+      name: redis
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: redis-pdb
+  namespace: medanki-prod
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: redis
+---
+# 3 sentinels pour le quorum (1 mort toléré).
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-sentinel
+  namespace: medanki-prod
+  labels:
+    app: redis-sentinel
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: redis-sentinel
+  template:
+    metadata:
+      labels:
+        app: redis-sentinel
+    spec:
+      containers:
+        - name: sentinel
+          image: redis:7-alpine
+          command:
+            - redis-sentinel
+            - /etc/redis/sentinel.conf
+          ports:
+            - containerPort: 26379
+              name: sentinel
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1001
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-sentinel
+  namespace: medanki-prod
+  labels:
+    app: redis-sentinel
+spec:
+  type: ClusterIP
+  selector:
+    app: redis-sentinel
+  ports:
+    - port: 26379
+      targetPort: 26379
+      name: sentinel
