@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "ts-fsrs": "^4.7.1"
+  }
+}
