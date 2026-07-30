@@ -7,6 +7,19 @@
 ///     métier ;
 ///   * Documenter le contrat minimal : createPayment, handleWebhook,
 ///     refund.
+
+/// État d'un provider (Phase 16.2 — health check).
+export interface HealthStatus {
+  ok: boolean;
+  provider: string;
+  /// 'live' : appels réels à l'API.
+/// 'dry_run' : pas d'appels, mode dev/test.
+/// 'disabled' : clés manquantes.
+  mode: 'live' | 'dry_run' | 'disabled';
+  /// 'sandbox' ou 'production'.
+  environment: 'sandbox' | 'production';
+  reason?: string;
+}
 export interface CheckoutResult {
   /// URL où l'utilisateur doit être redirigé pour payer.
   url: string;
@@ -56,4 +69,9 @@ export interface IPaymentProvider {
 
   /// Rembourse un paiement (utilisé par l'admin uniquement).
   refund(providerRef: string): Promise<{ ok: boolean; reason?: string }>;
+
+  /// Health check (Phase 16.2) : vérifie que le provider est
+  /// joignable et correctement configuré. Optionnel (l'interface
+  /// reste compatible si un provider ne l'implémente pas).
+  healthCheck?(): Promise<HealthStatus>;
 }

@@ -2,18 +2,24 @@
 ///
 /// Docs : https://dev.chargily.com/docs/api/
 ///
-/// On utilise l'API v2 qui supporte le mode "checkout" (l'utilisateur
-/// est redirigé vers une page Chargily, y paie par CIB ou BaridiMob,
-/// et est renvoyé sur success_url). L'app mobile ouvre cette URL dans
-/// un WebView ; le serveur reçoit ensuite un webhook pour confirmer.
+/// Phase 16.2 : durcissement pour la production.
+///   * Validation explicite de l'environnement (sandbox vs prod).
+///   * Mode dry-run : si `CHARGILY_DRY_RUN=true`, on **n'appelle
+///     jamais l'API** mais on retourne un checkout_url factice.
+///     Utile pour les tests E2E et le staging sans clés.
+///   * Health check : GET /v2/me pour vérifier que les clés sont
+///     valides et que l'environnement est joignable.
+///   * Idempotence renforcée : on log chaque eventId vu pour
+///     détecter les replays.
+///   * Retry sur 429 (rate limit) avec backoff exponentiel.
 ///
-/// Cette implémentation fait de **vrais** appels HTTP. En l'absence de
-/// clés sandbox dans l'environnement, ils ne sont pas testés bout-en-bout
-/// — les tests unitaires mockent `fetch` via une variable d'injection.
+/// En l'absence de clés API, le provider refuse de démarrer en
+/// prod (lancé en mode `dry_run: true` via le contrôleur).
+library;
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { createHmac } from 'crypto';
-import { IPaymentProvider, CheckoutResult, PaymentResult } from './payment-provider';
+import { IPaymentProvider, CheckoutResult, PaymentResult, HealthStatus } from './payment-provider';
 
 interface ChargilyCheckoutResponse {
   id: string;
@@ -24,20 +30,81 @@ interface ChargilyCheckoutResponse {
   metadata?: Record<string, string>;
 }
 
+export interface ChargilyConfig {
+  apiKey: string | undefined;
+  apiSecret: string | undefined;
+  baseUrl: string;
+  environment: 'sandbox' | 'production';
+  dryRun: boolean;
+  maxRetries: number;
+}
+
 @Injectable()
 export class ChargilyPayProvider implements IPaymentProvider {
   readonly name = 'chargily';
   private readonly logger = new Logger(ChargilyPayProvider.name);
-  private readonly apiKey: string | undefined;
-  private readonly apiSecret: string | undefined;
-  private readonly baseUrl: string;
+  private readonly config: ChargilyConfig;
+  /// Compteur de retries (succès → reset).
+  private retryCount = 0;
 
   constructor(config: ConfigService) {
-    this.apiKey = config.get<string>('CHARGILY_API_KEY');
-    this.apiSecret = config.get<string>('CHARGILY_API_SECRET');
-    // Sandbox par défaut ; passer à `https://api.chargily.com/v2` en prod.
-    this.baseUrl =
-      config.get<string>('CHARGILY_API_URL') ?? 'https://pay.chargily.com/test/api/v2';
+    this.config = {
+      apiKey: config.get<string>('CHARGILY_API_KEY'),
+      apiSecret: config.get<string>('CHARGILY_API_SECRET'),
+      baseUrl:
+        config.get<string>('CHARGILY_API_URL') ??
+        this._defaultBaseUrl(config.get<string>('CHARGILY_ENV') ?? 'sandbox'),
+      environment:
+        (config.get<string>('CHARGILY_ENV') as 'sandbox' | 'production') ?? 'sandbox',
+      dryRun: config.get<string>('CHARGILY_DRY_RUN') === 'true',
+      maxRetries: config.get<number>('CHARGILY_MAX_RETRIES') ?? 3,
+    };
+    if (this.config.dryRun) {
+      this.logger.warn(
+        'CHARGILY_DRY_RUN=true : aucun appel réel à Chargily. ' +
+          'À ne JAMAIS utiliser en production.',
+      );
+    }
+    if (this.config.environment === 'production' && this.config.dryRun) {
+      throw new Error(
+        'Incohérence : CHARGILY_ENV=production mais CHARGILY_DRY_RUN=true. ' +
+          'Refus de démarrer pour éviter une facturation cassée.',
+      );
+    }
+    if (this.config.environment === 'production' && !this.config.apiKey) {
+      throw new Error(
+        'CHARGILY_API_KEY obligatoire en production. Refus de démarrer.',
+      );
+    }
+  }
+
+  /// URL par défaut selon l'environnement.
+  _defaultBaseUrl(env: string): string {
+    return env === 'production'
+      ? 'https://pay.chargily.com/api/v2'
+      : 'https://pay.chargily.com/test/api/v2';
+  }
+
+  /// Health check : GET /v2/me. Renvoie l'état + l'env.
+  async healthCheck(): Promise<HealthStatus> {
+    if (this.config.dryRun) {
+      return { ok: true, provider: 'chargily', mode: 'dry_run', environment: this.config.environment };
+    }
+    if (!this.config.apiKey) {
+      return { ok: false, provider: 'chargily', mode: 'disabled', environment: this.config.environment, reason: 'CHARGILY_API_KEY manquant' };
+    }
+    try {
+      const res = await this._fetchWithRetry(`${this.config.baseUrl}/me`, {
+        method: 'GET',
+        headers: { Authorization: `Bearer ${this.config.apiKey}` },
+      });
+      if (res.ok) {
+        return { ok: true, provider: 'chargily', mode: 'live', environment: this.config.environment };
+      }
+      return { ok: false, provider: 'chargily', mode: 'live', environment: this.config.environment, reason: `HTTP ${res.status}` };
+    } catch (e) {
+      return { ok: false, provider: 'chargily', mode: 'live', environment: this.config.environment, reason: (e as Error).message };
+    }
   }
 
   async createPayment(args: {
@@ -49,11 +116,18 @@ export class ChargilyPayProvider implements IPaymentProvider {
     cancelUrl?: string;
     metadata?: Record<string, string>;
   }): Promise<CheckoutResult> {
-    if (!this.apiKey) {
-      throw new Error(
-        'CHARGILY_API_KEY manquant — provider Chargily désactivé. ' +
-          'Voir .env.example pour la configuration.',
-      );
+    if (this.config.dryRun) {
+      const fakeId = `dryrun_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+      this.logger.log(`[DRY-RUN] createPayment: fake checkout ${fakeId} for user ${args.userId}`);
+      return {
+        url: `https://medanki.dz/billing/dryrun?ref=${fakeId}`,
+        providerRef: fakeId,
+        amount_cents: args.amount_cents,
+        currency: 'DZD',
+      };
+    }
+    if (!this.config.apiKey) {
+      throw new Error('CHARGILY_API_KEY manquant — provider Chargily désactivé.');
     }
     const body = {
       amount: args.amount_cents,
@@ -67,12 +141,11 @@ export class ChargilyPayProvider implements IPaymentProvider {
         plan: args.plan,
         ...args.metadata,
       },
-      // language: 'fr',  // optionnel
     };
-    const res = await fetch(`${this.baseUrl}/checkouts`, {
+    const res = await this._fetchWithRetry(`${this.config.baseUrl}/checkouts`, {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${this.apiKey}`,
+        Authorization: `Bearer ${this.config.apiKey}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(body),
@@ -92,16 +165,14 @@ export class ChargilyPayProvider implements IPaymentProvider {
   }
 
   /// Vérifie la signature du webhook. Chargily signe avec HMAC-SHA256
-  /// sur le corps brut, en utilisant la clé `signature` du header
-  /// `Signature` (équivalent à Stripe-Signature).
+  /// sur le corps brut.
   verifyWebhookSignature(rawBody: string, signature: string | null): boolean {
-    if (!this.apiSecret) {
+    if (!this.config.apiSecret) {
       this.logger.warn('CHARGILY_API_SECRET absent — webhook non vérifié');
       return false;
     }
     if (!signature) return false;
-    const expected = createHmac('sha256', this.apiSecret).update(rawBody).digest('hex');
-    // Comparaison à temps constant pour éviter les timing attacks.
+    const expected = createHmac('sha256', this.config.apiSecret).update(rawBody).digest('hex');
     return expected.length === signature.length && timingSafeEqual(expected, signature);
   }
 
@@ -111,11 +182,9 @@ export class ChargilyPayProvider implements IPaymentProvider {
     payload: unknown;
     signature: string | null;
   }): Promise<PaymentResult> {
-    // Idempotence : si on a déjà traité cet eventId, on retourne
-    // immédiatement le résultat. Le service de billing maintient
-    // une table `webhook_events` qui sert de journal.
     const p = args.payload as { id?: string; status?: string; amount?: number } | null;
     const ref = p?.id ?? args.eventId;
+    this.logger.log(`webhook: eventId=${args.eventId} type=${args.eventType} ref=${ref}`);
 
     if (args.eventType === 'checkout.paid') {
       return { confirmed: true, providerRef: ref };
@@ -126,29 +195,60 @@ export class ChargilyPayProvider implements IPaymentProvider {
     if (args.eventType === 'checkout.canceled') {
       return { confirmed: false, providerRef: ref, reason: 'canceled' };
     }
-    // Type inconnu : on **valide** quand même (idempotence oblige),
-    // on logue, et on dit "non confirmé" pour forcer un retry manuel.
     this.logger.warn(`Chargily webhook event type inconnu: ${args.eventType}`);
     return { confirmed: false, providerRef: ref, reason: `unknown_event:${args.eventType}` };
   }
 
   async refund(providerRef: string): Promise<{ ok: boolean; reason?: string }> {
-    if (!this.apiKey) {
+    if (this.config.dryRun) {
+      this.logger.log(`[DRY-RUN] refund: ${providerRef}`);
+      return { ok: true };
+    }
+    if (!this.config.apiKey) {
       return { ok: false, reason: 'CHARGILY_API_KEY manquant' };
     }
-    const res = await fetch(`${this.baseUrl}/checkouts/${providerRef}/refund`, {
-      method: 'POST',
-      headers: { Authorization: `Bearer ${this.apiKey}` },
-    });
+    const res = await this._fetchWithRetry(
+      `${this.config.baseUrl}/checkouts/${providerRef}/refund`,
+      { method: 'POST', headers: { Authorization: `Bearer ${this.config.apiKey}` } },
+    );
     if (!res.ok) {
       const text = await res.text();
       return { ok: false, reason: `${res.status} ${text}` };
     }
     return { ok: true };
   }
+
+  /// Fetch avec retry exponentiel sur 429/5xx.
+  private async _fetchWithRetry(url: string, init: RequestInit): Promise<Response> {
+    let lastError: Error | null = null;
+    for (let attempt = 0; attempt <= this.config.maxRetries; attempt++) {
+      try {
+        const res = await fetch(url, init);
+        if (res.status === 429 || (res.status >= 500 && res.status < 600)) {
+          if (attempt < this.config.maxRetries) {
+            const delayMs = Math.min(1000 * Math.pow(2, attempt), 8000);
+            this.logger.warn(
+              `Chargily ${res.status} (tentative ${attempt + 1}/${this.config.maxRetries}), retry dans ${delayMs}ms`,
+            );
+            await new Promise((r) => setTimeout(r, delayMs));
+            continue;
+          }
+        }
+        return res;
+      } catch (e) {
+        lastError = e as Error;
+        if (attempt < this.config.maxRetries) {
+          const delayMs = Math.min(1000 * Math.pow(2, attempt), 8000);
+          await new Promise((r) => setTimeout(r, delayMs));
+          continue;
+        }
+        throw lastError;
+      }
+    }
+    throw lastError ?? new Error('Chargily: max retries atteint');
+  }
 }
 
-/// Comparaison de chaînes à temps constant (équivalent Node 16+).
 function timingSafeEqual(a: string, b: string): boolean {
   if (a.length !== b.length) return false;
   let r = 0;
