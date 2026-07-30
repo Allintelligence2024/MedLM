@@ -1,27 +1,11 @@
-/// Composition root — câblage des implémentations à leurs interfaces.
-///
-/// C'est l'**unique** endroit du code applicatif qui connaît à la fois les
-/// contrats du domaine ET les implémentations de la couche data. Le reste
-/// de l'app ne dépend que des contrats — c'est ce qui rend les use cases
-/// testables en isolation et l'architecture remplaçable.
-///
-/// Pourquoi pas Riverpod dès la Phase 4 ?
-///   * Le doc v2 §3 prévoit Riverpod pour la couche présentation, pas pour
-///     le câblage bas niveau. Riverpod viendra avec les ViewModels (Phase 8).
-///   * En attendant, ce container expose une **API simple** (un objet
-///     avec des champs) que les ViewModels et les tests peuvent consommer
-///     sans framework.
-///   * Le container est immuable : une fois construit, l'app peut le passer
-///     partout. Pas de cycles de vie compliqués, pas de singletons globaux.
-///
-/// Pour les tests : on peut construire un `AppContainer` ad hoc avec un
-/// `AppDatabase` mémoire et des fakes pour le sync. Voir
-/// `test/domain/use_cases_test.dart` (à venir).
-library;
-
+// AppContainer — composition root (Phase 8 : on branche la couche réseau).
 import '../../data/local/app_database.dart';
+import '../../data/network/api_client.dart';
+import '../../data/network/secure_token_storage.dart';
 import '../../data/repositories/card_repository.dart';
 import '../../data/repositories/entitlement_repository.dart';
+import '../../data/repositories/rest_entitlement_repository.dart';
+import '../../data/repositories/rest_sync_repository.dart';
 import '../../data/repositories/srs_repository.dart';
 import '../../data/repositories/sync_repository.dart';
 import '../../domain/domain.dart';
@@ -29,33 +13,49 @@ import '../../domain/domain.dart';
 class AppContainer {
   AppContainer({
     required this.database,
+    required this.apiBaseUrl,
     ISyncRepository? syncRepository,
-  })  : srsRepository = SrsRepository(database),
-        cardRepository = CardRepository(database),
-        entitlementRepository = EntitlementRepository(database),
-        syncRepository = syncRepository ?? LocalSyncRepository(database);
+    IEntitlementRepository? entitlementRepository,
+  })  : tokenStorage = SecureTokenStorage(),
+        apiClient = ApiClient(
+          baseUrl: apiBaseUrl,
+          tokenStorage: tokenStorage,
+        ) {
+    // Si un repo custom n'est pas passé, on prend l'impl REST par défaut.
+    this.syncRepository = syncRepository ??
+        RestSyncRepository(api: apiClient, db: database);
+    this.entitlementRepository = entitlementRepository ??
+        RestEntitlementRepository(api: apiClient, storage: tokenStorage);
+    _initLegacyRefs();
+  }
 
   final AppDatabase database;
-  final ISrsRepository srsRepository;
-  final ICardRepository cardRepository;
-  final IEntitlementRepository entitlementRepository;
-  final ISyncRepository syncRepository;
+  final String apiBaseUrl;
+  final SecureTokenStorage tokenStorage;
+  final ApiClient apiClient;
 
-  // ── Use cases : construits paresseusement, mis en cache ─────────────────
+  // Use cases (instanciés paresseusement).
   late final BuildStudyQueueUseCase buildStudyQueue =
       BuildStudyQueueUseCase(srsRepository);
-  late final RecordReviewUseCase recordReview =
-      RecordReviewUseCase(srsRepository);
-  late final FetchDueCardsUseCase fetchDueCards =
-      FetchDueCardsUseCase(srsRepository);
+  late final RecordReviewUseCase recordReview = RecordReviewUseCase(srsRepository);
+  late final FetchDueCardsUseCase fetchDueCards = FetchDueCardsUseCase(srsRepository);
   late final SyncOutboxUseCase syncOutbox =
       SyncOutboxUseCase(srsRepository, syncRepository);
   late final ValidateEntitlementUseCase validateEntitlement =
       ValidateEntitlementUseCase(entitlementRepository);
   late final StartMockExamUseCase startMockExam =
       StartMockExamUseCase(srsRepository);
-  late final SubmitReportUseCase submitReport =
-      SubmitReportUseCase(cardRepository);
-  late final DownloadDeckUseCase downloadDeck =
-      DownloadDeckUseCase(cardRepository);
+  late final SubmitReportUseCase submitReport = SubmitReportUseCase(cardRepository);
+  late final DownloadDeckUseCase downloadDeck = DownloadDeckUseCase(cardRepository);
+
+  // Refs historiques (les tests existants les utilisent directement).
+  late final SrsRepository srsRepository;
+  late final CardRepository cardRepository;
+  late final IEntitlementRepository entitlementRepository;
+  late final ISyncRepository syncRepository;
+
+  void _initLegacyRefs() {
+    srsRepository = SrsRepository(database);
+    cardRepository = CardRepository(database);
+  }
 }
