@@ -23,6 +23,8 @@ import { ShareModule } from './share/share.module';
 import { GroupPacksModule } from './group-packs/group-packs.module';
 import { TenantsModule } from './tenants/tenants.module';
 import { I18nModule } from './i18n/i18n.module';
+import { CacheModule } from './cache/cache.module';
+import { DbModule } from './db/db.module';
 
 @Module({
   imports: [
@@ -58,6 +60,8 @@ import { I18nModule } from './i18n/i18n.module';
     GroupPacksModule, // Phase 16.3 (pack groupe)
     TenantsModule, // Phase 16.4 (B2B multi-tenants)
     I18nModule, // Phase 17.5 (internationalisation FR/AR/EN)
+    CacheModule, // Phase 18 (Redis cache injectable)
+    DbModule, // Phase 18 (read replicas)
   ],
 })
 export class AppModule {}

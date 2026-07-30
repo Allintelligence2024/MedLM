@@ -1,4 +1,4 @@
-// ApnsProvider — Apple Push Notification service (Phase 14).
+// ApnsProvider — Apple Push Notification service (Phase 14 + 18).
 //
 // Authentification : JWT signé ES256 avec la clé privée .p8
 // téléchargée depuis le portail Apple Developer. Header `kid` =
@@ -8,10 +8,7 @@
 // (production) ou https://api.sandbox.push.apple.com/3/device/{...}
 // (sandbox pour les builds dev).
 //
-// v2 §11.3 — trois types de notifs synchronisés avec FCM :
-//   * due_reminder  : "Vous avez N cartes dues aujourd'hui"
-//   * streak_danger : "Votre streak est en danger, révisez !"
-//   * deck_updated  : "Le deck X a été mis à jour"
+// Phase 18 : intégration jose complète (ES256, SignJWT, PKCS8).
 //
 // Configuration requise (via env) :
 //   APNS_TEAM_ID              = "ABCDE12345"
@@ -23,7 +20,6 @@ import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
-import * as jose from 'jose'; // p'écarter si pas dispo — fallback
 import type { PushPayload } from '../push.types';
 
 @Injectable()
@@ -31,6 +27,8 @@ export class ApnsProvider {
   private readonly logger = new Logger(ApnsProvider.name);
   private cachedToken: { token: string; expiresAt: number } | null = null;
   private privateKey: Uint8Array | null = null;
+  /// Module jose chargé dynamiquement (peut être absent en dev/test).
+  private joseModule: any = null;
 
   constructor(private readonly config: ConfigService) {
     const keyPath = this.config.get<string>('APNS_PRIVATE_KEY_PATH');
@@ -113,14 +111,16 @@ export class ApnsProvider {
     }
     if (!this.privateKey) return null;
     try {
-      // On importe jose dynamiquement (peut être absent en dev).
-      const joseModule = await this._loadJose();
-      if (!joseModule) return null;
-      const key = await joseModule.importPKCS8(
+      const jose = await this._loadJose();
+      if (!jose) {
+        this.logger.warn('jose non installé — APNs désactivé');
+        return null;
+      }
+      const key = await jose.importPKCS8(
         Buffer.from(this.privateKey).toString('utf8'),
         'ES256',
       );
-      const jwt = await new joseModule.SignJWT({})
+      const jwt = await new jose.SignJWT({})
         .setProtectedHeader({ alg: 'ES256', kid: keyId })
         .setIssuer(teamId)
         .setIssuedAt()
@@ -134,12 +134,17 @@ export class ApnsProvider {
     }
   }
 
-  private async _loadJose(): Promise<typeof jose | null> {
+  /// Charge jose dynamiquement (peut être absent en dev/test).
+  /// On cache la résolution pour éviter de re-tester à chaque
+  /// appel.
+  private async _loadJose(): Promise<any | null> {
+    if (this.joseModule !== null) return this.joseModule;
     try {
-      // Import dynamique pour ne pas casser si jose n'est pas installé.
-      const mod = await import('jose' as string).catch(() => null);
-      return (mod as typeof jose | null) ?? null;
+      const mod = (await import('jose' as string).catch(() => null)) as any;
+      this.joseModule = mod;
+      return mod;
     } catch {
+      this.joseModule = false; // sentinel pour ne pas re-tenter
       return null;
     }
   }
