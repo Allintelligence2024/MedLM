@@ -2,7 +2,7 @@
   "name": "medanki-dz-cms",
   "version": "0.1.0",
   "private": true,
-  "description": "MedAnki DZ — CMS Next.js (Phase 11 du plan)",
+  "description": "MedAnki DZ — CMS Next.js (Phase 11 + 11 bis du plan)",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -17,11 +17,19 @@
     "react-dom": "^18.3.1",
     "@radix-ui/react-dialog": "^1.1.2",
     "@radix-ui/react-select": "^2.1.2",
+    "@radix-ui/react-tabs": "^1.1.1",
+    "@radix-ui/react-toast": "^1.2.2",
+    "@tiptap/react": "^2.8.0",
+    "@tiptap/pm": "^2.8.0",
+    "@tiptap/starter-kit": "^2.8.0",
+    "@tiptap/extension-link": "^2.8.0",
+    "@tiptap/extension-placeholder": "^2.8.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.453.0",
     "tailwind-merge": "^2.5.4",
-    "zod": "^3.23.8"
+    "zod": "^3.23.8",
+    "date-fns": "^3.6.0"
   },
   "devDependencies": {
     "@types/node": "^22.7.0",
