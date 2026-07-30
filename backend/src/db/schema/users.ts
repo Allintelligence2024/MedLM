@@ -27,6 +27,9 @@ export const users = pgTable(
     faculty: text('faculty'),
     studyYear: integer('study_year'),
     langPref: text('lang_pref').notNull().default('fr'),
+    /// Rôle RBAC — student par défaut. Modifiable depuis le CMS (Phase 11)
+    /// ou par override d'email via `ADMIN_EMAILS` (.env).
+    rbacRole: text('rbac_role').notNull().default('student'),
     createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
     lastSeenAt: timestamp('last_seen_at', { withTimezone: true }),
   },

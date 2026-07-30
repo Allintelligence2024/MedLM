@@ -23,6 +23,7 @@ export interface JwtPayload {
   sub: string; // userId
   did?: string; // deviceId
   kind: 'access' | 'refresh' | 'entitlement';
+  role?: 'student' | 'author' | 'medical_reviewer' | 'editor' | 'admin';
   iat?: number;
   exp?: number;
 }
