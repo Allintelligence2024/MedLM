@@ -254,6 +254,64 @@ class ApiClient {
     }
   }
 
+  // ── Examens (Phase 10 bis) ─────────────────────────────────────
+
+  /// POST /v1/exams/templates/:id/generate — génère une tentative
+  /// à partir d'un template.
+  Future<Map<String, dynamic>> generateExam(String templateId) async {
+    try {
+      final res = await _dio.post<dynamic>('/v1/exams/templates/$templateId/generate');
+      return Map<String, dynamic>.from(res.data as Map);
+    } on DioException catch (e) {
+      throw _translate(e);
+    }
+  }
+
+  /// POST /v1/exams/attempts/:id/events — log d'un événement
+  /// anti-triche.
+  Future<void> recordExamEvent({
+    required String attemptId,
+    required String kind,
+    required Map<String, Object?> metadata,
+    required int clientTs,
+  }) async {
+    try {
+      await _dio.post<dynamic>(
+        '/v1/exams/attempts/$attemptId/events',
+        data: {
+          'kind': kind,
+          'metadata': metadata,
+          'client_ts': clientTs,
+        },
+      );
+    } on DioException catch (_) {
+      // Cf. AntiCheatController.record — l'échec du log ne doit
+      // jamais bloquer l'examen. Le caller catch déjà en amont.
+      rethrow;
+    }
+  }
+
+  /// GET /v1/exams/templates — templates actifs.
+  Future<List<Map<String, dynamic>>> listExamTemplates({
+    String? moduleId,
+    String? faculty,
+    int? studyYear,
+  }) async {
+    final params = <String, dynamic>{};
+    if (moduleId != null) params['module_id'] = moduleId;
+    if (faculty != null) params['faculty'] = faculty;
+    if (studyYear != null) params['study_year'] = studyYear;
+    try {
+      final res = await _dio.get<dynamic>(
+        '/v1/exams/templates',
+        queryParameters: params,
+      );
+      return (res.data as List).cast<Map<String, dynamic>>();
+    } on DioException catch (e) {
+      throw _translate(e);
+    }
+  }
+
   // ── Helpers ─────────────────────────────────────────────────────
 
   ApiException _translate(DioException e) {
