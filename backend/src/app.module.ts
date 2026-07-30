@@ -15,6 +15,7 @@ import { RbacModule } from './rbac/rbac.module';
 import { ExamsModule } from './exams/exams.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { ObservabilityModule } from './observability/observability.module';
+import { GamificationModule } from './gamification/gamification.module';
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { ObservabilityModule } from './observability/observability.module';
     EntitlementModule,
     ExamsModule, // Phase 10
     NotificationsModule, // Phase 10 (FCM)
+    GamificationModule, // Phase 9 bis (leaderboard)
   ],
 })
 export class AppModule {}

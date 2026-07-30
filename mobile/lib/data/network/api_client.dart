@@ -180,6 +180,80 @@ class ApiClient {
     }
   }
 
+  // ── Gamification (Phase 9 bis) ──────────────────────────────────
+
+  /// GET /v1/gamification/leaderboard — top N de la semaine.
+  Future<Map<String, dynamic>> leaderboardTop({
+    String? faculty,
+    int? studyYear,
+    int limit = 50,
+  }) async {
+    final params = <String, dynamic>{'limit': limit};
+    if (faculty != null) params['faculty'] = faculty;
+    if (studyYear != null) params['study_year'] = studyYear;
+    try {
+      final res = await _dio.get<dynamic>(
+        '/v1/gamification/leaderboard',
+        queryParameters: params,
+      );
+      return Map<String, dynamic>.from(res.data as Map);
+    } on DioException catch (e) {
+      throw _translate(e);
+    }
+  }
+
+  /// GET /v1/gamification/leaderboard/me — état d'opt-in.
+  Future<Map<String, dynamic>> leaderboardMe() async {
+    try {
+      final res = await _dio.get<dynamic>('/v1/gamification/leaderboard/me');
+      return Map<String, dynamic>.from(res.data as Map);
+    } on DioException catch (e) {
+      throw _translate(e);
+    }
+  }
+
+  /// POST /v1/gamification/leaderboard/opt-in.
+  Future<void> leaderboardOptIn({
+    required String pseudonym,
+    String? faculty,
+    int? studyYear,
+  }) async {
+    try {
+      await _dio.post<dynamic>(
+        '/v1/gamification/leaderboard/opt-in',
+        data: {
+          'pseudonym': pseudonym,
+          if (faculty != null) 'faculty': faculty,
+          if (studyYear != null) 'study_year': studyYear,
+        },
+      );
+    } on DioException catch (e) {
+      throw _translate(e);
+    }
+  }
+
+  /// DELETE /v1/gamification/leaderboard/opt-in.
+  Future<void> leaderboardOptOut() async {
+    try {
+      await _dio.delete<dynamic>('/v1/gamification/leaderboard/opt-in');
+    } on DioException catch (e) {
+      throw _translate(e);
+    }
+  }
+
+  // ── Badges (Phase 9 bis) ────────────────────────────────────────
+
+  /// GET /v1/gamification/badges — badges débloqués par l'utilisateur.
+  Future<List<Map<String, dynamic>>> badgesUnlocked() async {
+    try {
+      final res = await _dio.get<dynamic>('/v1/gamification/badges');
+      final items = (res.data as Map)['items'] as List;
+      return items.cast<Map<String, dynamic>>();
+    } on DioException catch (e) {
+      throw _translate(e);
+    }
+  }
+
   // ── Helpers ─────────────────────────────────────────────────────
 
   ApiException _translate(DioException e) {
