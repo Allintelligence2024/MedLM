@@ -14,6 +14,7 @@ import {
   index,
 } from 'drizzle-orm/pg-core';
 import { users } from './users';
+import { cards } from './content';
 
 export const aiGenerationJobs = pgTable(
   'ai_generation_jobs',
@@ -42,5 +43,35 @@ export const aiGenerationJobs = pgTable(
   (t) => ({
     userKindIdx: index('ai_jobs_user_kind_idx').on(t.userId, t.kind, t.createdAt),
     kindIdx: index('ai_jobs_kind_idx').on(t.kind, t.createdAt),
+  }),
+);
+
+/// Phase 18.4 — signaux de difficulté remontés aux auteurs.
+/// Un signal 'open' par carte maximum (unicité partielle côté SQL,
+/// migration 0013 : `WHERE status='open'`).
+export const aiDifficultySignals = pgTable(
+  'ai_difficulty_signals',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    cardId: uuid('card_id')
+      .notNull()
+      .references(() => cards.id, { onDelete: 'cascade' }),
+    /// 'repeated_lapses' (extensible : 'ambiguous_wording', …)
+    reason: text('reason').notNull(),
+    affectedUsers: integer('affected_users').notNull().default(0),
+    totalLapses: integer('total_lapses').notNull().default(0),
+    windowDays: integer('window_days').notNull().default(30),
+    /// 'open' | 'resolved' | 'ignored'
+    status: text('status').notNull().default('open'),
+    createdBy: text('created_by').notNull().default('adaptive-engine'),
+    createdAt: timestamp('created_at', { withTimezone: true })
+      .notNull()
+      .defaultNow(),
+    resolvedAt: timestamp('resolved_at', { withTimezone: true }),
+    resolvedBy: uuid('resolved_by').references(() => users.id),
+  },
+  (t) => ({
+    statusIdx: index('ai_signals_status_idx').on(t.status, t.createdAt),
+    cardIdx: index('ai_signals_card_idx').on(t.cardId),
   }),
 );
