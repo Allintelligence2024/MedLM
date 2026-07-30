@@ -1,23 +1,17 @@
 // RestEntitlementRepository — vérifie l'entitlement côté serveur ET
 // garde un JWT signé en local pour les vérifications hors ligne.
 //
-// Cycle de vie :
-//   * À chaque ouverture de l'app, on tente un GET /v1/entitlement/jwt
-//     (authentifié). Si succès, on stocke le JWT dans le secure
-//     storage.
-//   * Sinon (offline, session expirée), on relit le dernier JWT
-//     persisté et on le vérifie localement avec la clé publique
-//     embarquée (lecture seule, bundle).
-//   * L'usage courant (isPremium()) consulte le JWT en cache, pas
-//     le réseau — sinon la page d'accueil mettrait 3s à s'afficher
-//     en 3G algérienne.
+// Phase 8 bis :
+//   * Le JWT est maintenant vérifié **cryptographiquement** avec
+//     la clé publique embarquée (cf. v2 §8.1). Sans bundle de clé,
+//     on refuse systématiquement (mode fail-closed).
+//   * Le composant `JwtVerifier` est injecté pour faciliter les
+//     tests (on peut passer un mock).
 library;
 
 import 'dart:async';
-import 'dart:convert';
 
-import 'package:flutter/services.dart' show rootBundle;
-
+import '../../core/security/jwt_verifier.dart';
 import '../../domain/domain.dart';
 import '../network/api_client.dart';
 import '../network/secure_token_storage.dart';
@@ -26,32 +20,18 @@ class RestEntitlementRepository implements IEntitlementRepository {
   RestEntitlementRepository({
     required this.api,
     required this.storage,
-  });
+    JwtVerifier? jwtVerifier,
+  }) : _jwtVerifier = jwtVerifier ?? JwtVerifier();
 
   final ApiClient api;
   final SecureTokenStorage storage;
-
-  /// Clé publique embarquée (Phase 7). En production, on bundle
-  /// `assets/keys/entitlement_public.pem` au build.
-  String? _publicKeyPem;
-
-  Future<String> _loadPublicKey() async {
-    if (_publicKeyPem != null) return _publicKeyPem!;
-    try {
-      _publicKeyPem = await rootBundle.loadString('assets/keys/entitlement_public.pem');
-    } catch (_) {
-      // Pas de clé embarquée (mode dev) : on ne peut pas vérifier
-      // localement, on force un appel réseau.
-      _publicKeyPem = '';
-    }
-    return _publicKeyPem!;
-  }
+  final JwtVerifier _jwtVerifier;
 
   @override
   Future<EntitlementState> current() async {
     final cached = await storage.readEntitlementJwt();
     if (cached != null) {
-      final decoded = _verifyOffline(cached);
+      final decoded = await _verifyOffline(cached);
       if (decoded != null) {
         return decoded;
       }
@@ -88,35 +68,29 @@ class RestEntitlementRepository implements IEntitlementRepository {
     required int expiresAtMs,
     int? graceUntilMs,
   }) async {
+    // On vérifie le JWT qu'on s'apprête à stocker — c'est notre
+    // dernière chance de refuser un token forgé.
+    final verified = await _jwtVerifier.verify(signedToken);
     await storage.writeEntitlementJwt(signedToken);
     await storage.writeUserId(userId);
+    // `verified` est utilisé comme effet de bord (throw si invalide).
+    verified.expiresAtMs;
   }
 
   /// Vérification offline du JWT. Retourne null si invalide.
-  EntitlementState? _verifyOffline(String jwt) {
+  Future<EntitlementState?> _verifyOffline(String jwt) async {
     try {
-      final parts = jwt.split('.');
-      if (parts.length != 3) return null;
-      final payload = jsonDecode(
-        utf8.decode(base64Url.decode(base64Url.normalize(parts[1]))),
-      ) as Map<String, dynamic>;
-      final now = DateTime.now().millisecondsSinceEpoch;
-      final exp = (payload['expires_at'] as num?)?.toInt() ?? 0;
-      if (exp > 0 && exp < now) {
-        return null; // expiré
-      }
-      // TODO Phase 8 bis : vérifier la signature avec la clé publique.
-      // Pour l'instant on fait confiance à la signature tant qu'on
-      // n'a pas bundle la clé — la v2 §8.1 l'exige.
-      final plan = _planFromString(payload['plan'] as String?);
-      final grace = (payload['grace_until'] as num?)?.toInt();
+      final verified = await _jwtVerifier.verify(jwt);
+      final p = verified.payload;
+      final plan = _planFromString(p['plan'] as String?);
+      final grace = (p['grace_until'] as num?)?.toInt();
       return EntitlementState(
         plan: plan,
         isValid: true,
-        expiresAtMs: exp,
+        expiresAtMs: verified.expiresAtMs,
         graceUntilMs: grace,
       );
-    } catch (_) {
+    } on JwtVerificationException {
       return null;
     }
   }
