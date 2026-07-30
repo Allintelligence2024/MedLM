@@ -1,29 +1,26 @@
-// TracingService — OpenTelemetry Phase 12 bis.
+// TracingService — Phase 12 bis + Phase 14.
 //
 // Span distribué sur les requêtes HTTP. Compatible avec
 // Prometheus + Grafana Tempo + Jaeger (auto-instrumentation via
 // OTLP).
 //
-// On utilise l'API Node `node:async_hooks` pour propager le
-// contexte asynchrone, sans dépendre d'un SDK complet (l'API
-// officielle `@opentelemetry/sdk-node` fait 5 Mo de deps).
+// Phase 14 : export OTLP via OtelExporter (léger, sans SDK
+// @opentelemetry complet).
 //
-// Mode léger : on génère un traceId par requête, on l'attache
-// au log Pino, et on l'expose dans les headers de réponse
-// (`x-trace-id`). L'export OTLP est branchable via OTEL_EXPORTER_OTLP_ENDPOINT.
+// On utilise l'API Node `node:async_hooks` pour propager le
+// contexte asynchrone, sans dépendre d'un SDK complet.
 
 import { Injectable, Logger } from '@nestjs/common';
 import { AsyncLocalStorage } from 'node:async_hooks';
 import { randomUUID } from 'node:crypto';
+import { OtelExporter } from './otel.exporter';
 
 export interface TraceContext {
   traceId: string;
   spanId: string;
   parentSpanId?: string;
-  /// Nom de l'opération (ex. 'GET /v1/srs-sync/pull').
   operation: string;
   startedAt: number;
-  /// Attributs clé-valeur.
   attributes: Record<string, string | number | boolean>;
 }
 
@@ -32,8 +29,8 @@ export class TracingService {
   private readonly logger = new Logger(TracingService.name);
   private readonly storage = new AsyncLocalStorage<TraceContext>();
 
-  /// Démarre un span. Le callback reçoit un TraceContext qu'il
-  /// peut enrichir.
+  constructor(private readonly exporter: OtelExporter) {}
+
   run<T>(op: string, fn: (ctx: TraceContext) => Promise<T> | T): Promise<T> | T {
     const ctx: TraceContext = {
       traceId: randomUUID().replace(/-/g, ''),
@@ -45,21 +42,16 @@ export class TracingService {
     return this.storage.run(ctx, () => fn(ctx));
   }
 
-  /// Récupère le contexte courant (à utiliser depuis n'importe
-  /// quel service injecté). Retourne `null` si on n'est pas dans
-  /// un span.
   current(): TraceContext | null {
     return this.storage.getStore() ?? null;
   }
 
-  /// Ajoute un attribut au span courant. No-op si pas de span.
   setAttribute(key: string, value: string | number | boolean): void {
     const ctx = this.current();
     if (ctx) ctx.attributes[key] = value;
   }
 
-  /// Log structuré du span (à la fin de la requête). Ne bloque
-  /// pas : on log en async via setImmediate.
+  /// Termine un span : log + export OTLP.
   finish(ctx: TraceContext, status: 'ok' | 'error'): void {
     const durationMs = Date.now() - ctx.startedAt;
     setImmediate(() => {
@@ -72,16 +64,30 @@ export class TracingService {
         status,
         ...ctx.attributes,
       });
+      // Export OTLP (no-op si l'endpoint n'est pas configuré).
+      this.exporter.enqueue(ctx, status);
     });
   }
 
-  /// Génère un middleware-friendly wrapper pour Express.
-  /// Utilisé par `main.ts` (cf. bootstrap).
+  /// Crée un span enfant (pour appels sortants : DB, HTTP).
+  childSpan(operation: string, attributes: Record<string, string | number | boolean> = {}): TraceContext {
+    const parent = this.current();
+    const child: TraceContext = {
+      traceId: parent?.traceId ?? randomUUID().replace(/-/g, ''),
+      spanId: randomUUID().slice(0, 16),
+      parentSpanId: parent?.spanId,
+      operation,
+      startedAt: Date.now(),
+      attributes,
+    };
+    return child;
+  }
+
+  /// Middleware Express (utilisé par `main.ts`).
   middleware() {
     return (req: any, res: any, next: any) => {
       const op = `${req.method} ${req.route?.path ?? req.path}`;
       this.run(op, async (ctx) => {
-        // Header de réponse : permet de corréler client / serveur.
         res.setHeader('x-trace-id', ctx.traceId);
         try {
           await new Promise<void>((resolve, reject) => {

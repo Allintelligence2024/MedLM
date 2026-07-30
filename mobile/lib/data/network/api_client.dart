@@ -256,6 +256,41 @@ class ApiClient {
 
   // ── Examens (Phase 10 bis) ─────────────────────────────────────
 
+  /// GET /v1/decks/:id/wrap-key — récupère la clé AES wrappée.
+  Future<Map<String, dynamic>> wrapDeckKey({
+    required String deckId,
+    required String clientPublicKeyPem,
+    required String deviceId,
+  }) async {
+    try {
+      final res = await _dio.get<dynamic>(
+        '/v1/decks/$deckId/wrap-key',
+        queryParameters: {
+          'client_public_key': clientPublicKeyPem,
+          'device_id': deviceId,
+        },
+      );
+      return Map<String, dynamic>.from(res.data as Map);
+    } on DioException catch (e) {
+      throw _translate(e);
+    }
+  }
+
+  /// DELETE /v1/decks/:id/wrap-key — révoque la clé d'un device.
+  Future<void> revokeDeckKey({
+    required String deckId,
+    required String deviceId,
+  }) async {
+    try {
+      await _dio.delete<dynamic>(
+        '/v1/decks/$deckId/wrap-key',
+        queryParameters: {'device_id': deviceId},
+      );
+    } on DioException catch (e) {
+      throw _translate(e);
+    }
+  }
+
   /// POST /v1/exams/templates/:id/generate — génère une tentative
   /// à partir d'un template.
   Future<Map<String, dynamic>> generateExam(String templateId) async {

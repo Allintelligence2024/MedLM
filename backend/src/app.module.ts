@@ -16,6 +16,7 @@ import { ExamsModule } from './exams/exams.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { ObservabilityModule } from './observability/observability.module';
 import { GamificationModule } from './gamification/gamification.module';
+import { DeckKeysModule } from './deck-keys/deck-keys.module';
 
 @Module({
   imports: [
@@ -44,6 +45,7 @@ import { GamificationModule } from './gamification/gamification.module';
     ExamsModule, // Phase 10
     NotificationsModule, // Phase 10 (FCM)
     GamificationModule, // Phase 9 bis (leaderboard)
+    DeckKeysModule, // Phase 14 (RSA-OAEP key exchange)
   ],
 })
 export class AppModule {}

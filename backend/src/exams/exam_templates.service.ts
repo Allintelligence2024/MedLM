@@ -1,4 +1,4 @@
-// ExamTemplatesService — Phase 10 bis.
+// ExamTemplatesService — Phase 10 bis + Phase 14.
 //
 // Responsabilités :
 //   * listTemplates() : templates actifs, filtrés par faculté/année.
@@ -8,6 +8,8 @@
 //   * recordCheatEvent() : log append-only d'un événement.
 //   * suspicionScore() : score agrégé (0..1) d'une tentative, basé
 //     sur les événements. 0 = RAS, 1 = très suspect.
+//   * (Phase 14) detectMultiDevice() : signale les examens passés
+//     simultanément depuis plusieurs appareils (triche probable).
 import { Inject, Injectable, Logger, NotFoundException, BadRequestException } from '@nestjs/common';
 import { and, eq, sql } from 'drizzle-orm';
 import { DRIZZLE, Database } from '../db/database.module';
@@ -209,6 +211,64 @@ export class ExamTemplatesService {
     if (switches > 0) score += Math.min(0.1 * switches, 0.4);
     if (screenshots > 0) score += 0.5;
     if (rightClicks > 0) score += Math.min(0.05 * rightClicks, 0.2);
+
+    // Phase 14 : multi-device.
+    const multiDevice = await this.detectMultiDevice(attemptId);
+    if (multiDevice.distinctDevices > 1) {
+      // 0.4 par device supplémentaire, capé à 0.8.
+      score += Math.min(0.4 * (multiDevice.distinctDevices - 1), 0.8);
+    }
+
     return Math.min(score, 1.0);
+  }
+
+  /// Détecte les examens passés depuis plusieurs appareils pour un
+  /// même user. On regarde les `examAttemptEvents` qui contiennent
+  /// un `device_id` dans leur `metadata` et on compte les devices
+  /// distincts.
+  ///
+  /// Approche : pour chaque event d'une tentative, on regarde si
+  /// le `userId` a d'autres tentatives en cours (ou récentes) avec
+  /// un `deviceId` différent. Si oui, c'est suspect.
+  async detectMultiDevice(attemptId: string): Promise<{ distinctDevices: number; deviceIds: string[] }> {
+    const me = await this.db
+      .select({ userId: examAttempts.userId, startedAt: examAttempts.startedAt })
+      .from(examAttempts)
+      .where(eq(examAttempts.id, attemptId))
+      .get();
+    if (!me) return { distinctDevices: 0, deviceIds: [] };
+
+    // Toutes les tentatives en cours de ce user, dans la même
+    // fenêtre temporelle (± 30 minutes du début de la tentative).
+    const windowStart = new Date(me.startedAt.getTime() - 30 * 60_000);
+    const windowEnd = new Date(me.startedAt.getTime() + 30 * 60_000);
+    const concurrent = await this.db
+      .select({ id: examAttempts.id })
+      .from(examAttempts)
+      .where(
+        and(
+          eq(examAttempts.userId, me.userId),
+          sql`${examAttempts.startedAt} >= ${windowStart.toISOString()}`,
+          sql`${examAttempts.startedAt} <= ${windowEnd.toISOString()}`,
+        ),
+      );
+    if (concurrent.length === 0) {
+      return { distinctDevices: 0, deviceIds: [] };
+    }
+    const ids = concurrent.map((c) => c.id);
+    // Pour chaque tentative concurrente, on récupère les device_id
+    // depuis examAttemptEvents.metadata.device_id.
+    const events = await this.db
+      .select({ metadata: examAttemptEvents.metadata })
+      .from(examAttemptEvents)
+      .where(sql`${examAttemptEvents.attemptId} = ANY(${sql.raw(`ARRAY[${ids.map((i) => `'${i}'`).join(',')}]::uuid[]`)}`)`);
+    const devices = new Set<string>();
+    for (const e of events) {
+      const m = (e.metadata as any) ?? {};
+      if (typeof m.device_id === 'string' && m.device_id) {
+        devices.add(m.device_id);
+      }
+    }
+    return { distinctDevices: devices.size, deviceIds: [...devices] };
   }
 }
