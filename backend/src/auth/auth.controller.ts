@@ -9,12 +9,14 @@ import {
 import { z } from 'zod';
 import { AuthService } from './auth.service';
 import { LoginBody, SignupBody } from './auth.dto';
+import { Public } from './public.decorator';
 
 const RefreshBody = z.object({
   refresh_token: z.string().min(10),
 });
 
 @Controller('auth')
+@Public()
 export class AuthController {
   constructor(private readonly service: AuthService) {}
 

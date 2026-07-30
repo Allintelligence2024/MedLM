@@ -11,6 +11,7 @@ import {
 import type { Response } from 'express';
 import { z } from 'zod';
 import { GoogleOAuthService } from './google-oauth.service';
+import { Public } from './public.decorator';
 
 const CallbackQuery = z.object({
   code: z.string().min(1),
@@ -18,6 +19,7 @@ const CallbackQuery = z.object({
 });
 
 @Controller('auth/google')
+@Public()
 export class GoogleOAuthController {
   constructor(private readonly service: GoogleOAuthService) {}
 

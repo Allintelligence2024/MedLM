@@ -7,6 +7,9 @@
 ///   * Injecte `userId` et `deviceId` dans la requête via `req.user`.
 ///
 /// En cas d'échec : 401 Unauthorized (NestJS).
+///
+/// Endpoint public : un endpoint annoté `@Public()` est laissé
+/// passer sans vérification du header.
 import {
   CanActivate,
   ExecutionContext,
@@ -16,8 +19,10 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
+import { Reflector } from '@nestjs/core';
 import { readFileSync, existsSync } from 'fs';
 import { resolve } from 'path';
+import { IS_PUBLIC_KEY } from './public.decorator';
 
 export interface JwtPayload {
   sub: string; // userId
@@ -40,6 +45,7 @@ export class JwtGuard implements CanActivate {
   constructor(
     private readonly jwt: JwtService,
     private readonly config: ConfigService,
+    private readonly reflector: Reflector,
   ) {
     const keyPath = this.config.get<string>('JWT_PUBLIC_KEY_PATH');
     if (keyPath && existsSync(resolve(keyPath))) {
@@ -52,6 +58,15 @@ export class JwtGuard implements CanActivate {
   }
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
+    // Endpoint @Public() : pas d'auth requise.
+    const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
+      context.getHandler(),
+      context.getClass(),
+    ]);
+    if (isPublic) {
+      return true;
+    }
+
     const req = context.switchToHttp().getRequest<AuthedRequest>();
     const auth = req.headers['authorization'];
     if (!auth || Array.isArray(auth)) {

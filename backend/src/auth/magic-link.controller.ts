@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { z } from 'zod';
 import { MagicLinkService } from './magic-link.service';
+import { Public } from './public.decorator';
 
 const MagicLinkRequestBody = z.object({
   email: z.string().email(),
@@ -18,6 +19,7 @@ const MagicLinkVerifyQuery = z.object({
 });
 
 @Controller('auth/magic-link')
+@Public()
 export class MagicLinkController {
   constructor(private readonly service: MagicLinkService) {}
 

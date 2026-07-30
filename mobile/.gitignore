@@ -1,4 +1,6 @@
 .dart_tool/
 .packages
 build/
-pubspec.lock
+# pubspec.lock n'est PAS ignoré (Phase 13 — v2 §11.1 lockfiles épinglés).
+# Il sera régénéré par `flutter pub get` mais le committed assure la
+# reproductibilité des builds.
