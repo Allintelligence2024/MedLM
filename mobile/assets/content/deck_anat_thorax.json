@@ -1,0 +1,4216 @@
+{
+  "deck_id": "deck_anat_thorax",
+  "module_id": "anatomie",
+  "programme": "medecine_dz",
+  "study_year": 1,
+  "version": 1,
+  "name_fr": "Thorax",
+  "name_en": "Thorax",
+  "description_fr": "Paroi thoracique, cavité pleurale, médiastin, cœur et poumons.",
+  "description_en": "Thoracic wall, pleural cavity, mediastinum, heart and lungs.",
+  "is_premium": false,
+  "is_demo": false,
+  "license": "medankidz_internal_v1",
+  "cards": [
+    {
+      "id": "deck_anat_thorax_0241",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "paroi",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Paroi thoracique — sternum, côtes, muscles intercostaux] Combien d'os compte la cage thoracique ?",
+          "en": "[Thorax — paroi] Translate to English: Combien d'os compte la cage thoracique ?"
+        },
+        "back": {
+          "fr": "12 paires de côtes (7 vraies + 3 fausses + 2 flottantes), sternum, 12 vertèbres thoraciques.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les vraies côtes (1-7) s'attachent directement au sternum. Les fausses (8-10) s'attachent via le cartilage de la 7. Les flottantes (11-12) sont libres.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "paroi"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0242",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "paroi",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Paroi thoracique — sternum, côtes, muscles intercostaux] Quels muscles forment la paroi abdominale antérieure ?",
+          "en": "[Thorax — paroi] Translate to English: Quels muscles forment la paroi abdominale antérieure ?"
+        },
+        "back": {
+          "fr": "Grand droit (gaine rectusienne), oblique externe, oblique interne, transverse.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La gaine du grand droit est formée par les aponévroses des 3 muscles latéraux. La ligne arquée (de Douglas) marque la transition entre la gaine complète (au-dessus) et l'absence de feuillet postérieur (en dessous).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "paroi"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0243",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "paroi",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Paroi thoracique — sternum, côtes, muscles intercostaux] Combien d'os compte la cage thoracique ?",
+          "en": "[Thorax — paroi] Translate to English: Combien d'os compte la cage thoracique ?"
+        },
+        "back": {
+          "fr": "12 paires de côtes (7 vraies + 3 fausses + 2 flottantes), sternum, 12 vertèbres thoraciques.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les vraies côtes (1-7) s'attachent directement au sternum. Les fausses (8-10) s'attachent via le cartilage de la 7. Les flottantes (11-12) sont libres.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "paroi"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0244",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "paroi",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Paroi thoracique — sternum, côtes, muscles intercostaux] Quels muscles forment la paroi abdominale antérieure ?",
+          "en": "[Thorax — paroi] Translate to English: Quels muscles forment la paroi abdominale antérieure ?"
+        },
+        "back": {
+          "fr": "Grand droit (gaine rectusienne), oblique externe, oblique interne, transverse.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La gaine du grand droit est formée par les aponévroses des 3 muscles latéraux. La ligne arquée (de Douglas) marque la transition entre la gaine complète (au-dessus) et l'absence de feuillet postérieur (en dessous).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "paroi"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0245",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "paroi",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Paroi thoracique — sternum, côtes, muscles intercostaux] Combien d'os compte la cage thoracique ?",
+          "en": "[Thorax — paroi] Translate to English: Combien d'os compte la cage thoracique ?"
+        },
+        "back": {
+          "fr": "12 paires de côtes (7 vraies + 3 fausses + 2 flottantes), sternum, 12 vertèbres thoraciques.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les vraies côtes (1-7) s'attachent directement au sternum. Les fausses (8-10) s'attachent via le cartilage de la 7. Les flottantes (11-12) sont libres.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "paroi"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0246",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "paroi",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Paroi thoracique — sternum, côtes, muscles intercostaux] Quels muscles forment la paroi abdominale antérieure ?",
+          "en": "[Thorax — paroi] Translate to English: Quels muscles forment la paroi abdominale antérieure ?"
+        },
+        "back": {
+          "fr": "Grand droit (gaine rectusienne), oblique externe, oblique interne, transverse.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La gaine du grand droit est formée par les aponévroses des 3 muscles latéraux. La ligne arquée (de Douglas) marque la transition entre la gaine complète (au-dessus) et l'absence de feuillet postérieur (en dessous).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "paroi"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0247",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "paroi",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Paroi thoracique — sternum, côtes, muscles intercostaux] Combien d'os compte la cage thoracique ?",
+          "en": "[Thorax — paroi] Translate to English: Combien d'os compte la cage thoracique ?"
+        },
+        "back": {
+          "fr": "12 paires de côtes (7 vraies + 3 fausses + 2 flottantes), sternum, 12 vertèbres thoraciques.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les vraies côtes (1-7) s'attachent directement au sternum. Les fausses (8-10) s'attachent via le cartilage de la 7. Les flottantes (11-12) sont libres.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "paroi"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0248",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "paroi",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Paroi thoracique — sternum, côtes, muscles intercostaux] Quels muscles forment la paroi abdominale antérieure ?",
+          "en": "[Thorax — paroi] Translate to English: Quels muscles forment la paroi abdominale antérieure ?"
+        },
+        "back": {
+          "fr": "Grand droit (gaine rectusienne), oblique externe, oblique interne, transverse.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La gaine du grand droit est formée par les aponévroses des 3 muscles latéraux. La ligne arquée (de Douglas) marque la transition entre la gaine complète (au-dessus) et l'absence de feuillet postérieur (en dessous).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "paroi"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0249",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "paroi",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Paroi thoracique — sternum, côtes, muscles intercostaux] Combien d'os compte la cage thoracique ?",
+          "en": "[Thorax — paroi] Translate to English: Combien d'os compte la cage thoracique ?"
+        },
+        "back": {
+          "fr": "12 paires de côtes (7 vraies + 3 fausses + 2 flottantes), sternum, 12 vertèbres thoraciques.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les vraies côtes (1-7) s'attachent directement au sternum. Les fausses (8-10) s'attachent via le cartilage de la 7. Les flottantes (11-12) sont libres.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "paroi"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0250",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "paroi",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Paroi thoracique — sternum, côtes, muscles intercostaux] Quels muscles forment la paroi abdominale antérieure ?",
+          "en": "[Thorax — paroi] Translate to English: Quels muscles forment la paroi abdominale antérieure ?"
+        },
+        "back": {
+          "fr": "Grand droit (gaine rectusienne), oblique externe, oblique interne, transverse.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La gaine du grand droit est formée par les aponévroses des 3 muscles latéraux. La ligne arquée (de Douglas) marque la transition entre la gaine complète (au-dessus) et l'absence de feuillet postérieur (en dessous).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "paroi"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0251",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "paroi",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Paroi thoracique — sternum, côtes, muscles intercostaux] Combien d'os compte la cage thoracique ?",
+          "en": "[Thorax — paroi] Translate to English: Combien d'os compte la cage thoracique ?"
+        },
+        "back": {
+          "fr": "12 paires de côtes (7 vraies + 3 fausses + 2 flottantes), sternum, 12 vertèbres thoraciques.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les vraies côtes (1-7) s'attachent directement au sternum. Les fausses (8-10) s'attachent via le cartilage de la 7. Les flottantes (11-12) sont libres.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "paroi"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0252",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "paroi",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Paroi thoracique — sternum, côtes, muscles intercostaux] Quels muscles forment la paroi abdominale antérieure ?",
+          "en": "[Thorax — paroi] Translate to English: Quels muscles forment la paroi abdominale antérieure ?"
+        },
+        "back": {
+          "fr": "Grand droit (gaine rectusienne), oblique externe, oblique interne, transverse.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La gaine du grand droit est formée par les aponévroses des 3 muscles latéraux. La ligne arquée (de Douglas) marque la transition entre la gaine complète (au-dessus) et l'absence de feuillet postérieur (en dessous).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "paroi"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0253",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "paroi",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Paroi thoracique — sternum, côtes, muscles intercostaux] Combien d'os compte la cage thoracique ?",
+          "en": "[Thorax — paroi] Translate to English: Combien d'os compte la cage thoracique ?"
+        },
+        "back": {
+          "fr": "12 paires de côtes (7 vraies + 3 fausses + 2 flottantes), sternum, 12 vertèbres thoraciques.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les vraies côtes (1-7) s'attachent directement au sternum. Les fausses (8-10) s'attachent via le cartilage de la 7. Les flottantes (11-12) sont libres.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "paroi"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0254",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "paroi",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Paroi thoracique — sternum, côtes, muscles intercostaux] Quels muscles forment la paroi abdominale antérieure ?",
+          "en": "[Thorax — paroi] Translate to English: Quels muscles forment la paroi abdominale antérieure ?"
+        },
+        "back": {
+          "fr": "Grand droit (gaine rectusienne), oblique externe, oblique interne, transverse.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La gaine du grand droit est formée par les aponévroses des 3 muscles latéraux. La ligne arquée (de Douglas) marque la transition entre la gaine complète (au-dessus) et l'absence de feuillet postérieur (en dessous).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "paroi"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0255",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "paroi",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Paroi thoracique — sternum, côtes, muscles intercostaux] Combien d'os compte la cage thoracique ?",
+          "en": "[Thorax — paroi] Translate to English: Combien d'os compte la cage thoracique ?"
+        },
+        "back": {
+          "fr": "12 paires de côtes (7 vraies + 3 fausses + 2 flottantes), sternum, 12 vertèbres thoraciques.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les vraies côtes (1-7) s'attachent directement au sternum. Les fausses (8-10) s'attachent via le cartilage de la 7. Les flottantes (11-12) sont libres.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "paroi"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0256",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "paroi",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Paroi thoracique — sternum, côtes, muscles intercostaux] Quels muscles forment la paroi abdominale antérieure ?",
+          "en": "[Thorax — paroi] Translate to English: Quels muscles forment la paroi abdominale antérieure ?"
+        },
+        "back": {
+          "fr": "Grand droit (gaine rectusienne), oblique externe, oblique interne, transverse.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La gaine du grand droit est formée par les aponévroses des 3 muscles latéraux. La ligne arquée (de Douglas) marque la transition entre la gaine complète (au-dessus) et l'absence de feuillet postérieur (en dessous).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "paroi"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0257",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "paroi",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Paroi thoracique — sternum, côtes, muscles intercostaux] Combien d'os compte la cage thoracique ?",
+          "en": "[Thorax — paroi] Translate to English: Combien d'os compte la cage thoracique ?"
+        },
+        "back": {
+          "fr": "12 paires de côtes (7 vraies + 3 fausses + 2 flottantes), sternum, 12 vertèbres thoraciques.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les vraies côtes (1-7) s'attachent directement au sternum. Les fausses (8-10) s'attachent via le cartilage de la 7. Les flottantes (11-12) sont libres.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "paroi"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0258",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "paroi",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Paroi thoracique — sternum, côtes, muscles intercostaux] Quels muscles forment la paroi abdominale antérieure ?",
+          "en": "[Thorax — paroi] Translate to English: Quels muscles forment la paroi abdominale antérieure ?"
+        },
+        "back": {
+          "fr": "Grand droit (gaine rectusienne), oblique externe, oblique interne, transverse.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La gaine du grand droit est formée par les aponévroses des 3 muscles latéraux. La ligne arquée (de Douglas) marque la transition entre la gaine complète (au-dessus) et l'absence de feuillet postérieur (en dessous).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "paroi"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0259",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "plèvres_poumons",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Plèvres et poumons — segmentation broncho-pulmonaire] Combien de segments au poumon droit ?",
+          "en": "[Thorax — plèvres_poumons] Translate to English: Combien de segments au poumon droit ?"
+        },
+        "back": {
+          "fr": "10 segments (3 sup + 2 moy + 5 inf).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le poumon droit a 3 lobes (sup, moy, inf) séparés par les scissures horizontale et oblique. Chaque lobe est divisé en segments broncho-pulmonaires autonomes (vascularisation et ventilation propres).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "plèvres poumons"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0260",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "plèvres_poumons",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Plèvres et poumons — segmentation broncho-pulmonaire] Quelle est la différence entre plèvre viscérale et pariétale ?",
+          "en": "[Thorax — plèvres_poumons] Translate to English: Quelle est la différence entre plèvre viscérale et pariétale ?"
+        },
+        "back": {
+          "fr": "La plèvre viscérale tapisse le poumon, la pariétale tapisse la cavité thoracique. Entre les deux : la cavité pleurale (espace virtuel).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La plèvre pariétale est innervée par les nerfs intercostaux (sensitive → douleur à la ponction). La plèvre viscérale est insensible (innervation autonome).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "plèvres poumons"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0261",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "plèvres_poumons",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Plèvres et poumons — segmentation broncho-pulmonaire] Combien de segments au poumon droit ?",
+          "en": "[Thorax — plèvres_poumons] Translate to English: Combien de segments au poumon droit ?"
+        },
+        "back": {
+          "fr": "10 segments (3 sup + 2 moy + 5 inf).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le poumon droit a 3 lobes (sup, moy, inf) séparés par les scissures horizontale et oblique. Chaque lobe est divisé en segments broncho-pulmonaires autonomes (vascularisation et ventilation propres).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "plèvres poumons"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0262",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "plèvres_poumons",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Plèvres et poumons — segmentation broncho-pulmonaire] Quelle est la différence entre plèvre viscérale et pariétale ?",
+          "en": "[Thorax — plèvres_poumons] Translate to English: Quelle est la différence entre plèvre viscérale et pariétale ?"
+        },
+        "back": {
+          "fr": "La plèvre viscérale tapisse le poumon, la pariétale tapisse la cavité thoracique. Entre les deux : la cavité pleurale (espace virtuel).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La plèvre pariétale est innervée par les nerfs intercostaux (sensitive → douleur à la ponction). La plèvre viscérale est insensible (innervation autonome).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "plèvres poumons"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0263",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "plèvres_poumons",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Plèvres et poumons — segmentation broncho-pulmonaire] Combien de segments au poumon droit ?",
+          "en": "[Thorax — plèvres_poumons] Translate to English: Combien de segments au poumon droit ?"
+        },
+        "back": {
+          "fr": "10 segments (3 sup + 2 moy + 5 inf).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le poumon droit a 3 lobes (sup, moy, inf) séparés par les scissures horizontale et oblique. Chaque lobe est divisé en segments broncho-pulmonaires autonomes (vascularisation et ventilation propres).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "plèvres poumons"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0264",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "plèvres_poumons",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Plèvres et poumons — segmentation broncho-pulmonaire] Quelle est la différence entre plèvre viscérale et pariétale ?",
+          "en": "[Thorax — plèvres_poumons] Translate to English: Quelle est la différence entre plèvre viscérale et pariétale ?"
+        },
+        "back": {
+          "fr": "La plèvre viscérale tapisse le poumon, la pariétale tapisse la cavité thoracique. Entre les deux : la cavité pleurale (espace virtuel).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La plèvre pariétale est innervée par les nerfs intercostaux (sensitive → douleur à la ponction). La plèvre viscérale est insensible (innervation autonome).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "plèvres poumons"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0265",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "plèvres_poumons",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Plèvres et poumons — segmentation broncho-pulmonaire] Combien de segments au poumon droit ?",
+          "en": "[Thorax — plèvres_poumons] Translate to English: Combien de segments au poumon droit ?"
+        },
+        "back": {
+          "fr": "10 segments (3 sup + 2 moy + 5 inf).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le poumon droit a 3 lobes (sup, moy, inf) séparés par les scissures horizontale et oblique. Chaque lobe est divisé en segments broncho-pulmonaires autonomes (vascularisation et ventilation propres).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "plèvres poumons"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0266",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "plèvres_poumons",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Plèvres et poumons — segmentation broncho-pulmonaire] Quelle est la différence entre plèvre viscérale et pariétale ?",
+          "en": "[Thorax — plèvres_poumons] Translate to English: Quelle est la différence entre plèvre viscérale et pariétale ?"
+        },
+        "back": {
+          "fr": "La plèvre viscérale tapisse le poumon, la pariétale tapisse la cavité thoracique. Entre les deux : la cavité pleurale (espace virtuel).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La plèvre pariétale est innervée par les nerfs intercostaux (sensitive → douleur à la ponction). La plèvre viscérale est insensible (innervation autonome).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "plèvres poumons"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0267",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "plèvres_poumons",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Plèvres et poumons — segmentation broncho-pulmonaire] Combien de segments au poumon droit ?",
+          "en": "[Thorax — plèvres_poumons] Translate to English: Combien de segments au poumon droit ?"
+        },
+        "back": {
+          "fr": "10 segments (3 sup + 2 moy + 5 inf).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le poumon droit a 3 lobes (sup, moy, inf) séparés par les scissures horizontale et oblique. Chaque lobe est divisé en segments broncho-pulmonaires autonomes (vascularisation et ventilation propres).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "plèvres poumons"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0268",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "plèvres_poumons",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Plèvres et poumons — segmentation broncho-pulmonaire] Quelle est la différence entre plèvre viscérale et pariétale ?",
+          "en": "[Thorax — plèvres_poumons] Translate to English: Quelle est la différence entre plèvre viscérale et pariétale ?"
+        },
+        "back": {
+          "fr": "La plèvre viscérale tapisse le poumon, la pariétale tapisse la cavité thoracique. Entre les deux : la cavité pleurale (espace virtuel).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La plèvre pariétale est innervée par les nerfs intercostaux (sensitive → douleur à la ponction). La plèvre viscérale est insensible (innervation autonome).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "plèvres poumons"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0269",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "plèvres_poumons",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Plèvres et poumons — segmentation broncho-pulmonaire] Combien de segments au poumon droit ?",
+          "en": "[Thorax — plèvres_poumons] Translate to English: Combien de segments au poumon droit ?"
+        },
+        "back": {
+          "fr": "10 segments (3 sup + 2 moy + 5 inf).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le poumon droit a 3 lobes (sup, moy, inf) séparés par les scissures horizontale et oblique. Chaque lobe est divisé en segments broncho-pulmonaires autonomes (vascularisation et ventilation propres).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "plèvres poumons"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0270",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "plèvres_poumons",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Plèvres et poumons — segmentation broncho-pulmonaire] Quelle est la différence entre plèvre viscérale et pariétale ?",
+          "en": "[Thorax — plèvres_poumons] Translate to English: Quelle est la différence entre plèvre viscérale et pariétale ?"
+        },
+        "back": {
+          "fr": "La plèvre viscérale tapisse le poumon, la pariétale tapisse la cavité thoracique. Entre les deux : la cavité pleurale (espace virtuel).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La plèvre pariétale est innervée par les nerfs intercostaux (sensitive → douleur à la ponction). La plèvre viscérale est insensible (innervation autonome).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "plèvres poumons"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0271",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "plèvres_poumons",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Plèvres et poumons — segmentation broncho-pulmonaire] Combien de segments au poumon droit ?",
+          "en": "[Thorax — plèvres_poumons] Translate to English: Combien de segments au poumon droit ?"
+        },
+        "back": {
+          "fr": "10 segments (3 sup + 2 moy + 5 inf).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le poumon droit a 3 lobes (sup, moy, inf) séparés par les scissures horizontale et oblique. Chaque lobe est divisé en segments broncho-pulmonaires autonomes (vascularisation et ventilation propres).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "plèvres poumons"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0272",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "plèvres_poumons",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Plèvres et poumons — segmentation broncho-pulmonaire] Quelle est la différence entre plèvre viscérale et pariétale ?",
+          "en": "[Thorax — plèvres_poumons] Translate to English: Quelle est la différence entre plèvre viscérale et pariétale ?"
+        },
+        "back": {
+          "fr": "La plèvre viscérale tapisse le poumon, la pariétale tapisse la cavité thoracique. Entre les deux : la cavité pleurale (espace virtuel).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La plèvre pariétale est innervée par les nerfs intercostaux (sensitive → douleur à la ponction). La plèvre viscérale est insensible (innervation autonome).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "plèvres poumons"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0273",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "plèvres_poumons",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Plèvres et poumons — segmentation broncho-pulmonaire] Combien de segments au poumon droit ?",
+          "en": "[Thorax — plèvres_poumons] Translate to English: Combien de segments au poumon droit ?"
+        },
+        "back": {
+          "fr": "10 segments (3 sup + 2 moy + 5 inf).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le poumon droit a 3 lobes (sup, moy, inf) séparés par les scissures horizontale et oblique. Chaque lobe est divisé en segments broncho-pulmonaires autonomes (vascularisation et ventilation propres).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "plèvres poumons"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0274",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "plèvres_poumons",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Plèvres et poumons — segmentation broncho-pulmonaire] Quelle est la différence entre plèvre viscérale et pariétale ?",
+          "en": "[Thorax — plèvres_poumons] Translate to English: Quelle est la différence entre plèvre viscérale et pariétale ?"
+        },
+        "back": {
+          "fr": "La plèvre viscérale tapisse le poumon, la pariétale tapisse la cavité thoracique. Entre les deux : la cavité pleurale (espace virtuel).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La plèvre pariétale est innervée par les nerfs intercostaux (sensitive → douleur à la ponction). La plèvre viscérale est insensible (innervation autonome).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "plèvres poumons"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0275",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "plèvres_poumons",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Plèvres et poumons — segmentation broncho-pulmonaire] Combien de segments au poumon droit ?",
+          "en": "[Thorax — plèvres_poumons] Translate to English: Combien de segments au poumon droit ?"
+        },
+        "back": {
+          "fr": "10 segments (3 sup + 2 moy + 5 inf).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le poumon droit a 3 lobes (sup, moy, inf) séparés par les scissures horizontale et oblique. Chaque lobe est divisé en segments broncho-pulmonaires autonomes (vascularisation et ventilation propres).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "plèvres poumons"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0276",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "mediastin",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Médiastin — loges, contenu, rapports] Quelles sont les 4 loges du médiastin ?",
+          "en": "[Thorax — mediastin] Translate to English: Quelles sont les 4 loges du médiastin ?"
+        },
+        "back": {
+          "fr": "Antérieure, moyenne (cœur), postérieure, supérieure.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le médiastin supérieur est au-dessus du plan passant par l'angle de Louis (T4-T5). Le médiastin moyen contient le péricarde. Le postérieur contient l'œsophage, l'aorte thoracique, le canal thoracique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "mediastin"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0277",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "mediastin",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Médiastin — loges, contenu, rapports] Quelles sont les 4 loges du médiastin ?",
+          "en": "[Thorax — mediastin] Translate to English: Quelles sont les 4 loges du médiastin ?"
+        },
+        "back": {
+          "fr": "Antérieure, moyenne (cœur), postérieure, supérieure.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le médiastin supérieur est au-dessus du plan passant par l'angle de Louis (T4-T5). Le médiastin moyen contient le péricarde. Le postérieur contient l'œsophage, l'aorte thoracique, le canal thoracique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "mediastin"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0278",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "mediastin",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Médiastin — loges, contenu, rapports] Quelles sont les 4 loges du médiastin ?",
+          "en": "[Thorax — mediastin] Translate to English: Quelles sont les 4 loges du médiastin ?"
+        },
+        "back": {
+          "fr": "Antérieure, moyenne (cœur), postérieure, supérieure.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le médiastin supérieur est au-dessus du plan passant par l'angle de Louis (T4-T5). Le médiastin moyen contient le péricarde. Le postérieur contient l'œsophage, l'aorte thoracique, le canal thoracique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "mediastin"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0279",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "mediastin",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Médiastin — loges, contenu, rapports] Quelles sont les 4 loges du médiastin ?",
+          "en": "[Thorax — mediastin] Translate to English: Quelles sont les 4 loges du médiastin ?"
+        },
+        "back": {
+          "fr": "Antérieure, moyenne (cœur), postérieure, supérieure.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le médiastin supérieur est au-dessus du plan passant par l'angle de Louis (T4-T5). Le médiastin moyen contient le péricarde. Le postérieur contient l'œsophage, l'aorte thoracique, le canal thoracique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "mediastin"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0280",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "mediastin",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Médiastin — loges, contenu, rapports] Quelles sont les 4 loges du médiastin ?",
+          "en": "[Thorax — mediastin] Translate to English: Quelles sont les 4 loges du médiastin ?"
+        },
+        "back": {
+          "fr": "Antérieure, moyenne (cœur), postérieure, supérieure.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le médiastin supérieur est au-dessus du plan passant par l'angle de Louis (T4-T5). Le médiastin moyen contient le péricarde. Le postérieur contient l'œsophage, l'aorte thoracique, le canal thoracique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "mediastin"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0281",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "mediastin",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Médiastin — loges, contenu, rapports] Quelles sont les 4 loges du médiastin ?",
+          "en": "[Thorax — mediastin] Translate to English: Quelles sont les 4 loges du médiastin ?"
+        },
+        "back": {
+          "fr": "Antérieure, moyenne (cœur), postérieure, supérieure.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le médiastin supérieur est au-dessus du plan passant par l'angle de Louis (T4-T5). Le médiastin moyen contient le péricarde. Le postérieur contient l'œsophage, l'aorte thoracique, le canal thoracique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "mediastin"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0282",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "mediastin",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Médiastin — loges, contenu, rapports] Quelles sont les 4 loges du médiastin ?",
+          "en": "[Thorax — mediastin] Translate to English: Quelles sont les 4 loges du médiastin ?"
+        },
+        "back": {
+          "fr": "Antérieure, moyenne (cœur), postérieure, supérieure.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le médiastin supérieur est au-dessus du plan passant par l'angle de Louis (T4-T5). Le médiastin moyen contient le péricarde. Le postérieur contient l'œsophage, l'aorte thoracique, le canal thoracique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "mediastin"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0283",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "mediastin",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Médiastin — loges, contenu, rapports] Quelles sont les 4 loges du médiastin ?",
+          "en": "[Thorax — mediastin] Translate to English: Quelles sont les 4 loges du médiastin ?"
+        },
+        "back": {
+          "fr": "Antérieure, moyenne (cœur), postérieure, supérieure.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le médiastin supérieur est au-dessus du plan passant par l'angle de Louis (T4-T5). Le médiastin moyen contient le péricarde. Le postérieur contient l'œsophage, l'aorte thoracique, le canal thoracique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "mediastin"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0284",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "mediastin",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Médiastin — loges, contenu, rapports] Quelles sont les 4 loges du médiastin ?",
+          "en": "[Thorax — mediastin] Translate to English: Quelles sont les 4 loges du médiastin ?"
+        },
+        "back": {
+          "fr": "Antérieure, moyenne (cœur), postérieure, supérieure.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le médiastin supérieur est au-dessus du plan passant par l'angle de Louis (T4-T5). Le médiastin moyen contient le péricarde. Le postérieur contient l'œsophage, l'aorte thoracique, le canal thoracique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "mediastin"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0285",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "mediastin",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Médiastin — loges, contenu, rapports] Quelles sont les 4 loges du médiastin ?",
+          "en": "[Thorax — mediastin] Translate to English: Quelles sont les 4 loges du médiastin ?"
+        },
+        "back": {
+          "fr": "Antérieure, moyenne (cœur), postérieure, supérieure.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le médiastin supérieur est au-dessus du plan passant par l'angle de Louis (T4-T5). Le médiastin moyen contient le péricarde. Le postérieur contient l'œsophage, l'aorte thoracique, le canal thoracique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "mediastin"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0286",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "mediastin",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Médiastin — loges, contenu, rapports] Quelles sont les 4 loges du médiastin ?",
+          "en": "[Thorax — mediastin] Translate to English: Quelles sont les 4 loges du médiastin ?"
+        },
+        "back": {
+          "fr": "Antérieure, moyenne (cœur), postérieure, supérieure.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le médiastin supérieur est au-dessus du plan passant par l'angle de Louis (T4-T5). Le médiastin moyen contient le péricarde. Le postérieur contient l'œsophage, l'aorte thoracique, le canal thoracique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "mediastin"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0287",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "mediastin",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Médiastin — loges, contenu, rapports] Quelles sont les 4 loges du médiastin ?",
+          "en": "[Thorax — mediastin] Translate to English: Quelles sont les 4 loges du médiastin ?"
+        },
+        "back": {
+          "fr": "Antérieure, moyenne (cœur), postérieure, supérieure.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le médiastin supérieur est au-dessus du plan passant par l'angle de Louis (T4-T5). Le médiastin moyen contient le péricarde. Le postérieur contient l'œsophage, l'aorte thoracique, le canal thoracique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "mediastin"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0288",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "mediastin",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Médiastin — loges, contenu, rapports] Quelles sont les 4 loges du médiastin ?",
+          "en": "[Thorax — mediastin] Translate to English: Quelles sont les 4 loges du médiastin ?"
+        },
+        "back": {
+          "fr": "Antérieure, moyenne (cœur), postérieure, supérieure.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le médiastin supérieur est au-dessus du plan passant par l'angle de Louis (T4-T5). Le médiastin moyen contient le péricarde. Le postérieur contient l'œsophage, l'aorte thoracique, le canal thoracique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "mediastin"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0289",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "mediastin",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Médiastin — loges, contenu, rapports] Quelles sont les 4 loges du médiastin ?",
+          "en": "[Thorax — mediastin] Translate to English: Quelles sont les 4 loges du médiastin ?"
+        },
+        "back": {
+          "fr": "Antérieure, moyenne (cœur), postérieure, supérieure.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le médiastin supérieur est au-dessus du plan passant par l'angle de Louis (T4-T5). Le médiastin moyen contient le péricarde. Le postérieur contient l'œsophage, l'aorte thoracique, le canal thoracique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "mediastin"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0290",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "mediastin",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Médiastin — loges, contenu, rapports] Quelles sont les 4 loges du médiastin ?",
+          "en": "[Thorax — mediastin] Translate to English: Quelles sont les 4 loges du médiastin ?"
+        },
+        "back": {
+          "fr": "Antérieure, moyenne (cœur), postérieure, supérieure.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le médiastin supérieur est au-dessus du plan passant par l'angle de Louis (T4-T5). Le médiastin moyen contient le péricarde. Le postérieur contient l'œsophage, l'aorte thoracique, le canal thoracique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "mediastin"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0291",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "mediastin",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Médiastin — loges, contenu, rapports] Quelles sont les 4 loges du médiastin ?",
+          "en": "[Thorax — mediastin] Translate to English: Quelles sont les 4 loges du médiastin ?"
+        },
+        "back": {
+          "fr": "Antérieure, moyenne (cœur), postérieure, supérieure.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le médiastin supérieur est au-dessus du plan passant par l'angle de Louis (T4-T5). Le médiastin moyen contient le péricarde. Le postérieur contient l'œsophage, l'aorte thoracique, le canal thoracique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "mediastin"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0292",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "mediastin",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Médiastin — loges, contenu, rapports] Quelles sont les 4 loges du médiastin ?",
+          "en": "[Thorax — mediastin] Translate to English: Quelles sont les 4 loges du médiastin ?"
+        },
+        "back": {
+          "fr": "Antérieure, moyenne (cœur), postérieure, supérieure.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le médiastin supérieur est au-dessus du plan passant par l'angle de Louis (T4-T5). Le médiastin moyen contient le péricarde. Le postérieur contient l'œsophage, l'aorte thoracique, le canal thoracique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "mediastin"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0293",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "coeur",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Cœur — cavités, valves, vascularisation, innervation] Combien de valves cardiaques ?",
+          "en": "[Thorax — coeur] Translate to English: Combien de valves cardiaques ?"
+        },
+        "back": {
+          "fr": "4 valves : 2 atrio-ventriculaires (mitrale, tricuspide) + 2 sigmoides (aortique, pulmonaire).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les valves AV empêchent le reflux du sang des ventricules vers les oreillettes. Les sigmoides empêchent le reflux des artères vers les ventricules. Les valves AV sont soutenues par les cordages tendineux.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "coeur"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0294",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "coeur",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Cœur — cavités, valves, vascularisation, innervation] Quelle est la vascularisation du myocarde ?",
+          "en": "[Thorax — coeur] Translate to English: Quelle est la vascularisation du myocarde ?"
+        },
+        "back": {
+          "fr": "Artères coronaires droite et gauche, naissant de l'aorte au-dessus de la valve aortique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'artère coronaire gauche se divise en IVA (interventriculaire antérieure) et circonflexe. La dominance coronaire est droite dans 70% des cas.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "coeur"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0295",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "coeur",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Cœur — cavités, valves, vascularisation, innervation] Combien de valves cardiaques ?",
+          "en": "[Thorax — coeur] Translate to English: Combien de valves cardiaques ?"
+        },
+        "back": {
+          "fr": "4 valves : 2 atrio-ventriculaires (mitrale, tricuspide) + 2 sigmoides (aortique, pulmonaire).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les valves AV empêchent le reflux du sang des ventricules vers les oreillettes. Les sigmoides empêchent le reflux des artères vers les ventricules. Les valves AV sont soutenues par les cordages tendineux.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "coeur"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0296",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "coeur",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Cœur — cavités, valves, vascularisation, innervation] Quelle est la vascularisation du myocarde ?",
+          "en": "[Thorax — coeur] Translate to English: Quelle est la vascularisation du myocarde ?"
+        },
+        "back": {
+          "fr": "Artères coronaires droite et gauche, naissant de l'aorte au-dessus de la valve aortique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'artère coronaire gauche se divise en IVA (interventriculaire antérieure) et circonflexe. La dominance coronaire est droite dans 70% des cas.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "coeur"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0297",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "coeur",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Cœur — cavités, valves, vascularisation, innervation] Combien de valves cardiaques ?",
+          "en": "[Thorax — coeur] Translate to English: Combien de valves cardiaques ?"
+        },
+        "back": {
+          "fr": "4 valves : 2 atrio-ventriculaires (mitrale, tricuspide) + 2 sigmoides (aortique, pulmonaire).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les valves AV empêchent le reflux du sang des ventricules vers les oreillettes. Les sigmoides empêchent le reflux des artères vers les ventricules. Les valves AV sont soutenues par les cordages tendineux.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "coeur"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0298",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "coeur",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Cœur — cavités, valves, vascularisation, innervation] Quelle est la vascularisation du myocarde ?",
+          "en": "[Thorax — coeur] Translate to English: Quelle est la vascularisation du myocarde ?"
+        },
+        "back": {
+          "fr": "Artères coronaires droite et gauche, naissant de l'aorte au-dessus de la valve aortique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'artère coronaire gauche se divise en IVA (interventriculaire antérieure) et circonflexe. La dominance coronaire est droite dans 70% des cas.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "coeur"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0299",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "coeur",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Cœur — cavités, valves, vascularisation, innervation] Combien de valves cardiaques ?",
+          "en": "[Thorax — coeur] Translate to English: Combien de valves cardiaques ?"
+        },
+        "back": {
+          "fr": "4 valves : 2 atrio-ventriculaires (mitrale, tricuspide) + 2 sigmoides (aortique, pulmonaire).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les valves AV empêchent le reflux du sang des ventricules vers les oreillettes. Les sigmoides empêchent le reflux des artères vers les ventricules. Les valves AV sont soutenues par les cordages tendineux.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "coeur"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0300",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "coeur",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Cœur — cavités, valves, vascularisation, innervation] Quelle est la vascularisation du myocarde ?",
+          "en": "[Thorax — coeur] Translate to English: Quelle est la vascularisation du myocarde ?"
+        },
+        "back": {
+          "fr": "Artères coronaires droite et gauche, naissant de l'aorte au-dessus de la valve aortique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'artère coronaire gauche se divise en IVA (interventriculaire antérieure) et circonflexe. La dominance coronaire est droite dans 70% des cas.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "coeur"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0301",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "coeur",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Cœur — cavités, valves, vascularisation, innervation] Combien de valves cardiaques ?",
+          "en": "[Thorax — coeur] Translate to English: Combien de valves cardiaques ?"
+        },
+        "back": {
+          "fr": "4 valves : 2 atrio-ventriculaires (mitrale, tricuspide) + 2 sigmoides (aortique, pulmonaire).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les valves AV empêchent le reflux du sang des ventricules vers les oreillettes. Les sigmoides empêchent le reflux des artères vers les ventricules. Les valves AV sont soutenues par les cordages tendineux.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "coeur"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0302",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "coeur",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Cœur — cavités, valves, vascularisation, innervation] Quelle est la vascularisation du myocarde ?",
+          "en": "[Thorax — coeur] Translate to English: Quelle est la vascularisation du myocarde ?"
+        },
+        "back": {
+          "fr": "Artères coronaires droite et gauche, naissant de l'aorte au-dessus de la valve aortique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'artère coronaire gauche se divise en IVA (interventriculaire antérieure) et circonflexe. La dominance coronaire est droite dans 70% des cas.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "coeur"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0303",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "coeur",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Cœur — cavités, valves, vascularisation, innervation] Combien de valves cardiaques ?",
+          "en": "[Thorax — coeur] Translate to English: Combien de valves cardiaques ?"
+        },
+        "back": {
+          "fr": "4 valves : 2 atrio-ventriculaires (mitrale, tricuspide) + 2 sigmoides (aortique, pulmonaire).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les valves AV empêchent le reflux du sang des ventricules vers les oreillettes. Les sigmoides empêchent le reflux des artères vers les ventricules. Les valves AV sont soutenues par les cordages tendineux.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "coeur"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0304",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "coeur",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Cœur — cavités, valves, vascularisation, innervation] Quelle est la vascularisation du myocarde ?",
+          "en": "[Thorax — coeur] Translate to English: Quelle est la vascularisation du myocarde ?"
+        },
+        "back": {
+          "fr": "Artères coronaires droite et gauche, naissant de l'aorte au-dessus de la valve aortique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'artère coronaire gauche se divise en IVA (interventriculaire antérieure) et circonflexe. La dominance coronaire est droite dans 70% des cas.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "coeur"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0305",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "coeur",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Cœur — cavités, valves, vascularisation, innervation] Combien de valves cardiaques ?",
+          "en": "[Thorax — coeur] Translate to English: Combien de valves cardiaques ?"
+        },
+        "back": {
+          "fr": "4 valves : 2 atrio-ventriculaires (mitrale, tricuspide) + 2 sigmoides (aortique, pulmonaire).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les valves AV empêchent le reflux du sang des ventricules vers les oreillettes. Les sigmoides empêchent le reflux des artères vers les ventricules. Les valves AV sont soutenues par les cordages tendineux.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "coeur"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0306",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "coeur",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Cœur — cavités, valves, vascularisation, innervation] Quelle est la vascularisation du myocarde ?",
+          "en": "[Thorax — coeur] Translate to English: Quelle est la vascularisation du myocarde ?"
+        },
+        "back": {
+          "fr": "Artères coronaires droite et gauche, naissant de l'aorte au-dessus de la valve aortique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'artère coronaire gauche se divise en IVA (interventriculaire antérieure) et circonflexe. La dominance coronaire est droite dans 70% des cas.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "coeur"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0307",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "coeur",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Cœur — cavités, valves, vascularisation, innervation] Combien de valves cardiaques ?",
+          "en": "[Thorax — coeur] Translate to English: Combien de valves cardiaques ?"
+        },
+        "back": {
+          "fr": "4 valves : 2 atrio-ventriculaires (mitrale, tricuspide) + 2 sigmoides (aortique, pulmonaire).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les valves AV empêchent le reflux du sang des ventricules vers les oreillettes. Les sigmoides empêchent le reflux des artères vers les ventricules. Les valves AV sont soutenues par les cordages tendineux.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "coeur"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0308",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "coeur",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Cœur — cavités, valves, vascularisation, innervation] Quelle est la vascularisation du myocarde ?",
+          "en": "[Thorax — coeur] Translate to English: Quelle est la vascularisation du myocarde ?"
+        },
+        "back": {
+          "fr": "Artères coronaires droite et gauche, naissant de l'aorte au-dessus de la valve aortique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'artère coronaire gauche se divise en IVA (interventriculaire antérieure) et circonflexe. La dominance coronaire est droite dans 70% des cas.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "coeur"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0309",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "coeur",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Cœur — cavités, valves, vascularisation, innervation] Combien de valves cardiaques ?",
+          "en": "[Thorax — coeur] Translate to English: Combien de valves cardiaques ?"
+        },
+        "back": {
+          "fr": "4 valves : 2 atrio-ventriculaires (mitrale, tricuspide) + 2 sigmoides (aortique, pulmonaire).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les valves AV empêchent le reflux du sang des ventricules vers les oreillettes. Les sigmoides empêchent le reflux des artères vers les ventricules. Les valves AV sont soutenues par les cordages tendineux.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "coeur"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0310",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "pericarde",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Péricarde — séreuse, ligaments] Quelle est la structure du péricarde ?",
+          "en": "[Thorax — pericarde] Translate to English: Quelle est la structure du péricarde ?"
+        },
+        "back": {
+          "fr": "Péricarde fibreux (externe) et péricarde séreux (interne, avec un feuillet pariétal et un viscéral = épicarde).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Entre les deux feuillets séreux : la cavité péricardique (avec le liquide péricardique). La tamponnade est la compression du cœur par un épanchement péricardique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "pericarde"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0311",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "pericarde",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Péricarde — séreuse, ligaments] Quelle est la structure du péricarde ?",
+          "en": "[Thorax — pericarde] Translate to English: Quelle est la structure du péricarde ?"
+        },
+        "back": {
+          "fr": "Péricarde fibreux (externe) et péricarde séreux (interne, avec un feuillet pariétal et un viscéral = épicarde).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Entre les deux feuillets séreux : la cavité péricardique (avec le liquide péricardique). La tamponnade est la compression du cœur par un épanchement péricardique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "pericarde"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0312",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "pericarde",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Péricarde — séreuse, ligaments] Quelle est la structure du péricarde ?",
+          "en": "[Thorax — pericarde] Translate to English: Quelle est la structure du péricarde ?"
+        },
+        "back": {
+          "fr": "Péricarde fibreux (externe) et péricarde séreux (interne, avec un feuillet pariétal et un viscéral = épicarde).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Entre les deux feuillets séreux : la cavité péricardique (avec le liquide péricardique). La tamponnade est la compression du cœur par un épanchement péricardique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "pericarde"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0313",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "pericarde",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Péricarde — séreuse, ligaments] Quelle est la structure du péricarde ?",
+          "en": "[Thorax — pericarde] Translate to English: Quelle est la structure du péricarde ?"
+        },
+        "back": {
+          "fr": "Péricarde fibreux (externe) et péricarde séreux (interne, avec un feuillet pariétal et un viscéral = épicarde).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Entre les deux feuillets séreux : la cavité péricardique (avec le liquide péricardique). La tamponnade est la compression du cœur par un épanchement péricardique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "pericarde"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0314",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "pericarde",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Péricarde — séreuse, ligaments] Quelle est la structure du péricarde ?",
+          "en": "[Thorax — pericarde] Translate to English: Quelle est la structure du péricarde ?"
+        },
+        "back": {
+          "fr": "Péricarde fibreux (externe) et péricarde séreux (interne, avec un feuillet pariétal et un viscéral = épicarde).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Entre les deux feuillets séreux : la cavité péricardique (avec le liquide péricardique). La tamponnade est la compression du cœur par un épanchement péricardique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "pericarde"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0315",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "pericarde",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Péricarde — séreuse, ligaments] Quelle est la structure du péricarde ?",
+          "en": "[Thorax — pericarde] Translate to English: Quelle est la structure du péricarde ?"
+        },
+        "back": {
+          "fr": "Péricarde fibreux (externe) et péricarde séreux (interne, avec un feuillet pariétal et un viscéral = épicarde).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Entre les deux feuillets séreux : la cavité péricardique (avec le liquide péricardique). La tamponnade est la compression du cœur par un épanchement péricardique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "pericarde"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0316",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "pericarde",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Péricarde — séreuse, ligaments] Quelle est la structure du péricarde ?",
+          "en": "[Thorax — pericarde] Translate to English: Quelle est la structure du péricarde ?"
+        },
+        "back": {
+          "fr": "Péricarde fibreux (externe) et péricarde séreux (interne, avec un feuillet pariétal et un viscéral = épicarde).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Entre les deux feuillets séreux : la cavité péricardique (avec le liquide péricardique). La tamponnade est la compression du cœur par un épanchement péricardique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "pericarde"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0317",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "pericarde",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Péricarde — séreuse, ligaments] Quelle est la structure du péricarde ?",
+          "en": "[Thorax — pericarde] Translate to English: Quelle est la structure du péricarde ?"
+        },
+        "back": {
+          "fr": "Péricarde fibreux (externe) et péricarde séreux (interne, avec un feuillet pariétal et un viscéral = épicarde).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Entre les deux feuillets séreux : la cavité péricardique (avec le liquide péricardique). La tamponnade est la compression du cœur par un épanchement péricardique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "pericarde"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0318",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "pericarde",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Péricarde — séreuse, ligaments] Quelle est la structure du péricarde ?",
+          "en": "[Thorax — pericarde] Translate to English: Quelle est la structure du péricarde ?"
+        },
+        "back": {
+          "fr": "Péricarde fibreux (externe) et péricarde séreux (interne, avec un feuillet pariétal et un viscéral = épicarde).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Entre les deux feuillets séreux : la cavité péricardique (avec le liquide péricardique). La tamponnade est la compression du cœur par un épanchement péricardique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "pericarde"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0319",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "pericarde",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Péricarde — séreuse, ligaments] Quelle est la structure du péricarde ?",
+          "en": "[Thorax — pericarde] Translate to English: Quelle est la structure du péricarde ?"
+        },
+        "back": {
+          "fr": "Péricarde fibreux (externe) et péricarde séreux (interne, avec un feuillet pariétal et un viscéral = épicarde).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Entre les deux feuillets séreux : la cavité péricardique (avec le liquide péricardique). La tamponnade est la compression du cœur par un épanchement péricardique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "pericarde"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0320",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "pericarde",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Péricarde — séreuse, ligaments] Quelle est la structure du péricarde ?",
+          "en": "[Thorax — pericarde] Translate to English: Quelle est la structure du péricarde ?"
+        },
+        "back": {
+          "fr": "Péricarde fibreux (externe) et péricarde séreux (interne, avec un feuillet pariétal et un viscéral = épicarde).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Entre les deux feuillets séreux : la cavité péricardique (avec le liquide péricardique). La tamponnade est la compression du cœur par un épanchement péricardique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "pericarde"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0321",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "pericarde",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Péricarde — séreuse, ligaments] Quelle est la structure du péricarde ?",
+          "en": "[Thorax — pericarde] Translate to English: Quelle est la structure du péricarde ?"
+        },
+        "back": {
+          "fr": "Péricarde fibreux (externe) et péricarde séreux (interne, avec un feuillet pariétal et un viscéral = épicarde).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Entre les deux feuillets séreux : la cavité péricardique (avec le liquide péricardique). La tamponnade est la compression du cœur par un épanchement péricardique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "pericarde"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0322",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "pericarde",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Péricarde — séreuse, ligaments] Quelle est la structure du péricarde ?",
+          "en": "[Thorax — pericarde] Translate to English: Quelle est la structure du péricarde ?"
+        },
+        "back": {
+          "fr": "Péricarde fibreux (externe) et péricarde séreux (interne, avec un feuillet pariétal et un viscéral = épicarde).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Entre les deux feuillets séreux : la cavité péricardique (avec le liquide péricardique). La tamponnade est la compression du cœur par un épanchement péricardique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "pericarde"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0323",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "pericarde",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Péricarde — séreuse, ligaments] Quelle est la structure du péricarde ?",
+          "en": "[Thorax — pericarde] Translate to English: Quelle est la structure du péricarde ?"
+        },
+        "back": {
+          "fr": "Péricarde fibreux (externe) et péricarde séreux (interne, avec un feuillet pariétal et un viscéral = épicarde).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Entre les deux feuillets séreux : la cavité péricardique (avec le liquide péricardique). La tamponnade est la compression du cœur par un épanchement péricardique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "pericarde"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0324",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "pericarde",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Péricarde — séreuse, ligaments] Quelle est la structure du péricarde ?",
+          "en": "[Thorax — pericarde] Translate to English: Quelle est la structure du péricarde ?"
+        },
+        "back": {
+          "fr": "Péricarde fibreux (externe) et péricarde séreux (interne, avec un feuillet pariétal et un viscéral = épicarde).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Entre les deux feuillets séreux : la cavité péricardique (avec le liquide péricardique). La tamponnade est la compression du cœur par un épanchement péricardique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "pericarde"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0325",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "pericarde",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Péricarde — séreuse, ligaments] Quelle est la structure du péricarde ?",
+          "en": "[Thorax — pericarde] Translate to English: Quelle est la structure du péricarde ?"
+        },
+        "back": {
+          "fr": "Péricarde fibreux (externe) et péricarde séreux (interne, avec un feuillet pariétal et un viscéral = épicarde).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Entre les deux feuillets séreux : la cavité péricardique (avec le liquide péricardique). La tamponnade est la compression du cœur par un épanchement péricardique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "pericarde"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0326",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "pericarde",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Péricarde — séreuse, ligaments] Quelle est la structure du péricarde ?",
+          "en": "[Thorax — pericarde] Translate to English: Quelle est la structure du péricarde ?"
+        },
+        "back": {
+          "fr": "Péricarde fibreux (externe) et péricarde séreux (interne, avec un feuillet pariétal et un viscéral = épicarde).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Entre les deux feuillets séreux : la cavité péricardique (avec le liquide péricardique). La tamponnade est la compression du cœur par un épanchement péricardique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "pericarde"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0327",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "gros_vaisseaux",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Gros vaisseaux — aorte, veine cave, tronc pulmonaire] Quelles sont les branches de la crosse aortique ?",
+          "en": "[Thorax — gros_vaisseaux] Translate to English: Quelles sont les branches de la crosse aortique ?"
+        },
+        "back": {
+          "fr": "Tronc artériel brachiocéphalique, carotide commune gauche, subclavière gauche.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'aorte ascendante donne les coronaires. La crosse aortique passe au-dessus de la bifurcation trachéale. L'aorte thoracique descendante longe le flanc gauche de l'œsophage.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "gros vaisseaux"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0328",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "gros_vaisseaux",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Gros vaisseaux — aorte, veine cave, tronc pulmonaire] Quelles sont les branches de la crosse aortique ?",
+          "en": "[Thorax — gros_vaisseaux] Translate to English: Quelles sont les branches de la crosse aortique ?"
+        },
+        "back": {
+          "fr": "Tronc artériel brachiocéphalique, carotide commune gauche, subclavière gauche.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'aorte ascendante donne les coronaires. La crosse aortique passe au-dessus de la bifurcation trachéale. L'aorte thoracique descendante longe le flanc gauche de l'œsophage.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "gros vaisseaux"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0329",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "gros_vaisseaux",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Gros vaisseaux — aorte, veine cave, tronc pulmonaire] Quelles sont les branches de la crosse aortique ?",
+          "en": "[Thorax — gros_vaisseaux] Translate to English: Quelles sont les branches de la crosse aortique ?"
+        },
+        "back": {
+          "fr": "Tronc artériel brachiocéphalique, carotide commune gauche, subclavière gauche.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'aorte ascendante donne les coronaires. La crosse aortique passe au-dessus de la bifurcation trachéale. L'aorte thoracique descendante longe le flanc gauche de l'œsophage.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "gros vaisseaux"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0330",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "gros_vaisseaux",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Gros vaisseaux — aorte, veine cave, tronc pulmonaire] Quelles sont les branches de la crosse aortique ?",
+          "en": "[Thorax — gros_vaisseaux] Translate to English: Quelles sont les branches de la crosse aortique ?"
+        },
+        "back": {
+          "fr": "Tronc artériel brachiocéphalique, carotide commune gauche, subclavière gauche.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'aorte ascendante donne les coronaires. La crosse aortique passe au-dessus de la bifurcation trachéale. L'aorte thoracique descendante longe le flanc gauche de l'œsophage.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "gros vaisseaux"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0331",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "gros_vaisseaux",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Gros vaisseaux — aorte, veine cave, tronc pulmonaire] Quelles sont les branches de la crosse aortique ?",
+          "en": "[Thorax — gros_vaisseaux] Translate to English: Quelles sont les branches de la crosse aortique ?"
+        },
+        "back": {
+          "fr": "Tronc artériel brachiocéphalique, carotide commune gauche, subclavière gauche.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'aorte ascendante donne les coronaires. La crosse aortique passe au-dessus de la bifurcation trachéale. L'aorte thoracique descendante longe le flanc gauche de l'œsophage.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "gros vaisseaux"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0332",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "gros_vaisseaux",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Gros vaisseaux — aorte, veine cave, tronc pulmonaire] Quelles sont les branches de la crosse aortique ?",
+          "en": "[Thorax — gros_vaisseaux] Translate to English: Quelles sont les branches de la crosse aortique ?"
+        },
+        "back": {
+          "fr": "Tronc artériel brachiocéphalique, carotide commune gauche, subclavière gauche.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'aorte ascendante donne les coronaires. La crosse aortique passe au-dessus de la bifurcation trachéale. L'aorte thoracique descendante longe le flanc gauche de l'œsophage.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "gros vaisseaux"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0333",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "gros_vaisseaux",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Gros vaisseaux — aorte, veine cave, tronc pulmonaire] Quelles sont les branches de la crosse aortique ?",
+          "en": "[Thorax — gros_vaisseaux] Translate to English: Quelles sont les branches de la crosse aortique ?"
+        },
+        "back": {
+          "fr": "Tronc artériel brachiocéphalique, carotide commune gauche, subclavière gauche.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'aorte ascendante donne les coronaires. La crosse aortique passe au-dessus de la bifurcation trachéale. L'aorte thoracique descendante longe le flanc gauche de l'œsophage.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "gros vaisseaux"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0334",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "gros_vaisseaux",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Gros vaisseaux — aorte, veine cave, tronc pulmonaire] Quelles sont les branches de la crosse aortique ?",
+          "en": "[Thorax — gros_vaisseaux] Translate to English: Quelles sont les branches de la crosse aortique ?"
+        },
+        "back": {
+          "fr": "Tronc artériel brachiocéphalique, carotide commune gauche, subclavière gauche.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'aorte ascendante donne les coronaires. La crosse aortique passe au-dessus de la bifurcation trachéale. L'aorte thoracique descendante longe le flanc gauche de l'œsophage.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "gros vaisseaux"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0335",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "gros_vaisseaux",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Gros vaisseaux — aorte, veine cave, tronc pulmonaire] Quelles sont les branches de la crosse aortique ?",
+          "en": "[Thorax — gros_vaisseaux] Translate to English: Quelles sont les branches de la crosse aortique ?"
+        },
+        "back": {
+          "fr": "Tronc artériel brachiocéphalique, carotide commune gauche, subclavière gauche.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'aorte ascendante donne les coronaires. La crosse aortique passe au-dessus de la bifurcation trachéale. L'aorte thoracique descendante longe le flanc gauche de l'œsophage.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "gros vaisseaux"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0336",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "gros_vaisseaux",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Gros vaisseaux — aorte, veine cave, tronc pulmonaire] Quelles sont les branches de la crosse aortique ?",
+          "en": "[Thorax — gros_vaisseaux] Translate to English: Quelles sont les branches de la crosse aortique ?"
+        },
+        "back": {
+          "fr": "Tronc artériel brachiocéphalique, carotide commune gauche, subclavière gauche.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'aorte ascendante donne les coronaires. La crosse aortique passe au-dessus de la bifurcation trachéale. L'aorte thoracique descendante longe le flanc gauche de l'œsophage.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "gros vaisseaux"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0337",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "gros_vaisseaux",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Gros vaisseaux — aorte, veine cave, tronc pulmonaire] Quelles sont les branches de la crosse aortique ?",
+          "en": "[Thorax — gros_vaisseaux] Translate to English: Quelles sont les branches de la crosse aortique ?"
+        },
+        "back": {
+          "fr": "Tronc artériel brachiocéphalique, carotide commune gauche, subclavière gauche.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'aorte ascendante donne les coronaires. La crosse aortique passe au-dessus de la bifurcation trachéale. L'aorte thoracique descendante longe le flanc gauche de l'œsophage.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "gros vaisseaux"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0338",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "gros_vaisseaux",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Gros vaisseaux — aorte, veine cave, tronc pulmonaire] Quelles sont les branches de la crosse aortique ?",
+          "en": "[Thorax — gros_vaisseaux] Translate to English: Quelles sont les branches de la crosse aortique ?"
+        },
+        "back": {
+          "fr": "Tronc artériel brachiocéphalique, carotide commune gauche, subclavière gauche.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'aorte ascendante donne les coronaires. La crosse aortique passe au-dessus de la bifurcation trachéale. L'aorte thoracique descendante longe le flanc gauche de l'œsophage.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "gros vaisseaux"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0339",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "gros_vaisseaux",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Gros vaisseaux — aorte, veine cave, tronc pulmonaire] Quelles sont les branches de la crosse aortique ?",
+          "en": "[Thorax — gros_vaisseaux] Translate to English: Quelles sont les branches de la crosse aortique ?"
+        },
+        "back": {
+          "fr": "Tronc artériel brachiocéphalique, carotide commune gauche, subclavière gauche.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'aorte ascendante donne les coronaires. La crosse aortique passe au-dessus de la bifurcation trachéale. L'aorte thoracique descendante longe le flanc gauche de l'œsophage.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "gros vaisseaux"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0340",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "gros_vaisseaux",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Gros vaisseaux — aorte, veine cave, tronc pulmonaire] Quelles sont les branches de la crosse aortique ?",
+          "en": "[Thorax — gros_vaisseaux] Translate to English: Quelles sont les branches de la crosse aortique ?"
+        },
+        "back": {
+          "fr": "Tronc artériel brachiocéphalique, carotide commune gauche, subclavière gauche.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'aorte ascendante donne les coronaires. La crosse aortique passe au-dessus de la bifurcation trachéale. L'aorte thoracique descendante longe le flanc gauche de l'œsophage.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "gros vaisseaux"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0341",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "gros_vaisseaux",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Gros vaisseaux — aorte, veine cave, tronc pulmonaire] Quelles sont les branches de la crosse aortique ?",
+          "en": "[Thorax — gros_vaisseaux] Translate to English: Quelles sont les branches de la crosse aortique ?"
+        },
+        "back": {
+          "fr": "Tronc artériel brachiocéphalique, carotide commune gauche, subclavière gauche.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'aorte ascendante donne les coronaires. La crosse aortique passe au-dessus de la bifurcation trachéale. L'aorte thoracique descendante longe le flanc gauche de l'œsophage.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "gros vaisseaux"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0342",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "gros_vaisseaux",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Gros vaisseaux — aorte, veine cave, tronc pulmonaire] Quelles sont les branches de la crosse aortique ?",
+          "en": "[Thorax — gros_vaisseaux] Translate to English: Quelles sont les branches de la crosse aortique ?"
+        },
+        "back": {
+          "fr": "Tronc artériel brachiocéphalique, carotide commune gauche, subclavière gauche.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'aorte ascendante donne les coronaires. La crosse aortique passe au-dessus de la bifurcation trachéale. L'aorte thoracique descendante longe le flanc gauche de l'œsophage.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "gros vaisseaux"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0343",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "gros_vaisseaux",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Gros vaisseaux — aorte, veine cave, tronc pulmonaire] Quelles sont les branches de la crosse aortique ?",
+          "en": "[Thorax — gros_vaisseaux] Translate to English: Quelles sont les branches de la crosse aortique ?"
+        },
+        "back": {
+          "fr": "Tronc artériel brachiocéphalique, carotide commune gauche, subclavière gauche.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'aorte ascendante donne les coronaires. La crosse aortique passe au-dessus de la bifurcation trachéale. L'aorte thoracique descendante longe le flanc gauche de l'œsophage.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "gros vaisseaux"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0344",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — auscultation, percussion, voies d'abord] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Thorax — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0345",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — auscultation, percussion, voies d'abord] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Thorax — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0346",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — auscultation, percussion, voies d'abord] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Thorax — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0347",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — auscultation, percussion, voies d'abord] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Thorax — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0348",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — auscultation, percussion, voies d'abord] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Thorax — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0349",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — auscultation, percussion, voies d'abord] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Thorax — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0350",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — auscultation, percussion, voies d'abord] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Thorax — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0351",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — auscultation, percussion, voies d'abord] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Thorax — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0352",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — auscultation, percussion, voies d'abord] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Thorax — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0353",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — auscultation, percussion, voies d'abord] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Thorax — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0354",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — auscultation, percussion, voies d'abord] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Thorax — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0355",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — auscultation, percussion, voies d'abord] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Thorax — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0356",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — auscultation, percussion, voies d'abord] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Thorax — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0357",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — auscultation, percussion, voies d'abord] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Thorax — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0358",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — auscultation, percussion, voies d'abord] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Thorax — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0359",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — auscultation, percussion, voies d'abord] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Thorax — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_thorax_0360",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_thorax"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — auscultation, percussion, voies d'abord] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Thorax — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    }
+  ]
+}

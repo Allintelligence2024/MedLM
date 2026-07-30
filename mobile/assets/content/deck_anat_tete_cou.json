@@ -1,0 +1,4216 @@
+{
+  "deck_id": "deck_anat_tete_cou",
+  "module_id": "anatomie",
+  "programme": "medecine_dz",
+  "study_year": 1,
+  "version": 1,
+  "name_fr": "Tête et cou",
+  "name_en": "Head and neck",
+  "description_fr": "Crâne, face, muscles masticateurs, glandes salivaires, innervation crânienne.",
+  "description_en": "Skull, face, masticatory muscles, salivary glands, cranial innervation.",
+  "is_premium": false,
+  "is_demo": false,
+  "license": "medankidz_internal_v1",
+  "cards": [
+    {
+      "id": "deck_anat_tete_cou_0481",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "crâne",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Crâne — os, sutures, foramens] Combien d'os compte le crâne ?",
+          "en": "[Head and neck — crâne] Translate to English: Combien d'os compte le crâne ?"
+        },
+        "back": {
+          "fr": "22 os : 8 os du crâne (neurocrâne) + 14 os de la face (viscérocrâne).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le neurocrâne protège l'encéphale. Les os principaux sont le frontal, pariétaux, temporaux, occipital, sphénoïde, ethmoïde. Les sutures sont des articulations fibreuses.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "crâne"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0482",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "crâne",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Crâne — os, sutures, foramens] Combien d'os compte le crâne ?",
+          "en": "[Head and neck — crâne] Translate to English: Combien d'os compte le crâne ?"
+        },
+        "back": {
+          "fr": "22 os : 8 os du crâne (neurocrâne) + 14 os de la face (viscérocrâne).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le neurocrâne protège l'encéphale. Les os principaux sont le frontal, pariétaux, temporaux, occipital, sphénoïde, ethmoïde. Les sutures sont des articulations fibreuses.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "crâne"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0483",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "crâne",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Crâne — os, sutures, foramens] Combien d'os compte le crâne ?",
+          "en": "[Head and neck — crâne] Translate to English: Combien d'os compte le crâne ?"
+        },
+        "back": {
+          "fr": "22 os : 8 os du crâne (neurocrâne) + 14 os de la face (viscérocrâne).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le neurocrâne protège l'encéphale. Les os principaux sont le frontal, pariétaux, temporaux, occipital, sphénoïde, ethmoïde. Les sutures sont des articulations fibreuses.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "crâne"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0484",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "crâne",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Crâne — os, sutures, foramens] Combien d'os compte le crâne ?",
+          "en": "[Head and neck — crâne] Translate to English: Combien d'os compte le crâne ?"
+        },
+        "back": {
+          "fr": "22 os : 8 os du crâne (neurocrâne) + 14 os de la face (viscérocrâne).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le neurocrâne protège l'encéphale. Les os principaux sont le frontal, pariétaux, temporaux, occipital, sphénoïde, ethmoïde. Les sutures sont des articulations fibreuses.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "crâne"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0485",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "crâne",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Crâne — os, sutures, foramens] Combien d'os compte le crâne ?",
+          "en": "[Head and neck — crâne] Translate to English: Combien d'os compte le crâne ?"
+        },
+        "back": {
+          "fr": "22 os : 8 os du crâne (neurocrâne) + 14 os de la face (viscérocrâne).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le neurocrâne protège l'encéphale. Les os principaux sont le frontal, pariétaux, temporaux, occipital, sphénoïde, ethmoïde. Les sutures sont des articulations fibreuses.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "crâne"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0486",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "crâne",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Crâne — os, sutures, foramens] Combien d'os compte le crâne ?",
+          "en": "[Head and neck — crâne] Translate to English: Combien d'os compte le crâne ?"
+        },
+        "back": {
+          "fr": "22 os : 8 os du crâne (neurocrâne) + 14 os de la face (viscérocrâne).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le neurocrâne protège l'encéphale. Les os principaux sont le frontal, pariétaux, temporaux, occipital, sphénoïde, ethmoïde. Les sutures sont des articulations fibreuses.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "crâne"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0487",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "crâne",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Crâne — os, sutures, foramens] Combien d'os compte le crâne ?",
+          "en": "[Head and neck — crâne] Translate to English: Combien d'os compte le crâne ?"
+        },
+        "back": {
+          "fr": "22 os : 8 os du crâne (neurocrâne) + 14 os de la face (viscérocrâne).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le neurocrâne protège l'encéphale. Les os principaux sont le frontal, pariétaux, temporaux, occipital, sphénoïde, ethmoïde. Les sutures sont des articulations fibreuses.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "crâne"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0488",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "crâne",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Crâne — os, sutures, foramens] Combien d'os compte le crâne ?",
+          "en": "[Head and neck — crâne] Translate to English: Combien d'os compte le crâne ?"
+        },
+        "back": {
+          "fr": "22 os : 8 os du crâne (neurocrâne) + 14 os de la face (viscérocrâne).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le neurocrâne protège l'encéphale. Les os principaux sont le frontal, pariétaux, temporaux, occipital, sphénoïde, ethmoïde. Les sutures sont des articulations fibreuses.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "crâne"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0489",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "crâne",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Crâne — os, sutures, foramens] Combien d'os compte le crâne ?",
+          "en": "[Head and neck — crâne] Translate to English: Combien d'os compte le crâne ?"
+        },
+        "back": {
+          "fr": "22 os : 8 os du crâne (neurocrâne) + 14 os de la face (viscérocrâne).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le neurocrâne protège l'encéphale. Les os principaux sont le frontal, pariétaux, temporaux, occipital, sphénoïde, ethmoïde. Les sutures sont des articulations fibreuses.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "crâne"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0490",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "crâne",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Crâne — os, sutures, foramens] Combien d'os compte le crâne ?",
+          "en": "[Head and neck — crâne] Translate to English: Combien d'os compte le crâne ?"
+        },
+        "back": {
+          "fr": "22 os : 8 os du crâne (neurocrâne) + 14 os de la face (viscérocrâne).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le neurocrâne protège l'encéphale. Les os principaux sont le frontal, pariétaux, temporaux, occipital, sphénoïde, ethmoïde. Les sutures sont des articulations fibreuses.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "crâne"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0491",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "crâne",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Crâne — os, sutures, foramens] Combien d'os compte le crâne ?",
+          "en": "[Head and neck — crâne] Translate to English: Combien d'os compte le crâne ?"
+        },
+        "back": {
+          "fr": "22 os : 8 os du crâne (neurocrâne) + 14 os de la face (viscérocrâne).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le neurocrâne protège l'encéphale. Les os principaux sont le frontal, pariétaux, temporaux, occipital, sphénoïde, ethmoïde. Les sutures sont des articulations fibreuses.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "crâne"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0492",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "crâne",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Crâne — os, sutures, foramens] Combien d'os compte le crâne ?",
+          "en": "[Head and neck — crâne] Translate to English: Combien d'os compte le crâne ?"
+        },
+        "back": {
+          "fr": "22 os : 8 os du crâne (neurocrâne) + 14 os de la face (viscérocrâne).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le neurocrâne protège l'encéphale. Les os principaux sont le frontal, pariétaux, temporaux, occipital, sphénoïde, ethmoïde. Les sutures sont des articulations fibreuses.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "crâne"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0493",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "crâne",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Crâne — os, sutures, foramens] Combien d'os compte le crâne ?",
+          "en": "[Head and neck — crâne] Translate to English: Combien d'os compte le crâne ?"
+        },
+        "back": {
+          "fr": "22 os : 8 os du crâne (neurocrâne) + 14 os de la face (viscérocrâne).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le neurocrâne protège l'encéphale. Les os principaux sont le frontal, pariétaux, temporaux, occipital, sphénoïde, ethmoïde. Les sutures sont des articulations fibreuses.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "crâne"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0494",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "crâne",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Crâne — os, sutures, foramens] Combien d'os compte le crâne ?",
+          "en": "[Head and neck — crâne] Translate to English: Combien d'os compte le crâne ?"
+        },
+        "back": {
+          "fr": "22 os : 8 os du crâne (neurocrâne) + 14 os de la face (viscérocrâne).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le neurocrâne protège l'encéphale. Les os principaux sont le frontal, pariétaux, temporaux, occipital, sphénoïde, ethmoïde. Les sutures sont des articulations fibreuses.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "crâne"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0495",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "crâne",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Crâne — os, sutures, foramens] Combien d'os compte le crâne ?",
+          "en": "[Head and neck — crâne] Translate to English: Combien d'os compte le crâne ?"
+        },
+        "back": {
+          "fr": "22 os : 8 os du crâne (neurocrâne) + 14 os de la face (viscérocrâne).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le neurocrâne protège l'encéphale. Les os principaux sont le frontal, pariétaux, temporaux, occipital, sphénoïde, ethmoïde. Les sutures sont des articulations fibreuses.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "crâne"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0496",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "crâne",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Crâne — os, sutures, foramens] Combien d'os compte le crâne ?",
+          "en": "[Head and neck — crâne] Translate to English: Combien d'os compte le crâne ?"
+        },
+        "back": {
+          "fr": "22 os : 8 os du crâne (neurocrâne) + 14 os de la face (viscérocrâne).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le neurocrâne protège l'encéphale. Les os principaux sont le frontal, pariétaux, temporaux, occipital, sphénoïde, ethmoïde. Les sutures sont des articulations fibreuses.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "crâne"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0497",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "crâne",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Crâne — os, sutures, foramens] Combien d'os compte le crâne ?",
+          "en": "[Head and neck — crâne] Translate to English: Combien d'os compte le crâne ?"
+        },
+        "back": {
+          "fr": "22 os : 8 os du crâne (neurocrâne) + 14 os de la face (viscérocrâne).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le neurocrâne protège l'encéphale. Les os principaux sont le frontal, pariétaux, temporaux, occipital, sphénoïde, ethmoïde. Les sutures sont des articulations fibreuses.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "crâne"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0498",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "crâne",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Crâne — os, sutures, foramens] Combien d'os compte le crâne ?",
+          "en": "[Head and neck — crâne] Translate to English: Combien d'os compte le crâne ?"
+        },
+        "back": {
+          "fr": "22 os : 8 os du crâne (neurocrâne) + 14 os de la face (viscérocrâne).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le neurocrâne protège l'encéphale. Les os principaux sont le frontal, pariétaux, temporaux, occipital, sphénoïde, ethmoïde. Les sutures sont des articulations fibreuses.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "crâne"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0499",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "face",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Face — muscles peauciers, glandes salivaires] Quelles glandes salivaires ?",
+          "en": "[Head and neck — face] Translate to English: Quelles glandes salivaires ?"
+        },
+        "back": {
+          "fr": "3 paires : parotides, submandibulaires, sublinguales.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La parotide est la plus volumineuse. Elle est traversée par le nerf facial (VII) — risque de lésion en chirurgie. Le canal de Sténon s'abouche à la face interne de la joue.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "face"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0500",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "face",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Face — muscles peauciers, glandes salivaires] Quelles glandes salivaires ?",
+          "en": "[Head and neck — face] Translate to English: Quelles glandes salivaires ?"
+        },
+        "back": {
+          "fr": "3 paires : parotides, submandibulaires, sublinguales.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La parotide est la plus volumineuse. Elle est traversée par le nerf facial (VII) — risque de lésion en chirurgie. Le canal de Sténon s'abouche à la face interne de la joue.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "face"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0501",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "face",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Face — muscles peauciers, glandes salivaires] Quelles glandes salivaires ?",
+          "en": "[Head and neck — face] Translate to English: Quelles glandes salivaires ?"
+        },
+        "back": {
+          "fr": "3 paires : parotides, submandibulaires, sublinguales.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La parotide est la plus volumineuse. Elle est traversée par le nerf facial (VII) — risque de lésion en chirurgie. Le canal de Sténon s'abouche à la face interne de la joue.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "face"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0502",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "face",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Face — muscles peauciers, glandes salivaires] Quelles glandes salivaires ?",
+          "en": "[Head and neck — face] Translate to English: Quelles glandes salivaires ?"
+        },
+        "back": {
+          "fr": "3 paires : parotides, submandibulaires, sublinguales.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La parotide est la plus volumineuse. Elle est traversée par le nerf facial (VII) — risque de lésion en chirurgie. Le canal de Sténon s'abouche à la face interne de la joue.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "face"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0503",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "face",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Face — muscles peauciers, glandes salivaires] Quelles glandes salivaires ?",
+          "en": "[Head and neck — face] Translate to English: Quelles glandes salivaires ?"
+        },
+        "back": {
+          "fr": "3 paires : parotides, submandibulaires, sublinguales.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La parotide est la plus volumineuse. Elle est traversée par le nerf facial (VII) — risque de lésion en chirurgie. Le canal de Sténon s'abouche à la face interne de la joue.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "face"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0504",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "face",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Face — muscles peauciers, glandes salivaires] Quelles glandes salivaires ?",
+          "en": "[Head and neck — face] Translate to English: Quelles glandes salivaires ?"
+        },
+        "back": {
+          "fr": "3 paires : parotides, submandibulaires, sublinguales.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La parotide est la plus volumineuse. Elle est traversée par le nerf facial (VII) — risque de lésion en chirurgie. Le canal de Sténon s'abouche à la face interne de la joue.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "face"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0505",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "face",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Face — muscles peauciers, glandes salivaires] Quelles glandes salivaires ?",
+          "en": "[Head and neck — face] Translate to English: Quelles glandes salivaires ?"
+        },
+        "back": {
+          "fr": "3 paires : parotides, submandibulaires, sublinguales.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La parotide est la plus volumineuse. Elle est traversée par le nerf facial (VII) — risque de lésion en chirurgie. Le canal de Sténon s'abouche à la face interne de la joue.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "face"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0506",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "face",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Face — muscles peauciers, glandes salivaires] Quelles glandes salivaires ?",
+          "en": "[Head and neck — face] Translate to English: Quelles glandes salivaires ?"
+        },
+        "back": {
+          "fr": "3 paires : parotides, submandibulaires, sublinguales.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La parotide est la plus volumineuse. Elle est traversée par le nerf facial (VII) — risque de lésion en chirurgie. Le canal de Sténon s'abouche à la face interne de la joue.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "face"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0507",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "face",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Face — muscles peauciers, glandes salivaires] Quelles glandes salivaires ?",
+          "en": "[Head and neck — face] Translate to English: Quelles glandes salivaires ?"
+        },
+        "back": {
+          "fr": "3 paires : parotides, submandibulaires, sublinguales.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La parotide est la plus volumineuse. Elle est traversée par le nerf facial (VII) — risque de lésion en chirurgie. Le canal de Sténon s'abouche à la face interne de la joue.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "face"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0508",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "face",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Face — muscles peauciers, glandes salivaires] Quelles glandes salivaires ?",
+          "en": "[Head and neck — face] Translate to English: Quelles glandes salivaires ?"
+        },
+        "back": {
+          "fr": "3 paires : parotides, submandibulaires, sublinguales.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La parotide est la plus volumineuse. Elle est traversée par le nerf facial (VII) — risque de lésion en chirurgie. Le canal de Sténon s'abouche à la face interne de la joue.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "face"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0509",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "face",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Face — muscles peauciers, glandes salivaires] Quelles glandes salivaires ?",
+          "en": "[Head and neck — face] Translate to English: Quelles glandes salivaires ?"
+        },
+        "back": {
+          "fr": "3 paires : parotides, submandibulaires, sublinguales.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La parotide est la plus volumineuse. Elle est traversée par le nerf facial (VII) — risque de lésion en chirurgie. Le canal de Sténon s'abouche à la face interne de la joue.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "face"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0510",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "face",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Face — muscles peauciers, glandes salivaires] Quelles glandes salivaires ?",
+          "en": "[Head and neck — face] Translate to English: Quelles glandes salivaires ?"
+        },
+        "back": {
+          "fr": "3 paires : parotides, submandibulaires, sublinguales.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La parotide est la plus volumineuse. Elle est traversée par le nerf facial (VII) — risque de lésion en chirurgie. Le canal de Sténon s'abouche à la face interne de la joue.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "face"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0511",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "face",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Face — muscles peauciers, glandes salivaires] Quelles glandes salivaires ?",
+          "en": "[Head and neck — face] Translate to English: Quelles glandes salivaires ?"
+        },
+        "back": {
+          "fr": "3 paires : parotides, submandibulaires, sublinguales.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La parotide est la plus volumineuse. Elle est traversée par le nerf facial (VII) — risque de lésion en chirurgie. Le canal de Sténon s'abouche à la face interne de la joue.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "face"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0512",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "face",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Face — muscles peauciers, glandes salivaires] Quelles glandes salivaires ?",
+          "en": "[Head and neck — face] Translate to English: Quelles glandes salivaires ?"
+        },
+        "back": {
+          "fr": "3 paires : parotides, submandibulaires, sublinguales.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La parotide est la plus volumineuse. Elle est traversée par le nerf facial (VII) — risque de lésion en chirurgie. Le canal de Sténon s'abouche à la face interne de la joue.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "face"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0513",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "face",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Face — muscles peauciers, glandes salivaires] Quelles glandes salivaires ?",
+          "en": "[Head and neck — face] Translate to English: Quelles glandes salivaires ?"
+        },
+        "back": {
+          "fr": "3 paires : parotides, submandibulaires, sublinguales.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La parotide est la plus volumineuse. Elle est traversée par le nerf facial (VII) — risque de lésion en chirurgie. Le canal de Sténon s'abouche à la face interne de la joue.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "face"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0514",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "face",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Face — muscles peauciers, glandes salivaires] Quelles glandes salivaires ?",
+          "en": "[Head and neck — face] Translate to English: Quelles glandes salivaires ?"
+        },
+        "back": {
+          "fr": "3 paires : parotides, submandibulaires, sublinguales.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La parotide est la plus volumineuse. Elle est traversée par le nerf facial (VII) — risque de lésion en chirurgie. Le canal de Sténon s'abouche à la face interne de la joue.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "face"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0515",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "face",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Face — muscles peauciers, glandes salivaires] Quelles glandes salivaires ?",
+          "en": "[Head and neck — face] Translate to English: Quelles glandes salivaires ?"
+        },
+        "back": {
+          "fr": "3 paires : parotides, submandibulaires, sublinguales.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La parotide est la plus volumineuse. Elle est traversée par le nerf facial (VII) — risque de lésion en chirurgie. Le canal de Sténon s'abouche à la face interne de la joue.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "face"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0516",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "masticateurs",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Muscles masticateurs — masséter, temporal, ptérygoïdiens] Quels sont les 4 muscles masticateurs ?",
+          "en": "[Head and neck — masticateurs] Translate to English: Quels sont les 4 muscles masticateurs ?"
+        },
+        "back": {
+          "fr": "Masséter, temporal, ptérygoïdien médial, ptérygoïdien latéral.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les 3 premiers ferment la mâchoire. Le ptérygoïdien latéral ouvre. Tous sont innervés par le nerf mandibulaire (V3, branche du trijumeau).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "masticateurs"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0517",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "masticateurs",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Muscles masticateurs — masséter, temporal, ptérygoïdiens] Quels sont les 4 muscles masticateurs ?",
+          "en": "[Head and neck — masticateurs] Translate to English: Quels sont les 4 muscles masticateurs ?"
+        },
+        "back": {
+          "fr": "Masséter, temporal, ptérygoïdien médial, ptérygoïdien latéral.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les 3 premiers ferment la mâchoire. Le ptérygoïdien latéral ouvre. Tous sont innervés par le nerf mandibulaire (V3, branche du trijumeau).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "masticateurs"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0518",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "masticateurs",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Muscles masticateurs — masséter, temporal, ptérygoïdiens] Quels sont les 4 muscles masticateurs ?",
+          "en": "[Head and neck — masticateurs] Translate to English: Quels sont les 4 muscles masticateurs ?"
+        },
+        "back": {
+          "fr": "Masséter, temporal, ptérygoïdien médial, ptérygoïdien latéral.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les 3 premiers ferment la mâchoire. Le ptérygoïdien latéral ouvre. Tous sont innervés par le nerf mandibulaire (V3, branche du trijumeau).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "masticateurs"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0519",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "masticateurs",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Muscles masticateurs — masséter, temporal, ptérygoïdiens] Quels sont les 4 muscles masticateurs ?",
+          "en": "[Head and neck — masticateurs] Translate to English: Quels sont les 4 muscles masticateurs ?"
+        },
+        "back": {
+          "fr": "Masséter, temporal, ptérygoïdien médial, ptérygoïdien latéral.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les 3 premiers ferment la mâchoire. Le ptérygoïdien latéral ouvre. Tous sont innervés par le nerf mandibulaire (V3, branche du trijumeau).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "masticateurs"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0520",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "masticateurs",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Muscles masticateurs — masséter, temporal, ptérygoïdiens] Quels sont les 4 muscles masticateurs ?",
+          "en": "[Head and neck — masticateurs] Translate to English: Quels sont les 4 muscles masticateurs ?"
+        },
+        "back": {
+          "fr": "Masséter, temporal, ptérygoïdien médial, ptérygoïdien latéral.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les 3 premiers ferment la mâchoire. Le ptérygoïdien latéral ouvre. Tous sont innervés par le nerf mandibulaire (V3, branche du trijumeau).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "masticateurs"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0521",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "masticateurs",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Muscles masticateurs — masséter, temporal, ptérygoïdiens] Quels sont les 4 muscles masticateurs ?",
+          "en": "[Head and neck — masticateurs] Translate to English: Quels sont les 4 muscles masticateurs ?"
+        },
+        "back": {
+          "fr": "Masséter, temporal, ptérygoïdien médial, ptérygoïdien latéral.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les 3 premiers ferment la mâchoire. Le ptérygoïdien latéral ouvre. Tous sont innervés par le nerf mandibulaire (V3, branche du trijumeau).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "masticateurs"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0522",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "masticateurs",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Muscles masticateurs — masséter, temporal, ptérygoïdiens] Quels sont les 4 muscles masticateurs ?",
+          "en": "[Head and neck — masticateurs] Translate to English: Quels sont les 4 muscles masticateurs ?"
+        },
+        "back": {
+          "fr": "Masséter, temporal, ptérygoïdien médial, ptérygoïdien latéral.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les 3 premiers ferment la mâchoire. Le ptérygoïdien latéral ouvre. Tous sont innervés par le nerf mandibulaire (V3, branche du trijumeau).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "masticateurs"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0523",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "masticateurs",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Muscles masticateurs — masséter, temporal, ptérygoïdiens] Quels sont les 4 muscles masticateurs ?",
+          "en": "[Head and neck — masticateurs] Translate to English: Quels sont les 4 muscles masticateurs ?"
+        },
+        "back": {
+          "fr": "Masséter, temporal, ptérygoïdien médial, ptérygoïdien latéral.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les 3 premiers ferment la mâchoire. Le ptérygoïdien latéral ouvre. Tous sont innervés par le nerf mandibulaire (V3, branche du trijumeau).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "masticateurs"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0524",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "masticateurs",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Muscles masticateurs — masséter, temporal, ptérygoïdiens] Quels sont les 4 muscles masticateurs ?",
+          "en": "[Head and neck — masticateurs] Translate to English: Quels sont les 4 muscles masticateurs ?"
+        },
+        "back": {
+          "fr": "Masséter, temporal, ptérygoïdien médial, ptérygoïdien latéral.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les 3 premiers ferment la mâchoire. Le ptérygoïdien latéral ouvre. Tous sont innervés par le nerf mandibulaire (V3, branche du trijumeau).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "masticateurs"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0525",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "masticateurs",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Muscles masticateurs — masséter, temporal, ptérygoïdiens] Quels sont les 4 muscles masticateurs ?",
+          "en": "[Head and neck — masticateurs] Translate to English: Quels sont les 4 muscles masticateurs ?"
+        },
+        "back": {
+          "fr": "Masséter, temporal, ptérygoïdien médial, ptérygoïdien latéral.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les 3 premiers ferment la mâchoire. Le ptérygoïdien latéral ouvre. Tous sont innervés par le nerf mandibulaire (V3, branche du trijumeau).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "masticateurs"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0526",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "masticateurs",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Muscles masticateurs — masséter, temporal, ptérygoïdiens] Quels sont les 4 muscles masticateurs ?",
+          "en": "[Head and neck — masticateurs] Translate to English: Quels sont les 4 muscles masticateurs ?"
+        },
+        "back": {
+          "fr": "Masséter, temporal, ptérygoïdien médial, ptérygoïdien latéral.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les 3 premiers ferment la mâchoire. Le ptérygoïdien latéral ouvre. Tous sont innervés par le nerf mandibulaire (V3, branche du trijumeau).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "masticateurs"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0527",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "masticateurs",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Muscles masticateurs — masséter, temporal, ptérygoïdiens] Quels sont les 4 muscles masticateurs ?",
+          "en": "[Head and neck — masticateurs] Translate to English: Quels sont les 4 muscles masticateurs ?"
+        },
+        "back": {
+          "fr": "Masséter, temporal, ptérygoïdien médial, ptérygoïdien latéral.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les 3 premiers ferment la mâchoire. Le ptérygoïdien latéral ouvre. Tous sont innervés par le nerf mandibulaire (V3, branche du trijumeau).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "masticateurs"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0528",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "masticateurs",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Muscles masticateurs — masséter, temporal, ptérygoïdiens] Quels sont les 4 muscles masticateurs ?",
+          "en": "[Head and neck — masticateurs] Translate to English: Quels sont les 4 muscles masticateurs ?"
+        },
+        "back": {
+          "fr": "Masséter, temporal, ptérygoïdien médial, ptérygoïdien latéral.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les 3 premiers ferment la mâchoire. Le ptérygoïdien latéral ouvre. Tous sont innervés par le nerf mandibulaire (V3, branche du trijumeau).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "masticateurs"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0529",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "masticateurs",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Muscles masticateurs — masséter, temporal, ptérygoïdiens] Quels sont les 4 muscles masticateurs ?",
+          "en": "[Head and neck — masticateurs] Translate to English: Quels sont les 4 muscles masticateurs ?"
+        },
+        "back": {
+          "fr": "Masséter, temporal, ptérygoïdien médial, ptérygoïdien latéral.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les 3 premiers ferment la mâchoire. Le ptérygoïdien latéral ouvre. Tous sont innervés par le nerf mandibulaire (V3, branche du trijumeau).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "masticateurs"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0530",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "masticateurs",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Muscles masticateurs — masséter, temporal, ptérygoïdiens] Quels sont les 4 muscles masticateurs ?",
+          "en": "[Head and neck — masticateurs] Translate to English: Quels sont les 4 muscles masticateurs ?"
+        },
+        "back": {
+          "fr": "Masséter, temporal, ptérygoïdien médial, ptérygoïdien latéral.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les 3 premiers ferment la mâchoire. Le ptérygoïdien latéral ouvre. Tous sont innervés par le nerf mandibulaire (V3, branche du trijumeau).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "masticateurs"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0531",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "masticateurs",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Muscles masticateurs — masséter, temporal, ptérygoïdiens] Quels sont les 4 muscles masticateurs ?",
+          "en": "[Head and neck — masticateurs] Translate to English: Quels sont les 4 muscles masticateurs ?"
+        },
+        "back": {
+          "fr": "Masséter, temporal, ptérygoïdien médial, ptérygoïdien latéral.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les 3 premiers ferment la mâchoire. Le ptérygoïdien latéral ouvre. Tous sont innervés par le nerf mandibulaire (V3, branche du trijumeau).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "masticateurs"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0532",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "masticateurs",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Muscles masticateurs — masséter, temporal, ptérygoïdiens] Quels sont les 4 muscles masticateurs ?",
+          "en": "[Head and neck — masticateurs] Translate to English: Quels sont les 4 muscles masticateurs ?"
+        },
+        "back": {
+          "fr": "Masséter, temporal, ptérygoïdien médial, ptérygoïdien latéral.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les 3 premiers ferment la mâchoire. Le ptérygoïdien latéral ouvre. Tous sont innervés par le nerf mandibulaire (V3, branche du trijumeau).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "masticateurs"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0533",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "nerfs_craniens",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Nerfs crâniens — 12 paires, fonctions] Quels sont les 12 nerfs crâniens ?",
+          "en": "[Head and neck — nerfs_craniens] Translate to English: Quels sont les 12 nerfs crâniens ?"
+        },
+        "back": {
+          "fr": "I Olfactif, II Optique, III Oculo-moteur, IV Trochléaire, V Trijumeau, VI Abducens, VII Facial, VIII Vestibulo-cochléaire, IX Glosso-pharyngien, X Vague, XI Accessoire, XII Hypoglosse.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "I et II sont des expansions cérébrales. III, IV, VI commandent les muscles oculomoteurs. V est sensitif de la face. VII est moteur des muscles peauciers. X est le parasympathique thoracique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "nerfs craniens"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0534",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "nerfs_craniens",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Nerfs crâniens — 12 paires, fonctions] Quels sont les 12 nerfs crâniens ?",
+          "en": "[Head and neck — nerfs_craniens] Translate to English: Quels sont les 12 nerfs crâniens ?"
+        },
+        "back": {
+          "fr": "I Olfactif, II Optique, III Oculo-moteur, IV Trochléaire, V Trijumeau, VI Abducens, VII Facial, VIII Vestibulo-cochléaire, IX Glosso-pharyngien, X Vague, XI Accessoire, XII Hypoglosse.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "I et II sont des expansions cérébrales. III, IV, VI commandent les muscles oculomoteurs. V est sensitif de la face. VII est moteur des muscles peauciers. X est le parasympathique thoracique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "nerfs craniens"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0535",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "nerfs_craniens",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Nerfs crâniens — 12 paires, fonctions] Quels sont les 12 nerfs crâniens ?",
+          "en": "[Head and neck — nerfs_craniens] Translate to English: Quels sont les 12 nerfs crâniens ?"
+        },
+        "back": {
+          "fr": "I Olfactif, II Optique, III Oculo-moteur, IV Trochléaire, V Trijumeau, VI Abducens, VII Facial, VIII Vestibulo-cochléaire, IX Glosso-pharyngien, X Vague, XI Accessoire, XII Hypoglosse.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "I et II sont des expansions cérébrales. III, IV, VI commandent les muscles oculomoteurs. V est sensitif de la face. VII est moteur des muscles peauciers. X est le parasympathique thoracique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "nerfs craniens"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0536",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "nerfs_craniens",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Nerfs crâniens — 12 paires, fonctions] Quels sont les 12 nerfs crâniens ?",
+          "en": "[Head and neck — nerfs_craniens] Translate to English: Quels sont les 12 nerfs crâniens ?"
+        },
+        "back": {
+          "fr": "I Olfactif, II Optique, III Oculo-moteur, IV Trochléaire, V Trijumeau, VI Abducens, VII Facial, VIII Vestibulo-cochléaire, IX Glosso-pharyngien, X Vague, XI Accessoire, XII Hypoglosse.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "I et II sont des expansions cérébrales. III, IV, VI commandent les muscles oculomoteurs. V est sensitif de la face. VII est moteur des muscles peauciers. X est le parasympathique thoracique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "nerfs craniens"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0537",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "nerfs_craniens",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Nerfs crâniens — 12 paires, fonctions] Quels sont les 12 nerfs crâniens ?",
+          "en": "[Head and neck — nerfs_craniens] Translate to English: Quels sont les 12 nerfs crâniens ?"
+        },
+        "back": {
+          "fr": "I Olfactif, II Optique, III Oculo-moteur, IV Trochléaire, V Trijumeau, VI Abducens, VII Facial, VIII Vestibulo-cochléaire, IX Glosso-pharyngien, X Vague, XI Accessoire, XII Hypoglosse.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "I et II sont des expansions cérébrales. III, IV, VI commandent les muscles oculomoteurs. V est sensitif de la face. VII est moteur des muscles peauciers. X est le parasympathique thoracique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "nerfs craniens"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0538",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "nerfs_craniens",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Nerfs crâniens — 12 paires, fonctions] Quels sont les 12 nerfs crâniens ?",
+          "en": "[Head and neck — nerfs_craniens] Translate to English: Quels sont les 12 nerfs crâniens ?"
+        },
+        "back": {
+          "fr": "I Olfactif, II Optique, III Oculo-moteur, IV Trochléaire, V Trijumeau, VI Abducens, VII Facial, VIII Vestibulo-cochléaire, IX Glosso-pharyngien, X Vague, XI Accessoire, XII Hypoglosse.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "I et II sont des expansions cérébrales. III, IV, VI commandent les muscles oculomoteurs. V est sensitif de la face. VII est moteur des muscles peauciers. X est le parasympathique thoracique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "nerfs craniens"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0539",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "nerfs_craniens",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Nerfs crâniens — 12 paires, fonctions] Quels sont les 12 nerfs crâniens ?",
+          "en": "[Head and neck — nerfs_craniens] Translate to English: Quels sont les 12 nerfs crâniens ?"
+        },
+        "back": {
+          "fr": "I Olfactif, II Optique, III Oculo-moteur, IV Trochléaire, V Trijumeau, VI Abducens, VII Facial, VIII Vestibulo-cochléaire, IX Glosso-pharyngien, X Vague, XI Accessoire, XII Hypoglosse.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "I et II sont des expansions cérébrales. III, IV, VI commandent les muscles oculomoteurs. V est sensitif de la face. VII est moteur des muscles peauciers. X est le parasympathique thoracique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "nerfs craniens"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0540",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "nerfs_craniens",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Nerfs crâniens — 12 paires, fonctions] Quels sont les 12 nerfs crâniens ?",
+          "en": "[Head and neck — nerfs_craniens] Translate to English: Quels sont les 12 nerfs crâniens ?"
+        },
+        "back": {
+          "fr": "I Olfactif, II Optique, III Oculo-moteur, IV Trochléaire, V Trijumeau, VI Abducens, VII Facial, VIII Vestibulo-cochléaire, IX Glosso-pharyngien, X Vague, XI Accessoire, XII Hypoglosse.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "I et II sont des expansions cérébrales. III, IV, VI commandent les muscles oculomoteurs. V est sensitif de la face. VII est moteur des muscles peauciers. X est le parasympathique thoracique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "nerfs craniens"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0541",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "nerfs_craniens",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Nerfs crâniens — 12 paires, fonctions] Quels sont les 12 nerfs crâniens ?",
+          "en": "[Head and neck — nerfs_craniens] Translate to English: Quels sont les 12 nerfs crâniens ?"
+        },
+        "back": {
+          "fr": "I Olfactif, II Optique, III Oculo-moteur, IV Trochléaire, V Trijumeau, VI Abducens, VII Facial, VIII Vestibulo-cochléaire, IX Glosso-pharyngien, X Vague, XI Accessoire, XII Hypoglosse.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "I et II sont des expansions cérébrales. III, IV, VI commandent les muscles oculomoteurs. V est sensitif de la face. VII est moteur des muscles peauciers. X est le parasympathique thoracique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "nerfs craniens"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0542",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "nerfs_craniens",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Nerfs crâniens — 12 paires, fonctions] Quels sont les 12 nerfs crâniens ?",
+          "en": "[Head and neck — nerfs_craniens] Translate to English: Quels sont les 12 nerfs crâniens ?"
+        },
+        "back": {
+          "fr": "I Olfactif, II Optique, III Oculo-moteur, IV Trochléaire, V Trijumeau, VI Abducens, VII Facial, VIII Vestibulo-cochléaire, IX Glosso-pharyngien, X Vague, XI Accessoire, XII Hypoglosse.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "I et II sont des expansions cérébrales. III, IV, VI commandent les muscles oculomoteurs. V est sensitif de la face. VII est moteur des muscles peauciers. X est le parasympathique thoracique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "nerfs craniens"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0543",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "nerfs_craniens",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Nerfs crâniens — 12 paires, fonctions] Quels sont les 12 nerfs crâniens ?",
+          "en": "[Head and neck — nerfs_craniens] Translate to English: Quels sont les 12 nerfs crâniens ?"
+        },
+        "back": {
+          "fr": "I Olfactif, II Optique, III Oculo-moteur, IV Trochléaire, V Trijumeau, VI Abducens, VII Facial, VIII Vestibulo-cochléaire, IX Glosso-pharyngien, X Vague, XI Accessoire, XII Hypoglosse.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "I et II sont des expansions cérébrales. III, IV, VI commandent les muscles oculomoteurs. V est sensitif de la face. VII est moteur des muscles peauciers. X est le parasympathique thoracique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "nerfs craniens"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0544",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "nerfs_craniens",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Nerfs crâniens — 12 paires, fonctions] Quels sont les 12 nerfs crâniens ?",
+          "en": "[Head and neck — nerfs_craniens] Translate to English: Quels sont les 12 nerfs crâniens ?"
+        },
+        "back": {
+          "fr": "I Olfactif, II Optique, III Oculo-moteur, IV Trochléaire, V Trijumeau, VI Abducens, VII Facial, VIII Vestibulo-cochléaire, IX Glosso-pharyngien, X Vague, XI Accessoire, XII Hypoglosse.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "I et II sont des expansions cérébrales. III, IV, VI commandent les muscles oculomoteurs. V est sensitif de la face. VII est moteur des muscles peauciers. X est le parasympathique thoracique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "nerfs craniens"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0545",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "nerfs_craniens",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Nerfs crâniens — 12 paires, fonctions] Quels sont les 12 nerfs crâniens ?",
+          "en": "[Head and neck — nerfs_craniens] Translate to English: Quels sont les 12 nerfs crâniens ?"
+        },
+        "back": {
+          "fr": "I Olfactif, II Optique, III Oculo-moteur, IV Trochléaire, V Trijumeau, VI Abducens, VII Facial, VIII Vestibulo-cochléaire, IX Glosso-pharyngien, X Vague, XI Accessoire, XII Hypoglosse.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "I et II sont des expansions cérébrales. III, IV, VI commandent les muscles oculomoteurs. V est sensitif de la face. VII est moteur des muscles peauciers. X est le parasympathique thoracique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "nerfs craniens"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0546",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "nerfs_craniens",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Nerfs crâniens — 12 paires, fonctions] Quels sont les 12 nerfs crâniens ?",
+          "en": "[Head and neck — nerfs_craniens] Translate to English: Quels sont les 12 nerfs crâniens ?"
+        },
+        "back": {
+          "fr": "I Olfactif, II Optique, III Oculo-moteur, IV Trochléaire, V Trijumeau, VI Abducens, VII Facial, VIII Vestibulo-cochléaire, IX Glosso-pharyngien, X Vague, XI Accessoire, XII Hypoglosse.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "I et II sont des expansions cérébrales. III, IV, VI commandent les muscles oculomoteurs. V est sensitif de la face. VII est moteur des muscles peauciers. X est le parasympathique thoracique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "nerfs craniens"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0547",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "nerfs_craniens",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Nerfs crâniens — 12 paires, fonctions] Quels sont les 12 nerfs crâniens ?",
+          "en": "[Head and neck — nerfs_craniens] Translate to English: Quels sont les 12 nerfs crâniens ?"
+        },
+        "back": {
+          "fr": "I Olfactif, II Optique, III Oculo-moteur, IV Trochléaire, V Trijumeau, VI Abducens, VII Facial, VIII Vestibulo-cochléaire, IX Glosso-pharyngien, X Vague, XI Accessoire, XII Hypoglosse.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "I et II sont des expansions cérébrales. III, IV, VI commandent les muscles oculomoteurs. V est sensitif de la face. VII est moteur des muscles peauciers. X est le parasympathique thoracique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "nerfs craniens"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0548",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "nerfs_craniens",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Nerfs crâniens — 12 paires, fonctions] Quels sont les 12 nerfs crâniens ?",
+          "en": "[Head and neck — nerfs_craniens] Translate to English: Quels sont les 12 nerfs crâniens ?"
+        },
+        "back": {
+          "fr": "I Olfactif, II Optique, III Oculo-moteur, IV Trochléaire, V Trijumeau, VI Abducens, VII Facial, VIII Vestibulo-cochléaire, IX Glosso-pharyngien, X Vague, XI Accessoire, XII Hypoglosse.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "I et II sont des expansions cérébrales. III, IV, VI commandent les muscles oculomoteurs. V est sensitif de la face. VII est moteur des muscles peauciers. X est le parasympathique thoracique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "nerfs craniens"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0549",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "nerfs_craniens",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Nerfs crâniens — 12 paires, fonctions] Quels sont les 12 nerfs crâniens ?",
+          "en": "[Head and neck — nerfs_craniens] Translate to English: Quels sont les 12 nerfs crâniens ?"
+        },
+        "back": {
+          "fr": "I Olfactif, II Optique, III Oculo-moteur, IV Trochléaire, V Trijumeau, VI Abducens, VII Facial, VIII Vestibulo-cochléaire, IX Glosso-pharyngien, X Vague, XI Accessoire, XII Hypoglosse.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "I et II sont des expansions cérébrales. III, IV, VI commandent les muscles oculomoteurs. V est sensitif de la face. VII est moteur des muscles peauciers. X est le parasympathique thoracique.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "nerfs craniens"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0550",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "vaisseaux_cou",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Vaisseaux du cou — carotides, jugulaires] Quelles sont les branches de l'artère carotide externe ?",
+          "en": "[Head and neck — vaisseaux_cou] Translate to English: Quelles sont les branches de l'artère carotide externe ?"
+        },
+        "back": {
+          "fr": "Thyroïdienne supérieure, linguale, faciale, pharyngienne ascendante, occipitale, auriculaire postérieure, maxillaire, temporale superficielle.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'artère carotide externe vascularise la face et le cuir chevelu. L'artère carotide interne pénètre dans le crâne par le canal carotidien et vascularise le cerveau.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "vaisseaux cou"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0551",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "vaisseaux_cou",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Vaisseaux du cou — carotides, jugulaires] Quelles sont les branches de l'artère carotide externe ?",
+          "en": "[Head and neck — vaisseaux_cou] Translate to English: Quelles sont les branches de l'artère carotide externe ?"
+        },
+        "back": {
+          "fr": "Thyroïdienne supérieure, linguale, faciale, pharyngienne ascendante, occipitale, auriculaire postérieure, maxillaire, temporale superficielle.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'artère carotide externe vascularise la face et le cuir chevelu. L'artère carotide interne pénètre dans le crâne par le canal carotidien et vascularise le cerveau.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "vaisseaux cou"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0552",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "vaisseaux_cou",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Vaisseaux du cou — carotides, jugulaires] Quelles sont les branches de l'artère carotide externe ?",
+          "en": "[Head and neck — vaisseaux_cou] Translate to English: Quelles sont les branches de l'artère carotide externe ?"
+        },
+        "back": {
+          "fr": "Thyroïdienne supérieure, linguale, faciale, pharyngienne ascendante, occipitale, auriculaire postérieure, maxillaire, temporale superficielle.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'artère carotide externe vascularise la face et le cuir chevelu. L'artère carotide interne pénètre dans le crâne par le canal carotidien et vascularise le cerveau.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "vaisseaux cou"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0553",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "vaisseaux_cou",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Vaisseaux du cou — carotides, jugulaires] Quelles sont les branches de l'artère carotide externe ?",
+          "en": "[Head and neck — vaisseaux_cou] Translate to English: Quelles sont les branches de l'artère carotide externe ?"
+        },
+        "back": {
+          "fr": "Thyroïdienne supérieure, linguale, faciale, pharyngienne ascendante, occipitale, auriculaire postérieure, maxillaire, temporale superficielle.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'artère carotide externe vascularise la face et le cuir chevelu. L'artère carotide interne pénètre dans le crâne par le canal carotidien et vascularise le cerveau.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "vaisseaux cou"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0554",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "vaisseaux_cou",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Vaisseaux du cou — carotides, jugulaires] Quelles sont les branches de l'artère carotide externe ?",
+          "en": "[Head and neck — vaisseaux_cou] Translate to English: Quelles sont les branches de l'artère carotide externe ?"
+        },
+        "back": {
+          "fr": "Thyroïdienne supérieure, linguale, faciale, pharyngienne ascendante, occipitale, auriculaire postérieure, maxillaire, temporale superficielle.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'artère carotide externe vascularise la face et le cuir chevelu. L'artère carotide interne pénètre dans le crâne par le canal carotidien et vascularise le cerveau.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "vaisseaux cou"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0555",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "vaisseaux_cou",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Vaisseaux du cou — carotides, jugulaires] Quelles sont les branches de l'artère carotide externe ?",
+          "en": "[Head and neck — vaisseaux_cou] Translate to English: Quelles sont les branches de l'artère carotide externe ?"
+        },
+        "back": {
+          "fr": "Thyroïdienne supérieure, linguale, faciale, pharyngienne ascendante, occipitale, auriculaire postérieure, maxillaire, temporale superficielle.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'artère carotide externe vascularise la face et le cuir chevelu. L'artère carotide interne pénètre dans le crâne par le canal carotidien et vascularise le cerveau.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "vaisseaux cou"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0556",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "vaisseaux_cou",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Vaisseaux du cou — carotides, jugulaires] Quelles sont les branches de l'artère carotide externe ?",
+          "en": "[Head and neck — vaisseaux_cou] Translate to English: Quelles sont les branches de l'artère carotide externe ?"
+        },
+        "back": {
+          "fr": "Thyroïdienne supérieure, linguale, faciale, pharyngienne ascendante, occipitale, auriculaire postérieure, maxillaire, temporale superficielle.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'artère carotide externe vascularise la face et le cuir chevelu. L'artère carotide interne pénètre dans le crâne par le canal carotidien et vascularise le cerveau.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "vaisseaux cou"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0557",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "vaisseaux_cou",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Vaisseaux du cou — carotides, jugulaires] Quelles sont les branches de l'artère carotide externe ?",
+          "en": "[Head and neck — vaisseaux_cou] Translate to English: Quelles sont les branches de l'artère carotide externe ?"
+        },
+        "back": {
+          "fr": "Thyroïdienne supérieure, linguale, faciale, pharyngienne ascendante, occipitale, auriculaire postérieure, maxillaire, temporale superficielle.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'artère carotide externe vascularise la face et le cuir chevelu. L'artère carotide interne pénètre dans le crâne par le canal carotidien et vascularise le cerveau.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "vaisseaux cou"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0558",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "vaisseaux_cou",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Vaisseaux du cou — carotides, jugulaires] Quelles sont les branches de l'artère carotide externe ?",
+          "en": "[Head and neck — vaisseaux_cou] Translate to English: Quelles sont les branches de l'artère carotide externe ?"
+        },
+        "back": {
+          "fr": "Thyroïdienne supérieure, linguale, faciale, pharyngienne ascendante, occipitale, auriculaire postérieure, maxillaire, temporale superficielle.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'artère carotide externe vascularise la face et le cuir chevelu. L'artère carotide interne pénètre dans le crâne par le canal carotidien et vascularise le cerveau.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "vaisseaux cou"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0559",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "vaisseaux_cou",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Vaisseaux du cou — carotides, jugulaires] Quelles sont les branches de l'artère carotide externe ?",
+          "en": "[Head and neck — vaisseaux_cou] Translate to English: Quelles sont les branches de l'artère carotide externe ?"
+        },
+        "back": {
+          "fr": "Thyroïdienne supérieure, linguale, faciale, pharyngienne ascendante, occipitale, auriculaire postérieure, maxillaire, temporale superficielle.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'artère carotide externe vascularise la face et le cuir chevelu. L'artère carotide interne pénètre dans le crâne par le canal carotidien et vascularise le cerveau.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "vaisseaux cou"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0560",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "vaisseaux_cou",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Vaisseaux du cou — carotides, jugulaires] Quelles sont les branches de l'artère carotide externe ?",
+          "en": "[Head and neck — vaisseaux_cou] Translate to English: Quelles sont les branches de l'artère carotide externe ?"
+        },
+        "back": {
+          "fr": "Thyroïdienne supérieure, linguale, faciale, pharyngienne ascendante, occipitale, auriculaire postérieure, maxillaire, temporale superficielle.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'artère carotide externe vascularise la face et le cuir chevelu. L'artère carotide interne pénètre dans le crâne par le canal carotidien et vascularise le cerveau.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "vaisseaux cou"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0561",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "vaisseaux_cou",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Vaisseaux du cou — carotides, jugulaires] Quelles sont les branches de l'artère carotide externe ?",
+          "en": "[Head and neck — vaisseaux_cou] Translate to English: Quelles sont les branches de l'artère carotide externe ?"
+        },
+        "back": {
+          "fr": "Thyroïdienne supérieure, linguale, faciale, pharyngienne ascendante, occipitale, auriculaire postérieure, maxillaire, temporale superficielle.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'artère carotide externe vascularise la face et le cuir chevelu. L'artère carotide interne pénètre dans le crâne par le canal carotidien et vascularise le cerveau.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "vaisseaux cou"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0562",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "vaisseaux_cou",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Vaisseaux du cou — carotides, jugulaires] Quelles sont les branches de l'artère carotide externe ?",
+          "en": "[Head and neck — vaisseaux_cou] Translate to English: Quelles sont les branches de l'artère carotide externe ?"
+        },
+        "back": {
+          "fr": "Thyroïdienne supérieure, linguale, faciale, pharyngienne ascendante, occipitale, auriculaire postérieure, maxillaire, temporale superficielle.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'artère carotide externe vascularise la face et le cuir chevelu. L'artère carotide interne pénètre dans le crâne par le canal carotidien et vascularise le cerveau.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "vaisseaux cou"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0563",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "vaisseaux_cou",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Vaisseaux du cou — carotides, jugulaires] Quelles sont les branches de l'artère carotide externe ?",
+          "en": "[Head and neck — vaisseaux_cou] Translate to English: Quelles sont les branches de l'artère carotide externe ?"
+        },
+        "back": {
+          "fr": "Thyroïdienne supérieure, linguale, faciale, pharyngienne ascendante, occipitale, auriculaire postérieure, maxillaire, temporale superficielle.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'artère carotide externe vascularise la face et le cuir chevelu. L'artère carotide interne pénètre dans le crâne par le canal carotidien et vascularise le cerveau.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "vaisseaux cou"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0564",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "vaisseaux_cou",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Vaisseaux du cou — carotides, jugulaires] Quelles sont les branches de l'artère carotide externe ?",
+          "en": "[Head and neck — vaisseaux_cou] Translate to English: Quelles sont les branches de l'artère carotide externe ?"
+        },
+        "back": {
+          "fr": "Thyroïdienne supérieure, linguale, faciale, pharyngienne ascendante, occipitale, auriculaire postérieure, maxillaire, temporale superficielle.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'artère carotide externe vascularise la face et le cuir chevelu. L'artère carotide interne pénètre dans le crâne par le canal carotidien et vascularise le cerveau.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "vaisseaux cou"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0565",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "vaisseaux_cou",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Vaisseaux du cou — carotides, jugulaires] Quelles sont les branches de l'artère carotide externe ?",
+          "en": "[Head and neck — vaisseaux_cou] Translate to English: Quelles sont les branches de l'artère carotide externe ?"
+        },
+        "back": {
+          "fr": "Thyroïdienne supérieure, linguale, faciale, pharyngienne ascendante, occipitale, auriculaire postérieure, maxillaire, temporale superficielle.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'artère carotide externe vascularise la face et le cuir chevelu. L'artère carotide interne pénètre dans le crâne par le canal carotidien et vascularise le cerveau.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "vaisseaux cou"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0566",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "vaisseaux_cou",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Vaisseaux du cou — carotides, jugulaires] Quelles sont les branches de l'artère carotide externe ?",
+          "en": "[Head and neck — vaisseaux_cou] Translate to English: Quelles sont les branches de l'artère carotide externe ?"
+        },
+        "back": {
+          "fr": "Thyroïdienne supérieure, linguale, faciale, pharyngienne ascendante, occipitale, auriculaire postérieure, maxillaire, temporale superficielle.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'artère carotide externe vascularise la face et le cuir chevelu. L'artère carotide interne pénètre dans le crâne par le canal carotidien et vascularise le cerveau.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "vaisseaux cou"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0567",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "cavite_buccale",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Cavité buccale — langue, dents, palais] Combien de dents chez l'adulte ?",
+          "en": "[Head and neck — cavite_buccale] Translate to English: Combien de dents chez l'adulte ?"
+        },
+        "back": {
+          "fr": "32 dents : 8 incisives, 4 canines, 8 prémolaires, 12 molaires (incluant les 4 dents de sagesse).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La denture temporaire (enfant) compte 20 dents. La première molaire permanente apparaît vers 6 ans. La dent de sagesse sort entre 18 et 25 ans (parfois incluse).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "cavite buccale"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0568",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "cavite_buccale",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Cavité buccale — langue, dents, palais] Combien de dents chez l'adulte ?",
+          "en": "[Head and neck — cavite_buccale] Translate to English: Combien de dents chez l'adulte ?"
+        },
+        "back": {
+          "fr": "32 dents : 8 incisives, 4 canines, 8 prémolaires, 12 molaires (incluant les 4 dents de sagesse).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La denture temporaire (enfant) compte 20 dents. La première molaire permanente apparaît vers 6 ans. La dent de sagesse sort entre 18 et 25 ans (parfois incluse).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "cavite buccale"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0569",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "cavite_buccale",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Cavité buccale — langue, dents, palais] Combien de dents chez l'adulte ?",
+          "en": "[Head and neck — cavite_buccale] Translate to English: Combien de dents chez l'adulte ?"
+        },
+        "back": {
+          "fr": "32 dents : 8 incisives, 4 canines, 8 prémolaires, 12 molaires (incluant les 4 dents de sagesse).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La denture temporaire (enfant) compte 20 dents. La première molaire permanente apparaît vers 6 ans. La dent de sagesse sort entre 18 et 25 ans (parfois incluse).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "cavite buccale"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0570",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "cavite_buccale",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Cavité buccale — langue, dents, palais] Combien de dents chez l'adulte ?",
+          "en": "[Head and neck — cavite_buccale] Translate to English: Combien de dents chez l'adulte ?"
+        },
+        "back": {
+          "fr": "32 dents : 8 incisives, 4 canines, 8 prémolaires, 12 molaires (incluant les 4 dents de sagesse).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La denture temporaire (enfant) compte 20 dents. La première molaire permanente apparaît vers 6 ans. La dent de sagesse sort entre 18 et 25 ans (parfois incluse).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "cavite buccale"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0571",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "cavite_buccale",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Cavité buccale — langue, dents, palais] Combien de dents chez l'adulte ?",
+          "en": "[Head and neck — cavite_buccale] Translate to English: Combien de dents chez l'adulte ?"
+        },
+        "back": {
+          "fr": "32 dents : 8 incisives, 4 canines, 8 prémolaires, 12 molaires (incluant les 4 dents de sagesse).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La denture temporaire (enfant) compte 20 dents. La première molaire permanente apparaît vers 6 ans. La dent de sagesse sort entre 18 et 25 ans (parfois incluse).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "cavite buccale"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0572",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "cavite_buccale",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Cavité buccale — langue, dents, palais] Combien de dents chez l'adulte ?",
+          "en": "[Head and neck — cavite_buccale] Translate to English: Combien de dents chez l'adulte ?"
+        },
+        "back": {
+          "fr": "32 dents : 8 incisives, 4 canines, 8 prémolaires, 12 molaires (incluant les 4 dents de sagesse).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La denture temporaire (enfant) compte 20 dents. La première molaire permanente apparaît vers 6 ans. La dent de sagesse sort entre 18 et 25 ans (parfois incluse).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "cavite buccale"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0573",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "cavite_buccale",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Cavité buccale — langue, dents, palais] Combien de dents chez l'adulte ?",
+          "en": "[Head and neck — cavite_buccale] Translate to English: Combien de dents chez l'adulte ?"
+        },
+        "back": {
+          "fr": "32 dents : 8 incisives, 4 canines, 8 prémolaires, 12 molaires (incluant les 4 dents de sagesse).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La denture temporaire (enfant) compte 20 dents. La première molaire permanente apparaît vers 6 ans. La dent de sagesse sort entre 18 et 25 ans (parfois incluse).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "cavite buccale"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0574",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "cavite_buccale",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Cavité buccale — langue, dents, palais] Combien de dents chez l'adulte ?",
+          "en": "[Head and neck — cavite_buccale] Translate to English: Combien de dents chez l'adulte ?"
+        },
+        "back": {
+          "fr": "32 dents : 8 incisives, 4 canines, 8 prémolaires, 12 molaires (incluant les 4 dents de sagesse).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La denture temporaire (enfant) compte 20 dents. La première molaire permanente apparaît vers 6 ans. La dent de sagesse sort entre 18 et 25 ans (parfois incluse).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "cavite buccale"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0575",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "cavite_buccale",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Cavité buccale — langue, dents, palais] Combien de dents chez l'adulte ?",
+          "en": "[Head and neck — cavite_buccale] Translate to English: Combien de dents chez l'adulte ?"
+        },
+        "back": {
+          "fr": "32 dents : 8 incisives, 4 canines, 8 prémolaires, 12 molaires (incluant les 4 dents de sagesse).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La denture temporaire (enfant) compte 20 dents. La première molaire permanente apparaît vers 6 ans. La dent de sagesse sort entre 18 et 25 ans (parfois incluse).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "cavite buccale"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0576",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "cavite_buccale",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Cavité buccale — langue, dents, palais] Combien de dents chez l'adulte ?",
+          "en": "[Head and neck — cavite_buccale] Translate to English: Combien de dents chez l'adulte ?"
+        },
+        "back": {
+          "fr": "32 dents : 8 incisives, 4 canines, 8 prémolaires, 12 molaires (incluant les 4 dents de sagesse).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La denture temporaire (enfant) compte 20 dents. La première molaire permanente apparaît vers 6 ans. La dent de sagesse sort entre 18 et 25 ans (parfois incluse).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "cavite buccale"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0577",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "cavite_buccale",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Cavité buccale — langue, dents, palais] Combien de dents chez l'adulte ?",
+          "en": "[Head and neck — cavite_buccale] Translate to English: Combien de dents chez l'adulte ?"
+        },
+        "back": {
+          "fr": "32 dents : 8 incisives, 4 canines, 8 prémolaires, 12 molaires (incluant les 4 dents de sagesse).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La denture temporaire (enfant) compte 20 dents. La première molaire permanente apparaît vers 6 ans. La dent de sagesse sort entre 18 et 25 ans (parfois incluse).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "cavite buccale"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0578",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "cavite_buccale",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Cavité buccale — langue, dents, palais] Combien de dents chez l'adulte ?",
+          "en": "[Head and neck — cavite_buccale] Translate to English: Combien de dents chez l'adulte ?"
+        },
+        "back": {
+          "fr": "32 dents : 8 incisives, 4 canines, 8 prémolaires, 12 molaires (incluant les 4 dents de sagesse).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La denture temporaire (enfant) compte 20 dents. La première molaire permanente apparaît vers 6 ans. La dent de sagesse sort entre 18 et 25 ans (parfois incluse).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "cavite buccale"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0579",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "cavite_buccale",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Cavité buccale — langue, dents, palais] Combien de dents chez l'adulte ?",
+          "en": "[Head and neck — cavite_buccale] Translate to English: Combien de dents chez l'adulte ?"
+        },
+        "back": {
+          "fr": "32 dents : 8 incisives, 4 canines, 8 prémolaires, 12 molaires (incluant les 4 dents de sagesse).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La denture temporaire (enfant) compte 20 dents. La première molaire permanente apparaît vers 6 ans. La dent de sagesse sort entre 18 et 25 ans (parfois incluse).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "cavite buccale"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0580",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "cavite_buccale",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Cavité buccale — langue, dents, palais] Combien de dents chez l'adulte ?",
+          "en": "[Head and neck — cavite_buccale] Translate to English: Combien de dents chez l'adulte ?"
+        },
+        "back": {
+          "fr": "32 dents : 8 incisives, 4 canines, 8 prémolaires, 12 molaires (incluant les 4 dents de sagesse).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La denture temporaire (enfant) compte 20 dents. La première molaire permanente apparaît vers 6 ans. La dent de sagesse sort entre 18 et 25 ans (parfois incluse).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "cavite buccale"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0581",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "cavite_buccale",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Cavité buccale — langue, dents, palais] Combien de dents chez l'adulte ?",
+          "en": "[Head and neck — cavite_buccale] Translate to English: Combien de dents chez l'adulte ?"
+        },
+        "back": {
+          "fr": "32 dents : 8 incisives, 4 canines, 8 prémolaires, 12 molaires (incluant les 4 dents de sagesse).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La denture temporaire (enfant) compte 20 dents. La première molaire permanente apparaît vers 6 ans. La dent de sagesse sort entre 18 et 25 ans (parfois incluse).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "cavite buccale"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0582",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "cavite_buccale",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Cavité buccale — langue, dents, palais] Combien de dents chez l'adulte ?",
+          "en": "[Head and neck — cavite_buccale] Translate to English: Combien de dents chez l'adulte ?"
+        },
+        "back": {
+          "fr": "32 dents : 8 incisives, 4 canines, 8 prémolaires, 12 molaires (incluant les 4 dents de sagesse).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La denture temporaire (enfant) compte 20 dents. La première molaire permanente apparaît vers 6 ans. La dent de sagesse sort entre 18 et 25 ans (parfois incluse).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "cavite buccale"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0583",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "cavite_buccale",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Cavité buccale — langue, dents, palais] Combien de dents chez l'adulte ?",
+          "en": "[Head and neck — cavite_buccale] Translate to English: Combien de dents chez l'adulte ?"
+        },
+        "back": {
+          "fr": "32 dents : 8 incisives, 4 canines, 8 prémolaires, 12 molaires (incluant les 4 dents de sagesse).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La denture temporaire (enfant) compte 20 dents. La première molaire permanente apparaît vers 6 ans. La dent de sagesse sort entre 18 et 25 ans (parfois incluse).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "cavite buccale"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0584",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — fractures Le Fort, tumeurs parotidiennes] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Head and neck — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0585",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — fractures Le Fort, tumeurs parotidiennes] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Head and neck — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0586",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — fractures Le Fort, tumeurs parotidiennes] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Head and neck — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0587",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — fractures Le Fort, tumeurs parotidiennes] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Head and neck — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0588",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — fractures Le Fort, tumeurs parotidiennes] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Head and neck — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0589",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — fractures Le Fort, tumeurs parotidiennes] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Head and neck — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0590",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — fractures Le Fort, tumeurs parotidiennes] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Head and neck — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0591",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — fractures Le Fort, tumeurs parotidiennes] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Head and neck — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0592",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — fractures Le Fort, tumeurs parotidiennes] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Head and neck — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0593",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — fractures Le Fort, tumeurs parotidiennes] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Head and neck — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0594",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — fractures Le Fort, tumeurs parotidiennes] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Head and neck — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0595",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — fractures Le Fort, tumeurs parotidiennes] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Head and neck — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0596",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — fractures Le Fort, tumeurs parotidiennes] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Head and neck — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0597",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — fractures Le Fort, tumeurs parotidiennes] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Head and neck — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0598",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — fractures Le Fort, tumeurs parotidiennes] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Head and neck — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0599",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — fractures Le Fort, tumeurs parotidiennes] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Head and neck — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_tete_cou_0600",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_tete_cou"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — fractures Le Fort, tumeurs parotidiennes] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Head and neck — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    }
+  ]
+}
