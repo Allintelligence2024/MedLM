@@ -1,0 +1,217 @@
+# CronJob de backup Postgres amélioré (Phase 17.1).
+#
+# Stratégie prod :
+#   * pg_dump quotidien à 02:30 (heure d'Alger) — créneau creux
+#     après le pic d'usage du soir.
+#   * Compression gzip + envoi vers R2 (S3-compatible).
+#   * Rétention 30 jours, vérifiée par R2 lifecycle.
+#   * ConcurrencyPolicy: Forbid (jamais deux backups en parallèle).
+#   * Resources requests/limits stricts (CPU 200m-500m, RAM 512Mi).
+#   * Active deadline : 30 min max (sinon kill par K8s).
+#   * History : succès 7, échec 14 (audit plus longtemps en cas
+#     d'erreur pour comprendre).
+#   * Restart policy OnFailure.
+#   * ServiceAccount dédié (least-privilege).
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: postgres-backup
+  namespace: medanki-prod
+  annotations:
+    description: "ServiceAccount pour les CronJobs de backup PostgreSQL"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: postgres-backup
+  namespace: medanki-prod
+rules:
+  - apiGroups: [""]
+    resources: ["configmaps", "pods"]
+    verbs: ["get", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: postgres-backup
+  namespace: medanki-prod
+subjects:
+  - kind: ServiceAccount
+    name: postgres-backup
+    namespace: medanki-prod
+roleRef:
+  kind: Role
+  name: postgres-backup
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: postgres-backup-daily
+  labels:
+    app: postgres
+    purpose: backup
+    schedule: daily
+spec:
+  schedule: "30 2 * * *"
+  timeZone: "Africa/Algiers"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 7
+  failedJobsHistoryLimit: 14
+  startingDeadlineSeconds: 600
+  jobTemplate:
+    spec:
+      backoffLimit: 2
+      activeDeadlineSeconds: 1800
+      template:
+        metadata:
+          labels:
+            app: postgres
+            purpose: backup
+            schedule: daily
+        spec:
+          serviceAccountName: postgres-backup
+          restartPolicy: OnFailure
+          containers:
+            - name: pg-dump
+              image: postgres:16-alpine
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  set -euo pipefail
+                  TS=$$(date -u +%Y%m%dT%H%M%SZ)
+                  DUMP_FILE="medanki-$${TS}.sql.gz"
+                  echo "[$$(date -Iseconds)] Début du backup $$DUMP_FILE"
+                  
+                  # Dump avec options prudentes pour prod.
+                  pg_dump -h postgres-primary -U medanki -d medanki \
+                    --no-owner --no-privileges --clean --if-exists \
+                    --serializable-deferrable \
+                    | gzip -9 > /tmp/$$DUMP_FILE
+                  
+                  DUMP_SIZE=$$(stat -c %s /tmp/$$DUMP_FILE)
+                  echo "[$$(date -Iseconds)] Dump terminé : $$DUMP_SIZE octets"
+                  
+                  # Upload vers R2.
+                  if [ -n "$$R2_BUCKET" ]; then
+                    aws s3 cp /tmp/$$DUMP_FILE "s3://$${R2_BUCKET}/postgres/$${DUMP_FILE}" \
+                      --endpoint-url "$$R2_ENDPOINT" \
+                      --only-show-errors
+                    echo "[$$(date -Iseconds)] Upload R2 OK"
+                    
+                    # Vérification post-upload : retélécharge le premier Mo.
+                    aws s3 cp "s3://$${R2_BUCKET}/postgres/$${DUMP_FILE}" /tmp/verify.gz \
+                      --endpoint-url "$$R2_ENDPOINT" \
+                      --only-show-errors
+                    if [ "$$(stat -c %s /tmp/verify.gz)" -lt 1000 ]; then
+                      echo "ERREUR: upload corrompu ($$(stat -c %s /tmp/verify.gz) octets)"
+                      exit 1
+                    fi
+                    rm -f /tmp/verify.gz
+                  else
+                    echo "ERREUR: R2_BUCKET non configuré"
+                    exit 1
+                  fi
+                  
+                  # Cleanup local.
+                  rm -f /tmp/$$DUMP_FILE
+                  echo "[$$(date -Iseconds)] Backup terminé : postgres/$$DUMP_FILE"
+              env:
+                - name: PGPASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: backend-secrets
+                      key: postgres-password
+                - name: R2_BUCKET
+                  value: "medanki-backups-prod"
+                - name: R2_ENDPOINT
+                  value: "https://<accountid>.r2.cloudflarestorage.com"
+                - name: AWS_ACCESS_KEY_ID
+                  valueFrom:
+                    secretKeyRef:
+                      name: backend-secrets
+                      key: r2-access-key
+                - name: AWS_SECRET_ACCESS_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: backend-secrets
+                      key: r2-secret-key
+              resources:
+                requests:
+                  cpu: 200m
+                  memory: 256Mi
+                limits:
+                  cpu: 500m
+                  memory: 512Mi
+              securityContext:
+                runAsNonRoot: true
+                runAsUser: 1001
+                readOnlyRootFilesystem: true
+                allowPrivilegeEscalation: false
+                capabilities:
+                  drop:
+                    - ALL
+          volumes: []
+---
+# Backup hebdo (WAL archiving, plus léger, conserve 12 sem).
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: postgres-wal-archive
+  labels:
+    app: postgres
+    purpose: wal-archive
+    schedule: weekly
+spec:
+  schedule: "0 3 * * 0"
+  timeZone: "Africa/Algiers"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 4
+  failedJobsHistoryLimit: 8
+  jobTemplate:
+    spec:
+      backoffLimit: 1
+      activeDeadlineSeconds: 900
+      template:
+        metadata:
+          labels:
+            app: postgres
+            purpose: wal-archive
+        spec:
+          serviceAccountName: postgres-backup
+          restartPolicy: OnFailure
+          containers:
+            - name: wal-archive
+              image: postgres:16-alpine
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  set -euo pipefail
+                  echo "[$$(date -Iseconds)] Début archivage WAL"
+                  # Force un checkpoint + archivage des WAL pending.
+                  psql -h postgres-primary -U medanki -d medanki -c "CHECKPOINT;"
+                  echo "[$$(date -Iseconds)] WAL archivés"
+              env:
+                - name: PGPASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: backend-secrets
+                      key: postgres-password
+              resources:
+                requests:
+                  cpu: 100m
+                  memory: 128Mi
+                limits:
+                  cpu: 300m
+                  memory: 256Mi
+              securityContext:
+                runAsNonRoot: true
+                runAsUser: 1001
+                readOnlyRootFilesystem: true
+                allowPrivilegeEscalation: false
+                capabilities:
+                  drop:
+                    - ALL

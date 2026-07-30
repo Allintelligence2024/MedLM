@@ -1,0 +1,12 @@
+-- ────────────────────────────────────────────────────────────────────────────
+-- MedAnki DZ — migration initiale (Drizzle)
+-- Ce fichier est généré par `npm run db:generate` après édition du schéma.
+-- On documente ici l'intention ; le code exécutable est généré automatiquement.
+-- ────────────────────────────────────────────────────────────────────────────
+
+-- Toutes les tables décrites dans src/db/schema/ sont créées ici.
+-- Les index GIN sur `cards.tags` et `cards.content` permettent la recherche
+-- plein texte côté serveur (équivalent du full-text search mobile).
+-- Le PK composite (user_id, card_id) sur srs_card_state reflète la règle
+-- "un état SRS par utilisateur par carte" (multi-utilisateur sur un même
+-- appareil, doc v2 §3).

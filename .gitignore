@@ -16,3 +16,39 @@
 local.properties
 .env
 debug.keystore
+
+# Mobile
+mobile/.dart_tool/
+mobile/.packages
+mobile/build/
+mobile/.flutter-plugins
+mobile/.flutter-plugins-dependencies
+mobile/ios/Pods/
+mobile/android/.gradle/
+mobile/android/app/build/
+
+# Backend
+backend/node_modules/
+backend/dist/
+backend/coverage/
+backend/.vitest-cache/
+backend/*.tsbuildinfo
+backend/keys/
+
+# CMS
+cms/node_modules/
+cms/.next/
+cms/out/
+cms/.tsbuildinfo
+
+# Tools (Python)
+tools/__pycache__/
+tools/*.pyc
+# Le node_modules de tools/ est généré par la CI
+# (npm install ts-fsrs). On le commit PAS pour éviter de
+# polluer le repo.
+tools/node_modules/
+
+# Worktrees
+/worktrees/
+tools/__pycache__/

@@ -1,0 +1,17 @@
+# Note : pour Kustomize, on peut inclure un PVC ici, mais le
+# volume principal est défini dans le StatefulSet. Ce PVC
+# additionnel est pour le backup (cf. CronJob dans overlays).
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-backup
+  labels:
+    app: postgres
+    purpose: backup
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+  storageClassName: standard

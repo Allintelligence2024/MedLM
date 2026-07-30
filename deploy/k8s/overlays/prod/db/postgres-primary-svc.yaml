@@ -1,0 +1,21 @@
+# Phase 17.1 — service headless pour le primary PostgreSQL.
+# Permet à pg_dump (backup) et à des outils d'admin de se connecter
+# via DNS sans passer par le service applicatif.
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-primary
+  namespace: medanki-prod
+  labels:
+    app: postgres
+    role: primary
+spec:
+  type: ClusterIP
+  selector:
+    app: postgres
+    role: primary
+  ports:
+    - port: 5432
+      targetPort: 5432
+      protocol: TCP
+      name: pg

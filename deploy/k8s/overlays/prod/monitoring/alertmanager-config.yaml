@@ -1,0 +1,101 @@
+# Phase 17.1 — ConfigMap pour Alertmanager.
+# Définit les règles d'alerte critiques pour la prod :
+#   * 5xx rate > 1% pendant 5 min → page oncall
+#   * P95 latency > 500ms pendant 10 min → warning
+#   * DB connections > 80% du pool → warning
+#   * Disk usage > 85% → warning
+#   * Sentry error rate > 10/min → page oncall
+#
+# Note : on stocke la config ici, mais c'est Alertmanager Operator
+# qui la consomme. À déployer séparément.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: alertmanager-rules
+  namespace: medanki-prod
+  labels:
+    app: alertmanager
+data:
+  rules.yml: |
+    groups:
+      - name: medanki-backend
+        interval: 30s
+        rules:
+          - alert: HighErrorRate
+            expr: |
+              (
+                sum(rate(medanki_http_errors_total[5m]))
+                /
+                sum(rate(medanki_http_requests_total[5m]))
+              ) > 0.01
+            for: 5m
+            labels:
+              severity: critical
+              team: backend
+            annotations:
+              summary: "Taux d'erreur 5xx > 1% (5 min)"
+              description: "Le backend retourne > 1% d'erreurs 5xx depuis 5 min. Page on-call."
+          
+          - alert: HighP95Latency
+            expr: medanki_http_latency_p95_ms > 500
+            for: 10m
+            labels:
+              severity: warning
+              team: backend
+            annotations:
+              summary: "P95 latency > 500ms (10 min)"
+              description: "P95 > 500ms — objectif v2 §11.3 non atteint."
+          
+          - alert: SentryErrorSpike
+            expr: rate(sentry_events_total[5m]) > 0.166
+            for: 5m
+            labels:
+              severity: critical
+              team: backend
+            annotations:
+              summary: "Pic d'erreurs Sentry"
+              description: "Plus de 10 events/min dans Sentry. Probable régression."
+          
+          - alert: HighMemoryUsage
+            expr: |
+              (
+                container_memory_working_set_bytes{pod=~"backend-.*"}
+                /
+                container_spec_memory_limit_bytes{pod=~"backend-.*"}
+              ) > 0.85
+            for: 10m
+            labels:
+              severity: warning
+              team: backend
+            annotations:
+              summary: "Backend proche de la limite mémoire"
+          
+          - alert: HighCPUUsage
+            expr: |
+              rate(container_cpu_usage_seconds_total{pod=~"backend-.*"}[5m]) > 0.8
+            for: 10m
+            labels:
+              severity: warning
+              team: backend
+            annotations:
+              summary: "CPU backend > 80%"
+          
+          - alert: PostgresConnectionsHigh
+            expr: pg_stat_activity_count > 80
+            for: 5m
+            labels:
+              severity: warning
+              team: dba
+            annotations:
+              summary: "Connexions PostgreSQL > 80"
+              description: "Pool proche de la saturation. Vérifier les fuites de connexion."
+          
+          - alert: PostgresReplicaLag
+            expr: pg_replication_lag_seconds > 30
+            for: 5m
+            labels:
+              severity: warning
+              team: dba
+            annotations:
+              summary: "Lag replica > 30s"
+              description: "Les read replicas sont en retard. Investiguer."

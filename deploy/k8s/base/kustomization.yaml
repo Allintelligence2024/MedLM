@@ -1,0 +1,27 @@
+# Kustomize base pour MedAnki DZ (Phase 12 bis).
+#
+# Cette base est partagée entre staging et prod. Les overlays
+# appliquent les particularités (taille des pods, secrets, etc.).
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: medanki
+
+resources:
+  - namespace.yaml
+  - backend-deployment.yaml
+  - backend-service.yaml
+  - backend-ingress.yaml
+  - cms-deployment.yaml
+  - cms-service.yaml
+  - postgres-statefulset.yaml
+  - postgres-service.yaml
+  - postgres-pvc.yaml
+  - redis-deployment.yaml
+  - redis-service.yaml
+  - configmap.yaml
+  - hpa.yaml
+
+commonLabels:
+  app.kubernetes.io/part-of: medanki-dz

@@ -1,0 +1,4216 @@
+{
+  "deck_id": "deck_anat_membre_inf",
+  "module_id": "anatomie",
+  "programme": "medecine_dz",
+  "study_year": 1,
+  "version": 1,
+  "name_fr": "Membre inférieur",
+  "name_en": "Lower limb",
+  "description_fr": "Ostéologie, myologie, vascularisation et innervation du membre inférieur.",
+  "description_en": "Osteology, myology, vascularization and innervation of the lower limb.",
+  "is_premium": false,
+  "is_demo": false,
+  "license": "medankidz_internal_v1",
+  "cards": [
+    {
+      "id": "deck_anat_membre_inf_0121",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "ostéologie",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Ostéologie — fémur, tibia, fibula, os du pied] Quels os forment la ceinture scapulaire ?",
+          "en": "[Lower limb — ostéologie] Translate to English: Quels os forment la ceinture scapulaire ?"
+        },
+        "back": {
+          "fr": "La clavicule et la scapula (omoplate).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La scapula est un os plat triangulaire situé en arrière du gril costal. La clavicule est un os long en S italique, seul os qui réalise une articulation avec le tronc (sterno-claviculaire).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "ostéologie"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0122",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "ostéologie",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Ostéologie — fémur, tibia, fibula, os du pied] Combien d'os compte la main ?",
+          "en": "[Lower limb — ostéologie] Translate to English: Combien d'os compte la main ?"
+        },
+        "back": {
+          "fr": "27 os : 8 os du carpe, 5 métacarpiens, 14 phalanges.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le carpe est organisé en deux rangées : proximale (scaphoïde, lunatum, triquétrum, pisiforme) et distale (trapèze, trapézoïde, capitatum, unciforme).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "ostéologie"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0123",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "ostéologie",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Ostéologie — fémur, tibia, fibula, os du pied] Quels os forment la ceinture scapulaire ?",
+          "en": "[Lower limb — ostéologie] Translate to English: Quels os forment la ceinture scapulaire ?"
+        },
+        "back": {
+          "fr": "La clavicule et la scapula (omoplate).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La scapula est un os plat triangulaire situé en arrière du gril costal. La clavicule est un os long en S italique, seul os qui réalise une articulation avec le tronc (sterno-claviculaire).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "ostéologie"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0124",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "ostéologie",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Ostéologie — fémur, tibia, fibula, os du pied] Combien d'os compte la main ?",
+          "en": "[Lower limb — ostéologie] Translate to English: Combien d'os compte la main ?"
+        },
+        "back": {
+          "fr": "27 os : 8 os du carpe, 5 métacarpiens, 14 phalanges.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le carpe est organisé en deux rangées : proximale (scaphoïde, lunatum, triquétrum, pisiforme) et distale (trapèze, trapézoïde, capitatum, unciforme).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "ostéologie"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0125",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "ostéologie",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Ostéologie — fémur, tibia, fibula, os du pied] Quels os forment la ceinture scapulaire ?",
+          "en": "[Lower limb — ostéologie] Translate to English: Quels os forment la ceinture scapulaire ?"
+        },
+        "back": {
+          "fr": "La clavicule et la scapula (omoplate).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La scapula est un os plat triangulaire situé en arrière du gril costal. La clavicule est un os long en S italique, seul os qui réalise une articulation avec le tronc (sterno-claviculaire).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "ostéologie"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0126",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "ostéologie",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Ostéologie — fémur, tibia, fibula, os du pied] Combien d'os compte la main ?",
+          "en": "[Lower limb — ostéologie] Translate to English: Combien d'os compte la main ?"
+        },
+        "back": {
+          "fr": "27 os : 8 os du carpe, 5 métacarpiens, 14 phalanges.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le carpe est organisé en deux rangées : proximale (scaphoïde, lunatum, triquétrum, pisiforme) et distale (trapèze, trapézoïde, capitatum, unciforme).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "ostéologie"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0127",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "ostéologie",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Ostéologie — fémur, tibia, fibula, os du pied] Quels os forment la ceinture scapulaire ?",
+          "en": "[Lower limb — ostéologie] Translate to English: Quels os forment la ceinture scapulaire ?"
+        },
+        "back": {
+          "fr": "La clavicule et la scapula (omoplate).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La scapula est un os plat triangulaire situé en arrière du gril costal. La clavicule est un os long en S italique, seul os qui réalise une articulation avec le tronc (sterno-claviculaire).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "ostéologie"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0128",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "ostéologie",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Ostéologie — fémur, tibia, fibula, os du pied] Combien d'os compte la main ?",
+          "en": "[Lower limb — ostéologie] Translate to English: Combien d'os compte la main ?"
+        },
+        "back": {
+          "fr": "27 os : 8 os du carpe, 5 métacarpiens, 14 phalanges.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le carpe est organisé en deux rangées : proximale (scaphoïde, lunatum, triquétrum, pisiforme) et distale (trapèze, trapézoïde, capitatum, unciforme).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "ostéologie"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0129",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "ostéologie",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Ostéologie — fémur, tibia, fibula, os du pied] Quels os forment la ceinture scapulaire ?",
+          "en": "[Lower limb — ostéologie] Translate to English: Quels os forment la ceinture scapulaire ?"
+        },
+        "back": {
+          "fr": "La clavicule et la scapula (omoplate).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La scapula est un os plat triangulaire situé en arrière du gril costal. La clavicule est un os long en S italique, seul os qui réalise une articulation avec le tronc (sterno-claviculaire).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "ostéologie"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0130",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "ostéologie",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Ostéologie — fémur, tibia, fibula, os du pied] Combien d'os compte la main ?",
+          "en": "[Lower limb — ostéologie] Translate to English: Combien d'os compte la main ?"
+        },
+        "back": {
+          "fr": "27 os : 8 os du carpe, 5 métacarpiens, 14 phalanges.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le carpe est organisé en deux rangées : proximale (scaphoïde, lunatum, triquétrum, pisiforme) et distale (trapèze, trapézoïde, capitatum, unciforme).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "ostéologie"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0131",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "ostéologie",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Ostéologie — fémur, tibia, fibula, os du pied] Quels os forment la ceinture scapulaire ?",
+          "en": "[Lower limb — ostéologie] Translate to English: Quels os forment la ceinture scapulaire ?"
+        },
+        "back": {
+          "fr": "La clavicule et la scapula (omoplate).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La scapula est un os plat triangulaire situé en arrière du gril costal. La clavicule est un os long en S italique, seul os qui réalise une articulation avec le tronc (sterno-claviculaire).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "ostéologie"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0132",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "ostéologie",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Ostéologie — fémur, tibia, fibula, os du pied] Combien d'os compte la main ?",
+          "en": "[Lower limb — ostéologie] Translate to English: Combien d'os compte la main ?"
+        },
+        "back": {
+          "fr": "27 os : 8 os du carpe, 5 métacarpiens, 14 phalanges.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le carpe est organisé en deux rangées : proximale (scaphoïde, lunatum, triquétrum, pisiforme) et distale (trapèze, trapézoïde, capitatum, unciforme).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "ostéologie"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0133",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "ostéologie",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Ostéologie — fémur, tibia, fibula, os du pied] Quels os forment la ceinture scapulaire ?",
+          "en": "[Lower limb — ostéologie] Translate to English: Quels os forment la ceinture scapulaire ?"
+        },
+        "back": {
+          "fr": "La clavicule et la scapula (omoplate).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La scapula est un os plat triangulaire situé en arrière du gril costal. La clavicule est un os long en S italique, seul os qui réalise une articulation avec le tronc (sterno-claviculaire).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "ostéologie"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0134",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "ostéologie",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Ostéologie — fémur, tibia, fibula, os du pied] Combien d'os compte la main ?",
+          "en": "[Lower limb — ostéologie] Translate to English: Combien d'os compte la main ?"
+        },
+        "back": {
+          "fr": "27 os : 8 os du carpe, 5 métacarpiens, 14 phalanges.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le carpe est organisé en deux rangées : proximale (scaphoïde, lunatum, triquétrum, pisiforme) et distale (trapèze, trapézoïde, capitatum, unciforme).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "ostéologie"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0135",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "ostéologie",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Ostéologie — fémur, tibia, fibula, os du pied] Quels os forment la ceinture scapulaire ?",
+          "en": "[Lower limb — ostéologie] Translate to English: Quels os forment la ceinture scapulaire ?"
+        },
+        "back": {
+          "fr": "La clavicule et la scapula (omoplate).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La scapula est un os plat triangulaire situé en arrière du gril costal. La clavicule est un os long en S italique, seul os qui réalise une articulation avec le tronc (sterno-claviculaire).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "ostéologie"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0136",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "ostéologie",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Ostéologie — fémur, tibia, fibula, os du pied] Combien d'os compte la main ?",
+          "en": "[Lower limb — ostéologie] Translate to English: Combien d'os compte la main ?"
+        },
+        "back": {
+          "fr": "27 os : 8 os du carpe, 5 métacarpiens, 14 phalanges.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le carpe est organisé en deux rangées : proximale (scaphoïde, lunatum, triquétrum, pisiforme) et distale (trapèze, trapézoïde, capitatum, unciforme).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "ostéologie"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0137",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "ostéologie",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Ostéologie — fémur, tibia, fibula, os du pied] Quels os forment la ceinture scapulaire ?",
+          "en": "[Lower limb — ostéologie] Translate to English: Quels os forment la ceinture scapulaire ?"
+        },
+        "back": {
+          "fr": "La clavicule et la scapula (omoplate).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La scapula est un os plat triangulaire situé en arrière du gril costal. La clavicule est un os long en S italique, seul os qui réalise une articulation avec le tronc (sterno-claviculaire).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "ostéologie"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0138",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "ostéologie",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Ostéologie — fémur, tibia, fibula, os du pied] Combien d'os compte la main ?",
+          "en": "[Lower limb — ostéologie] Translate to English: Combien d'os compte la main ?"
+        },
+        "back": {
+          "fr": "27 os : 8 os du carpe, 5 métacarpiens, 14 phalanges.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le carpe est organisé en deux rangées : proximale (scaphoïde, lunatum, triquétrum, pisiforme) et distale (trapèze, trapézoïde, capitatum, unciforme).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "ostéologie"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0139",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "articulations",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Articulations — hanche, genou, cheville, pied] Quels sont les types d'articulations de l'épaule ?",
+          "en": "[Lower limb — articulations] Translate to English: Quels sont les types d'articulations de l'épaule ?"
+        },
+        "back": {
+          "fr": "Trois : gléno-humérale, acromio-claviculaire, sterno-claviculaire.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'articulation gléno-humérale est une énarthrose (sphéroïde) très mobile mais peu congruente — d'où la fréquence des luxations. Le labrum glénoïdal approfondit la glène.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "articulations"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0140",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "articulations",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Articulations — hanche, genou, cheville, pied] Quels ligaments renforcent l'articulation du coude ?",
+          "en": "[Lower limb — articulations] Translate to English: Quels ligaments renforcent l'articulation du coude ?"
+        },
+        "back": {
+          "fr": "Ligaments collatéraux radial et ulnaire (annulaire).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le ligament annulaire encercle la tête radiale et la maintient dans l'incisure radiale de l'ulna — essentiel pour la pronation-supination.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "articulations"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0141",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "articulations",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Articulations — hanche, genou, cheville, pied] Quels sont les types d'articulations de l'épaule ?",
+          "en": "[Lower limb — articulations] Translate to English: Quels sont les types d'articulations de l'épaule ?"
+        },
+        "back": {
+          "fr": "Trois : gléno-humérale, acromio-claviculaire, sterno-claviculaire.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'articulation gléno-humérale est une énarthrose (sphéroïde) très mobile mais peu congruente — d'où la fréquence des luxations. Le labrum glénoïdal approfondit la glène.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "articulations"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0142",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "articulations",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Articulations — hanche, genou, cheville, pied] Quels ligaments renforcent l'articulation du coude ?",
+          "en": "[Lower limb — articulations] Translate to English: Quels ligaments renforcent l'articulation du coude ?"
+        },
+        "back": {
+          "fr": "Ligaments collatéraux radial et ulnaire (annulaire).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le ligament annulaire encercle la tête radiale et la maintient dans l'incisure radiale de l'ulna — essentiel pour la pronation-supination.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "articulations"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0143",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "articulations",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Articulations — hanche, genou, cheville, pied] Quels sont les types d'articulations de l'épaule ?",
+          "en": "[Lower limb — articulations] Translate to English: Quels sont les types d'articulations de l'épaule ?"
+        },
+        "back": {
+          "fr": "Trois : gléno-humérale, acromio-claviculaire, sterno-claviculaire.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'articulation gléno-humérale est une énarthrose (sphéroïde) très mobile mais peu congruente — d'où la fréquence des luxations. Le labrum glénoïdal approfondit la glène.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "articulations"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0144",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "articulations",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Articulations — hanche, genou, cheville, pied] Quels ligaments renforcent l'articulation du coude ?",
+          "en": "[Lower limb — articulations] Translate to English: Quels ligaments renforcent l'articulation du coude ?"
+        },
+        "back": {
+          "fr": "Ligaments collatéraux radial et ulnaire (annulaire).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le ligament annulaire encercle la tête radiale et la maintient dans l'incisure radiale de l'ulna — essentiel pour la pronation-supination.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "articulations"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0145",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "articulations",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Articulations — hanche, genou, cheville, pied] Quels sont les types d'articulations de l'épaule ?",
+          "en": "[Lower limb — articulations] Translate to English: Quels sont les types d'articulations de l'épaule ?"
+        },
+        "back": {
+          "fr": "Trois : gléno-humérale, acromio-claviculaire, sterno-claviculaire.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'articulation gléno-humérale est une énarthrose (sphéroïde) très mobile mais peu congruente — d'où la fréquence des luxations. Le labrum glénoïdal approfondit la glène.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "articulations"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0146",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "articulations",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Articulations — hanche, genou, cheville, pied] Quels ligaments renforcent l'articulation du coude ?",
+          "en": "[Lower limb — articulations] Translate to English: Quels ligaments renforcent l'articulation du coude ?"
+        },
+        "back": {
+          "fr": "Ligaments collatéraux radial et ulnaire (annulaire).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le ligament annulaire encercle la tête radiale et la maintient dans l'incisure radiale de l'ulna — essentiel pour la pronation-supination.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "articulations"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0147",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "articulations",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Articulations — hanche, genou, cheville, pied] Quels sont les types d'articulations de l'épaule ?",
+          "en": "[Lower limb — articulations] Translate to English: Quels sont les types d'articulations de l'épaule ?"
+        },
+        "back": {
+          "fr": "Trois : gléno-humérale, acromio-claviculaire, sterno-claviculaire.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'articulation gléno-humérale est une énarthrose (sphéroïde) très mobile mais peu congruente — d'où la fréquence des luxations. Le labrum glénoïdal approfondit la glène.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "articulations"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0148",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "articulations",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Articulations — hanche, genou, cheville, pied] Quels ligaments renforcent l'articulation du coude ?",
+          "en": "[Lower limb — articulations] Translate to English: Quels ligaments renforcent l'articulation du coude ?"
+        },
+        "back": {
+          "fr": "Ligaments collatéraux radial et ulnaire (annulaire).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le ligament annulaire encercle la tête radiale et la maintient dans l'incisure radiale de l'ulna — essentiel pour la pronation-supination.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "articulations"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0149",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "articulations",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Articulations — hanche, genou, cheville, pied] Quels sont les types d'articulations de l'épaule ?",
+          "en": "[Lower limb — articulations] Translate to English: Quels sont les types d'articulations de l'épaule ?"
+        },
+        "back": {
+          "fr": "Trois : gléno-humérale, acromio-claviculaire, sterno-claviculaire.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'articulation gléno-humérale est une énarthrose (sphéroïde) très mobile mais peu congruente — d'où la fréquence des luxations. Le labrum glénoïdal approfondit la glène.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "articulations"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0150",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "articulations",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Articulations — hanche, genou, cheville, pied] Quels ligaments renforcent l'articulation du coude ?",
+          "en": "[Lower limb — articulations] Translate to English: Quels ligaments renforcent l'articulation du coude ?"
+        },
+        "back": {
+          "fr": "Ligaments collatéraux radial et ulnaire (annulaire).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le ligament annulaire encercle la tête radiale et la maintient dans l'incisure radiale de l'ulna — essentiel pour la pronation-supination.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "articulations"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0151",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "articulations",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Articulations — hanche, genou, cheville, pied] Quels sont les types d'articulations de l'épaule ?",
+          "en": "[Lower limb — articulations] Translate to English: Quels sont les types d'articulations de l'épaule ?"
+        },
+        "back": {
+          "fr": "Trois : gléno-humérale, acromio-claviculaire, sterno-claviculaire.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'articulation gléno-humérale est une énarthrose (sphéroïde) très mobile mais peu congruente — d'où la fréquence des luxations. Le labrum glénoïdal approfondit la glène.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "articulations"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0152",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "articulations",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Articulations — hanche, genou, cheville, pied] Quels ligaments renforcent l'articulation du coude ?",
+          "en": "[Lower limb — articulations] Translate to English: Quels ligaments renforcent l'articulation du coude ?"
+        },
+        "back": {
+          "fr": "Ligaments collatéraux radial et ulnaire (annulaire).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le ligament annulaire encercle la tête radiale et la maintient dans l'incisure radiale de l'ulna — essentiel pour la pronation-supination.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "articulations"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0153",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "articulations",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Articulations — hanche, genou, cheville, pied] Quels sont les types d'articulations de l'épaule ?",
+          "en": "[Lower limb — articulations] Translate to English: Quels sont les types d'articulations de l'épaule ?"
+        },
+        "back": {
+          "fr": "Trois : gléno-humérale, acromio-claviculaire, sterno-claviculaire.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'articulation gléno-humérale est une énarthrose (sphéroïde) très mobile mais peu congruente — d'où la fréquence des luxations. Le labrum glénoïdal approfondit la glène.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "articulations"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0154",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "articulations",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Articulations — hanche, genou, cheville, pied] Quels ligaments renforcent l'articulation du coude ?",
+          "en": "[Lower limb — articulations] Translate to English: Quels ligaments renforcent l'articulation du coude ?"
+        },
+        "back": {
+          "fr": "Ligaments collatéraux radial et ulnaire (annulaire).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le ligament annulaire encercle la tête radiale et la maintient dans l'incisure radiale de l'ulna — essentiel pour la pronation-supination.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "articulations"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0155",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "articulations",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Articulations — hanche, genou, cheville, pied] Quels sont les types d'articulations de l'épaule ?",
+          "en": "[Lower limb — articulations] Translate to English: Quels sont les types d'articulations de l'épaule ?"
+        },
+        "back": {
+          "fr": "Trois : gléno-humérale, acromio-claviculaire, sterno-claviculaire.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'articulation gléno-humérale est une énarthrose (sphéroïde) très mobile mais peu congruente — d'où la fréquence des luxations. Le labrum glénoïdal approfondit la glène.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "articulations"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0156",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "myologie",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Myologie — muscles de la hanche, de la cuisse, de la jambe, du pied] Quels sont les muscles de la loge antérieure du bras ?",
+          "en": "[Lower limb — myologie] Translate to English: Quels sont les muscles de la loge antérieure du bras ?"
+        },
+        "back": {
+          "fr": "Biceps brachial, brachial, coraco-brachial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le biceps brachial a deux chefs (long et court). Il est fléchisseur du coude et supinateur. Innervé par le musculo-cutané (C5-C6).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "myologie"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0157",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "myologie",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Myologie — muscles de la hanche, de la cuisse, de la jambe, du pied] Quelle est l'innervation du deltoïde ?",
+          "en": "[Lower limb — myologie] Translate to English: Quelle est l'innervation du deltoïde ?"
+        },
+        "back": {
+          "fr": "Le nerf axillaire (C5-C6), branche terminale du faisceau postérieur du plexus brachial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le deltoïde est abducteur du bras (fibres moyennes). Les fibres antérieures font la flexion et les postérieures l'extension. L'atrophie du deltoïde traduit une atteinte du nerf axillaire (luxation d'épaule).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "myologie"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0158",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "myologie",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Myologie — muscles de la hanche, de la cuisse, de la jambe, du pied] Quels sont les muscles de la loge antérieure du bras ?",
+          "en": "[Lower limb — myologie] Translate to English: Quels sont les muscles de la loge antérieure du bras ?"
+        },
+        "back": {
+          "fr": "Biceps brachial, brachial, coraco-brachial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le biceps brachial a deux chefs (long et court). Il est fléchisseur du coude et supinateur. Innervé par le musculo-cutané (C5-C6).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "myologie"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0159",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "myologie",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Myologie — muscles de la hanche, de la cuisse, de la jambe, du pied] Quelle est l'innervation du deltoïde ?",
+          "en": "[Lower limb — myologie] Translate to English: Quelle est l'innervation du deltoïde ?"
+        },
+        "back": {
+          "fr": "Le nerf axillaire (C5-C6), branche terminale du faisceau postérieur du plexus brachial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le deltoïde est abducteur du bras (fibres moyennes). Les fibres antérieures font la flexion et les postérieures l'extension. L'atrophie du deltoïde traduit une atteinte du nerf axillaire (luxation d'épaule).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "myologie"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0160",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "myologie",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Myologie — muscles de la hanche, de la cuisse, de la jambe, du pied] Quels sont les muscles de la loge antérieure du bras ?",
+          "en": "[Lower limb — myologie] Translate to English: Quels sont les muscles de la loge antérieure du bras ?"
+        },
+        "back": {
+          "fr": "Biceps brachial, brachial, coraco-brachial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le biceps brachial a deux chefs (long et court). Il est fléchisseur du coude et supinateur. Innervé par le musculo-cutané (C5-C6).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "myologie"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0161",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "myologie",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Myologie — muscles de la hanche, de la cuisse, de la jambe, du pied] Quelle est l'innervation du deltoïde ?",
+          "en": "[Lower limb — myologie] Translate to English: Quelle est l'innervation du deltoïde ?"
+        },
+        "back": {
+          "fr": "Le nerf axillaire (C5-C6), branche terminale du faisceau postérieur du plexus brachial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le deltoïde est abducteur du bras (fibres moyennes). Les fibres antérieures font la flexion et les postérieures l'extension. L'atrophie du deltoïde traduit une atteinte du nerf axillaire (luxation d'épaule).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "myologie"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0162",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "myologie",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Myologie — muscles de la hanche, de la cuisse, de la jambe, du pied] Quels sont les muscles de la loge antérieure du bras ?",
+          "en": "[Lower limb — myologie] Translate to English: Quels sont les muscles de la loge antérieure du bras ?"
+        },
+        "back": {
+          "fr": "Biceps brachial, brachial, coraco-brachial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le biceps brachial a deux chefs (long et court). Il est fléchisseur du coude et supinateur. Innervé par le musculo-cutané (C5-C6).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "myologie"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0163",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "myologie",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Myologie — muscles de la hanche, de la cuisse, de la jambe, du pied] Quelle est l'innervation du deltoïde ?",
+          "en": "[Lower limb — myologie] Translate to English: Quelle est l'innervation du deltoïde ?"
+        },
+        "back": {
+          "fr": "Le nerf axillaire (C5-C6), branche terminale du faisceau postérieur du plexus brachial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le deltoïde est abducteur du bras (fibres moyennes). Les fibres antérieures font la flexion et les postérieures l'extension. L'atrophie du deltoïde traduit une atteinte du nerf axillaire (luxation d'épaule).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "myologie"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0164",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "myologie",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Myologie — muscles de la hanche, de la cuisse, de la jambe, du pied] Quels sont les muscles de la loge antérieure du bras ?",
+          "en": "[Lower limb — myologie] Translate to English: Quels sont les muscles de la loge antérieure du bras ?"
+        },
+        "back": {
+          "fr": "Biceps brachial, brachial, coraco-brachial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le biceps brachial a deux chefs (long et court). Il est fléchisseur du coude et supinateur. Innervé par le musculo-cutané (C5-C6).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "myologie"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0165",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "myologie",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Myologie — muscles de la hanche, de la cuisse, de la jambe, du pied] Quelle est l'innervation du deltoïde ?",
+          "en": "[Lower limb — myologie] Translate to English: Quelle est l'innervation du deltoïde ?"
+        },
+        "back": {
+          "fr": "Le nerf axillaire (C5-C6), branche terminale du faisceau postérieur du plexus brachial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le deltoïde est abducteur du bras (fibres moyennes). Les fibres antérieures font la flexion et les postérieures l'extension. L'atrophie du deltoïde traduit une atteinte du nerf axillaire (luxation d'épaule).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "myologie"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0166",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "myologie",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Myologie — muscles de la hanche, de la cuisse, de la jambe, du pied] Quels sont les muscles de la loge antérieure du bras ?",
+          "en": "[Lower limb — myologie] Translate to English: Quels sont les muscles de la loge antérieure du bras ?"
+        },
+        "back": {
+          "fr": "Biceps brachial, brachial, coraco-brachial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le biceps brachial a deux chefs (long et court). Il est fléchisseur du coude et supinateur. Innervé par le musculo-cutané (C5-C6).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "myologie"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0167",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "myologie",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Myologie — muscles de la hanche, de la cuisse, de la jambe, du pied] Quelle est l'innervation du deltoïde ?",
+          "en": "[Lower limb — myologie] Translate to English: Quelle est l'innervation du deltoïde ?"
+        },
+        "back": {
+          "fr": "Le nerf axillaire (C5-C6), branche terminale du faisceau postérieur du plexus brachial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le deltoïde est abducteur du bras (fibres moyennes). Les fibres antérieures font la flexion et les postérieures l'extension. L'atrophie du deltoïde traduit une atteinte du nerf axillaire (luxation d'épaule).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "myologie"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0168",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "myologie",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Myologie — muscles de la hanche, de la cuisse, de la jambe, du pied] Quels sont les muscles de la loge antérieure du bras ?",
+          "en": "[Lower limb — myologie] Translate to English: Quels sont les muscles de la loge antérieure du bras ?"
+        },
+        "back": {
+          "fr": "Biceps brachial, brachial, coraco-brachial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le biceps brachial a deux chefs (long et court). Il est fléchisseur du coude et supinateur. Innervé par le musculo-cutané (C5-C6).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "myologie"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0169",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "myologie",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Myologie — muscles de la hanche, de la cuisse, de la jambe, du pied] Quelle est l'innervation du deltoïde ?",
+          "en": "[Lower limb — myologie] Translate to English: Quelle est l'innervation du deltoïde ?"
+        },
+        "back": {
+          "fr": "Le nerf axillaire (C5-C6), branche terminale du faisceau postérieur du plexus brachial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le deltoïde est abducteur du bras (fibres moyennes). Les fibres antérieures font la flexion et les postérieures l'extension. L'atrophie du deltoïde traduit une atteinte du nerf axillaire (luxation d'épaule).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "myologie"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0170",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "myologie",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Myologie — muscles de la hanche, de la cuisse, de la jambe, du pied] Quels sont les muscles de la loge antérieure du bras ?",
+          "en": "[Lower limb — myologie] Translate to English: Quels sont les muscles de la loge antérieure du bras ?"
+        },
+        "back": {
+          "fr": "Biceps brachial, brachial, coraco-brachial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le biceps brachial a deux chefs (long et court). Il est fléchisseur du coude et supinateur. Innervé par le musculo-cutané (C5-C6).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "myologie"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0171",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "myologie",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Myologie — muscles de la hanche, de la cuisse, de la jambe, du pied] Quelle est l'innervation du deltoïde ?",
+          "en": "[Lower limb — myologie] Translate to English: Quelle est l'innervation du deltoïde ?"
+        },
+        "back": {
+          "fr": "Le nerf axillaire (C5-C6), branche terminale du faisceau postérieur du plexus brachial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le deltoïde est abducteur du bras (fibres moyennes). Les fibres antérieures font la flexion et les postérieures l'extension. L'atrophie du deltoïde traduit une atteinte du nerf axillaire (luxation d'épaule).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "myologie"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0172",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "myologie",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Myologie — muscles de la hanche, de la cuisse, de la jambe, du pied] Quels sont les muscles de la loge antérieure du bras ?",
+          "en": "[Lower limb — myologie] Translate to English: Quels sont les muscles de la loge antérieure du bras ?"
+        },
+        "back": {
+          "fr": "Biceps brachial, brachial, coraco-brachial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le biceps brachial a deux chefs (long et court). Il est fléchisseur du coude et supinateur. Innervé par le musculo-cutané (C5-C6).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "myologie"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0173",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "plexus_lombaire_sacral",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Plexus lombaire et sacré — branches, territoires] Quelles sont les racines du plexus lombaire ?",
+          "en": "[Lower limb — plexus_lombaire_sacral] Translate to English: Quelles sont les racines du plexus lombaire ?"
+        },
+        "back": {
+          "fr": "T12, L1, L2, L3, L4.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le plexus lombaire se forme dans le muscle grand psoas. Il donne les nerfs ilio-hypogastrique, ilio-inguinal, génito-fémoral, cutané latéral de la cuisse, fémoral et obturateur.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "plexus lombaire sacral"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0174",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "plexus_lombaire_sacral",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Plexus lombaire et sacré — branches, territoires] Quel nerf innerve le quadriceps ?",
+          "en": "[Lower limb — plexus_lombaire_sacral] Translate to English: Quel nerf innerve le quadriceps ?"
+        },
+        "back": {
+          "fr": "Le nerf fémoral (L2, L3, L4).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le nerf fémoral sort sous le ligament inguinal, latéral à l'artère fémorale. L'atteinte du nerf fémoral entraîne un déficit d'extension du genou.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "plexus lombaire sacral"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0175",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "plexus_lombaire_sacral",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Plexus lombaire et sacré — branches, territoires] Quelles sont les racines du plexus lombaire ?",
+          "en": "[Lower limb — plexus_lombaire_sacral] Translate to English: Quelles sont les racines du plexus lombaire ?"
+        },
+        "back": {
+          "fr": "T12, L1, L2, L3, L4.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le plexus lombaire se forme dans le muscle grand psoas. Il donne les nerfs ilio-hypogastrique, ilio-inguinal, génito-fémoral, cutané latéral de la cuisse, fémoral et obturateur.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "plexus lombaire sacral"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0176",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "plexus_lombaire_sacral",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Plexus lombaire et sacré — branches, territoires] Quel nerf innerve le quadriceps ?",
+          "en": "[Lower limb — plexus_lombaire_sacral] Translate to English: Quel nerf innerve le quadriceps ?"
+        },
+        "back": {
+          "fr": "Le nerf fémoral (L2, L3, L4).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le nerf fémoral sort sous le ligament inguinal, latéral à l'artère fémorale. L'atteinte du nerf fémoral entraîne un déficit d'extension du genou.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "plexus lombaire sacral"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0177",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "plexus_lombaire_sacral",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Plexus lombaire et sacré — branches, territoires] Quelles sont les racines du plexus lombaire ?",
+          "en": "[Lower limb — plexus_lombaire_sacral] Translate to English: Quelles sont les racines du plexus lombaire ?"
+        },
+        "back": {
+          "fr": "T12, L1, L2, L3, L4.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le plexus lombaire se forme dans le muscle grand psoas. Il donne les nerfs ilio-hypogastrique, ilio-inguinal, génito-fémoral, cutané latéral de la cuisse, fémoral et obturateur.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "plexus lombaire sacral"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0178",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "plexus_lombaire_sacral",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Plexus lombaire et sacré — branches, territoires] Quel nerf innerve le quadriceps ?",
+          "en": "[Lower limb — plexus_lombaire_sacral] Translate to English: Quel nerf innerve le quadriceps ?"
+        },
+        "back": {
+          "fr": "Le nerf fémoral (L2, L3, L4).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le nerf fémoral sort sous le ligament inguinal, latéral à l'artère fémorale. L'atteinte du nerf fémoral entraîne un déficit d'extension du genou.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "plexus lombaire sacral"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0179",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "plexus_lombaire_sacral",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Plexus lombaire et sacré — branches, territoires] Quelles sont les racines du plexus lombaire ?",
+          "en": "[Lower limb — plexus_lombaire_sacral] Translate to English: Quelles sont les racines du plexus lombaire ?"
+        },
+        "back": {
+          "fr": "T12, L1, L2, L3, L4.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le plexus lombaire se forme dans le muscle grand psoas. Il donne les nerfs ilio-hypogastrique, ilio-inguinal, génito-fémoral, cutané latéral de la cuisse, fémoral et obturateur.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "plexus lombaire sacral"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0180",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "plexus_lombaire_sacral",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Plexus lombaire et sacré — branches, territoires] Quel nerf innerve le quadriceps ?",
+          "en": "[Lower limb — plexus_lombaire_sacral] Translate to English: Quel nerf innerve le quadriceps ?"
+        },
+        "back": {
+          "fr": "Le nerf fémoral (L2, L3, L4).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le nerf fémoral sort sous le ligament inguinal, latéral à l'artère fémorale. L'atteinte du nerf fémoral entraîne un déficit d'extension du genou.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "plexus lombaire sacral"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0181",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "plexus_lombaire_sacral",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Plexus lombaire et sacré — branches, territoires] Quelles sont les racines du plexus lombaire ?",
+          "en": "[Lower limb — plexus_lombaire_sacral] Translate to English: Quelles sont les racines du plexus lombaire ?"
+        },
+        "back": {
+          "fr": "T12, L1, L2, L3, L4.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le plexus lombaire se forme dans le muscle grand psoas. Il donne les nerfs ilio-hypogastrique, ilio-inguinal, génito-fémoral, cutané latéral de la cuisse, fémoral et obturateur.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "plexus lombaire sacral"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0182",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "plexus_lombaire_sacral",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Plexus lombaire et sacré — branches, territoires] Quel nerf innerve le quadriceps ?",
+          "en": "[Lower limb — plexus_lombaire_sacral] Translate to English: Quel nerf innerve le quadriceps ?"
+        },
+        "back": {
+          "fr": "Le nerf fémoral (L2, L3, L4).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le nerf fémoral sort sous le ligament inguinal, latéral à l'artère fémorale. L'atteinte du nerf fémoral entraîne un déficit d'extension du genou.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "plexus lombaire sacral"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0183",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "plexus_lombaire_sacral",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Plexus lombaire et sacré — branches, territoires] Quelles sont les racines du plexus lombaire ?",
+          "en": "[Lower limb — plexus_lombaire_sacral] Translate to English: Quelles sont les racines du plexus lombaire ?"
+        },
+        "back": {
+          "fr": "T12, L1, L2, L3, L4.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le plexus lombaire se forme dans le muscle grand psoas. Il donne les nerfs ilio-hypogastrique, ilio-inguinal, génito-fémoral, cutané latéral de la cuisse, fémoral et obturateur.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "plexus lombaire sacral"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0184",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "plexus_lombaire_sacral",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Plexus lombaire et sacré — branches, territoires] Quel nerf innerve le quadriceps ?",
+          "en": "[Lower limb — plexus_lombaire_sacral] Translate to English: Quel nerf innerve le quadriceps ?"
+        },
+        "back": {
+          "fr": "Le nerf fémoral (L2, L3, L4).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le nerf fémoral sort sous le ligament inguinal, latéral à l'artère fémorale. L'atteinte du nerf fémoral entraîne un déficit d'extension du genou.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "plexus lombaire sacral"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0185",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "plexus_lombaire_sacral",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Plexus lombaire et sacré — branches, territoires] Quelles sont les racines du plexus lombaire ?",
+          "en": "[Lower limb — plexus_lombaire_sacral] Translate to English: Quelles sont les racines du plexus lombaire ?"
+        },
+        "back": {
+          "fr": "T12, L1, L2, L3, L4.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le plexus lombaire se forme dans le muscle grand psoas. Il donne les nerfs ilio-hypogastrique, ilio-inguinal, génito-fémoral, cutané latéral de la cuisse, fémoral et obturateur.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "plexus lombaire sacral"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0186",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "plexus_lombaire_sacral",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Plexus lombaire et sacré — branches, territoires] Quel nerf innerve le quadriceps ?",
+          "en": "[Lower limb — plexus_lombaire_sacral] Translate to English: Quel nerf innerve le quadriceps ?"
+        },
+        "back": {
+          "fr": "Le nerf fémoral (L2, L3, L4).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le nerf fémoral sort sous le ligament inguinal, latéral à l'artère fémorale. L'atteinte du nerf fémoral entraîne un déficit d'extension du genou.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "plexus lombaire sacral"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0187",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "plexus_lombaire_sacral",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Plexus lombaire et sacré — branches, territoires] Quelles sont les racines du plexus lombaire ?",
+          "en": "[Lower limb — plexus_lombaire_sacral] Translate to English: Quelles sont les racines du plexus lombaire ?"
+        },
+        "back": {
+          "fr": "T12, L1, L2, L3, L4.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le plexus lombaire se forme dans le muscle grand psoas. Il donne les nerfs ilio-hypogastrique, ilio-inguinal, génito-fémoral, cutané latéral de la cuisse, fémoral et obturateur.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "plexus lombaire sacral"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0188",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "plexus_lombaire_sacral",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Plexus lombaire et sacré — branches, territoires] Quel nerf innerve le quadriceps ?",
+          "en": "[Lower limb — plexus_lombaire_sacral] Translate to English: Quel nerf innerve le quadriceps ?"
+        },
+        "back": {
+          "fr": "Le nerf fémoral (L2, L3, L4).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le nerf fémoral sort sous le ligament inguinal, latéral à l'artère fémorale. L'atteinte du nerf fémoral entraîne un déficit d'extension du genou.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "plexus lombaire sacral"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0189",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "plexus_lombaire_sacral",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Plexus lombaire et sacré — branches, territoires] Quelles sont les racines du plexus lombaire ?",
+          "en": "[Lower limb — plexus_lombaire_sacral] Translate to English: Quelles sont les racines du plexus lombaire ?"
+        },
+        "back": {
+          "fr": "T12, L1, L2, L3, L4.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le plexus lombaire se forme dans le muscle grand psoas. Il donne les nerfs ilio-hypogastrique, ilio-inguinal, génito-fémoral, cutané latéral de la cuisse, fémoral et obturateur.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "plexus lombaire sacral"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0190",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "vascularisation",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Vascularisation — artères iliaques, fémorale, poplitée, tibiales] Quelles sont les branches de l'artère fémorale ?",
+          "en": "[Lower limb — vascularisation] Translate to English: Quelles sont les branches de l'artère fémorale ?"
+        },
+        "back": {
+          "fr": "Artère fémorale profonde (avec circonflexes fémorales médiale et latérale) et artère fémorale superficielle (qui devient poplitée).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'artère fémorale est la continuation de l'iliaque externe sous le ligament inguinal. Le pouls fémoral se prend en dedans du milieu du ligament inguinal.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "vascularisation"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0191",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "vascularisation",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Vascularisation — artères iliaques, fémorale, poplitée, tibiales] Quelles artères vascularisent le cerveau ?",
+          "en": "[Lower limb — vascularisation] Translate to English: Quelles artères vascularisent le cerveau ?"
+        },
+        "back": {
+          "fr": "Artères carotides internes (80% du débit) et vertébrales (20%).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le polygone de Willis est l'anneau artériel à la base du cerveau. Anastomose entre carotides internes et vertébrales via les artères communicantes.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "vascularisation"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0192",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "vascularisation",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Vascularisation — artères iliaques, fémorale, poplitée, tibiales] Quelles sont les branches de l'artère fémorale ?",
+          "en": "[Lower limb — vascularisation] Translate to English: Quelles sont les branches de l'artère fémorale ?"
+        },
+        "back": {
+          "fr": "Artère fémorale profonde (avec circonflexes fémorales médiale et latérale) et artère fémorale superficielle (qui devient poplitée).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'artère fémorale est la continuation de l'iliaque externe sous le ligament inguinal. Le pouls fémoral se prend en dedans du milieu du ligament inguinal.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "vascularisation"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0193",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "vascularisation",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Vascularisation — artères iliaques, fémorale, poplitée, tibiales] Quelles artères vascularisent le cerveau ?",
+          "en": "[Lower limb — vascularisation] Translate to English: Quelles artères vascularisent le cerveau ?"
+        },
+        "back": {
+          "fr": "Artères carotides internes (80% du débit) et vertébrales (20%).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le polygone de Willis est l'anneau artériel à la base du cerveau. Anastomose entre carotides internes et vertébrales via les artères communicantes.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "vascularisation"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0194",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "vascularisation",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Vascularisation — artères iliaques, fémorale, poplitée, tibiales] Quelles sont les branches de l'artère fémorale ?",
+          "en": "[Lower limb — vascularisation] Translate to English: Quelles sont les branches de l'artère fémorale ?"
+        },
+        "back": {
+          "fr": "Artère fémorale profonde (avec circonflexes fémorales médiale et latérale) et artère fémorale superficielle (qui devient poplitée).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'artère fémorale est la continuation de l'iliaque externe sous le ligament inguinal. Le pouls fémoral se prend en dedans du milieu du ligament inguinal.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "vascularisation"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0195",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "vascularisation",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Vascularisation — artères iliaques, fémorale, poplitée, tibiales] Quelles artères vascularisent le cerveau ?",
+          "en": "[Lower limb — vascularisation] Translate to English: Quelles artères vascularisent le cerveau ?"
+        },
+        "back": {
+          "fr": "Artères carotides internes (80% du débit) et vertébrales (20%).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le polygone de Willis est l'anneau artériel à la base du cerveau. Anastomose entre carotides internes et vertébrales via les artères communicantes.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "vascularisation"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0196",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "vascularisation",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Vascularisation — artères iliaques, fémorale, poplitée, tibiales] Quelles sont les branches de l'artère fémorale ?",
+          "en": "[Lower limb — vascularisation] Translate to English: Quelles sont les branches de l'artère fémorale ?"
+        },
+        "back": {
+          "fr": "Artère fémorale profonde (avec circonflexes fémorales médiale et latérale) et artère fémorale superficielle (qui devient poplitée).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'artère fémorale est la continuation de l'iliaque externe sous le ligament inguinal. Le pouls fémoral se prend en dedans du milieu du ligament inguinal.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "vascularisation"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0197",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "vascularisation",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Vascularisation — artères iliaques, fémorale, poplitée, tibiales] Quelles artères vascularisent le cerveau ?",
+          "en": "[Lower limb — vascularisation] Translate to English: Quelles artères vascularisent le cerveau ?"
+        },
+        "back": {
+          "fr": "Artères carotides internes (80% du débit) et vertébrales (20%).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le polygone de Willis est l'anneau artériel à la base du cerveau. Anastomose entre carotides internes et vertébrales via les artères communicantes.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "vascularisation"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0198",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "vascularisation",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Vascularisation — artères iliaques, fémorale, poplitée, tibiales] Quelles sont les branches de l'artère fémorale ?",
+          "en": "[Lower limb — vascularisation] Translate to English: Quelles sont les branches de l'artère fémorale ?"
+        },
+        "back": {
+          "fr": "Artère fémorale profonde (avec circonflexes fémorales médiale et latérale) et artère fémorale superficielle (qui devient poplitée).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'artère fémorale est la continuation de l'iliaque externe sous le ligament inguinal. Le pouls fémoral se prend en dedans du milieu du ligament inguinal.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "vascularisation"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0199",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "vascularisation",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Vascularisation — artères iliaques, fémorale, poplitée, tibiales] Quelles artères vascularisent le cerveau ?",
+          "en": "[Lower limb — vascularisation] Translate to English: Quelles artères vascularisent le cerveau ?"
+        },
+        "back": {
+          "fr": "Artères carotides internes (80% du débit) et vertébrales (20%).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le polygone de Willis est l'anneau artériel à la base du cerveau. Anastomose entre carotides internes et vertébrales via les artères communicantes.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "vascularisation"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0200",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "vascularisation",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Vascularisation — artères iliaques, fémorale, poplitée, tibiales] Quelles sont les branches de l'artère fémorale ?",
+          "en": "[Lower limb — vascularisation] Translate to English: Quelles sont les branches de l'artère fémorale ?"
+        },
+        "back": {
+          "fr": "Artère fémorale profonde (avec circonflexes fémorales médiale et latérale) et artère fémorale superficielle (qui devient poplitée).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'artère fémorale est la continuation de l'iliaque externe sous le ligament inguinal. Le pouls fémoral se prend en dedans du milieu du ligament inguinal.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "vascularisation"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0201",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "vascularisation",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Vascularisation — artères iliaques, fémorale, poplitée, tibiales] Quelles artères vascularisent le cerveau ?",
+          "en": "[Lower limb — vascularisation] Translate to English: Quelles artères vascularisent le cerveau ?"
+        },
+        "back": {
+          "fr": "Artères carotides internes (80% du débit) et vertébrales (20%).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le polygone de Willis est l'anneau artériel à la base du cerveau. Anastomose entre carotides internes et vertébrales via les artères communicantes.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "vascularisation"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0202",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "vascularisation",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Vascularisation — artères iliaques, fémorale, poplitée, tibiales] Quelles sont les branches de l'artère fémorale ?",
+          "en": "[Lower limb — vascularisation] Translate to English: Quelles sont les branches de l'artère fémorale ?"
+        },
+        "back": {
+          "fr": "Artère fémorale profonde (avec circonflexes fémorales médiale et latérale) et artère fémorale superficielle (qui devient poplitée).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'artère fémorale est la continuation de l'iliaque externe sous le ligament inguinal. Le pouls fémoral se prend en dedans du milieu du ligament inguinal.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "vascularisation"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0203",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "vascularisation",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Vascularisation — artères iliaques, fémorale, poplitée, tibiales] Quelles artères vascularisent le cerveau ?",
+          "en": "[Lower limb — vascularisation] Translate to English: Quelles artères vascularisent le cerveau ?"
+        },
+        "back": {
+          "fr": "Artères carotides internes (80% du débit) et vertébrales (20%).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le polygone de Willis est l'anneau artériel à la base du cerveau. Anastomose entre carotides internes et vertébrales via les artères communicantes.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "vascularisation"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0204",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "vascularisation",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Vascularisation — artères iliaques, fémorale, poplitée, tibiales] Quelles sont les branches de l'artère fémorale ?",
+          "en": "[Lower limb — vascularisation] Translate to English: Quelles sont les branches de l'artère fémorale ?"
+        },
+        "back": {
+          "fr": "Artère fémorale profonde (avec circonflexes fémorales médiale et latérale) et artère fémorale superficielle (qui devient poplitée).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'artère fémorale est la continuation de l'iliaque externe sous le ligament inguinal. Le pouls fémoral se prend en dedans du milieu du ligament inguinal.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "vascularisation"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0205",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "vascularisation",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Vascularisation — artères iliaques, fémorale, poplitée, tibiales] Quelles artères vascularisent le cerveau ?",
+          "en": "[Lower limb — vascularisation] Translate to English: Quelles artères vascularisent le cerveau ?"
+        },
+        "back": {
+          "fr": "Artères carotides internes (80% du débit) et vertébrales (20%).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le polygone de Willis est l'anneau artériel à la base du cerveau. Anastomose entre carotides internes et vertébrales via les artères communicantes.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "vascularisation"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0206",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "vascularisation",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Vascularisation — artères iliaques, fémorale, poplitée, tibiales] Quelles sont les branches de l'artère fémorale ?",
+          "en": "[Lower limb — vascularisation] Translate to English: Quelles sont les branches de l'artère fémorale ?"
+        },
+        "back": {
+          "fr": "Artère fémorale profonde (avec circonflexes fémorales médiale et latérale) et artère fémorale superficielle (qui devient poplitée).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'artère fémorale est la continuation de l'iliaque externe sous le ligament inguinal. Le pouls fémoral se prend en dedans du milieu du ligament inguinal.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "vascularisation"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0207",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "innervation",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Innervation — nerfs fémoral, obturateur, sciatique, tibial, fibulaire] Quel nerf innerve le diaphragme ?",
+          "en": "[Lower limb — innervation] Translate to English: Quel nerf innerve le diaphragme ?"
+        },
+        "back": {
+          "fr": "Le nerf phrénique (C3, C4, C5).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le nerf phrénique naît du plexus cervical. C3-C4-C5 garde la mémoire (« 3, 4, 5 maintient le diaphragme vivant »). Une lésion haute de la moelle (C3) entraîne un arrêt respiratoire.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "innervation"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0208",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "innervation",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Innervation — nerfs fémoral, obturateur, sciatique, tibial, fibulaire] Quel nerf est lésé dans la sciatique ?",
+          "en": "[Lower limb — innervation] Translate to English: Quel nerf est lésé dans la sciatique ?"
+        },
+        "back": {
+          "fr": "Le nerf sciatique (L4-S3), généralement par hernie discale L4-L5 ou L5-S1.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La hernie L4-L5 comprime la racine L5 (déficit extenseur orteils). La hernie L5-S1 comprime la racine S1 (déficit fléchisseur plantaire, abolition du réflexe achilléen).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "innervation"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0209",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "innervation",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Innervation — nerfs fémoral, obturateur, sciatique, tibial, fibulaire] Quel nerf innerve le diaphragme ?",
+          "en": "[Lower limb — innervation] Translate to English: Quel nerf innerve le diaphragme ?"
+        },
+        "back": {
+          "fr": "Le nerf phrénique (C3, C4, C5).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le nerf phrénique naît du plexus cervical. C3-C4-C5 garde la mémoire (« 3, 4, 5 maintient le diaphragme vivant »). Une lésion haute de la moelle (C3) entraîne un arrêt respiratoire.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "innervation"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0210",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "innervation",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Innervation — nerfs fémoral, obturateur, sciatique, tibial, fibulaire] Quel nerf est lésé dans la sciatique ?",
+          "en": "[Lower limb — innervation] Translate to English: Quel nerf est lésé dans la sciatique ?"
+        },
+        "back": {
+          "fr": "Le nerf sciatique (L4-S3), généralement par hernie discale L4-L5 ou L5-S1.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La hernie L4-L5 comprime la racine L5 (déficit extenseur orteils). La hernie L5-S1 comprime la racine S1 (déficit fléchisseur plantaire, abolition du réflexe achilléen).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "innervation"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0211",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "innervation",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Innervation — nerfs fémoral, obturateur, sciatique, tibial, fibulaire] Quel nerf innerve le diaphragme ?",
+          "en": "[Lower limb — innervation] Translate to English: Quel nerf innerve le diaphragme ?"
+        },
+        "back": {
+          "fr": "Le nerf phrénique (C3, C4, C5).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le nerf phrénique naît du plexus cervical. C3-C4-C5 garde la mémoire (« 3, 4, 5 maintient le diaphragme vivant »). Une lésion haute de la moelle (C3) entraîne un arrêt respiratoire.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "innervation"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0212",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "innervation",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Innervation — nerfs fémoral, obturateur, sciatique, tibial, fibulaire] Quel nerf est lésé dans la sciatique ?",
+          "en": "[Lower limb — innervation] Translate to English: Quel nerf est lésé dans la sciatique ?"
+        },
+        "back": {
+          "fr": "Le nerf sciatique (L4-S3), généralement par hernie discale L4-L5 ou L5-S1.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La hernie L4-L5 comprime la racine L5 (déficit extenseur orteils). La hernie L5-S1 comprime la racine S1 (déficit fléchisseur plantaire, abolition du réflexe achilléen).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "innervation"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0213",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "innervation",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Innervation — nerfs fémoral, obturateur, sciatique, tibial, fibulaire] Quel nerf innerve le diaphragme ?",
+          "en": "[Lower limb — innervation] Translate to English: Quel nerf innerve le diaphragme ?"
+        },
+        "back": {
+          "fr": "Le nerf phrénique (C3, C4, C5).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le nerf phrénique naît du plexus cervical. C3-C4-C5 garde la mémoire (« 3, 4, 5 maintient le diaphragme vivant »). Une lésion haute de la moelle (C3) entraîne un arrêt respiratoire.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "innervation"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0214",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "innervation",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Innervation — nerfs fémoral, obturateur, sciatique, tibial, fibulaire] Quel nerf est lésé dans la sciatique ?",
+          "en": "[Lower limb — innervation] Translate to English: Quel nerf est lésé dans la sciatique ?"
+        },
+        "back": {
+          "fr": "Le nerf sciatique (L4-S3), généralement par hernie discale L4-L5 ou L5-S1.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La hernie L4-L5 comprime la racine L5 (déficit extenseur orteils). La hernie L5-S1 comprime la racine S1 (déficit fléchisseur plantaire, abolition du réflexe achilléen).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "innervation"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0215",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "innervation",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Innervation — nerfs fémoral, obturateur, sciatique, tibial, fibulaire] Quel nerf innerve le diaphragme ?",
+          "en": "[Lower limb — innervation] Translate to English: Quel nerf innerve le diaphragme ?"
+        },
+        "back": {
+          "fr": "Le nerf phrénique (C3, C4, C5).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le nerf phrénique naît du plexus cervical. C3-C4-C5 garde la mémoire (« 3, 4, 5 maintient le diaphragme vivant »). Une lésion haute de la moelle (C3) entraîne un arrêt respiratoire.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "innervation"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0216",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "innervation",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Innervation — nerfs fémoral, obturateur, sciatique, tibial, fibulaire] Quel nerf est lésé dans la sciatique ?",
+          "en": "[Lower limb — innervation] Translate to English: Quel nerf est lésé dans la sciatique ?"
+        },
+        "back": {
+          "fr": "Le nerf sciatique (L4-S3), généralement par hernie discale L4-L5 ou L5-S1.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La hernie L4-L5 comprime la racine L5 (déficit extenseur orteils). La hernie L5-S1 comprime la racine S1 (déficit fléchisseur plantaire, abolition du réflexe achilléen).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "innervation"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0217",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "innervation",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Innervation — nerfs fémoral, obturateur, sciatique, tibial, fibulaire] Quel nerf innerve le diaphragme ?",
+          "en": "[Lower limb — innervation] Translate to English: Quel nerf innerve le diaphragme ?"
+        },
+        "back": {
+          "fr": "Le nerf phrénique (C3, C4, C5).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le nerf phrénique naît du plexus cervical. C3-C4-C5 garde la mémoire (« 3, 4, 5 maintient le diaphragme vivant »). Une lésion haute de la moelle (C3) entraîne un arrêt respiratoire.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "innervation"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0218",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "innervation",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Innervation — nerfs fémoral, obturateur, sciatique, tibial, fibulaire] Quel nerf est lésé dans la sciatique ?",
+          "en": "[Lower limb — innervation] Translate to English: Quel nerf est lésé dans la sciatique ?"
+        },
+        "back": {
+          "fr": "Le nerf sciatique (L4-S3), généralement par hernie discale L4-L5 ou L5-S1.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La hernie L4-L5 comprime la racine L5 (déficit extenseur orteils). La hernie L5-S1 comprime la racine S1 (déficit fléchisseur plantaire, abolition du réflexe achilléen).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "innervation"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0219",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "innervation",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Innervation — nerfs fémoral, obturateur, sciatique, tibial, fibulaire] Quel nerf innerve le diaphragme ?",
+          "en": "[Lower limb — innervation] Translate to English: Quel nerf innerve le diaphragme ?"
+        },
+        "back": {
+          "fr": "Le nerf phrénique (C3, C4, C5).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le nerf phrénique naît du plexus cervical. C3-C4-C5 garde la mémoire (« 3, 4, 5 maintient le diaphragme vivant »). Une lésion haute de la moelle (C3) entraîne un arrêt respiratoire.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "innervation"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0220",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "innervation",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Innervation — nerfs fémoral, obturateur, sciatique, tibial, fibulaire] Quel nerf est lésé dans la sciatique ?",
+          "en": "[Lower limb — innervation] Translate to English: Quel nerf est lésé dans la sciatique ?"
+        },
+        "back": {
+          "fr": "Le nerf sciatique (L4-S3), généralement par hernie discale L4-L5 ou L5-S1.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La hernie L4-L5 comprime la racine L5 (déficit extenseur orteils). La hernie L5-S1 comprime la racine S1 (déficit fléchisseur plantaire, abolition du réflexe achilléen).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "innervation"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0221",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "innervation",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Innervation — nerfs fémoral, obturateur, sciatique, tibial, fibulaire] Quel nerf innerve le diaphragme ?",
+          "en": "[Lower limb — innervation] Translate to English: Quel nerf innerve le diaphragme ?"
+        },
+        "back": {
+          "fr": "Le nerf phrénique (C3, C4, C5).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le nerf phrénique naît du plexus cervical. C3-C4-C5 garde la mémoire (« 3, 4, 5 maintient le diaphragme vivant »). Une lésion haute de la moelle (C3) entraîne un arrêt respiratoire.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "innervation"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0222",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "innervation",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Innervation — nerfs fémoral, obturateur, sciatique, tibial, fibulaire] Quel nerf est lésé dans la sciatique ?",
+          "en": "[Lower limb — innervation] Translate to English: Quel nerf est lésé dans la sciatique ?"
+        },
+        "back": {
+          "fr": "Le nerf sciatique (L4-S3), généralement par hernie discale L4-L5 ou L5-S1.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La hernie L4-L5 comprime la racine L5 (déficit extenseur orteils). La hernie L5-S1 comprime la racine S1 (déficit fléchisseur plantaire, abolition du réflexe achilléen).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "innervation"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0223",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "innervation",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Innervation — nerfs fémoral, obturateur, sciatique, tibial, fibulaire] Quel nerf innerve le diaphragme ?",
+          "en": "[Lower limb — innervation] Translate to English: Quel nerf innerve le diaphragme ?"
+        },
+        "back": {
+          "fr": "Le nerf phrénique (C3, C4, C5).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le nerf phrénique naît du plexus cervical. C3-C4-C5 garde la mémoire (« 3, 4, 5 maintient le diaphragme vivant »). Une lésion haute de la moelle (C3) entraîne un arrêt respiratoire.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "innervation"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0224",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — fractures, sciatique, syndrome de la loge] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Lower limb — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0225",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — fractures, sciatique, syndrome de la loge] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Lower limb — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0226",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — fractures, sciatique, syndrome de la loge] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Lower limb — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0227",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — fractures, sciatique, syndrome de la loge] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Lower limb — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0228",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — fractures, sciatique, syndrome de la loge] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Lower limb — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0229",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — fractures, sciatique, syndrome de la loge] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Lower limb — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0230",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — fractures, sciatique, syndrome de la loge] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Lower limb — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0231",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — fractures, sciatique, syndrome de la loge] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Lower limb — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0232",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — fractures, sciatique, syndrome de la loge] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Lower limb — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0233",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — fractures, sciatique, syndrome de la loge] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Lower limb — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0234",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — fractures, sciatique, syndrome de la loge] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Lower limb — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0235",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — fractures, sciatique, syndrome de la loge] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Lower limb — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0236",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — fractures, sciatique, syndrome de la loge] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Lower limb — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0237",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — fractures, sciatique, syndrome de la loge] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Lower limb — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0238",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — fractures, sciatique, syndrome de la loge] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Lower limb — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0239",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — fractures, sciatique, syndrome de la loge] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Lower limb — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_membre_inf_0240",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_membre_inf"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — fractures, sciatique, syndrome de la loge] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Lower limb — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+# Phase 17.4 — ConfigMap pour la politique CORS prod.
+#
+# Le backend NestJS doit accepter les requêtes cross-origin depuis :
+#   * Le CMS (cms.medanki-dz.com)
+#   * L'app mobile (capacitor://, http://localhost pour dev)
+#   * Le dashboard (futur, app.medanki-dz.com)
+#
+# On stocke la config ici, mais c'est le contrôleur NestJS qui la
+# consomme via env (CORS_ALLOWED_ORIGINS).
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cors-config
+  namespace: medanki-prod
+  labels:
+    app: backend
+    purpose: cors
+data:
+  # Origins autorisées (séparées par virgule).
+  allowed-origins: |
+    https://medanki-dz.com
+    https://app.medanki-dz.com
+    https://cms.medanki-dz.com
+    https://api.medanki-dz.com
+    capacitor://localhost
+    ionic://localhost
+  # Headers autorisés côté client.
+  allowed-headers: |
+    Content-Type
+    Authorization
+    X-Device-Id
+    X-Platform
+    X-App-Version
+    X-Trace-Id
+  # Méthodes autorisées.
+  allowed-methods: |
+    GET
+    POST
+    PUT
+    PATCH
+    DELETE
+    OPTIONS
+  # Exposition du X-Trace-Id au client (pour debug).
+  exposed-headers: |
+    X-Trace-Id
+    X-Request-Id
+  # Credentials (cookies, auth headers).
+  allow-credentials: "true"
+  # Max-age preflight (24h).
+  max-age: "86400"

@@ -1,0 +1,49 @@
+# Phase 17.2 — service headless pour les read replicas PostgreSQL.
+# Utilisé par le backend pour les lectures (rapports, stats, leaderboard).
+# Pattern : splitter le trafic entre primary (writes) et replica (reads).
+#
+# Architecture cible :
+#   * 1 primary (writes) → postgres-primary
+#   * 2-3 read replicas (reads) → postgres-replica
+#   * Les lectures lourdes (stats, leaderboard) vont aux replicas.
+#   * Les écritures vont toujours au primary.
+#
+# Cf. backend/src/db/ReadReplicaRouter.ts (Phase 17.2 logic).
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-replica
+  namespace: medanki-prod
+  labels:
+    app: postgres
+    role: replica
+spec:
+  type: ClusterIP
+  selector:
+    app: postgres
+    role: replica
+  ports:
+    - port: 5432
+      targetPort: 5432
+      protocol: TCP
+      name: pg
+---
+# Headless service pour les replicas individuels (round-robin DNS).
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-replica-headless
+  namespace: medanki-prod
+  labels:
+    app: postgres
+    role: replica
+spec:
+  type: ClusterIP
+  clusterIP: None
+  selector:
+    app: postgres
+    role: replica
+  ports:
+    - port: 5432
+      targetPort: 5432
+      name: pg

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: medanki-config
+data:
+  # OpenTelemetry
+  otel-endpoint: "http://otel-collector.observability:4317"
+  otel-service-name: "medanki-backend"
+  # Logging
+  log-level: "info"
+  # Feature flags
+  feature-leaderboard: "true"
+  feature-anticheat: "true"
+  feature-r2-upload: "false"

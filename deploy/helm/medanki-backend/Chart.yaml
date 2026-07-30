@@ -1,0 +1,13 @@
+apiVersion: v2
+name: medanki-backend
+description: MedAnki DZ — Backend NestJS (Phase 12 bis)
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
+keywords:
+  - medical
+  - education
+  - srs
+maintainers:
+  - name: Arena
+    email: arena@medanki-dz.com

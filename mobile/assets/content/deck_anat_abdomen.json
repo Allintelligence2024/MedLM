@@ -1,0 +1,4216 @@
+{
+  "deck_id": "deck_anat_abdomen",
+  "module_id": "anatomie",
+  "programme": "medecine_dz",
+  "study_year": 1,
+  "version": 1,
+  "name_fr": "Abdomen",
+  "name_en": "Abdomen",
+  "description_fr": "Paroi abdominale, cavité péritonéale, tube digestif, foie, rate, reins.",
+  "description_en": "Abdominal wall, peritoneal cavity, GI tract, liver, spleen, kidneys.",
+  "is_premium": false,
+  "is_demo": false,
+  "license": "medankidz_internal_v1",
+  "cards": [
+    {
+      "id": "deck_anat_abdomen_0361",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "paroi",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Paroi abdominale — muscles grand droit, obliques, transverse] Combien d'os compte la cage thoracique ?",
+          "en": "[Abdomen — paroi] Translate to English: Combien d'os compte la cage thoracique ?"
+        },
+        "back": {
+          "fr": "12 paires de côtes (7 vraies + 3 fausses + 2 flottantes), sternum, 12 vertèbres thoraciques.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les vraies côtes (1-7) s'attachent directement au sternum. Les fausses (8-10) s'attachent via le cartilage de la 7. Les flottantes (11-12) sont libres.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "paroi"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0362",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "paroi",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Paroi abdominale — muscles grand droit, obliques, transverse] Quels muscles forment la paroi abdominale antérieure ?",
+          "en": "[Abdomen — paroi] Translate to English: Quels muscles forment la paroi abdominale antérieure ?"
+        },
+        "back": {
+          "fr": "Grand droit (gaine rectusienne), oblique externe, oblique interne, transverse.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La gaine du grand droit est formée par les aponévroses des 3 muscles latéraux. La ligne arquée (de Douglas) marque la transition entre la gaine complète (au-dessus) et l'absence de feuillet postérieur (en dessous).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "paroi"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0363",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "paroi",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Paroi abdominale — muscles grand droit, obliques, transverse] Combien d'os compte la cage thoracique ?",
+          "en": "[Abdomen — paroi] Translate to English: Combien d'os compte la cage thoracique ?"
+        },
+        "back": {
+          "fr": "12 paires de côtes (7 vraies + 3 fausses + 2 flottantes), sternum, 12 vertèbres thoraciques.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les vraies côtes (1-7) s'attachent directement au sternum. Les fausses (8-10) s'attachent via le cartilage de la 7. Les flottantes (11-12) sont libres.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "paroi"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0364",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "paroi",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Paroi abdominale — muscles grand droit, obliques, transverse] Quels muscles forment la paroi abdominale antérieure ?",
+          "en": "[Abdomen — paroi] Translate to English: Quels muscles forment la paroi abdominale antérieure ?"
+        },
+        "back": {
+          "fr": "Grand droit (gaine rectusienne), oblique externe, oblique interne, transverse.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La gaine du grand droit est formée par les aponévroses des 3 muscles latéraux. La ligne arquée (de Douglas) marque la transition entre la gaine complète (au-dessus) et l'absence de feuillet postérieur (en dessous).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "paroi"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0365",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "paroi",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Paroi abdominale — muscles grand droit, obliques, transverse] Combien d'os compte la cage thoracique ?",
+          "en": "[Abdomen — paroi] Translate to English: Combien d'os compte la cage thoracique ?"
+        },
+        "back": {
+          "fr": "12 paires de côtes (7 vraies + 3 fausses + 2 flottantes), sternum, 12 vertèbres thoraciques.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les vraies côtes (1-7) s'attachent directement au sternum. Les fausses (8-10) s'attachent via le cartilage de la 7. Les flottantes (11-12) sont libres.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "paroi"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0366",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "paroi",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Paroi abdominale — muscles grand droit, obliques, transverse] Quels muscles forment la paroi abdominale antérieure ?",
+          "en": "[Abdomen — paroi] Translate to English: Quels muscles forment la paroi abdominale antérieure ?"
+        },
+        "back": {
+          "fr": "Grand droit (gaine rectusienne), oblique externe, oblique interne, transverse.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La gaine du grand droit est formée par les aponévroses des 3 muscles latéraux. La ligne arquée (de Douglas) marque la transition entre la gaine complète (au-dessus) et l'absence de feuillet postérieur (en dessous).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "paroi"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0367",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "paroi",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Paroi abdominale — muscles grand droit, obliques, transverse] Combien d'os compte la cage thoracique ?",
+          "en": "[Abdomen — paroi] Translate to English: Combien d'os compte la cage thoracique ?"
+        },
+        "back": {
+          "fr": "12 paires de côtes (7 vraies + 3 fausses + 2 flottantes), sternum, 12 vertèbres thoraciques.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les vraies côtes (1-7) s'attachent directement au sternum. Les fausses (8-10) s'attachent via le cartilage de la 7. Les flottantes (11-12) sont libres.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "paroi"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0368",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "paroi",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Paroi abdominale — muscles grand droit, obliques, transverse] Quels muscles forment la paroi abdominale antérieure ?",
+          "en": "[Abdomen — paroi] Translate to English: Quels muscles forment la paroi abdominale antérieure ?"
+        },
+        "back": {
+          "fr": "Grand droit (gaine rectusienne), oblique externe, oblique interne, transverse.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La gaine du grand droit est formée par les aponévroses des 3 muscles latéraux. La ligne arquée (de Douglas) marque la transition entre la gaine complète (au-dessus) et l'absence de feuillet postérieur (en dessous).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "paroi"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0369",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "paroi",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Paroi abdominale — muscles grand droit, obliques, transverse] Combien d'os compte la cage thoracique ?",
+          "en": "[Abdomen — paroi] Translate to English: Combien d'os compte la cage thoracique ?"
+        },
+        "back": {
+          "fr": "12 paires de côtes (7 vraies + 3 fausses + 2 flottantes), sternum, 12 vertèbres thoraciques.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les vraies côtes (1-7) s'attachent directement au sternum. Les fausses (8-10) s'attachent via le cartilage de la 7. Les flottantes (11-12) sont libres.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "paroi"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0370",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "paroi",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Paroi abdominale — muscles grand droit, obliques, transverse] Quels muscles forment la paroi abdominale antérieure ?",
+          "en": "[Abdomen — paroi] Translate to English: Quels muscles forment la paroi abdominale antérieure ?"
+        },
+        "back": {
+          "fr": "Grand droit (gaine rectusienne), oblique externe, oblique interne, transverse.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La gaine du grand droit est formée par les aponévroses des 3 muscles latéraux. La ligne arquée (de Douglas) marque la transition entre la gaine complète (au-dessus) et l'absence de feuillet postérieur (en dessous).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "paroi"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0371",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "paroi",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Paroi abdominale — muscles grand droit, obliques, transverse] Combien d'os compte la cage thoracique ?",
+          "en": "[Abdomen — paroi] Translate to English: Combien d'os compte la cage thoracique ?"
+        },
+        "back": {
+          "fr": "12 paires de côtes (7 vraies + 3 fausses + 2 flottantes), sternum, 12 vertèbres thoraciques.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les vraies côtes (1-7) s'attachent directement au sternum. Les fausses (8-10) s'attachent via le cartilage de la 7. Les flottantes (11-12) sont libres.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "paroi"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0372",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "paroi",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Paroi abdominale — muscles grand droit, obliques, transverse] Quels muscles forment la paroi abdominale antérieure ?",
+          "en": "[Abdomen — paroi] Translate to English: Quels muscles forment la paroi abdominale antérieure ?"
+        },
+        "back": {
+          "fr": "Grand droit (gaine rectusienne), oblique externe, oblique interne, transverse.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La gaine du grand droit est formée par les aponévroses des 3 muscles latéraux. La ligne arquée (de Douglas) marque la transition entre la gaine complète (au-dessus) et l'absence de feuillet postérieur (en dessous).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "paroi"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0373",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "paroi",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Paroi abdominale — muscles grand droit, obliques, transverse] Combien d'os compte la cage thoracique ?",
+          "en": "[Abdomen — paroi] Translate to English: Combien d'os compte la cage thoracique ?"
+        },
+        "back": {
+          "fr": "12 paires de côtes (7 vraies + 3 fausses + 2 flottantes), sternum, 12 vertèbres thoraciques.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les vraies côtes (1-7) s'attachent directement au sternum. Les fausses (8-10) s'attachent via le cartilage de la 7. Les flottantes (11-12) sont libres.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "paroi"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0374",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "paroi",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Paroi abdominale — muscles grand droit, obliques, transverse] Quels muscles forment la paroi abdominale antérieure ?",
+          "en": "[Abdomen — paroi] Translate to English: Quels muscles forment la paroi abdominale antérieure ?"
+        },
+        "back": {
+          "fr": "Grand droit (gaine rectusienne), oblique externe, oblique interne, transverse.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La gaine du grand droit est formée par les aponévroses des 3 muscles latéraux. La ligne arquée (de Douglas) marque la transition entre la gaine complète (au-dessus) et l'absence de feuillet postérieur (en dessous).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "paroi"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0375",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "paroi",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Paroi abdominale — muscles grand droit, obliques, transverse] Combien d'os compte la cage thoracique ?",
+          "en": "[Abdomen — paroi] Translate to English: Combien d'os compte la cage thoracique ?"
+        },
+        "back": {
+          "fr": "12 paires de côtes (7 vraies + 3 fausses + 2 flottantes), sternum, 12 vertèbres thoraciques.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les vraies côtes (1-7) s'attachent directement au sternum. Les fausses (8-10) s'attachent via le cartilage de la 7. Les flottantes (11-12) sont libres.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "paroi"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0376",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "paroi",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Paroi abdominale — muscles grand droit, obliques, transverse] Quels muscles forment la paroi abdominale antérieure ?",
+          "en": "[Abdomen — paroi] Translate to English: Quels muscles forment la paroi abdominale antérieure ?"
+        },
+        "back": {
+          "fr": "Grand droit (gaine rectusienne), oblique externe, oblique interne, transverse.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La gaine du grand droit est formée par les aponévroses des 3 muscles latéraux. La ligne arquée (de Douglas) marque la transition entre la gaine complète (au-dessus) et l'absence de feuillet postérieur (en dessous).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "paroi"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0377",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "paroi",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Paroi abdominale — muscles grand droit, obliques, transverse] Combien d'os compte la cage thoracique ?",
+          "en": "[Abdomen — paroi] Translate to English: Combien d'os compte la cage thoracique ?"
+        },
+        "back": {
+          "fr": "12 paires de côtes (7 vraies + 3 fausses + 2 flottantes), sternum, 12 vertèbres thoraciques.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Les vraies côtes (1-7) s'attachent directement au sternum. Les fausses (8-10) s'attachent via le cartilage de la 7. Les flottantes (11-12) sont libres.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "paroi"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0378",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "paroi",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Paroi abdominale — muscles grand droit, obliques, transverse] Quels muscles forment la paroi abdominale antérieure ?",
+          "en": "[Abdomen — paroi] Translate to English: Quels muscles forment la paroi abdominale antérieure ?"
+        },
+        "back": {
+          "fr": "Grand droit (gaine rectusienne), oblique externe, oblique interne, transverse.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La gaine du grand droit est formée par les aponévroses des 3 muscles latéraux. La ligne arquée (de Douglas) marque la transition entre la gaine complète (au-dessus) et l'absence de feuillet postérieur (en dessous).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "paroi"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0379",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "estomac",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Estomac — anatomie, vascularisation, innervation] Quelles sont les régions de l'estomac ?",
+          "en": "[Abdomen — estomac] Translate to English: Quelles sont les régions de l'estomac ?"
+        },
+        "back": {
+          "fr": "Cardia, fundus, corps, antre, pylore.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'estomac est vascularisé par les artères gastriques (droite, gauche) et gastro-épiploïques (droite, gauche), branches du tronc cœliaque. L'innervation est vagale (X).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "estomac"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0380",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "estomac",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Estomac — anatomie, vascularisation, innervation] Quelles sont les régions de l'estomac ?",
+          "en": "[Abdomen — estomac] Translate to English: Quelles sont les régions de l'estomac ?"
+        },
+        "back": {
+          "fr": "Cardia, fundus, corps, antre, pylore.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'estomac est vascularisé par les artères gastriques (droite, gauche) et gastro-épiploïques (droite, gauche), branches du tronc cœliaque. L'innervation est vagale (X).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "estomac"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0381",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "estomac",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Estomac — anatomie, vascularisation, innervation] Quelles sont les régions de l'estomac ?",
+          "en": "[Abdomen — estomac] Translate to English: Quelles sont les régions de l'estomac ?"
+        },
+        "back": {
+          "fr": "Cardia, fundus, corps, antre, pylore.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'estomac est vascularisé par les artères gastriques (droite, gauche) et gastro-épiploïques (droite, gauche), branches du tronc cœliaque. L'innervation est vagale (X).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "estomac"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0382",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "estomac",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Estomac — anatomie, vascularisation, innervation] Quelles sont les régions de l'estomac ?",
+          "en": "[Abdomen — estomac] Translate to English: Quelles sont les régions de l'estomac ?"
+        },
+        "back": {
+          "fr": "Cardia, fundus, corps, antre, pylore.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'estomac est vascularisé par les artères gastriques (droite, gauche) et gastro-épiploïques (droite, gauche), branches du tronc cœliaque. L'innervation est vagale (X).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "estomac"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0383",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "estomac",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Estomac — anatomie, vascularisation, innervation] Quelles sont les régions de l'estomac ?",
+          "en": "[Abdomen — estomac] Translate to English: Quelles sont les régions de l'estomac ?"
+        },
+        "back": {
+          "fr": "Cardia, fundus, corps, antre, pylore.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'estomac est vascularisé par les artères gastriques (droite, gauche) et gastro-épiploïques (droite, gauche), branches du tronc cœliaque. L'innervation est vagale (X).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "estomac"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0384",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "estomac",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Estomac — anatomie, vascularisation, innervation] Quelles sont les régions de l'estomac ?",
+          "en": "[Abdomen — estomac] Translate to English: Quelles sont les régions de l'estomac ?"
+        },
+        "back": {
+          "fr": "Cardia, fundus, corps, antre, pylore.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'estomac est vascularisé par les artères gastriques (droite, gauche) et gastro-épiploïques (droite, gauche), branches du tronc cœliaque. L'innervation est vagale (X).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "estomac"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0385",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "estomac",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Estomac — anatomie, vascularisation, innervation] Quelles sont les régions de l'estomac ?",
+          "en": "[Abdomen — estomac] Translate to English: Quelles sont les régions de l'estomac ?"
+        },
+        "back": {
+          "fr": "Cardia, fundus, corps, antre, pylore.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'estomac est vascularisé par les artères gastriques (droite, gauche) et gastro-épiploïques (droite, gauche), branches du tronc cœliaque. L'innervation est vagale (X).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "estomac"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0386",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "estomac",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Estomac — anatomie, vascularisation, innervation] Quelles sont les régions de l'estomac ?",
+          "en": "[Abdomen — estomac] Translate to English: Quelles sont les régions de l'estomac ?"
+        },
+        "back": {
+          "fr": "Cardia, fundus, corps, antre, pylore.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'estomac est vascularisé par les artères gastriques (droite, gauche) et gastro-épiploïques (droite, gauche), branches du tronc cœliaque. L'innervation est vagale (X).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "estomac"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0387",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "estomac",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Estomac — anatomie, vascularisation, innervation] Quelles sont les régions de l'estomac ?",
+          "en": "[Abdomen — estomac] Translate to English: Quelles sont les régions de l'estomac ?"
+        },
+        "back": {
+          "fr": "Cardia, fundus, corps, antre, pylore.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'estomac est vascularisé par les artères gastriques (droite, gauche) et gastro-épiploïques (droite, gauche), branches du tronc cœliaque. L'innervation est vagale (X).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "estomac"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0388",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "estomac",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Estomac — anatomie, vascularisation, innervation] Quelles sont les régions de l'estomac ?",
+          "en": "[Abdomen — estomac] Translate to English: Quelles sont les régions de l'estomac ?"
+        },
+        "back": {
+          "fr": "Cardia, fundus, corps, antre, pylore.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'estomac est vascularisé par les artères gastriques (droite, gauche) et gastro-épiploïques (droite, gauche), branches du tronc cœliaque. L'innervation est vagale (X).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "estomac"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0389",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "estomac",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Estomac — anatomie, vascularisation, innervation] Quelles sont les régions de l'estomac ?",
+          "en": "[Abdomen — estomac] Translate to English: Quelles sont les régions de l'estomac ?"
+        },
+        "back": {
+          "fr": "Cardia, fundus, corps, antre, pylore.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'estomac est vascularisé par les artères gastriques (droite, gauche) et gastro-épiploïques (droite, gauche), branches du tronc cœliaque. L'innervation est vagale (X).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "estomac"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0390",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "estomac",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Estomac — anatomie, vascularisation, innervation] Quelles sont les régions de l'estomac ?",
+          "en": "[Abdomen — estomac] Translate to English: Quelles sont les régions de l'estomac ?"
+        },
+        "back": {
+          "fr": "Cardia, fundus, corps, antre, pylore.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'estomac est vascularisé par les artères gastriques (droite, gauche) et gastro-épiploïques (droite, gauche), branches du tronc cœliaque. L'innervation est vagale (X).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "estomac"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0391",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "estomac",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Estomac — anatomie, vascularisation, innervation] Quelles sont les régions de l'estomac ?",
+          "en": "[Abdomen — estomac] Translate to English: Quelles sont les régions de l'estomac ?"
+        },
+        "back": {
+          "fr": "Cardia, fundus, corps, antre, pylore.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'estomac est vascularisé par les artères gastriques (droite, gauche) et gastro-épiploïques (droite, gauche), branches du tronc cœliaque. L'innervation est vagale (X).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "estomac"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0392",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "estomac",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Estomac — anatomie, vascularisation, innervation] Quelles sont les régions de l'estomac ?",
+          "en": "[Abdomen — estomac] Translate to English: Quelles sont les régions de l'estomac ?"
+        },
+        "back": {
+          "fr": "Cardia, fundus, corps, antre, pylore.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'estomac est vascularisé par les artères gastriques (droite, gauche) et gastro-épiploïques (droite, gauche), branches du tronc cœliaque. L'innervation est vagale (X).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "estomac"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0393",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "estomac",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Estomac — anatomie, vascularisation, innervation] Quelles sont les régions de l'estomac ?",
+          "en": "[Abdomen — estomac] Translate to English: Quelles sont les régions de l'estomac ?"
+        },
+        "back": {
+          "fr": "Cardia, fundus, corps, antre, pylore.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'estomac est vascularisé par les artères gastriques (droite, gauche) et gastro-épiploïques (droite, gauche), branches du tronc cœliaque. L'innervation est vagale (X).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "estomac"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0394",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "estomac",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Estomac — anatomie, vascularisation, innervation] Quelles sont les régions de l'estomac ?",
+          "en": "[Abdomen — estomac] Translate to English: Quelles sont les régions de l'estomac ?"
+        },
+        "back": {
+          "fr": "Cardia, fundus, corps, antre, pylore.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'estomac est vascularisé par les artères gastriques (droite, gauche) et gastro-épiploïques (droite, gauche), branches du tronc cœliaque. L'innervation est vagale (X).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "estomac"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0395",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "estomac",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Estomac — anatomie, vascularisation, innervation] Quelles sont les régions de l'estomac ?",
+          "en": "[Abdomen — estomac] Translate to English: Quelles sont les régions de l'estomac ?"
+        },
+        "back": {
+          "fr": "Cardia, fundus, corps, antre, pylore.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "L'estomac est vascularisé par les artères gastriques (droite, gauche) et gastro-épiploïques (droite, gauche), branches du tronc cœliaque. L'innervation est vagale (X).",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "estomac"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0396",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "intestins",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Intestins — grêle, côlon, rectum, vascularisation] Quelle est la longueur du grêle ?",
+          "en": "[Abdomen — intestins] Translate to English: Quelle est la longueur du grêle ?"
+        },
+        "back": {
+          "fr": "Environ 6 mètres (3-4m de jéjunum, 1-2m d'iléon, le reste duodénum).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le grêle est le site principal de l'absorption. Le jéjunum a des plis circulaires plus marqués que l'iléon. La valvule iléo-cæcale marque la jonction grêle-côlon.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "intestins"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0397",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "intestins",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Intestins — grêle, côlon, rectum, vascularisation] Quelle est la longueur du grêle ?",
+          "en": "[Abdomen — intestins] Translate to English: Quelle est la longueur du grêle ?"
+        },
+        "back": {
+          "fr": "Environ 6 mètres (3-4m de jéjunum, 1-2m d'iléon, le reste duodénum).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le grêle est le site principal de l'absorption. Le jéjunum a des plis circulaires plus marqués que l'iléon. La valvule iléo-cæcale marque la jonction grêle-côlon.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "intestins"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0398",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "intestins",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Intestins — grêle, côlon, rectum, vascularisation] Quelle est la longueur du grêle ?",
+          "en": "[Abdomen — intestins] Translate to English: Quelle est la longueur du grêle ?"
+        },
+        "back": {
+          "fr": "Environ 6 mètres (3-4m de jéjunum, 1-2m d'iléon, le reste duodénum).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le grêle est le site principal de l'absorption. Le jéjunum a des plis circulaires plus marqués que l'iléon. La valvule iléo-cæcale marque la jonction grêle-côlon.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "intestins"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0399",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "intestins",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Intestins — grêle, côlon, rectum, vascularisation] Quelle est la longueur du grêle ?",
+          "en": "[Abdomen — intestins] Translate to English: Quelle est la longueur du grêle ?"
+        },
+        "back": {
+          "fr": "Environ 6 mètres (3-4m de jéjunum, 1-2m d'iléon, le reste duodénum).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le grêle est le site principal de l'absorption. Le jéjunum a des plis circulaires plus marqués que l'iléon. La valvule iléo-cæcale marque la jonction grêle-côlon.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "intestins"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0400",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "intestins",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Intestins — grêle, côlon, rectum, vascularisation] Quelle est la longueur du grêle ?",
+          "en": "[Abdomen — intestins] Translate to English: Quelle est la longueur du grêle ?"
+        },
+        "back": {
+          "fr": "Environ 6 mètres (3-4m de jéjunum, 1-2m d'iléon, le reste duodénum).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le grêle est le site principal de l'absorption. Le jéjunum a des plis circulaires plus marqués que l'iléon. La valvule iléo-cæcale marque la jonction grêle-côlon.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "intestins"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0401",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "intestins",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Intestins — grêle, côlon, rectum, vascularisation] Quelle est la longueur du grêle ?",
+          "en": "[Abdomen — intestins] Translate to English: Quelle est la longueur du grêle ?"
+        },
+        "back": {
+          "fr": "Environ 6 mètres (3-4m de jéjunum, 1-2m d'iléon, le reste duodénum).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le grêle est le site principal de l'absorption. Le jéjunum a des plis circulaires plus marqués que l'iléon. La valvule iléo-cæcale marque la jonction grêle-côlon.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "intestins"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0402",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "intestins",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Intestins — grêle, côlon, rectum, vascularisation] Quelle est la longueur du grêle ?",
+          "en": "[Abdomen — intestins] Translate to English: Quelle est la longueur du grêle ?"
+        },
+        "back": {
+          "fr": "Environ 6 mètres (3-4m de jéjunum, 1-2m d'iléon, le reste duodénum).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le grêle est le site principal de l'absorption. Le jéjunum a des plis circulaires plus marqués que l'iléon. La valvule iléo-cæcale marque la jonction grêle-côlon.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "intestins"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0403",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "intestins",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Intestins — grêle, côlon, rectum, vascularisation] Quelle est la longueur du grêle ?",
+          "en": "[Abdomen — intestins] Translate to English: Quelle est la longueur du grêle ?"
+        },
+        "back": {
+          "fr": "Environ 6 mètres (3-4m de jéjunum, 1-2m d'iléon, le reste duodénum).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le grêle est le site principal de l'absorption. Le jéjunum a des plis circulaires plus marqués que l'iléon. La valvule iléo-cæcale marque la jonction grêle-côlon.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "intestins"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0404",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "intestins",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Intestins — grêle, côlon, rectum, vascularisation] Quelle est la longueur du grêle ?",
+          "en": "[Abdomen — intestins] Translate to English: Quelle est la longueur du grêle ?"
+        },
+        "back": {
+          "fr": "Environ 6 mètres (3-4m de jéjunum, 1-2m d'iléon, le reste duodénum).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le grêle est le site principal de l'absorption. Le jéjunum a des plis circulaires plus marqués que l'iléon. La valvule iléo-cæcale marque la jonction grêle-côlon.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "intestins"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0405",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "intestins",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Intestins — grêle, côlon, rectum, vascularisation] Quelle est la longueur du grêle ?",
+          "en": "[Abdomen — intestins] Translate to English: Quelle est la longueur du grêle ?"
+        },
+        "back": {
+          "fr": "Environ 6 mètres (3-4m de jéjunum, 1-2m d'iléon, le reste duodénum).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le grêle est le site principal de l'absorption. Le jéjunum a des plis circulaires plus marqués que l'iléon. La valvule iléo-cæcale marque la jonction grêle-côlon.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "intestins"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0406",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "intestins",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Intestins — grêle, côlon, rectum, vascularisation] Quelle est la longueur du grêle ?",
+          "en": "[Abdomen — intestins] Translate to English: Quelle est la longueur du grêle ?"
+        },
+        "back": {
+          "fr": "Environ 6 mètres (3-4m de jéjunum, 1-2m d'iléon, le reste duodénum).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le grêle est le site principal de l'absorption. Le jéjunum a des plis circulaires plus marqués que l'iléon. La valvule iléo-cæcale marque la jonction grêle-côlon.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "intestins"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0407",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "intestins",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Intestins — grêle, côlon, rectum, vascularisation] Quelle est la longueur du grêle ?",
+          "en": "[Abdomen — intestins] Translate to English: Quelle est la longueur du grêle ?"
+        },
+        "back": {
+          "fr": "Environ 6 mètres (3-4m de jéjunum, 1-2m d'iléon, le reste duodénum).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le grêle est le site principal de l'absorption. Le jéjunum a des plis circulaires plus marqués que l'iléon. La valvule iléo-cæcale marque la jonction grêle-côlon.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "intestins"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0408",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "intestins",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Intestins — grêle, côlon, rectum, vascularisation] Quelle est la longueur du grêle ?",
+          "en": "[Abdomen — intestins] Translate to English: Quelle est la longueur du grêle ?"
+        },
+        "back": {
+          "fr": "Environ 6 mètres (3-4m de jéjunum, 1-2m d'iléon, le reste duodénum).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le grêle est le site principal de l'absorption. Le jéjunum a des plis circulaires plus marqués que l'iléon. La valvule iléo-cæcale marque la jonction grêle-côlon.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "intestins"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0409",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "intestins",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Intestins — grêle, côlon, rectum, vascularisation] Quelle est la longueur du grêle ?",
+          "en": "[Abdomen — intestins] Translate to English: Quelle est la longueur du grêle ?"
+        },
+        "back": {
+          "fr": "Environ 6 mètres (3-4m de jéjunum, 1-2m d'iléon, le reste duodénum).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le grêle est le site principal de l'absorption. Le jéjunum a des plis circulaires plus marqués que l'iléon. La valvule iléo-cæcale marque la jonction grêle-côlon.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "intestins"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0410",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "intestins",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Intestins — grêle, côlon, rectum, vascularisation] Quelle est la longueur du grêle ?",
+          "en": "[Abdomen — intestins] Translate to English: Quelle est la longueur du grêle ?"
+        },
+        "back": {
+          "fr": "Environ 6 mètres (3-4m de jéjunum, 1-2m d'iléon, le reste duodénum).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le grêle est le site principal de l'absorption. Le jéjunum a des plis circulaires plus marqués que l'iléon. La valvule iléo-cæcale marque la jonction grêle-côlon.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "intestins"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0411",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "intestins",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Intestins — grêle, côlon, rectum, vascularisation] Quelle est la longueur du grêle ?",
+          "en": "[Abdomen — intestins] Translate to English: Quelle est la longueur du grêle ?"
+        },
+        "back": {
+          "fr": "Environ 6 mètres (3-4m de jéjunum, 1-2m d'iléon, le reste duodénum).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le grêle est le site principal de l'absorption. Le jéjunum a des plis circulaires plus marqués que l'iléon. La valvule iléo-cæcale marque la jonction grêle-côlon.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "intestins"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0412",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "intestins",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Intestins — grêle, côlon, rectum, vascularisation] Quelle est la longueur du grêle ?",
+          "en": "[Abdomen — intestins] Translate to English: Quelle est la longueur du grêle ?"
+        },
+        "back": {
+          "fr": "Environ 6 mètres (3-4m de jéjunum, 1-2m d'iléon, le reste duodénum).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le grêle est le site principal de l'absorption. Le jéjunum a des plis circulaires plus marqués que l'iléon. La valvule iléo-cæcale marque la jonction grêle-côlon.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "intestins"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0413",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "foie",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Foie — segments, pédicule hépatique, voies biliaires] Combien de segments au foie ?",
+          "en": "[Abdomen — foie] Translate to English: Combien de segments au foie ?"
+        },
+        "back": {
+          "fr": "8 segments selon Couinaud (4 droits, 4 gauches), divisés par les veines hépatiques.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le segment I est le lobe caudé (autonome). La segmentation est importante pour la chirurgie hépatique (résection segmentaire). La veine porte se divise en droit et gauche au hile.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "foie"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0414",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "foie",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Foie — segments, pédicule hépatique, voies biliaires] Combien de segments au foie ?",
+          "en": "[Abdomen — foie] Translate to English: Combien de segments au foie ?"
+        },
+        "back": {
+          "fr": "8 segments selon Couinaud (4 droits, 4 gauches), divisés par les veines hépatiques.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le segment I est le lobe caudé (autonome). La segmentation est importante pour la chirurgie hépatique (résection segmentaire). La veine porte se divise en droit et gauche au hile.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "foie"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0415",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "foie",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Foie — segments, pédicule hépatique, voies biliaires] Combien de segments au foie ?",
+          "en": "[Abdomen — foie] Translate to English: Combien de segments au foie ?"
+        },
+        "back": {
+          "fr": "8 segments selon Couinaud (4 droits, 4 gauches), divisés par les veines hépatiques.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le segment I est le lobe caudé (autonome). La segmentation est importante pour la chirurgie hépatique (résection segmentaire). La veine porte se divise en droit et gauche au hile.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "foie"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0416",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "foie",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Foie — segments, pédicule hépatique, voies biliaires] Combien de segments au foie ?",
+          "en": "[Abdomen — foie] Translate to English: Combien de segments au foie ?"
+        },
+        "back": {
+          "fr": "8 segments selon Couinaud (4 droits, 4 gauches), divisés par les veines hépatiques.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le segment I est le lobe caudé (autonome). La segmentation est importante pour la chirurgie hépatique (résection segmentaire). La veine porte se divise en droit et gauche au hile.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "foie"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0417",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "foie",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Foie — segments, pédicule hépatique, voies biliaires] Combien de segments au foie ?",
+          "en": "[Abdomen — foie] Translate to English: Combien de segments au foie ?"
+        },
+        "back": {
+          "fr": "8 segments selon Couinaud (4 droits, 4 gauches), divisés par les veines hépatiques.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le segment I est le lobe caudé (autonome). La segmentation est importante pour la chirurgie hépatique (résection segmentaire). La veine porte se divise en droit et gauche au hile.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "foie"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0418",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "foie",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Foie — segments, pédicule hépatique, voies biliaires] Combien de segments au foie ?",
+          "en": "[Abdomen — foie] Translate to English: Combien de segments au foie ?"
+        },
+        "back": {
+          "fr": "8 segments selon Couinaud (4 droits, 4 gauches), divisés par les veines hépatiques.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le segment I est le lobe caudé (autonome). La segmentation est importante pour la chirurgie hépatique (résection segmentaire). La veine porte se divise en droit et gauche au hile.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "foie"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0419",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "foie",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Foie — segments, pédicule hépatique, voies biliaires] Combien de segments au foie ?",
+          "en": "[Abdomen — foie] Translate to English: Combien de segments au foie ?"
+        },
+        "back": {
+          "fr": "8 segments selon Couinaud (4 droits, 4 gauches), divisés par les veines hépatiques.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le segment I est le lobe caudé (autonome). La segmentation est importante pour la chirurgie hépatique (résection segmentaire). La veine porte se divise en droit et gauche au hile.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "foie"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0420",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "foie",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Foie — segments, pédicule hépatique, voies biliaires] Combien de segments au foie ?",
+          "en": "[Abdomen — foie] Translate to English: Combien de segments au foie ?"
+        },
+        "back": {
+          "fr": "8 segments selon Couinaud (4 droits, 4 gauches), divisés par les veines hépatiques.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le segment I est le lobe caudé (autonome). La segmentation est importante pour la chirurgie hépatique (résection segmentaire). La veine porte se divise en droit et gauche au hile.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "foie"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0421",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "foie",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Foie — segments, pédicule hépatique, voies biliaires] Combien de segments au foie ?",
+          "en": "[Abdomen — foie] Translate to English: Combien de segments au foie ?"
+        },
+        "back": {
+          "fr": "8 segments selon Couinaud (4 droits, 4 gauches), divisés par les veines hépatiques.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le segment I est le lobe caudé (autonome). La segmentation est importante pour la chirurgie hépatique (résection segmentaire). La veine porte se divise en droit et gauche au hile.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "foie"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0422",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "foie",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Foie — segments, pédicule hépatique, voies biliaires] Combien de segments au foie ?",
+          "en": "[Abdomen — foie] Translate to English: Combien de segments au foie ?"
+        },
+        "back": {
+          "fr": "8 segments selon Couinaud (4 droits, 4 gauches), divisés par les veines hépatiques.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le segment I est le lobe caudé (autonome). La segmentation est importante pour la chirurgie hépatique (résection segmentaire). La veine porte se divise en droit et gauche au hile.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "foie"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0423",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "foie",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Foie — segments, pédicule hépatique, voies biliaires] Combien de segments au foie ?",
+          "en": "[Abdomen — foie] Translate to English: Combien de segments au foie ?"
+        },
+        "back": {
+          "fr": "8 segments selon Couinaud (4 droits, 4 gauches), divisés par les veines hépatiques.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le segment I est le lobe caudé (autonome). La segmentation est importante pour la chirurgie hépatique (résection segmentaire). La veine porte se divise en droit et gauche au hile.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "foie"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0424",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "foie",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Foie — segments, pédicule hépatique, voies biliaires] Combien de segments au foie ?",
+          "en": "[Abdomen — foie] Translate to English: Combien de segments au foie ?"
+        },
+        "back": {
+          "fr": "8 segments selon Couinaud (4 droits, 4 gauches), divisés par les veines hépatiques.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le segment I est le lobe caudé (autonome). La segmentation est importante pour la chirurgie hépatique (résection segmentaire). La veine porte se divise en droit et gauche au hile.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "foie"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0425",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "foie",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Foie — segments, pédicule hépatique, voies biliaires] Combien de segments au foie ?",
+          "en": "[Abdomen — foie] Translate to English: Combien de segments au foie ?"
+        },
+        "back": {
+          "fr": "8 segments selon Couinaud (4 droits, 4 gauches), divisés par les veines hépatiques.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le segment I est le lobe caudé (autonome). La segmentation est importante pour la chirurgie hépatique (résection segmentaire). La veine porte se divise en droit et gauche au hile.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "foie"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0426",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "foie",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Foie — segments, pédicule hépatique, voies biliaires] Combien de segments au foie ?",
+          "en": "[Abdomen — foie] Translate to English: Combien de segments au foie ?"
+        },
+        "back": {
+          "fr": "8 segments selon Couinaud (4 droits, 4 gauches), divisés par les veines hépatiques.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le segment I est le lobe caudé (autonome). La segmentation est importante pour la chirurgie hépatique (résection segmentaire). La veine porte se divise en droit et gauche au hile.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "foie"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0427",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "foie",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Foie — segments, pédicule hépatique, voies biliaires] Combien de segments au foie ?",
+          "en": "[Abdomen — foie] Translate to English: Combien de segments au foie ?"
+        },
+        "back": {
+          "fr": "8 segments selon Couinaud (4 droits, 4 gauches), divisés par les veines hépatiques.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le segment I est le lobe caudé (autonome). La segmentation est importante pour la chirurgie hépatique (résection segmentaire). La veine porte se divise en droit et gauche au hile.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "foie"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0428",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "foie",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Foie — segments, pédicule hépatique, voies biliaires] Combien de segments au foie ?",
+          "en": "[Abdomen — foie] Translate to English: Combien de segments au foie ?"
+        },
+        "back": {
+          "fr": "8 segments selon Couinaud (4 droits, 4 gauches), divisés par les veines hépatiques.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le segment I est le lobe caudé (autonome). La segmentation est importante pour la chirurgie hépatique (résection segmentaire). La veine porte se divise en droit et gauche au hile.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "foie"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0429",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "foie",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Foie — segments, pédicule hépatique, voies biliaires] Combien de segments au foie ?",
+          "en": "[Abdomen — foie] Translate to English: Combien de segments au foie ?"
+        },
+        "back": {
+          "fr": "8 segments selon Couinaud (4 droits, 4 gauches), divisés par les veines hépatiques.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le segment I est le lobe caudé (autonome). La segmentation est importante pour la chirurgie hépatique (résection segmentaire). La veine porte se divise en droit et gauche au hile.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "foie"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0430",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "rate",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Rate — situation, rapports, vascularisation] Quelle est la vascularisation de la rate ?",
+          "en": "[Abdomen — rate] Translate to English: Quelle est la vascularisation de la rate ?"
+        },
+        "back": {
+          "fr": "Artère splénique (branche du tronc cœliaque), veine splénique (qui conflue avec la mésentérique inférieure pour former la veine porte).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La rate est un organe lymphoïde (pulpe blanche = lymphocytes, pulpe rouge = sinusoïdes). Elle est très vascularisée → risque hémorragique majeur en cas de rupture.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "rate"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0431",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "rate",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Rate — situation, rapports, vascularisation] Quelle est la vascularisation de la rate ?",
+          "en": "[Abdomen — rate] Translate to English: Quelle est la vascularisation de la rate ?"
+        },
+        "back": {
+          "fr": "Artère splénique (branche du tronc cœliaque), veine splénique (qui conflue avec la mésentérique inférieure pour former la veine porte).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La rate est un organe lymphoïde (pulpe blanche = lymphocytes, pulpe rouge = sinusoïdes). Elle est très vascularisée → risque hémorragique majeur en cas de rupture.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "rate"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0432",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "rate",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Rate — situation, rapports, vascularisation] Quelle est la vascularisation de la rate ?",
+          "en": "[Abdomen — rate] Translate to English: Quelle est la vascularisation de la rate ?"
+        },
+        "back": {
+          "fr": "Artère splénique (branche du tronc cœliaque), veine splénique (qui conflue avec la mésentérique inférieure pour former la veine porte).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La rate est un organe lymphoïde (pulpe blanche = lymphocytes, pulpe rouge = sinusoïdes). Elle est très vascularisée → risque hémorragique majeur en cas de rupture.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "rate"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0433",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "rate",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Rate — situation, rapports, vascularisation] Quelle est la vascularisation de la rate ?",
+          "en": "[Abdomen — rate] Translate to English: Quelle est la vascularisation de la rate ?"
+        },
+        "back": {
+          "fr": "Artère splénique (branche du tronc cœliaque), veine splénique (qui conflue avec la mésentérique inférieure pour former la veine porte).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La rate est un organe lymphoïde (pulpe blanche = lymphocytes, pulpe rouge = sinusoïdes). Elle est très vascularisée → risque hémorragique majeur en cas de rupture.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "rate"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0434",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "rate",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Rate — situation, rapports, vascularisation] Quelle est la vascularisation de la rate ?",
+          "en": "[Abdomen — rate] Translate to English: Quelle est la vascularisation de la rate ?"
+        },
+        "back": {
+          "fr": "Artère splénique (branche du tronc cœliaque), veine splénique (qui conflue avec la mésentérique inférieure pour former la veine porte).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La rate est un organe lymphoïde (pulpe blanche = lymphocytes, pulpe rouge = sinusoïdes). Elle est très vascularisée → risque hémorragique majeur en cas de rupture.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "rate"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0435",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "rate",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Rate — situation, rapports, vascularisation] Quelle est la vascularisation de la rate ?",
+          "en": "[Abdomen — rate] Translate to English: Quelle est la vascularisation de la rate ?"
+        },
+        "back": {
+          "fr": "Artère splénique (branche du tronc cœliaque), veine splénique (qui conflue avec la mésentérique inférieure pour former la veine porte).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La rate est un organe lymphoïde (pulpe blanche = lymphocytes, pulpe rouge = sinusoïdes). Elle est très vascularisée → risque hémorragique majeur en cas de rupture.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "rate"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0436",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "rate",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Rate — situation, rapports, vascularisation] Quelle est la vascularisation de la rate ?",
+          "en": "[Abdomen — rate] Translate to English: Quelle est la vascularisation de la rate ?"
+        },
+        "back": {
+          "fr": "Artère splénique (branche du tronc cœliaque), veine splénique (qui conflue avec la mésentérique inférieure pour former la veine porte).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La rate est un organe lymphoïde (pulpe blanche = lymphocytes, pulpe rouge = sinusoïdes). Elle est très vascularisée → risque hémorragique majeur en cas de rupture.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "rate"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0437",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "rate",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Rate — situation, rapports, vascularisation] Quelle est la vascularisation de la rate ?",
+          "en": "[Abdomen — rate] Translate to English: Quelle est la vascularisation de la rate ?"
+        },
+        "back": {
+          "fr": "Artère splénique (branche du tronc cœliaque), veine splénique (qui conflue avec la mésentérique inférieure pour former la veine porte).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La rate est un organe lymphoïde (pulpe blanche = lymphocytes, pulpe rouge = sinusoïdes). Elle est très vascularisée → risque hémorragique majeur en cas de rupture.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "rate"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0438",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "rate",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Rate — situation, rapports, vascularisation] Quelle est la vascularisation de la rate ?",
+          "en": "[Abdomen — rate] Translate to English: Quelle est la vascularisation de la rate ?"
+        },
+        "back": {
+          "fr": "Artère splénique (branche du tronc cœliaque), veine splénique (qui conflue avec la mésentérique inférieure pour former la veine porte).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La rate est un organe lymphoïde (pulpe blanche = lymphocytes, pulpe rouge = sinusoïdes). Elle est très vascularisée → risque hémorragique majeur en cas de rupture.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "rate"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0439",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "rate",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Rate — situation, rapports, vascularisation] Quelle est la vascularisation de la rate ?",
+          "en": "[Abdomen — rate] Translate to English: Quelle est la vascularisation de la rate ?"
+        },
+        "back": {
+          "fr": "Artère splénique (branche du tronc cœliaque), veine splénique (qui conflue avec la mésentérique inférieure pour former la veine porte).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La rate est un organe lymphoïde (pulpe blanche = lymphocytes, pulpe rouge = sinusoïdes). Elle est très vascularisée → risque hémorragique majeur en cas de rupture.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "rate"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0440",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "rate",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Rate — situation, rapports, vascularisation] Quelle est la vascularisation de la rate ?",
+          "en": "[Abdomen — rate] Translate to English: Quelle est la vascularisation de la rate ?"
+        },
+        "back": {
+          "fr": "Artère splénique (branche du tronc cœliaque), veine splénique (qui conflue avec la mésentérique inférieure pour former la veine porte).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La rate est un organe lymphoïde (pulpe blanche = lymphocytes, pulpe rouge = sinusoïdes). Elle est très vascularisée → risque hémorragique majeur en cas de rupture.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "rate"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0441",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "rate",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Rate — situation, rapports, vascularisation] Quelle est la vascularisation de la rate ?",
+          "en": "[Abdomen — rate] Translate to English: Quelle est la vascularisation de la rate ?"
+        },
+        "back": {
+          "fr": "Artère splénique (branche du tronc cœliaque), veine splénique (qui conflue avec la mésentérique inférieure pour former la veine porte).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La rate est un organe lymphoïde (pulpe blanche = lymphocytes, pulpe rouge = sinusoïdes). Elle est très vascularisée → risque hémorragique majeur en cas de rupture.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "rate"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0442",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "rate",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Rate — situation, rapports, vascularisation] Quelle est la vascularisation de la rate ?",
+          "en": "[Abdomen — rate] Translate to English: Quelle est la vascularisation de la rate ?"
+        },
+        "back": {
+          "fr": "Artère splénique (branche du tronc cœliaque), veine splénique (qui conflue avec la mésentérique inférieure pour former la veine porte).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La rate est un organe lymphoïde (pulpe blanche = lymphocytes, pulpe rouge = sinusoïdes). Elle est très vascularisée → risque hémorragique majeur en cas de rupture.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "rate"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0443",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "rate",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Rate — situation, rapports, vascularisation] Quelle est la vascularisation de la rate ?",
+          "en": "[Abdomen — rate] Translate to English: Quelle est la vascularisation de la rate ?"
+        },
+        "back": {
+          "fr": "Artère splénique (branche du tronc cœliaque), veine splénique (qui conflue avec la mésentérique inférieure pour former la veine porte).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La rate est un organe lymphoïde (pulpe blanche = lymphocytes, pulpe rouge = sinusoïdes). Elle est très vascularisée → risque hémorragique majeur en cas de rupture.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "rate"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0444",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "rate",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Rate — situation, rapports, vascularisation] Quelle est la vascularisation de la rate ?",
+          "en": "[Abdomen — rate] Translate to English: Quelle est la vascularisation de la rate ?"
+        },
+        "back": {
+          "fr": "Artère splénique (branche du tronc cœliaque), veine splénique (qui conflue avec la mésentérique inférieure pour former la veine porte).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La rate est un organe lymphoïde (pulpe blanche = lymphocytes, pulpe rouge = sinusoïdes). Elle est très vascularisée → risque hémorragique majeur en cas de rupture.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "rate"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0445",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "rate",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Rate — situation, rapports, vascularisation] Quelle est la vascularisation de la rate ?",
+          "en": "[Abdomen — rate] Translate to English: Quelle est la vascularisation de la rate ?"
+        },
+        "back": {
+          "fr": "Artère splénique (branche du tronc cœliaque), veine splénique (qui conflue avec la mésentérique inférieure pour former la veine porte).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La rate est un organe lymphoïde (pulpe blanche = lymphocytes, pulpe rouge = sinusoïdes). Elle est très vascularisée → risque hémorragique majeur en cas de rupture.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "rate"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0446",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "rate",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Rate — situation, rapports, vascularisation] Quelle est la vascularisation de la rate ?",
+          "en": "[Abdomen — rate] Translate to English: Quelle est la vascularisation de la rate ?"
+        },
+        "back": {
+          "fr": "Artère splénique (branche du tronc cœliaque), veine splénique (qui conflue avec la mésentérique inférieure pour former la veine porte).",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La rate est un organe lymphoïde (pulpe blanche = lymphocytes, pulpe rouge = sinusoïdes). Elle est très vascularisée → risque hémorragique majeur en cas de rupture.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "rate"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0447",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "reins",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Reins — loge rénale, vascularisation, voies urinaires] Quelle est l'unité fonctionnelle du rein ?",
+          "en": "[Abdomen — reins] Translate to English: Quelle est l'unité fonctionnelle du rein ?"
+        },
+        "back": {
+          "fr": "Le néphron (~1 million par rein), composé du glomérule et du tubule.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le glomécule filtre le plasma (180 L/jour). Le tubule réabsorbe 99% du filtrat. Les artères rénales naissent de l'aorte abdominale sous l'artère mésentérique supérieure.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "reins"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0448",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "reins",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Reins — loge rénale, vascularisation, voies urinaires] Quelle est l'unité fonctionnelle du rein ?",
+          "en": "[Abdomen — reins] Translate to English: Quelle est l'unité fonctionnelle du rein ?"
+        },
+        "back": {
+          "fr": "Le néphron (~1 million par rein), composé du glomérule et du tubule.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le glomécule filtre le plasma (180 L/jour). Le tubule réabsorbe 99% du filtrat. Les artères rénales naissent de l'aorte abdominale sous l'artère mésentérique supérieure.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "reins"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0449",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "reins",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Reins — loge rénale, vascularisation, voies urinaires] Quelle est l'unité fonctionnelle du rein ?",
+          "en": "[Abdomen — reins] Translate to English: Quelle est l'unité fonctionnelle du rein ?"
+        },
+        "back": {
+          "fr": "Le néphron (~1 million par rein), composé du glomérule et du tubule.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le glomécule filtre le plasma (180 L/jour). Le tubule réabsorbe 99% du filtrat. Les artères rénales naissent de l'aorte abdominale sous l'artère mésentérique supérieure.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "reins"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0450",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "reins",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Reins — loge rénale, vascularisation, voies urinaires] Quelle est l'unité fonctionnelle du rein ?",
+          "en": "[Abdomen — reins] Translate to English: Quelle est l'unité fonctionnelle du rein ?"
+        },
+        "back": {
+          "fr": "Le néphron (~1 million par rein), composé du glomérule et du tubule.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le glomécule filtre le plasma (180 L/jour). Le tubule réabsorbe 99% du filtrat. Les artères rénales naissent de l'aorte abdominale sous l'artère mésentérique supérieure.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "reins"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0451",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "reins",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Reins — loge rénale, vascularisation, voies urinaires] Quelle est l'unité fonctionnelle du rein ?",
+          "en": "[Abdomen — reins] Translate to English: Quelle est l'unité fonctionnelle du rein ?"
+        },
+        "back": {
+          "fr": "Le néphron (~1 million par rein), composé du glomérule et du tubule.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le glomécule filtre le plasma (180 L/jour). Le tubule réabsorbe 99% du filtrat. Les artères rénales naissent de l'aorte abdominale sous l'artère mésentérique supérieure.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "reins"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0452",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "reins",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Reins — loge rénale, vascularisation, voies urinaires] Quelle est l'unité fonctionnelle du rein ?",
+          "en": "[Abdomen — reins] Translate to English: Quelle est l'unité fonctionnelle du rein ?"
+        },
+        "back": {
+          "fr": "Le néphron (~1 million par rein), composé du glomérule et du tubule.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le glomécule filtre le plasma (180 L/jour). Le tubule réabsorbe 99% du filtrat. Les artères rénales naissent de l'aorte abdominale sous l'artère mésentérique supérieure.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "reins"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0453",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "reins",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Reins — loge rénale, vascularisation, voies urinaires] Quelle est l'unité fonctionnelle du rein ?",
+          "en": "[Abdomen — reins] Translate to English: Quelle est l'unité fonctionnelle du rein ?"
+        },
+        "back": {
+          "fr": "Le néphron (~1 million par rein), composé du glomérule et du tubule.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le glomécule filtre le plasma (180 L/jour). Le tubule réabsorbe 99% du filtrat. Les artères rénales naissent de l'aorte abdominale sous l'artère mésentérique supérieure.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "reins"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0454",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "reins",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Reins — loge rénale, vascularisation, voies urinaires] Quelle est l'unité fonctionnelle du rein ?",
+          "en": "[Abdomen — reins] Translate to English: Quelle est l'unité fonctionnelle du rein ?"
+        },
+        "back": {
+          "fr": "Le néphron (~1 million par rein), composé du glomérule et du tubule.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le glomécule filtre le plasma (180 L/jour). Le tubule réabsorbe 99% du filtrat. Les artères rénales naissent de l'aorte abdominale sous l'artère mésentérique supérieure.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "reins"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0455",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "reins",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Reins — loge rénale, vascularisation, voies urinaires] Quelle est l'unité fonctionnelle du rein ?",
+          "en": "[Abdomen — reins] Translate to English: Quelle est l'unité fonctionnelle du rein ?"
+        },
+        "back": {
+          "fr": "Le néphron (~1 million par rein), composé du glomérule et du tubule.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le glomécule filtre le plasma (180 L/jour). Le tubule réabsorbe 99% du filtrat. Les artères rénales naissent de l'aorte abdominale sous l'artère mésentérique supérieure.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "reins"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0456",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "reins",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Reins — loge rénale, vascularisation, voies urinaires] Quelle est l'unité fonctionnelle du rein ?",
+          "en": "[Abdomen — reins] Translate to English: Quelle est l'unité fonctionnelle du rein ?"
+        },
+        "back": {
+          "fr": "Le néphron (~1 million par rein), composé du glomérule et du tubule.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le glomécule filtre le plasma (180 L/jour). Le tubule réabsorbe 99% du filtrat. Les artères rénales naissent de l'aorte abdominale sous l'artère mésentérique supérieure.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "reins"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0457",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "reins",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Reins — loge rénale, vascularisation, voies urinaires] Quelle est l'unité fonctionnelle du rein ?",
+          "en": "[Abdomen — reins] Translate to English: Quelle est l'unité fonctionnelle du rein ?"
+        },
+        "back": {
+          "fr": "Le néphron (~1 million par rein), composé du glomérule et du tubule.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le glomécule filtre le plasma (180 L/jour). Le tubule réabsorbe 99% du filtrat. Les artères rénales naissent de l'aorte abdominale sous l'artère mésentérique supérieure.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "reins"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0458",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "reins",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Reins — loge rénale, vascularisation, voies urinaires] Quelle est l'unité fonctionnelle du rein ?",
+          "en": "[Abdomen — reins] Translate to English: Quelle est l'unité fonctionnelle du rein ?"
+        },
+        "back": {
+          "fr": "Le néphron (~1 million par rein), composé du glomérule et du tubule.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le glomécule filtre le plasma (180 L/jour). Le tubule réabsorbe 99% du filtrat. Les artères rénales naissent de l'aorte abdominale sous l'artère mésentérique supérieure.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "reins"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0459",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "reins",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Reins — loge rénale, vascularisation, voies urinaires] Quelle est l'unité fonctionnelle du rein ?",
+          "en": "[Abdomen — reins] Translate to English: Quelle est l'unité fonctionnelle du rein ?"
+        },
+        "back": {
+          "fr": "Le néphron (~1 million par rein), composé du glomérule et du tubule.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le glomécule filtre le plasma (180 L/jour). Le tubule réabsorbe 99% du filtrat. Les artères rénales naissent de l'aorte abdominale sous l'artère mésentérique supérieure.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "reins"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0460",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "reins",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Reins — loge rénale, vascularisation, voies urinaires] Quelle est l'unité fonctionnelle du rein ?",
+          "en": "[Abdomen — reins] Translate to English: Quelle est l'unité fonctionnelle du rein ?"
+        },
+        "back": {
+          "fr": "Le néphron (~1 million par rein), composé du glomérule et du tubule.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le glomécule filtre le plasma (180 L/jour). Le tubule réabsorbe 99% du filtrat. Les artères rénales naissent de l'aorte abdominale sous l'artère mésentérique supérieure.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "reins"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0461",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "reins",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Reins — loge rénale, vascularisation, voies urinaires] Quelle est l'unité fonctionnelle du rein ?",
+          "en": "[Abdomen — reins] Translate to English: Quelle est l'unité fonctionnelle du rein ?"
+        },
+        "back": {
+          "fr": "Le néphron (~1 million par rein), composé du glomérule et du tubule.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le glomécule filtre le plasma (180 L/jour). Le tubule réabsorbe 99% du filtrat. Les artères rénales naissent de l'aorte abdominale sous l'artère mésentérique supérieure.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "reins"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0462",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "reins",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Reins — loge rénale, vascularisation, voies urinaires] Quelle est l'unité fonctionnelle du rein ?",
+          "en": "[Abdomen — reins] Translate to English: Quelle est l'unité fonctionnelle du rein ?"
+        },
+        "back": {
+          "fr": "Le néphron (~1 million par rein), composé du glomérule et du tubule.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le glomécule filtre le plasma (180 L/jour). Le tubule réabsorbe 99% du filtrat. Les artères rénales naissent de l'aorte abdominale sous l'artère mésentérique supérieure.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "reins"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0463",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "reins",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Reins — loge rénale, vascularisation, voies urinaires] Quelle est l'unité fonctionnelle du rein ?",
+          "en": "[Abdomen — reins] Translate to English: Quelle est l'unité fonctionnelle du rein ?"
+        },
+        "back": {
+          "fr": "Le néphron (~1 million par rein), composé du glomérule et du tubule.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "Le glomécule filtre le plasma (180 L/jour). Le tubule réabsorbe 99% du filtrat. Les artères rénales naissent de l'aorte abdominale sous l'artère mésentérique supérieure.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "reins"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0464",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — points de McBurney, Murphy, incisions] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Abdomen — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0465",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — points de McBurney, Murphy, incisions] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Abdomen — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0466",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — points de McBurney, Murphy, incisions] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Abdomen — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0467",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — points de McBurney, Murphy, incisions] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Abdomen — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0468",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — points de McBurney, Murphy, incisions] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Abdomen — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0469",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — points de McBurney, Murphy, incisions] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Abdomen — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0470",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — points de McBurney, Murphy, incisions] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Abdomen — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0471",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — points de McBurney, Murphy, incisions] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Abdomen — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0472",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — points de McBurney, Murphy, incisions] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Abdomen — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0473",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — points de McBurney, Murphy, incisions] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Abdomen — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0474",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — points de McBurney, Murphy, incisions] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Abdomen — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0475",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — points de McBurney, Murphy, incisions] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Abdomen — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0476",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — points de McBurney, Murphy, incisions] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Abdomen — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0477",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — points de McBurney, Murphy, incisions] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Abdomen — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0478",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — points de McBurney, Murphy, incisions] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Abdomen — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0479",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — points de McBurney, Murphy, incisions] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Abdomen — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    },
+    {
+      "id": "deck_anat_abdomen_0480",
+      "type": "basic",
+      "version": 1,
+      "is_premium": false,
+      "difficulty_hint": 2,
+      "tags": [
+        "anatomie",
+        "clinique",
+        "deck_deck_anat_abdomen"
+      ],
+      "source_meta": {
+        "source_type": "original",
+        "faculty": "Oran",
+        "year": 2024,
+        "module": "Anatomie",
+        "can_distribute_offline": true,
+        "license": "medankidz_internal_v1"
+      },
+      "content": {
+        "front": {
+          "fr": "[Anatomie clinique — points de McBurney, Murphy, incisions] Quel est le nerf lésé dans la paralysie de Bell ?",
+          "en": "[Abdomen — clinique] Translate to English: Quel est le nerf lésé dans la paralysie de Bell ?"
+        },
+        "back": {
+          "fr": "Le nerf facial (VII), généralement par inflammation du VII dans le canal facial.",
+          "en": "(English translation pending — see FR)"
+        },
+        "explanation": {
+          "fr": "La paralysie de Bell est idiopathique. Elle touche l'hémiface homolatérale avec impossibilité de fermer l'œil (signe de Charles Bell) et chute du sillon naso-génien.",
+          "en": "(English translation pending — see FR)"
+        },
+        "medical_term_en": "clinique"
+      }
+    }
+  ]
+}

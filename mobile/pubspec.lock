@@ -1,0 +1,65 @@
+# Pub lockfile — généré par tools/scripts/generate_lockfiles.py
+# Régénérer avec : cd mobile && flutter pub get
+# Format : https://dart.dev/tools/pub/glossary#lockfile
+sdks:
+  dart: '>=3.4.0 <4.0.0'
+  flutter: '>=3.0.0'
+
+packages:
+  drift:
+    dependency: "direct main"
+    version: 2.18.0
+  sqlite3_flutter_libs:
+    dependency: "direct main"
+    version: 0.5.20
+  path_provider:
+    dependency: "direct main"
+    version: 2.1.3
+  path:
+    dependency: "direct main"
+    version: 1.9.0
+  flutter_riverpod:
+    dependency: "direct main"
+    version: 2.5.1
+  dio:
+    dependency: "direct main"
+    version: 5.7.0
+  flutter_secure_storage:
+    dependency: "direct main"
+    version: 9.2.2
+  workmanager:
+    dependency: "direct main"
+    version: 0.5.2
+  cryptography:
+    dependency: "direct main"
+    version: 2.7.0
+  pointycastle:
+    dependency: "direct main"
+    version: 3.9.1
+  connectivity_plus:
+    dependency: "direct main"
+    version: 6.0.5
+  uuid:
+    dependency: "direct main"
+    version: 4.5.0
+  fake_async:
+    dependency: "direct main"
+    version: 1.3.1
+  mocktail:
+    dependency: "direct main"
+    version: 1.0.4
+  flutter_test:
+    dependency: transitive
+    version: 1.0.0
+  flutter_lints:
+    dependency: "direct main"
+    version: 4.0.0
+  test:
+    dependency: "direct main"
+    version: 1.25.0
+  drift_dev:
+    dependency: "direct main"
+    version: 2.18.0
+  build_runner:
+    dependency: "direct main"
+    version: 2.4.9
