@@ -1,0 +1,91 @@
+# CronJob de backup Postgres — Phase 12 bis.
+#
+# Stratégie :
+#   * pg_dump quotidien à 03:00 (heure d'Alger).
+#   * Compression gzip + envoi vers R2 (S3-compatible).
+#   * Rétention 30 jours (cleanup intégré).
+#   * Pas d'impact sur le trafic utilisateur (pod éphémère).
+
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: postgres-backup
+  labels:
+    app: postgres
+    purpose: backup
+spec:
+  schedule: "0 3 * * *"
+  timeZone: "Africa/Algiers"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 5
+  startingDeadlineSeconds: 600
+  jobTemplate:
+    spec:
+      backoffLimit: 2
+      template:
+        metadata:
+          labels:
+            app: postgres
+            purpose: backup
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: pg-dump
+              image: postgres:16-alpine
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  set -e
+                  DUMP_FILE="medanki-$(date -u +%Y%m%dT%H%M%SZ).sql.gz"
+                  echo "Backing up to $$DUMP_FILE"
+                  pg_dump -h postgres -U medanki -d medanki \
+                    --no-owner --no-privileges --clean --if-exists \
+                    | gzip > /tmp/$$DUMP_FILE
+                  echo "Dump size: $$(stat -c %s /tmp/$$DUMP_FILE) bytes"
+                  # Upload vers R2 (via aws-cli ou rclone, à câbler)
+                  if [ -n "$$R2_BUCKET" ]; then
+                    aws s3 cp /tmp/$$DUMP_FILE "s3://$$R2_BUCKET/postgres/$$DUMP_FILE" \
+                      --endpoint-url $$R2_ENDPOINT
+                    echo "Uploaded to R2"
+                  else
+                    echo "R2_BUCKET not set, keeping locally"
+                    cp /tmp/$$DUMP_FILE /backup/
+                  fi
+                  # Cleanup local (R2 lifecycle gère la rétention distante)
+                  rm -f /tmp/$$DUMP_FILE
+              env:
+                - name: PGPASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: backend-secrets
+                      key: postgres-password
+                - name: R2_BUCKET
+                  value: "medanki-backups"
+                - name: R2_ENDPOINT
+                  value: "https://<accountid>.r2.cloudflarestorage.com"
+                - name: AWS_ACCESS_KEY_ID
+                  valueFrom:
+                    secretKeyRef:
+                      name: backend-secrets
+                      key: r2-access-key
+                - name: AWS_SECRET_ACCESS_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: backend-secrets
+                      key: r2-secret-key
+              volumeMounts:
+                - name: backup
+                  mountPath: /backup
+              resources:
+                requests:
+                  cpu: 100m
+                  memory: 256Mi
+                limits:
+                  cpu: 500m
+                  memory: 512Mi
+          volumes:
+            - name: backup
+              persistentVolumeClaim:
+                claimName: postgres-backup

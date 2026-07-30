@@ -1,0 +1,99 @@
+# Default values for medanki-backend.
+# This is a YAML-formatted file.
+# Override with --set or -f myvalues.yaml.
+
+replicaCount: 2
+
+image:
+  repository: medanki/backend
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 1001
+  fsGroup: 1001
+
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 1001
+  readOnlyRootFilesystem: true
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 3000
+
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "20m"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  hosts:
+    - host: api.medanki-dz.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - hosts:
+        - api.medanki-dz.com
+      secretName: backend-tls
+
+resources:
+  requests:
+    cpu: 200m
+    memory: 256Mi
+  limits:
+    cpu: 1000m
+    memory: 1Gi
+
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 70
+  targetMemoryUtilizationPercentage: 80
+
+probes:
+  readiness:
+    path: /readyz
+    initialDelaySeconds: 10
+    periodSeconds: 10
+  liveness:
+    path: /healthz
+    initialDelaySeconds: 30
+    periodSeconds: 30
+
+env:
+  nodeEnv: production
+  port: 3000
+  logLevel: info
+
+secrets:
+  databaseUrl: ""
+  jwtSigningKey: ""
+  sentryDsn: ""
+  postgresPassword: ""
+  r2AccessKey: ""
+  r2SecretKey: ""
+
+otel:
+  enabled: true
+  endpoint: "http://otel-collector.observability:4317"
+  serviceName: "medanki-backend"

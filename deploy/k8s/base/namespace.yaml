@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: medanki
+  labels:
+    name: medanki
+    purpose: medical-anki-dz
