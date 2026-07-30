@@ -9,3 +9,4 @@ export * from './gamification';
 export * from './deck-keys';
 export * from './share';
 export * from './group-packs';
+export * from './tenants';

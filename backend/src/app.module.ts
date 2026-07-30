@@ -21,6 +21,7 @@ import { StatsModule } from './stats/stats.module';
 import { OnboardingModule } from './onboarding/onboarding.module';
 import { ShareModule } from './share/share.module';
 import { GroupPacksModule } from './group-packs/group-packs.module';
+import { TenantsModule } from './tenants/tenants.module';
 
 @Module({
   imports: [
@@ -54,6 +55,7 @@ import { GroupPacksModule } from './group-packs/group-packs.module';
     OnboardingModule, // Phase 15.3 (onboarding adaptatif)
     ShareModule, // Phase 15.5 (partage social)
     GroupPacksModule, // Phase 16.3 (pack groupe)
+    TenantsModule, // Phase 16.4 (B2B multi-tenants)
   ],
 })
 export class AppModule {}
