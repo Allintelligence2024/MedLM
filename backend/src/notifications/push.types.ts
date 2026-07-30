@@ -1,6 +1,11 @@
 // Types partagés pour les providers de push (FCM + APNs).
 
-export type NotificationKind = 'due_reminder' | 'streak_danger' | 'deck_updated';
+export type NotificationKind =
+  | 'due_reminder'
+  | 'streak_danger'
+  | 'deck_updated'
+  /// Phase 18.5 — détection de décrochage (rétention).
+  | 'retention_alert';
 
 export interface PushPayload {
   to: string;

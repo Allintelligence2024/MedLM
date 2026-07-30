@@ -75,3 +75,26 @@ export const aiDifficultySignals = pgTable(
     cardIdx: index('ai_signals_card_idx').on(t.cardId),
   }),
 );
+
+/// Phase 18.5 — alertes de décrochage envoyées (anti-spam : on ne
+/// consigne que les notifications réellement parties).
+export const retentionAlerts = pgTable(
+  'retention_alerts',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    userId: uuid('user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    /// 'gentle' | 'streak_broken' | 'reengagement'
+    level: text('level').notNull(),
+    /// Nombre de notifications poussées (1 par appareil notifié).
+    channels: integer('channels').notNull().default(0),
+    notifiedAt: timestamp('notified_at', { withTimezone: true })
+      .notNull()
+      .defaultNow(),
+  },
+  (t) => ({
+    userIdx: index('retention_alerts_user_idx').on(t.userId, t.notifiedAt),
+    levelIdx: index('retention_alerts_level_idx').on(t.level, t.notifiedAt),
+  }),
+);
