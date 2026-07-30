@@ -51,3 +51,4 @@ tools/node_modules/
 
 # Worktrees
 /worktrees/
+tools/__pycache__/
