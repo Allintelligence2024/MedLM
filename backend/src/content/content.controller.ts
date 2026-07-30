@@ -2,18 +2,21 @@ import {
   Body,
   Controller,
   Get,
-  Headers,
   HttpCode,
   HttpStatus,
   Param,
   ParseUUIDPipe,
   Post,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { ContentService } from './content.service';
 import { DeckCardsQuery, ListDecksQuery, ReportBody } from './content.dto';
+import { JwtGuard } from '../auth/jwt.guard';
+import { CurrentUserId } from '../auth/jwt.decorators';
 
 @Controller('content')
+@UseGuards(JwtGuard)
 export class ContentController {
   constructor(private readonly service: ContentService) {}
 
@@ -40,11 +43,10 @@ export class ContentController {
   @Post('cards/:id/report')
   @HttpCode(HttpStatus.CREATED)
   async report(
-    @Headers('X-User-Id') userId: string,
+    @CurrentUserId() userId: string,
     @Param('id', new ParseUUIDPipe()) id: string,
     @Body() body: unknown,
   ) {
-    if (!userId) throw new Error('X-User-Id header manquant');
     const r = ReportBody.parse(body);
     return this.service.reportCard({
       userId,

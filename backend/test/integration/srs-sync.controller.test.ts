@@ -1,23 +1,16 @@
 /// Test d'intégration HTTP du contrôleur SrsSync.
 ///
-/// Stratégie : on monte un module NestJS **réel** mais on substitue le
-/// `DRIZZLE` provider par un fake. Cela permet de tester la pile
-/// validation → contrôleur → service → réponse, sans dépendre d'un
-/// PostgreSQL.
-///
-/// En CI, on garde aussi un test d'intégration « end-to-end » contre
-/// Neon (cf. `backend-ci.yml` workflow), qui lui crée vraiment les
-/// enregistrements.
+/// Stratégie : on monte un module NestJS réel mais on substitue le
+/// `DRIZZLE` provider par un fake, et on signe un JWT avec un secret
+/// dev. Cela permet de tester la pile validation → JwtGuard → contrôleur
+/// → service → réponse, sans dépendre d'un PostgreSQL.
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import request from 'supertest';
 import { AppModule } from '../../src/app.module';
 import { DRIZZLE } from '../../src/db/database.module';
-import { FsrsModule } from '../../src/common/fsrs/fsrs.module';
-import { SrsSyncModule } from '../../src/srs-sync/srs-sync.module';
-import { AuthModule } from '../../src/auth/auth.module';
-import { ContentModule } from '../../src/content/content.module';
 
 class FakeDb {
   events: any[] = [];
@@ -70,9 +63,13 @@ class FakeDb {
   }
 }
 
-describe('SRS Sync — HTTP end-to-end (fake DB)', () => {
+describe('SRS Sync — HTTP end-to-end (fake DB, JWT auth)', () => {
   let app: INestApplication;
+  let jwt: JwtService;
+  let accessToken: string;
   const fake = new FakeDb();
+  const userId = '00000000-0000-4000-8000-000000000099';
+  const deviceId = 'test-device-1';
 
   beforeAll(async () => {
     const moduleRef: TestingModule = await Test.createTestingModule({
@@ -84,18 +81,23 @@ describe('SRS Sync — HTTP end-to-end (fake DB)', () => {
     app = moduleRef.createNestApplication();
     app.setGlobalPrefix('v1');
     await app.init();
+    jwt = app.get(JwtService);
+    accessToken = await jwt.signAsync(
+      { sub: userId, did: deviceId, kind: 'access' },
+      { expiresIn: 3600 },
+    );
   });
 
   afterAll(async () => {
     await app.close();
   });
 
-  it('POST /v1/srs-sync/push accepte un événement', async () => {
+  it('POST /v1/srs-sync/push accepte un événement (JWT)', async () => {
     const event = {
       id: '00000000-0000-7000-8000-000000000001',
       card_id: '00000000-0000-4000-8000-000000000002',
-      user_id: '00000000-0000-4000-8000-000000000003',
-      device_id: 'd1',
+      user_id: userId,
+      device_id: deviceId,
       rating: 3,
       duration_ms: 100,
       card_type: 'basic',
@@ -104,8 +106,8 @@ describe('SRS Sync — HTTP end-to-end (fake DB)', () => {
     };
     const res = await request(app.getHttpServer())
       .post('/v1/srs-sync/push')
-      .set('X-User-Id', '00000000-0000-4000-8000-000000000003')
-      .set('X-Device-Id', 'd1')
+      .set('Authorization', `Bearer ${accessToken}`)
+      .set('X-Device-Id', deviceId)
       .send({ events: [event] })
       .expect(200);
     expect(res.body.accepted).toContain(event.id);
@@ -115,8 +117,8 @@ describe('SRS Sync — HTTP end-to-end (fake DB)', () => {
     const events = Array.from({ length: 101 }, (_, i) => ({
       id: `00000000-0000-7000-8000-${String(i).padStart(12, '0')}`,
       card_id: '00000000-0000-4000-8000-000000000002',
-      user_id: '00000000-0000-4000-8000-000000000003',
-      device_id: 'd1',
+      user_id: userId,
+      device_id: deviceId,
       rating: 3,
       duration_ms: 0,
       card_type: 'basic',
@@ -125,8 +127,8 @@ describe('SRS Sync — HTTP end-to-end (fake DB)', () => {
     }));
     await request(app.getHttpServer())
       .post('/v1/srs-sync/push')
-      .set('X-User-Id', '00000000-0000-4000-8000-000000000003')
-      .set('X-Device-Id', 'd1')
+      .set('Authorization', `Bearer ${accessToken}`)
+      .set('X-Device-Id', deviceId)
       .send({ events })
       .expect(400);
   });
@@ -135,14 +137,21 @@ describe('SRS Sync — HTTP end-to-end (fake DB)', () => {
     const res = await request(app.getHttpServer())
       .get('/v1/srs-sync/pull')
       .query({ since_ms: 0, limit: 10 })
-      .set('X-User-Id', '00000000-0000-4000-8000-000000000003')
-      .set('X-Device-Id', 'd1')
+      .set('Authorization', `Bearer ${accessToken}`)
+      .set('X-Device-Id', deviceId)
       .expect(200);
     expect(res.body).toHaveProperty('next_cursor_ms');
     expect(res.body).toHaveProperty('events');
   });
 
-  it('GET /v1/health répond 200', async () => {
+  it('GET /v1/srs-sync/push refuse sans JWT (401)', async () => {
+    await request(app.getHttpServer())
+      .post('/v1/srs-sync/push')
+      .send({ events: [] })
+      .expect(401);
+  });
+
+  it('GET /v1/health répond 200 sans auth', async () => {
     const res = await request(app.getHttpServer())
       .get('/v1/health')
       .expect(200);

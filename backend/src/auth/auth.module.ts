@@ -5,6 +5,11 @@ import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
+import { MagicLinkService } from './magic-link.service';
+import { MagicLinkController } from './magic-link.controller';
+import { GoogleOAuthService } from './google-oauth.service';
+import { GoogleOAuthController } from './google-oauth.controller';
+import { ResendEmailSender } from './email-sender.service';
 
 @Global()
 @Module({
@@ -17,7 +22,6 @@ import { AuthController } from './auth.controller';
         const ttl = config.get<number>('JWT_ACCESS_TTL_SECONDS') ?? 900;
 
         if (!keyPath) {
-          // Mode dev : HS256 avec un secret statique. NE JAMAIS utiliser en prod.
           return {
             secret: 'dev-only-secret-do-not-use-in-prod',
             signOptions: { expiresIn: ttl, algorithm: 'HS256' },
@@ -31,8 +35,17 @@ import { AuthController } from './auth.controller';
       },
     }),
   ],
-  providers: [AuthService],
-  controllers: [AuthController],
+  providers: [
+    AuthService,
+    MagicLinkService,
+    GoogleOAuthService,
+    ResendEmailSender,
+  ],
+  controllers: [
+    AuthController,
+    MagicLinkController,
+    GoogleOAuthController,
+  ],
   exports: [AuthService, JwtModule],
 })
 export class AuthModule {}

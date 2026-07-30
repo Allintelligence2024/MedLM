@@ -63,6 +63,32 @@ export class AuthService {
     return this.issueTokens(user.id, args.platform, args.appVersion);
   }
 
+  /// Émet des tokens d'accès pour un userId connu (utilisé par le magic
+  /// link après vérification du token email). Méthode publique pour
+  /// permettre la réutilisation depuis `MagicLinkService`.
+  async issueAccessFor(userId: string, platform: string): Promise<TokenResponse> {
+    return this.issueTokens(userId, platform);
+  }
+
+  /// POST /auth/refresh — rotation du refresh token.
+  async refresh(args: { refreshToken: string; platform: string }): Promise<TokenResponse> {
+    const tokenHash = createHash('sha256').update(args.refreshToken).digest('hex');
+    const row = await this.db
+      .select()
+      .from(refreshTokens)
+      .where(eq(refreshTokens.tokenHash, tokenHash))
+      .get();
+    if (!row || row.revokedAt || row.expiresAt < new Date()) {
+      throw new UnauthorizedException('refresh token invalide ou expiré');
+    }
+    // Révoquer l'ancien (rotation, §6.1 v2).
+    await this.db
+      .update(refreshTokens)
+      .set({ revokedAt: new Date() })
+      .where(eq(refreshTokens.id, row.id));
+    return this.issueTokens(row.userId, args.platform);
+  }
+
   private async issueTokens(
     userId: string,
     platform: string,
