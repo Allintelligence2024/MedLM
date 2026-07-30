@@ -83,6 +83,9 @@ export const cards = pgTable(
     publishedAt: timestamp('published_at', { withTimezone: true }),
     createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
     updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+    /// Phase 10 : lien optionnel vers une question d'examen. Si la
+    /// carte est ratée à un exam, on la réinjecte dans le SRS.
+    examQuestionId: uuid('exam_question_id'),
   },
   (t) => ({
     deckStatusIdx: index('cards_deck_status_idx').on(t.deckId, t.status, t.version),

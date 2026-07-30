@@ -3,3 +3,4 @@ export * from './users';
 export * from './content';
 export * from './srs';
 export * from './billing';
+export * from './exams';

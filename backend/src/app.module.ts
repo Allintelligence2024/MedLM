@@ -1,4 +1,4 @@
-// AppModule — composition root côté serveur (Phase 7).
+// AppModule — composition root côté serveur (Phase 10/11/12).
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { LoggerModule } from 'nestjs-pino';
@@ -12,13 +12,15 @@ import { HealthModule } from './health/health.module';
 import { BillingModule } from './billing/billing.module';
 import { EntitlementModule } from './entitlement/entitlement.module';
 import { RbacModule } from './rbac/rbac.module';
+import { ExamsModule } from './exams/exams.module';
+import { NotificationsModule } from './notifications/notifications.module';
+import { ObservabilityModule } from './observability/observability.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     LoggerModule.forRoot({
       pinoHttp: {
-        // On NE loggue jamais les Authorization headers ni les cookies.
         redact: ['req.headers.authorization', 'req.headers.cookie'],
         level: process.env.LOG_LEVEL ?? 'info',
         transport:
@@ -31,12 +33,15 @@ import { RbacModule } from './rbac/rbac.module';
     DatabaseModule,
     FsrsModule,
     RbacModule,
+    ObservabilityModule, // Sentry + Prometheus (Phase 12)
     AuthModule,
     HealthModule,
     ContentModule,
     SrsSyncModule,
     BillingModule,
     EntitlementModule,
+    ExamsModule, // Phase 10
+    NotificationsModule, // Phase 10 (FCM)
   ],
 })
 export class AppModule {}
