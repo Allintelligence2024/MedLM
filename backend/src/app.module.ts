@@ -19,6 +19,7 @@ import { GamificationModule } from './gamification/gamification.module';
 import { DeckKeysModule } from './deck-keys/deck-keys.module';
 import { StatsModule } from './stats/stats.module';
 import { OnboardingModule } from './onboarding/onboarding.module';
+import { ShareModule } from './share/share.module';
 
 @Module({
   imports: [
@@ -50,6 +51,7 @@ import { OnboardingModule } from './onboarding/onboarding.module';
     DeckKeysModule, // Phase 14 (RSA-OAEP key exchange)
     StatsModule, // Phase 15.2 (statistiques utilisateur)
     OnboardingModule, // Phase 15.3 (onboarding adaptatif)
+    ShareModule, // Phase 15.5 (partage social)
   ],
 })
 export class AppModule {}
