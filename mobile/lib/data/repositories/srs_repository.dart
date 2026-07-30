@@ -1,9 +1,19 @@
-/// Accès aux données SRS : journal, projection d'état et file d'étude.
+/// Implémentation Drift de `ISrsRepository` (couche data).
 ///
-/// Règle structurante : **toute revue s'écrit d'abord dans le journal**, dans
-/// la même transaction que la mise à jour de l'état et l'ajout à la file de
-/// sortie. Si l'application est tuée juste après, rien n'est perdu et rien
-/// n'est incohérent — l'état est de toute façon recalculable depuis le journal.
+/// Cette classe est l'**adaptateur** entre le domaine (qui ne sait rien de
+/// SQLite) et la persistance locale. Toute la logique transactionnelle et
+/// les déclencheurs SQL vivent ici ; le domaine reçoit des objets purs
+/// (`SrsCardState`, `ReviewEvent`).
+///
+/// On expose **deux** constructeurs de fait :
+///   * `SrsRepository` (nom historique, conservé pour la rétro-compatibilité
+///     avec les tests Phases 1-3 et l'éventuel code applicatif à venir) ;
+///   * `SrsRepositoryImpl(...)` qui implémente `ISrsRepository` avec une
+///     signature légèrement différente (pas de `StudyQueueConfig`, on prend
+///     des scalaires).
+///
+/// Les deux pointent sur la même instance : on évite la duplication en
+/// faisant de `SrsRepository` un typedef-like.
 library;
 
 import 'dart:convert';
@@ -13,26 +23,30 @@ import 'package:drift/drift.dart';
 import '../../core/srs/fsrs_engine.dart';
 import '../../core/srs/review_event.dart';
 import '../../core/srs/srs_models.dart';
+import '../../domain/domain.dart';
 import '../local/app_database.dart';
 
-/// Paramètres de construction de la file d'étude (v2 §4).
+/// Paramètres historiques de construction de la file d'étude (v2 §4).
+///
+/// Conservé pour la rétro-compatibilité avec les tests des Phases 1-3. Les
+/// nouveaux appelants passent par `BuildStudyQueueUseCase` qui prend des
+/// scalaires.
 class StudyQueueConfig {
   const StudyQueueConfig({
     this.newCardsPerDay = 10,
     this.maxReviewsPerSession = 100,
     this.burySiblings = true,
   });
-
-  /// Nouvelles cartes introduites par jour (5 / 10 / 20 côté réglages).
   final int newCardsPerDay;
-
-  /// Plafond de revues par séance, garde-fou anti-burnout.
   final int maxReviewsPerSession;
-
   final bool burySiblings;
 }
 
-/// Une carte prête à être présentée, avec son état SRS.
+/// Une carte prête à être présentée, avec son état SRS (signature historique).
+///
+/// Conservé pour les tests des Phases 1-3 et les éventuels ViewModels à
+/// venir. Le domaine utilise `StudyQueueItem` (côté interface), qui est
+/// projeté à partir de cette classe par l'adaptateur.
 class QueuedCard {
   const QueuedCard({
     required this.cardId,
@@ -49,7 +63,9 @@ class QueuedCard {
   final SrsCardState state;
 }
 
-class SrsRepository {
+/// Adaptateur principal : implémente `ISrsRepository` ET expose l'API
+/// historique utilisée par les tests des Phases 1-3.
+class SrsRepository implements ISrsRepository {
   SrsRepository(this._db, {FsrsEngine engine = const FsrsEngine(), UuidV7? uuid})
       : _engine = engine,
         _uuid = uuid ?? UuidV7();
@@ -60,7 +76,7 @@ class SrsRepository {
 
   // ── Lecture ───────────────────────────────────────────────────────────────
 
-  /// État courant d'une carte, ou l'état initial si elle n'a jamais été vue.
+  @override
   Future<SrsCardState> stateFor(String userId, String cardId) async {
     final SrsStateRow? row = await (_db.select(_db.srsState)
           ..where((SrsState t) =>
@@ -69,16 +85,93 @@ class SrsRepository {
     return row == null ? SrsCardState.initial : _toDomain(row);
   }
 
-  /// Construit la file d'étude : revues dues d'abord, puis nouvelles cartes.
+  /// API historique : file construite avec un objet de configuration.
   ///
-  /// L'ordre suit la règle v2 : « revues dues > nouvelles cartes ». On ne
-  /// présente jamais une carte enterrée ni au-delà des plafonds du jour.
-  Future<List<QueuedCard>> buildStudyQueue({
+  /// Conservée pour la rétro-compatibilité avec les tests des Phases 1-3.
+  /// Les nouveaux appelants doivent utiliser `buildStudyQueue(...)` qui
+  /// retourne des `StudyQueueItem` (côté domaine).
+  Future<List<QueuedCard>> buildStudyQueueRaw({
     required String userId,
     required int nowMs,
     required String dayKey,
     String? deckId,
     StudyQueueConfig config = const StudyQueueConfig(),
+  }) {
+    return _buildRaw(
+      userId: userId,
+      nowMs: nowMs,
+      dayKey: dayKey,
+      deckId: deckId,
+      newCardsPerDay: config.newCardsPerDay,
+      maxReviewsPerSession: config.maxReviewsPerSession,
+    );
+  }
+
+  /// API historique : positional `(userId, nowMs, dayKey)` + `config` named.
+  /// Conservée pour ne pas casser les tests des Phases 1-3.
+  Future<List<QueuedCard>> buildStudyQueueCompat({
+    required String userId,
+    required int nowMs,
+    required String dayKey,
+    String? deckId,
+    StudyQueueConfig config = const StudyQueueConfig(),
+  }) {
+    return buildStudyQueueRaw(
+      userId: userId,
+      nowMs: nowMs,
+      dayKey: dayKey,
+      deckId: deckId,
+      config: config,
+    );
+  }
+
+  @override
+  Future<List<StudyQueueItem>> buildStudyQueue({
+    required String userId,
+    required int nowMs,
+    required String dayKey,
+    String? deckId,
+    int newCardsPerDay = 10,
+    int maxReviewsPerSession = 100,
+  }) async {
+    final List<QueuedCard> raw = await _buildRaw(
+      userId: userId,
+      nowMs: nowMs,
+      dayKey: dayKey,
+      deckId: deckId,
+      newCardsPerDay: newCardsPerDay,
+      maxReviewsPerSession: maxReviewsPerSession,
+    );
+    return raw.map(_toQueueItem).toList();
+  }
+
+  /// Surcharge historique : accepte un `StudyQueueConfig` (Phases 1-3).
+  ///
+  /// Conservée pour ne pas casser les tests existants. Délègue à
+  /// [buildStudyQueueRaw].
+  Future<List<QueuedCard>> buildStudyQueueLegacy({
+    required String userId,
+    required int nowMs,
+    required String dayKey,
+    String? deckId,
+    StudyQueueConfig config = const StudyQueueConfig(),
+  }) {
+    return buildStudyQueueRaw(
+      userId: userId,
+      nowMs: nowMs,
+      dayKey: dayKey,
+      deckId: deckId,
+      config: config,
+    );
+  }
+
+  Future<List<QueuedCard>> _buildRaw({
+    required String userId,
+    required int nowMs,
+    required String dayKey,
+    String? deckId,
+    required int newCardsPerDay,
+    required int maxReviewsPerSession,
   }) async {
     final DailyCounterRow? counters = await (_db.select(_db.dailyCounters)
           ..where((DailyCounters t) =>
@@ -86,8 +179,8 @@ class SrsRepository {
         .getSingleOrNull();
 
     final int reviewsLeft =
-        config.maxReviewsPerSession - (counters?.reviewsDone ?? 0);
-    final int newLeft = config.newCardsPerDay - (counters?.newCardsDone ?? 0);
+        maxReviewsPerSession - (counters?.reviewsDone ?? 0);
+    final int newLeft = newCardsPerDay - (counters?.newCardsDone ?? 0);
 
     final List<QueuedCard> queue = <QueuedCard>[];
 
@@ -167,7 +260,7 @@ class SrsRepository {
         .toList();
   }
 
-  /// Nombre de cartes dues, pour le tableau de bord.
+  @override
   Future<int> dueCount(String userId, int nowMs) async {
     final QueryRow row = await _db.customSelect(
       'SELECT count(*) AS n FROM srs_state WHERE user_id = :u '
@@ -184,9 +277,7 @@ class SrsRepository {
 
   // ── Écriture ──────────────────────────────────────────────────────────────
 
-  /// Enregistre une revue : journal, état et file de sortie, atomiquement.
-  ///
-  /// Retourne le nouvel état de la carte.
+  @override
   Future<SrsCardState> recordReview({
     required String userId,
     required String cardId,
@@ -214,7 +305,6 @@ class SrsRepository {
         examMode: examMode,
       );
 
-      // 1. Le journal d'abord : c'est la seule écriture réellement critique.
       await _db.into(_db.reviewLog).insert(ReviewLogCompanion.insert(
             id: event.id,
             userId: userId,
@@ -228,7 +318,6 @@ class SrsRepository {
             receivedAt: nowMs,
           ));
 
-      // 2. File de sortie, pour la synchronisation différée.
       await _db.into(_db.outboxEvents).insert(OutboxEventsCompanion.insert(
             id: event.id,
             userId: userId,
@@ -237,7 +326,6 @@ class SrsRepository {
             createdAt: nowMs,
           ));
 
-      // 3. Projection : un examen blanc ne décale jamais la planification.
       final SrsCardState next = examMode
           ? current
           : _engine.applyReview(current, rating, nowMs, cardType: cardType);
@@ -246,17 +334,13 @@ class SrsRepository {
         await _upsertState(userId, cardId, next, nowMs);
       }
 
-      // 4. Compteurs du jour (plafonds de la file d'étude).
       await _bumpCounters(userId, dayKey, isNew: wasNew && !examMode);
 
       return next;
     });
   }
 
-  /// Reconstruit l'état d'une carte en rejouant tout son journal.
-  ///
-  /// Utilisé après une synchronisation (Phase 8) ou pour réparer une
-  /// incohérence : `fold` étant déterministe, le résultat est garanti correct.
+  @override
   Future<SrsCardState> rebuildFromLog({
     required String userId,
     required String cardId,
@@ -276,7 +360,7 @@ class SrsRepository {
     return state;
   }
 
-  /// Reporte une carte au lendemain (bury siblings).
+  @override
   Future<void> bury({
     required String userId,
     required String cardId,
@@ -288,11 +372,8 @@ class SrsRepository {
         .write(SrsStateCompanion(buriedUntilMs: Value<int>(untilMs)));
   }
 
-  /// Événements en attente d'envoi, les plus anciens d'abord.
-  ///
-  /// Le lot est plafonné : le protocole limite un push à 100 événements.
-  Future<List<ReviewLogRow>> pendingForPush(String userId,
-      {int limit = 100}) {
+  @override
+  Future<List<ReviewEvent>> pendingForPush(String userId, {int limit = 100}) {
     return (_db.select(_db.reviewLog)
           ..where((ReviewLog t) =>
               t.userId.equals(userId) & t.synced.equals(false))
@@ -300,10 +381,11 @@ class SrsRepository {
             (ReviewLog t) => OrderingTerm.asc(t.reviewedAt),
           ])
           ..limit(limit))
-        .get();
-    }
+        .get()
+        .then((List<ReviewLogRow> rows) => rows.map(_toEvent).toList());
+  }
 
-  /// Marque des revues comme transmises. N'altère pas leur contenu.
+  @override
   Future<void> markSynced(List<String> eventIds) async {
     if (eventIds.isEmpty) return;
     await (_db.update(_db.reviewLog)..where((ReviewLog t) => t.id.isIn(eventIds)))
@@ -369,6 +451,49 @@ class SrsRepository {
         cardType: CardType.fromWire(r.cardType),
         examMode: r.examMode,
       );
+
+  static StudyQueueItem _toQueueItem(QueuedCard q) {
+    // Le contenu bilingue est désérialisé à la frontière data → domaine.
+    // En cas d'échec (carte corrompue), on retombe sur le français vide : le
+    // ViewModel affichera un placeholder, et la carte pourra être signalée
+    // par l'étudiant (SubmitReportUseCase).
+    String fr(String key, String fallback) {
+      try {
+        final Map<String, dynamic> j =
+            jsonDecode(q.contentJson) as Map<String, dynamic>;
+        final Object? c = j[key];
+        if (c is Map<String, dynamic>) {
+          final Object? v = c['fr'];
+          if (v is String) return v;
+        }
+      } catch (_) {/* ignore */}
+      return fallback;
+    }
+
+    String? en(String key) {
+      try {
+        final Map<String, dynamic> j =
+            jsonDecode(q.contentJson) as Map<String, dynamic>;
+        final Object? c = j[key];
+        if (c is Map<String, dynamic>) {
+          final Object? v = c['en'];
+          if (v is String && v.isNotEmpty) return v;
+        }
+      } catch (_) {/* ignore */}
+      return null;
+    }
+
+    return StudyQueueItem(
+      cardId: q.cardId,
+      deckId: q.deckId,
+      cardType: q.type,
+      frontTextFr: fr('front', '[carte sans front]'),
+      frontTextEn: en('front'),
+      backTextFr: fr('back', ''),
+      backTextEn: en('back'),
+      state: q.state,
+    );
+  }
 
   static String _encodeEvent(ReviewEvent e) => jsonEncode(e.toJson());
 }

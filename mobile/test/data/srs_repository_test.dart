@@ -173,7 +173,7 @@ void main() {
         rating: Rating.easy, nowMs: t0, dayKey: '2023-11-14',
       );
 
-      final List<QueuedCard> queue = await repo.buildStudyQueue(
+      final List<QueuedCard> queue = await repo.buildStudyQueueLegacy(
         userId: user, nowMs: t0 + 400 * day, dayKey: '2024-12-01',
       );
       expect(queue.first.cardId, 'due');
@@ -188,7 +188,7 @@ void main() {
       );
       await repo.bury(userId: user, cardId: 'c1', untilMs: t0 + 500 * day);
 
-      final List<QueuedCard> queue = await repo.buildStudyQueue(
+      final List<QueuedCard> queue = await repo.buildStudyQueueLegacy(
         userId: user, nowMs: t0 + 400 * day, dayKey: '2024-12-01',
       );
       expect(queue.where((QueuedCard c) => c.cardId == 'c1'), isEmpty);
@@ -198,7 +198,7 @@ void main() {
       for (int i = 0; i < 15; i++) {
         await addCard('c$i');
       }
-      final List<QueuedCard> queue = await repo.buildStudyQueue(
+      final List<QueuedCard> queue = await repo.buildStudyQueueLegacy(
         userId: user, nowMs: t0, dayKey: '2023-11-14',
         config: const StudyQueueConfig(newCardsPerDay: 5),
       );
