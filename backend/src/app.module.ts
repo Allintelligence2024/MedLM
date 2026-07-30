@@ -18,6 +18,7 @@ import { ObservabilityModule } from './observability/observability.module';
 import { GamificationModule } from './gamification/gamification.module';
 import { DeckKeysModule } from './deck-keys/deck-keys.module';
 import { StatsModule } from './stats/stats.module';
+import { OnboardingModule } from './onboarding/onboarding.module';
 
 @Module({
   imports: [
@@ -48,6 +49,7 @@ import { StatsModule } from './stats/stats.module';
     GamificationModule, // Phase 9 bis (leaderboard)
     DeckKeysModule, // Phase 14 (RSA-OAEP key exchange)
     StatsModule, // Phase 15.2 (statistiques utilisateur)
+    OnboardingModule, // Phase 15.3 (onboarding adaptatif)
   ],
 })
 export class AppModule {}
