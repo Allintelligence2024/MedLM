@@ -11,6 +11,7 @@ import {
   integer,
   timestamp,
   jsonb,
+  boolean,
   index,
 } from 'drizzle-orm/pg-core';
 import { users } from './users';
@@ -96,5 +97,37 @@ export const retentionAlerts = pgTable(
   (t) => ({
     userIdx: index('retention_alerts_user_idx').on(t.userId, t.notifiedAt),
     levelIdx: index('retention_alerts_level_idx').on(t.level, t.notifiedAt),
+  }),
+);
+
+/// Phase 18.6 — audit APPEND-ONLY des échanges du tuteur (triggers SQL
+/// `no_update` / `no_delete` en migration 0015, même pattern que
+/// review_logs — conformité : on ne réécrit pas un audit).
+export const aiTutorPrompts = pgTable(
+  'ai_tutor_prompts',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    userId: uuid('user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    question: text('question').notNull(),
+    questionHash: text('question_hash').notNull(),
+    lang: text('lang').notNull().default('fr'),
+    provider: text('provider').notNull().default('mock'),
+    model: text('model').notNull().default('mock-fsm-1'),
+    /// Réponse finale SERVIE (avec disclaimer) — preuve de conformité.
+    answer: text('answer').notNull(),
+    responseHash: text('response_hash').notNull(),
+    withinScope: boolean('within_scope').notNull().default(true),
+    emergency: boolean('emergency').notNull().default(false),
+    tokensIn: integer('tokens_in').notNull().default(0),
+    tokensOut: integer('tokens_out').notNull().default(0),
+    createdAt: timestamp('created_at', { withTimezone: true })
+      .notNull()
+      .defaultNow(),
+  },
+  (t) => ({
+    userIdx: index('ai_tutor_prompts_user_idx').on(t.userId, t.createdAt),
+    scopeIdx: index('ai_tutor_prompts_scope_idx').on(t.withinScope, t.createdAt),
   }),
 );

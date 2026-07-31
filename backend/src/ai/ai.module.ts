@@ -6,7 +6,7 @@
 //   18.3 voice-to-card      (VoiceToCardService — STT client ou serveur) ✅
 //   18.4 adaptive learning  (AdaptiveService — profils d'erreur + signaux) ✅
 //   18.5 décrochage         (RetentionService — FCM/APNs, fenêtre 8h-22h) ✅
-//   18.6 voice tutoring     (à venir)
+//   18.6 voice tutoring     (TutorService — disclaimer obligatoire + audit) ✅
 import { Module } from '@nestjs/common';
 import { NotificationsModule } from '../notifications/notifications.module';
 import { HintsService } from './hints/hints.service';
@@ -21,6 +21,8 @@ import { AdaptiveService } from './adaptive/adaptive.service';
 import { AdaptiveController } from './adaptive/adaptive.controller';
 import { RetentionService } from './retention/retention.service';
 import { RetentionController } from './retention/retention.controller';
+import { TutorService } from './tutor/tutor.service';
+import { TutorController } from './tutor/tutor.controller';
 
 @Module({
   imports: [NotificationsModule], // Phase 14 : FCM/APNs pour 18.5
@@ -32,6 +34,7 @@ import { RetentionController } from './retention/retention.controller';
     VoiceToCardService,
     AdaptiveService,
     RetentionService,
+    TutorService,
   ],
   controllers: [
     HintsController,
@@ -39,6 +42,7 @@ import { RetentionController } from './retention/retention.controller';
     VoiceToCardController,
     AdaptiveController,
     RetentionController,
+    TutorController,
   ],
   exports: [
     HintsService,
@@ -48,6 +52,7 @@ import { RetentionController } from './retention/retention.controller';
     TranscriberFactory,
     AdaptiveService,
     RetentionService,
+    TutorService,
   ],
 })
 export class AiModule {}
