@@ -6,6 +6,8 @@ namespace: medanki-prod
 resources:
   - ../../base
   - backup-cronjob.yaml
+  # Phase 19.2 — scan de rétention (détection de décrochage)
+  - retention-cronjob.yaml
   # Phase 17.1 — composants prod additionnels
   - db/postgres-primary-svc.yaml
   - db/postgres-replica-svc.yaml
@@ -92,6 +94,8 @@ configMapGenerator:
       - feature-multi-tenant=true
       - feature-group-packs=true
       - feature-share-cards=true
+      # Phase 19.2 — rétention (détection de décrochage, 2 scans/jour)
+      - feature-retention-cron=true
       # Phase 17.4 — CDN
       - cdn-base-url=https://cdn.medanki-dz.com
       # Phase 17.2 — read replicas
