@@ -7,15 +7,24 @@ Tu es un agent de code (Arena.ai Agent Mode) qui continue le projet
 étudiants en médecine algériens).
 
 **Repo** : https://github.com/Allintelligence2024/MedLM
-**Branche principale** : main (PR #2 mergé, commit 43ac7f9)
-**Phase 18 livrée** : branche arena/019fb521-medlm (PR #3 à merger)
+**Branche principale** : main (PR #2 mergé 43ac7f9, PR #3 mergé 4fe5437)
+**Branche session** : arena/019fb521-medlm (Phase 19 en cours, PR #4 à venir)
 
-## État actuel (Phases 4-17 + limites 18 + Phase 18 IA)
+## État actuel (Phases 4-17 + Phase 18 IA + Phase 19 partielle)
 
-**Phases 4 à 17 mergées dans main** (PR #2, 17 commits squashés,
-~280 fichiers, +18k lignes, 200+ tests). La **Phase 18 (IA)** est
-livrée sur arena/019fb521-medlm : 6 sous-phases, 6 commits, ~130
-tests supplémentaires, 4 migrations (0012-0015).
+**Phases 4 à 18 mergées dans main.** La **Phase 19** (production
+launch) est entamée sur arena/019fb521-medlm :
+
+| Sous-phase | Contenu | Statut |
+|---|---|---|
+| 19.1 | Seed étendu : histologie (30), embryologie S1-8 (30), biophysique membranes (30) → 10 decks, 697 cartes | ✅ mergé |
+| 19.2 | CronJob K8s rétention (2 scans/jour 09:30 & 18:30 Alger, POST /v1/ai/retention/scan) | ✅ mergé |
+| 19.3 | i18n FR/AR/EN complète des clés IA (15 clés × 3, parité testée, source unique disclaimer) | ✅ mergé |
+| 19.4 | SECURITY.md — politique sécurité + bug bounty (SLA, barème DZD, safe harbor lois 09-04/18-07) | ✅ mergé |
+| 19.5 | UI mobile des endpoints IA (HintBanner, dictée, tuteur STT/TTS, signaux CMS) | ⏳ reste |
+| 19.6 | Application des poids FSRS ajustés (18.4) dans le moteur Dart + golden tests | ⏳ reste |
+| 19.7 | Landing page / marketing site | ⏳ reste |
+| 19.8 | Pen test externe + app stores (iOS/Android) | ⏳ reste (opérationnel) |
 
 ### Phase 18 — ce qui est livré
 
@@ -61,22 +70,25 @@ AI_GENERATE_DAILY_QUOTA=20  AI_VOICE_DAILY_QUOTA=50  AI_TUTOR_DAILY_QUOTA=30
 
 ## CE QUE TU DOIS FAIRE (Phase 19+)
 
-### Phase 19 — Production launch (3+ mois)
+### Phase 19 — Production launch (3+ mois) — EN COURS
 
-* Merger la PR #3 (Phase 18) si pas encore fait.
-* Seed étendu : histologie, embryologie, biophysique (JSON dans
-  mobile/assets/content, conformité Content Policy +
-  tools/validate_content.py).
-* Localisation AR complète (RTL, traductions — i18n Phase 17.5 posé).
-* Application mobile des poids FSRS ajustés (18.4 exposés, moteur
-  Dart + golden tests de parité à mettre à jour).
-* UI mobile des endpoints 18.x : HintBanner, dictée vocale
-  (speech_to_text), chat tuteur (STT/TTS), écran signaux CMS.
-* CronJob K8s `retention-cronjob.yaml` (09:30 / 18:30 → POST
-  /v1/ai/retention/scan).
-* Penetration testing externe, bug bounty.
-* App store submission (iOS + Android).
-* Marketing site + landing page.
+Fait (PR #4) : 19.1 seed 3 disciplines (697 cartes), 19.2 CronJob
+rétention, 19.3 i18n IA trilingue, 19.4 SECURITY.md/bug bounty.
+
+Reste à faire :
+* **19.5** UI mobile des endpoints IA : HintBanner (GET
+  /v1/ai/hints/:cardId pendant l'étude), dictée vocale
+  (speech_to_text → POST /v1/ai/voice-to-card), chat tuteur
+  (STT/TTS → POST /v1/ai/tutor/ask — disclaimer DÉJÀ dans le
+  texte servi), signaux auteur dans le CMS (GET
+  /v1/ai/adaptive/signals).
+* **19.6** Appliquer les poids FSRS ajustés (GET
+  /v1/ai/adaptive/profile) côté moteur Dart : mettre à jour
+  fsrs_parameters.dart + golden tests de parité
+  (tools/verify_against_ts_fsrs.js, cross_check.py).
+* **19.7** Landing page / marketing site (cms/ ou site statique).
+* **19.8** Pen test externe (produire SECURITY.md §1 comme canal),
+  app store submission iOS + Android.
 
 ### Phase 20 — Scale (6+ mois)
 
