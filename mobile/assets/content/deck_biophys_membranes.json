@@ -1,0 +1,435 @@
+{
+ "deck_id": "deck_biophys_membranes",
+ "module_id": "biophysique",
+ "programme": "medecine_dz",
+ "study_year": 1,
+ "version": 1,
+ "name_fr": "Biophysique des membranes et du transport",
+ "name_en": "Membrane biophysics and transport",
+ "description_fr": "Bicouche lipidique, diffusion et transport actif, potentiels de membrane, potentiel d'action, osmose et loi de Starling — avec leurs applications cliniques.",
+ "is_premium": true,
+ "is_demo": false,
+ "license": "medankidz_internal_v1",
+ "cards": [
+  {
+   "id": "biophys_membr_001",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 1,
+   "tags": ["biophysique", "membrane", "structure"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Biophysique", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Pourquoi les phospholipides forment-ils spontanément une bicouche ?", "en": "Why do phospholipids spontaneously form a bilayer?"},
+    "back": {"fr": "Ce sont des molécules amphiphiles : en milieu aqueux, les têtes hydrophiles s'exposent à l'eau et les queues hydrophobes s'agrègent entre elles (minimisation d'énergie libre).", "en": "They are amphiphilic: in water, hydrophilic heads face out and hydrophobic tails cluster inward (free-energy minimization)."},
+    "explanation": {"fr": "Ce principe gouverne la formation de toutes les membranes cellulaires et leur auto-réparation après micro-lésions.", "en": "This principle governs the formation of all cell membranes and their self-sealing after micro-damage."}
+   }
+  },
+  {
+   "id": "biophys_membr_002",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 3,
+   "tags": ["biophysique", "membrane", "cholesterol"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Biophysique", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Quel est le rôle du cholestérol membranaire ?", "en": "What is the role of membrane cholesterol?"},
+    "back": {"fr": "Tampon de fluidité : il empêche la cristallisation des chaînes grasses à basse température et rigidifie/compense la fluidité excessive à haute température (+ perméabilité réduite aux petites molécules).", "en": "Fluidity buffer: it prevents fatty-chain crystallization at low temperature and stiffens excessive fluidity at high temperature (+ reduced small-molecule permeability)."},
+    "explanation": {"fr": "La membrane des hématies contient ~25 % de cholestérol ; les plaques d'athérome sont des dépôts de cholestérol estérifié dans l'intima artérielle.", "en": "Erythrocyte membranes contain ~25% cholesterol; atheroma plaques are cholesteryl-ester deposits in the arterial intima."}
+   }
+  },
+  {
+   "id": "biophys_membr_003",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 2,
+   "tags": ["biophysique", "transport", "passif"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Biophysique", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Quelles molécules traversent la membrane par diffusion simple ?", "en": "Which molecules cross membranes by simple diffusion?"},
+    "back": {"fr": "Les petites molécules liposolubles (O2, CO2, N2) et non chargées (stéroïdes, anesthésiques gazeux), suivant le gradient de concentration/pression partielle, sans protéine ni énergie.", "en": "Small lipophilic (O2, CO2, N2) or uncharged molecules (steroids, gaseous anesthetics), down their concentration/partial-pressure gradient, without protein or energy."},
+    "explanation": {"fr": "L'eau en est exclue de fait (aquaporines requises) : comprendre la différence diffusion simple vs facilitée est fondamental pour la pharmacocinétique.", "en": "Water itself is largely excluded (aquaporins needed): distinguishing simple vs facilitated diffusion underpins pharmacokinetics."}
+   }
+  },
+  {
+   "id": "biophys_membr_004",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 4,
+   "tags": ["biophysique", "fick", "pneumologie"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Biophysique", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Énoncez la loi de Fick de la diffusion et ses implications cliniques pulmonaires.", "en": "State Fick's law of diffusion and its pulmonary clinical implications."},
+    "back": {"fr": "J = D·A·(ΔC/Δx) : le flux est proportionnel à la surface A et au gradient ΔC, inversement proportionnel à l'épaisseur Δx. Fibrose (↑Δx) ou emphysème (↓A) réduisent le transfert de gaz.", "en": "J = D·A·(ΔC/Δx): flux is proportional to area A and gradient ΔC, inversely proportional to thickness Δx. Fibrosis (↑Δx) or emphysema (↓A) reduce gas transfer."},
+    "explanation": {"fr": "Le DLCO mesure précisément ce transfert : il chute dans les pneumopathies interstitielles et l'emphysème, même avec une ventilation normale.", "en": "DLCO measures exactly this transfer: it falls in interstitial lung disease and emphysema even with normal ventilation."}
+   }
+  },
+  {
+   "id": "biophys_membr_005",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 4,
+   "tags": ["biophysique", "transport", "facilitee"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Biophysique", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Diffusion facilitée : canaux vs transporteurs ?", "en": "Facilitated diffusion: channels vs carriers?"},
+    "back": {"fr": "Toutes deux passives (suivant le gradient) via une protéine : les canaux forment un pore aqueux à haut débit (ions, aquaporines) ; les transporteurs (GLUT) changent de conformation et sont saturables (cinétique Michaelis).", "en": "Both are passive (down-gradient) via a protein: channels form high-throughput aqueous pores (ions, aquaporins); carriers (GLUT) change conformation and are saturable (Michaelis kinetics)."},
+    "explanation": {"fr": "GLUT4, insulino-dépendant, se transloque à la membrane du myocyte et de l'adipocyte : base de la baisse de glycémie post-insuline.", "en": "Insulin-dependent GLUT4 translocates to the membrane of myocytes and adipocytes: the basis of post-insulin glucose lowering."}
+   }
+  },
+  {
+   "id": "biophys_membr_006",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 3,
+   "tags": ["biophysique", "transport", "pharmacologie"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Biophysique", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Quel paramètre physico-chimique prédit le passage d'un soluté à travers la bicouche ?", "en": "Which physicochemical parameter predicts a solute's crossing of the bilayer?"},
+    "back": {"fr": "Le coefficient de partition huile/eau (log P) : plus un soluté non ionisé est liposoluble, plus sa perméabilité est élevée.", "en": "The oil/water partition coefficient (log P): the more lipophilic a non-ionized solute, the higher its permeability."},
+    "explanation": {"fr": "La barrière hémato-encéphalique n'admet guère que l'unionisé lipophile : c'est pourquoi l'ionisation (pKa) et le log P dictent l'entrée des psychotropes au cerveau.", "en": "The blood-brain barrier admits only non-ionized lipophilic species: ionization (pKa) and log P dictate CNS drug entry."}
+   }
+  },
+  {
+   "id": "biophys_membr_007",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 3,
+   "tags": ["biophysique", "pompe", "atpase"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Biophysique", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Na/K ATPase : stœchiométrie et conséquence électrique ?", "en": "Na/K ATPase: stoichiometry and electrical consequence?"},
+    "back": {"fr": "3 Na+ sortent contre 2 K+ entrants par ATP hydrolysé : la pompe est donc électrogénique (contribue ~-4 mV au potentiel de membrane) et maintient les gradients ioniques.", "en": "3 Na+ out for 2 K+ in per ATP hydrolyzed: the pump is electrogenic (~-4 mV contribution) and maintains ionic gradients."},
+    "explanation": {"fr": "Elle consomme 20-40 % d'ATP basal (jusqu'à 70 % neuronale) : l'arrêt cardiaque effondre les gradients → œdème cellulaire cytotoxique.", "en": "It uses 20-40% of basal ATP (up to 70% in neurons): cardiac arrest collapses gradients → cytotoxic cell edema."}
+   }
+  },
+  {
+   "id": "biophys_membr_008",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 4,
+   "tags": ["biophysique", "transport", "endocrino"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Biophysique", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Expliquez le transport actif secondaire via l'exemple de SGLT.", "en": "Explain secondary active transport through SGLT."},
+    "back": {"fr": "Le cotransporteur Na+-glucose utilise l'énergie du gradient Na+ (créé par la pompe Na/K) pour entrainer le glucose contre son gradient : le transport est actif sans hydrolyser l'ATP directement.", "en": "The Na+-glucose cotransporter uses the Na+ gradient (built by the Na/K pump) to drag glucose against its gradient: active transport without directly hydrolyzing ATP."},
+    "explanation": {"fr": "Les gliflozines inhibent le SGLT2 rénal → glycosurie thérapeutique dans le diabète de type 2.", "en": "Gliflozins inhibit renal SGLT2 → therapeutic glycosuria in type 2 diabetes."}
+   }
+  },
+  {
+   "id": "biophys_membr_009",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 3,
+   "tags": ["biophysique", "potentiel", "membrane"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Biophysique", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Quelle est l'origine du potentiel de membrane ?", "en": "What is the origin of the membrane potential?"},
+    "back": {"fr": "La séparation de charges créée par les gradients ioniques (maintenus par la pompe Na/K) combinée aux perméabilités sélectives (canaux de fuite, surtout K+) : diffusion K+ sortante laisse l'intérieur négatif.", "en": "Charge separation from ionic gradients (maintained by the Na/K pump) combined with selective permeabilities (leak channels, mostly K+): outward K+ diffusion leaves the inside negative."},
+    "explanation": {"fr": "Ce potentiel énergétique est utilisable (influx nerveux, contraction) : toute dépolarisation soutenue est pathologique (hyperkaliémie).", "en": "This stored energy drives nerve impulses and contraction: sustained depolarization is pathological (hyperkalemia)."}
+   }
+  },
+  {
+   "id": "biophys_membr_010",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 4,
+   "tags": ["biophysique", "nernst", "potassium"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Biophysique", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Équation de Nernst pour K+ (37 °C) : forme et valeur typique ?", "en": "Nernst equation for K+ (37 °C): form and typical value?"},
+    "back": {"fr": "E_K = (60/z) · log₁₀([K]ext/[K]int) ; avec [K]ext ≈ 4 mM et [K]int ≈ 120 mM (z = +1) : E_K ≈ -90 mV.", "en": "E_K = (60/z) · log₁₀([K]out/[K]in); with [K]out ≈ 4 mM and [K]in ≈ 120 mM (z = +1): E_K ≈ -90 mV."},
+    "explanation": {"fr": "L'hyperkaliémie augmente [K]ext → E_K moins négatif → dépolarisation : d'où la sévérité cardiaque (tachy/bradyarythmies).", "en": "Hyperkalemia raises [K]out → E_K less negative → depolarization: hence cardiac severity (tachy/bradyarrhythmias)."}
+   }
+  },
+  {
+   "id": "biophys_membr_011",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 4,
+   "tags": ["biophysique", "ghk", "potentiel"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Biophysique", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "À quoi sert l'équation GHK et quel ion y domine au repos ?", "en": "What is the GHK equation for, and which ion dominates at rest?"},
+    "back": {"fr": "Elle calcule Vm en pondérant Na+, K+ et Cl− par leurs perméabilités. Au repos P_K ≫ P_Na : Vm ≈ E_K ≈ -70 à -90 mV (la membrane est une quasi-électrode à potassium).", "en": "It computes Vm by weighting Na+, K+, and Cl− by their permeabilities. At rest P_K ≫ P_Na: Vm ≈ E_K ≈ -70 to -90 mV (the membrane is quasi a potassium electrode)."},
+    "explanation": {"fr": "Au pic du potentiel d'action, P_Na explose brièvement : Vm tend alors vers E_Na (~+60 mV).", "en": "At the action-potential peak, P_Na briefly explodes: Vm then approaches E_Na (~+60 mV)."}
+   }
+  },
+  {
+   "id": "biophys_membr_012",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 2,
+   "tags": ["biophysique", "potentiel", "repos"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Biophysique", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Donnez les valeurs typiques de potentiel de repos du neurone et du myocyte.", "en": "Give typical resting potentials of neuron and myocyte."},
+    "back": {"fr": "≈ -70 mV (neurone) et ≈ -90 mV (myocyte squelettique).", "en": "≈ -70 mV (neuron) and ≈ -90 mV (skeletal myocyte)."},
+    "explanation": {"fr": "Ce potentiel persiste tant que la pompe Na/K compense les fuites ioniques ; l'ischémie fait chuter l'ATP → dépolarisation lente.", "en": "This potential persists while the Na/K pump offsets leaks; ischemia drops ATP → slow depolarization."}
+   }
+  },
+  {
+   "id": "biophys_membr_013",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 3,
+   "tags": ["biophysique", "pa", "neuro"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Biophysique", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Phases ioniques du potentiel d'action (neurone) ?", "en": "Ionic phases of the neuronal action potential?"},
+    "back": {"fr": "Dépolarisation rapide par entrée Na+ (canaux voltage-dépendants), repolarisation par sortie K+, hyperpolarisation transitoire (K+ restent ouverts), retour au repos avec les pompes/fuites.", "en": "Rapid depolarization via Na+ influx (voltage-gated channels), repolarization via K+ efflux, transient after-hyperpolarization (K+ still open), resting state restored by pumps/leaks."},
+    "explanation": {"fr": "Le PA obéit au tout-ou-rien : amplitude constante, seule la fréquence code l'intensité du stimulus.", "en": "The AP is all-or-none: fixed amplitude; stimulus intensity is coded by frequency only."}
+   }
+  },
+  {
+   "id": "biophys_membr_014",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 4,
+   "tags": ["biophysique", "pa", "refractaire"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Biophysique", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Périodes réfractaires : base moléculaire et rintérêt fonctionnel ?", "en": "Refractory periods: molecular basis and functional significance?"},
+    "back": {"fr": "Absolue : canaux Na+ inactivés (aucun nouveau PA possible). Relative : K+ ouverts et Na+ partiellement récupérés → seuil plus haut. Elles bornent la fréquence max et empêchent la propagation rétrograde.", "en": "Absolute: Na+ channels inactivated (no new AP). Relative: K+ still open, Na+ partially recovered → higher threshold. They cap maximal frequency and prevent backward propagation."},
+    "explanation": {"fr": "Dans le myocarde, le long plateau Ca2+ prolonge la période réfractaire : sécurité anti-tétanie (vs twitch muscle squelettique).", "en": "In the myocardium, the long Ca2+ plateau prolongs the refractory period: anti-tetany safeguard (vs skeletal twitch)."}
+   }
+  },
+  {
+   "id": "biophys_membr_015",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 4,
+   "tags": ["biophysique", "conduction", "neuro"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Biophysique", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Conduction saltatoire : mécanisme et gain ?", "en": "Saltatory conduction: mechanism and gain?"},
+    "back": {"fr": "La myéline isole l'internœud (capacité ↓, résistance ↑) : le PA ne se régénère qu'aux nœuds de Ranvier → sauts de nœud en nœud, vitesse ×10-100 avec moins d'énergie.", "en": "Myelin insulates the internode (↓capacitance, ↑resistance): the AP regenerates only at nodes of Ranvier → node-to-node hops, ×10-100 speed with less energy."},
+    "explanation": {"fr": "La sclérose en plaques détruit la myéline : ralentissement/bloc de conduction → signes focaux selon le territoire atteint.", "en": "Multiple sclerosis destroys myelin: slowed/blocked conduction → focal signs by territory."}
+   }
+  },
+  {
+   "id": "biophys_membr_016",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 5,
+   "tags": ["biophysique", "canaux", "pharmacologie"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Biophysique", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Les 3 états du canal Na+ voltage-dépendant ?", "en": "The 3 states of the voltage-gated Na+ channel?"},
+    "back": {"fr": "Fermé activable (porte m fermée, porte h ouverte), ouvert (m et h ouvertes — le Na+ entre), inactivé (m ouverte, h fermée — pause obligée avant réactivation).", "en": "Closed-activatable (activation gate m closed, inactivation gate h open), open (both gates open — Na+ flows), inactivated (m open, h closed — mandatory pause before reactivation)."},
+    "explanation": {"fr": "Les anesthésiques locaux (lidocaïne) lient préférentiellement l'état inactivé : bloc d'usage — les fibres douloureuses à haute fréquence sont bloquées en priorité.", "en": "Local anesthetics (lidocaine) preferentially bind the inactivated state: use-dependent block — high-frequency pain fibers are blocked first."}
+   }
+  },
+  {
+   "id": "biophys_membr_017",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 5,
+   "tags": ["biophysique", "canaux", "toxines"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Biophysique", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Action de la tétrodotoxine (TTX) ?", "en": "What is the action of tetrodotoxin (TTX)?"},
+    "back": {"fr": "Blocage sélectif des canaux Na+ voltage-dépendants par la face extracellulaire : paralysie flasque (poisson-globe/fugu).", "en": "Selective blockade of voltage-gated Na+ channels from the extracellular face: flaccid paralysis (pufferfish/fugu)."},
+    "explanation": {"fr": "Avec la saxitoxine, la TTX a servi d'outil pour cartographier les canaux Na+ ; certains canaux Na-cardiaques y sont résistants (différences de sélectivité).", "en": "With saxitoxin, TTX served to map Na+ channels; some cardiac Na channels are TTX-resistant (selectivity differences)."}
+   }
+  },
+  {
+   "id": "biophys_membr_018",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 3,
+   "tags": ["biophysique", "pompe", "canaux"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Biophysique", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "3 différences entre une pompe et un canal ionique ?", "en": "3 differences between a pump and an ion channel?"},
+    "back": {"fr": "Pompe : consomme de l'énergie (ATP), transporte contre gradient, cinétique lente et saturable. Canal : passif, élevé débit, ouverture/fermeture rapides (gating) suivant gradient.", "en": "Pump: consumes energy (ATP), transports against gradient, slow saturable kinetics. Channel: passive, high throughput, fast gating, down-gradient."},
+    "explanation": {"fr": "Confondre pompe et canal fausse l'interprétation des tracés ECG (courants) et des équilibres ioniques régulés.", "en": "Confusing pump and channel corrupts ECG current interpretation and regulated ion-balance physiology."}
+   }
+  },
+  {
+   "id": "biophys_membr_019",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 3,
+   "tags": ["biophysique", "osmose", "eau"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Biophysique", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Osmose : définition et force motrice ?", "en": "Osmosis: definition and driving force?"},
+    "back": {"fr": "Flux d'eau à travers une membrane semi-perméable vers le compartiment le plus concentré en solutés, jusqu'à équilibre (pression osmotique). La force motrice est le gradient osmotique (Na+ en pratique clinique).", "en": "Water flow across a semipermeable membrane toward the more solute-concentrated compartment until equilibrium (osmotic pressure). The driving force is the osmotic gradient (Na+ in clinical practice)."},
+    "explanation": {"fr": "L'ADH règle le réabsorption aqueuse en insérant l'aquaporine-2 : compréhension directe des tests de restriction hydrique.", "en": "ADH controls water reabsorption by inserting aquaporin-2: directly underpins water-restriction test interpretation."}
+   }
+  },
+  {
+   "id": "biophys_membr_020",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 4,
+   "tags": ["biophysique", "tonicite", "fluides"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Biophysique", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Tonicité vs osmolarité : quelle nuance clinique ?", "en": "Tonicity vs osmolarity: what is the clinical nuance?"},
+    "back": {"fr": "L'osmolarité compte tous les particules ; la tonicité ne retient que les solutés NON pénétrants. Un liquide iso-osmolaire contenant de l'urée est hypotonique (l'urée traverse).", "en": "Osmolarity counts all particles; tonicity counts only non-penetrating solutes. An iso-osmolar solution containing urea is hypotonic (urea crosses)."},
+    "explanation": {"fr": "NaCl 0,9 % est isotonique (remplissage sans œdème cellulaire) ; l'eau glucose 5 % devient hypotonique après métabolisme du glucose.", "en": "0.9% NaCl is isotonic (no cell swelling on infusion); 5% glucose becomes hypotonic once glucose is metabolized."}
+   }
+  },
+  {
+   "id": "biophys_membr_021",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 4,
+   "tags": ["biophysique", "oncotique", "oedeme"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Biophysique", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Pression oncotique : origine et protéine clé ?", "en": "Oncotic pressure: origin and key protein?"},
+    "back": {"fr": "Pression osmotique colloïdale des protéines plasmatiques non filtrables (albumine ≈ 80 %) qui retient l'eau dans le secteur vasculaire.", "en": "Colloid osmotic pressure of non-filterable plasma proteins (albumin ≈ 80%) keeping water in the vascular compartment."},
+    "explanation": {"fr": "Hypoalbuminémie de la cirrhose ou du syndrome néphrotique → diminution πc → œdèmes périphériques et ascite.", "en": "Hypoalbuminemia of cirrhosis or nephrotic syndrome → decreased πc → peripheral edema and ascites."}
+   }
+  },
+  {
+   "id": "biophys_membr_022",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 5,
+   "tags": ["biophysique", "starling", "oedeme"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Biophysique", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Formule de Starling et les 3 causes principales d'œdème ?", "en": "Starling equation and the 3 main causes of edema?"},
+    "back": {"fr": "Jv = Kf·[(Pc − Pi) − σ(πc − πi)]. Œdème si : ↑pression hydrostatique capillaire Pc (insuffisance cardiaque), ↓pression oncotique πc (hypoalbuminémie), ↑perméabilité capillaire (inflammation).", "en": "Jv = Kf·[(Pc − Pi) − σ(πc − πi)]. Edema with: ↑capillary hydrostatic pressure Pc (heart failure), ↓oncotic pressure πc (hypoalbuminemia), ↑capillary permeability (inflammation)."},
+    "explanation": {"fr": "Le drainage lymphatique est un 4ᵉ facteur (oublié dans la formule) : son obstruction (filaires, curage) produit un lymphœdème.", "en": "Lymphatic drainage is a 4th factor (outside the formula): its obstruction (filariae, node dissection) produces lymphedema."}
+   }
+  },
+  {
+   "id": "biophys_membr_023",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 4,
+   "tags": ["biophysique", "aquaporine", "nephro"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Biophysique", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Aquaporine-2 : site, régulation et pathologie ?", "en": "Aquaporin-2: site, regulation and pathology?"},
+    "back": {"fr": "Pôle apical du tube collecteur rénal, insérée par l'ADH (vasopressine) via V2R-cAMP : hyposmolarité urinaire possible. Résistance rénale = diabète insipide néphrogénique.", "en": "Apical pole of the renal collecting duct, inserted by ADH (vasopressin) via V2R-cAMP: enables concentrated urine. Renal resistance = nephrogenic diabetes insipidus."},
+    "explanation": {"fr": "Le lithium est une cause classique de résistance AQP2 : à rechercher devant polyurie-polydipsie chez un patient sous lithium.", "en": "Lithium is a classic cause of AQP2 resistance: suspect it in polyuria-polydipsia in a patient on lithium."}
+   }
+  },
+  {
+   "id": "biophys_membr_024",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 4,
+   "tags": ["biophysique", "cotransport", "cardio"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Biophysique", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Symport vs antiport : un exemple de chaque ?", "en": "Symport vs antiport: one example of each?"},
+    "back": {"fr": "Symport (même sens) : SGLT Na+-glucose intestinal/rénal. Antiport (sens opposés) : échangeur Na+/Ca2+ cardiaque (3 Na+ entrants contre 1 Ca2+ sortant).", "en": "Symport (same direction): intestinal/renal SGLT Na+-glucose. Antiport (opposite): cardiac Na+/Ca2+ exchanger (3 Na+ in for 1 Ca2+ out)."},
+    "explanation": {"fr": "Les digitaliques augmentent [Na]i → l'échangeur Na/Ca s'inverse partiellement → ↑[Ca]i → effet inotrope positif.", "en": "Cardiac glycosides raise [Na]i → Na/Ca exchanger partly reverses → ↑[Ca]i → positive inotropy."}
+   }
+  },
+  {
+   "id": "biophys_membr_025",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 3,
+   "tags": ["biophysique", "sodium", "energie"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Biophysique", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Pourquoi le gradient Na+ est-il qualifié de « batterie » cellulaire ?", "en": "Why is the Na+ gradient called the cell's battery?"},
+    "back": {"fr": "Il stocke l'énergie investie par la pompe Na/K : cotransports (glucose, acides aminés), échanges (Na/Ca), réabsorptions et potentiel d'action en dépendent directement.", "en": "It stores the energy invested by the Na/K pump: cotransports (glucose, amino acids), exchanges (Na/Ca), reabsorption and the action potential all depend on it."},
+    "explanation": {"fr": "L'arrêt cardiaque épuise l'ATP, effondre ce gradient puis tous les autres : œdème cellulaire, arrêt de l'homéostasie calcique.", "en": "Cardiac arrest depletes ATP, collapses this gradient then all others: cellular edema, loss of calcium homeostasis."}
+   }
+  },
+  {
+   "id": "biophys_membr_026",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 4,
+   "tags": ["biophysique", "calcium", "signalisation"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Biophysique", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Pourquoi Ca2+ est-il un bon second messager ?", "en": "Why is Ca2+ a good second messenger?"},
+    "back": {"fr": "Sa concentration cytosolique libre est très basse (~100 nM) contre ~1-2 mM extracellulaire : une petite entrée fait un signal d'amplitude ×100 rapide et réversible (pompes SERCA/PMCA le résorbent).", "en": "Its free cytosolic concentration is very low (~100 nM) vs ~1-2 mM extracellular: a small influx gives a fast ×100-amplified reversible signal (SERCA/PMCA pumps clear it)."},
+    "explanation": {"fr": "Au cœur, Ca2+ induit sa propre libération par le réticulum (CICR via RyR2) : maillon du couplage excitation-contraction ciblé par les bêta-bloquants.", "en": "In the heart, Ca2+ induces its own SR release (CICR via RyR2): the excitation-contraction link targeted by beta-blockers."}
+   }
+  },
+  {
+   "id": "biophys_membr_027",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 4,
+   "tags": ["biophysique", "signalisation", "gpcr"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Biophysique", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Cascade cAMP des GPCR stimulatrices (Gs) : étapes et effecteur ?", "en": "cAMP cascade of stimulatory GPCRs (Gs): steps and effector?"},
+    "back": {"fr": "Ligand → récepteur → protéine Gs-GTP → adénylyl cyclase → ↑cAMP → activation de la protéine kinase A (PKA) → phosphorylations cibles.", "en": "Ligand → receptor → Gs-GTP protein → adenylyl cyclase → ↑cAMP → activation of protein kinase A (PKA) → target phosphorylations."},
+    "explanation": {"fr": "L'adrénaline β1 ↑cAMP cardiaque (inotrope/chronotrope +) ; la toxine cholérique bloque Gs en position active → sécrétion intestinale massive (diarrhée).", "en": "β1 adrenaline ↑cardiac cAMP (positive ino/chronotropy); cholera toxin locks Gs active → massive intestinal secretion (diarrhea)."}
+   }
+  },
+  {
+   "id": "biophys_membr_028",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 5,
+   "tags": ["biophysique", "digitaliques", "cardio"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Biophysique", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Mécanisme inotrope positif des digitaliques (digoxine) ?", "en": "Positive inotropic mechanism of cardiac glycosides (digoxin)?"},
+    "back": {"fr": "Inhibition de la Na/K ATPase → ↑[Na]i → réduction/inversion de l'échangeur Na+/Ca2+ → ↑[Ca]i → contraction renforcée.", "en": "Inhibition of Na/K ATPase → ↑[Na]i → reduced/reversed Na+/Ca2+ exchange → ↑[Ca]i → stronger contraction."},
+    "explanation": {"fr": "Marge thérapeutique étroite : surdosage = arythmies, nausées, signes visuels jaune-vert (xanthopsie) — d'où la digoxinémie surveillée.", "en": "Narrow therapeutic index: overdose = arrhythmias, nausea, yellow-green vision (xanthopsia) — hence monitored digoxin levels."}
+   }
+  },
+  {
+   "id": "biophys_membr_029",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 5,
+   "tags": ["biophysique", "patchclamp", "methodes"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Biophysique", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Que mesure la technique du patch-clamp ?", "en": "What does the patch-clamp technique measure?"},
+    "back": {"fr": "Les courants ioniques traversant un ou quelques canaux uniques (cell-attached, inside-out/outside-out) ou la cellule entière (whole-cell). Prix Nobel 1991 (Neher, Sakmann).", "en": "Ionic currents through one or a few single channels (cell-attached, inside-out/outside-out) or the whole cell (whole-cell). 1991 Nobel Prize (Neher, Sakmann)."},
+    "explanation": {"fr": "Base de la pharmacologie des canaux : profils d'ouverture de chaque canal Na/K/Ca et modes d'action des bloqueurs.", "en": "Foundation of channel pharmacology: opening profiles of each Na/K/Ca channel and blocking-drug modes."}
+   }
+  },
+  {
+   "id": "biophys_membr_030",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 4,
+   "tags": ["biophysique", "hemodynamique", "poiseuille"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Biophysique", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Loi de Poiseuille : relation rayon-résistance et exemples cliniques ?", "en": "Poiseuille's law: radius-resistance relation and clinical examples?"},
+    "back": {"fr": "R = 8ηL/πr⁴ : la résistance varie en 1/r⁴. Une sténose divisant le rayon par 2 multiplie R par 16 ; la polyglobulie (↑η) et l'HTA s'y comprennent directement.", "en": "R = 8ηL/πr⁴: resistance scales as 1/r⁴. Halving radius ×16 resistance; polycythemia (↑η) and hypertension follow directly."},
+    "explanation": {"fr": "La vasoconstriction compensatrice apporte un bénéfice rapide mais coûteux pour le cœur : 1/r⁴ explique la brutalité de la post-charge.", "en": "Compensatory vasoconstriction is rapid but costly for the heart: 1/r⁴ explains the brutality of afterload."}
+   }
+  }
+ ]
+}

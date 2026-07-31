@@ -1,0 +1,435 @@
+{
+ "deck_id": "deck_histo_epitheliums",
+ "module_id": "histologie",
+ "programme": "medecine_dz",
+ "study_year": 1,
+ "version": 1,
+ "name_fr": "Histologie des épithéliums",
+ "name_en": "Histology of epithelia",
+ "description_fr": "Classification, jonctions cellulaires, spécialisations apicales et basales, glandes et aspects cliniques des tissus épithéliaux.",
+ "is_premium": true,
+ "is_demo": false,
+ "license": "medankidz_internal_v1",
+ "cards": [
+  {
+   "id": "histo_epith_001",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 2,
+   "tags": ["histologie", "epithelium", "classification"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Histologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Où trouve-t-on un épithélium pavimenteux simple (plats, une couche) ?", "en": "Where is simple squamous epithelium found?"},
+    "back": {"fr": "Alvéoles pulmonaires, endothélium vasculaire, mésothélium des cavités séreuses (plèvre, péricarde, péritoine), capsule de Bowman.", "en": "Pulmonary alveoli, vascular endothelium, mesothelium of serous cavities (pleura, pericardium, peritoneum), Bowman's capsule."},
+    "explanation": {"fr": "Sa minceur permet les échanges (gaz, liquides) et le glissement des séreuses. Une transformation locale en épithélium stratifié (métaplasie) signe une irritation chronique.", "en": "Its thinness enables exchange (gases, fluids) and frictionless sliding of serous membranes. Local conversion to stratified epithelium (metaplasia) is a marker of chronic irritation."}
+   }
+  },
+  {
+   "id": "histo_epith_002",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 2,
+   "tags": ["histologie", "epithelium", "classification"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Histologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Donnez 3 localisations typiques d'un épithélium cubique simple.", "en": "Name 3 typical locations of simple cuboidal epithelium."},
+    "back": {"fr": "Tubules rénaux, follicules thyroïdiens, plexus choroïdes, surface ovarienne.", "en": "Renal tubules, thyroid follicles, choroid plexus, ovarian surface."},
+    "explanation": {"fr": "Adapté à la réabsorption et la sécrétion. Les follicules thyroïdiens stockent la colloïde (thyroglobuline iodée) — leur hauteur varie avec l'activité de la glande.", "en": "Suited to reabsorption and secretion. Thyroid follicles store colloid (iodinated thyroglobulin); their epithelial height reflects gland activity."}
+   }
+  },
+  {
+   "id": "histo_epith_003",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 2,
+   "tags": ["histologie", "epithelium", "classification"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Histologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Quels organes sont tapissés d'un épithélium cylindrique simple ?", "en": "Which organs are lined by simple columnar epithelium?"},
+    "back": {"fr": "Estomac, intestin grêle, côlon, vésicule biliaire, utérus et trompes.", "en": "Stomach, small intestine, colon, gallbladder, uterus and uterine tubes."},
+    "explanation": {"fr": "Spécialisé en sécrétion et absorption. Le revêtement gastrique sécrète une mucine protectrice : sa rupture ouvre la voie aux ulcères gastro-duodénaux.", "en": "Specialized in secretion and absorption. Gastric lining secretes protective mucus; its breakdown enables gastroduodenal ulcers."}
+   }
+  },
+  {
+   "id": "histo_epith_004",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 3,
+   "tags": ["histologie", "epithelium", "respiratoire"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Histologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Épithélium cylindrique pseudostratifié cilié : localisation et fonction ?", "en": "Pseudostratified ciliated columnar epithelium: location and function?"},
+    "back": {"fr": "Voies respiratoires (trachée, bronches, fosses nasales). Il piège les particules dans le mucus et les évacue par les battements ciliaires (clairance mucociliaire).", "en": "Respiratory tract (trachea, bronchi, nasal cavities). It traps particles in mucus and clears them via ciliary beating (mucociliary clearance)."},
+    "explanation": {"fr": "Chez le fumeur, la clairance chute et l'épithélium se métaplasie en pavimenteux stratifié : terrain pré-cancéreux des cancers bronchiques.", "en": "In smokers, clearance drops and the epithelium undergoes squamous metaplasia: a pre-cancerous field for bronchial carcinoma."}
+   }
+  },
+  {
+   "id": "histo_epith_005",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 3,
+   "tags": ["histologie", "epithelium", "peau"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Histologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Quel est le rôle de la kératine de l'épithélium pavimenteux stratifié kératinisé ?", "en": "What is the role of keratin in keratinized stratified squamous epithelium?"},
+    "back": {"fr": "Barrière imperméable et mécaniquement résistante (épiderme, surtout paumes et plantes). La couche cornée est anucléée, pleine de kératine.", "en": "A waterproof, mechanically resistant barrier (epidermis, especially palms and soles). The anucleate stratum corneum is filled with keratin."},
+    "explanation": {"fr": "Le psoriasis accélère le cycle des kératinocytes (3-4 jours au lieu de ~28) : squames argentées sur plaques érythémateuses.", "en": "Psoriasis accelerates keratinocyte turnover (3-4 days instead of ~28): silvery scales on erythematous plaques."}
+   }
+  },
+  {
+   "id": "histo_epith_006",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 3,
+   "tags": ["histologie", "epithelium", "clinique"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Histologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Citez 3 localisations d'un épithélium pavimenteux stratifié NON kératinisé.", "en": "Name 3 locations of non-keratinized stratified squamous epithelium."},
+    "back": {"fr": "Cavité orale, œsophage, vagin, cornée, canal anal (partie inférieure).", "en": "Oral cavity, esophagus, vagina, cornea, lower anal canal."},
+    "explanation": {"fr": "Il résiste aux frottements tout en restant humide. Le reflux gastro-œsophagien chronique peut y induire une métaplasie cylindrique (œsophage de Barrett), lésion pré-cancéreuse.", "en": "It withstands friction while staying moist. Chronic gastroesophageal reflux can induce columnar metaplasia (Barrett's esophagus), a precancerous lesion."}
+   }
+  },
+  {
+   "id": "histo_epith_007",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 3,
+   "tags": ["histologie", "epithelium", "urinaire"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Histologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Où situe-t-on l'épithélium transitionnel (urothélium) et quelle est sa particularité ?", "en": "Where is transitional epithelium (urothelium) found, and what is its special feature?"},
+    "back": {"fr": "Voies excrétrices urinaires : bassinet, uretères, vessie, urètre proximal. Il s'étire sans déchirer grâce aux cellules superficielles en parapluie.", "en": "Urinary tract: renal pelvis, ureters, bladder, proximal urethra. It stretches without tearing thanks to dome-shaped umbrella cells."},
+    "explanation": {"fr": "Le carcinome urothélial est le cancer vésical le plus fréquent (facteurs de risque : tabac, amines aromatiques professionnelles).", "en": "Urothelial carcinoma is the most common bladder cancer (risk factors: smoking, occupational aromatic amines)."}
+   }
+  },
+  {
+   "id": "histo_epith_008",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 4,
+   "tags": ["histologie", "jonctions", "dermato"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Histologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Desmosome : composition et fonction ?", "en": "Desmosome: composition and function?"},
+    "back": {"fr": "Point d'adhérence intercellulaire : cadhérines (desmogleines) liées aux filaments intermédiaires de kératine via les plaques de densité (desmoplakines).", "en": "Spot-like intercellular adhesion: cadherins (desmogleins) linked to keratin intermediate filaments via dense plaques (desmoplakins)."},
+    "explanation": {"fr": "Le pemphigus vulgaire est dû à des auto-anticorps anti-desmogleines : acantholyse → bulles intra-épidermiques très fragiles (signe de Nikolsky positif).", "en": "Pemphigus vulgaris is caused by anti-desmoglein autoantibodies: acantholysis produces flaccid intraepidermal blisters (positive Nikolsky sign)."}
+   }
+  },
+  {
+   "id": "histo_epith_009",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 4,
+   "tags": ["histologie", "jonctions", "physiologie"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Histologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Quelles protéines composent les jonctions serrées (zonula occludens) et quel est leur rôle ?", "en": "Which proteins form tight junctions (zonula occludens) and for what purpose?"},
+    "back": {"fr": "Claudines et occludine. Elles scellent l'espace paracellulaire (étanchéité) et séparent domaines apical et basolatéral (polarité).", "en": "Claudins and occludin. They seal the paracellular space (barrier) and separate apical from basolateral domains (polarity)."},
+    "explanation": {"fr": "La barrière hémato-encéphalique et la barrière intestinale reposent sur elles : augmenter leur perméabilité (entérites, sepsis) provoque diarrhées et passage d'antigènes.", "en": "The blood-brain barrier and intestinal barrier depend on them: increased permeability (enteritis, sepsis) causes diarrhea and antigen translocation."}
+   }
+  },
+  {
+   "id": "histo_epith_010",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 4,
+   "tags": ["histologie", "jonctions", "cardio"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Histologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Jonction communicante (gap junction) : structure et fonction ?", "en": "Gap junction: structure and function?"},
+    "back": {"fr": "Canaux connexons faits de 6 connexines, reliant les cytoplasmes : passage d'ions et de petites molécules (couplage électrique et métabolique).", "en": "Connexons of 6 connexins linking cytoplasms: ions and small molecules pass through (electrical and metabolic coupling)."},
+    "explanation": {"fr": "Le myocarde est un syncytium fonctionnel grâce aux gap junctions des disques intercalés ; la coordination des battements ciliaires en dépend aussi.", "en": "The myocardium is a functional syncytium thanks to gap junctions in intercalated discs; ciliary beat coordination also depends on them."}
+   }
+  },
+  {
+   "id": "histo_epith_011",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 4,
+   "tags": ["histologie", "jonctions", "dermato"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Histologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "À quoi sert l'hémidesmosome ?", "en": "What is the function of the hemidesmosome?"},
+    "back": {"fr": "Ancrer la cellule épithéliale basale à la lame basale (intégrines + collagène VII des fibrilles d'ancrage).", "en": "Anchoring the basal epithelial cell to the basement membrane (integrins + type VII collagen of anchoring fibrils)."},
+    "explanation": {"fr": "Les épidermolyses bulleuses jonctionnelles (défauts d'intégrines/collagène VII) provoquent des décollements dermo-épidermiques au moindre frottement.", "en": "Junctional epidermolysis bullosa (integrin/collagen VII defects) causes dermo-epidermal blistering at the slightest friction."}
+   }
+  },
+  {
+   "id": "histo_epith_012",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 4,
+   "tags": ["histologie", "lame_basale", "nephro"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Histologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Composition de la lame basale ?", "en": "What is the composition of the basement membrane?"},
+    "back": {"fr": "Collagène de type IV (réseau), laminine, nidogène (entactine) et protéoglycanes à héparane sulfate (charge négative).", "en": "Type IV collagen (network), laminin, nidogen (entactin) and heparan-sulfate proteoglycans (negative charge)."},
+    "explanation": {"fr": "Dans le glomérule, la lame basale est une barrière de charge : sa négativité repousse l'albumine. Le syndrome néphrotique = fuite protéique massive.", "en": "In the glomerulus, the basement membrane is a charge barrier: its negativity repels albumin. Nephrotic syndrome = massive protein leakage."}
+   }
+  },
+  {
+   "id": "histo_epith_013",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 3,
+   "tags": ["histologie", "apex", "digestif"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Histologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Microvillosités : où et pour quoi ?", "en": "Microvilli: where and for what purpose?"},
+    "back": {"fr": "Pôle apical des entérocytes (plateau strié) et du tubule proximal rénal : amplification ×20-30 de la surface d'absorption (+ glycocalyx enzymatique : lactase…).", "en": "Apical pole of enterocytes (brush border) and renal proximal tubule: ×20-30 amplification of absorptive surface (+ enzymatic glycocalyx: lactase…)."},
+    "explanation": {"fr": "Le déficit en lactase du glycocalyx explique l'intolérance au lactose (flatulences, diarrhée osmotique après lait).", "en": "Glycocalyx lactase deficiency explains lactose intolerance (bloating, osmotic diarrhea after milk)."}
+   }
+  },
+  {
+   "id": "histo_epith_014",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 4,
+   "tags": ["histologie", "apex", "cils"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Histologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Structure moléculaire d'un cil mobile ?", "en": "What is the molecular structure of a motile cilium?"},
+    "back": {"fr": "Axonème de 9 doublets périphériques + 2 microtubules centraux (9+2), bras de dynéine (ATPase) ancrés sur un corpuscule basal.", "en": "Axoneme of 9 peripheral doublets + 2 central microtubules (9+2), dynein arms (ATPase), anchored to a basal body."},
+    "explanation": {"fr": "La dyskinésie ciliaire primitive (défaut de dynéine) cause sinusites, bronchiectasies et situs inversus (syndrome de Kartagener), voire infertilité.", "en": "Primary ciliary dyskinesia (dynein defects) causes sinusitis, bronchiectasis and situs inversus (Kartagener syndrome), sometimes infertility."}
+   }
+  },
+  {
+   "id": "histo_epith_015",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 4,
+   "tags": ["histologie", "apex", "repro"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Histologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Où trouve-t-on des stéréocils et sont-ils de vrais cils ?", "en": "Where are stereocilia found, and are they true cilia?"},
+    "back": {"fr": "Épididyme et oreille interne (cellules ciliées). Non : ce sont de longues microvillosités actiniques, sans axonème ni mouvement propre.", "en": "Epididymis and inner ear (hair cells). No: they are long actin-based microvilli, without axoneme or intrinsic motion."},
+    "explanation": {"fr": "Dans l'épididyme ils absorbent le liquide séminal ; dans l'oreille interne ils assurent la mécanotransduction auditive (canaux K+ apicaux).", "en": "In the epididymis they absorb seminal fluid; in the inner ear they perform auditory mechanotransduction (apical K+ channels)."}
+   }
+  },
+  {
+   "id": "histo_epith_016",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 2,
+   "tags": ["histologie", "secretion", "digestif"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Histologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Quelle est la fonction des cellules caliciformes (goblet) ?", "en": "What is the function of goblet cells?"},
+    "back": {"fr": "Sécrétion unicellulaire de mucines exocytossées : le mucus forme un gel protecteur et lubrifiant (intestin, voies respiratoires).", "en": "Unicellular secretion of mucins by exocytosis: mucus forms a protective, lubricating gel (intestine, airways)."},
+    "explanation": {"fr": "Dans la bronchite chronique du fumeur, leur hyperplasie accroît la production de mucus (toux productive) pendant que les cils disparaissent.", "en": "In smokers' chronic bronchitis, goblet-cell hyperplasia increases mucus (productive cough) while cilia are lost."}
+   }
+  },
+  {
+   "id": "histo_epith_017",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 4,
+   "tags": ["histologie", "digestif", "immunite"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Histologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Cellule de Paneth : localisation et rôle ?", "en": "Paneth cell: location and role?"},
+    "back": {"fr": "Au fond des cryptes de Lieberkühn (grêle) : granules apicaux de lysozyme et défensines → immunité innée et contrôle du microbiote.", "en": "At the bottom of the crypts of Lieberkühn (small intestine): apical granules of lysozyme and defensins → innate immunity and microbiome control."},
+    "explanation": {"fr": "La maladie de Crohn atteint souvent l'iléon terminal, niche des Paneth et des cellules souches épithéliales qu'elles protègent.", "en": "Crohn's disease often targets the terminal ileum, the niche of Paneth cells and of the epithelial stem cells they protect."}
+   }
+  },
+  {
+   "id": "histo_epith_018",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 4,
+   "tags": ["histologie", "digestif", "immunite"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Histologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Cellule M (microfold) : rôle immunitaire ?", "en": "M (microfold) cell: what is its immune role?"},
+    "back": {"fr": "Épithélium des plaques de Peyer : transcytose des antigènes luminaux vers les lymphocytes et cellules présentatrices situés en dessous.", "en": "Epithelium of Peyer's patches: transcytosis of luminal antigens down to underlying lymphocytes and antigen-presenting cells."},
+    "explanation": {"fr": "Certaines bactéries en abusent comme porte d'entrée : Salmonella typhi (fièvre typhoïde) franchit les cellules M pour envahir.", "en": "Some bacteria exploit them as a portal of entry: Salmonella typhi (typhoid fever) crosses M cells to invade."}
+   }
+  },
+  {
+   "id": "histo_epith_019",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 3,
+   "tags": ["histologie", "peau", "pigment"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Histologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Mélanocyte : origine embryologique et produit ?", "en": "Melanocyte: embryological origin and product?"},
+    "back": {"fr": "Origine crête neurale, localisé en couche basale : synthétise la mélanine dans des mélanosomes transférés aux kératinocytes voisins.", "en": "Neural-crest origin, located in the basal layer: synthesizes melanin in melanosomes transferred to neighboring keratinocytes."},
+    "explanation": {"fr": "Les UV stimulent la mélanogenèse protectrice de l'ADN. Le mélanome malin dérive du mélanocyte (critères ABCDE en clinique).", "en": "UV light stimulates melanogenesis protecting DNA. Malignant melanoma derives from melanocytes (ABCDE clinical criteria)."}
+   }
+  },
+  {
+   "id": "histo_epith_020",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 3,
+   "tags": ["histologie", "peau", "epiderme"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Histologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Énumérez les 4 couches de l'épiderme de la base vers la surface.", "en": "List the 4 epidermal layers from base to surface."},
+    "back": {"fr": "Basale (cellules souches) → épineuse → granuleuse (grains de kératohyaline) → cornée (squames anucléées kératinisées).", "en": "Basal (stem cells) → spinous → granular (keratohyalin granules) → corneum (anucleate keratinized flakes)."},
+    "explanation": {"fr": "Le renouvellement complet dure ~28 jours. La parakératose (noyaux persistants en couche cornée) signe un psoriasis ou une irritation.", "en": "Full renewal takes ~28 days. Parakeratosis (retained nuclei in the corneum) marks psoriasis or irritation."}
+   }
+  },
+  {
+   "id": "histo_epith_021",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 3,
+   "tags": ["histologie", "peau", "immunite"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Histologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Cellule de Langerhans : type et fonction ?", "en": "Langerhans cell: type and function?"},
+    "back": {"fr": "Cellule dendritique (présentatrice d'antigène) migrée dans l'épiderme : capte les antigènes cutanés et les présente dans le ganglion drainant.", "en": "Dendritic (antigen-presenting) cell residing in the epidermis: captures skin antigens and presents them in the draining lymph node."},
+    "explanation": {"fr": "Eczéma de contact = hypersensibilité retardée (type IV) initiée par ces cellules. Leur prolifération tumorale = histiocytose langerhansienne.", "en": "Contact eczema is delayed-type (IV) hypersensitivity initiated by these cells; their neoplastic proliferation = Langerhans-cell histiocytosis."}
+   }
+  },
+  {
+   "id": "histo_epith_022",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 1,
+   "tags": ["histologie", "glandes"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Histologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Différence entre glande exocrine et glande endocrine ?", "en": "Difference between exocrine and endocrine gland?"},
+    "back": {"fr": "L'exocrine déverse sa sécrétion par des canaux excréteurs (surface ou lumière) ; l'endocrine la libère dans le sang/capillaires (hormones).", "en": "Exocrine secretes via ducts (surface or lumen); endocrine releases into blood capillaries (hormones)."},
+    "explanation": {"fr": "Le pancréas est mixte : acini exocrines (enzymes digestives) et ilots de Langerhans endocrines (insuline, glucagon).", "en": "The pancreas is mixed: exocrine acini (digestive enzymes) and endocrine islets of Langerhans (insulin, glucagon)."}
+   }
+  },
+  {
+   "id": "histo_epith_023",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 4,
+   "tags": ["histologie", "glandes", "secretion"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Histologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Décrivez les 3 modes de sécrétion des glandes exocrines.", "en": "Describe the 3 secretion modes of exocrine glands."},
+    "back": {"fr": "Mérocrine (exocytose pure : sudorales eccrines), apocrine (apex cytoplasmique cédé : mammaires), holocrine (cellule entière sacrifiée : sébacées).", "en": "Merocrine (pure exocytosis: eccrine sweat glands), apocrine (apical cytoplasm lost: mammary), holocrine (whole cell sacrificed: sebaceous)."},
+    "explanation": {"fr": "La sécrétion des glandes sébacées (holocrine) est stimulée par les androgènes : base physiopathologique de l'acné de l'adolescent.", "en": "Sebaceous (holocrine) secretion is androgen-driven: the pathophysiological basis of teenage acne."}
+   }
+  },
+  {
+   "id": "histo_epith_024",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 3,
+   "tags": ["histologie", "peau", "glandes"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Histologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Glande sébacée : mode de sécrétion et produit ?", "en": "Sebaceous gland: secretion mode and product?"},
+    "back": {"fr": "Holocrine (la cellule se désintègre) : le sébum, mélange lipidique déversé dans le follicule pileux, lubrifie poil et peau.", "en": "Holocrine (the cell disintegrates): sebum, a lipid mixture discharged into the hair follicle, lubricating hair and skin."},
+    "explanation": {"fr": "L'hyperactivité androgénique + kératinisation du canal favorisent le comédon, colonisé par Cutibacterium acnes → acné inflammatoire.", "en": "Androgen-driven hyperactivity plus duct keratinization promotes comedones colonized by Cutibacterium acnes → inflammatory acne."}
+   }
+  },
+  {
+   "id": "histo_epith_025",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 3,
+   "tags": ["histologie", "glandes", "salivaires"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Histologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Acini séreux vs acini muqueux : différences et exemples ?", "en": "Serous vs mucous acini: differences and examples?"},
+    "back": {"fr": "Séreux = sécrétion aqueuse riche en enzymes (parotide, pancréas exocrine) ; muqueux = sécrétion visqueuse de mucines (sublinguale, glandes buccales).", "en": "Serous = watery enzyme-rich secretion (parotid, exocrine pancreas); mucous = viscous mucin secretion (sublingual, buccal glands)."},
+    "explanation": {"fr": "La parotide est quasi purement séreuse. La sécheresse buccale (médicaments, syndrome de Gougerot-Sjögren) favorise caries et infections.", "en": "The parotid is almost purely serous. Dry mouth (drugs, Sjögren's syndrome) promotes caries and infections."}
+   }
+  },
+  {
+   "id": "histo_epith_026",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 4,
+   "tags": ["histologie", "glandes", "myoepithelium"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Histologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Où sont les cellules myoépithéliales et que font-elles ?", "en": "Where are myoepithelial cells, and what do they do?"},
+    "back": {"fr": "Entre épithélium sécrétoire et lame basale (mammaires, salivaires, sudorales) : elles se contractent pour expulser la sécrétion (stimulus ocytocine pour l'ejection lactée).", "en": "Between secretory epithelium and basement membrane (mammary, salivary, sweat glands): they contract to expel secretion (oxytocin drives milk ejection)."},
+    "explanation": {"fr": "Certaines tumeurs salivaires comportent un contingent myoépithélial (adénoïde kystique) ; son étude aide au diagnostic histopathologique.", "en": "Some salivary tumors contain a myoepithelial component (adenoid cystic carcinoma); its analysis guides histopathological diagnosis."}
+   }
+  },
+  {
+   "id": "histo_epith_027",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 3,
+   "tags": ["histologie", "regeneration", "oncologie"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Histologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Où siègent les cellules souches des épithéliums digestif et cutané ?", "en": "Where do the stem cells of intestinal and skin epithelia reside?"},
+    "back": {"fr": "Au fond des cryptes intestinales (au-dessus des Paneth) et dans la couche basale épidermique (+ bulbe des follicules pileux).", "en": "At the bottom of intestinal crypts (above Paneth cells) and in the epidermal basal layer (+ hair-follicle bulge)."},
+    "explanation": {"fr": "L' épithélium intestinal se renouvelle en 3-5 jours : les chimiothérapies visent ces populations à fort renouvellement → mucites digestives.", "en": "Intestinal epithelium renews every 3-5 days: chemotherapies hit these fast-dividing populations → digestive mucositis."}
+   }
+  },
+  {
+   "id": "histo_epith_028",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 4,
+   "tags": ["histologie", "metaplasie", "oncologie"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Histologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Définissez la métaplasie et donnez un exemple clinique majeur.", "en": "Define metaplasia and give a major clinical example."},
+    "back": {"fr": "Remplacement réversible d'un épithélium différencié par un autre, en réponse à une agression. Ex. : épithélium respiratoire cilié → pavimenteux stratifié chez le fumeur.", "en": "Reversible replacement of one differentiated epithelium by another in response to injury. E.g.: ciliated respiratory epithelium → stratified squamous in smokers."},
+    "explanation": {"fr": "Adaptative au début, la métaplasie persistante sous agression chronique est un terrain de cancérogenèse (cancer bronchique, œsophage de Barrett).", "en": "Initially adaptive, persistent metaplasia under chronic injury is fertile ground for carcinogenesis (lung cancer, Barrett's esophagus)."}
+   }
+  },
+  {
+   "id": "histo_epith_029",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 4,
+   "tags": ["histologie", "dysplasie", "oncologie"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Histologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Dysplasie vs métaplasie : quelle différence pronostique ?", "en": "Dysplasia vs metaplasia: what is the prognostic difference?"},
+    "back": {"fr": "La métaplasie est adaptative et souvent bénigne/réversible ; la dysplasie combine atypies nucléaires et désorganisation architecturale : c'est une lésion PRÉCANCÉREUSE.", "en": "Metaplasia is adaptive, often benign/reversible; dysplasia combines nuclear atypia and architectural disarray: it is a PRECANCEROUS lesion."},
+    "explanation": {"fr": "Le dépistage cervical par frottis cherche précisément les dysplasies (CIN/HSIL) pour traiter avant le cancer invasif du col.", "en": "Cervical screening by Pap smear specifically detects dysplasias (CIN/HSIL) to treat before invasive cervical cancer."}
+   }
+  },
+  {
+   "id": "histo_epith_030",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 5,
+   "tags": ["histologie", "marqueurs", "oncologie"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Histologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Pourquoi les cytokératines sont-elles utiles en immunohistochimie ?", "en": "Why are cytokeratins useful in immunohistochemistry?"},
+    "back": {"fr": "Filaments intermédiaires exclusivement épithéliaux : leur profil (ex. CK7, CK20) confirme l'origine épithéliale d'une tumeur et oriente vers l'organe primitif.", "en": "Intermediate filaments specific to epithelia: their profile (e.g. CK7, CK20) confirms the epithelial origin of a tumor and points to the primary organ."},
+    "explanation": {"fr": "Un adénocarcinome colorectal est classiquement CK20+/CK7− : ce profil aide à identifier une métastase d'origine inconnue.", "en": "Colorectal adenocarcinoma is classically CK20+/CK7−: this profile helps identify metastases of unknown primary."}
+   }
+  }
+ ]
+}

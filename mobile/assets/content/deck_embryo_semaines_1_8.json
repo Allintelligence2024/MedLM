@@ -1,0 +1,435 @@
+{
+ "deck_id": "deck_embryo_semaines_1_8",
+ "module_id": "embryologie",
+ "programme": "medecine_dz",
+ "study_year": 1,
+ "version": 1,
+ "name_fr": "Embryologie : semaines 1 à 8",
+ "name_en": "Embryology: weeks 1 to 8",
+ "description_fr": "De la fécondation à la fin de l'organogenèse : implantation, gastrulation, neurulation, crêtes neurales, cœur, membres et malformations associées.",
+ "is_premium": true,
+ "is_demo": false,
+ "license": "medankidz_internal_v1",
+ "cards": [
+  {
+   "id": "embryo_s1s8_001",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 2,
+   "tags": ["embryologie", "fecondation", "semaine1"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Embryologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Où a lieu la fécondation dans des conditions normales ?", "en": "Where does fertilization normally take place?"},
+    "back": {"fr": "Dans l'ampoule tubaire (tiers latéral de la trompe utérine), à proximité de l'infundibulum.", "en": "In the ampulla of the uterine tube (lateral third), near the infundibulum."},
+    "explanation": {"fr": "Si l'embryon ne migre pas vers l'utérus, il s'implante dans la trompe : grossesse extra-utérine, première cause de mortalité maternelle au 1er trimestre.", "en": "If the embryo fails to migrate to the uterus, it implants in the tube: ectopic pregnancy, the leading cause of maternal death in the first trimester."}
+   }
+  },
+  {
+   "id": "embryo_s1s8_002",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 3,
+   "tags": ["embryologie", "fecondation", "semaine1"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Embryologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Quel mécanisme empêche la polyspermie ?", "en": "Which mechanism prevents polyspermy?"},
+    "back": {"fr": "La réaction corticale : exocytose des granules corticaux de l'ovocyte qui durcissent la zone pellucide (réaction zonale) et rendent la membrane ovocytaire infécondable.", "en": "The cortical reaction: exocytosis of oocyte cortical granules hardens the zona pellucida (zona reaction) and makes the oolemma infusible."},
+    "explanation": {"fr": "Son échec produit des triploïdies ; une dispermie peut aboutir à une môle hydatiforme partielle (69 chromosomes).", "en": "Its failure produces triploidy; dispermy may result in a partial hydatidiform mole (69 chromosomes)."}
+   }
+  },
+  {
+   "id": "embryo_s1s8_003",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 2,
+   "tags": ["embryologie", "clivage", "semaine1"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Embryologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Qu'appelle-t-on morula et quand se forme-t-elle ?", "en": "What is the morula and when does it form?"},
+    "back": {"fr": "Masse compacte de ~16 blastomères issue des divisions de clivage, vers J3-J4 après la fécondation, encore entourée de la zone pellucide.", "en": "A compact ball of ~16 blastomeres arising from cleavage divisions, around day 3-4 after fertilization, still within the zona pellucida."},
+    "explanation": {"fr": "Après compaction, la cavitation forme le blastocyste ; la zone pellucide empêche l'implantation tubaire prématurée pendant la migration.", "en": "After compaction, cavitation forms the blastocyst; the zona pellucida prevents premature tubal implantation during migration."}
+   }
+  },
+  {
+   "id": "embryo_s1s8_004",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 3,
+   "tags": ["embryologie", "blastocyste", "semaine1"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Embryologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Décrivez la structure du blastocyste.", "en": "Describe the structure of the blastocyst."},
+    "back": {"fr": "Embryoblaste (amas cellulaire interne), trophoblaste (assise externe) et blastocèle (cavité liquidienne).", "en": "Embryoblast (inner cell mass), trophoblast (outer layer) and blastocoele (fluid cavity)."},
+    "explanation": {"fr": "L'embryoblaste donne l'embryon propre ; le trophoblaste formera la partie fœtale du placenta (chorion frondosum) — d'où les valeurs d'hCG mesurées en clinique.", "en": "The embryoblast gives rise to the embryo proper; the trophoblast forms the fetal placenta (chorion frondosum) — hence the hCG measured clinically."}
+   }
+  },
+  {
+   "id": "embryo_s1s8_005",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 3,
+   "tags": ["embryologie", "implantation", "semaine1"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Embryologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Quand l'implantation débute-t-elle et que devient le trophoblaste ?", "en": "When does implantation begin, and what happens to the trophoblast?"},
+    "back": {"fr": "Vers J6-J7. Le trophoblaste se différencie en cytotrophoblaste (prolifératif) et syncytiotrophoblaste (invasif, sécrète hCG).", "en": "Around day 6-7. The trophoblast differentiates into cytotrophoblast (proliferative) and syncytiotrophoblast (invasive, hCG secreting)."},
+    "explanation": {"fr": "Le syncytiotrophoblaste creuse l'endomètre sans paroi cellulaire — ses lacunes se remplissent de sang maternel (futur espace intervilleux).", "en": "The syncytiotrophoblast invades the endometrium as a multinucleated sheet; its lacunae fill with maternal blood (future intervillous space)."}
+   }
+  },
+  {
+   "id": "embryo_s1s8_006",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 3,
+   "tags": ["embryologie", "disque", "semaine2"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Embryologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Qu'est-ce que le disque germinatif bilaminaire (semaine 2) ?", "en": "What is the bilaminar germ disc (week 2)?"},
+    "back": {"fr": "L'embryoblaste réorganisé en deux assises : épiblaste (vers la cavité amniotique) et hypoblaste (vers la vésicule vitelline).", "en": "The embryoblast reorganized into two layers: epiblast (facing the amniotic cavity) and hypoblast (facing the yolk sac)."},
+    "explanation": {"fr": "Toutes les structures de l'embryon dérivent de l'épiblaste — c'est lui qui subira la gastrulation en semaine 3.", "en": "All embryonic structures derive from the epiblast — it is the layer that will undergo gastrulation in week 3."}
+   }
+  },
+  {
+   "id": "embryo_s1s8_007",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 3,
+   "tags": ["embryologie", "hcg", "semaine2"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Embryologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Qui sécrète l'hCG et quel est son rôle ?", "en": "Who secretes hCG and what is its role?"},
+    "back": {"fr": "Le syncytiotrophoblaste. L'hCG maintient le corps jaune ovarien, donc la progestérone, jusqu'à la prise de relais placentaire (~10 semaines).", "en": "The syncytiotrophoblast. hCG maintains the corpus luteum, hence progesterone, until the placental shift (~10 weeks)."},
+    "explanation": {"fr": "Son dosage sanguin/urinaire = test de grossesse ; des valeurs anormalement hautes évoquent môle ou grossesse multiple.", "en": "Its blood/urine assay = the pregnancy test; abnormally high values suggest mole or multiple gestation."}
+   }
+  },
+  {
+   "id": "embryo_s1s8_008",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 3,
+   "tags": ["embryologie", "gastrulation", "semaine3"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Embryologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Quelle structure marque le début de la semaine 3 et l'axe cranio-caudal ?", "en": "Which structure marks the beginning of week 3 and the craniocaudal axis?"},
+    "back": {"fr": "La ligne primitive, épaississement médian de l'épiblaste surmonté du nœud de Hensen à son extrémité céphalique.", "en": "The primitive streak, a midline thickening of the epiblast topped by Hensen's node at its cephalic end."},
+    "explanation": {"fr": "Ses vestiges persistent parfois à l'extrémité caudale : origine des tératomes sacro-coccygiens du nouveau-né.", "en": "Remnants may persist at the caudal end: the origin of neonatal sacrococcygeal teratomas."}
+   }
+  },
+  {
+   "id": "embryo_s1s8_009",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 4,
+   "tags": ["embryologie", "gastrulation", "semaine3"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Embryologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "En quoi consiste la gastrulation ?", "en": "What is gastrulation?"},
+    "back": {"fr": "Migration des cellules épiblastiques à travers la ligne primitive : elles remplacent l'hypoblaste (endoderme), forment le mésoderme, et l'épiblaste restant devient ectoderme → displacement trilaminaire.", "en": "Migration of epiblast cells through the primitive streak: they replace the hypoblast (endoderm), form the mesoderm, and the remaining epiblast becomes ectoderm → trilaminar disc."},
+    "explanation": {"fr": "Période ultra-sensible aux tératogènes (semaines 3-8) : une agression en semaine 3 compromet la mise en place de tous les organes.", "en": "A highly teratogen-sensitive period (weeks 3-8): an insult in week 3 jeopardizes the laying down of all organs."}
+   }
+  },
+  {
+   "id": "embryo_s1s8_010",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 4,
+   "tags": ["embryologie", "notochorde", "semaine3"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Embryologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Quel est le rôle inducteur de la notochorde ?", "en": "What is the inducing role of the notochord?"},
+    "back": {"fr": "Mésoderme axial : il induit la formation de la plaque neurale dans l'ectoderme sus-jacent (début de la neurulation) et axe les somites.", "en": "Axial mesoderm: it induces the neural plate in the overlying ectoderm (start of neurulation) and patterns the somites."},
+    "explanation": {"fr": "Son reliquat adulte est le nucléus pulposus des disques ; les chordomes (tumeurs du clivus ou du sacrum) en dérivent.", "en": "Its adult remnant is the nucleus pulposus of discs; chordomas (clivus or sacrum tumors) derive from it."}
+   }
+  },
+  {
+   "id": "embryo_s1s8_011",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 2,
+   "tags": ["embryologie", "feuillets", "semaine3"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Embryologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Donnez une dérivée majeure de chaque feuillet : ecto/méso/endoderme.", "en": "Give one major derivative of each germ layer: ecto/meso/endoderm."},
+    "back": {"fr": "Ectoderme → SNC et épiderme ; Mésoderme → muscles, os, sang, reins/gonades ; Endoderme → épithéliums digestif et respiratoire (+ foie, pancréas).", "en": "Ectoderm → CNS and epidermis; Mesoderm → muscles, bone, blood, kidneys/gonads; Endoderm → gut and respiratory epithelia (+ liver, pancreas)."},
+    "explanation": {"fr": "Beaucoup de malformations ou syndromes se comprennent comme des défauts ciblant un feuillet (ex. neurocristopathies pour les crêtes).", "en": "Many malformations and syndromes are understood as defects of a specific layer (e.g. neurocristopathies for crest cells)."}
+   }
+  },
+  {
+   "id": "embryo_s1s8_012",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 4,
+   "tags": ["embryologie", "mesoderme", "semaine3"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Embryologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Quelles sont les 4 régions du mésoderme et leurs produits ?", "en": "What are the 4 regions of mesoderm and their products?"},
+    "back": {"fr": "Axial (notochorde), para-axial (somites), intermédiaire (reins, gonades), latéral (somatopleure = parois, splanchnopleure = tube digestif/cœur).", "en": "Axial (notochord), paraxial (somites), intermediate (kidneys, gonads), lateral (somatopleure = body wall, splanchnopleure = gut/heart)."},
+    "explanation": {"fr": "Le feuillet latéral clivé donne le cœlome : futur péritoine, plèvre et péricarde — le lien entre mésoderme et séreuses.", "en": "The split lateral plate yields the coelom: future peritoneum, pleura and pericardium — linking mesoderm to serous membranes."}
+   }
+  },
+  {
+   "id": "embryo_s1s8_013",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 4,
+   "tags": ["embryologie", "somites", "semaine3"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Embryologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Que forment sclérotome, myotome et dermatome ?", "en": "What do sclerotome, myotome and dermatome form?"},
+    "back": {"fr": "Sclérotome → vertèbres et côtes ; Myotome → muscles squelettiques ; Dermatome → derme du dos.", "en": "Sclerotome → vertebrae and ribs; Myotome → skeletal muscles; Dermatome → dermis of the back."},
+    "explanation": {"fr": "La segmentation des somites explique la métamérie vertébrale et la réinervation segmentaire de la peau (dermatomes cliniques).", "en": "Somite segmentation explains vertebral metamerism and segmental skin innervation (clinical dermatomes)."}
+   }
+  },
+  {
+   "id": "embryo_s1s8_014",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 3,
+   "tags": ["embryologie", "neurulation", "semaine3"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Embryologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Décrivez la neurulation (J18-24).", "en": "Describe neurulation (days 18-24)."},
+    "back": {"fr": "Plaque neurale → bourrelets neuraux se rapprochent → gouttière → fermeture médiane formant le tube neural (futur SNC), avec migration des crêtes neurales.", "en": "Neural plate → neural folds meet → groove → midline closure forming the neural tube (future CNS), with neural crest migration."},
+    "explanation": {"fr": "La fermeture débute au niveau cervical et progresse en zip cranio-caudal : les extrémités (neuropores) ferment en dernier — points faibles.", "en": "Closure begins at cervical level and zips cranio-caudally: the ends (neuropores) close last — the weak points."}
+   }
+  },
+  {
+   "id": "embryo_s1s8_015",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 5,
+   "tags": ["embryologie", "neuropores", "malformations"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Embryologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Jours de fermeture des neuropores et malformations associées ?", "en": "Neuropore closure days and associated malformations?"},
+    "back": {"fr": "Neuropore antérieur ~J25, postérieur ~J27. Défaut antérieur = anencéphalie ; défaut postérieur = spina bifida (méningocèle, myéloméningocèle).", "en": "Anterior neuropore ~day 25, posterior ~day 27. Anterior failure = anencephaly; posterior failure = spina bifida (meningocele, myelomeningocele)."},
+    "explanation": {"fr": "Le dépistage combine α-fœtoprotéine sérique maternelle et échographie (signe du citron/banane) avant le terme de fermeture.", "en": "Screening combines maternal serum alpha-fetoprotein and ultrasound (lemon/banana signs) around closure timing."}
+   }
+  },
+  {
+   "id": "embryo_s1s8_016",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 3,
+   "tags": ["embryologie", "prevention", "malformations"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Embryologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Quelle supplémentation périconceptionnelle réduit les anomalies du tube neural ?", "en": "Which periconceptional supplementation reduces neural tube defects?"},
+    "back": {"fr": "L'acide folique (vitamine B9) : 400 µg/j, idéalement dès 1 mois avant la conception jusqu'à la fin du 1er trimestre.", "en": "Folic acid (vitamin B9): 400 µg/day, ideally from 1 month before conception through the first trimester."},
+    "explanation": {"fr": "La fermeture du tube neural survient J25-27 — souvent AVANT que la grossesse soit connue : d'où l'importance de la supplémentation précoce.", "en": "Neural tube closure occurs on days 25-27 — often BEFORE pregnancy is known: hence the need for early supplementation."}
+   }
+  },
+  {
+   "id": "embryo_s1s8_017",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 5,
+   "tags": ["embryologie", "cretes_neurales", "semaine4"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Embryologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Citez 4 dérivés des crêtes neurales.", "en": "Name 4 neural crest derivatives."},
+    "back": {"fr": "Système nerveux autonome, mélanocytes, médullo-surrénale, méninges crâniennes, squelette facial (ectomésenchyme) et Schwann cellules.", "en": "Autonomic nervous system, melanocytes, adrenal medulla, cranial meninges, facial skeleton (ectomesenchyme) and Schwann cells."},
+    "explanation": {"fr": "Les défauts de migration des crêtes causent les neurocristopathies : DiGeorge (thymus/parathyroïdes/cardiaque), CHARGE, Waardenburg.", "en": "Defective crest migration causes neurocristopathies: DiGeorge (thymus/parathyroids/heart), CHARGE, Waardenburg."}
+   }
+  },
+  {
+   "id": "embryo_s1s8_018",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 3,
+   "tags": ["embryologie", "coeur", "semaine3"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Embryologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Quand le cœur devient-il le premier organe fonctionnel ?", "en": "When does the heart become the first functional organ?"},
+    "back": {"fr": "Vers J21-23 : fusion des deux tubes cardiaques endocardiques en un tube unique qui commence à battre dès J22-23.", "en": "Around days 21-23: fusion of the two endocardial tubes into a single tube that starts beating by days 22-23."},
+    "explanation": {"fr": "Anomalies de fusion ou de stirring des flux : risque de cœur unique ou de sténoses précoces — visibles dès l'échographie de datation.", "en": "Fusion or flow-patterning anomalies may yield single-chamber defects or early stenosis — visible on dating ultrasound."}
+   }
+  },
+  {
+   "id": "embryo_s1s8_019",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 5,
+   "tags": ["embryologie", "coeur", "semaine4"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Embryologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Qu'est-ce que le looping cardiaque et que se passe-t-il s'il est inversé ?", "en": "What is cardiac looping and what happens if it is reversed?"},
+    "back": {"fr": "Flexion en D (vers la droite) du tube cardiaque qui positionne les ventricules et orifices. L'inversion (looping en L) donne des transpositions des gros vaisseaux.", "en": "D-(rightward) bending of the cardiac tube positioning ventricles and orifices. Reversal (L-loop) yields transpositions of the great arteries."},
+    "explanation": {"fr": "Le looping dépend de signaux de latéralité (nodal, lefty) — les anomalies de latéralisation s'accompagnent souvent d'un situs inversus.", "en": "Looping depends on laterality signals (nodal, lefty) — laterality defects often come with situs inversus."}
+   }
+  },
+  {
+   "id": "embryo_s1s8_020",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 5,
+   "tags": ["embryologie", "coeur", "cloisonnement"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Embryologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Foramen ovale : mécanisme fœtal et devenir post-natal ?", "en": "Foramen ovale: fetal mechanism and postnatal fate?"},
+    "back": {"fr": "Septum primum + septum secundum forment une valve : le sang passe de l'oreillette droite vers la gauche in utero ; l'augmentation des pressions gauches à la naissance la ferme.", "en": "Septum primum + septum secundum form a flap: blood shunts right-to-left in utero; rising left atrial pressure at birth closes it."},
+    "explanation": {"fr": "Chez ~25 % des adultes il reste probe-patent (PFO), potentiel passage d'embolies paradoxales vers le cerveau.", "en": "In ~25% of adults it remains probe-patent (PFO), a potential route for paradoxical emboli to the brain."}
+   }
+  },
+  {
+   "id": "embryo_s1s8_021",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 5,
+   "tags": ["embryologie", "coeur", "malformations"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Embryologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Tétralogie de Fallot : quelle anomalie embryologique et quelles 4 composantes ?", "en": "Tetralogy of Fallot: which embryological anomaly and which 4 components?"},
+    "back": {"fr": "Septation conotroncale asymétrique (déviation antérieure du septum) : CIV sous-aortique, sténose pulmonaire, dextroposition de l'aorte et hypertrophie ventriculaire droite.", "en": "Asymmetrical conotruncal septation (anterior septal deviation): subaortic VSD, pulmonary stenosis, overriding aorta, right ventricular hypertrophy."},
+    "explanation": {"fr": "La sténose pulmonaire fixe le shunt droite-gauche : cyanose d'autant plus profonde qu'elle est serrée (crises hypoxémiques).", "en": "Pulmonary stenosis drives the right-to-left shunt: the tighter it is, the deeper the cyanosis (hypoxic spells)."}
+   }
+  },
+  {
+   "id": "embryo_s1s8_022",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 4,
+   "tags": ["embryologie", "arches", "semaine4"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Embryologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Que dérive de la 1ère arcade pharyngienne (mandibulaire) ?", "en": "What derives from the 1st pharyngeal (mandibular) arch?"},
+    "back": {"fr": "Maxillaire et mandibule, marteau et enclume, muscles masticateurs, nerf trijumeau (V).", "en": "Maxilla and mandible, malleus and incus, muscles of mastication, trigeminal nerve (V)."},
+    "explanation": {"fr": "Les fentes labio-palatines résultent du défaut de fusion des bourgeons maxillaires avec les processus nasaux médians.", "en": "Cleft lip/palate results from failure of maxillary processes to fuse with the medial nasal prominences."}
+   }
+  },
+  {
+   "id": "embryo_s1s8_023",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 5,
+   "tags": ["embryologie", "poches", "endocrino"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Embryologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Que donne la 3ème poche pharyngienne, et quel syndrome si elle manque ?", "en": "What does the 3rd pharyngeal pouch give, and which syndrome if missing?"},
+    "back": {"fr": "Thymus et parathyroïdes inférieures. Leur aplasie/hypoplasie (délétion 22q11, DiGeorge) provoque immunodéficience T et hypocalcémie.", "en": "Thymus and inferior parathyroids. Their aplasia/hypoplasia (22q11 deletion, DiGeorge) causes T-cell immunodeficiency and hypocalcemia."},
+    "explanation": {"fr": "La migration thymus descend plus bas que les parathyroïdes : c'est pourquoi les inférieures (3ème poche) finissent sous les supérieures (4ème).", "en": "Thymic descent drags lower than parathyroids: that's why inferior glands (3rd pouch) end up below superior ones (4th pouch)."}
+   }
+  },
+  {
+   "id": "embryo_s1s8_024",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 4,
+   "tags": ["embryologie", "digestif", "foie"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Embryologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Quelle est l'origine embryologique du foie ?", "en": "What is the embryological origin of the liver?"},
+    "back": {"fr": "Bourgeon hépatique : diverticule endodermique du duodénum (semaine 3-4) qui croît dans le septum transversum (mésoderme), source aussi du tendon diaphragmatique central.", "en": "Hepatic bud: an endodermal diverticulum of the duodenum (week 3-4) growing into the septum transversum (mesoderm), also source of the central diaphragmatic tendon."},
+    "explanation": {"fr": "La partie cystique du bourgeon donne vésicule et voies biliaires : l'atrésie des voies biliaires néonatale en est la malformation redoutée.", "en": "The cystic part of the bud gives gallbladder and bile ducts: neonatal biliary atresia is its dreaded malformation."}
+   }
+  },
+  {
+   "id": "embryo_s1s8_025",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 4,
+   "tags": ["embryologie", "rein", "semaine5"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Embryologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Énumérez les 3 systèmes rénaux successifs de l'embryon.", "en": "List the 3 successive renal systems of the embryo."},
+    "back": {"fr": "Pronephros (régressif, non fonctionnel), mésonephros (transitoire, canaux de Wolff), métanéphros (rein définitif, dès la semaine 5).", "en": "Pronephros (regressive, non-functional), mesonephros (transient, Wolffian ducts), metanephros (definitive kidney, from week 5)."},
+    "explanation": {"fr": "Chez l'homme, les canaux de Wolff persistent comme voies génitales (épididyme, déférent) : lien rein-appareil génital masculin.", "en": "In males, Wolffian ducts persist as genital tract (epididymis, vas deferens): the kidney-male genital link."}
+   }
+  },
+  {
+   "id": "embryo_s1s8_026",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 4,
+   "tags": ["embryologie", "rein", "semaine5"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Embryologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Qu'est-ce que le bourgeon urétéral et qu'induit-il ?", "en": "What is the ureteric bud and what does it induce?"},
+    "back": {"fr": "Diverticule du canal de Wolff émis vers la semaine 5 : il induit la néphrogenèse dans le blastème métanéphrogène (rein définitif) et forme uretère, bassinet et tubes collecteurs.", "en": "A diverticulum of the Wolffian duct arising around week 5: it induces nephrogenesis in the metanephrogenic blastema (definitive kidney) and forms ureter, pelvis and collecting ducts."},
+    "explanation": {"fr": "Échec d'induction = agénésie rénale (oligohydramnios de Potter) ; double bourgeon = duplication du système collecteur.", "en": "Failed induction = renal agenesis (Potter oligohydramnios); duplicated bud = duplicated collecting system."}
+   }
+  },
+  {
+   "id": "embryo_s1s8_027",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 4,
+   "tags": ["embryologie", "membres", "semaine4"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Embryologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Quelle structure pilote la croissance proximo-distale des membres ?", "en": "Which structure drives proximodistal limb growth?"},
+    "back": {"fr": "La crête ectodermique apicale (AER) en bordure du bourgeon : ses FGF maintiennent la zone de progression sous-jacente.", "en": "The apical ectodermal ridge (AER) at the bud's edge: its FGFs maintain the underlying progress zone."},
+    "explanation": {"fr": "La perte de l'AER stoppe l'élongation (amélies) ; le thalidomide est le tératogène historique des défauts proximo-distaux.", "en": "AER loss halts elongation (amelia); thalidomide is the historical teratogen of proximodistal defects."}
+   }
+  },
+  {
+   "id": "embryo_s1s8_028",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 5,
+   "tags": ["embryologie", "membres", "morphogenese"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Embryologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "ZPA et SHH : quel axe patternes-t-ils ?", "en": "ZPA and SHH: which axis do they pattern?"},
+    "back": {"fr": "L'axe antéro-postérieur du membre : la zone d'activité polarisante (ZPA) postérieure exprime Sonic hedgehog (SHH), gradient qui spécifie les doigts (5→1).", "en": "The anteroposterior limb axis: the posterior zone of polarizing activity (ZPA) expresses Sonic hedgehog (SHH), a gradient specifying digits (5→1)."},
+    "explanation": {"fr": "Une duplication de la ZPA/SHH provoque des polydactylies pré-axiales (réflexion spéculaire du membre).", "en": "ZPA/SHH duplication causes pre-axial polydactyly (mirror-image duplication of the limb)."}
+   }
+  },
+  {
+   "id": "embryo_s1s8_029",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 3,
+   "tags": ["embryologie", "placenta", "semaine3"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Embryologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Quand les échanges placentaires débutent-ils réellement ?", "en": "When do placental exchanges actually begin?"},
+    "back": {"fr": "À la fin de la semaine 3 : les villosités tertiaires vascularisées baignent dans le sang maternel de l'espace intervilleux établi (début de la circulation utéro-placentaire).", "en": "By the end of week 3: vascularized tertiary villi bathe in maternal blood of the established intervillous space (start of uteroplacental circulation)."},
+    "explanation": {"fr": "Dès lors la barrière placentaire filtre mais ne protège pas entièrement : rubéole, toxoplasmose et beaucoup de médicaments la franchissent.", "en": "From then on the placental barrier filters but does not fully protect: rubella, toxoplasmosis and many drugs cross it."}
+   }
+  },
+  {
+   "id": "embryo_s1s8_030",
+   "type": "basic",
+   "version": 1,
+   "is_premium": true,
+   "difficulty_hint": 4,
+   "tags": ["embryologie", "circulation", "foetal"],
+   "source_meta": {"source_type": "original", "faculty": "Oran", "year": 2026, "module": "Embryologie", "can_distribute_offline": true},
+   "content": {
+    "front": {"fr": "Nommez les 3 shunts de la circulation fœtale et leur destinée post-natale.", "en": "Name the 3 fetal circulatory shunts and their postnatal fate."},
+    "back": {"fr": "Canal veineux (bypass foie → ligament veineux), foramen ovale (D→G atriorales → fosse ovale), canal artériel (artère pulm. → aorte, ligament artériel).", "en": "Ductus venosus (liver bypass → ligamentum venosum), foramen ovale (right→left atrium → fossa ovalis), ductus arteriosus (pulmonary artery → aorta, ligamentum arteriosum)."},
+    "explanation": {"fr": "Tombée des prostaglandines + oxygénation ferment le canal artériel ; sa persistance (PDA) se traite par inhibiteurs de COX ou chirurgie.", "en": "Falling prostaglandins and oxygenation close the ductus arteriosus; persistence (PDA) is treated with COX inhibitors or surgery."}
+   }
+  }
+ ]
+}

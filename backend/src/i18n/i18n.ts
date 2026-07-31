@@ -44,7 +44,8 @@ export interface Messages {
 
 /// Catalogue par défaut (extrait — les autres clés sont dans
 /// `messages.ts` qui est généré au build).
-const DEFAULT_CATALOG: Messages = {
+/// Exportée depuis la Phase 19.3 pour les tests de parité FR/AR/EN.
+export const DEFAULT_CATALOG: Messages = {
   fr: {
     'auth.login.success': 'Connexion réussie',
     'auth.login.invalid_credentials': 'Email ou mot de passe incorrect',
@@ -62,6 +63,28 @@ const DEFAULT_CATALOG: Messages = {
     'gamification.level.up': 'Vous êtes passé au niveau {level} !',
     'share.created': 'Carte de partage créée',
     'stats.fetched': 'Statistiques récupérées',
+    // Phase 19.3 — i18n complète des features IA (Phase 18).
+    'ai.hint.fetched': 'Indice personnalisé généré',
+    'ai.generate.drafts_created':
+      '{count, plural, one {# brouillon créé} other {# brouillons créés}} — relecture humaine obligatoire avant publication',
+    'ai.generate.quota_exceeded': 'Quota journalier de génération IA atteint',
+    'ai.voice.draft_created': 'Brouillon vocal enregistré, en attente de relecture',
+    'ai.adaptive.profile_fetched': 'Profil d\u2019apprentissage calculé',
+    'ai.adaptive.scan_done': 'Balayage terminé : {count} nouveaux signaux',
+    'ai.tutor.disclaimer':
+      "⚠️ Ceci n'est pas un avis médical. Pour toute décision de santé, consultez un professionnel de santé.",
+    'ai.tutor.out_of_scope':
+      'Je suis un assistant dédié aux révisions médicales — reposez votre question sur un cours.',
+    'ai.tutor.quota_exceeded': 'Quota journalier du tuteur atteint',
+    'retention.gentle.title': 'Petit rappel 💡',
+    'retention.gentle.body':
+      'Vous n\u2019avez pas révisé depuis {days} jours — 5 cartes suffisent pour relancer la mémoire.',
+    'retention.streak_broken.title': 'Streak en danger 🔥',
+    'retention.streak_broken.body':
+      '{days} jours sans révision. 3 cartes maintenant pour repartir sur de bonnes bases.',
+    'retention.reengagement.title': 'On vous attend 👋',
+    'retention.reengagement.body':
+      'Cela fait {days} jours. Reprenez en douceur : une session de 5 cartes aujourd\u2019hui.',
   },
   ar: {
     'auth.login.success': 'تم تسجيل الدخول بنجاح',
@@ -80,6 +103,25 @@ const DEFAULT_CATALOG: Messages = {
     'gamification.level.up': 'لقد انتقلت إلى المستوى {level}!',
     'share.created': 'تم إنشاء بطاقة المشاركة',
     'stats.fetched': 'تم استرداد الإحصائيات',
+    // Phase 19.3 — i18n complète des features IA (Phase 18).
+    'ai.hint.fetched': 'تم إنشاء تلميح مخصص',
+    'ai.generate.drafts_created':
+      '{count, plural, one {# مسودة} other {# مسودات}} — المراجعة البشرية إلزامية قبل النشر',
+    'ai.generate.quota_exceeded': 'تم بلوغ الحصة اليومية للتوليد بالذكاء الاصطناعي',
+    'ai.voice.draft_created': 'تم تسجيل المسودة الصوتية، بانتظار المراجعة',
+    'ai.adaptive.profile_fetched': 'تم حساب ملف التعلم',
+    'ai.adaptive.scan_done': 'اكتمل المسح: {count} إشارة جديدة',
+    'ai.tutor.disclaimer':
+      '⚠️ هذه ليست استشارة طبية. لأي قرار يخص صحتك، استشر طبيبًا أو مختصًّا في الرعاية الصحية.',
+    'ai.tutor.out_of_scope':
+      'أنا مساعد مخصص للمراجعة الطبية — أعد صياغة سؤالك حول درس طبي.',
+    'ai.tutor.quota_exceeded': 'تم بلوغ الحصة اليومية للمدرس',
+    'retention.gentle.title': 'تذكير لطيف 💡',
+    'retention.gentle.body': 'لم تراجع منذ {days} أيام — 5 بطاقات تكفي لإعادة تنشيط ذاكرتك.',
+    'retention.streak_broken.title': 'تتابعك في خطر 🔥',
+    'retention.streak_broken.body': '{days} أيام دون مراجعة. 3 بطاقات الآن لتستأنف المسار.',
+    'retention.reengagement.title': 'ننتظرك 👋',
+    'retention.reengagement.body': 'مرّت {days} أيام. عُد بهدوء: جلسة من 5 بطاقات اليوم ويكفي.',
   },
   en: {
     'auth.login.success': 'Login successful',
@@ -98,6 +140,28 @@ const DEFAULT_CATALOG: Messages = {
     'gamification.level.up': 'You leveled up to {level}!',
     'share.created': 'Share card created',
     'stats.fetched': 'Stats fetched',
+    // Phase 19.3 — i18n complète des features IA (Phase 18).
+    'ai.hint.fetched': 'Personalized hint generated',
+    'ai.generate.drafts_created':
+      '{count, plural, one {# draft created} other {# drafts created}} — human review is mandatory before publishing',
+    'ai.generate.quota_exceeded': 'Daily AI generation quota reached',
+    'ai.voice.draft_created': 'Voice draft saved, pending review',
+    'ai.adaptive.profile_fetched': 'Learning profile computed',
+    'ai.adaptive.scan_done': 'Scan complete: {count} new signals',
+    'ai.tutor.disclaimer':
+      '⚠️ This is not medical advice. For any health decision, consult a healthcare professional.',
+    'ai.tutor.out_of_scope':
+      "I'm an assistant dedicated to medical revision — rephrase your question around a course topic.",
+    'ai.tutor.quota_exceeded': 'Daily tutor quota reached',
+    'retention.gentle.title': 'Gentle reminder 💡',
+    'retention.gentle.body':
+      'You haven\u2019t reviewed in {days} days — 5 cards is enough to restart your memory.',
+    'retention.streak_broken.title': 'Streak at risk 🔥',
+    'retention.streak_broken.body':
+      '{days} days without reviewing. 3 cards now to get back on track.',
+    'retention.reengagement.title': "We're waiting for you 👋",
+    'retention.reengagement.body':
+      "It's been {days} days. Ease back in: a quick 5-card session today.",
   },
 };
 
