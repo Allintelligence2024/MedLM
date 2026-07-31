@@ -25,6 +25,7 @@ import { TenantsModule } from './tenants/tenants.module';
 import { I18nModule } from './i18n/i18n.module';
 import { CacheModule } from './cache/cache.module';
 import { DbModule } from './db/db.module';
+import { AiModule } from './ai/ai.module';
 
 @Module({
   imports: [
@@ -62,6 +63,7 @@ import { DbModule } from './db/db.module';
     I18nModule, // Phase 17.5 (internationalisation FR/AR/EN)
     CacheModule, // Phase 18 (Redis cache injectable)
     DbModule, // Phase 18 (read replicas)
+    AiModule, // Phase 18.1+ (hints adaptatifs, génération LLM, tutorat)
   ],
 })
 export class AppModule {}
