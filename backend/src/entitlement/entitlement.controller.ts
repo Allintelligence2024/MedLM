@@ -1,5 +1,11 @@
 // EntitlementController — endpoint public pour le mobile.
-import { Controller, Get, Headers, UseGuards } from '@nestjs/common';
+import {
+  BadRequestException,
+  Controller,
+  Get,
+  Headers,
+  UseGuards,
+} from '@nestjs/common';
 import { EntitlementService } from './entitlement.service';
 import { CurrentUserId } from '../auth/jwt.decorators';
 import { JwtGuard } from '../auth/jwt.guard';
@@ -16,7 +22,14 @@ export class EntitlementController {
     @CurrentUserId() userId: string,
     @Headers('X-Device-Id') deviceId: string,
   ) {
-    if (!deviceId) throw new Error('X-Device-Id header manquant');
+    // BadRequestException (400), pas Error (500) : un en-tête manquant
+    // est une faute de l'APPELANT. Un `Error` nu remonte en 500, ce qui
+    // dit au client « le serveur est cassé » alors que c'est sa requête
+    // qui l'est — et déclenche des alertes 5xx pour rien.
+    // srs-sync.controller.ts faisait déjà correctement ce contrôle.
+    if (!deviceId) {
+      throw new BadRequestException('X-Device-Id header manquant');
+    }
     return this.service.issue(userId, deviceId);
   }
 }

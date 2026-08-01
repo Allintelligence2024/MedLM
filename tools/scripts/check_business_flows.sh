@@ -144,6 +144,32 @@ C=$(code -X POST -H "Authorization: Bearer $AT" -H 'Content-Type: application/js
 C=$(code -H "Authorization: Bearer $AT" "$B/v1/billing/entitlement")
 [[ "$C" == "200" ]] && ok "GET /v1/billing/entitlement → 200" || ko "entitlement → $C"
 
+# ── Entitlement hors ligne (JWT RS256, v2 §8.1) ──────────────────────
+# Sans X-Device-Id, le contrôleur jetait un `Error` nu → HTTP 500 : le
+# serveur s'accusait d'une faute de l'appelant, et déclenchait des
+# alertes 5xx pour une requête simplement mal formée.
+C=$(code -H "Authorization: Bearer $AT" "$B/v1/entitlement/jwt")
+[[ "$C" == "400" ]] && ok "entitlement sans X-Device-Id → 400" || ko "entitlement sans header → $C (400 attendu)"
+
+C=$(code -H "Authorization: Bearer $AT" -H 'X-Device-Id: device-e2e-0001' "$B/v1/entitlement/jwt")
+[[ "$C" == "200" ]] && ok "GET /v1/entitlement/jwt → 200" || ko "entitlement → $C : $(head -c 200 /tmp/body.txt)"
+
+# Le JWT d'entitlement DOIT être RS256 : le mobile le vérifie hors
+# ligne avec la clé publique embarquée. Un HS256 rendrait cette
+# vérification impossible.
+EALG=$(python3 -c "
+import base64,json
+tok=json.load(open('/tmp/body.txt')).get('jwt','')
+print(json.loads(base64.urlsafe_b64decode(tok.split('.')[0]+'==')).get('alg') if tok else 'aucun')" 2>/dev/null)
+[[ "$EALG" == "RS256" ]] && ok "entitlement signé RS256 (vérif hors ligne)" || ko "entitlement signé $EALG"
+
+# ── Lectures des modules métier ──────────────────────────────────────
+for route in "content/decks" "exams/templates" "ml/mock-exam-prediction" \
+             "ml/tag-focus" "ai/adaptive/profile" "gamification/badges" "tenants"; do
+  C=$(code -H "Authorization: Bearer $AT" -H 'X-Device-Id: device-e2e-0001' "$B/v1/$route")
+  [[ "$C" == "200" ]] && ok "GET /v1/$route → 200" || ko "GET /v1/$route → $C"
+done
+
 # ── Classement (le « = NULL » le vidait en permanence) ───────────────
 PSEUDO="Etud$RANDOM"
 C=$(code -X POST -H "Authorization: Bearer $AT" -H 'Content-Type: application/json' \
