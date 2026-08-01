@@ -171,6 +171,11 @@ npm run e2e                        # Playwright (CMS + backend seedé)
 
 ## Intégration continue
 
+> ⚠️ **Les workflows attendent leur activation** : ils vivent dans
+> [`ci/workflows/`](ci/workflows/) et doivent être déplacés vers
+> `.github/workflows/` par un compte disposant de la permission
+> `workflows` — voir [ci/README.md](ci/README.md).
+
 | Workflow | Déclencheur | Contenu |
 |---|---|---|
 | `backend-ci.yml` | `backend/**` | tsc · eslint · vitest · nest build · **intégration sur PostgreSQL 16** (schéma jetable) · `docker build` |
