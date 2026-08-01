@@ -74,6 +74,8 @@ jobs:
         working-directory: .
         run: |
           python3 tools/scripts/check_mobile_i18n.py
+          python3 tools/scripts/check_l10n_usage.py
+          python3 tools/scripts/check_dart_symbols.py
           python3 tools/scripts/check_faculties_parity.py
           python3 tools/scripts/check_dart_static.py --strict
           python3 tools/scripts/gen_l10n.py --check

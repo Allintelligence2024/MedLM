@@ -91,6 +91,21 @@ if [ -f tools/scripts/check_faculties_parity.py ]; then
     echo "  ✓ check_faculties_parity.py (allow-list facultés)" || \
     { echo "  ❌ check_faculties_parity.py"; exit 1; }
 fi
+if [ -f tools/scripts/check_dockerfiles.py ]; then
+  python3 tools/scripts/check_dockerfiles.py && \
+    echo "  ✓ check_dockerfiles.py (images + compose P0-4)" || \
+    { echo "  ❌ check_dockerfiles.py"; exit 1; }
+fi
+if [ -f tools/scripts/check_l10n_usage.py ]; then
+  python3 tools/scripts/check_l10n_usage.py >/dev/null && \
+    echo "  ✓ check_l10n_usage.py (clés i18n appelées ↔ déclarées)" || \
+    { python3 tools/scripts/check_l10n_usage.py; echo "  ❌ check_l10n_usage.py"; exit 1; }
+fi
+if [ -f tools/scripts/check_dart_symbols.py ]; then
+  python3 tools/scripts/check_dart_symbols.py && \
+    echo "  ✓ check_dart_symbols.py (symboles Dart résolus)" || \
+    { echo "  ❌ check_dart_symbols.py"; exit 1; }
+fi
 if [ -f tools/scripts/check_dart_static.py ]; then
   python3 tools/scripts/check_dart_static.py && \
     echo "  ✓ check_dart_static.py (Dart statique P0-2)" || \

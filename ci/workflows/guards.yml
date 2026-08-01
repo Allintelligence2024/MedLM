@@ -21,6 +21,10 @@ jobs:
         with:
           python-version: '3.12'
 
+      # check_dockerfiles.py parse le compose en YAML réel.
+      - name: Dépendances Python des gardes
+        run: pip install --quiet PyYAML
+
       - uses: actions/setup-node@v4
         with:
           node-version: 22

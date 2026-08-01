@@ -82,16 +82,45 @@ au boot. C'est ce qui justifie `pool: 'forks'` dans la configuration
 vitest d'intégration. À surveiller si le projet migre vers un ESM
 strict : le chargement dynamique de modules changerait de sémantique.
 
+## Ce qui a été vérifié sans les outils correspondants
+
+Cet environnement n'a **ni SDK Dart/Flutter, ni démon Docker**, et
+pub.dev comme `storage.googleapis.com` y sont injoignables (seuls npm,
+PyPI et l'API GitHub répondent). Plutôt que de renvoyer ces deux pans
+entiers à la CI, ils ont été couverts par des vérifications qui rejouent
+la partie du travail du compilateur qui compte le plus ici — celle qui
+attrape les fautes commises **en volume** dans du code écrit à la main :
+
+| Outil manquant | Ce qui le remplace | Ce qui est réellement prouvé |
+|---|---|---|
+| `flutter analyze` | `check_dart_static.py` | 0 classe imbriquée, 0 extension instanciée, `part`/imports résolus (a trouvé 3 fichiers jamais compilables) |
+| `flutter analyze` | `check_l10n_usage.py` | les 148 appels `l10n.x(…)` existent, avec la bonne arité — testé en injectant les 3 fautes typiques (clé inexistante, getter appelé, mauvais nombre d'arguments) |
+| `flutter analyze` | `check_dart_symbols.py` | méthodes et paramètres nommés d'`ApiClient`, membres d'`AppContainer`, providers, imports des tests — testé en injectant 4 fautes |
+| `docker build` | `check_dockerfiles.py` | étapes `COPY --from`, sources présentes dans le contexte, **healthcheck sondant une route qui existe vraiment**, user non-root ; compose : volumes, dépendances, `service_healthy` — testé en injectant 4 fautes |
+
+Chaque garde a été validée en y **injectant délibérément les erreurs
+qu'elle prétend détecter**, puis en restaurant le code : une garde qui
+ne mord pas est pire qu'aucune garde.
+
+> À propos de `dockerfilelint` (npm) : il signale `--start-period` comme
+> invalide. C'est un faux positif connu — l'option est documentée depuis
+> Docker 17.05 et le scanner de trivy a le même bug. Les Dockerfiles ont
+> été relus à la main sur ce point plutôt que d'être « corrigés » vers
+> une syntaxe inférieure.
+
+Ce que cela ne remplace pas : l'inférence de types, la vérification de
+nullabilité, l'analyse de flot, et la construction effective des images.
+Ces quatre-là restent le premier retour attendu de la CI.
+
 ## Ce qui reste ouvert
 
 1. **Installer les workflows** — une commande, depuis un compte
    disposant de la permission `workflows` (`ci/README.md`). Tant que ce
    n'est pas fait, rien n'est rejoué automatiquement.
-2. **Compiler le mobile pour de vrai** — le SDK Flutter et pub.dev sont
-   inaccessibles depuis l'environnement de cette session. Le code Dart
-   est validé statiquement (structure, imports, i18n, parité FSRS) mais
-   `flutter analyze` / `flutter test` n'ont pas pu être exécutés.
-   C'est le premier retour attendu de `mobile-ci.yml`.
+2. **Compiler le mobile et construire les images** — voir la section
+   précédente : quatre gardes couvrent désormais l'essentiel des fautes
+   mécaniques, mais l'inférence de types, la nullabilité et le
+   `docker build` effectif ne peuvent pas être simulés.
 3. **Le keystore de release et les secrets `ANDROID_*`** — la
    configuration qui les consomme est en place, les clés ne peuvent pas
    venir du dépôt.

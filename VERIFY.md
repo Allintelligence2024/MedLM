@@ -18,6 +18,9 @@
 | `tools/scripts/gen_l10n.py --check` | `app_localizations.dart` généré est à jour vis-à-vis des `.arb` |
 | `tools/scripts/check_bundle_assets.py` | aucun deck de démonstration livré en production, archive hors bundle (audit P2-4) |
 | `tools/scripts/apply_android_release_config.py --check` | build de release Android : R8 et shrink actifs, signature de release (jamais la clé de debug), `applicationId` de production (audit P2-8) |
+| `tools/scripts/check_l10n_usage.py` | chaque `l10n.clé(…)` du code existe, avec la bonne arité (getter vs méthode, nombre d'arguments) — remplace le compilateur Dart sur ce point |
+| `tools/scripts/check_dart_symbols.py` | méthodes et paramètres nommés de `ApiClient`, membres d'`AppContainer`, providers Riverpod, imports des tests |
+| `tools/scripts/check_dockerfiles.py` | images : étapes `COPY --from` existantes, sources présentes dans le contexte, **healthcheck ↔ route backend réelle**, user non-root, base taguée ; compose : dockerfiles, dépendances, volumes nommés, `service_healthy` ↔ healthcheck déclaré |
 | `tools/scripts/phase13_checks.sh` | orchestre tout ce niveau + load-tester self-test |
 
 ## Niveau 1 — moteur SRS (python, < 2 s)

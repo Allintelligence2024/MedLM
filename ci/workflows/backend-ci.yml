@@ -107,6 +107,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # Validation statique d'abord : un COPY --from vers une étape
+      # inexistante ou un healthcheck sondant une route absente coûte
+      # moins cher à détecter ici qu'après un build de 3 minutes.
+      - name: Validation statique des Dockerfiles
+        working-directory: .
+        run: |
+          pip install --quiet PyYAML
+          python3 tools/scripts/check_dockerfiles.py
+
       - name: Build de l'image backend
         run: docker build -f backend/Dockerfile -t medanki/backend:ci .
         working-directory: .
