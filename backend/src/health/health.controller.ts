@@ -10,6 +10,11 @@
 import { Controller, Get, HttpCode, HttpStatus, Inject } from '@nestjs/common';
 import { sql } from 'drizzle-orm';
 import { DRIZZLE, Database } from '../db/database.module';
+import {
+  parseRegion,
+  routingFor,
+  REGION_ENV_VAR,
+} from '../common/regions/regions';
 
 @Controller()
 export class HealthController {
@@ -41,6 +46,19 @@ export class HealthController {
     return {
       status: allOk ? 'ready' : 'not_ready',
       checks,
+    };
+  }
+
+  /// /regionz — Phase 20.1 : région du pod + routage (debug LB/GeoDNS,
+  /// non sensible : un identifiant de site, jamais de secret).
+  @Get('regionz')
+  @HttpCode(HttpStatus.OK)
+  region() {
+    const def = parseRegion(process.env[REGION_ENV_VAR]);
+    return {
+      ...routingFor(def.id),
+      timezone: def.timezone,
+      latency_target_ms: def.latencyTargetMs,
     };
   }
 
