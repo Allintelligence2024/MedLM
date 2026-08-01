@@ -1,0 +1,92 @@
+name: guards
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: guards-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  guards:
+    name: verify_all · phase13 · audits
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # Niveau 2 de VERIFY.md : la référence externe ts-fsrs.
+      - name: Référence ts-fsrs (/tmp/tsf)
+        run: |
+          mkdir -p /tmp/tsf && cd /tmp/tsf
+          npm install --no-audit --no-fund ts-fsrs@4.7.1
+
+      - name: verify_all.sh (niveaux 1 à 3)
+        run: ./tools/verify_all.sh
+
+      - name: phase13_checks.sh (lockfiles, sécurité, syntaxe, gardes 19/20)
+        run: ./tools/scripts/phase13_checks.sh
+
+      - name: Audit sécurité statique
+        run: python3 tools/scripts/security_audit.py
+
+  e2e:
+    name: e2e (playwright)
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: medanki
+          POSTGRES_PASSWORD: medanki
+          POSTGRES_DB: medanki_dz
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U medanki -d medanki_dz"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+    env:
+      DATABASE_URL: postgres://medanki:medanki@localhost:5432/medanki_dz
+      NODE_ENV: test
+      LOG_LEVEL: error
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Dépendances racine (playwright)
+        run: npm install --no-audit --no-fund
+
+      - name: Dépendances backend + CMS
+        run: |
+          (cd backend && npm ci)
+          (cd cms && npm ci)
+
+      - name: Clés RS256 éphémères
+        run: |
+          mkdir -p backend/keys
+          openssl genrsa -out backend/keys/jwt-private.pem 2048
+          openssl rsa -in backend/keys/jwt-private.pem -pubout -out backend/keys/jwt-public.pem
+
+      - name: Migrations + seed
+        run: cd backend && npm run db:migrate
+
+      - name: Navigateurs Playwright
+        run: npx playwright install --with-deps chromium
+
+      - name: E2E
+        run: npm run e2e

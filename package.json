@@ -1,0 +1,19 @@
+{
+  "name": "medanki-dz",
+  "version": "0.1.0",
+  "private": true,
+  "description": "MedAnki DZ — racine du monorepo (scripts transverses : e2e, gardes).",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "e2e": "playwright test --config tests/e2e/playwright.config.ts",
+    "e2e:ui": "playwright test --config tests/e2e/playwright.config.ts --ui",
+    "guards": "./tools/scripts/phase13_checks.sh",
+    "verify": "./tools/verify_all.sh"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.48.0"
+  }
+}

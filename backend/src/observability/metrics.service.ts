@@ -23,6 +23,12 @@ class Counter {
 
 @Injectable()
 export class MetricsService {
+  /// Total des requêtes HTTP servies (toutes issues confondues).
+  ///
+  /// Indispensable pour exprimer un taux d'erreur : l'alerte SLO
+  /// « 5xx > 1 % » (deploy/monitoring/alerts.yml) a besoin d'un
+  /// dénominateur, pas seulement du compteur d'erreurs.
+  readonly httpRequests = new Counter();
   readonly httpErrors = new Counter();
   readonly srsPushEvents = new Counter();
   readonly srsPullEvents = new Counter();
@@ -33,6 +39,10 @@ export class MetricsService {
 
   // Latence (P95 calculé sur les 1000 dernières requêtes par route).
   private latencies = new Map<string, number[]>();
+
+  recordHttpRequest(route: string) {
+    this.httpRequests.inc(1, route);
+  }
 
   recordHttpError(route: string) {
     this.httpErrors.inc(1, route);
@@ -75,9 +85,18 @@ export class MetricsService {
   /// Génère le dump Prometheus.
   toPrometheus(): string {
     const lines: string[] = [];
+    lines.push('# HELP medanki_http_requests_total Requêtes HTTP servies');
+    lines.push('# TYPE medanki_http_requests_total counter');
+    lines.push(`medanki_http_requests_total ${this.httpRequests.value}`);
+    for (const [k, v] of this.httpRequests.labels) {
+      lines.push(`medanki_http_requests_total{route="${k}"} ${v}`);
+    }
     lines.push('# HELP medanki_http_errors_total Nombre d\'erreurs HTTP par route');
     lines.push('# TYPE medanki_http_errors_total counter');
     lines.push(`medanki_http_errors_total ${this.httpErrors.value}`);
+    for (const [k, v] of this.httpErrors.labels) {
+      lines.push(`medanki_http_errors_total{route="${k}"} ${v}`);
+    }
     lines.push('# HELP medanki_srs_push_events_total Événements SRS poussés');
     lines.push('# TYPE medanki_srs_push_events_total counter');
     lines.push(`medanki_srs_push_events_total ${this.srsPushEvents.value}`);

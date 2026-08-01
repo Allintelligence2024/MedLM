@@ -39,7 +39,7 @@ export const examAttempts = pgTable(
     templateIdx: index('exam_attempts_template_idx').on(t.templateId),
     /// Une seule tentative « active » par user/template — empêche les
     /// doubles starts. PARTIEL (status = 'in_progress') : on peut
-    /// repasser le même sujet une fois soumis. Migration 0017.
+    /// repasser le même sujet une fois soumis. Migration 0016.
     activeUnique: uniqueIndex('exam_attempts_active_unique')
       .on(t.userId, t.templateId)
       .where(sql`status = 'in_progress'`),

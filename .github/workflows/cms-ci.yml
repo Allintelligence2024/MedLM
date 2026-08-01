@@ -1,0 +1,52 @@
+name: cms-ci
+
+on:
+  push:
+    branches: ['**']
+    paths:
+      - 'cms/**'
+      - '.github/workflows/cms-ci.yml'
+  pull_request:
+    paths:
+      - 'cms/**'
+      - '.github/workflows/cms-ci.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: cms-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: typecheck · lint · build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: cms
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: cms/package-lock.json
+
+      - run: npm ci
+
+      - name: TypeScript (tsc --noEmit)
+        run: npm run typecheck
+
+      - name: ESLint (next lint)
+        run: npm run lint
+
+      - name: Next build
+        run: npm run build
+
+  docker:
+    name: docker build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build de l'image CMS
+        run: docker build -f cms/Dockerfile -t medanki/cms:ci .

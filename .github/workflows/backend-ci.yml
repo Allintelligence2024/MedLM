@@ -1,0 +1,112 @@
+name: backend-ci
+
+on:
+  push:
+    branches: ['**']
+    paths:
+      - 'backend/**'
+      - '.github/workflows/backend-ci.yml'
+  pull_request:
+    paths:
+      - 'backend/**'
+      - '.github/workflows/backend-ci.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: backend-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    working-directory: backend
+
+jobs:
+  static:
+    name: typecheck · lint · unit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+
+      - run: npm ci
+
+      - name: TypeScript (tsc --noEmit)
+        run: npm run typecheck
+
+      - name: ESLint
+        run: npm run lint
+
+      - name: Unit tests (vitest)
+        run: npm run test
+
+      - name: Nest build
+        run: npm run build
+
+  integration:
+    name: integration (postgres 16)
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: medanki
+          POSTGRES_PASSWORD: medanki
+          POSTGRES_DB: medanki_dz
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U medanki -d medanki_dz"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+    env:
+      DATABASE_URL: postgres://medanki:medanki@localhost:5432/medanki_dz
+      # Schéma jetable par run — isole les tests (cf. database.module.ts).
+      PG_SCHEMA: ci_${{ github.run_id }}
+      NODE_ENV: test
+      LOG_LEVEL: error
+      AI_LLM_PROVIDER: mock
+      AI_TRANSCRIBER_PROVIDER: mock
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+
+      - run: npm ci
+
+      - name: Clés RS256 éphémères (JWT)
+        run: |
+          mkdir -p keys
+          openssl genrsa -out keys/jwt-private.pem 2048
+          openssl rsa -in keys/jwt-private.pem -pubout -out keys/jwt-public.pem
+
+      - name: Créer le schéma jetable
+        run: psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -c "CREATE SCHEMA IF NOT EXISTS \"$PG_SCHEMA\";"
+
+      - name: Migrations
+        run: npm run db:migrate
+
+      - name: Tests d'intégration
+        run: npm run test:integration
+
+      - name: Nettoyer le schéma
+        if: always()
+        run: psql "$DATABASE_URL" -c "DROP SCHEMA IF EXISTS \"$PG_SCHEMA\" CASCADE;" || true
+
+  docker:
+    name: docker build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build de l'image backend
+        run: docker build -f backend/Dockerfile -t medanki/backend:ci .
+        working-directory: .

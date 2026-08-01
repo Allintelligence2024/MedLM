@@ -68,6 +68,28 @@ produits par `tools/generate_golden.py` (Phase 1) et vérifient que
 **les valeurs TypeScript sont identiques aux valeurs Dart à 1e-9 près**.
 C'est la garantie de l'équivalence cross-platform (Phase 6, v2 §14).
 
+## Migrations
+
+Les migrations vivent dans `src/db/migrations/NNNN_nom.sql` et sont
+appliquées par `npm run db:migrate` (`src/db/migrate.ts`).
+
+**Point critique** : drizzle ne découvre *pas* les fichiers par listage
+du dossier — il lit **exclusivement** `src/db/migrations/meta/_journal.json`
+et n'applique que les `tag` qui y figurent, dans l'ordre déclaré. Toute
+nouvelle migration doit donc :
+
+1. être nommée avec le numéro suivant, sans trou (`0017_…`) ;
+2. recevoir une entrée dans `meta/_journal.json` (`idx` contigu, `when`
+   strictement croissant).
+
+`test/unit/migrations_journal.test.ts` vérifie ces deux invariants à
+chaque run.
+
+> *Historique* : la série a longtemps sauté le numéro 0011 (0010 → 0012)
+> et le journal était absent — `db:migrate` échouait donc systématiquement.
+> Les deux points ont été corrigés le 2026-08-01 (renumérotation
+> 0012–0017 → 0011–0016, avant toute application en production).
+
 ## Variables d'environnement
 
 Cf. `.env.example`. En production :

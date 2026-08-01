@@ -1,5 +1,5 @@
 /// Schéma Drizzle — partnerships (Phase 20.4).
-/// SQL source de vérité : migrations/0016_partnerships.sql.
+/// SQL source de vérité : migrations/0015_partnerships.sql.
 import {
   pgTable,
   uuid,

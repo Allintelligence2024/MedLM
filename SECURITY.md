@@ -122,7 +122,7 @@ version publique. Merci d'avance aux premiers chercheurs.)_
 
 ## 9. Références internes
 
-* `AUDIT_ARCHITECTURE.md` — audit initial de l'architecture.
+* `docs/phases/AUDIT_ARCHITECTURE.md` — audit initial de l'architecture.
 * `PLAN_IMPLEMENTATION.md` — phases et mesures de sécurité.
 * `backend/test/unit/*` — tests dont parité FSRS, RBAC, policy tuteur.
 * `tools/scripts/security_audit.py` — garde-fou CI (0 secret, Zod,

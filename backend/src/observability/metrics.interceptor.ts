@@ -20,10 +20,12 @@ export class HttpMetricsInterceptor implements NestInterceptor {
     return next.handle().pipe(
       tap({
         next: () => {
+          this.metrics.recordHttpRequest(route);
           this.metrics.recordLatency(route, Date.now() - t0);
           if (res.statusCode >= 500) this.metrics.recordHttpError(route);
         },
         error: () => {
+          this.metrics.recordHttpRequest(route);
           this.metrics.recordLatency(route, Date.now() - t0);
           this.metrics.recordHttpError(route);
         },

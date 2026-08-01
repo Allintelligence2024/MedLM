@@ -23,7 +23,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 P = ROOT / "backend" / "src" / "partnerships"
-MIG = ROOT / "backend" / "src" / "db" / "migrations" / "0016_partnerships.sql"
+# Résolution par suffixe (la série a déjà été renumérotée une fois).
+_MIGDIR = ROOT / "backend" / "src" / "db" / "migrations"
+_MATCHES = sorted(_MIGDIR.glob("*_partnerships.sql"))
+MIG = _MATCHES[-1] if _MATCHES else _MIGDIR / "0015_partnerships.sql"
 CONTENT = ROOT / "mobile" / "assets" / "content"
 
 
@@ -53,7 +56,7 @@ def main() -> int:
     # 2. Migration 0016.
     mig = MIG.read_text(encoding="utf-8") if MIG.exists() else ""
     if not mig:
-        failures.append("0016_partnerships.sql manquant")
+        failures.append("*_partnerships.sql manquant")
     else:
         for needle, label in [
             ("CHECK (status IN ('draft', 'active', 'suspended', 'terminated'))",

@@ -1,0 +1,115 @@
+# Règles d'alerte Prometheus — MedAnki DZ (audit P2-3).
+#
+# Cibles SLO (Phase 17) : P95 < 500 ms · 5xx < 1 % · dispo 99,5 %.
+#
+# Installation :
+#   kubectl -n medanki create configmap medanki-alerts \
+#     --from-file=deploy/monitoring/alerts.yml
+# ou, avec kube-prometheus-stack, encapsuler dans un PrometheusRule.
+#
+# Scrape attendu : l'annotation prometheus.io/path est déjà posée sur
+# le Deployment backend et pointe /v1/metrics.
+
+groups:
+  - name: medanki-slo
+    interval: 30s
+    rules:
+      # ── SLO 1 — latence ────────────────────────────────────────────
+      - alert: MedankiLatencyP95High
+        expr: max by (route) (medanki_http_latency_p95_ms) > 500
+        for: 5m
+        labels:
+          severity: warning
+          slo: latency
+        annotations:
+          summary: 'P95 > 500 ms sur {{ $labels.route }}'
+          description: >-
+            La latence P95 de {{ $labels.route }} est à
+            {{ $value | printf "%.0f" }} ms depuis 5 min
+            (objectif SLO : 500 ms).
+          runbook: 'docs/phases/PHASE_17_RAPPORT.md#slo'
+
+      - alert: MedankiLatencyP95Critical
+        expr: max by (route) (medanki_http_latency_p95_ms) > 1500
+        for: 5m
+        labels:
+          severity: critical
+          slo: latency
+        annotations:
+          summary: 'P95 > 1,5 s sur {{ $labels.route }}'
+          description: 'Dégradation majeure — vérifier la base et les pools.'
+
+      # ── SLO 2 — taux d'erreur ──────────────────────────────────────
+      - alert: MedankiErrorRateHigh
+        expr: |
+          (
+            sum(rate(medanki_http_errors_total[5m]))
+            /
+            clamp_min(sum(rate(medanki_http_requests_total[5m])), 0.001)
+          ) > 0.01
+        for: 5m
+        labels:
+          severity: critical
+          slo: errors
+        annotations:
+          summary: 'Taux de 5xx > 1 %'
+          description: >-
+            {{ $value | humanizePercentage }} des requêtes échouent en
+            5xx sur 5 min (objectif SLO : < 1 %).
+
+      # ── Disponibilité ──────────────────────────────────────────────
+      - alert: MedankiBackendDown
+        expr: up{job=~".*medanki-backend.*"} == 0
+        for: 2m
+        labels:
+          severity: critical
+          slo: availability
+        annotations:
+          summary: 'Backend injoignable ({{ $labels.instance }})'
+
+      - alert: MedankiNoTraffic
+        expr: sum(rate(medanki_http_requests_total[10m])) == 0
+        for: 15m
+        labels:
+          severity: warning
+        annotations:
+          summary: 'Aucun trafic depuis 15 min'
+          description: 'Panne de LB/DNS probable, ou scrape cassé.'
+
+  - name: medanki-business
+    interval: 60s
+    rules:
+      - alert: MedankiBillingWebhookFailures
+        expr: rate(medanki_billing_webhooks_total{kind="failed"}[15m]) > 0
+        for: 15m
+        labels:
+          severity: warning
+        annotations:
+          summary: 'Webhooks Chargily en échec'
+          description: >-
+            Des paiements échouent en continu — vérifier la signature
+            HMAC et l'état du compte Chargily.
+
+      - alert: MedankiSrsSyncStalled
+        expr: |
+          rate(medanki_srs_push_events_total[30m]) == 0
+          and on() hour() >= 6 and on() hour() <= 21
+        for: 30m
+        labels:
+          severity: warning
+        annotations:
+          summary: 'Aucun événement SRS poussé en heures actives'
+          description: >-
+            La sync est le cœur du produit : 30 min sans push entre 6 h
+            et 21 h (heure UTC) est anormal.
+
+      - alert: MedankiAuthRefreshSpike
+        expr: |
+          rate(medanki_auth_refreshes_total[5m])
+          > 10 * rate(medanki_auth_logins_total[1h])
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: 'Pic anormal de refresh tokens'
+          description: 'Boucle de refresh côté client ou tentative de rejeu.'
