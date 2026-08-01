@@ -7,13 +7,14 @@ Tu es un agent de code (Arena.ai Agent Mode) qui continue le projet
 étudiants en médecine algériens).
 
 **Repo** : https://github.com/Allintelligence2024/MedLM
-**Branche principale** : main (PR #2 mergé 43ac7f9, PR #3 mergé 4fe5437)
-**Branche session** : arena/019fb521-medlm (Phase 19 en cours, PR #4 à venir)
+**Branche principale** : main (PR #2 mergé 43ac7f9, PR #3 mergé 4fe5437,
+PR #4 mergé 996ebb7)
+**Branche session** : arena/019fbd6a-medlm (Phase 19.5-19.7 livrées, PR #5)
 
-## État actuel (Phases 4-17 + Phase 18 IA + Phase 19 partielle)
+## État actuel (Phases 4-18 + Phase 19 quasi complète)
 
 **Phases 4 à 18 mergées dans main.** La **Phase 19** (production
-launch) est entamée sur arena/019fb521-medlm :
+launch) est presque bouclée :
 
 | Sous-phase | Contenu | Statut |
 |---|---|---|
@@ -21,10 +22,10 @@ launch) est entamée sur arena/019fb521-medlm :
 | 19.2 | CronJob K8s rétention (2 scans/jour 09:30 & 18:30 Alger, POST /v1/ai/retention/scan) | ✅ mergé |
 | 19.3 | i18n FR/AR/EN complète des clés IA (15 clés × 3, parité testée, source unique disclaimer) | ✅ mergé |
 | 19.4 | SECURITY.md — politique sécurité + bug bounty (SLA, barème DZD, safe harbor lois 09-04/18-07) | ✅ mergé |
-| 19.5 | UI mobile des endpoints IA (HintBanner, dictée, tuteur STT/TTS, signaux CMS) | ⏳ reste |
-| 19.6 | Application des poids FSRS ajustés (18.4) dans le moteur Dart + golden tests | ⏳ reste |
-| 19.7 | Landing page / marketing site | ⏳ reste |
-| 19.8 | Pen test externe + app stores (iOS/Android) | ⏳ reste (opérationnel) |
+| 19.5 | UI mobile des endpoints IA : HintBanner, dictée vocale (ports STT), chat tuteur (STT/TTS, disclaimer servi), signaux auteur CMS `/admin/signals` | ✅ PR #5 |
+| 19.6 | Poids FSRS ajustés côté moteur Dart : `fsrs_adaptive.dart` (miroir backend w11×1.15 / w8×1.05, bornes 0.5×-2×) + golden tests de parité (8 cas + 2 séquences, 855 valeurs cross-check) | ✅ PR #5 |
+| 19.7 | Landing page statique trilingue (site/, 61 clés × 3, FR inliné, zéro tracker, check_landing.py bloquant) | ✅ PR #5 |
+| 19.8 | Pen test externe (canal = SECURITY.md §1) + app stores iOS/Android | ⏳ reste (opérationnel) |
 
 ### Phase 18 — ce qui est livré
 
@@ -37,65 +38,53 @@ launch) est entamée sur arena/019fb521-medlm :
 | 18.5 | Détection de décrochage (FCM/APNs, 8h-22h) | `GET/POST /v1/ai/retention/{preview,scan}` | ✅ |
 | 18.6 | Voice tutoring (disclaimer obligatoire, audit append-only) | `POST /v1/ai/tutor/ask` | ✅ |
 
-### Nouveaux fichiers Phase 18
+### Nouveaux fichiers Phase 19.5-19.7 (PR #5)
 
 ```
-backend/src/ai/
-├── ai.module.ts               (AiModule monté dans app.module.ts)
-├── llm/                       (LlmProvider : mock déterministe | http OpenAI-compatible)
-├── hints/                     (7 catégories × 3 langues, profil dérivé du SRS)
-├── generate/                  (quota 20/j, throttle, drafts, audit)
-├── voice/                     (3 règles de formatage dictée → carte)
-├── adaptive/                  (fenêtre 30 j, w11×1.15 fragile / w8×1.05 fort, signaux)
-├── retention/                 (gentle 3j / streak_broken 5j / reengagement 10j, anti-spam)
-└── tutor/                     (disclaimer invariant, urgences SAMU 115, anti-injection)
+mobile/lib/data/repositories/ai/       (ai_models + ai_repository,
+                                        cache hints, offline-first)
+mobile/lib/ui/ai/                      (hint_banner, voice_dictation_sheet,
+                                        tutor_chat_screen, ai_speech_ports)
+mobile/lib/core/srs/fsrs_adaptive.dart (miroir ADAPTIVE_THRESHOLDS backend)
+mobile/test/ai/                        (modèles, repository, widgets)
+mobile/test/srs/adaptive_golden_test.dart
 
-backend/src/db/schema/ai.ts    (ai_generation_jobs, ai_difficulty_signals,
-                                retention_alerts, ai_tutor_prompts)
-backend/src/db/migrations/0012..0015 (0015 = append-only + triggers)
+cms/src/app/admin/signals/page.tsx     (file signaux + scan, rôles author/editor)
+cms/src/lib/signals.ts                 (types camelCase = réponse Drizzle)
 
-backend/test/unit/             (ai_hints, ai_generate, voice_to_card,
-                                ai_adaptive, ai_retention, ai_tutor — ~130 cas)
-
-PHASE_18_1..6_RAPPORT.md       (6 rapports de sous-phase)
+site/                                  (landing statique trilingue FR/AR/EN)
+tools/scripts/check_landing.py         (parité clés, zéro tracker — bloquant
+                                        dans phase13_checks.sh)
+tools/verify_against_ts_fsrs.js        (+ section adaptive w custom)
+tools/cross_check.py                   (+ 378 valeurs adaptatives, 855 total)
+tools/dart_parity_check.py             (+ seuils adaptatifs TS↔Dart↔Py)
+tools/fsrs_reference.py / generate_golden.py (+ miroir Python + section
+                                        adaptive du golden)
 ```
 
-### Config IA (backend/.env.example)
+## CE QUE TU DOIS FAIRE (Phase 19.8 + Phase 20)
 
-```
-AI_LLM_PROVIDER=mock|http      AI_LLM_BASE_URL/API_KEY/MODEL
-AI_TRANSCRIBER_PROVIDER=mock|http  AI_TRANSCRIBER_BASE_URL/API_KEY/MODEL
-AI_GENERATE_DAILY_QUOTA=20  AI_VOICE_DAILY_QUOTA=50  AI_TUTOR_DAILY_QUOTA=30
-```
+### Phase 19.8 — Lancement opérationnel (reste)
 
-## CE QUE TU DOIS FAIRE (Phase 19+)
-
-### Phase 19 — Production launch (3+ mois) — EN COURS
-
-Fait (PR #4) : 19.1 seed 3 disciplines (697 cartes), 19.2 CronJob
-rétention, 19.3 i18n IA trilingue, 19.4 SECURITY.md/bug bounty.
-
-Reste à faire :
-* **19.5** UI mobile des endpoints IA : HintBanner (GET
-  /v1/ai/hints/:cardId pendant l'étude), dictée vocale
-  (speech_to_text → POST /v1/ai/voice-to-card), chat tuteur
-  (STT/TTS → POST /v1/ai/tutor/ask — disclaimer DÉJÀ dans le
-  texte servi), signaux auteur dans le CMS (GET
-  /v1/ai/adaptive/signals).
-* **19.6** Appliquer les poids FSRS ajustés (GET
-  /v1/ai/adaptive/profile) côté moteur Dart : mettre à jour
-  fsrs_parameters.dart + golden tests de parité
-  (tools/verify_against_ts_fsrs.js, cross_check.py).
-* **19.7** Landing page / marketing site (cms/ ou site statique).
-* **19.8** Pen test externe (produire SECURITY.md §1 comme canal),
-  app store submission iOS + Android.
+* **Pen test externe** : canal = SECURITY.md §1 (bug bounty 19.4) ;
+  périmètre conseillé : auth/refresh rotation, wrap-key decks,
+  quotas IA, append-only audit (triggers 0015), injection LLM tuteur.
+* **App stores** : build signé iOS + Android, fiches store (captures à
+  générer depuis un device), privacy labels cohérents avec la FAQ de la
+  landing (site/). Brancher alors le formulaire notify :
+  `POST /v1/marketing/notify-list` (double opt-in, registre loi 18-07).
+* **Branchements réels des ports** `SpeechToTextPort`/`TextToSpeechPort`
+  (plugins speech_to_text / flutter_tts au `main()`), sur device.
+* Intégrer `HintBanner` + `VoiceDictationSheet` dans l'écran d'étude
+  (widgets prêts, écran à finaliser) et la synchro périodique de
+  `AdaptiveFsrsParameters` (worker de fond).
 
 ### Phase 20 — Scale (6+ mois)
 
 * Multi-régions (Alger, Oran, Constantine).
 * GraphQL gateway (remplacement progressif de REST).
 * ML pipeline (prédictions de scores mock exam, ajustement par tag).
-* Partenariats facultés.
+* Partenariats facultés ; libellés captures d'écran de la landing.
 
 ## RESSOURCES ET CONTRAINTES
 
@@ -118,7 +107,9 @@ Reste à faire :
 python3 tools/scripts/security_audit.py
 python3 tools/scripts/generate_lockfiles.py --check
 python3 tools/validate_content.py
-bash tools/scripts/phase13_checks.sh
+bash tools/scripts/phase13_checks.sh    # inclut check_landing.py
+# Parité SRS si on touche au moteur :
+python3 tools/dart_parity_check.py && python3 tools/generate_golden.py
 ```
 
 ## STYLE DE TRAVAIL
