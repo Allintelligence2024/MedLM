@@ -341,6 +341,82 @@ class ApiClient {
     }
   }
 
+  // ── IA (Phase 19.5) ─────────────────────────────────────────────
+  //
+  // Tous les endpoints IA sont *provider-agnostic* côté serveur : le
+  // mobile ne voit jamais de clé API ni de choix de fournisseur.
+
+  /// GET /v1/ai/hints/:cardId — hint adaptatif (règles SRS, sans LLM).
+  Future<Map<String, dynamic>> fetchAiHint(String cardId, {String? lang}) async {
+    try {
+      final res = await _dio.get<dynamic>(
+        '/v1/ai/hints/$cardId',
+        queryParameters: {if (lang != null) 'lang': lang},
+      );
+      return Map<String, dynamic>.from(res.data as Map);
+    } on DioException catch (e) {
+      throw _translate(e);
+    }
+  }
+
+  /// POST /v1/ai/voice-to-card — dictée → brouillon de carte.
+  ///
+  /// Chemin préféré : [audioTranscript] (STT côté client, pas d'upload
+  /// audio). [audioBase64] n'est envoyé que si le STT natif est absent.
+  Future<Map<String, dynamic>> voiceToCard({
+    required String deckId,
+    String lang = 'fr',
+    String? audioTranscript,
+    String? audioBase64,
+  }) async {
+    try {
+      final res = await _dio.post<dynamic>(
+        '/v1/ai/voice-to-card',
+        data: {
+          'deck_id': deckId,
+          'lang': lang,
+          if (audioTranscript != null) 'audio_transcript': audioTranscript,
+          if (audioBase64 != null) 'audio_base64': audioBase64,
+        },
+      );
+      return Map<String, dynamic>.from(res.data as Map);
+    } on DioException catch (e) {
+      throw _translate(e);
+    }
+  }
+
+  /// POST /v1/ai/tutor/ask — question au tuteur (disclaimer déjà dans
+  /// le texte servi ; l'historique est plafonné à 10 messages).
+  Future<Map<String, dynamic>> tutorAsk({
+    required String question,
+    String lang = 'fr',
+    List<Map<String, String>> history = const [],
+  }) async {
+    try {
+      final res = await _dio.post<dynamic>(
+        '/v1/ai/tutor/ask',
+        data: {
+          'question': question,
+          'lang': lang,
+          'history': history,
+        },
+      );
+      return Map<String, dynamic>.from(res.data as Map);
+    } on DioException catch (e) {
+      throw _translate(e);
+    }
+  }
+
+  /// GET /v1/ai/adaptive/profile — profil d'erreur + poids FSRS ajustés.
+  Future<Map<String, dynamic>> fetchAdaptiveProfile() async {
+    try {
+      final res = await _dio.get<dynamic>('/v1/ai/adaptive/profile');
+      return Map<String, dynamic>.from(res.data as Map);
+    } on DioException catch (e) {
+      throw _translate(e);
+    }
+  }
+
   /// GET /v1/exams/templates — templates actifs.
   Future<List<Map<String, dynamic>>> listExamTemplates({
     String? moduleId,

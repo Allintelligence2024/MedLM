@@ -2,6 +2,7 @@
 import '../../data/local/app_database.dart';
 import '../../data/network/api_client.dart';
 import '../../data/network/secure_token_storage.dart';
+import '../../data/repositories/ai/ai_repository.dart';
 import '../../data/repositories/card_repository.dart';
 import '../../data/repositories/entitlement_repository.dart';
 import '../../data/repositories/rest_entitlement_repository.dart';
@@ -47,6 +48,9 @@ class AppContainer {
       StartMockExamUseCase(srsRepository);
   late final SubmitReportUseCase submitReport = SubmitReportUseCase(cardRepository);
   late final DownloadDeckUseCase downloadDeck = DownloadDeckUseCase(cardRepository);
+
+  // Phase 19.5 : endpoints IA (hints, voice-to-card, tuteur, adaptatif).
+  late final AiRepository aiRepository = AiRepository(api: apiClient);
 
   // Refs historiques (les tests existants les utilisent directement).
   late final SrsRepository srsRepository;
