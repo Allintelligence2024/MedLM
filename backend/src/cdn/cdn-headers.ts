@@ -10,7 +10,6 @@
 //   * `cards` (contenu) : 5 minutes, private (auth requise).
 //   * `media` (R2) : 30 jours, public (signé R2).
 //   * `api` (réponses dynamiques) : no-store, private.
-library;
 
 export type CacheProfile = 'static' | 'decks' | 'cards' | 'media' | 'api';
 
@@ -28,7 +27,7 @@ const FIVE_MINUTES = 300;
 const THIRTY_DAYS = ONE_HOUR * 24 * 30;
 
 export function buildCacheHeaders(profile: CacheProfile, isPrivate = false): CacheHeader {
-  const base: CacheHeader = {
+  const base: Omit<CacheHeader, 'cache-control'> = {
     'x-content-type-options': 'nosniff',
     'x-frame-options': 'DENY',
   };

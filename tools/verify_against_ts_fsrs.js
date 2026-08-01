@@ -73,4 +73,49 @@ for (const s of [0.5, 1, 3.173, 10, 50]) {
   }
 }
 
+/**
+ * Phase 19.6 — primitives rejouées avec les poids ADAPTATIFS (miroir de
+ * ADAPTIVE_THRESHOLDS côté backend : fragile → w[11] ×1.15, fort →
+ * w[8] ×1.05). cross_check.py compare à notre référence Python avec les
+ * mêmes ajustements : un écart signalerait que l'ajustement n'a pas le
+ * même effet des deux côtés.
+ */
+function emitAdaptive(label, mutate) {
+  const customW = Array.from(w);
+  mutate(customW);
+  const adaptiveAlgo = new FSRSAlgorithm(
+    generatorParameters({ enable_short_term: true, w: customW }),
+  );
+  const section = {
+    weights: customW,
+    nextRecallStability: [],
+    nextForgetStability: [],
+  };
+  for (const d of [3, 5.28243442, 7]) {
+    for (const s of [1, 3.173, 10]) {
+      for (const r of [0.7, 0.9, 1.0]) {
+        for (const g of [2, 3, 4]) {
+          section.nextRecallStability.push({
+            d, s, r, g,
+            value: adaptiveAlgo.next_recall_stability(d, s, r, g),
+          });
+        }
+        section.nextForgetStability.push({
+          d, s, r,
+          value: adaptiveAlgo.next_forget_stability(d, s, r),
+        });
+      }
+    }
+  }
+  out.adaptive[label] = section;
+}
+
+out.adaptive = {};
+emitAdaptive("fragile_w11_x1_15", (customW) => {
+  customW[11] = params.w[11] * 1.15;
+});
+emitAdaptive("strong_w8_x1_05", (customW) => {
+  customW[8] = params.w[8] * 1.05;
+});
+
 process.stdout.write(JSON.stringify(out));

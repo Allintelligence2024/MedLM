@@ -15,6 +15,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from fsrs_reference import (  # noqa: E402
     DAY_MS, DEFAULT_W, State, apply_review, fold, preview,
     retrievability, interval_from_stability, init_difficulty, init_stability,
+    compute_fsrs_adjustment,
     AGAIN, HARD, GOOD, EASY,
 )
 
@@ -22,15 +23,17 @@ RATING_NAMES = {1: "again", 2: "hard", 3: "good", 4: "easy"}
 T0 = 1700000000000  # 2023-11-14T22:13:20Z — instant de référence fixe
 
 
-def run_sequence(name, steps, card_type="basic", description=""):
-    """steps = liste de (rating, jours_ecoules_depuis_la_revue_precedente)."""
+def run_sequence(name, steps, card_type="basic", description="", w=None):
+    """steps = liste de (rating, jours_ecoules_depuis_la_revue_precedente).
+
+    w : poids FSRS explicites (p. ex. ajustés) — None = poids par défaut."""
     st = State()
     now = T0
     out_steps = []
     for i, (grade, gap_days) in enumerate(steps):
         if i > 0:
             now += int(gap_days * DAY_MS)
-        st = apply_review(st, grade, now, card_type=card_type)
+        st = apply_review(st, grade, now, card_type=card_type, w=w)
         d = st.to_dict()
         d["rating"] = grade
         d["ratingName"] = RATING_NAMES[grade]
@@ -200,6 +203,54 @@ def build():
         "expectedWithExam": fold(events + [exam_event]).to_dict(),
     }
 
+    # --- 8. FSRS adaptatif (Phase 19.6) -------------------------------------
+    #
+    # a) Cas de calcul d'ajustement : (totalReviews, lapseRate) → poids.
+    #    Le moteur Dart doit produire EXACTEMENT ces poids via
+    #    FsrsAdaptive.computeAdjustment (miroir du backend 18.4).
+    adjustment_cases = []
+    for case_name, total_reviews, lapse_rate in [
+        ("below_min_reviews_no_change", 99, 0.5),
+        ("exactly_min_reviews_fragile", 100, 0.5),
+        ("fragile_adjusts_w11", 350, 0.42),
+        ("fragile_edge_30pct", 150, 0.3),
+        ("strong_needs_200_reviews", 150, 0.02),
+        ("strong_adjusts_w8", 400, 0.01),
+        ("strong_edge_5pct_200", 200, 0.05),
+        ("neutral_band_no_change", 500, 0.15),
+    ]:
+        adj_w, changed, reasons = compute_fsrs_adjustment(total_reviews, lapse_rate)
+        adjustment_cases.append({
+            "name": case_name,
+            "totalReviews": total_reviews,
+            "lapseRate": lapse_rate,
+            "expectedChangedIndices": changed,
+            "expectedWeights": adj_w,
+            "expectedReasons": reasons,
+        })
+
+    # b) Séquences complètes rejouées avec les poids ajustés — les golden
+    #    verrouillent l'effet de w11×1.15 (oubli) et w8×1.05 (rappel) sur
+    #    TOUT le parcours, pas seulement sur les primitives.
+    fragile_w, _, _ = compute_fsrs_adjustment(300, 0.4)
+    strong_w, _, _ = compute_fsrs_adjustment(400, 0.02)
+    adaptive_scenarios = [
+        run_sequence(
+            "adaptive_fragile_lapse_recovery",
+            [(GOOD, 0), (GOOD, 0), (GOOD, 4), (AGAIN, 14), (GOOD, 0), (GOOD, 3)],
+            w=fragile_w,
+            description="Profil fragile (w11 ×1.15) : la stabilité post-oubli "
+                        "se reconstruit plus vite",
+        ),
+        run_sequence(
+            "adaptive_strong_spacing",
+            [(GOOD, 0), (GOOD, 0), (GOOD, 4), (GOOD, 12), (EASY, 30)],
+            w=strong_w,
+            description="Profil fort (w8 ×1.05) : les rappels réussis espacent "
+                        "un peu plus",
+        ),
+    ]
+
     return {
         "_comment": "Généré par tools/generate_golden.py — NE PAS ÉDITER À LA MAIN.",
         "t0": T0,
@@ -208,6 +259,10 @@ def build():
         "previews": previews,
         "math": math_probes,
         "fold": fold_case,
+        "adaptive": {
+            "adjustmentCases": adjustment_cases,
+            "scenarios": adaptive_scenarios,
+        },
     }
 
 

@@ -11,3 +11,4 @@ export * from './share';
 export * from './group-packs';
 export * from './tenants';
 export * from './ai';
+export * from './partnerships';

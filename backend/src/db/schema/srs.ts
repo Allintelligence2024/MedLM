@@ -14,7 +14,6 @@ import {
   boolean,
   index,
   primaryKey,
-  uniqueIndex,
 } from 'drizzle-orm/pg-core';
 import { users } from './users';
 import { cards } from './content';

@@ -6,11 +6,10 @@ import { ConfigService } from '@nestjs/config';
 import { eq, and } from 'drizzle-orm';
 import { DRIZZLE, Database } from '../db/database.module';
 import { entitlements, users, webhookEvents } from '../db/schema';
-import { IPaymentProvider, PaymentResult } from './payment-provider';
+import { PaymentResult } from './payment-provider';
 import { ChargilyPayProvider } from './chargily.provider';
 import { PromoCodeProvider } from './promo-code.provider';
 import { PLAN_DURATION_DAYS, PLAN_PRICING_DA, PlanId } from './billing.dto';
-import { randomUUID } from 'crypto';
 
 @Injectable()
 export class BillingService {
@@ -56,7 +55,7 @@ export class BillingService {
       .select({ email: users.email })
       .from(users)
       .where(eq(users.id, args.userId))
-      .get();
+      .then((rows) => rows[0]);
     if (!user) throw new BadRequestException('utilisateur inconnu');
 
     const checkout = await this.chargily.createPayment({
@@ -64,8 +63,8 @@ export class BillingService {
       userEmail: user.email,
       plan,
       amount_cents: baseCents,
-      successUrl: args.successUrl,
-      cancelUrl: args.cancelUrl,
+      ...(args.successUrl !== undefined && { successUrl: args.successUrl }),
+      ...(args.cancelUrl !== undefined && { cancelUrl: args.cancelUrl }),
       metadata: { plan, durationDays: String(durationDays) },
     });
     return { url: checkout.url, providerRef: checkout.providerRef, finalCents: baseCents };
@@ -84,7 +83,7 @@ export class BillingService {
         .select()
         .from(webhookEvents)
         .where(eq(webhookEvents.eventId, args.eventId))
-        .get();
+        .then((rows) => rows[0]);
       if (seen) {
         return { processed: true, reason: 'already_seen' };
       }
@@ -137,7 +136,7 @@ export class BillingService {
       .select()
       .from(entitlements)
       .where(and(eq(entitlements.userId, args.userId), eq(entitlements.plan, args.plan)))
-      .get();
+      .then((rows) => rows[0]);
     const now = new Date();
     const start = existing && existing.expiresAt && existing.expiresAt > now ? existing.expiresAt : now;
     const expires = new Date(start.getTime() + args.durationDays * 86_400_000);

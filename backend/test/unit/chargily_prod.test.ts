@@ -63,8 +63,13 @@ describe('ChargilyPayProvider — defaultBaseUrl', () => {
   });
 
   it('production = live endpoint', () => {
+    // La construction en prod exige une clé (fail-closed, testé plus
+    // haut) — on passe une clé factice pour isoler le test d'URL.
     const p = new ChargilyPayProvider(
-      baseConfig({ CHARGILY_ENV: 'production' }) as any,
+      baseConfig({
+        CHARGILY_ENV: 'production',
+        CHARGILY_API_KEY: 'pk_live_factice',
+      }) as any,
     );
     expect((p as any)._defaultBaseUrl('production')).toContain('/api/v2');
     expect((p as any)._defaultBaseUrl('production')).not.toContain('test');

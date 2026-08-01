@@ -81,14 +81,29 @@ def scan_console_log(path: Path) -> list[tuple[Path, int]]:
         text = path.read_text(errors="ignore")
     except Exception:
         return findings
-    for lineno, line in enumerate(text.splitlines(), start=1):
-        if re.search(r"\b(console\.log|print\s*\()", line):
-            # Filtre : tests, scripts CLI, debug annoté.
+    lines = text.splitlines()
+    for lineno, line in enumerate(lines, start=1):
+        # On retire le commentaire de fin de ligne avant de chercher :
+        # « // on peut logger via print() » n'est pas un appel.
+        code = re.sub(r"//.*$", "", line)
+        if re.search(r"\b(console\.log|print\s*\()", code):
+            # Filtre : tests.
             rel = str(path.relative_to(REPO_ROOT))
             if rel.endswith((".test.ts", ".test.dart", "_test.dart")):
                 continue
-            # Filtre : commentaires ou `// ignore: avoid_print`.
-            if "ignore:" in line or "console.log" in line and "// debug" in line:
+            # Filtre : sentinelles de linter explicites — sur la ligne
+            # elle-même ou la ligne PRÉCÉDENTE (idiomes du dépôt :
+            # `// eslint-disable-next-line no-console`,
+            # `// ignore: avoid_print`, `// ignore_for_file: avoid_print`).
+            prev = lines[lineno - 2] if lineno >= 2 else ""
+            sentinels = (
+                "ignore: avoid_print",
+                "ignore_for_file: avoid_print",
+                "eslint-disable-next-line no-console",
+            )
+            if any(s in line or s in prev for s in sentinels):
+                continue
+            if "console.log" in code and "// debug" in line:
                 continue
             findings.append((path, lineno))
     return findings

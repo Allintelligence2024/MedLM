@@ -15,16 +15,11 @@
 ///   1. lire `review_logs` depuis le curseur ;
 ///   2. le client rejoue `fold` localement (c'est sa responsabilité).
 import { Inject, Injectable, Logger, BadRequestException } from '@nestjs/common';
-import { and, eq, gte, lte, asc, sql } from 'drizzle-orm';
-import { reviewLogs, srsCardState, syncCursors, users } from '../db/schema';
+import { and, eq, gte, asc, sql } from 'drizzle-orm';
+import { reviewLogs, srsCardState, syncCursors } from '../db/schema';
 import { DRIZZLE, Database } from '../db/database.module';
 import { FsrsEngine } from '../common/fsrs/fsrs.engine';
-import {
-  CardState,
-  CardType,
-  Rating,
-  ReviewEvent,
-} from '../common/fsrs/fsrs.constants';
+import { CardType, Rating, ReviewEvent } from '../common/fsrs/fsrs.constants';
 import { PushResponse, PullResponse, ReviewEventDto } from './srs-sync.dto';
 
 const PUSH_BATCH_MAX = 100;
@@ -222,7 +217,7 @@ export class SrsSyncService {
         device_id: r.deviceId,
         rating: r.rating as 1 | 2 | 3 | 4,
         duration_ms: r.durationMs,
-        card_type: r.cardType as 'basic' | 'cloze' | 'qcm',
+        card_type: r.cardType as CardType,
         reviewed_at: r.reviewedAt,
         exam_mode: r.examMode,
       })),

@@ -15,7 +15,6 @@ import {
   jsonb,
   boolean,
   index,
-  uniqueIndex,
 } from 'drizzle-orm/pg-core';
 import { users } from './users';
 import { modules } from './content';
@@ -76,9 +75,8 @@ export const examAttemptEvents = pgTable(
   }),
 );
 
-/// Index unique : une seule tentative "active" par user/template.
-/// Empêche les doubles starts accidentels.
-export const examAttemptsActiveUnique = uniqueIndex('exam_attempts_active_unique').on(
-  examAttempts.userId,
-  examAttempts.templateId,
-);
+// NOTE : l'index unique partiel « une tentative active par user/template »
+// vit désormais dans le callback de la table `exam_attempts`
+// (schema/exams.ts) + migration 0017. Déclarer un index standalone sur
+// des colonnes d'une autre table crashait au chargement
+// (`defaultConfig` undefined → JSON.parse(undefined)).

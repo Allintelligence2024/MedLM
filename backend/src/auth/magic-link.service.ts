@@ -26,6 +26,13 @@ export interface EmailSender {
   send(args: { to: string; subject: string; html: string }): Promise<void>;
 }
 
+/// Token d'injection pour EmailSender. OBLIGATOIRE : une interface
+/// TypeScript n'existe pas à l'exécution — `design:paramtypes` émet
+/// `Object` pour ce paramètre et Nest ne peut pas le résoudre
+/// ("Nest can't resolve dependencies of the MagicLinkService").
+/// Ce bug était latent : l'application ne bootait pas hors tests unitaires.
+export const EMAIL_SENDER = Symbol('EMAIL_SENDER');
+
 @Injectable()
 export class MagicLinkService {
   private readonly logger = new Logger(MagicLinkService.name);
@@ -34,7 +41,7 @@ export class MagicLinkService {
     @Inject(DRIZZLE) private readonly db: Database,
     private readonly jwt: JwtService,
     private readonly config: ConfigService,
-    private readonly email: EmailSender,
+    @Inject(EMAIL_SENDER) private readonly email: EmailSender,
     private readonly auth: AuthService,
   ) {}
 
@@ -44,7 +51,7 @@ export class MagicLinkService {
       .select({ id: users.id })
       .from(users)
       .where(eq(users.email, args.email))
-      .get();
+      .then((rows) => rows[0]);
     if (!user) {
       this.logger.warn(`magic link demandé pour email inconnu`);
       return { sent: true };

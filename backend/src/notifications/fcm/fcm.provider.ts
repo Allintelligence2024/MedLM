@@ -7,7 +7,7 @@
 // `deck_updated`.
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import type { PushPayload } from './push.types';
+import type { PushPayload } from '../push.types';
 
 @Injectable()
 export class FcmProvider {

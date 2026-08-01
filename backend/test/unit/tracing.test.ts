@@ -4,7 +4,7 @@ import { TracingService } from '../../src/observability/tracing.service';
 
 describe('TracingService', () => {
   it('génère un traceId dans un span', async () => {
-    const svc = new TracingService();
+    const svc = new TracingService(undefined as any);
     await svc.run('test.op', async (ctx) => {
       expect(ctx.traceId).toMatch(/^[a-f0-9]{32}$/);
       expect(ctx.spanId.length).toBe(16);
@@ -13,7 +13,7 @@ describe('TracingService', () => {
   });
 
   it('permet d\'ajouter des attributs au span courant', async () => {
-    const svc = new TracingService();
+    const svc = new TracingService(undefined as any);
     await svc.run('test.op', async (ctx) => {
       svc.setAttribute('http.status_code', 200);
       svc.setAttribute('user.id', 'u1');
@@ -23,12 +23,12 @@ describe('TracingService', () => {
   });
 
   it('retourne null si on n\'est pas dans un span', () => {
-    const svc = new TracingService();
+    const svc = new TracingService(undefined as any);
     expect(svc.current()).toBeNull();
   });
 
   it('les spans sont isolés entre exécutions concurrentes', async () => {
-    const svc = new TracingService();
+    const svc = new TracingService(undefined as any);
     const seen = new Set<string>();
     const tasks = Array.from({ length: 10 }, (_, i) =>
       svc.run(`op-${i}`, async (ctx) => {

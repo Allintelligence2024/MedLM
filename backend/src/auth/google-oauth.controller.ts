@@ -2,10 +2,7 @@ import {
   Controller,
   Get,
   Headers,
-  HttpCode,
-  HttpStatus,
   Query,
-  Redirect,
   Res,
 } from '@nestjs/common';
 import type { Response } from 'express';

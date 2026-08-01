@@ -17,6 +17,7 @@ import {
   Rating,
   ReviewEvent,
   FSRS_WEIGHTS,
+  SrsCardState,
 } from '../../src/common/fsrs/fsrs.constants';
 import { FsrsEngine } from '../../src/common/fsrs/fsrs.engine';
 
@@ -137,7 +138,7 @@ describe('Parité FSRS-5 Dart ↔ TypeScript', () => {
 
   for (const scenario of golden.scenarios) {
     it(`scénario "${scenario.name}" — ${scenario.description}`, () => {
-      let state = {
+      let state: SrsCardState = {
         state: CardState.New,
         stability: 0,
         difficulty: 0,
@@ -193,7 +194,7 @@ describe('Parité FSRS-5 Dart ↔ TypeScript', () => {
   it.each(golden.previews)(
     'aperçu des boutons — état $name',
     (p) => {
-      let state = {
+      let state: SrsCardState = {
         state: CardState.New,
         stability: 0,
         difficulty: 0,

@@ -123,7 +123,7 @@ describe('MockLlmProvider.generateCards', () => {
 describe('parseJsonCards', () => {
   it('accepte un bloc ```json … ```', () => {
     const raw =
-      '```json\n[{"front":"Q1 ?","back":"R1","explanation":"E","tags":["anat"]}]\n```';
+      '```json\n[{"front":"Q1 ?","back":"R1 (valide)","explanation":"E","tags":["anat"]}]\n```';
     const cards = parseJsonCards(raw);
     expect(cards.length).toBe(1);
     expect(cards[0]!.front).toBe('Q1 ?');
@@ -132,7 +132,7 @@ describe('parseJsonCards', () => {
   it('accepte { cards: [...] } et filtre les items invalides', () => {
     const raw = JSON.stringify({
       cards: [
-        { front: 'OK ?', back: 'OK', tags: ['x'] },
+        { front: 'OK ?', back: 'OK (correcte)', tags: ['x'] },
         { front: 'ab' }, // trop court / sans back
         'pas une carte',
       ],

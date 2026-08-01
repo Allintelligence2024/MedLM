@@ -2,56 +2,51 @@
 //
 // On utilise une base SQLite en mémoire + Drizzle. Le test vérifie
 // les invariants du leaderboard (scope hebdo, tri, opt-in/out).
-import { describe, it, expect, beforeEach } from 'vitest';
-import { drizzle } from 'drizzle-orm/better-sqlite3';
-import Database from 'better-sqlite3';
-import { eq, and } from 'drizzle-orm';
-import { integer, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
-import { leaderboardOptin, userXpSnapshot, users } from '../../src/db/schema/gamification';
+import { describe, it, expect } from 'vitest';
+import { leaderboardOptin, userXpSnapshot } from '../../src/db/schema/gamification';
+import { users } from '../../src/db/schema/users';
 
 class FakeDb {
   private data: any = { users: [], optin: [], snapshot: [] };
+
+  private _rows(table: any): any[] {
+    // Détection par identité (le schéma Drizzle est chargé une fois).
+    if (table === users) return this.data.users;
+    if (table === leaderboardOptin) return this.data.optin;
+    if (table === userXpSnapshot) return this.data.snapshot;
+    return [];
+  }
+
   select() {
     return {
       from: (table: any) => ({
-        where: (cond: any) => ({
-          get: async () => this._match(table, cond)?.[0] ?? null,
-        }),
-        get: async () => this._matchAll(table)?.[0] ?? null,
-        orderBy: () => ({
-          get: async () => this._matchAll(table)?.[0] ?? null,
-        }),
-      }),
-    };
-  }
-  insert(table: any) {
-    return {
-      values: (v: any) => {
-        const rows = this._tableName(table);
-        rows.push(v);
-        return Promise.resolve();
-      },
-    };
-  }
-  update(table: any) {
-    return {
-      set: (v: any) => ({
-        where: async (cond: any) => {
-          const rows = this._tableName(table);
-          for (const r of rows) Object.assign(r, v);
+        where: (_cond: any) => {
+          // Drizzle réel : le builder est THENABLE (await → rows[]).
+          const p = Promise.resolve(this._rows(table));
+          return {
+            then: (cb: any) => p.then(cb),
+          };
         },
       }),
     };
   }
-  private _tableName(table: any) {
-    const t = (table?.name ?? table?._?.name ?? '').toString();
-    return this.data[t] ?? [];
-  }
-  private _match(table: any, cond: any) {
-    return this._matchAll(table);
-  }
-  private _matchAll(table: any) {
-    return this._tableName(table);
+
+  insert(table: any) {
+    return {
+      values: (v: any) => {
+        const rows = this._rows(table);
+        return {
+          // UPSERT : on remplace la ligne (user, week) si elle existe.
+          onConflictDoUpdate: async ({ set }: any) => {
+            const i = rows.findIndex(
+              (r: any) => r.userId === v.userId && r.weekIso === v.weekIso,
+            );
+            if (i >= 0) Object.assign(rows[i], set);
+            else rows.push(v);
+          },
+        };
+      },
+    };
   }
 }
 

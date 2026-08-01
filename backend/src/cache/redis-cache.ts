@@ -17,7 +17,6 @@
 // Si `REDIS_URL` n'est pas configuré, le cache est un no-op (mode
 // dev). C'est important : on ne doit JAMAIS faire crasher l'app
 // parce que Redis est down.
-library;
 
 /// Type minimal pour ioredis (évite l'import direct pour ne pas
 /// casser le dev sans Redis).
@@ -94,7 +93,9 @@ export class RedisCache {
         this.connected = false;
         this.stats.errors++;
       }
-    } catch (e) {
+    } catch {
+      // L'exception n'est pas propagée volontairement : Redis est un
+      // cache best-effort — on bascule en mémoire locale.
       this.connected = false;
       this.stats.errors++;
     }

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MedAnki DZ — Révise mieux, retiens plus, réussis ta médecine</title>
+  <meta name="description" content="Application de révision SRS pour étudiants en médecine algériens : cartes vérifiées, hors-ligne, hints IA sans cloud, examens blancs." />
+  <meta property="og:title" content="MedAnki DZ" />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0f766e" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩺</text></svg>" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#" aria-label="MedAnki DZ">
+        <span class="brand-mark" aria-hidden="true">🩺</span> MedAnki&nbsp;DZ
+      </a>
+      <nav class="nav-links" aria-label="Navigation principale">
+        <a href="#features" data-i18n="nav.features">Fonctionnalités</a>
+        <a href="#decks" data-i18n="nav.decks">Bibliothèque</a>
+        <a href="#pricing" data-i18n="nav.pricing">Tarifs</a>
+        <a href="#faq" data-i18n="nav.faq">FAQ</a>
+      </nav>
+      <div class="lang-switch" role="group" aria-label="Langue / اللغة / Language">
+        <button type="button" data-lang="fr" aria-pressed="true">FR</button>
+        <button type="button" data-lang="ar" aria-pressed="false">ع</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <p class="badge" data-i18n="hero.badge">Conçu pour les facultés de médecine d'Algérie</p>
+        <h1 data-i18n="hero.title">Révise mieux. Retiens plus. Réussis ta 1ère année.</h1>
+        <p class="subtitle" data-i18n="hero.subtitle">MedAnki DZ planifie tes révisions avec la science de la répétition espacée (FSRS-5) : 697 cartes médicales vérifiées, disponibles hors-ligne, en français, arabe et anglais.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#notify" data-i18n="hero.cta_primary">Être notifié du lancement</a>
+          <a class="btn btn-ghost" href="#features" data-i18n="hero.cta_secondary">Découvrir les fonctionnalités</a>
+        </div>
+        <dl class="stats">
+          <div><dt>697+</dt><dd data-i18n="hero.stat_cards">cartes vérifiées</dd></div>
+          <div><dt>10</dt><dd data-i18n="hero.stat_decks">decks thématiques</dd></div>
+          <div><dt>3</dt><dd data-i18n="hero.stat_langs">langues (FR · AR · EN)</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section id="features" class="section">
+      <div class="container">
+        <h2 data-i18n="features.title">Tout ce qu'il faut pour retenir l'indispensable</h2>
+        <div class="grid three">
+          <article class="card">
+            <span class="icon" aria-hidden="true">🧠</span>
+            <h3 data-i18n="features.srs_title">Répétition espacée FSRS-5</h3>
+            <p data-i18n="features.srs_body">Le moteur FSRS-5 calcule le moment exact où tu es sur le point d'oublier. 19 paramètres s'ajustent à TON profil : fragile ou fort, l'algorithme s'adapte sans jamais dériver.</p>
+          </article>
+          <article class="card">
+            <span class="icon" aria-hidden="true">📴</span>
+            <h3 data-i18n="features.offline_title">Hors-ligne d'abord</h3>
+            <p data-i18n="features.offline_body">Conçu pour les connexions intermittentes : decks chiffrés sur l'appareil, synchronisation en arrière-plan quand le réseau revient. Zéro friction dans l'amphi ou le bus.</p>
+          </article>
+          <article class="card">
+            <span class="icon" aria-hidden="true">💡</span>
+            <h3 data-i18n="features.ai_title">Hints IA sans cloud</h3>
+            <p data-i18n="features.ai_body">Des indices personnalisés calculés par règles à partir de ton historique — aucune donnée personnelle ne part vers un LLM externe. Explicable : chaque indice dit pourquoi il est là.</p>
+          </article>
+          <article class="card">
+            <span class="icon" aria-hidden="true">🎙️</span>
+            <h3 data-i18n="features.tutor_title">Tuteur vocal encadré</h3>
+            <p data-i18n="features.tutor_body">Pose une question de cours à voix haute : le tuteur t'aide à réviser — avec un disclaimer médical systématique et des garde-fous d'urgence (SAMU 115). Jamais de diagnostic.</p>
+          </article>
+          <article class="card">
+            <span class="icon" aria-hidden="true">📝</span>
+            <h3 data-i18n="features.exam_title">Examens blancs</h3>
+            <p data-i18n="features.exam_body">Entraîne-toi en conditions réelles : templates par module, anti-triche natif, corrigé détaillé et remontée des lacunes directement dans ta file de révision.</p>
+          </article>
+          <article class="card">
+            <span class="icon" aria-hidden="true">🏅</span>
+            <h3 data-i18n="features.gamif_title">Motivation durable</h3>
+            <p data-i18n="features.gamif_body">Streaks, XP et classements hebdomadaires par faculté (opt-in, pseudonyme). La régularité bat le bachotage — 20 minutes par jour suffisent.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="decks" class="section alt">
+      <div class="container">
+        <h2 data-i18n="decks.title">Une bibliothèque qui grandit chaque sprint</h2>
+        <p class="section-sub" data-i18n="decks.subtitle">Chaque carte est relue par pairs, sourcée (manuelles de référence DES), et atomique : 1 fait, 1 question.</p>
+        <div class="grid three">
+          <article class="card deck">
+            <h3 data-i18n="decks.anat_title">Anatomie</h3>
+            <p data-i18n="decks.anat_body">5 decks régionaux : thorax, abdomen, tête et cou, membres.</p>
+          </article>
+          <article class="card deck">
+            <h3 data-i18n="decks.histo_title">Histologie &amp; embryologie</h3>
+            <p data-i18n="decks.histo_body">Épithéliums et développement semaines 1-8, avec points d'examen.</p>
+          </article>
+          <article class="card deck">
+            <h3 data-i18n="decks.bioch_title">Biochimie &amp; biophysique</h3>
+            <p data-i18n="decks.bioch_body">Glycolyse pas à pas, membraniques et transports, QCM pièges classiques.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing" class="section">
+      <div class="container">
+        <h2 data-i18n="pricing.title">Gratuit pour apprendre. Premium pour aller plus loin.</h2>
+        <div class="grid two">
+          <article class="card price">
+            <h3 data-i18n="pricing.free_name">Découverte — 0 DA</h3>
+            <ul>
+              <li data-i18n="pricing.free_1">5 decks fondamentaux</li>
+              <li data-i18n="pricing.free_2">Révisions illimitées (SRS)</li>
+              <li data-i18n="pricing.free_3">Statistiques locales</li>
+            </ul>
+          </article>
+          <article class="card price highlight">
+            <span class="ribbon">★</span>
+            <h3 data-i18n="pricing.pro_name">Premium</h3>
+            <p class="price-note" data-i18n="pricing.pro_price">Abonnement étudiant (prix DZ)</p>
+            <ul>
+              <li data-i18n="pricing.pro_1">Les 10 decks + nouveautés chaque sprint</li>
+              <li data-i18n="pricing.pro_2">Hints IA personnalisés et tuteur vocal</li>
+              <li data-i18n="pricing.pro_3">Examens blancs et poids FSRS adaptatifs</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="section alt">
+      <div class="container narrow">
+        <h2 data-i18n="faq.title">Questions fréquentes</h2>
+        <details>
+          <summary data-i18n="faq.q1">Mes données sont-elles envoyées à un LLM ?</summary>
+          <p data-i18n="faq.a1">Non par défaut. Les hints sont calculés par règles, sans LLM. Les fonctions LLM (génération, tuteur) passent par un fournisseur configurable côté serveur, jamais avec tes données personnelles identifiables — et la dictée privilégie le texte transcrit sur l'appareil, pas l'audio.</p>
+        </details>
+        <details>
+          <summary data-i18n="faq.q2">Est-ce un avis médical ?</summary>
+          <p data-i18n="faq.a2">Non. MedAnki DZ est un outil de RÉVISION pour étudiants. Le tuteur IA affiche systématiquement un disclaimer et détecte les urgences (renvoi SAMU 115 / Protection civile 14). Pour toute décision de santé, consulte un professionnel.</p>
+        </details>
+        <details>
+          <summary data-i18n="faq.q3">Ça marche sans Internet ?</summary>
+          <p data-i18n="faq.a3">Oui. Les decks premium sont chiffrés sur ton appareil (AES-GCM, clé par device) et le moteur SRS tourne localement. La synchro reprend toute seule quand le réseau revient.</p>
+        </details>
+        <details>
+          <summary data-i18n="faq.q4">Quand sortent les applications ?</summary>
+          <p data-i18n="faq.a4">La soumission App Store / Google Play est en préparation (Phase 19.8). Laisse ton email pour être notifié du lancement.</p>
+        </details>
+      </div>
+    </section>
+
+    <section id="notify" class="section notify">
+      <div class="container narrow">
+        <h2 data-i18n="notify.title">Sois notifié du lancement</h2>
+        <form id="notify-form" class="notify-form" action="#" method="post" novalidate>
+          <label class="sr-only" for="email">Email</label>
+          <input id="email" name="email" type="email" required
+                 data-i18n-placeholder="notify.placeholder" placeholder="ton.email@etu.dz" />
+          <button type="submit" class="btn btn-primary" data-i18n="notify.button">Me notifier</button>
+        </form>
+        <p class="note" data-i18n="notify.note">Un seul email au lancement. Pas de spam, pas de revente.</p>
+        <p id="notify-feedback" class="feedback" role="status"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p data-i18n="footer.disclaimer">Outil de révision pour étudiants. Ne constitue pas un avis médical.</p>
+      <p>
+        <a href="https://github.com/Allintelligence2024/MedLM/blob/main/SECURITY.md"
+           rel="noopener" data-i18n="footer.security">Signaler une faille (bug bounty)</a>
+      </p>
+      <p class="made" data-i18n="footer.made">Fait avec rigueur pour les étudiants en médecine d'Algérie 🇩🇿</p>
+    </div>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>

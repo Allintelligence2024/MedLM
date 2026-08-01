@@ -26,7 +26,6 @@
 //   * DATABASE_READ_REPLICA_URL : replica 1
 //   * DATABASE_READ_REPLICA_URLS : comma-separated pour N replicas
 //   * READ_REPLICA_LAG_TOLERANCE_MS : défaut 30000
-library;
 
 export type QueryType = 'read' | 'write' | 'analytics';
 

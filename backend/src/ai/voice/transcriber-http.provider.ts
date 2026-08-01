@@ -7,7 +7,7 @@
 import { ServiceUnavailableException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TranscriberProvider, TranscriptionResult } from './transcriber.types';
-import { LlmLang } from '../llm.types';
+import { LlmLang } from '../llm/llm.types';
 
 const HTTP_TIMEOUT_MS = 30_000; // l'audio monte à ~7,5 Mo
 

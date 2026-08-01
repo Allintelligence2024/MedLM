@@ -18,6 +18,10 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DART = os.path.join(ROOT, "mobile", "lib", "core", "srs", "fsrs_engine.dart")
 PARAMS = os.path.join(ROOT, "mobile", "lib", "core", "srs", "fsrs_parameters.dart")
+ADAPTIVE_DART = os.path.join(
+    ROOT, "mobile", "lib", "core", "srs", "fsrs_adaptive.dart")
+ADAPTIVE_TS = os.path.join(
+    ROOT, "backend", "src", "ai", "adaptive", "adaptive.service.ts")
 
 
 def normalize(expr):
@@ -42,6 +46,60 @@ def extract_dart_weights():
         return None
     nums = re.findall(r"(-?\d+\.\d+)", block.group(1))
     return [float(n) for n in nums]
+
+
+def check_adaptive_parity():
+    """Phase 19.6 — les seuils/facteurs adaptatifs doivent être identiques
+    dans le backend (adaptive.service.ts), le moteur Dart
+    (fsrs_adaptive.dart) et la référence Python (ADAPTIVE)."""
+    failures = []
+    ts_src = open(ADAPTIVE_TS, encoding="utf-8").read()
+    dart_src = open(ADAPTIVE_DART, encoding="utf-8").read()
+
+    def ts_num(key):
+        m = re.search(rf"{key}:\s*(\d+(?:\.\d+)?)", ts_src)
+        return float(m.group(1)) if m else None
+
+    def dart_num(key):
+        m = re.search(rf"{key}\s*=\s*(\d+(?:\.\d+)?)", dart_src)
+        return float(m.group(1)) if m else None
+
+    pairs = [
+        ("ADJUST_MIN_REVIEWS", "adjustMinReviews"),
+        ("STRONG_MAX_LAPSE_RATE", "strongMaxLapseRate"),
+        ("STRONG_MIN_REVIEWS", "strongMinReviews"),
+        ("FRAGILE_MIN_LAPSE_RATE", "fragileMinLapseRate"),
+        ("WEIGHT_MIN_FACTOR", "weightMinFactor"),
+        ("WEIGHT_MAX_FACTOR", "weightMaxFactor"),
+    ]
+    from fsrs_reference import ADAPTIVE  # import local : déjà dans sys.path
+
+    for ts_key, dart_key in pairs:
+        ts_val = ts_num(ts_key)
+        dart_val = dart_num(dart_key)
+        py_val = float(ADAPTIVE.get(ts_key, float("nan")))
+        if ts_val is None or dart_val is None:
+            failures.append(
+                f"Seuil adaptatif introuvable : {ts_key} (TS={ts_val}, "
+                f"Dart={dart_val})")
+            continue
+        if not (ts_val == dart_val == py_val):
+            failures.append(
+                f"Seuil adaptatif divergent {ts_key} : backend={ts_val}, "
+                f"Dart={dart_val}, python={py_val}")
+
+    # Facteurs ×1.15 (fragile, w11) et ×1.05 (fort, w8) présents des
+    # deux côtés (le backend les applique en ligne : `FSRS_WEIGHTS[11]! *
+    # 1.15`, le Dart via des constantes nommées).
+    if not re.search(r"FSRS_WEIGHTS\[11\]!\s*\*\s*1\.15", ts_src):
+        failures.append("Facteur fragile w11 ×1.15 introuvable côté backend")
+    if not re.search(r"FSRS_WEIGHTS\[8\]!\s*\*\s*1\.05", ts_src):
+        failures.append("Facteur fort w8 ×1.05 introuvable côté backend")
+    if dart_num("fragileW11Factor") != ADAPTIVE["FRAGILE_W11_FACTOR"]:
+        failures.append("fragileW11Factor Dart ≠ référence Python")
+    if dart_num("strongW8Factor") != ADAPTIVE["STRONG_W8_FACTOR"]:
+        failures.append("strongW8Factor Dart ≠ référence Python")
+    return failures
 
 
 def main():
@@ -103,6 +161,10 @@ def main():
             failures.append(
                 f"Le moteur doit rester pur : '{forbidden}' interdit dans "
                 f"fsrs_engine.dart")
+
+    # 5. Parité des seuils adaptatifs (Phase 19.6) : backend TS ↔ Dart ↔
+    #    référence Python. Trois sources, une seule vérité numérique.
+    failures += check_adaptive_parity()
 
     if failures:
         print(f"❌ {len(failures)} problème(s) de parité Dart/référence :\n")

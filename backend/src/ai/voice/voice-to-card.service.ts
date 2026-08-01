@@ -96,7 +96,7 @@ export class VoiceToCardService {
       AI_VOICE_DEFAULT_DAILY_QUOTA;
 
     // 1. Quota journalier (jour UTC, jobs 'ok').
-    const [{ count: used }] = await this.db
+    const [usedRow] = await this.db
       .select({ count: sql<number>`count(*)::int` })
       .from(aiGenerationJobs)
       .where(
@@ -107,6 +107,8 @@ export class VoiceToCardService {
           gte(aiGenerationJobs.createdAt, AiGenerateService.todayStartUtc(now)),
         ),
       );
+
+    const used = usedRow?.count ?? 0;
     if (AiGenerateService.remainingQuota(used, limit) <= 0) {
       throw new HttpException(
         `quota journalier voice-to-card atteint (${limit}/jour)`,

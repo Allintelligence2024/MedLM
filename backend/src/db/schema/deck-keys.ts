@@ -7,7 +7,8 @@
 // v2 §8.1 : le serveur ne stocke JAMAIS la clé AES en clair.
 // Quand la clé est wrappée et émise, c'est fini — on ne peut
 // plus la relire. C'est le principe de forward secrecy.
-import { pgTable, uuid, text, timestamp, bytea, index } from 'drizzle-orm/pg-core';
+import { pgTable, uuid, text, timestamp, index } from 'drizzle-orm/pg-core';
+import { bytea } from './columns';
 import { users } from './users';
 import { decks } from './content';
 

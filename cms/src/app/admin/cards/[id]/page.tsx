@@ -51,7 +51,10 @@ export default function CardEditPage() {
           fr: data.content.explanation_fr ?? '',
           en: data.content.explanation_en ?? '',
         });
-        setMedia(data.content.media ?? []);
+        // Le média persisté (CardDetail) n'a pas de `key` — celui-ci
+        // n'existe que pour les uploads frais (MediaUpload). On dérive
+        // une clé stable depuis l'URL pour satisfaire MediaItem.
+        setMedia((data.content.media ?? []).map((m) => ({ ...m, key: m.url })));
         setSourceType(data.source.type);
         setFaculty(data.source.faculty ?? '');
         setYear(data.source.year ?? '');

@@ -341,6 +341,147 @@ class ApiClient {
     }
   }
 
+  // ── IA (Phase 19.5) ─────────────────────────────────────────────
+  //
+  // Tous les endpoints IA sont *provider-agnostic* côté serveur : le
+  // mobile ne voit jamais de clé API ni de choix de fournisseur.
+
+  /// GET /v1/ai/hints/:cardId — hint adaptatif (règles SRS, sans LLM).
+  Future<Map<String, dynamic>> fetchAiHint(String cardId, {String? lang}) async {
+    try {
+      final res = await _dio.get<dynamic>(
+        '/v1/ai/hints/$cardId',
+        queryParameters: {if (lang != null) 'lang': lang},
+      );
+      return Map<String, dynamic>.from(res.data as Map);
+    } on DioException catch (e) {
+      throw _translate(e);
+    }
+  }
+
+  /// POST /v1/ai/voice-to-card — dictée → brouillon de carte.
+  ///
+  /// Chemin préféré : [audioTranscript] (STT côté client, pas d'upload
+  /// audio). [audioBase64] n'est envoyé que si le STT natif est absent.
+  Future<Map<String, dynamic>> voiceToCard({
+    required String deckId,
+    String lang = 'fr',
+    String? audioTranscript,
+    String? audioBase64,
+  }) async {
+    try {
+      final res = await _dio.post<dynamic>(
+        '/v1/ai/voice-to-card',
+        data: {
+          'deck_id': deckId,
+          'lang': lang,
+          if (audioTranscript != null) 'audio_transcript': audioTranscript,
+          if (audioBase64 != null) 'audio_base64': audioBase64,
+        },
+      );
+      return Map<String, dynamic>.from(res.data as Map);
+    } on DioException catch (e) {
+      throw _translate(e);
+    }
+  }
+
+  /// POST /v1/ai/tutor/ask — question au tuteur (disclaimer déjà dans
+  /// le texte servi ; l'historique est plafonné à 10 messages).
+  Future<Map<String, dynamic>> tutorAsk({
+    required String question,
+    String lang = 'fr',
+    List<Map<String, String>> history = const [],
+  }) async {
+    try {
+      final res = await _dio.post<dynamic>(
+        '/v1/ai/tutor/ask',
+        data: {
+          'question': question,
+          'lang': lang,
+          'history': history,
+        },
+      );
+      return Map<String, dynamic>.from(res.data as Map);
+    } on DioException catch (e) {
+      throw _translate(e);
+    }
+  }
+
+  /// GET /v1/ai/adaptive/profile — profil d'erreur + poids FSRS ajustés.
+  Future<Map<String, dynamic>> fetchAdaptiveProfile() async {
+    try {
+      final res = await _dio.get<dynamic>('/v1/ai/adaptive/profile');
+      return Map<String, dynamic>.from(res.data as Map);
+    } on DioException catch (e) {
+      throw _translate(e);
+    }
+  }
+
+  // ── ML locale (Phase 20.3) ──────────────────────────────────────
+  //
+  // Calculs 100 % serveur sur agrégats déjà en base — jamais de service
+  // ML externe, jamais de données qui sortent. Réponses explicables
+  // (features + raisons rendues, v2 §13).
+
+  /// GET /v1/ml/mock-exam-prediction — prédiction du score au prochain
+  /// examen blanc (ou refus k-anonymat documenté, predictible=false).
+  Future<Map<String, dynamic>> fetchMockExamPrediction() async {
+    try {
+      final res =
+          await _dio.get<dynamic>('/v1/ml/mock-exam-prediction');
+      return Map<String, dynamic>.from(res.data as Map);
+    } on DioException catch (e) {
+      throw _translate(e);
+    }
+  }
+
+  /// GET /v1/ml/tag-focus — suggestions focus/relax par tag.
+  Future<Map<String, dynamic>> fetchTagFocus() async {
+    try {
+      final res = await _dio.get<dynamic>('/v1/ml/tag-focus');
+      return Map<String, dynamic>.from(res.data as Map);
+    } on DioException catch (e) {
+      throw _translate(e);
+    }
+  }
+
+  // ── Gateway GraphQL (Phase 20.2) ────────────────────────────────
+  //
+  // POST /v2/graphql — opérations persistées UNIQUEMENT (le texte de
+  // [query] doit correspondre à une empreinte de l'allow-list serveur,
+  // cf. repositories/gateway/graphql_operations.dart). Réponse nominale
+  // : { "data": { … } } — on retourne le contenu de `data`.
+  //
+  // Échecs traduits par _translate comme le REST : 400 (opération non
+  // persistée / variables), 429 (budget coût), 503 (flag OFF).
+  Future<Map<String, dynamic>> graphql(
+    String query, {
+    Map<String, dynamic>? variables,
+  }) async {
+    try {
+      final res = await _dio.post<dynamic>(
+        '/v2/graphql',
+        data: {
+          'query': query,
+          if (variables != null) 'variables': variables,
+        },
+      );
+      final body = Map<String, dynamic>.from(res.data as Map);
+      final data = body['data'];
+      if (data is! Map) {
+        // Enveloppe GraphQL sans data = erreurs non transport (rare :
+        // le gateway signale normalement par le statut HTTP).
+        throw ServerException(
+          'réponse gateway sans data',
+          cause: body['errors'],
+        );
+      }
+      return Map<String, dynamic>.from(data);
+    } on DioException catch (e) {
+      throw _translate(e);
+    }
+  }
+
   /// GET /v1/exams/templates — templates actifs.
   Future<List<Map<String, dynamic>>> listExamTemplates({
     String? moduleId,

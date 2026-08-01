@@ -21,14 +21,19 @@ async function main(): Promise<void> {
   const pool = new Pool({ connectionString: url, max: 1 });
   const db = drizzle(pool);
 
+  // Script CLI : sa sortie standard EST son interface utilisateur
+  // (justifié — sentinelles explicites reconnues par security_audit.py).
+  // eslint-disable-next-line no-console
   console.log('migrations en cours…');
   await migrate(db, { migrationsFolder: './src/db/migrations' });
+  // eslint-disable-next-line no-console -- CLI : stdout est le canal prévu
   console.log('migrations OK');
 
   await pool.end();
 }
 
 main().catch((err) => {
+  // eslint-disable-next-line no-console -- CLI : stderr est le canal prévu
   console.error('migration échouée', err);
   process.exit(1);
 });

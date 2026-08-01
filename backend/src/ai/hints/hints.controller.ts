@@ -31,7 +31,7 @@ export class HintsController {
     return this.service.getHintForCard({
       userId,
       cardId,
-      langOverride: q.lang,
+      ...(q.lang !== undefined && { langOverride: q.lang }),
     });
   }
 }

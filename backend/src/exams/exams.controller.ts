@@ -33,9 +33,9 @@ export class ExamsController {
   async listTemplates(@Query() query: unknown) {
     const q = ListTemplatesQuery.parse(query);
     return this.templates.listTemplates({
-      moduleId: q.module_id,
-      faculty: q.faculty,
-      studyYear: q.study_year,
+      ...(q.module_id !== undefined && { moduleId: q.module_id }),
+      ...(q.faculty !== undefined && { faculty: q.faculty }),
+      ...(q.study_year !== undefined && { studyYear: q.study_year }),
     });
   }
 

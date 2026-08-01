@@ -28,7 +28,11 @@ export class AuthController {
     @Headers('X-App-Version') appVersion?: string,
   ) {
     const b = SignupBody.parse(body);
-    return this.service.signup({ ...b, platform: platform ?? 'unknown', appVersion });
+    return this.service.signup({
+      ...b,
+      platform: platform ?? 'unknown',
+      ...(appVersion !== undefined && { appVersion }),
+    });
   }
 
   @Post('login')
@@ -39,7 +43,11 @@ export class AuthController {
     @Headers('X-App-Version') appVersion?: string,
   ) {
     const b = LoginBody.parse(body);
-    return this.service.login({ ...b, platform: platform ?? 'unknown', appVersion });
+    return this.service.login({
+      ...b,
+      platform: platform ?? 'unknown',
+      ...(appVersion !== undefined && { appVersion }),
+    });
   }
 
   @Post('refresh')

@@ -1,0 +1,51 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Région Alger — PRIMARY (Phase 20.1). Écritures + référence de
+# réplication. Toutes les données restent en Algérie (loi 18-07).
+namespace: medanki-alger
+
+resources:
+  - ../../prod
+
+commonLabels:
+  medanki.io/region: alger
+
+patches:
+  - target:
+      kind: ConfigMap
+      name: medanki-config
+    patch: |-
+      - op: add
+        path: /data/region
+        value: alger
+      - op: add
+        path: /data/region-role
+        value: primary
+  - target:
+      kind: Deployment
+      name: backend
+    patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 6
+      - op: add
+        path: /spec/template/spec/containers/0/env/-
+        value:
+          name: MEDANKI_REGION
+          value: alger
+      - op: add
+        path: /spec/template/spec/containers/0/env/-
+        value:
+          name: MEDANKI_REGION_ROLE
+          value: primary
+  - target:
+      kind: HorizontalPodAutoscaler
+      name: backend-hpa
+    patch: |-
+      - op: replace
+        path: /spec/minReplicas
+        value: 6
+      - op: replace
+        path: /spec/maxReplicas
+        value: 24

@@ -101,14 +101,16 @@ export function BilingualEditor({ value, onChange, placeholderFr, placeholderEn 
   });
 
   // Sync external value → editor.
+  // Note : tiptap v2.27 prend `emitUpdate` en 2ᵉ argument positionnel
+  // (boolean), PAS un objet options — la forme objet n'existe qu'en v3.
   useEffect(() => {
     if (frEditor && value.fr !== frEditor.getHTML()) {
-      frEditor.commands.setContent(value.fr || '', { emitUpdate: false });
+      frEditor.commands.setContent(value.fr || '', false);
     }
   }, [value.fr, frEditor]);
   useEffect(() => {
     if (enEditor && value.en !== enEditor.getHTML()) {
-      enEditor.commands.setContent(value.en || '', { emitUpdate: false });
+      enEditor.commands.setContent(value.en || '', false);
     }
   }, [value.en, enEditor]);
 

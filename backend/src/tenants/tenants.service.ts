@@ -33,7 +33,7 @@ export class TenantsService {
       .select({ id: tenants.id })
       .from(tenants)
       .where(eq(tenants.slug, args.body.slug))
-      .get();
+      .then((rows) => rows[0]);
     if (existing) {
       throw new BadRequestException(`slug déjà pris : ${args.body.slug}`);
     }
@@ -113,7 +113,7 @@ export class TenantsService {
       .select({ slug: tenants.slug, name: tenants.name, branding: tenants.branding })
       .from(tenants)
       .where(eq(tenants.slug, slug))
-      .get();
+      .then((rows) => rows[0]);
     if (!row) return null;
     return {
       slug: row.slug,
@@ -132,13 +132,13 @@ export class TenantsService {
       .select()
       .from(tenants)
       .where(eq(tenants.id, tenantId))
-      .get();
+      .then((rows) => rows[0]);
     if (!row) throw new NotFoundException('tenant introuvable');
     const countRow = await this.db
       .select({ c: sql<number>`count(*)::int` })
       .from(userTenants)
       .where(eq(userTenants.tenantId, tenantId))
-      .get();
+      .then((rows) => rows[0]);
     return {
       id: row.id,
       slug: row.slug,

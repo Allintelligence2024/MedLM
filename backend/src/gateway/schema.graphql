@@ -1,0 +1,76 @@
+# MedAnki DZ — contrat GraphQL v2 (Phase 20.2).
+#
+# CONTRAT DOCUMENTAIRE + ALLOW-LIST. Le gateway ne sert QUE ces
+# opérations persistées (persisted-operations.ts) : toute autre requête
+# est rejetée avec OPERATION_NOT_PERSISTED. Lecture seule en v1
+# (aucune mutation — la surface d'écriture reste REST le temps que le
+# modèle d'autorisation GraphQL soit éprouvé).
+
+enum StatsPeriod {
+  day
+  week
+  month
+  all
+}
+
+type ViewerStats {
+  period: StatsPeriod!
+  cardsReviewed: Int!
+  accuracy: Float!
+  currentStreak: Int!
+  xpTotal: Int!
+  level: String!
+  leechCount: Int!
+}
+
+type DeckSummary {
+  deckId: ID!
+  nameFr: String!
+  isPremium: Boolean!
+  updatedAt: String!
+}
+
+type FsrsAdjustment {
+  active: Boolean!
+  changedIndices: [Int!]!
+  reasons: [String!]!
+}
+
+type AdaptiveProfile {
+  windowDays: Int!
+  totalReviews: Int!
+  lapseRate: Float!
+  fsrsAdjustment: FsrsAdjustment!
+}
+
+type MockExamTemplate {
+  id: ID!
+  title: String!
+}
+
+type LeaderboardEntry {
+  pseudonym: String!
+  xpTotal: Int!
+  rank: Int!
+}
+
+type LeaderboardTop {
+  week: String
+  entries: [LeaderboardEntry!]!
+}
+
+type Query {
+  viewerStats(period: StatsPeriod): ViewerStats!
+  deckCatalog: [DeckSummary!]!
+  adaptiveProfile: AdaptiveProfile!
+  mockExamTemplates(faculty: String, studyYear: Int): [MockExamTemplate!]!
+  leaderboardTop(faculty: String, studyYear: Int, limit: Int): LeaderboardTop!
+}
+
+# Opérations persistées (textes exacts acceptés par le gateway) :
+#
+# query ViewerStats($period: StatsPeriod) { viewerStats(period: $period) { period cardsReviewed accuracy currentStreak xpTotal level leechCount } }
+# query DeckCatalog { deckCatalog { deckId nameFr isPremium updatedAt } }
+# query AdaptiveProfile { adaptiveProfile { windowDays totalReviews lapseRate fsrsAdjustment { active changedIndices reasons } } }
+# query MockExamTemplates($faculty: String, $studyYear: Int) { mockExamTemplates(faculty: $faculty, studyYear: $studyYear) { id title } }
+# query LeaderboardTop($faculty: String, $studyYear: Int, $limit: Int) { leaderboardTop(faculty: $faculty, studyYear: $studyYear, limit: $limit) { entries { pseudonym xpTotal rank } week } }

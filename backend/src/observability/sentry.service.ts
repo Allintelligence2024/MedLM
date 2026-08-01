@@ -40,7 +40,10 @@ export class SentryService {
 
   captureException(err: unknown, context?: Record<string, unknown>): void {
     if (this.enabled) {
-      Sentry.captureException(err, { extra: context });
+      Sentry.captureException(
+        err,
+        context === undefined ? undefined : { extra: context },
+      );
     }
     // Toujours logger côté Pino.
     this.logger.error(

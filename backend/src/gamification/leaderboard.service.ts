@@ -23,7 +23,8 @@
 import { Inject, Injectable, Logger, BadRequestException, NotFoundException } from '@nestjs/common';
 import { and, desc, eq, sql } from 'drizzle-orm';
 import { DRIZZLE, Database } from '../db/database.module';
-import { leaderboardOptin, userXpSnapshot, users } from '../db/schema/gamification';
+import { leaderboardOptin, userXpSnapshot } from '../db/schema/gamification';
+
 import { LeaderboardEntry, LeaderboardResponse, OptInBody } from './leaderboard.dto';
 
 const PSEUDONYM_TAKEN = 'pseudonyme déjà pris';
@@ -52,7 +53,7 @@ export class LeaderboardService {
       .select()
       .from(leaderboardOptin)
       .where(eq(leaderboardOptin.userId, userId))
-      .get();
+      .then((rows) => rows[0]);
     if (existing && !existing.revokedAt) {
       throw new BadRequestException('déjà opt-in');
     }
@@ -61,7 +62,7 @@ export class LeaderboardService {
       .select()
       .from(leaderboardOptin)
       .where(eq(leaderboardOptin.pseudonym, body.pseudonym))
-      .get();
+      .then((rows) => rows[0]);
     if (taken && taken.userId !== userId) {
       throw new BadRequestException(PSEUDONYM_TAKEN);
     }
@@ -97,7 +98,7 @@ export class LeaderboardService {
       .select()
       .from(leaderboardOptin)
       .where(eq(leaderboardOptin.userId, userId))
-      .get();
+      .then((rows) => rows[0]);
     if (!existing) throw new NotFoundException("pas d'opt-in actif");
     await this.db
       .update(leaderboardOptin)
@@ -112,7 +113,7 @@ export class LeaderboardService {
       .select({ revokedAt: leaderboardOptin.revokedAt })
       .from(leaderboardOptin)
       .where(eq(leaderboardOptin.userId, userId))
-      .get();
+      .then((rows) => rows[0]);
     return !!row && !row.revokedAt;
   }
 
@@ -208,7 +209,7 @@ export class LeaderboardService {
         .select({ pseudonym: leaderboardOptin.pseudonym })
         .from(leaderboardOptin)
         .where(eq(leaderboardOptin.userId, args.userId))
-        .get();
+        .then((rows) => rows[0]);
       if (meRow && !meRow.pseudonym) myRank = null;
       const idx = entries.findIndex((e) => e.pseudonym === meRow?.pseudonym);
       if (idx >= 0) myRank = idx + 1;
@@ -220,7 +221,7 @@ export class LeaderboardService {
         .select({ pseudonym: leaderboardOptin.pseudonym })
         .from(leaderboardOptin)
         .where(eq(leaderboardOptin.userId, args.userId))
-        .get();
+        .then((rows) => rows[0]);
       if (meRow && !meRow.pseudonym) {
         // Pas opt-in → myRank reste null.
       } else if (meRow) {
@@ -239,7 +240,7 @@ export class LeaderboardService {
           .from(userXpSnapshot)
           .innerJoin(leaderboardOptin, eq(leaderboardOptin.userId, userXpSnapshot.userId))
           .where(and(...allMyConditions, eq(leaderboardOptin.pseudonym, meRow.pseudonym)))
-          .get();
+          .then((rows) => rows[0]);
         if (myRow) {
           // Compte combien de users ont un meilleur score.
           const betterConditions = [
@@ -259,7 +260,7 @@ export class LeaderboardService {
                     > (${myRow.xpWeek}, ${myRow.cardsReviewed}, ${myRow.mockExams})`,
               ),
             )
-            .get();
+            .then((rows) => rows[0]);
           myRank = (rankRow?.c ?? 0) + 1;
         }
       }

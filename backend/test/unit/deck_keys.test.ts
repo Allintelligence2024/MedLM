@@ -2,7 +2,7 @@
 // Vérifie que le wrap RSA-OAEP fonctionne et qu'on peut déwrap
 // côté serveur (round-trip de la clé AES).
 import { describe, it, expect } from 'vitest';
-import { generateKeyPairSync, publicEncrypt, privateDecrypt, constants } from 'node:crypto';
+import { generateKeyPairSync, createPublicKey, publicEncrypt, privateDecrypt, constants } from 'node:crypto';
 
 describe('RSA-OAEP wrap/unwrap round-trip', () => {
   it('une clé AES wrappée peut être déwrapée avec la clé privée', () => {
@@ -43,8 +43,10 @@ describe('RSA-OAEP wrap/unwrap round-trip', () => {
       publicKeyEncoding: { type: 'spki', format: 'pem' },
       privateKeyEncoding: { type: 'pkcs8', format: 'pem' },
     });
-    const details = (publicKey as any).asymmetricKeyDetails;
-    expect(details.modulusLength).toBeLessThan(2048);
+    // publicKey est encodée en PEM (string) — asymmetricKeyDetails
+    // n'existe que sur un KeyObject : on le recrée explicitement.
+    const details = createPublicKey(publicKey).asymmetricKeyDetails;
+    expect(details?.modulusLength).toBeLessThan(2048);
   });
 
   it('wrap est déterministe (même entrée → même sortie)', () => {

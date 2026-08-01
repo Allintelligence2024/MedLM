@@ -15,7 +15,6 @@
 ///
 /// En l'absence de clés API, le provider refuse de démarrer en
 /// prod (lancé en mode `dry_run: true` via le contrôleur).
-library;
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { createHmac } from 'crypto';
@@ -45,7 +44,6 @@ export class ChargilyPayProvider implements IPaymentProvider {
   private readonly logger = new Logger(ChargilyPayProvider.name);
   private readonly config: ChargilyConfig;
   /// Compteur de retries (succès → reset).
-  private retryCount = 0;
 
   constructor(config: ConfigService) {
     this.config = {

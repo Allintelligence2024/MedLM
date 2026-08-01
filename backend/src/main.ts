@@ -1,31 +1,22 @@
-/// Point d'entrée — NestJS bootstrap (Phase 12 : intercepteur métriques).
+/// Point d'entrée — NestJS bootstrap.
+///
+/// ATTENTION : ce fichier appelle bootstrap() à l'import — ne JAMAIS
+/// l'importer depuis un test (un second serveur réel écouterait sur le
+/// port PORT/3000). La configuration HTTP partagée vit dans
+/// ./configure-app.ts, sans effet de bord.
 import 'reflect-metadata';
 import { NestFactory } from '@nestjs/core';
-import { ValidationPipe } from '@nestjs/common';
-import helmet from 'helmet';
 import { AppModule } from './app.module';
-import { MetricsService } from './observability/metrics.service';
-import { HttpMetricsInterceptor } from './observability/metrics.interceptor';
-import { SentryService } from './observability/sentry.service';
+import { configureApp } from './configure-app';
 
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule, { bufferLogs: false });
-  app.use(helmet());
-  app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
-  app.enableCors({ origin: false });
-  app.setGlobalPrefix('v1');
-
-  // Phase 12 : intercepteur métriques (latence + erreurs par route).
-  const metrics = app.get(MetricsService);
-  app.useGlobalInterceptors(new HttpMetricsInterceptor(metrics));
-
-  // Phase 12 : Sentry (no-op si SENTRY_DSN absent).
-  app.get(SentryService);
+  configureApp(app);
 
   const port = Number(process.env.PORT ?? 3000);
   await app.listen(port);
   // eslint-disable-next-line no-console
-  console.log(`MedAnki DZ API listening on :${port}/v1`);
+  console.log(`MedAnki DZ API listening on :${port}/v1 · graphql :${port}/v2/graphql`);
   // eslint-disable-next-line no-console
   console.log(`metrics scrape :${port}/v1/metrics`);
 }

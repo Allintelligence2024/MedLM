@@ -51,6 +51,11 @@ echo "▸ 7/7 Content Policy et contenu embarqué"
 python3 tools/check_schema_parity.py
 python3 tools/validate_content.py
 
+echo "▸ Livrables lancement (Phases 19.7-19.8)"
+python3 tools/scripts/check_landing.py
+python3 tools/scripts/check_store.py
+python3 tools/scripts/pentest_prep.py
+
 if command -v dart >/dev/null 2>&1; then
   echo "▸ Tests Dart"
   (cd mobile && dart pub get >/dev/null && dart test)

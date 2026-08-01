@@ -19,8 +19,6 @@
 // la bonne langue — la traduction des contenus CMS reste l'affaire
 // des auteurs.
 
-import type { CacheProfile } from '../cdn/cdn-headers';
-
 export type Lang = 'fr' | 'ar' | 'en';
 
 export const SUPPORTED_LANGS: Lang[] = ['fr', 'ar', 'en'];
@@ -193,25 +191,47 @@ export class I18n {
   ///   * `{count, plural, one {# carte} other {# cartes}}` → pluralisation
   _format(template: string, params?: Record<string, string | number>): string {
     if (!params) return template;
-    // Pluralisation ICU-lite.
-    const pluralMatch = template.match(/\{(\w+),\s*plural,[^}]+\}/);
-    if (pluralMatch) {
-      const varName = pluralMatch[1]!;
-      const count = Number(params[varName] ?? 0);
-      const block = pluralMatch[0]!;
-      // Parse "one {# carte} other {# cartes}"
-      const branches: Record<string, string> = {};
-      const re = /(one|other|many|few|two)\s*\{([^}]*(?:\{[^}]*\}[^}]*)*)\}/g;
-      let m: RegExpExecArray | null;
-      while ((m = re.exec(block)) !== null) {
-        branches[m[1]!] = m[2]!;
+    // Pluralisation ICU-lite : on repère `{nom, plural,` puis on scanne
+    // le bloc COMPLET avec un compteur d'accolades (un regex ne peut
+    // pas matcher des accolades imbriquées — l'ancien `[^}]+`
+    // s'arrêtait à la première fermante et cassait le rendu).
+    const head = template.match(/\{(\w+),\s*plural,/);
+    if (head && head.index !== undefined) {
+      const varName = head[1]!;
+      const start = head.index;
+      const bodyStart = start + head[0].length;
+      let depth = 0;
+      let end = -1;
+      for (let i = start; i < template.length; i++) {
+        const c = template[i];
+        if (c === '{') depth++;
+        else if (c === '}') {
+          depth--;
+          if (depth === 0) {
+            end = i;
+            break;
+          }
+        }
       }
-      const branch = count === 0 ? 'other' : count === 1 ? 'one' : 'other';
-      const chosen = branches[branch] ?? branches.other ?? '';
-      // Remplace # par count.
-      let result = chosen.replace(/#/g, String(count));
-      // Substitue le bloc entier.
-      return template.replace(pluralMatch[0], result);
+      if (end !== -1) {
+        const body = template.slice(bodyStart, end);
+        // Parse "one {# carte} other {# cartes}" — un niveau
+        // d'imbrication d'accolades supporté dans une branche.
+        const branches: Record<string, string> = {};
+        const re = /(zero|one|two|few|many|other)\s*\{((?:[^{}]|\{[^{}]*\})*)\}/g;
+        let m: RegExpExecArray | null;
+        while ((m = re.exec(body)) !== null) {
+          branches[m[1]!] = m[2]!;
+        }
+        const count = Number(params[varName] ?? 0);
+        const explicitZero = count === 0 && branches.zero !== undefined;
+        const branch = explicitZero ? 'zero' : count === 1 ? 'one' : 'other';
+        const chosen = branches[branch] ?? branches.other ?? '';
+        const result = chosen.replace(/#/g, String(count));
+        const replaced =
+          template.slice(0, start) + result + template.slice(end + 1);
+        return this._format(replaced, params); // substitue les {name} restants
+      }
     }
     // Simple substitution {name}.
     return template.replace(/\{(\w+)\}/g, (_, name) => {

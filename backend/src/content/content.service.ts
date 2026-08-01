@@ -4,9 +4,9 @@
 /// Toutes les requêtes sont scopées par utilisateur. Les decks premium
 /// sont filtrés selon l'entitlement (Phase 7 câblera la vérification).
 import { Inject, Injectable, Logger, NotFoundException, BadRequestException } from '@nestjs/common';
-import { and, desc, eq, gte, sql } from 'drizzle-orm';
+import { and, desc, eq, gte } from 'drizzle-orm';
 import { randomUUID } from 'crypto';
-import { cards, cardReports, decks, modules, programmes } from '../db/schema';
+import { cards, cardReports, decks, modules } from '../db/schema';
 import { DRIZZLE, Database } from '../db/database.module';
 import type { UpdateCardBody } from './content.dto';
 
@@ -116,7 +116,7 @@ export class ContentService {
       .select({ id: decks.id, version: decks.version })
       .from(decks)
       .where(eq(decks.id, args.deckId))
-      .get();
+      .then((rows) => rows[0]);
     if (!deck) throw new NotFoundException(`deck ${args.deckId} introuvable`);
 
     const rows = await this.db
@@ -187,7 +187,7 @@ export class ContentService {
       .select()
       .from(cards)
       .where(eq(cards.id, cardId))
-      .get();
+      .then((rows) => rows[0]);
     if (!row) throw new NotFoundException('carte introuvable');
     const c = (row.content as any) ?? {};
     const s = (row.sourceMeta as any) ?? {};
@@ -226,7 +226,7 @@ export class ContentService {
       .select({ id: cards.id, version: cards.version, status: cards.status })
       .from(cards)
       .where(eq(cards.id, args.cardId))
-      .get();
+      .then((rows) => rows[0]);
     if (!existing) throw new NotFoundException('carte introuvable');
     if (existing.status === 'published') {
       // Édition d'une carte publiée : on incrémente la version et
@@ -261,7 +261,7 @@ export class ContentService {
       .select({ id: cards.id, status: cards.status, version: cards.version })
       .from(cards)
       .where(eq(cards.id, args.cardId))
-      .get();
+      .then((rows) => rows[0]);
     if (!existing) throw new NotFoundException('carte introuvable');
     const allowed = ALLOWED_TRANSITIONS[existing.status] ?? [];
     if (!allowed.includes(args.to)) {

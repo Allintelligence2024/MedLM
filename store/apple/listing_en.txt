@@ -1,0 +1,33 @@
+TITLE : MedAnki DZ — Medical Revision
+SHORT DESCRIPTION (80) : Spaced-repetition medical revision for Algerian students. Offline, FR/AR/EN.
+
+FULL DESCRIPTION :
+MedAnki DZ is the revision app built for Algeria's medical students.
+Powered by spaced-repetition science (FSRS-5), it schedules each card
+at the exact moment you're about to forget it.
+
+WHAT MAKES MEDANKI DIFFERENT
+• 697+ verified, peer-reviewed cards organised by module (anatomy,
+  histology, embryology, biochemistry, biophysics…)
+• Offline-first: decks encrypted on your device, sync when the network
+  returns — built for intermittent connectivity
+• AI hints without the cloud: personalized hints computed by rules,
+  without sending your data to an external LLM
+• Guard-railed voice tutor: ask course questions out loud — systematic
+  medical disclaimer, emergency detection (SAMU 115), never medical advice
+• Adaptive FSRS weights: the algorithm tunes to your profile (struggling
+  or strong) so you review at the right time, never too much
+• Module-based mock exams with detailed corrections
+• Streaks, XP and per-faculty leaderboards (opt-in, pseudonymous)
+• Trilingual: French, Arabic, English
+
+WHO IS IT FOR?
+First- and second-year medical students in Algeria who want to turn
+20 minutes a day into exam success.
+
+PRIVACY
+Your reviews stay on your device. AI features send no identifiable
+personal data to external services by default. Full policy: see
+PRIVACY.md in the repository.
+
+MedAnki DZ is a revision tool. It is not medical advice.

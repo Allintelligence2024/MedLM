@@ -27,7 +27,7 @@ export class ContentController {
   async listDecks(@Query() query: unknown) {
     const q = ListDecksQuery.parse(query);
     return this.service.listDecks({
-      moduleId: q.module_id,
+      ...(q.module_id !== undefined && { moduleId: q.module_id }),
       versionSince: q.version_since,
       limit: q.limit,
     });
@@ -48,7 +48,7 @@ export class ContentController {
     // Phase 11 bis : alias pratique pour le CMS.
     const q = ListDecksQuery.parse(query);
     return this.service.listCardsForCms({
-      moduleId: q.module_id,
+      ...(q.module_id !== undefined && { moduleId: q.module_id }),
       limit: q.limit ?? 50,
     });
   }
@@ -77,7 +77,12 @@ export class ContentController {
     @Body() body: unknown,
   ) {
     const b = TransitionBody.parse(body);
-    return this.service.transitionCard({ userId, cardId: id, to: b.to, comment: b.comment });
+    return this.service.transitionCard({
+      userId,
+      cardId: id,
+      to: b.to,
+      ...(b.comment !== undefined && { comment: b.comment }),
+    });
   }
 
   @Post('cards/:id/report')
@@ -111,7 +116,11 @@ export class ContentController {
     @Body() body: unknown,
   ) {
     const b = UpdateReportBody.parse(body);
-    return this.service.updateReport({ id, status: b.status, comment: b.comment });
+    return this.service.updateReport({
+      id,
+      status: b.status,
+      ...(b.comment !== undefined && { comment: b.comment }),
+    });
   }
 
   // ── Media (Phase 11 bis) ───────────────────────────────────────

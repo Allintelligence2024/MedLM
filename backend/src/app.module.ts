@@ -26,6 +26,9 @@ import { I18nModule } from './i18n/i18n.module';
 import { CacheModule } from './cache/cache.module';
 import { DbModule } from './db/db.module';
 import { AiModule } from './ai/ai.module';
+import { GatewayModule } from './gateway/gateway.module';
+import { MlModule } from './ml/ml.module';
+import { PartnershipsModule } from './partnerships/partnerships.module';
 
 @Module({
   imports: [
@@ -33,11 +36,15 @@ import { AiModule } from './ai/ai.module';
     LoggerModule.forRoot({
       pinoHttp: {
         redact: ['req.headers.authorization', 'req.headers.cookie'],
-        level: process.env.LOG_LEVEL ?? 'info',
-        transport:
-          process.env.NODE_ENV !== 'production'
-            ? { target: 'pino-pretty', options: { singleLine: true } }
-            : undefined,
+        level: (process.env.LOG_LEVEL ?? 'info') as
+          | 'fatal' | 'error' | 'warn' | 'info' | 'debug' | 'trace' | 'silent',
+        // pino-pretty = thread-stream (worker thread). Il tue les
+        // workers vitest (crash silencieux) et n'a aucun sens hors dev
+        // local : on ne l'attache QUE si NODE_ENV est absent (npm run
+        // start:dev) ou explicitement 'development'.
+        ...(!process.env.NODE_ENV || process.env.NODE_ENV === 'development'
+          ? { transport: { target: 'pino-pretty', options: { singleLine: true as const } } }
+          : {}),
       },
     }),
     ThrottlerModuleConfigured,
@@ -64,6 +71,9 @@ import { AiModule } from './ai/ai.module';
     CacheModule, // Phase 18 (Redis cache injectable)
     DbModule, // Phase 18 (read replicas)
     AiModule, // Phase 18.1+ (hints adaptatifs, génération LLM, tutorat)
+    GatewayModule, // Phase 20.2 (passerelle GraphQL, opérations persistées)
+    MlModule, // Phase 20.3 (prédiction examen blanc + focus par tag, local)
+    PartnershipsModule, // Phase 20.4 (partenariats facultés DZ)
   ],
 })
 export class AppModule {}
