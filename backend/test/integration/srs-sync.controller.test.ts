@@ -11,6 +11,12 @@ import { JwtService } from '@nestjs/jwt';
 import request from 'supertest';
 import { AppModule } from '../../src/app.module';
 import { DRIZZLE } from '../../src/db/database.module';
+import { configureApp } from '../../src/configure-app';
+
+// La factory PG_POOL est instanciée au boot du module et exige
+// DATABASE_URL — pg.Pool reste paresseuse, aucune connexion réelle
+// n'est ouverte (toutes les requêtes passent par le fake DRIZZLE).
+process.env.DATABASE_URL ??= 'postgres://unused:unused@127.0.0.1:1/unused';
 
 class FakeDb {
   events: any[] = [];
@@ -20,44 +26,53 @@ class FakeDb {
   async transaction<T>(fn: (tx: FakeDb) => Promise<T>): Promise<T> {
     return fn(this);
   }
-  select(): any {
+
+  /// Tableau augmenté des chaînes drizzle (orderBy/limit) — awaitable
+  /// tel quel (le service fait parfois `await ...where(...)` sans
+  /// terminal, parfois `...orderBy(...)` sans limit, parfois les deux).
+  private chain(rows: any[]): any {
+    return Object.assign(rows, {
+      orderBy: () => this.chain(rows),
+      limit: (n: number) => rows.slice(0, n),
+    });
+  }
+
+  select(_projection?: unknown): any {
     const self = this;
     return {
-      from() {
+      from(_table: unknown) {
         return {
-          where() {
-            return {
-              orderBy() {
-                return {
-                  limit(n: number) {
-                    return Promise.resolve(self.events.slice(0, n));
-                  },
-                };
-              },
-            };
+          where(_cond: unknown) {
+            return self.chain(self.events.slice());
           },
         };
       },
     };
   }
-  insert(): any {
+
+  insert(_table: unknown): any {
     const self = this;
     return {
       values(v: any) {
-        return {
+        // review_logs est inséré SANS terminal (await direct de
+        // values()) : on persiste immédiatement, puis on expose les
+        // terminaux utilisés par les autres tables (onConflictDoUpdate,
+        // returning). Le builder est lui-même thenable.
+        if (v?.id && typeof v.rating === 'number') {
+          self.existing.add(v.id);
+          self.events.push(v);
+        }
+        return Object.assign(Promise.resolve(), {
           async onConflictDoUpdate() {
-            if (v.id) {
-              if (!self.existing.has(v.id)) {
-                self.existing.add(v.id);
-                self.events.push(v);
-              }
+            if (v?.id && !self.existing.has(v.id)) {
+              self.existing.add(v.id);
+              self.events.push(v);
             }
-            return Promise.resolve();
           },
           async returning() {
-            return [{ id: v.id ?? 'x' }];
+            return [{ id: v?.id ?? 'x' }];
           },
-        };
+        });
       },
     };
   }
@@ -79,7 +94,9 @@ describe('SRS Sync — HTTP end-to-end (fake DB, JWT auth)', () => {
       .useValue(fake)
       .compile();
     app = moduleRef.createNestApplication();
-    app.setGlobalPrefix('v1');
+    // Même configuration que la prod (main.ts) : préfixe v1 +
+    // exclusion /v2/graphql, ValidationPipe globale, helmet…
+    configureApp(app);
     await app.init();
     jwt = app.get(JwtService);
     accessToken = await jwt.signAsync(

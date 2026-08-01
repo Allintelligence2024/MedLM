@@ -5,7 +5,7 @@ import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
-import { MagicLinkService } from './magic-link.service';
+import { EMAIL_SENDER, MagicLinkService } from './magic-link.service';
 import { MagicLinkController } from './magic-link.controller';
 import { GoogleOAuthService } from './google-oauth.service';
 import { GoogleOAuthController } from './google-oauth.controller';
@@ -39,7 +39,9 @@ import { ResendEmailSender } from './email-sender.service';
     AuthService,
     MagicLinkService,
     GoogleOAuthService,
-    ResendEmailSender,
+    // Token EMAIL_SENDER (pas la classe) : MagicLinkService injecte
+    // l'interface EmailSender via ce token — voir magic-link.service.ts.
+    { provide: EMAIL_SENDER, useClass: ResendEmailSender },
   ],
   controllers: [
     AuthController,

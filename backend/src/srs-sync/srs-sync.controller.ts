@@ -7,7 +7,7 @@
 /// Trois endpoints :
 ///   * POST /srs-sync/push   — idempotent, batch 100 max
 ///   * GET  /srs-sync/pull?since_ms=&limit=  — paginé
-import { Body, Controller, Get, Headers, HttpCode, HttpStatus, Post, Query, UseGuards } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Get, Headers, HttpCode, HttpStatus, Post, Query, UseGuards } from '@nestjs/common';
 import { PullQuery, PushBody } from './srs-sync.dto';
 import { SrsSyncService } from './srs-sync.service';
 import { JwtGuard } from '../auth/jwt.guard';
@@ -25,7 +25,7 @@ export class SrsSyncController {
     @Headers('X-Device-Id') deviceId: string,
     @Body() body: unknown,
   ) {
-    if (!deviceId) throw new Error('X-Device-Id header manquant');
+    if (!deviceId) throw new BadRequestException('X-Device-Id header manquant');
     const events = PushBody.parse(body).events;
     return this.service.push({ userId, deviceId, events });
   }
@@ -36,7 +36,7 @@ export class SrsSyncController {
     @Headers('X-Device-Id') deviceId: string,
     @Query() query: unknown,
   ) {
-    if (!deviceId) throw new Error('X-Device-Id header manquant');
+    if (!deviceId) throw new BadRequestException('X-Device-Id header manquant');
     const q = PullQuery.parse(query);
     return this.service.pull({
       userId,

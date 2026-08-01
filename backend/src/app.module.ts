@@ -38,7 +38,11 @@ import { PartnershipsModule } from './partnerships/partnerships.module';
         redact: ['req.headers.authorization', 'req.headers.cookie'],
         level: (process.env.LOG_LEVEL ?? 'info') as
           | 'fatal' | 'error' | 'warn' | 'info' | 'debug' | 'trace' | 'silent',
-        ...(process.env.NODE_ENV !== 'production'
+        // pino-pretty = thread-stream (worker thread). Il tue les
+        // workers vitest (crash silencieux) et n'a aucun sens hors dev
+        // local : on ne l'attache QUE si NODE_ENV est absent (npm run
+        // start:dev) ou explicitement 'development'.
+        ...(!process.env.NODE_ENV || process.env.NODE_ENV === 'development'
           ? { transport: { target: 'pino-pretty', options: { singleLine: true as const } } }
           : {}),
       },
