@@ -26,6 +26,7 @@ import { I18nModule } from './i18n/i18n.module';
 import { CacheModule } from './cache/cache.module';
 import { DbModule } from './db/db.module';
 import { AiModule } from './ai/ai.module';
+import { GatewayModule } from './gateway/gateway.module';
 
 @Module({
   imports: [
@@ -64,6 +65,7 @@ import { AiModule } from './ai/ai.module';
     CacheModule, // Phase 18 (Redis cache injectable)
     DbModule, // Phase 18 (read replicas)
     AiModule, // Phase 18.1+ (hints adaptatifs, génération LLM, tutorat)
+    GatewayModule, // Phase 20.2 (passerelle GraphQL, opérations persistées)
   ],
 })
 export class AppModule {}

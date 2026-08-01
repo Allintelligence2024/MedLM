@@ -53,6 +53,16 @@ if [ -f tools/scripts/pentest_prep.py ]; then
     echo "  ✓ pentest_prep.py (périmètre pen test Phase 19.8)" || \
     { echo "  ❌ pentest_prep.py"; exit 1; }
 fi
+if [ -f tools/scripts/check_graphql.py ]; then
+  python3 tools/scripts/check_graphql.py && \
+    echo "  ✓ check_graphql.py (gateway Phase 20.2)" || \
+    { echo "  ❌ check_graphql.py"; exit 1; }
+fi
+if [ -f tools/scripts/check_regions.py ]; then
+  python3 tools/scripts/check_regions.py && \
+    echo "  ✓ check_regions.py (multi-régions Phase 20.1)" || \
+    { echo "  ❌ check_regions.py"; exit 1; }
+fi
 if [ -f tools/test_repository_logic.py ]; then
   python3 tools/test_repository_logic.py > /tmp/phase13_repo.log 2>&1 && \
     echo "  ✓ test_repository_logic.py" || \
