@@ -7,7 +7,7 @@
 // documentés, chiffres expliqués).
 import { Inject, Injectable } from '@nestjs/common';
 import { and, eq, gte } from 'drizzle-orm';
-import { DRIZZLE, Database } from '../db/database.module';
+import { DRIZZLE_READ, Database } from '../db/database.module';
 import { reviewLogs, srsCardState } from '../db/schema/srs';
 import { cards } from '../db/schema/content';
 import { FSRS_MILLIS_PER_DAY } from '../common/fsrs/fsrs.constants';
@@ -19,7 +19,14 @@ const WINDOW_DAYS = 30;
 
 @Injectable()
 export class MlService {
-  constructor(@Inject(DRIZZLE) private readonly db: Database) {}
+  /// Lectures servies par `DRIZZLE_READ` (audit P2-1) : features du prédicteur (fenêtre glissante de 30 jours).
+  ///
+  /// `DRIZZLE_READ` retombe sur la primary tant que
+  /// `READ_REPLICA_ENABLED` n'est pas activé ET qu'aucune URL de
+  /// réplica n'est configurée — donc aucun changement de comportement
+  /// par défaut. Ce service ne fait que des LECTURES : il n'y a rien à
+  /// router vers la primary.
+  constructor(@Inject(DRIZZLE_READ) private readonly db: Database) {}
 
   /// Agrégation des revues récentes de l'utilisateur (pur reste dans
   /// les statiques — ici : lecture uniquement).

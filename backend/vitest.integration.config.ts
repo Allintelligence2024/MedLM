@@ -26,6 +26,9 @@ export default defineConfig({
     }),
   ],
   test: {
+    // Les tests d'intégration bootent l'app réelle : sans ça, pino
+    // déverse une ligne JSON par requête et noie la sortie.
+    env: { LOG_LEVEL: 'silent', NODE_ENV: 'test' },
     globals: false,
     environment: 'node',
     pool: 'forks',

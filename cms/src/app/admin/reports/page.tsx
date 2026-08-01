@@ -5,6 +5,7 @@
 import { useEffect, useState } from 'react';
 import type { CardReport } from '@/lib/types';
 import { CheckCircle2, X } from 'lucide-react';
+import { getToken } from '@/lib/auth';
 
 const API = process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:3000';
 
@@ -18,7 +19,7 @@ export default function ReportsPage() {
     async function load() {
       try {
         const res = await fetch(`${API}/v1/content/reports`, {
-          headers: { Authorization: `Bearer ${localStorage.getItem('cms_token') ?? ''}` },
+          headers: { Authorization: `Bearer ${getToken()}` },
         });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
@@ -38,7 +39,7 @@ export default function ReportsPage() {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('cms_token') ?? ''}`,
+          Authorization: `Bearer ${getToken()}`,
         },
         body: JSON.stringify({ status }),
       });

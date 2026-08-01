@@ -36,7 +36,7 @@ def main() -> int:
     html_path = SITE / "index.html"
     i18n_path = SITE / "i18n.json"
     for p in (html_path, SITE / "styles.css", SITE / "app.js",
-              SITE / "robots.txt", i18n_path):
+              SITE / "robots.txt", SITE / "sitemap.xml", i18n_path):
         if not p.exists():
             failures.append(f"fichier manquant : {p.name}")
 
@@ -44,6 +44,36 @@ def main() -> int:
         for f in failures:
             print("  -", f)
         return 1
+
+    # Sitemap (audit P3-1) : il n'existait pas alors que robots.txt
+    # était en place. Un robots.txt sans sitemap laisse l'indexation
+    # au hasard du crawl.
+    robots = (SITE / "robots.txt").read_text(encoding="utf-8")
+    sitemap = (SITE / "sitemap.xml").read_text(encoding="utf-8")
+    if "Sitemap:" not in robots:
+        failures.append("robots.txt ne déclare pas le sitemap")
+    if "sitemap.xml" not in robots:
+        failures.append("robots.txt : la déclaration ne pointe pas sitemap.xml")
+    try:
+        import xml.etree.ElementTree as ET
+
+        root = ET.fromstring(sitemap)
+        ns = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+        locs = [u.findtext("s:loc", default="", namespaces=ns) for u in root]
+        if len(locs) != 3:
+            failures.append(f"sitemap.xml : {len(locs)} URL(s), 3 attendues (fr/ar/en)")
+        for loc in locs:
+            if not loc.startswith("https://"):
+                failures.append(f"sitemap.xml : URL non HTTPS « {loc} »")
+        if len(set(locs)) != len(locs):
+            failures.append("sitemap.xml : URL dupliquée")
+        # Les trois langues doivent être déclarées en alternates,
+        # sinon les moteurs voient du contenu dupliqué.
+        for lang in ("fr", "ar", "en"):
+            if f'hreflang="{lang}"' not in sitemap:
+                failures.append(f"sitemap.xml : hreflang « {lang} » absent")
+    except ET.ParseError as e:
+        failures.append(f"sitemap.xml : XML invalide ({e})")
 
     html = html_path.read_text(encoding="utf-8")
     catalog = json.loads(i18n_path.read_text(encoding="utf-8"))
@@ -99,7 +129,7 @@ def main() -> int:
             print("  -", f)
         return 1
     print(f"✅ Landing page conforme ({len(catalog)} clés × 3 langues, "
-          "contenu FR inliné, zéro tracker).")
+          "contenu FR inliné, zéro tracker, sitemap 3 URLs déclaré).")
     return 0
 
 

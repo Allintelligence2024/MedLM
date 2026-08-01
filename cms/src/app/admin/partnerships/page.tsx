@@ -9,6 +9,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Handshake, PlusCircle } from 'lucide-react';
 import { CreatePartnershipDialog } from './create_partnership_dialog';
+import { getToken } from '@/lib/auth';
 
 const API = process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:3000';
 
@@ -39,7 +40,7 @@ export default function PartnershipsPage() {
   const [filter, setFilter] = useState<string>('all');
   const [creating, setCreating] = useState(false);
 
-  const token = () => localStorage.getItem('cms_token') ?? '';
+  const token = () => getToken();
 
   const load = useCallback(async () => {
     setLoading(true);

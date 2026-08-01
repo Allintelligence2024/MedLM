@@ -22,7 +22,7 @@
 //     le fait (cf. cron_helpers.ts, livré en Phase 10+).
 import { Inject, Injectable, Logger, BadRequestException, NotFoundException } from '@nestjs/common';
 import { and, desc, eq, sql } from 'drizzle-orm';
-import { DRIZZLE, Database } from '../db/database.module';
+import { DRIZZLE_READ, Database } from '../db/database.module';
 import { leaderboardOptin, userXpSnapshot } from '../db/schema/gamification';
 
 import { LeaderboardEntry, LeaderboardResponse, OptInBody } from './leaderboard.dto';
@@ -33,7 +33,14 @@ const PSEUDONYM_TAKEN = 'pseudonyme déjà pris';
 export class LeaderboardService {
   private readonly logger = new Logger(LeaderboardService.name);
 
-  constructor(@Inject(DRIZZLE) private readonly db: Database) {}
+  /// Lectures servies par `DRIZZLE_READ` (audit P2-1) : classement hebdomadaire (agrégat sur tous les utilisateurs).
+  ///
+  /// `DRIZZLE_READ` retombe sur la primary tant que
+  /// `READ_REPLICA_ENABLED` n'est pas activé ET qu'aucune URL de
+  /// réplica n'est configurée — donc aucun changement de comportement
+  /// par défaut. Ce service ne fait que des LECTURES : il n'y a rien à
+  /// router vers la primary.
+  constructor(@Inject(DRIZZLE_READ) private readonly db: Database) {}
 
   /// Calcule la semaine ISO courante. Format `YYYY-Www`.
   currentWeek(now: Date = new Date()): string {

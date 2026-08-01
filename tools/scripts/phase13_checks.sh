@@ -96,6 +96,11 @@ if [ -f tools/scripts/check_dart_static.py ]; then
     echo "  ✓ check_dart_static.py (Dart statique P0-2)" || \
     { echo "  ❌ check_dart_static.py"; exit 1; }
 fi
+if [ -f tools/scripts/check_bundle_assets.py ]; then
+  python3 tools/scripts/check_bundle_assets.py && \
+    echo "  ✓ check_bundle_assets.py (bundle sans contenu démo P2-4)" || \
+    { echo "  ❌ check_bundle_assets.py"; exit 1; }
+fi
 if [ -f tools/scripts/gen_l10n.py ]; then
   python3 tools/scripts/gen_l10n.py --check && \
     echo "  ✓ gen_l10n.py --check (localisations à jour)" || \

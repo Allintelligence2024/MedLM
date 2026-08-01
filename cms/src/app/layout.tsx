@@ -1,5 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
+import { SessionMenu } from '@/components/nav/session_menu';
 
 export const metadata: Metadata = {
   title: 'MedAnki DZ — CMS éditorial',
@@ -19,6 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <a href="/admin/reports" className="text-slate-600 hover:text-slate-900">Signalements</a>
             <a href="/admin/signals" className="text-slate-600 hover:text-slate-900">Signaux IA</a>
             <a href="/admin/partnerships" className="text-slate-600 hover:text-slate-900">Partenariats</a>
+            <SessionMenu />
           </div>
         </nav>
         <main className="mx-auto max-w-6xl px-6 py-8">{children}</main>

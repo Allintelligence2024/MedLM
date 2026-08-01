@@ -26,6 +26,12 @@ interface RedisLike {
   del(...keys: string[]): Promise<number>;
   keys(pattern: string): Promise<string[]>;
   quit(): Promise<unknown>;
+  /// Compteurs partagés — utilisés par le budget de coût du gateway
+  /// (audit P2-2). Présents sur ioredis, déclarés ici pour rester
+  /// indépendant de ses types.
+  mget(...keys: string[]): Promise<Array<string | null>>;
+  incrby(key: string, value: number): Promise<number>;
+  expire(key: string, seconds: number): Promise<unknown>;
 }
 
 export interface CacheOptions {
@@ -99,6 +105,16 @@ export class RedisCache {
       this.connected = false;
       this.stats.errors++;
     }
+  }
+
+  /// Client Redis brut, ou `null` en mode dégradé/mémoire.
+  ///
+  /// Exposé pour les usages qui ne sont PAS du cache : le budget de
+  /// coût du gateway a besoin de compteurs atomiques partagés
+  /// (audit P2-2) et réutilise cette connexion plutôt que d'en ouvrir
+  /// une seconde.
+  get client(): RedisLike | null {
+    return this.connected ? this.redis : null;
   }
 
   async get<T>(key: string): Promise<T | null> {

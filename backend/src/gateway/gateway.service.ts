@@ -1,18 +1,18 @@
 // GatewayService — Phase 20.2 : exécution d'une opération persistée.
 //
 // Orchestration : match (allow-list) → validation Zod des variables →
-// budget de coût (fenêtre glissante, en mémoire d'instance : best
-// effort documenté, upgrade Redis Phase 20+ avec le même contract) →
+// budget de coût (fenêtre glissante, partagée via Redis quand il est
+// disponible — cf. cost-budget.store.ts, audit P2-2) →
 // délégation REST interne (JWT forwardé, aucune élévation) → shaping
 // vers la shape GraphQL déclarée.
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import {
   matchPersistedOperation,
-  budgetRemaining,
   restQueryFor,
   PersistedOperation,
 } from './persisted-operations';
 import { REST_BACKEND, RestBackend } from './rest-backend.port';
+import { COST_BUDGET_STORE, CostBudgetStore } from './cost-budget.tokens';
 
 export type GatewayResult =
   | { ok: true; data: unknown }
@@ -26,13 +26,12 @@ export type GatewayResult =
 export class GatewayService {
   private readonly logger = new Logger(GatewayService.name);
 
-  /// Budget en mémoire d'instance : userId → historique des coûts.
-  /// Best-effort (multi-instance : chaque pod a sa fenêtre — upgrade
-  /// Redis documentée, contract inchangé).
-  private readonly usage = new Map<string, Array<{ at: number; cost: number }>>();
-
   constructor(
     @Inject(REST_BACKEND) private readonly backend: RestBackend,
+    /// Budget partagé (Redis) ou local (mémoire) — voir
+    /// cost-budget.store.ts. À N pods sans Redis, le budget réel
+    /// valait N × 500/h : c'est le bug corrigé par l'audit P2-2.
+    @Inject(COST_BUDGET_STORE) private readonly budget: CostBudgetStore,
   ) {}
 
   async execute(args: {
@@ -78,8 +77,7 @@ export class GatewayService {
     }
 
     // 3. Budget de coût.
-    const entries = this.usage.get(args.userId) ?? [];
-    if (budgetRemaining(entries, now) < op.cost) {
+    if ((await this.budget.remaining(args.userId, now)) < op.cost) {
       return {
         ok: false,
         httpStatus: 429,
@@ -91,8 +89,7 @@ export class GatewayService {
         ],
       };
     }
-    entries.push({ at: now, cost: op.cost });
-    this.usage.set(args.userId, entries);
+    await this.budget.consume(args.userId, op.cost, now);
 
     // 4. Délégation REST interne (JWT forwardé — mêmes permissions).
     const query = restQueryFor(op, parsed.data as Record<string, unknown>);

@@ -10,7 +10,7 @@
 // exactement les métriques décrites dans la section.
 import { Inject, Injectable } from '@nestjs/common';
 import { and, eq, gte, sql } from 'drizzle-orm';
-import { DRIZZLE, Database } from '../db/database.module';
+import { DRIZZLE_READ, Database } from '../db/database.module';
 import { reviewLogs, srsCardState } from '../db/schema/srs';
 import { examAttempts } from '../db/schema/exams';
 
@@ -23,7 +23,14 @@ export class StatsService {
   private readonly cache = new Map<string, { stats: UserStats; expiresAt: number }>();
   private readonly CACHE_TTL_MS = 60_000; // 60s
 
-  constructor(@Inject(DRIZZLE) private readonly db: Database) {}
+  /// Lectures servies par `DRIZZLE_READ` (audit P2-1) : statistiques utilisateur (agrégats sur review_logs).
+  ///
+  /// `DRIZZLE_READ` retombe sur la primary tant que
+  /// `READ_REPLICA_ENABLED` n'est pas activé ET qu'aucune URL de
+  /// réplica n'est configurée — donc aucun changement de comportement
+  /// par défaut. Ce service ne fait que des LECTURES : il n'y a rien à
+  /// router vers la primary.
+  constructor(@Inject(DRIZZLE_READ) private readonly db: Database) {}
 
   /// Calcule les stats pour un user sur une période.
   async compute(args: { userId: string; period: 'day' | 'week' | 'month' | 'all' }): Promise<UserStats> {

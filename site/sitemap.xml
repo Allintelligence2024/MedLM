@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Sitemap statique de la landing MedAnki DZ (audit P3-1).
+
+  Le site est une page unique trilingue : les trois URL correspondent
+  aux trois langues servies par le sélecteur (paramètre `lang`), pas à
+  trois pages distinctes. Les liens `hreflang` disent explicitement aux
+  moteurs qu'il s'agit de la même page traduite — sans quoi ils y
+  verraient du contenu dupliqué.
+
+  À régénérer si de vraies pages sont ajoutées.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://medanki.dz/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://medanki.dz/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://medanki.dz/?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://medanki.dz/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://medanki.dz/"/>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://medanki.dz/?lang=ar</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://medanki.dz/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://medanki.dz/?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://medanki.dz/?lang=en"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://medanki.dz/?lang=en</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://medanki.dz/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://medanki.dz/?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://medanki.dz/?lang=en"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>
