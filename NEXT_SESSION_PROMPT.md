@@ -56,25 +56,54 @@ livrées sur la branche session (PR #5).
 
 ## CE QUI RESTE (opérationnel, hors sandbox)
 
+Tous les items « faisables au code » sont LIVRÉS (session 2026-08-01) :
+
+* ✅ Formulaire CMS de création de partenariat (`create_partnership_dialog.tsx`,
+  POST /v1/partnerships, miroir allow-list, erreurs Zod affichées).
+* ✅ Mobile consomme `/v1/ml/mock-exam-prediction` + `/v1/ml/tag-focus`
+  (MlRepository + MlPredictionCard/TagFocusCard explicables, tests).
+* ✅ Gateway GraphQL côté mobile (GraphqlGatewayRepository, SDL exactes
+  verrouillées par check_graphql.py — parité mobile↔backend bloquante).
+* ✅ Écran d'étude complet : HintBanner + VoiceDictationSheet intégrés
+  (ui/study/study_screen.dart), refresh opportuniste adaptatif.
+* ✅ Synchro périodique AdaptiveFsrsParameters : AdaptiveParamsCache
+  (user_prefs, TTL 6 h, lecture défensive) + worker de fond.
+* ✅ DATABASE_READ_URL branchée : providers PG_READ_POOL + DRIZZLE_READ
+  (fallback primary === DRIZZLE si absent), resolveReadUrl testé.
+
+Restent PAR DÉFINITION hors sandbox (device/consoles/humains) :
+
 * **Pen test externe** : lançable dès maintenant — canal = SECURITY.md §1,
   périmètre = `python3 tools/scripts/pentest_prep.py --report`.
-* **Consoles stores** : ouvrir Play Console / App Store Connect, suivre
-  `store/RELEASE_CHECKLIST.md` (fiches prêtes dans `store/`, captures à
-  générer depuis un device, build signé). Brancher alors le formulaire
-  notify : `POST /v1/marketing/notify-list` (double opt-in, loi 18-07).
+* **Consoles stores** : suivre `store/RELEASE_CHECKLIST.md` (build signé,
+  captures device). Brancher alors `POST /v1/marketing/notify-list`.
 * **Branchements réels des ports** `SpeechToTextPort`/`TextToSpeechPort`
   (plugins speech_to_text / flutter_tts au `main()`), sur device.
-* Intégrer `HintBanner` + `VoiceDictationSheet` dans l'écran d'étude
-  (widgets prêts, écran à finaliser) et la synchro périodique de
-  `AdaptiveFsrsParameters` (worker de fond).
-* Brancher `DATABASE_READ_URL` vers un réplica régional (le routage
-  20.1 retombe sur la primary si absent).
-* Consommer côté mobile les endpoints `/v1/ml/mock-exam-prediction` et
-  `/v1/ml/tag-focus` (cartes UI à dessiner), puis le gateway GraphQL
-  dans le repository Dart (ops persistées, empreintes listées dans
-  `backend/src/gateway/README.md`).
-* Formulaire CMS de création de partenariat (la page 20.4 est en
-  lecture + changement de statut).
+* **`dart test` / `flutter test` en CI** : le sandbox n'a pas le SDK ;
+  tous les fichiers Dart de cette session passent check_syntax_guard.py
+  (114 fichiers) mais doivent être compilés/testés en CI.
+
+## RÉPARATIONS IMPORTANTES (session 2026-08-01)
+
+Le backend ne compilait pas du tout avant cette session (les lockfiles
+étaient des stubs synthétiques et node n'avait jamais installé). État
+désormais VÉRIFIÉ À CHAQUE COMMIT :
+
+* **backend : `npx tsc --noEmit` 0 erreur · vitest 431/431 (32 fichiers)
+  · eslint 0 problème** (config flat `backend/eslint.config.mjs` créée,
+  no-console avec sentinelle reconnue par security_audit.py).
+* **cms : `tsc --noEmit` 0 erreur · `next build` 11/11 pages**.
+* Lockfiles RÉELS (backend 793 entrées, cms 232, tools ts-fsrs 4.1
+  épinglé exact) — generate_lockfiles.py refuse d'écraser un lockfile
+  npm réel et détecte les stubs par recalcul de hash.
+* Bugs structurels corrigés : template literal triplement imbriqué
+  (TS1160, exam_templates.service.ts), index standalone cassé
+  (ExamAttemptsActiveUnique → migration 0017), `bytea` manquant
+  (helper columns.ts), 54 sites `.get()` inexistants sur node-postgres
+  (codemod `.then((rows) => rows[0])`), i18n `_format` plural imbriqué
+  (scanner d'accolades équilibré), normalisation GraphQL, ExamsService
+  lisant examQuestions au lieu de examTemplates, et autres (voir
+  commits d73d49d et suivants).
 
 ### Phase 18 — rappel des endpoints IA livrés
 
@@ -93,7 +122,10 @@ livrées sur la branche session (PR #5).
 
 * Pas de Flutter SDK, pas de Docker, pas de PostgreSQL en local.
 * Python 3.11 avec pip --break-system-packages disponible.
-* node dispo (scripts TS via tsx), pas de npm install.
+* **node v22 avec registry npm ACCESSIBLE** — `npm ci` / `npm install`
+  fonctionnent (backend, cms, tools). Profitez-en : toujours faire
+  tourner `npx tsc --noEmit`, `npm test` et `npx eslint .` avant de
+  committer du TS. (node_modules gitignorés.)
 
 ### GitHub App
 
@@ -105,13 +137,19 @@ livrées sur la branche session (PR #5).
 ### Validation avant push
 
 ```bash
+# Backend + CMS (node_modules installés) — OBLIGATOIRE avant commit TS :
+cd backend && npx tsc --noEmit && npm test && npx eslint . && cd ..
+cd cms && npm run typecheck && cd ..
+# Gardes-fous Python :
 python3 tools/scripts/security_audit.py
 python3 tools/scripts/generate_lockfiles.py --check
 python3 tools/validate_content.py
-bash tools/scripts/phase13_checks.sh    # audit + syntax guard + gardes 19/20
+python3 tools/scripts/check_syntax_guard.py   # délimiters Dart/Python
+bash tools/scripts/phase13_checks.sh          # audit + gardes 19/20
 # Parité SRS si on touche au moteur :
 python3 tools/dart_parity_check.py && python3 tools/generate_golden.py
-# Matrice complète : VERIFY.md
+# Matrice complète (avec vérif croisée ts-fsrs) :
+TS_FSRS_DIR=$PWD/tools bash tools/verify_all.sh
 ```
 
 ## STYLE DE TRAVAIL
