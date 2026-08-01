@@ -1,0 +1,36 @@
+TITRE : MedAnki DZ — Réviser médecine
+DESCRIPTION COURTE (80) : Révisions médicales SRS pour étudiants algériens. Hors-ligne, FR/AR/EN.
+
+DESCRIPTION LONGUE :
+MedAnki DZ est l'application de révision conçue pour les étudiants en
+médecine d'Algérie. Basée sur la science de la répétition espacée
+(FSRS-5), elle planifie chaque carte au moment exact où tu es sur le
+point de l'oublier.
+
+CE QUI REND MEDANKI DIFFÉRENT
+• 697+ cartes vérifiées, relues par pairs, classées par module
+  (anatomie, histologie, embryologie, biochimie, biophysique…)
+• Hors-ligne d'abord : decks chiffrés sur ton appareil, synchro quand
+  le réseau revient — pensé pour les connexions intermittentes
+• Hints IA sans cloud : des indices personnalisés calculés par règles,
+  sans envoyer tes données à un LLM externe
+• Tuteur vocal encadré : pose tes questions de cours à voix haute —
+  disclaimer médical systématique, détection d'urgence (SAMU 115),
+  jamais de diagnostic
+• Poids FSRS adaptatifs : l'algorithme s'ajuste à ton profil (fragile
+  ou fort) pour te faire réviser au bon moment, jamais trop
+• Examens blancs par module avec corrigé détaillé
+• Streaks, XP et classements par faculté (opt-in, pseudonyme)
+• Trilingue : français, arabe, anglais
+
+POUR QUI ?
+Étudiants de 1ère et 2ème année de médecine (PACES/PCEM1) en Algérie,
+qui veulent transformer 20 minutes par jour en réussite aux concours.
+
+VIE PRIVÉE
+Tes révisions restent sur ton appareil. Les fonctions IA n'envoient
+aucune donnée personnelle identifiable à un service externe par défaut.
+Politique complète : voir PRIVACY.md dans le dépôt.
+
+MedAnki DZ est un outil de révision. Il ne constitue pas un avis
+médical.

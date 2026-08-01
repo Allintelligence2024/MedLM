@@ -43,6 +43,16 @@ if [ -f tools/scripts/check_landing.py ]; then
     echo "  ✓ check_landing.py (landing Phase 19.7)" || \
     { echo "  ❌ check_landing.py"; exit 1; }
 fi
+if [ -f tools/scripts/check_store.py ]; then
+  python3 tools/scripts/check_store.py && \
+    echo "  ✓ check_store.py (stores Phase 19.8)" || \
+    { echo "  ❌ check_store.py"; exit 1; }
+fi
+if [ -f tools/scripts/pentest_prep.py ]; then
+  python3 tools/scripts/pentest_prep.py && \
+    echo "  ✓ pentest_prep.py (périmètre pen test Phase 19.8)" || \
+    { echo "  ❌ pentest_prep.py"; exit 1; }
+fi
 if [ -f tools/test_repository_logic.py ]; then
   python3 tools/test_repository_logic.py > /tmp/phase13_repo.log 2>&1 && \
     echo "  ✓ test_repository_logic.py" || \
