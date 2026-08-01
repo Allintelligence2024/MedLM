@@ -21,6 +21,32 @@ un vrai PostgreSQL** (P0-3).
 | `DeviceTokensService.markUnreachable()` sans appelant | les appareils désinstallés étaient retentés indéfiniment | corrigé, 20 tests |
 | `createShare` mobile envoyait `card_id` au lieu d'`attempt_id` | l'appel aurait été refusé en 400 par Zod | corrigé |
 
+## Bugs trouvés en EXÉCUTANT le logiciel
+
+Un PostgreSQL 16.2 réel a pu être obtenu (paquet PyPI `pgserver`, qui
+embarque les binaires). Appliquer les migrations et démarrer le binaire
+compilé — deux choses jamais faites — a révélé quatre défauts de plus,
+dont une faille de sécurité.
+
+| Découverte | Effet réel |
+|---|---|
+| **`0001_init.sql` ne contenait que des commentaires** | les 15 tables fondatrices (`users`, `cards`, `decks`, `review_logs`…) n'étaient créées par aucune migration : `db:migrate` échouait dès 0002 sur « relation "review_logs" does not exist ». La base n'avait jamais pu être provisionnée |
+| **`nest build` ne produisait pas `dist/main.js`** | `tsconfig.json` inclut `test/**/*`, donc la racine de sortie glissait vers `dist/src/`. `npm start`, `start:prod` et le `CMD` de l'image Docker échouaient tous — CrashLoopBackOff au premier déploiement |
+| **`migrate.ts` cherchait `./src/db/migrations`** | chemin absent de l'image Docker, où le Dockerfile range les `.sql` dans `dist/db/migrations` |
+| **🔴 Repli JWT sur un secret du dépôt** | sans `JWT_SIGNING_KEY_PATH`, l'app signait en HS256 avec `dev-only-secret-do-not-use-in-prod`, **y compris en `NODE_ENV=production`**. Un jeton `role: admin` forgé en trois lignes obtenait **200** sur les endpoints protégés |
+
+La faille JWT avait une cause aggravante : `security_audit.py` exemptait
+toute ligne contenant « dev-only » ou « do-not-use ». Le secret
+s'appelant littéralement `dev-only-secret-do-not-use-in-prod`, **il
+s'auto-exemptait de l'audit censé le détecter**. La sentinelle ne vaut
+désormais que dans les commentaires.
+
+Vérifié dans la foulée, pour la première fois contre une vraie base :
+les 6 triggers append-only existent **et mordent** — `UPDATE` et
+`DELETE` sur `review_logs` échouent. C'est l'invariant le plus critique
+du produit (« la perte d'une revue est le seul bug irrattrapable »,
+v2 §14), et il n'avait jamais été exercé ailleurs que sur SQLite.
+
 Pour que cette classe d'erreurs ne repasse plus sans SDK :
 `tools/scripts/check_dart_static.py`.
 

@@ -36,6 +36,25 @@ SECRET_PATTERNS = [
     (re.compile(r"-----BEGIN (?:RSA |EC |DSA )?PRIVATE KEY-----"), "private key"),
     (re.compile(r"(?i)(?:password|passwd)\s*[:=]\s*['\"][^'\"]{8,}['\"]"), "hardcoded password"),
     (re.compile(r"eyJ[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}"), "JWT-shaped string"),
+    # Secret de signature affecté en dur dans du code.
+    #
+    # Motif ajouté après la faille du 2026-08-01 : auth.module.ts
+    # contenait `secret: 'dev-only-secret-do-not-use-in-prod'` et
+    # signait réellement les JWT avec, en production, dès que
+    # JWT_SIGNING_KEY_PATH était absente. Un jeton `role: admin` forgé
+    # avec ce secret obtenait 200 sur les endpoints protégés.
+    #
+    # Le motif exige un identifiant qui DÉSIGNE le secret lui-même
+    # (`secret:`, `jwtSecret =`…), pas un nom de clé de stockage :
+    # `_kPrivateKey = 'device_rsa_private_key_pem'` nomme un
+    # emplacement dans le Keychain, pas une valeur sensible.
+    (
+        re.compile(
+            r"(?i)(?<![\w.])(?:secret|jwt_?secret|signing_?key|client_?secret|api_?secret)"
+            r"\s*[:=]\s*['\"][^'\"]{12,}['\"]"
+        ),
+        "secret de signature en dur",
+    ),
 ]
 
 # Endpoints backend à scanner.
@@ -52,9 +71,24 @@ def scan_secrets(path: Path) -> list[tuple[Path, int, str, str]]:
     except Exception:
         return findings
     for lineno, line in enumerate(text.splitlines(), start=1):
-        # On saute les lignes explicitement marquées "dev-only" ou
-        # "test-only" (sentinelle pour les devs).
-        if "dev-only" in line.lower() or "test-only" in line.lower() or "do-not-use" in line.lower():
+        # ATTENTION — cette sentinelle a déjà coûté une faille.
+        #
+        # Elle exemptait TOUTE ligne contenant « dev-only »,
+        # « test-only » ou « do-not-use ». Or le secret JWT vulnérable
+        # s'appelait littéralement `dev-only-secret-do-not-use-in-prod` :
+        # il s'auto-exemptait de l'audit censé le détecter, tout en
+        # signant réellement les jetons en production
+        # (faille trouvée le 2026-08-01).
+        #
+        # La sentinelle ne vaut donc plus que dans un COMMENTAIRE : un
+        # secret réellement inoffensif n'a pas besoin d'être affecté à
+        # une variable de code pour être documenté.
+        stripped = line.lstrip()
+        is_comment = stripped.startswith(("#", "//", "/*", "*", "--"))
+        if is_comment and any(
+            marker in line.lower()
+            for marker in ("dev-only", "test-only", "do-not-use")
+        ):
             continue
         for regex, name in SECRET_PATTERNS:
             m = regex.search(line)
