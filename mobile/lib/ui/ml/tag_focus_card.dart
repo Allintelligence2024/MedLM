@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 
 import '../../data/repositories/ml/ml_models.dart';
 import '../../data/repositories/ml/ml_repository.dart';
+import '../../l10n/app_localizations.dart';
 
 class TagFocusCard extends StatefulWidget {
   const TagFocusCard({super.key, required this.repository});
@@ -46,6 +47,7 @@ class _TagFocusCardState extends State<TagFocusCard> {
           return const SizedBox.shrink();
         }
         final scheme = Theme.of(context).colorScheme;
+        final l10n = AppLocalizations.of(context);
         return Card(
           elevation: 0,
           color: scheme.surfaceContainerHighest,
@@ -62,7 +64,7 @@ class _TagFocusCardState extends State<TagFocusCard> {
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
-                        'Où concentrer l\u2019effort (${result.windowDays} j)',
+                        l10n.mlTagFocusTitle(result.windowDays),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: scheme.onSurfaceVariant,
@@ -73,7 +75,7 @@ class _TagFocusCardState extends State<TagFocusCard> {
                 ),
                 if (result.focus.isNotEmpty) ...[
                   const SizedBox(height: 10),
-                  Text('À retravailler',
+                  Text(l10n.mlTagRework,
                       style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
@@ -90,7 +92,7 @@ class _TagFocusCardState extends State<TagFocusCard> {
                 ],
                 if (result.relax.isNotEmpty) ...[
                   const SizedBox(height: 10),
-                  Text('Maîtrisé — espacez',
+                  Text(l10n.mlTagMastered,
                       style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
@@ -127,7 +129,7 @@ class _TagChip extends StatelessWidget {
     final pct = (suggestion.lapseRate * 100).round();
     return Tooltip(
       message: '${suggestion.reason}\n'
-          '(${suggestion.lapses}/${suggestion.reviews} échecs)',
+          '${AppLocalizations.of(context).mlTagLapses(suggestion.lapses, suggestion.reviews)}',
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         decoration: BoxDecoration(

@@ -12,6 +12,9 @@ seule fois après le clone :
 ```bash
 cd mobile
 flutter create --platforms=android,ios --org dz.medanki --project-name medanki_dz .
+# `flutter create` signe le build release avec la clé de DEBUG et
+# désactive R8 : on corrige (idempotent, cf. audit P2-8).
+python3 ../tools/scripts/apply_android_release_config.py
 flutter pub get
 dart run build_runner build --delete-conflicting-outputs
 flutter run --dart-define=API_BASE_URL=http://10.0.2.2:3000
@@ -103,6 +106,25 @@ python3 tools/dart_parity_check.py              # moteur FSRS ↔ référence
 
 ## Publication
 
-Voir `store/RELEASE_CHECKLIST.md`. Points ouverts avant la première
-release : clés de signature en secrets CI, `shrinkResources`, et le
-remplacement des visuels de `assets/branding/` par les vrais.
+Voir `store/RELEASE_CHECKLIST.md`.
+
+La configuration de release est en place : `proguard-rules.pro`
+(règles de conservation pour Flutter, FCM, WorkManager, la crypto et le
+stockage sécurisé) et `apply_android_release_config.py` (R8, retrait des
+ressources, signature de release, `applicationId dz.medanki.app`).
+
+Il reste à **fournir les clés**, qui n'ont rien à faire dans le dépôt :
+
+| Secret CI | Rôle |
+|---|---|
+| `ANDROID_KEYSTORE_PATH` | chemin du keystore déchiffré par le job |
+| `ANDROID_KEYSTORE_PASSWORD` | mot de passe du magasin |
+| `ANDROID_KEY_ALIAS` | alias de la clé de signature |
+| `ANDROID_KEY_PASSWORD` | mot de passe de la clé |
+
+Sans eux, le build de release **n'est pas signé** — volontairement : un
+échec explicite vaut mieux qu'un APK signé en debug, que le Play Store
+refuse au dépôt.
+
+Reste aussi à remplacer les visuels de `assets/branding/` par les
+définitifs.

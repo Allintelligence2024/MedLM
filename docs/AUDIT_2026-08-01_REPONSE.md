@@ -37,7 +37,7 @@ Pour que cette classe d'erreurs ne repasse plus sans SDK :
 | **P1-1** résidus AI Studio | **fait** | 8 artefacts supprimés, README racine réécrit, 50 rapports déplacés sous `docs/phases/`. Migrations renumérotées 0012–0017 → 0011–0016 (le gap est comblé, pas documenté : rien n'était déployé) |
 | **P1-2** écrans manquants | **fait** | 12 écrans livrés ; la couche UI passe de 8 à 20 |
 | **P1-3** notifications | **fait** | Backend : OAuth2 par compte de service (le token statique aurait cessé de fonctionner après 1 h) + table `device_tokens` + endpoints. Mobile : FCM, remontée et rotation du jeton, deep links, écran de permission. **APNs reste à finir** (Android first, décision de l'audit) |
-| **P1-4** i18n mobile | **fait** | 122 clés × FR/AR/EN, garde anti-régression. Les 7 écrans antérieurs sont sur liste d'exception **qui ne peut que rétrécir** |
+| **P1-4** i18n mobile | **fait, terminé** | 177 clés × FR/AR/EN. Les 7 écrans antérieurs **ont été migrés** : la liste d'exception est **vide**. Les messages d'erreur en état (`_error`, `_bannerError`) sont devenus des codes, pas des phrases — sinon ils resteraient figés dans la langue en vigueur au moment de l'échec |
 | **P1-5** dépendances | **fait** | Riverpod devient la DI ; mocktail/fake_async en dev ; uuid retiré |
 
 ## P2 — dette technique
@@ -51,7 +51,7 @@ Pour que cette classe d'erreurs ne repasse plus sans SDK :
 | **P2-5** e2e jamais exécuté | **fait** | `npm run e2e` à la racine + job CI avec PostgreSQL |
 | **P2-6** un seul test d'intégration | **fait** | 5 fichiers, 28 cas : routage, sync, refresh, webhook billing, chronométrage examen |
 | **P2-7** CMS sans auth | **fait** | Page `/admin/login`, session par cookie, middleware Next protégeant `/admin/*`, 401 → redirection, bouton de déconnexion. Protection contre la redirection ouverte (`safeRedirectTarget`) |
-| **P2-8** release build | **partiel** | `flutter_launcher_icons` et `flutter_native_splash` configurés, visuels **placeholder** documentés comme tels. ProGuard/R8 et signature : à faire avec les vraies clés (secrets CI) |
+| **P2-8** release build | **fait** (hors clés) | Icônes et splash configurés (visuels placeholder documentés). `mobile/proguard-rules.pro` (Flutter, FCM, WorkManager, crypto, secure storage) + `apply_android_release_config.py` qui corrige ce que `flutter create` produit : signature **debug** sur le build release, R8 et shrink désactivés, `applicationId com.example`. Idempotent, vérifié en CI. Reste à fournir : le keystore et les 4 secrets `ANDROID_*` |
 
 ## P3 — menu fretin
 
@@ -89,6 +89,7 @@ strict : le chargement dynamique de modules changerait de sémantique.
    est validé statiquement (structure, imports, i18n, parité FSRS) mais
    `flutter analyze` / `flutter test` n'ont pas pu être exécutés.
    C'est le premier retour attendu de `mobile-ci.yml`.
-3. **APNs**, **ProGuard/R8 et signature de release**, **pages CMS pour
-   share/group-packs/tenants**, **migration i18n des 7 écrans
-   historiques**.
+3. **APNs** (Android first, décision de l'audit), **le keystore de
+   release et les secrets `ANDROID_*`** (la configuration qui les
+   consomme est en place), **les pages CMS de gestion pour
+   share/group-packs/tenants**.

@@ -15,6 +15,7 @@ import '../../data/network/api_exceptions.dart';
 import '../../data/repositories/ai/ai_models.dart';
 import '../../data/repositories/ai/ai_repository.dart';
 import 'ai_speech_ports.dart';
+import '../../l10n/app_localizations.dart';
 
 class VoiceDictationSheet extends StatefulWidget {
   const VoiceDictationSheet({
@@ -65,7 +66,9 @@ class _VoiceDictationSheetState extends State<VoiceDictationSheet> {
   bool _sttAvailable = false;
   bool _listening = false;
   bool _submitting = false;
-  String? _error;
+  /// Motif de l'erreur affichée — un CODE, pas une phrase (le texte est
+  /// résolu au rendu pour suivre la langue courante, audit P1-4).
+  _VoiceError? _error;
   VoiceDraft? _draft;
 
   @override
@@ -108,7 +111,7 @@ class _VoiceDictationSheetState extends State<VoiceDictationSheet> {
       if (mounted) {
         setState(() {
           _listening = false;
-          _error = 'Micro indisponible — saisissez le texte à la place.';
+          _error = _VoiceError.micUnavailable;
         });
       }
     }
@@ -117,7 +120,7 @@ class _VoiceDictationSheetState extends State<VoiceDictationSheet> {
   Future<void> _submit() async {
     final text = _transcript.text.trim();
     if (text.length < 3) {
-      setState(() => _error = 'Transcription trop courte (min 3 caractères).');
+      setState(() => _error = _VoiceError.tooShort);
       return;
     }
     setState(() {
@@ -133,17 +136,15 @@ class _VoiceDictationSheetState extends State<VoiceDictationSheet> {
       if (mounted) setState(() => _draft = draft);
     } on ThrottleException {
       if (mounted) {
-        setState(() => _error =
-            'Quota vocal du jour atteint — réessayez demain.');
+        setState(() => _error = _VoiceError.quota);
       }
     } on NetworkException {
       if (mounted) {
-        setState(() => _error =
-            'Pas de réseau : la dictée sera possible dès le retour de la connexion.');
+        setState(() => _error = _VoiceError.offline);
       }
     } catch (_) {
       if (mounted) {
-        setState(() => _error = 'Échec de la création du brouillon.');
+        setState(() => _error = _VoiceError.draftFailed);
       }
     } finally {
       if (mounted) setState(() => _submitting = false);
@@ -162,16 +163,16 @@ class _VoiceDictationSheetState extends State<VoiceDictationSheet> {
   }
 
   Widget _buildCapture(ColorScheme scheme) {
+    final l10n = AppLocalizations.of(context);
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text('Dicter une carte',
+        Text(l10n.voiceTitle,
             style: Theme.of(context).textTheme.titleLarge),
         const SizedBox(height: 4),
         Text(
-          'Parlez naturellement : la carte est formatée automatiquement '
-          'et relue avant publication.',
+          l10n.voiceHelpFull,
           style: TextStyle(fontSize: 13, color: scheme.onSurfaceVariant),
         ),
         const SizedBox(height: 12),
@@ -182,22 +183,22 @@ class _VoiceDictationSheetState extends State<VoiceDictationSheet> {
           maxLength: 2000,
           decoration: InputDecoration(
             hintText: _listening
-                ? 'Écoute en cours…'
-                : 'Transcription (dictée ou saisie manuelle)',
+                ? l10n.voiceListening
+                : l10n.voiceTranscriptLabel,
             border: const OutlineInputBorder(),
           ),
         ),
         if (_error != null)
           Padding(
             padding: const EdgeInsets.only(bottom: 8),
-            child: Text(_error!,
+            child: Text(_voiceErrorMessage(l10n, _error!),
                 style: TextStyle(color: scheme.error, fontSize: 13)),
           ),
         Row(
           children: [
             if (_sttAvailable)
               IconButton.filled(
-                tooltip: _listening ? 'Arrêter la dictée' : 'Dicter',
+                tooltip: _listening ? l10n.tutorStopDictation : l10n.voiceDictate,
                 onPressed: _submitting ? null : _toggleListening,
                 icon: Icon(_listening ? Icons.stop : Icons.mic),
               )
@@ -216,7 +217,9 @@ class _VoiceDictationSheetState extends State<VoiceDictationSheet> {
                       child: CircularProgressIndicator(strokeWidth: 2),
                     )
                   : const Icon(Icons.auto_awesome),
-              label: Text(_submitting ? 'Création…' : 'Créer le brouillon'),
+              label: Text(
+                _submitting ? l10n.voiceCreating : l10n.voiceCreateDraft,
+              ),
             ),
           ],
         ),
@@ -226,18 +229,21 @@ class _VoiceDictationSheetState extends State<VoiceDictationSheet> {
 
   Widget _buildDraft(ColorScheme scheme) {
     final draft = _draft!;
+    final l10n = AppLocalizations.of(context);
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text('Brouillon créé',
+        Text(l10n.voiceDraftCreated,
             style: Theme.of(context).textTheme.titleLarge),
         const SizedBox(height: 8),
-        _draftTile('Recto', draft.formatted.front),
-        _draftTile('Verso', draft.formatted.back),
+        _draftTile(l10n.voiceFront, draft.formatted.front),
+        _draftTile(l10n.voiceBack, draft.formatted.back),
         Text(
-          'Règle appliquée : ${draft.formatted.rule} · '
-          'quota restant : ${draft.remainingQuotaToday}',
+          l10n.voiceRuleAndQuota(
+            draft.formatted.rule,
+            draft.remainingQuotaToday,
+          ),
           style: TextStyle(fontSize: 12, color: scheme.onSurfaceVariant),
         ),
         if (draft.nextStep.isNotEmpty)
@@ -249,7 +255,7 @@ class _VoiceDictationSheetState extends State<VoiceDictationSheet> {
         const SizedBox(height: 12),
         FilledButton(
           onPressed: () => Navigator.of(context).pop(draft),
-          child: const Text('Terminer'),
+          child: Text(l10n.studyFinish),
         ),
       ],
     );
@@ -268,3 +274,15 @@ class _VoiceDictationSheetState extends State<VoiceDictationSheet> {
     );
   }
 }
+
+/// Motifs d'erreur de la feuille de dictée.
+enum _VoiceError { micUnavailable, tooShort, quota, offline, draftFailed }
+
+String _voiceErrorMessage(AppLocalizations l10n, _VoiceError error) =>
+    switch (error) {
+      _VoiceError.micUnavailable => l10n.voiceMicUnavailable,
+      _VoiceError.tooShort => l10n.voiceTooShort,
+      _VoiceError.quota => l10n.voiceQuotaReached,
+      _VoiceError.offline => l10n.voiceOffline,
+      _VoiceError.draftFailed => l10n.voiceDraftFailed,
+    };

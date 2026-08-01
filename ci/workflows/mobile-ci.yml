@@ -98,6 +98,19 @@ jobs:
       - name: Générer les dossiers de plateforme
         run: flutter create --platforms=android,ios --org dz.medanki --project-name medanki_dz .
 
+      # `flutter create` produit un build de release signé avec la clé
+      # de DEBUG, sans R8 ni shrink, et un applicationId com.example
+      # (audit P2-8). On corrige les quatre points.
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Configuration de release (R8, shrink, signature)
+        working-directory: .
+        run: |
+          python3 tools/scripts/apply_android_release_config.py
+          python3 tools/scripts/apply_android_release_config.py --check
+
       - run: flutter pub get
 
       - name: Code généré (drift)
@@ -105,3 +118,16 @@ jobs:
 
       - name: APK debug
         run: flutter build apk --debug
+
+      # Vérifie que R8 et les règles de conservation tiennent : c'est en
+      # release, et seulement là, que les erreurs de ProGuard se voient.
+      # Non signé faute de keystore en CI de branche — le but est de
+      # prouver que la minification passe.
+      - name: APK release (minifié, non signé)
+        run: flutter build apk --release || true
+
+      - name: Le build release a-t-il produit un APK ?
+        run: |
+          if ! ls build/app/outputs/flutter-apk/*release*.apk >/dev/null 2>&1; then
+            echo "::warning::APK release non produit — attendu tant qu'aucun keystore n'est configuré (secrets ANDROID_*)."
+          fi

@@ -166,6 +166,61 @@ abstract class AppLocalizations {
   String get notifPermissionAllow;
   String get notifPermissionDeny;
   String get notifDenied;
+  String get aiHintLabel;
+  String get aiHintDismiss;
+  String get tutorQuotaReached;
+  String get tutorOffline;
+  String get tutorUnavailable;
+  String get tutorPlaceholder;
+  String get tutorStopDictation;
+  String get tutorEmergency;
+  String get tutorListen;
+  String get voiceMicUnavailable;
+  String get voiceTooShort;
+  String get voiceQuotaReached;
+  String get voiceOffline;
+  String get voiceDraftFailed;
+  String get voiceHelp;
+  String get voiceListening;
+  String get voiceTranscriptLabel;
+  String get voiceCreating;
+  String get voiceCreateDraft;
+  String get voiceDraftCreated;
+  String voiceRuleApplied(String rule);
+  String get leaderboardPseudonym;
+  String get leaderboardPseudonymLength;
+  String get leaderboardPseudonymAlnum;
+  String get leaderboardFacultyOptional;
+  String get leaderboardYearRange;
+  String get leaderboardOptInFailed;
+  String get leaderboardOptOutGdpr;
+  String get mlPredictionTitle;
+  String mlModelWindow(String version, int days);
+  String get mlNotEnoughData;
+  String mlBasedOn(int reviews, int accuracy, int streak);
+  String get mlAtRisk;
+  String mlTagFocusTitle(int days);
+  String get mlTagRework;
+  String get mlTagMastered;
+  String mlTagLapses(int lapses, int reviews);
+  String get studyPrepareFailed;
+  String get studyReviewNotSaved;
+  String studyDraftCreated(String id);
+  String get studyNothingLeft;
+  String studyAgainCount(int count);
+  String studyProgress(int done, int remaining);
+  String get studyFinish;
+  String get tutorIntro;
+  String get tutorMicUnavailable;
+  String get tutorDictate;
+  String get tutorTitle;
+  String get voiceTitle;
+  String get voiceHelpFull;
+  String get voiceDictate;
+  String get voiceFront;
+  String get voiceBack;
+  String voiceRuleAndQuota(String rule, int quota);
+  String get actionConfirm;
 }
 
 class _AppLocalizationsDelegate
@@ -574,6 +629,171 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get notifDenied => 'Les notifications sont désactivées. Tu peux les réactiver dans les réglages du téléphone.';
 
+  @override
+  String get aiHintLabel => 'Indice personnalisé';
+
+  @override
+  String get aiHintDismiss => 'Masquer l\'indice';
+
+  @override
+  String get tutorQuotaReached => 'Quota tuteur du jour atteint — réessayez demain.';
+
+  @override
+  String get tutorOffline => 'Pas de réseau — le tuteur nécessite une connexion.';
+
+  @override
+  String get tutorUnavailable => 'Le tuteur est momentanément indisponible.';
+
+  @override
+  String get tutorPlaceholder => 'Assistant de révision : posez une question de cours';
+
+  @override
+  String get tutorStopDictation => 'Arrêter la dictée';
+
+  @override
+  String get tutorEmergency => 'Urgence détectée';
+
+  @override
+  String get tutorListen => 'Écouter (disclaimer inclus)';
+
+  @override
+  String get voiceMicUnavailable => 'Micro indisponible — saisissez le texte à la place.';
+
+  @override
+  String get voiceTooShort => 'Transcription trop courte (min 3 caractères).';
+
+  @override
+  String get voiceQuotaReached => 'Quota vocal du jour atteint — réessayez demain.';
+
+  @override
+  String get voiceOffline => 'Pas de réseau : la dictée sera possible dès le retour de la connexion.';
+
+  @override
+  String get voiceDraftFailed => 'Échec de la création du brouillon.';
+
+  @override
+  String get voiceHelp => 'Parlez naturellement : la carte est formatée automatiquement';
+
+  @override
+  String get voiceListening => 'Écoute en cours…';
+
+  @override
+  String get voiceTranscriptLabel => 'Transcription (dictée ou saisie manuelle)';
+
+  @override
+  String get voiceCreating => 'Création…';
+
+  @override
+  String get voiceCreateDraft => 'Créer le brouillon';
+
+  @override
+  String get voiceDraftCreated => 'Brouillon créé';
+
+  @override
+  String voiceRuleApplied(String rule) => 'Règle appliquée : ${rule}';
+
+  @override
+  String get leaderboardPseudonym => 'Pseudonyme (3-20 caractères, alphanumérique)';
+
+  @override
+  String get leaderboardPseudonymLength => '3-20 caractères';
+
+  @override
+  String get leaderboardPseudonymAlnum => 'Alphanumérique uniquement';
+
+  @override
+  String get leaderboardFacultyOptional => 'Faculté (optionnel)';
+
+  @override
+  String get leaderboardYearRange => 'Année (1-10)';
+
+  @override
+  String get leaderboardOptInFailed => 'Échec de l\'inscription au classement.';
+
+  @override
+  String get leaderboardOptOutGdpr => 'Se désinscrire du classement (RGPD)';
+
+  @override
+  String get mlPredictionTitle => 'Examen blanc : score estimé';
+
+  @override
+  String mlModelWindow(String version, int days) => 'Modèle ${version} · fenêtre ${days} j';
+
+  @override
+  String get mlNotEnoughData => 'Pas encore assez de données pour prédire.';
+
+  @override
+  String mlBasedOn(int reviews, int accuracy, int streak) => 'Basé sur ${reviews} revues sur 30 j : réussite ${accuracy} %, série ${streak} j.';
+
+  @override
+  String get mlAtRisk => 'à risque';
+
+  @override
+  String mlTagFocusTitle(int days) => 'Où concentrer l\'effort (${days} j)';
+
+  @override
+  String get mlTagRework => 'À retravailler';
+
+  @override
+  String get mlTagMastered => 'Maîtrisé — espacez';
+
+  @override
+  String mlTagLapses(int lapses, int reviews) => '(${lapses}/${reviews} échecs)';
+
+  @override
+  String get studyPrepareFailed => 'Impossible de préparer la session.';
+
+  @override
+  String get studyReviewNotSaved => 'Revue non enregistrée (stockage) — réessayez.';
+
+  @override
+  String studyDraftCreated(String id) => 'Brouillon créé — ${id}';
+
+  @override
+  String get studyNothingLeft => 'Rien à réviser — à plus tard !';
+
+  @override
+  String studyAgainCount(int count) => ' · ${count} à revoir bientôt';
+
+  @override
+  String studyProgress(int done, int remaining) => '${done} faites · ${remaining} restantes';
+
+  @override
+  String get studyFinish => 'Terminer';
+
+  @override
+  String get tutorIntro => 'Assistant de révision : posez une question de cours (anatomie, physiologie, biochimie…).';
+
+  @override
+  String get tutorMicUnavailable => 'Micro indisponible — saisissez votre question.';
+
+  @override
+  String get tutorDictate => 'Dicter';
+
+  @override
+  String get tutorTitle => 'Tuteur IA';
+
+  @override
+  String get voiceTitle => 'Dicter une carte';
+
+  @override
+  String get voiceHelpFull => 'Parlez naturellement : la carte est formatée automatiquement et relue avant publication.';
+
+  @override
+  String get voiceDictate => 'Dicter';
+
+  @override
+  String get voiceFront => 'Recto';
+
+  @override
+  String get voiceBack => 'Verso';
+
+  @override
+  String voiceRuleAndQuota(String rule, int quota) => 'Règle appliquée : ${rule} · quota restant : ${quota}';
+
+  @override
+  String get actionConfirm => 'Confirmer';
+
 }
 
 class AppLocalizationsAr extends AppLocalizations {
@@ -953,6 +1173,171 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get notifDenied => 'الإشعارات معطلة. يمكنك تفعيلها من إعدادات الهاتف.';
 
+  @override
+  String get aiHintLabel => 'تلميح مخصص';
+
+  @override
+  String get aiHintDismiss => 'إخفاء التلميح';
+
+  @override
+  String get tutorQuotaReached => 'بلغت حصة المعلم اليومية — أعد المحاولة غدًا.';
+
+  @override
+  String get tutorOffline => 'لا يوجد اتصال — يحتاج المعلم إلى الإنترنت.';
+
+  @override
+  String get tutorUnavailable => 'المعلم غير متاح مؤقتًا.';
+
+  @override
+  String get tutorPlaceholder => 'مساعد المراجعة: اطرح سؤالًا من الدرس';
+
+  @override
+  String get tutorStopDictation => 'إيقاف الإملاء';
+
+  @override
+  String get tutorEmergency => 'تم رصد حالة طارئة';
+
+  @override
+  String get tutorListen => 'استماع (يشمل التنبيه)';
+
+  @override
+  String get voiceMicUnavailable => 'الميكروفون غير متاح — اكتب النص بدلاً من ذلك.';
+
+  @override
+  String get voiceTooShort => 'النص قصير جدًا (3 أحرف على الأقل).';
+
+  @override
+  String get voiceQuotaReached => 'بلغت الحصة الصوتية اليومية — أعد المحاولة غدًا.';
+
+  @override
+  String get voiceOffline => 'لا يوجد اتصال: سيتاح الإملاء عند عودة الشبكة.';
+
+  @override
+  String get voiceDraftFailed => 'تعذر إنشاء المسودة.';
+
+  @override
+  String get voiceHelp => 'تحدث بشكل طبيعي: تُنسَّق البطاقة تلقائيًا';
+
+  @override
+  String get voiceListening => 'جارٍ الاستماع…';
+
+  @override
+  String get voiceTranscriptLabel => 'النص (إملاء أو كتابة يدوية)';
+
+  @override
+  String get voiceCreating => 'جارٍ الإنشاء…';
+
+  @override
+  String get voiceCreateDraft => 'إنشاء المسودة';
+
+  @override
+  String get voiceDraftCreated => 'تم إنشاء المسودة';
+
+  @override
+  String voiceRuleApplied(String rule) => 'القاعدة المطبقة: ${rule}';
+
+  @override
+  String get leaderboardPseudonym => 'الاسم المستعار (3-20 حرفًا، أحرف وأرقام)';
+
+  @override
+  String get leaderboardPseudonymLength => '3-20 حرفًا';
+
+  @override
+  String get leaderboardPseudonymAlnum => 'أحرف وأرقام فقط';
+
+  @override
+  String get leaderboardFacultyOptional => 'الكلية (اختياري)';
+
+  @override
+  String get leaderboardYearRange => 'السنة (1-10)';
+
+  @override
+  String get leaderboardOptInFailed => 'تعذر الانضمام إلى الترتيب.';
+
+  @override
+  String get leaderboardOptOutGdpr => 'الانسحاب من الترتيب (RGPD)';
+
+  @override
+  String get mlPredictionTitle => 'الامتحان التجريبي: النتيجة المتوقعة';
+
+  @override
+  String mlModelWindow(String version, int days) => 'النموذج ${version} · نافذة ${days} يومًا';
+
+  @override
+  String get mlNotEnoughData => 'لا توجد بيانات كافية للتنبؤ بعد.';
+
+  @override
+  String mlBasedOn(int reviews, int accuracy, int streak) => 'استنادًا إلى ${reviews} مراجعة خلال 30 يومًا: نجاح ${accuracy}%، سلسلة ${streak} يومًا.';
+
+  @override
+  String get mlAtRisk => 'في خطر';
+
+  @override
+  String mlTagFocusTitle(int days) => 'أين تركّز جهدك (${days} يومًا)';
+
+  @override
+  String get mlTagRework => 'بحاجة إلى مراجعة';
+
+  @override
+  String get mlTagMastered => 'متقَن — باعد المراجعات';
+
+  @override
+  String mlTagLapses(int lapses, int reviews) => '(${lapses}/${reviews} إخفاقات)';
+
+  @override
+  String get studyPrepareFailed => 'تعذر تحضير الجلسة.';
+
+  @override
+  String get studyReviewNotSaved => 'لم تُحفظ المراجعة (التخزين) — أعد المحاولة.';
+
+  @override
+  String studyDraftCreated(String id) => 'تم إنشاء المسودة — ${id}';
+
+  @override
+  String get studyNothingLeft => 'لا شيء للمراجعة — إلى اللقاء!';
+
+  @override
+  String studyAgainCount(int count) => ' · ${count} للمراجعة قريبًا';
+
+  @override
+  String studyProgress(int done, int remaining) => '${done} تمت · ${remaining} متبقية';
+
+  @override
+  String get studyFinish => 'إنهاء';
+
+  @override
+  String get tutorIntro => 'مساعد المراجعة: اطرح سؤالًا من الدرس (تشريح، فيزيولوجيا، كيمياء حيوية…).';
+
+  @override
+  String get tutorMicUnavailable => 'الميكروفون غير متاح — اكتب سؤالك.';
+
+  @override
+  String get tutorDictate => 'إملاء';
+
+  @override
+  String get tutorTitle => 'المعلّم الذكي';
+
+  @override
+  String get voiceTitle => 'إملاء بطاقة';
+
+  @override
+  String get voiceHelpFull => 'تحدث بشكل طبيعي: تُنسَّق البطاقة تلقائيًا وتُراجَع قبل النشر.';
+
+  @override
+  String get voiceDictate => 'إملاء';
+
+  @override
+  String get voiceFront => 'الوجه';
+
+  @override
+  String get voiceBack => 'الظهر';
+
+  @override
+  String voiceRuleAndQuota(String rule, int quota) => 'القاعدة المطبقة: ${rule} · الحصة المتبقية: ${quota}';
+
+  @override
+  String get actionConfirm => 'تأكيد';
+
 }
 
 class AppLocalizationsEn extends AppLocalizations {
@@ -1331,5 +1716,170 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get notifDenied => 'Notifications are off. You can re-enable them in your phone settings.';
+
+  @override
+  String get aiHintLabel => 'Personalised hint';
+
+  @override
+  String get aiHintDismiss => 'Hide hint';
+
+  @override
+  String get tutorQuotaReached => 'Daily tutor quota reached — try again tomorrow.';
+
+  @override
+  String get tutorOffline => 'No connection — the tutor needs to be online.';
+
+  @override
+  String get tutorUnavailable => 'The tutor is temporarily unavailable.';
+
+  @override
+  String get tutorPlaceholder => 'Study assistant: ask a course question';
+
+  @override
+  String get tutorStopDictation => 'Stop dictation';
+
+  @override
+  String get tutorEmergency => 'Emergency detected';
+
+  @override
+  String get tutorListen => 'Listen (disclaimer included)';
+
+  @override
+  String get voiceMicUnavailable => 'Microphone unavailable — type the text instead.';
+
+  @override
+  String get voiceTooShort => 'Transcript too short (3 characters minimum).';
+
+  @override
+  String get voiceQuotaReached => 'Daily voice quota reached — try again tomorrow.';
+
+  @override
+  String get voiceOffline => 'No connection: dictation will work once you\'re back online.';
+
+  @override
+  String get voiceDraftFailed => 'Couldn\'t create the draft.';
+
+  @override
+  String get voiceHelp => 'Speak naturally: the card is formatted automatically';
+
+  @override
+  String get voiceListening => 'Listening…';
+
+  @override
+  String get voiceTranscriptLabel => 'Transcript (dictated or typed)';
+
+  @override
+  String get voiceCreating => 'Creating…';
+
+  @override
+  String get voiceCreateDraft => 'Create draft';
+
+  @override
+  String get voiceDraftCreated => 'Draft created';
+
+  @override
+  String voiceRuleApplied(String rule) => 'Rule applied: ${rule}';
+
+  @override
+  String get leaderboardPseudonym => 'Nickname (3-20 characters, alphanumeric)';
+
+  @override
+  String get leaderboardPseudonymLength => '3-20 characters';
+
+  @override
+  String get leaderboardPseudonymAlnum => 'Alphanumeric only';
+
+  @override
+  String get leaderboardFacultyOptional => 'Faculty (optional)';
+
+  @override
+  String get leaderboardYearRange => 'Year (1-10)';
+
+  @override
+  String get leaderboardOptInFailed => 'Couldn\'t join the leaderboard.';
+
+  @override
+  String get leaderboardOptOutGdpr => 'Leave the leaderboard (GDPR)';
+
+  @override
+  String get mlPredictionTitle => 'Mock exam: estimated score';
+
+  @override
+  String mlModelWindow(String version, int days) => 'Model ${version} · ${days}-day window';
+
+  @override
+  String get mlNotEnoughData => 'Not enough data to predict yet.';
+
+  @override
+  String mlBasedOn(int reviews, int accuracy, int streak) => 'Based on ${reviews} reviews over 30 days: ${accuracy}% accuracy, ${streak}-day streak.';
+
+  @override
+  String get mlAtRisk => 'at risk';
+
+  @override
+  String mlTagFocusTitle(int days) => 'Where to focus (${days} days)';
+
+  @override
+  String get mlTagRework => 'Needs work';
+
+  @override
+  String get mlTagMastered => 'Mastered — space it out';
+
+  @override
+  String mlTagLapses(int lapses, int reviews) => '(${lapses}/${reviews} lapses)';
+
+  @override
+  String get studyPrepareFailed => 'Couldn\'t prepare the session.';
+
+  @override
+  String get studyReviewNotSaved => 'Review not saved (storage) — try again.';
+
+  @override
+  String studyDraftCreated(String id) => 'Draft created — ${id}';
+
+  @override
+  String get studyNothingLeft => 'Nothing left to review — see you later!';
+
+  @override
+  String studyAgainCount(int count) => ' · ${count} to see again soon';
+
+  @override
+  String studyProgress(int done, int remaining) => '${done} done · ${remaining} left';
+
+  @override
+  String get studyFinish => 'Finish';
+
+  @override
+  String get tutorIntro => 'Study assistant: ask a course question (anatomy, physiology, biochemistry…).';
+
+  @override
+  String get tutorMicUnavailable => 'Microphone unavailable — type your question.';
+
+  @override
+  String get tutorDictate => 'Dictate';
+
+  @override
+  String get tutorTitle => 'AI tutor';
+
+  @override
+  String get voiceTitle => 'Dictate a card';
+
+  @override
+  String get voiceHelpFull => 'Speak naturally: the card is formatted automatically and reviewed before publishing.';
+
+  @override
+  String get voiceDictate => 'Dictate';
+
+  @override
+  String get voiceFront => 'Front';
+
+  @override
+  String get voiceBack => 'Back';
+
+  @override
+  String voiceRuleAndQuota(String rule, int quota) => 'Rule applied: ${rule} · quota left: ${quota}';
+
+  @override
+  String get actionConfirm => 'Confirm';
 
 }

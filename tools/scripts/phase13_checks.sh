@@ -96,6 +96,11 @@ if [ -f tools/scripts/check_dart_static.py ]; then
     echo "  ✓ check_dart_static.py (Dart statique P0-2)" || \
     { echo "  ❌ check_dart_static.py"; exit 1; }
 fi
+if [ -f tools/scripts/apply_android_release_config.py ]; then
+  python3 tools/scripts/apply_android_release_config.py --check && \
+    echo "  ✓ apply_android_release_config.py --check (release Android P2-8)" || \
+    { echo "  ❌ apply_android_release_config.py --check"; exit 1; }
+fi
 if [ -f tools/scripts/check_bundle_assets.py ]; then
   python3 tools/scripts/check_bundle_assets.py && \
     echo "  ✓ check_bundle_assets.py (bundle sans contenu démo P2-4)" || \

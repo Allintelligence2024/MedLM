@@ -19,7 +19,17 @@ import 'package:medanki_dz/core/container/app_container.dart';
 import 'package:medanki_dz/data/local/app_database.dart';
 import 'package:medanki_dz/domain/domain.dart';
 import 'package:medanki_dz/ui/ai/voice_dictation_sheet.dart';
+import 'package:medanki_dz/l10n/app_localizations.dart';
 import 'package:medanki_dz/ui/study/study_screen.dart';
+
+/// Monte un écran avec les Localizations (audit P1-4 : les écrans
+/// exigent désormais un ancêtre AppLocalizations).
+Widget _app(Widget child) => MaterialApp(
+      locale: const Locale('fr'),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      home: child,
+    );
 
 StudyQueueItem _item(int n) => StudyQueueItem(
       cardId: 'card-$n',
@@ -46,8 +56,8 @@ void main() {
   testWidgets('boucle complète : question → réponse → rating → suivante '
       '→ synthèse', (tester) async {
     final recorded = <(String, Rating)>[];
-    await tester.pumpWidget(MaterialApp(
-      home: StudyScreen(
+    await tester.pumpWidget(_app(
+      StudyScreen(
         container: _container(db),
         userId: 'u1',
         queueLoader: (_, __, ___) async => [_item(1), _item(2)],
@@ -90,8 +100,8 @@ void main() {
   });
 
   testWidgets('queue vide → message rien à réviser', (tester) async {
-    await tester.pumpWidget(MaterialApp(
-      home: StudyScreen(
+    await tester.pumpWidget(_app(
+      StudyScreen(
         container: _container(db),
         userId: 'u1',
         queueLoader: (_, __, ___) async => const [],
@@ -105,8 +115,8 @@ void main() {
   testWidgets('erreur de chargement → message + retry fonctionnel',
       (tester) async {
     var attempts = 0;
-    await tester.pumpWidget(MaterialApp(
-      home: StudyScreen(
+    await tester.pumpWidget(_app(
+      StudyScreen(
         container: _container(db),
         userId: 'u1',
         queueLoader: (_, __, ___) async {
@@ -125,8 +135,8 @@ void main() {
 
   testWidgets('le micro ouvre la feuille de dictée (sans bloquer '
       'la session)', (tester) async {
-    await tester.pumpWidget(MaterialApp(
-      home: StudyScreen(
+    await tester.pumpWidget(_app(
+      StudyScreen(
         container: _container(db),
         userId: 'u1',
         queueLoader: (_, __, ___) async => [_item(1)],

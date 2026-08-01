@@ -15,6 +15,7 @@ import 'package:flutter/material.dart';
 
 import '../../data/repositories/ai/ai_models.dart';
 import '../../data/repositories/ai/ai_repository.dart';
+import '../../l10n/app_localizations.dart';
 
 class HintBanner extends StatefulWidget {
   const HintBanner({
@@ -66,8 +67,9 @@ class _HintBannerState extends State<HintBanner> {
         // d'étude n'est jamais bloquée par le hint.
         if (hint == null) return const SizedBox.shrink();
         final scheme = Theme.of(context).colorScheme;
+        final l10n = AppLocalizations.of(context);
         return Semantics(
-          label: 'Indice personnalisé',
+          label: l10n.aiHintLabel,
           child: Card(
             elevation: 0,
             color: scheme.tertiaryContainer,
@@ -94,7 +96,7 @@ class _HintBannerState extends State<HintBanner> {
                       ),
                       IconButton(
                         visualDensity: VisualDensity.compact,
-                        tooltip: 'Masquer l\u2019indice',
+                        tooltip: l10n.aiHintDismiss,
                         icon: const Icon(Icons.close, size: 18),
                         onPressed: () => setState(() => _dismissed = true),
                       ),

@@ -6,14 +6,15 @@
 //   * Bouton opt-in / opt-out accessible en bas.
 //   * Tri déterministe (déjà fait côté serveur).
 //
-// Pas d'internationalisation (i18n) pour cette première version :
-// les chaînes sont en dur. La i18n FR/AR/EN viendra en Phase 17.
+// i18n FR/AR/EN : fait (audit P1-4). Les chaînes vivent dans
+// lib/l10n/app_*.arb et `check_mobile_i18n.py` empêche la régression.
 library;
 
 import 'package:flutter/material.dart';
 
 import '../../data/repositories/leaderboard/leaderboard_models.dart';
 import '../../data/repositories/leaderboard/leaderboard_repository.dart';
+import '../../l10n/app_localizations.dart';
 
 class LeaderboardScreen extends StatefulWidget {
   const LeaderboardScreen({super.key, required this.repository});
@@ -38,12 +39,13 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Classement de la semaine'),
+        title: Text(l10n.leaderboardTitle),
         actions: [
           IconButton(
-            tooltip: 'Rafraîchir',
+            tooltip: l10n.actionRefresh,
             icon: const Icon(Icons.refresh),
             onPressed: () {
               setState(() {
@@ -64,7 +66,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
               child: Padding(
                 padding: const EdgeInsets.all(24.0),
                 child: Text(
-                  'Impossible de charger le classement.\n${snap.error}',
+                  l10n.leaderboardError,
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -107,10 +109,13 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
     String? faculty;
     int? studyYear;
     final formKey = GlobalKey<FormState>();
+    // Résolu AVANT showDialog : le contexte du dialogue est distinct,
+    // mais les deux partagent les mêmes Localizations.
+    final dialogL10n = AppLocalizations.of(context);
     final result = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('Participer au classement'),
+        title: Text(dialogL10n.leaderboardOptIn),
         content: Form(
           key: formKey,
           child: SingleChildScrollView(
@@ -119,24 +124,32 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
               children: [
                 TextFormField(
                   controller: controller,
-                  decoration: const InputDecoration(
-                    labelText: 'Pseudonyme (3-20 caractères, alphanum)',
+                  decoration: InputDecoration(
+                    labelText: dialogL10n.leaderboardPseudonym,
                   ),
                   validator: (v) {
                     final s = v?.trim() ?? '';
-                    if (s.length < 3 || s.length > 20) return '3-20 caractères';
-                    if (!RegExp(r'^[a-zA-Z0-9_]+$').hasMatch(s)) return 'Alphanumérique';
+                    if (s.length < 3 || s.length > 20) {
+                      return dialogL10n.leaderboardPseudonymLength;
+                    }
+                    if (!RegExp(r'^[a-zA-Z0-9_]+$').hasMatch(s)) {
+                      return dialogL10n.leaderboardPseudonymAlnum;
+                    }
                     return null;
                   },
                 ),
                 const SizedBox(height: 12),
                 TextFormField(
-                  decoration: const InputDecoration(labelText: 'Faculté (optionnel)'),
+                  decoration: InputDecoration(
+                    labelText: dialogL10n.leaderboardFacultyOptional,
+                  ),
                   onChanged: (v) => faculty = v.trim().isEmpty ? null : v.trim(),
                 ),
                 const SizedBox(height: 12),
                 TextFormField(
-                  decoration: const InputDecoration(labelText: 'Année (1-10)'),
+                  decoration: InputDecoration(
+                    labelText: dialogL10n.leaderboardYearRange,
+                  ),
                   keyboardType: TextInputType.number,
                   onChanged: (v) {
                     final n = int.tryParse(v);
@@ -150,7 +163,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(false),
-            child: const Text('Annuler'),
+            child: Text(dialogL10n.actionCancel),
           ),
           FilledButton(
             onPressed: () {
@@ -158,7 +171,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                 Navigator.of(ctx).pop(true);
               }
             },
-            child: const Text('Confirmer'),
+            child: Text(dialogL10n.actionConfirm),
           ),
         ],
       ),
@@ -178,7 +191,9 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
     } catch (e) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Échec opt-in : $e')),
+        SnackBar(
+          content: Text(AppLocalizations.of(context).leaderboardOptInFailed),
+        ),
       );
     }
   }
@@ -261,12 +276,12 @@ class _OptInFooter extends StatelessWidget {
             ? OutlinedButton.icon(
                 onPressed: onOptOut,
                 icon: const Icon(Icons.exit_to_app),
-                label: const Text("Se désinscrire du classement (RGPD)"),
+                label: Text(AppLocalizations.of(context).leaderboardOptOutGdpr),
               )
             : FilledButton.icon(
                 onPressed: onOptIn,
                 icon: const Icon(Icons.emoji_events),
-                label: const Text('Participer au classement'),
+                label: Text(AppLocalizations.of(context).leaderboardOptIn),
               ),
       ),
     );

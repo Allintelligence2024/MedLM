@@ -37,21 +37,10 @@ SAME_ACROSS_LANGS = {"appTitle", "authGoogle", "paywallCta", "decksPremium"}
 # non faite : on les tolère explicitement pour que la garde soit
 # activable tout de suite, et on rétrécit cette liste à chaque écran migré.
 # Toute NOUVELLE entrée ici doit être justifiée en revue.
-HARDCODED_ALLOWLIST: set[str] = {
-    # Écrans antérieurs à l'introduction de l'i18n (Phases 9 bis à 20.3).
-    # Leurs chaînes sont déjà extraites dans les .arb : la migration
-    # consiste à remplacer chaque littéral par `AppLocalizations.of(context)`,
-    # écran par écran, en s'appuyant sur les tests widget existants.
-    # RÈGLE : cette liste ne peut que RÉTRÉCIR. Tout nouvel écran doit
-    # naître localisé.
-    "lib/ui/ai/hint_banner.dart",
-    "lib/ui/ai/tutor_chat_screen.dart",
-    "lib/ui/ai/voice_dictation_sheet.dart",
-    "lib/ui/gamification/leaderboard_screen.dart",
-    "lib/ui/ml/ml_prediction_card.dart",
-    "lib/ui/ml/tag_focus_card.dart",
-    "lib/ui/study/study_screen.dart",
-}
+# La migration des écrans antérieurs à l'i18n est TERMINÉE : la liste
+# d'exception est vide et doit le rester. Tout écran, ancien ou nouveau,
+# passe désormais par AppLocalizations.
+HARDCODED_ALLOWLIST: set[str] = set()
 
 # Un placeholder ICU est `{nom}` ou `{nom,plural,…}`. Les branches de
 # plural (`=1{Rien à réviser}`) ressemblent syntaxiquement à des

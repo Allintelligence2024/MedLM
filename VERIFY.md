@@ -13,10 +13,11 @@
 | `tools/validate_content.py` | Content Policy : 697 cartes, règles de rejet, sources obligatoires |
 | `tools/scripts/check_syntax_guard.py` | délimiters `(){}[]` équilibrés (Dart mobile/ + Python tools/tests), 0 marqueur de conflit repo-wide ; TS exclu documenté (regex/gabarits imbriqués) |
 | `tools/scripts/check_dart_static.py` | Dart statiquement valide sans SDK : 0 classe imbriquée, 0 extension instanciée, `part`/imports résolus (a révélé 3 fichiers qui n'avaient jamais compilé — audit P0-2) |
-| `tools/scripts/check_mobile_i18n.py` | i18n mobile : 122 clés × FR/AR/EN, placeholders alignés, 0 chaîne FR en dur dans `lib/ui/` (audit P1-4) |
+| `tools/scripts/check_mobile_i18n.py` | i18n mobile : 177 clés × FR/AR/EN, placeholders alignés, **0 chaîne FR en dur dans `lib/ui/`, liste d'exception vide** (audit P1-4) |
 | `tools/scripts/check_faculties_parity.py` | l'allow-list serveur des facultés == le choix proposé à l'inscription (contenu, ordre, années, niveaux) |
 | `tools/scripts/gen_l10n.py --check` | `app_localizations.dart` généré est à jour vis-à-vis des `.arb` |
 | `tools/scripts/check_bundle_assets.py` | aucun deck de démonstration livré en production, archive hors bundle (audit P2-4) |
+| `tools/scripts/apply_android_release_config.py --check` | build de release Android : R8 et shrink actifs, signature de release (jamais la clé de debug), `applicationId` de production (audit P2-8) |
 | `tools/scripts/phase13_checks.sh` | orchestre tout ce niveau + load-tester self-test |
 
 ## Niveau 1 — moteur SRS (python, < 2 s)

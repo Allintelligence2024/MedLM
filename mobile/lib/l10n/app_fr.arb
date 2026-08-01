@@ -222,5 +222,141 @@
   "notifPermissionBody": "On t'envoie un rappel quand des cartes sont dues. Un par jour, pas plus.",
   "notifPermissionAllow": "Autoriser",
   "notifPermissionDeny": "Non merci",
-  "notifDenied": "Les notifications sont désactivées. Tu peux les réactiver dans les réglages du téléphone."
+  "notifDenied": "Les notifications sont désactivées. Tu peux les réactiver dans les réglages du téléphone.",
+  "aiHintLabel": "Indice personnalisé",
+  "aiHintDismiss": "Masquer l'indice",
+  "tutorQuotaReached": "Quota tuteur du jour atteint — réessayez demain.",
+  "tutorOffline": "Pas de réseau — le tuteur nécessite une connexion.",
+  "tutorUnavailable": "Le tuteur est momentanément indisponible.",
+  "tutorPlaceholder": "Assistant de révision : posez une question de cours",
+  "tutorStopDictation": "Arrêter la dictée",
+  "tutorEmergency": "Urgence détectée",
+  "tutorListen": "Écouter (disclaimer inclus)",
+  "voiceMicUnavailable": "Micro indisponible — saisissez le texte à la place.",
+  "voiceTooShort": "Transcription trop courte (min 3 caractères).",
+  "voiceQuotaReached": "Quota vocal du jour atteint — réessayez demain.",
+  "voiceOffline": "Pas de réseau : la dictée sera possible dès le retour de la connexion.",
+  "voiceDraftFailed": "Échec de la création du brouillon.",
+  "voiceHelp": "Parlez naturellement : la carte est formatée automatiquement",
+  "voiceListening": "Écoute en cours…",
+  "voiceTranscriptLabel": "Transcription (dictée ou saisie manuelle)",
+  "voiceCreating": "Création…",
+  "voiceCreateDraft": "Créer le brouillon",
+  "voiceDraftCreated": "Brouillon créé",
+  "voiceRuleApplied": "Règle appliquée : {rule}",
+  "@voiceRuleApplied": {
+    "placeholders": {
+      "rule": {
+        "type": "String"
+      }
+    }
+  },
+  "leaderboardPseudonym": "Pseudonyme (3-20 caractères, alphanumérique)",
+  "leaderboardPseudonymLength": "3-20 caractères",
+  "leaderboardPseudonymAlnum": "Alphanumérique uniquement",
+  "leaderboardFacultyOptional": "Faculté (optionnel)",
+  "leaderboardYearRange": "Année (1-10)",
+  "leaderboardOptInFailed": "Échec de l'inscription au classement.",
+  "leaderboardOptOutGdpr": "Se désinscrire du classement (RGPD)",
+  "mlPredictionTitle": "Examen blanc : score estimé",
+  "mlModelWindow": "Modèle {version} · fenêtre {days} j",
+  "@mlModelWindow": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      },
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "mlNotEnoughData": "Pas encore assez de données pour prédire.",
+  "mlBasedOn": "Basé sur {reviews} revues sur 30 j : réussite {accuracy} %, série {streak} j.",
+  "@mlBasedOn": {
+    "placeholders": {
+      "reviews": {
+        "type": "int"
+      },
+      "accuracy": {
+        "type": "int"
+      },
+      "streak": {
+        "type": "int"
+      }
+    }
+  },
+  "mlAtRisk": "à risque",
+  "mlTagFocusTitle": "Où concentrer l'effort ({days} j)",
+  "@mlTagFocusTitle": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "mlTagRework": "À retravailler",
+  "mlTagMastered": "Maîtrisé — espacez",
+  "mlTagLapses": "({lapses}/{reviews} échecs)",
+  "@mlTagLapses": {
+    "placeholders": {
+      "lapses": {
+        "type": "int"
+      },
+      "reviews": {
+        "type": "int"
+      }
+    }
+  },
+  "studyPrepareFailed": "Impossible de préparer la session.",
+  "studyReviewNotSaved": "Revue non enregistrée (stockage) — réessayez.",
+  "studyDraftCreated": "Brouillon créé — {id}",
+  "@studyDraftCreated": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
+  "studyNothingLeft": "Rien à réviser — à plus tard !",
+  "studyAgainCount": " · {count} à revoir bientôt",
+  "@studyAgainCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "studyProgress": "{done} faites · {remaining} restantes",
+  "@studyProgress": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "remaining": {
+        "type": "int"
+      }
+    }
+  },
+  "studyFinish": "Terminer",
+  "tutorIntro": "Assistant de révision : posez une question de cours (anatomie, physiologie, biochimie…).",
+  "tutorMicUnavailable": "Micro indisponible — saisissez votre question.",
+  "tutorDictate": "Dicter",
+  "tutorTitle": "Tuteur IA",
+  "voiceTitle": "Dicter une carte",
+  "voiceHelpFull": "Parlez naturellement : la carte est formatée automatiquement et relue avant publication.",
+  "voiceDictate": "Dicter",
+  "voiceFront": "Recto",
+  "voiceBack": "Verso",
+  "voiceRuleAndQuota": "Règle appliquée : {rule} · quota restant : {quota}",
+  "@voiceRuleAndQuota": {
+    "placeholders": {
+      "rule": {
+        "type": "String"
+      },
+      "quota": {
+        "type": "int"
+      }
+    }
+  },
+  "actionConfirm": "Confirmer"
 }

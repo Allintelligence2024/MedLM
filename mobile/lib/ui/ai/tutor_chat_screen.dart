@@ -17,6 +17,7 @@ import '../../data/network/api_exceptions.dart';
 import '../../data/repositories/ai/ai_models.dart';
 import '../../data/repositories/ai/ai_repository.dart';
 import 'ai_speech_ports.dart';
+import '../../l10n/app_localizations.dart';
 
 class TutorChatScreen extends StatefulWidget {
   const TutorChatScreen({
@@ -61,7 +62,12 @@ class _TutorChatScreenState extends State<TutorChatScreen> {
   bool _listening = false;
   bool _sending = false;
   int? _remainingQuota;
-  String? _bannerError;
+  /// Motif du bandeau d'erreur — un CODE, pas une phrase.
+  ///
+  /// Stocker le texte traduit dans l'état le figerait dans la langue
+  /// en vigueur au moment de l'échec (audit P1-4). Le message est
+  /// résolu au rendu.
+  _TutorBanner? _bannerError;
 
   /// Disclaimer du dernier échange — bandeau persistant tant qu'il est
   /// connu (le texte vient du SERVEUR, jamais codé ici).
@@ -121,19 +127,17 @@ class _TutorChatScreenState extends State<TutorChatScreen> {
     } on ThrottleException {
       if (mounted) {
         setState(() {
-          _bannerError =
-              'Quota tuteur du jour atteint — réessayez demain.';
+          _bannerError = _TutorBanner.quota;
           _remainingQuota = 0;
         });
       }
     } on NetworkException {
       if (mounted) {
-        setState(() =>
-            _bannerError = 'Pas de réseau — le tuteur nécessite une connexion.');
+        setState(() => _bannerError = _TutorBanner.offline);
       }
     } catch (_) {
       if (mounted) {
-        setState(() => _bannerError = 'Le tuteur est momentanément indisponible.');
+        setState(() => _bannerError = _TutorBanner.unavailable);
       }
     } finally {
       if (mounted) setState(() => _sending = false);
@@ -163,7 +167,7 @@ class _TutorChatScreenState extends State<TutorChatScreen> {
       if (mounted) {
         setState(() {
           _listening = false;
-          _bannerError = 'Micro indisponible — saisissez votre question.';
+          _bannerError = _TutorBanner.micUnavailable;
         });
       }
     }
@@ -191,9 +195,10 @@ class _TutorChatScreenState extends State<TutorChatScreen> {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Tuteur IA'),
+        title: Text(l10n.tutorTitle),
         actions: [
           if (_remainingQuota != null)
             Center(
@@ -228,8 +233,7 @@ class _TutorChatScreenState extends State<TutorChatScreen> {
               color: scheme.surfaceContainerHighest,
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               child: Text(
-                'Assistant de révision : posez une question de cours '
-                '(anatomie, physiologie, biochimie…).',
+                l10n.tutorIntro,
                 style: TextStyle(fontSize: 12, color: scheme.onSurfaceVariant),
               ),
             ),
@@ -239,7 +243,7 @@ class _TutorChatScreenState extends State<TutorChatScreen> {
               color: scheme.errorContainer,
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               child: Text(
-                _bannerError!,
+                _bannerMessage(l10n, _bannerError!),
                 style: TextStyle(fontSize: 12, color: scheme.onErrorContainer),
               ),
             ),
@@ -260,7 +264,8 @@ class _TutorChatScreenState extends State<TutorChatScreen> {
                 children: [
                   if (_sttAvailable)
                     IconButton(
-                      tooltip: _listening ? 'Arrêter la dictée' : 'Dicter',
+                      tooltip:
+                          _listening ? l10n.tutorStopDictation : l10n.tutorDictate,
                       onPressed: _inputDisabled ? null : _toggleDictation,
                       icon: Icon(_listening ? Icons.stop_circle : Icons.mic),
                     ),
@@ -355,7 +360,7 @@ class _MessageBubble extends StatelessWidget {
                             size: 16, color: scheme.error),
                         const SizedBox(width: 4),
                         Text(
-                          'Urgence détectée',
+                          AppLocalizations.of(context).tutorEmergency,
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
@@ -385,7 +390,7 @@ class _MessageBubble extends StatelessWidget {
                     alignment: Alignment.centerRight,
                     child: IconButton(
                       visualDensity: VisualDensity.compact,
-                      tooltip: 'Écouter (disclaimer inclus)',
+                      tooltip: AppLocalizations.of(context).tutorListen,
                       icon: const Icon(Icons.volume_up, size: 18),
                       onPressed: () => onSpeak!(answer),
                     ),
@@ -398,3 +403,14 @@ class _MessageBubble extends StatelessWidget {
     );
   }
 }
+
+/// Motifs d'affichage du bandeau d'erreur du tuteur.
+enum _TutorBanner { quota, offline, unavailable, micUnavailable }
+
+String _bannerMessage(AppLocalizations l10n, _TutorBanner banner) =>
+    switch (banner) {
+      _TutorBanner.quota => l10n.tutorQuotaReached,
+      _TutorBanner.offline => l10n.tutorOffline,
+      _TutorBanner.unavailable => l10n.tutorUnavailable,
+      _TutorBanner.micUnavailable => l10n.tutorMicUnavailable,
+    };
