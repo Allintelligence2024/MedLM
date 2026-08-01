@@ -221,6 +221,7 @@ abstract class AppLocalizations {
   String get voiceBack;
   String voiceRuleAndQuota(String rule, int quota);
   String get actionConfirm;
+  String get shareFailed;
 }
 
 class _AppLocalizationsDelegate
@@ -794,6 +795,9 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get actionConfirm => 'Confirmer';
 
+  @override
+  String get shareFailed => 'Le partage n\'a pas pu être créé.';
+
 }
 
 class AppLocalizationsAr extends AppLocalizations {
@@ -1338,6 +1342,9 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get actionConfirm => 'تأكيد';
 
+  @override
+  String get shareFailed => 'تعذر إنشاء المشاركة.';
+
 }
 
 class AppLocalizationsEn extends AppLocalizations {
@@ -1881,5 +1888,8 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get actionConfirm => 'Confirm';
+
+  @override
+  String get shareFailed => 'Couldn\'t create the share.';
 
 }

@@ -176,5 +176,6 @@
   "voiceFront": "Front",
   "voiceBack": "Back",
   "voiceRuleAndQuota": "Rule applied: {rule} · quota left: {quota}",
-  "actionConfirm": "Confirm"
+  "actionConfirm": "Confirm",
+  "shareFailed": "Couldn't create the share."
 }

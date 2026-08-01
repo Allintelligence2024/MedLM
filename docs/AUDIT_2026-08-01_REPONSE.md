@@ -17,6 +17,9 @@ un vrai PostgreSQL** (P0-3).
 | `sync_outbox.dart` déclarait une classe **imbriquée** (interdit en Dart) | ne compilait pas | corrigé (`SyncOutcome` hoistée) |
 | `exam_anticheat.dart` faisait `AntiCheatKindWire()` — instanciation d'une **extension** | ne compilait pas | corrigé (`kind.wire`) |
 | `stats_repository.dart` : import relatif faux (`../network/` au lieu de `../../network/`) | ne compilait pas | corrigé |
+| `retention.service.ts` lisait `user_devices.device_token` — colonne qu'**aucun code n'écrivait jamais** | la liste d'appareils était donc toujours vide : **pas une seule alerte de rétention ne partait** | corrigé (lit `device_tokens`) |
+| `DeviceTokensService.markUnreachable()` sans appelant | les appareils désinstallés étaient retentés indéfiniment | corrigé, 20 tests |
+| `createShare` mobile envoyait `card_id` au lieu d'`attempt_id` | l'appel aurait été refusé en 400 par Zod | corrigé |
 
 Pour que cette classe d'erreurs ne repasse plus sans SDK :
 `tools/scripts/check_dart_static.py`.
@@ -36,7 +39,7 @@ Pour que cette classe d'erreurs ne repasse plus sans SDK :
 |---|---|---|
 | **P1-1** résidus AI Studio | **fait** | 8 artefacts supprimés, README racine réécrit, 50 rapports déplacés sous `docs/phases/`. Migrations renumérotées 0012–0017 → 0011–0016 (le gap est comblé, pas documenté : rien n'était déployé) |
 | **P1-2** écrans manquants | **fait** | 12 écrans livrés ; la couche UI passe de 8 à 20 |
-| **P1-3** notifications | **fait** | Backend : OAuth2 par compte de service (le token statique aurait cessé de fonctionner après 1 h) + table `device_tokens` + endpoints. Mobile : FCM, remontée et rotation du jeton, deep links, écran de permission. **APNs reste à finir** (Android first, décision de l'audit) |
+| **P1-3** notifications | **fait** | Backend : OAuth2 par compte de service (le token statique aurait cessé de fonctionner après 1 h) + table `device_tokens` + endpoints + **désactivation des appareils injoignables** (410/404 interprétés, `markUnreachable` n'avait aucun appelant). Mobile : FCM, remontée et rotation du jeton, deep links, écran de permission. APNs : la signature ES256 et le cache de jeton étaient déjà là ; il ne manquait que l'interprétation des codes d'échec, désormais faite |
 | **P1-4** i18n mobile | **fait, terminé** | 177 clés × FR/AR/EN. Les 7 écrans antérieurs **ont été migrés** : la liste d'exception est **vide**. Les messages d'erreur en état (`_error`, `_bannerError`) sont devenus des codes, pas des phrases — sinon ils resteraient figés dans la langue en vigueur au moment de l'échec |
 | **P1-5** dépendances | **fait** | Riverpod devient la DI ; mocktail/fake_async en dev ; uuid retiré |
 
@@ -60,7 +63,7 @@ Pour que cette classe d'erreurs ne repasse plus sans SDK :
 | **P3-1** sitemap absent | **fait** — `site/sitemap.xml` (3 URLs + hreflang), déclaré dans `robots.txt`, vérifié par `check_landing.py` |
 | **P3-2** 46 rapports à la racine | **fait** — `docs/phases/` |
 | **P3-3** BACKGROUND_SYNC / sentry | **documenté** (ci-dessous), aucune action technique — conforme à la recommandation |
-| **P3-4** share / group-packs / tenants sans UI | **partiel** — le partage est câblé côté client (`createShare`) ; les packs de groupe ont un point d'entrée visible mais inactif dans le paywall (parcours produit à définir). Pages CMS de gestion : non faites |
+| **P3-4** share / group-packs / tenants sans UI | **fait** — bouton de partage sur l'écran de résultat d'examen (`share_plus`), pages CMS `/admin/tenants` (création, membres) et `/admin/group-packs` (recherche par code, sièges, échéance). Reste hors périmètre : le parcours produit « rejoindre un pack » côté mobile, à cadrer avec l'équipe |
 | **P3-5** fixtures d'examen fines | **fait** — la voie « expiresAt côté serveur » est couverte en intégration |
 
 ### P3-3 — notes, sans action
@@ -89,7 +92,9 @@ strict : le chargement dynamique de modules changerait de sémantique.
    est validé statiquement (structure, imports, i18n, parité FSRS) mais
    `flutter analyze` / `flutter test` n'ont pas pu être exécutés.
    C'est le premier retour attendu de `mobile-ci.yml`.
-3. **APNs** (Android first, décision de l'audit), **le keystore de
-   release et les secrets `ANDROID_*`** (la configuration qui les
-   consomme est en place), **les pages CMS de gestion pour
-   share/group-packs/tenants**.
+3. **Le keystore de release et les secrets `ANDROID_*`** — la
+   configuration qui les consomme est en place, les clés ne peuvent pas
+   venir du dépôt.
+4. **Le parcours « rejoindre un pack de groupe »** côté mobile : le
+   bouton existe, désactivé, faute de cadrage produit (qui saisit le
+   code, à quel moment, que voit un membre déjà inscrit).

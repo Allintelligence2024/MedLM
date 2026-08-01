@@ -11,10 +11,11 @@
 // 7 jours ; une escalade (niveau supérieur) est possible après 3 jours.
 // Jamais de spam : c'est le frein principal au churn silencieux.
 import { Inject, Injectable, Logger } from '@nestjs/common';
-import { desc, eq, isNotNull, lte, sql } from 'drizzle-orm';
+import { desc, eq, lte, sql } from 'drizzle-orm';
 import { DRIZZLE, Database } from '../../db/database.module';
 import { retentionAlerts } from '../../db/schema/ai';
-import { users, userDevices } from '../../db/schema/users';
+import { users } from '../../db/schema/users';
+import { deviceTokens } from '../../db/schema/notifications';
 import { FSRS_MILLIS_PER_DAY } from '../../common/fsrs/fsrs.constants';
 import {
   NotificationsService,
@@ -200,14 +201,21 @@ export class RetentionService {
         continue;
       }
 
+      // Registre des appareils joignables (audit P1-3).
+      //
+      // Cette requête lisait `user_devices.device_token` — une colonne
+      // qu'AUCUN code n'écrivait jamais : elle était nulle pour tout le
+      // monde, donc `devices` était toujours vide et pas une seule
+      // alerte de rétention n'était envoyée. Le registre réel est
+      // `device_tokens`, alimenté par POST /v1/notifications/devices.
       const devices = await this.db
         .select({
-          platform: userDevices.platform,
-          deviceToken: userDevices.deviceToken,
+          platform: deviceTokens.platform,
+          deviceToken: deviceTokens.token,
         })
-        .from(userDevices)
+        .from(deviceTokens)
         .where(
-          sql`${userDevices.userId} = ${c.userId} AND ${isNotNull(userDevices.deviceToken)}`,
+          sql`${deviceTokens.userId} = ${c.userId} AND ${deviceTokens.disabledAt} IS NULL`,
         );
       if (devices.length === 0) continue;
 

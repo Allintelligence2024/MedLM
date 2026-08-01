@@ -705,17 +705,21 @@ class ApiClient {
 
   // ── Partage (Phase 15.5) ────────────────────────────────────────
 
-  /// POST /v1/share — crée un lien de partage pour une carte.
+  /// POST /v1/share — crée une carte de partage pour une tentative
+  /// d'examen (v2 §11.3 : score + rang, pseudonyme obligatoire).
+  ///
+  /// Le contrat serveur (CreateShareBody) attend `attempt_id` et un
+  /// `style` parmi minimal | detailed | story.
   Future<Map<String, dynamic>> createShare({
-    required String cardId,
-    String? note,
+    required String attemptId,
+    String style = 'minimal',
   }) async {
     try {
       final res = await _dio.post<dynamic>(
         '/v1/share',
         data: {
-          'card_id': cardId,
-          if (note != null) 'note': note,
+          'attempt_id': attemptId,
+          'style': style,
         },
       );
       return Map<String, dynamic>.from(res.data as Map);

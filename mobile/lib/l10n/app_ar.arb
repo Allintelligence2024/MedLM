@@ -176,5 +176,6 @@
   "voiceFront": "الوجه",
   "voiceBack": "الظهر",
   "voiceRuleAndQuota": "القاعدة المطبقة: {rule} · الحصة المتبقية: {quota}",
-  "actionConfirm": "تأكيد"
+  "actionConfirm": "تأكيد",
+  "shareFailed": "تعذر إنشاء المشاركة."
 }

@@ -15,6 +15,8 @@ import { Injectable, Logger } from '@nestjs/common';
 
 import { FcmProvider } from './fcm/fcm.provider';
 import { ApnsProvider } from './apns/apns.provider';
+import { DeviceTokensService } from './device-tokens.service';
+import { reasonToUnreachable } from './unreachable';
 import type { NotificationKind, PushProvider } from './push.types';
 
 @Injectable()
@@ -24,6 +26,7 @@ export class NotificationsService {
   constructor(
     private readonly fcm: FcmProvider,
     private readonly apns: ApnsProvider,
+    private readonly devices: DeviceTokensService,
   ) {}
 
   /// Envoie une notif. `platform` choisit le provider.
@@ -59,6 +62,19 @@ export class NotificationsService {
         },
       },
     });
+    // Appareil définitivement injoignable (désinstallation, jeton
+    // invalide) : on le désactive plutôt que de le retenter à chaque
+    // campagne (audit P1-3 — `markUnreachable` existait sans appelant).
+    if (!result.sent) {
+      const unreachable = reasonToUnreachable(result.reason);
+      if (unreachable) {
+        await this.devices
+          .markUnreachable(args.deviceToken, unreachable)
+          .catch((e: Error) =>
+            this.logger.warn(`désactivation impossible: ${e.message}`),
+          );
+      }
+    }
     return { ...result, provider: result.sent ? providerName : 'none' };
   }
 }

@@ -358,5 +358,6 @@
       }
     }
   },
-  "actionConfirm": "Confirmer"
+  "actionConfirm": "Confirmer",
+  "shareFailed": "Le partage n'a pas pu être créé."
 }

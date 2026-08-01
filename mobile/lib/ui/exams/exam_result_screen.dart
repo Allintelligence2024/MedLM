@@ -6,12 +6,15 @@
 library;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../app/router.dart';
+import '../../core/di/providers.dart';
 import '../../l10n/app_localizations.dart';
 
-class ExamResultScreen extends StatelessWidget {
+class ExamResultScreen extends ConsumerWidget {
   const ExamResultScreen({super.key, required this.result});
 
   final Map<String, dynamic> result;
@@ -35,8 +38,36 @@ class ExamResultScreen extends StatelessWidget {
     return scorePercent(result) >= 50;
   }
 
+  /// Identifiant de la tentative, quelle que soit l'enveloppe.
+  static String? _attemptId(Map<String, dynamic> result) {
+    final id = result['attempt_id'] ?? result['id'];
+    return id is String && id.isNotEmpty ? id : null;
+  }
+
+  static Future<void> _share(
+    BuildContext context,
+    WidgetRef ref,
+    String attemptId,
+  ) async {
+    final l10n = AppLocalizations.of(context);
+    try {
+      final card = await ref
+          .read(apiClientProvider)
+          .createShare(attemptId: attemptId);
+      final url = (card['share_url'] ?? card['url'] ?? '').toString();
+      if (url.isEmpty) throw StateError('share_url absent');
+      await Share.share(url, subject: l10n.appTitle);
+    } catch (_) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(l10n.shareFailed)),
+        );
+      }
+    }
+  }
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final theme = Theme.of(context);
     final percent = scorePercent(result);
@@ -83,6 +114,17 @@ class ExamResultScreen extends StatelessWidget {
                 ),
               ],
               const Spacer(),
+              // Partage social ciblé (Phase 15.5) : l'endpoint
+              // /v1/share existait sans aucun appelant côté mobile.
+              // Le serveur impose le pseudonyme et refuse tout
+              // re-partage automatique (v2 §13).
+              if (_attemptId(result) != null)
+                OutlinedButton.icon(
+                  onPressed: () => _share(context, ref, _attemptId(result)!),
+                  icon: const Icon(Icons.share_outlined),
+                  label: Text(l10n.shareProgress),
+                ),
+              if (_attemptId(result) != null) const SizedBox(height: 12),
               FilledButton(
                 onPressed: () => context.go(Routes.exams),
                 child: Text(l10n.actionClose),
