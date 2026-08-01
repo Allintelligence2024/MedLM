@@ -62,10 +62,12 @@ class AntiCheatController {
     try {
       await api.recordExamEvent(
         attemptId: attemptId,
-        kind: AntiCheatKindWire().wire.replaceFirstMapped(
-          RegExp(r'^[a-z]'),
-          (m) => m.group(0)!.toUpperCase(),
-        ).toLowerCase(),
+        // `AntiCheatKindWire` est une EXTENSION : on ne l'instancie
+        // pas, on l'applique à la valeur. Le code précédent écrivait
+        // `AntiCheatKindWire().wire` — du Dart invalide, doublé d'un
+        // aller-retour majuscule/minuscule sans effet. Il n'avait
+        // jamais compilé (aucune CI n'exécutait le SDK Dart, cf. P0-3).
+        kind: kind.wire,
         metadata: {
           ...metadata,
           'platform': _platform(),

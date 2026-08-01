@@ -18,25 +18,33 @@ library;
 import '../entities/entities.dart';
 import '../repositories/repositories.dart';
 
+/// Résultat de la synchronisation, exposé au ViewModel.
+///
+/// Déclarée au niveau supérieur : Dart n'autorise pas les classes
+/// imbriquées. Elle était écrite `class Outcome { … }` À L'INTÉRIEUR de
+/// SyncOutboxUseCase — du Dart invalide, qui n'a jamais pu compiler.
+/// Personne ne l'avait vu parce qu'aucune CI n'exécutait le SDK Dart
+/// (audit P0-3) et que le garde-fou syntaxique maison ne vérifie que
+/// l'équilibrage des délimiteurs.
+class SyncOutcome {
+  const SyncOutcome({
+    required this.pushedCount,
+    required this.pulledCount,
+    required this.rebuiltCards,
+  });
+
+  final int pushedCount;
+  final int pulledCount;
+  final int rebuiltCards;
+}
+
 class SyncOutboxUseCase {
   const SyncOutboxUseCase(this._srs, this._sync);
 
   final ISrsRepository _srs;
   final ISyncRepository _sync;
 
-  /// Résultat de la synchronisation, exposé au ViewModel.
-  class Outcome {
-    const Outcome({
-      required this.pushedCount,
-      required this.pulledCount,
-      required this.rebuiltCards,
-    });
-    final int pushedCount;
-    final int pulledCount;
-    final int rebuiltCards;
-  }
-
-  Future<Outcome> call({
+  Future<SyncOutcome> call({
     required String userId,
     required String deviceId,
     int nowMs = 0,
@@ -69,7 +77,7 @@ class SyncOutboxUseCase {
       );
     }
 
-    return Outcome(
+    return SyncOutcome(
       pushedCount: push.acceptedIds.length,
       pulledCount: pull.events.length,
       rebuiltCards: touchedCardIds.length,

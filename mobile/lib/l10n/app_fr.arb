@@ -1,0 +1,226 @@
+{
+  "@@locale": "fr",
+  "appTitle": "MedAnki DZ",
+  "actionRetry": "Réessayer",
+  "actionCancel": "Annuler",
+  "actionContinue": "Continuer",
+  "actionSave": "Enregistrer",
+  "actionClose": "Fermer",
+  "actionRefresh": "Rafraîchir",
+  "actionSkip": "Passer",
+  "actionNext": "Suivant",
+  "actionBack": "Retour",
+  "errorGeneric": "Une erreur est survenue.",
+  "errorOffline": "Pas de connexion. Le mode hors ligne reste disponible.",
+  "loading": "Chargement…",
+  "navHome": "Accueil",
+  "navStudy": "Étudier",
+  "navDecks": "Cours",
+  "navExams": "Examens",
+  "navProfile": "Profil",
+  "authWelcomeTitle": "Révise mieux, retiens plus",
+  "authWelcomeSubtitle": "La révision par répétition espacée pour les étudiants en médecine en Algérie.",
+  "authLogin": "Se connecter",
+  "authSignup": "Créer un compte",
+  "authEmail": "Adresse e-mail",
+  "authEmailInvalid": "Adresse e-mail invalide.",
+  "authMagicLink": "Recevoir un lien de connexion",
+  "authMagicLinkSent": "Lien envoyé. Vérifie ta boîte mail.",
+  "authGoogle": "Continuer avec Google",
+  "authDisplayName": "Nom affiché",
+  "authFaculty": "Faculté",
+  "authStudyYear": "Année d'étude",
+  "authFacultyRequired": "Choisis ta faculté.",
+  "authHaveAccount": "J'ai déjà un compte",
+  "authNoAccount": "Je n'ai pas encore de compte",
+  "onboardingLanguage": "Langue de l'application",
+  "onboardingLanguageHelp": "Tu pourras la changer à tout moment dans le profil.",
+  "onboardingGoal": "Objectif quotidien",
+  "onboardingGoalCards": "{count} cartes par jour",
+  "@onboardingGoalCards": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "onboardingGoalHelp": "Un objectif tenable vaut mieux qu'un objectif ambitieux abandonné.",
+  "onboardingNotifications": "Rappels de révision",
+  "onboardingNotificationsHelp": "Un rappel par jour, jamais entre 22 h et 8 h.",
+  "onboardingNotificationsEnable": "Activer les rappels",
+  "onboardingNotificationsLater": "Plus tard",
+  "onboardingDone": "C'est parti !",
+  "homeGreeting": "Bonjour {name}",
+  "@homeGreeting": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "homeDueToday": "À réviser aujourd'hui",
+  "homeDueCount": "{count,plural, =0{Rien à réviser} =1{1 carte} other{{count} cartes}}",
+  "@homeDueCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeStartStudy": "Commencer la session",
+  "homeStreak": "{count,plural, =0{Aucune série} =1{1 jour de série} other{{count} jours de série}}",
+  "@homeStreak": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeXp": "{count} XP",
+  "@homeXp": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeLevel": "Niveau {level}",
+  "@homeLevel": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "homeAccuracy": "Précision",
+  "homeNothingDue": "Tout est à jour. Reviens demain !",
+  "homeQuickActions": "Raccourcis",
+  "studyTitle": "Session d'étude",
+  "studyShowAnswer": "Afficher la réponse",
+  "studyRatingAgain": "À revoir",
+  "studyRatingHard": "Difficile",
+  "studyRatingGood": "Correct",
+  "studyRatingEasy": "Facile",
+  "studyEmpty": "Rien à réviser pour le moment.",
+  "studyDone": "Session terminée",
+  "studyReviewed": "{count} cartes revues",
+  "@studyReviewed": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "studyDictate": "Dicter une carte",
+  "studyHint": "Indice",
+  "decksTitle": "Catalogue de cours",
+  "decksDownloaded": "Téléchargé",
+  "decksDownload": "Télécharger",
+  "decksDownloading": "Téléchargement…",
+  "decksPremium": "Premium",
+  "decksCardCount": "{count} cartes",
+  "@decksCardCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "decksEmpty": "Aucun cours disponible pour l'instant.",
+  "decksOfflineReady": "Disponible hors ligne",
+  "examsTitle": "Examens blancs",
+  "examsStart": "Commencer l'examen",
+  "examsQuestionOf": "Question {current} / {total}",
+  "@examsQuestionOf": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "examsTimeLeft": "Temps restant : {time}",
+  "@examsTimeLeft": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "examsSubmit": "Terminer l'examen",
+  "examsSubmitConfirm": "Terminer maintenant ? Les questions sans réponse seront comptées fausses.",
+  "examsScore": "Score : {score} %",
+  "@examsScore": {
+    "placeholders": {
+      "score": {
+        "type": "String"
+      }
+    }
+  },
+  "examsPassed": "Réussi",
+  "examsFailed": "Non atteint",
+  "examsExpired": "Le temps est écoulé. L'examen a été soumis automatiquement.",
+  "examsEmpty": "Aucun examen disponible.",
+  "examsPrediction": "Score prédit",
+  "paywallTitle": "Passe à MedAnki Premium",
+  "paywallBenefitDecks": "Tous les cours, hors ligne",
+  "paywallBenefitExams": "Examens blancs illimités",
+  "paywallBenefitAi": "Tuteur IA et indices adaptatifs",
+  "paywallCta": "Payer avec Chargily",
+  "paywallRestore": "J'ai déjà payé",
+  "paywallActiveUntil": "Actif jusqu'au {date}",
+  "@paywallActiveUntil": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "paywallGrace": "Ton accès expire bientôt. Renouvelle pour ne rien perdre.",
+  "paywallGroupPack": "Pack de groupe",
+  "paywallJoinGroup": "Rejoindre avec un code",
+  "profileTitle": "Profil",
+  "profileLanguage": "Langue",
+  "profileNotifications": "Notifications",
+  "profileDailyGoal": "Objectif quotidien",
+  "profileLeaderboardOptIn": "Apparaître dans le classement",
+  "profileSync": "Synchroniser maintenant",
+  "profileSynced": "Synchronisé",
+  "profileLogout": "Se déconnecter",
+  "profileLogoutConfirm": "Se déconnecter ? Les révisions non synchronisées seront envoyées d'abord.",
+  "profileVersion": "Version {version}",
+  "@profileVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "profileLegal": "Mentions légales et confidentialité",
+  "leaderboardTitle": "Classement de la semaine",
+  "leaderboardOptIn": "Participer au classement",
+  "leaderboardOptOut": "Quitter le classement",
+  "leaderboardMyRank": "Mon rang : {rank}",
+  "@leaderboardMyRank": {
+    "placeholders": {
+      "rank": {
+        "type": "int"
+      }
+    }
+  },
+  "leaderboardEmpty": "Personne dans le classement pour l'instant.",
+  "leaderboardError": "Impossible de charger le classement.",
+  "badgesTitle": "Badges",
+  "badgesLocked": "Verrouillé",
+  "badgesEmpty": "Aucun badge pour l'instant. Révise pour en débloquer !",
+  "shareTitle": "Partager",
+  "shareCard": "Partager cette carte",
+  "shareProgress": "Partager ma progression",
+  "notifPermissionTitle": "Autoriser les rappels ?",
+  "notifPermissionBody": "On t'envoie un rappel quand des cartes sont dues. Un par jour, pas plus.",
+  "notifPermissionAllow": "Autoriser",
+  "notifPermissionDeny": "Non merci",
+  "notifDenied": "Les notifications sont désactivées. Tu peux les réactiver dans les réglages du téléphone."
+}

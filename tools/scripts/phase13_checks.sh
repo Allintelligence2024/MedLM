@@ -79,6 +79,28 @@ if [ -f tools/scripts/check_partnerships.py ]; then
     echo "  ✓ check_partnerships.py (Phase 20.4)" || \
     { echo "  ❌ check_partnerships.py"; exit 1; }
 fi
+# Gardes mobiles (audit 2026-08-01) : i18n trilingue, parité des
+# facultés avec l'allow-list serveur, Dart statiquement valide.
+if [ -f tools/scripts/check_mobile_i18n.py ]; then
+  python3 tools/scripts/check_mobile_i18n.py && \
+    echo "  ✓ check_mobile_i18n.py (i18n mobile P1-4)" || \
+    { echo "  ❌ check_mobile_i18n.py"; exit 1; }
+fi
+if [ -f tools/scripts/check_faculties_parity.py ]; then
+  python3 tools/scripts/check_faculties_parity.py && \
+    echo "  ✓ check_faculties_parity.py (allow-list facultés)" || \
+    { echo "  ❌ check_faculties_parity.py"; exit 1; }
+fi
+if [ -f tools/scripts/check_dart_static.py ]; then
+  python3 tools/scripts/check_dart_static.py && \
+    echo "  ✓ check_dart_static.py (Dart statique P0-2)" || \
+    { echo "  ❌ check_dart_static.py"; exit 1; }
+fi
+if [ -f tools/scripts/gen_l10n.py ]; then
+  python3 tools/scripts/gen_l10n.py --check && \
+    echo "  ✓ gen_l10n.py --check (localisations à jour)" || \
+    { echo "  ❌ gen_l10n.py --check"; exit 1; }
+fi
 if [ -f tools/test_repository_logic.py ]; then
   python3 tools/test_repository_logic.py > /tmp/phase13_repo.log 2>&1 && \
     echo "  ✓ test_repository_logic.py" || \

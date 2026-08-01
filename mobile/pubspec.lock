@@ -6,6 +6,12 @@ sdks:
   flutter: '>=3.0.0'
 
 packages:
+  flutter_localizations:
+    dependency: transitive
+    version: 1.0.0
+  intl:
+    dependency: "direct main"
+    version: 0.19.0
   drift:
     dependency: "direct main"
     version: 2.18.0
@@ -21,6 +27,9 @@ packages:
   flutter_riverpod:
     dependency: "direct main"
     version: 2.5.1
+  go_router:
+    dependency: "direct main"
+    version: 14.2.0
   dio:
     dependency: "direct main"
     version: 5.7.0
@@ -39,15 +48,27 @@ packages:
   connectivity_plus:
     dependency: "direct main"
     version: 6.0.5
-  uuid:
+  firebase_core:
     dependency: "direct main"
-    version: 4.5.0
-  fake_async:
+    version: 3.6.0
+  firebase_messaging:
     dependency: "direct main"
-    version: 1.3.1
-  mocktail:
+    version: 15.1.3
+  flutter_local_notifications:
     dependency: "direct main"
-    version: 1.0.4
+    version: 17.2.3
+  permission_handler:
+    dependency: "direct main"
+    version: 11.3.1
+  package_info_plus:
+    dependency: "direct main"
+    version: 8.0.2
+  url_launcher:
+    dependency: "direct main"
+    version: 6.3.0
+  share_plus:
+    dependency: "direct main"
+    version: 10.0.2
   flutter_test:
     dependency: transitive
     version: 1.0.0
@@ -63,3 +84,15 @@ packages:
   build_runner:
     dependency: "direct main"
     version: 2.4.9
+  mocktail:
+    dependency: "direct main"
+    version: 1.0.4
+  fake_async:
+    dependency: "direct main"
+    version: 1.3.1
+  flutter_launcher_icons:
+    dependency: "direct main"
+    version: 0.13.1
+  flutter_native_splash:
+    dependency: "direct main"
+    version: 2.4.1

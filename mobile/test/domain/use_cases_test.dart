@@ -121,7 +121,7 @@ void main() {
         reviewedAtMs: 1700000000000,
       ));
 
-      final SyncOutboxUseCase.Outcome outcome = await useCase(
+      final SyncOutcome outcome = await useCase(
         userId: 'u1',
         deviceId: 'd1',
         nowMs: 1700000000000,

@@ -1,7 +1,7 @@
 // StatsRepository — consomme /v1/stats/me (Phase 15.2).
 library;
 
-import '../network/api_client.dart';
+import '../../network/api_client.dart';
 import 'stats_models.dart';
 
 class StatsRepository {
