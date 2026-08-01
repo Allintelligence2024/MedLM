@@ -15,7 +15,7 @@
 ///   1. lire `review_logs` depuis le curseur ;
 ///   2. le client rejoue `fold` localement (c'est sa responsabilité).
 import { Inject, Injectable, Logger, BadRequestException } from '@nestjs/common';
-import { and, eq, gte, asc, sql } from 'drizzle-orm';
+import { and, eq, gte, asc, inArray } from 'drizzle-orm';
 import { reviewLogs, srsCardState, syncCursors } from '../db/schema';
 import { DRIZZLE, Database } from '../db/database.module';
 import { FsrsEngine } from '../common/fsrs/fsrs.engine';
@@ -54,11 +54,22 @@ export class SrsSyncService {
       // 1. dédupliquer côté serveur (le mobile a déjà dédupliqué, mais
       //    un acteur malveillant peut rejouer un batch).
       const ids = args.events.map((e) => e.id);
+      // `inArray` plutôt que `= ANY(${ids}::uuid[])`.
+      //
+      // Drizzle interpole un tableau JS comme un paramètre SCALAIRE :
+      // PostgreSQL recevait un UUID là où il attendait un tableau et
+      // répondait « malformed array literal ». Résultat : TOUT push de
+      // synchronisation partait en 500 — la boucle centrale du produit
+      // était inutilisable (bug trouvé le 2026-08-01 en poussant un
+      // événement réel contre une vraie base).
+      //
+      // Les tests ne l'attrapaient pas : ils substituent un faux
+      // DRIZZLE qui n'exécute aucun SQL.
       const existing = await tx
         .select({ id: reviewLogs.id })
         .from(reviewLogs)
         .where(
-          sql`${reviewLogs.id} = ANY(${ids}::uuid[]) AND ${reviewLogs.userId} = ${args.userId}`,
+          and(inArray(reviewLogs.id, ids), eq(reviewLogs.userId, args.userId)),
         );
       const existingSet = new Set(existing.map((r) => r.id));
 

@@ -98,3 +98,53 @@ export function buildJwtConfig(args: {
       "vérification hors-ligne de l'entitlement (RS256) est indisponible.",
   };
 }
+
+
+/// Clé publique de VÉRIFICATION.
+///
+/// SECOND BUG, jumeau du premier (trouvé le 2026-08-01 en exécutant un
+/// parcours complet contre le binaire réel) : la signature lit
+/// `JWT_SIGNING_KEY_PATH`, la vérification lit `JWT_PUBLIC_KEY_PATH`.
+/// Renseigner l'une sans l'autre produisait des jetons RS256 valides
+/// que le garde ne savait pas vérifier — TOUTES les requêtes
+/// authentifiées repartaient en 401 :
+///
+///   {"message":"token invalide : secret or public key must be provided"}
+///
+/// Le serveur démarrait, l'inscription fonctionnait, et absolument rien
+/// d'autre. Un déploiement dans cet état est une panne totale et
+/// silencieuse.
+///
+/// Correctif : si la clé publique n'est pas configurée mais que la clé
+/// privée l'est, on la DÉRIVE de la privée. Une clé publique RSA se
+/// calcule depuis la privée — exiger les deux variables était une
+/// contrainte gratuite, et donc un piège.
+export function resolveVerificationKey(args: {
+  publicKeyPath: string | undefined;
+  signingKeyPath: string | undefined;
+  readKey: (path: string) => string;
+  derivePublic: (privatePem: string) => string;
+}): { publicKey: string | null; source: 'configured' | 'derived' | 'none' } {
+  const { publicKeyPath, signingKeyPath, readKey, derivePublic } = args;
+
+  if (publicKeyPath) {
+    try {
+      return { publicKey: readKey(publicKeyPath), source: 'configured' };
+    } catch {
+      // On tentera la dérivation plutôt que d'échouer tout de suite.
+    }
+  }
+
+  if (signingKeyPath) {
+    try {
+      return {
+        publicKey: derivePublic(readKey(signingKeyPath)),
+        source: 'derived',
+      };
+    } catch {
+      return { publicKey: null, source: 'none' };
+    }
+  }
+
+  return { publicKey: null, source: 'none' };
+}

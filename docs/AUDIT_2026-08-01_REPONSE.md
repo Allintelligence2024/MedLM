@@ -34,12 +34,21 @@ dont une faille de sécurité.
 | **`nest build` ne produisait pas `dist/main.js`** | `tsconfig.json` inclut `test/**/*`, donc la racine de sortie glissait vers `dist/src/`. `npm start`, `start:prod` et le `CMD` de l'image Docker échouaient tous — CrashLoopBackOff au premier déploiement |
 | **`migrate.ts` cherchait `./src/db/migrations`** | chemin absent de l'image Docker, où le Dockerfile range les `.sql` dans `dist/db/migrations` |
 | **🔴 Repli JWT sur un secret du dépôt** | sans `JWT_SIGNING_KEY_PATH`, l'app signait en HS256 avec `dev-only-secret-do-not-use-in-prod`, **y compris en `NODE_ENV=production`**. Un jeton `role: admin` forgé en trois lignes obtenait **200** sur les endpoints protégés |
+| **Signature RS256 sans clé de vérification** | signer lit `JWT_SIGNING_KEY_PATH`, vérifier lit `JWT_PUBLIC_KEY_PATH` : renseigner l'une sans l'autre donnait **401 sur toutes les requêtes authentifiées**. Le serveur démarre, l'inscription marche, et plus rien d'autre |
+| **🔴 Rotation de refresh token inopérante** | `revokedAt` était positionné à chaque rotation mais **jamais relu** : un jeton révoqué (ou expiré) restait valable indéfiniment. Un jeton volé survivait au rafraîchissement de la victime |
+| **HTTP 500 sur tout push de synchronisation** | `= ANY(${ids}::uuid[])` — drizzle interpole le tableau JS comme un paramètre scalaire : « malformed array literal ». **La boucle centrale du produit** était inutilisable |
 
 La faille JWT avait une cause aggravante : `security_audit.py` exemptait
 toute ligne contenant « dev-only » ou « do-not-use ». Le secret
 s'appelant littéralement `dev-only-secret-do-not-use-in-prod`, **il
 s'auto-exemptait de l'audit censé le détecter**. La sentinelle ne vaut
 désormais que dans les commentaires.
+
+Un parcours métier complet (`tools/scripts/check_business_flows.sh`,
+17 vérifications) tourne désormais contre le binaire compilé et la vraie
+base : inscription, RS256, rotation et rejeu, enregistrement d'appareil
+et idempotence, push/pull SRS, onboarding, entitlement, métriques.
+C'est ce script qui a révélé les trois dernières lignes du tableau.
 
 Vérifié dans la foulée, pour la première fois contre une vraie base :
 les 6 triggers append-only existent **et mordent** — `UPDATE` et

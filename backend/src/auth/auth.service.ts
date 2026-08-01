@@ -5,7 +5,7 @@
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
-import { eq, sql } from 'drizzle-orm';
+import { and, eq, gt, isNull, sql } from 'drizzle-orm';
 import { refreshTokens, users, userDevices } from '../db/schema';
 import { DRIZZLE, Database } from '../db/database.module';
 import { createHash, randomBytes } from 'crypto';
@@ -88,10 +88,27 @@ export class AuthService {
   /// POST /auth/refresh — rotation du refresh token.
   async refresh(args: { refreshToken: string; platform: string }): Promise<TokenResponse> {
     const tokenHash = createHash('sha256').update(args.refreshToken).digest('hex');
+    // Le jeton doit être NON RÉVOQUÉ et NON EXPIRÉ.
+    //
+    // Ces deux conditions manquaient (bug trouvé le 2026-08-01 en
+    // rejouant un parcours réel) : `revokedAt` était bien positionné à
+    // chaque rotation, mais jamais relu. Un refresh token restait donc
+    // valable indéfiniment, y compris après sa révocation et au-delà de
+    // son expiration — la rotation n'apportait AUCUNE protection.
+    //
+    // C'est précisément le scénario qu'elle est censée couvrir : un
+    // jeton volé reste utilisable par l'attaquant même après que la
+    // victime a rafraîchi sa session.
     const row = await this.db
       .select({ user: refreshTokens.userId, device: refreshTokens.deviceId })
       .from(refreshTokens)
-      .where(eq(refreshTokens.tokenHash, tokenHash))
+      .where(
+        and(
+          eq(refreshTokens.tokenHash, tokenHash),
+          isNull(refreshTokens.revokedAt),
+          gt(refreshTokens.expiresAt, new Date()),
+        ),
+      )
       .then((rows) => rows[0]);
     if (!row) throw new UnauthorizedException('refresh token invalide');
     const user = await this.db

@@ -106,6 +106,16 @@ jobs:
       - name: Tests d'intégration
         run: npm run test:integration
 
+      # Parcours métier contre le binaire RÉEL et la vraie base : c'est
+      # ce qui manquait quand trois pannes bloquantes (sync en 500,
+      # 401 généralisé, rotation inopérante) ont survécu à 531 tests.
+      - name: Build pour le test de parcours
+        run: npm run build
+
+      - name: Parcours métier de bout en bout
+        working-directory: .
+        run: ./tools/scripts/check_business_flows.sh
+
       - name: Nettoyer le schéma
         if: always()
         run: psql "$DATABASE_URL" -c "DROP SCHEMA IF EXISTS \"$PG_SCHEMA\" CASCADE;" || true
