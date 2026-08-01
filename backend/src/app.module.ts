@@ -27,6 +27,7 @@ import { CacheModule } from './cache/cache.module';
 import { DbModule } from './db/db.module';
 import { AiModule } from './ai/ai.module';
 import { GatewayModule } from './gateway/gateway.module';
+import { MlModule } from './ml/ml.module';
 
 @Module({
   imports: [
@@ -66,6 +67,7 @@ import { GatewayModule } from './gateway/gateway.module';
     DbModule, // Phase 18 (read replicas)
     AiModule, // Phase 18.1+ (hints adaptatifs, génération LLM, tutorat)
     GatewayModule, // Phase 20.2 (passerelle GraphQL, opérations persistées)
+    MlModule, // Phase 20.3 (prédiction examen blanc + focus par tag, local)
   ],
 })
 export class AppModule {}

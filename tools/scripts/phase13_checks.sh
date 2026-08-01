@@ -63,6 +63,11 @@ if [ -f tools/scripts/check_regions.py ]; then
     echo "  ✓ check_regions.py (multi-régions Phase 20.1)" || \
     { echo "  ❌ check_regions.py"; exit 1; }
 fi
+if [ -f tools/ml_eval.py ]; then
+  python3 tools/ml_eval.py && \
+    echo "  ✓ ml_eval.py (prédicteur Phase 20.3)" || \
+    { echo "  ❌ ml_eval.py"; exit 1; }
+fi
 if [ -f tools/test_repository_logic.py ]; then
   python3 tools/test_repository_logic.py > /tmp/phase13_repo.log 2>&1 && \
     echo "  ✓ test_repository_logic.py" || \
