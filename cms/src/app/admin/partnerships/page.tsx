@@ -8,6 +8,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { Handshake, PlusCircle } from 'lucide-react';
+import { CreatePartnershipDialog } from './create_partnership_dialog';
 
 const API = process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:3000';
 
@@ -36,6 +37,7 @@ export default function PartnershipsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [filter, setFilter] = useState<string>('all');
+  const [creating, setCreating] = useState(false);
 
   const token = () => localStorage.getItem('cms_token') ?? '';
 
@@ -100,7 +102,7 @@ export default function PartnershipsPage() {
         </div>
         <button
           className="flex items-center gap-2 rounded bg-emerald-600 px-3 py-2 text-sm text-white hover:bg-emerald-700"
-          onClick={() => setError('Création : formulaire à brancher sur POST /v1/partnerships (rôle editor) — voir PHASE_20_4_RAPPORT.md')}
+          onClick={() => setCreating(true)}
         >
           <PlusCircle className="h-4 w-4" /> Nouveau brouillon
         </button>
@@ -127,6 +129,18 @@ export default function PartnershipsPage() {
         <div className="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-800">
           {error}
         </div>
+      )}
+
+      {creating && (
+        <CreatePartnershipDialog
+          apiBaseUrl={API}
+          token={token()}
+          onClose={() => setCreating(false)}
+          onCreated={() => {
+            setCreating(false);
+            load();
+          }}
+        />
       )}
 
       <table className="w-full overflow-hidden rounded-lg border border-slate-200">
