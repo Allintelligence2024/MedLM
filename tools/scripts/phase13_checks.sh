@@ -91,6 +91,11 @@ if [ -f tools/scripts/check_faculties_parity.py ]; then
     echo "  ✓ check_faculties_parity.py (allow-list facultés)" || \
     { echo "  ❌ check_faculties_parity.py"; exit 1; }
 fi
+if [ -f tools/scripts/check_migrations_apply.py ]; then
+  python3 tools/scripts/check_migrations_apply.py && \
+    echo "  ✓ check_migrations_apply.py (schéma ↔ migrations)" || \
+    { echo "  ❌ check_migrations_apply.py"; exit 1; }
+fi
 if [ -f tools/scripts/check_workflows.py ]; then
   python3 tools/scripts/check_workflows.py >/dev/null && \
     echo "  ✓ check_workflows.py (workflows CI cohérents P0-3)" || \

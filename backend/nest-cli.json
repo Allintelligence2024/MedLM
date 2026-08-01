@@ -5,7 +5,12 @@
   "compilerOptions": {
     "deleteOutDir": true,
     "assets": [
-      { "include": "../mobile/assets/content/*.json", "outDir": "dist", "watchAssets": true }
-    ]
+      {
+        "include": "../mobile/assets/content/*.json",
+        "outDir": "dist",
+        "watchAssets": true
+      }
+    ],
+    "tsConfigPath": "tsconfig.build.json"
   }
 }

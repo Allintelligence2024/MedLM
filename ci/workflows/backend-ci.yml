@@ -47,6 +47,14 @@ jobs:
       - name: Nest build
         run: npm run build
 
+      # Le build peut « réussir » sans produire dist/main.js (la racine
+      # de sortie glisse si tsconfig inclut test/). On démarre donc
+      # réellement le binaire — c'est ce qui manquait quand le bug est
+      # passé jusqu'à l'image Docker.
+      - name: Démarrage du binaire compilé
+        working-directory: .
+        run: ./tools/scripts/check_build_artifact.sh
+
   integration:
     name: integration (postgres 16)
     runs-on: ubuntu-latest

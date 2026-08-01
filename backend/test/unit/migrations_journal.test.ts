@@ -72,3 +72,51 @@ describe('migrations — meta/_journal.json', () => {
     }
   });
 });
+
+// ── Localisation du dossier de migrations (bug trouvé le 2026-08-01) ──
+//
+// `migrate.ts` codait en dur `./src/db/migrations`. Correct en
+// développement, FAUX dans l'image Docker : le Dockerfile copie les
+// `.sql` vers `dist/db/migrations` et `src/` n'y existe pas. Toute
+// migration lancée depuis le conteneur échouait sur un dossier absent.
+describe('resolveMigrationsFolder', () => {
+  it('trouve le dossier de développement', async () => {
+    const { resolveMigrationsFolder } = await import('../../src/db/migrate');
+    // Depuis backend/, c'est le chemin réel du dépôt.
+    expect(resolveMigrationsFolder(['./src/db/migrations'])).toBe(
+      './src/db/migrations',
+    );
+  });
+
+  it('respecte l\'ordre de priorité des candidats', async () => {
+    const { resolveMigrationsFolder } = await import('../../src/db/migrate');
+    expect(
+      resolveMigrationsFolder(['./inexistant', './src/db/migrations']),
+    ).toBe('./src/db/migrations');
+  });
+
+  it('ignore les candidats vides (MIGRATIONS_DIR non défini)', async () => {
+    const { resolveMigrationsFolder } = await import('../../src/db/migrate');
+    expect(resolveMigrationsFolder(['', './src/db/migrations'])).toBe(
+      './src/db/migrations',
+    );
+  });
+
+  it('exige la présence de meta/_journal.json, pas juste du dossier', async () => {
+    const { resolveMigrationsFolder } = await import('../../src/db/migrate');
+    // `src/db` existe mais ne contient pas de journal : ce n'est pas
+    // un dossier de migrations valide.
+    expect(() => resolveMigrationsFolder(['./src/db'])).toThrow(
+      /introuvable/,
+    );
+  });
+
+  it('échoue avec un message qui liste les emplacements sondés', async () => {
+    const { resolveMigrationsFolder } = await import('../../src/db/migrate');
+    // Un « Can't find meta/_journal.json » brut de drizzle enverrait
+    // chercher au mauvais endroit.
+    expect(() => resolveMigrationsFolder(['./nulle-part'])).toThrow(
+      /nulle-part/,
+    );
+  });
+});
