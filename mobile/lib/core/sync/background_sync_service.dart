@@ -25,6 +25,8 @@ import 'package:path_provider/path_provider.dart';
 import '../../data/local/app_database.dart';
 import '../../data/network/api_client.dart';
 import '../../data/network/secure_token_storage.dart';
+import '../../data/repositories/ai/adaptive_params_cache.dart';
+import '../../data/repositories/ai/ai_repository.dart';
 import '../../data/repositories/rest_sync_repository.dart';
 import '../container/app_container.dart' show AppContainer;
 import 'background_sync.dart';
@@ -51,6 +53,22 @@ class BackgroundSyncService {
       try {
         final pushed = await sync.pushPending();
         final pulled = await sync.pullSince(0);
+
+        // Poids FSRS adaptatifs (Phase 19.6) : refresh périodique si
+        // le cache est périmé (> 6 h) — best-effort absolu, un échec
+        // réseau ici ne DOIT PAS invalider la tâche de sync (le SRS
+        // local continue sur les poids actuels).
+        final cache = AdaptiveParamsCache(db: db);
+        final existing = await cache.read();
+        final nowMs = DateTime.now().millisecondsSinceEpoch;
+        if (existing == null || cache.isStale(existing.fetchedAtMs, nowMs)) {
+          await refreshAdaptiveFsrsParameters(
+            ai: AiRepository(api: api),
+            cache: cache,
+            nowMs: nowMs,
+          );
+        }
+
         // On peut logger via print() — visible dans logcat (Android)
         // et os_log (iOS).
         // ignore: avoid_print
