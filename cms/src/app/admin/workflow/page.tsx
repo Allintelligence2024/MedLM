@@ -8,6 +8,7 @@
 import { useEffect, useState } from 'react';
 import { WorkflowBoard } from '@/components/workflow/workflow_board';
 import type { CardStatus } from '@/lib/types';
+import { getToken } from '@/lib/auth';
 
 interface Card {
   id: string;
@@ -28,7 +29,7 @@ export default function WorkflowPage() {
     async function load() {
       try {
         const res = await fetch(`${API}/v1/content/cards/list?limit=200`, {
-          headers: { Authorization: `Bearer ${localStorage.getItem('cms_token') ?? ''}` },
+          headers: { Authorization: `Bearer ${getToken()}` },
         });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
@@ -57,7 +58,7 @@ export default function WorkflowPage() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('cms_token') ?? ''}`,
+          Authorization: `Bearer ${getToken()}`,
         },
         body: JSON.stringify({ to }),
       });

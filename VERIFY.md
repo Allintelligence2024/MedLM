@@ -12,6 +12,16 @@
 | `tools/scripts/generate_lockfiles.py --check` | cohérence lockfiles backend/cms/mobile/tools |
 | `tools/validate_content.py` | Content Policy : 697 cartes, règles de rejet, sources obligatoires |
 | `tools/scripts/check_syntax_guard.py` | délimiters `(){}[]` équilibrés (Dart mobile/ + Python tools/tests), 0 marqueur de conflit repo-wide ; TS exclu documenté (regex/gabarits imbriqués) |
+| `tools/scripts/check_dart_static.py` | Dart statiquement valide sans SDK : 0 classe imbriquée, 0 extension instanciée, `part`/imports résolus (a révélé 3 fichiers qui n'avaient jamais compilé — audit P0-2) |
+| `tools/scripts/check_mobile_i18n.py` | i18n mobile : 177 clés × FR/AR/EN, placeholders alignés, **0 chaîne FR en dur dans `lib/ui/`, liste d'exception vide** (audit P1-4) |
+| `tools/scripts/check_faculties_parity.py` | l'allow-list serveur des facultés == le choix proposé à l'inscription (contenu, ordre, années, niveaux) |
+| `tools/scripts/gen_l10n.py --check` | `app_localizations.dart` généré est à jour vis-à-vis des `.arb` |
+| `tools/scripts/check_bundle_assets.py` | aucun deck de démonstration livré en production, archive hors bundle (audit P2-4) |
+| `tools/scripts/apply_android_release_config.py --check` | build de release Android : R8 et shrink actifs, signature de release (jamais la clé de debug), `applicationId` de production (audit P2-8) |
+| `tools/scripts/check_l10n_usage.py` | chaque `l10n.clé(…)` du code existe, avec la bonne arité (getter vs méthode, nombre d'arguments) — remplace le compilateur Dart sur ce point |
+| `tools/scripts/check_dart_symbols.py` | méthodes et paramètres nommés de `ApiClient`, membres d'`AppContainer`, providers Riverpod, imports des tests |
+| `tools/scripts/check_workflows.py` | workflows CI : YAML valide, `needs` déclarés, scripts et `working-directory` existants, `npm run` déclarés, 0 secret en dur |
+| `tools/scripts/check_dockerfiles.py` | images : étapes `COPY --from` existantes, sources présentes dans le contexte, **healthcheck ↔ route backend réelle**, user non-root, base taguée ; compose : dockerfiles, dépendances, volumes nommés, `service_healthy` ↔ healthcheck déclaré |
 | `tools/scripts/phase13_checks.sh` | orchestre tout ce niveau + load-tester self-test |
 
 ## Niveau 1 — moteur SRS (python, < 2 s)
@@ -53,7 +63,9 @@
 | Où | Quoi |
 |---|---|
 | CI avec SDK Dart | `cd mobile && dart test` (golden, adaptatifs, widgets IA, sécurité) |
-| CI avec node_modules | `cd backend && npm run test` (vitest, ~130 cas IA + modules) |
+| CI avec node_modules | `cd backend && npm run test` (vitest, 501 cas) |
+| CI avec PostgreSQL | `cd backend && npm run test:integration` (5 fichiers, 28 cas : routage, sync, refresh, webhook billing, chronométrage examen) — `backend-ci.yml` |
+| CI avec Docker | `docker build` des images backend et CMS |
 | Staging K8s | `helm`/`kustomize` overlays prod, SLO Phase 17 (P95 < 500 ms, 5xx < 1 %) |
 | Prestatire externe | pen test — canal SECURITY.md §1, périmètre = `pentest_prep.py --report` |
 | Device physique | plugins STT/TTS, notifications FCM/APNs, transaction Chargily |

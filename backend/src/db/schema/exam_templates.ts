@@ -77,6 +77,6 @@ export const examAttemptEvents = pgTable(
 
 // NOTE : l'index unique partiel « une tentative active par user/template »
 // vit désormais dans le callback de la table `exam_attempts`
-// (schema/exams.ts) + migration 0017. Déclarer un index standalone sur
+// (schema/exams.ts) + migration 0016. Déclarer un index standalone sur
 // des colonnes d'une autre table crashait au chargement
 // (`defaultConfig` undefined → JSON.parse(undefined)).

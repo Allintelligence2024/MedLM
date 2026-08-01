@@ -1,0 +1,33 @@
+{
+  // Configuration de BUILD — distincte de tsconfig.json (audit).
+  //
+  // LE BUG QU'ELLE CORRIGE : `tsconfig.json` inclut `test/**/*` pour que
+  // `tsc --noEmit` typecheck aussi les tests. Mais TypeScript calcule la
+  // racine de sortie comme le plus petit ancêtre commun des fichiers
+  // compilés : avec `src/` ET `test/`, cet ancêtre est la racine du
+  // projet, et l'émission part dans `dist/src/…` au lieu de `dist/…`.
+  //
+  // Conséquence : `nest build` réussissait, mais ne produisait PAS
+  // `dist/main.js`. Donc `npm start`, `npm run start:prod` et le
+  // `CMD ["node", "dist/main.js"]` de l'image Docker échouaient tous —
+  // le conteneur serait mort au démarrage, en production.
+  //
+  // Invisible jusqu'ici : aucun test ne lance le binaire compilé, et le
+  // `docker build` de la CI construit l'image sans jamais la démarrer.
+  //
+  // Ici, on ne compile que `src/` : l'ancêtre commun est `src/`, et la
+  // sortie retombe où tout le monde l'attend.
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./dist",
+    // Les tests ne sont pas livrés : leurs types n'ont pas à peser sur
+    // le build (et `vitest/globals` n'existe pas à l'exécution).
+    "types": ["node"],
+    // Le build ne réutilise pas le cache incrémental de tsconfig.json,
+    // dont le graphe de fichiers est différent.
+    "tsBuildInfoFile": "./dist/tsconfig.build.tsbuildinfo"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "test", "**/*.test.ts", "**/*.spec.ts"]
+}

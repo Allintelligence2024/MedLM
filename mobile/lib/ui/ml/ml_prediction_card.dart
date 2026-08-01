@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 
 import '../../data/repositories/ml/ml_models.dart';
 import '../../data/repositories/ml/ml_repository.dart';
+import '../../l10n/app_localizations.dart';
 
 class MlPredictionCard extends StatefulWidget {
   const MlPredictionCard({super.key, required this.repository});
@@ -56,15 +57,20 @@ class _MlPredictionCardState extends State<MlPredictionCard> {
           child: Padding(
             padding: const EdgeInsets.all(12),
             child: prediction.predictible
-                ? _buildPrediction(scheme, prediction)
-                : _buildRefusal(scheme, prediction),
+                ? _buildPrediction(context, scheme, prediction)
+                : _buildRefusal(context, scheme, prediction),
           ),
         );
       },
     );
   }
 
-  Widget _buildPrediction(ColorScheme scheme, MockExamPrediction p) {
+  Widget _buildPrediction(
+    BuildContext context,
+    ColorScheme scheme,
+    MockExamPrediction p,
+  ) {
+    final l10n = AppLocalizations.of(context);
     final score = p.scorePercent ?? 0;
     final margin = p.marginPercent ?? 0;
     return Column(
@@ -76,7 +82,7 @@ class _MlPredictionCardState extends State<MlPredictionCard> {
             const SizedBox(width: 8),
             Expanded(
               child: Text(
-                'Examen blanc : score estimé',
+                l10n.mlPredictionTitle,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: scheme.onSecondaryContainer,
@@ -97,7 +103,7 @@ class _MlPredictionCardState extends State<MlPredictionCard> {
         ),
         const SizedBox(height: 4),
         Text(
-          _explainFeatures(p.features),
+          _explainFeatures(l10n, p.features),
           style: TextStyle(
             fontSize: 12,
             color: scheme.onSecondaryContainer.withOpacity(0.75),
@@ -105,7 +111,7 @@ class _MlPredictionCardState extends State<MlPredictionCard> {
         ),
         const SizedBox(height: 2),
         Text(
-          'Modèle ${p.modelVersion} · fenêtre ${p.windowDays} j',
+          l10n.mlModelWindow(p.modelVersion, p.windowDays),
           style: TextStyle(
             fontSize: 11,
             color: scheme.onSecondaryContainer.withOpacity(0.6),
@@ -115,7 +121,11 @@ class _MlPredictionCardState extends State<MlPredictionCard> {
     );
   }
 
-  Widget _buildRefusal(ColorScheme scheme, MockExamPrediction p) {
+  Widget _buildRefusal(
+    BuildContext context,
+    ColorScheme scheme,
+    MockExamPrediction p,
+  ) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -123,7 +133,9 @@ class _MlPredictionCardState extends State<MlPredictionCard> {
         const SizedBox(width: 8),
         Expanded(
           child: Text(
-            p.reason ?? 'Pas encore assez de données pour prédire.',
+            // La raison servie par le serveur est déjà localisée
+            // (k-anonymat, données insuffisantes) : on la préfère.
+            p.reason ?? AppLocalizations.of(context).mlNotEnoughData,
             style: TextStyle(
               fontSize: 13,
               color: scheme.onSecondaryContainer,
@@ -135,12 +147,15 @@ class _MlPredictionCardState extends State<MlPredictionCard> {
   }
 
   /// Explicabilité : traduit les features en une phrase lisible.
-  String _explainFeatures(ScoreFeatures f) {
-    return 'Basé sur ${f.reviews30d} revues sur 30 j : '
-        'réussite ${(f.accuracy30d * 100).round()} %, '
-        'couverture ${(f.coverageRatio * 100).round()} %, '
-        'cartes matures ${(f.matureRatio * 100).round()} %, '
-        'série ${f.streakDays} j.';
+  ///
+  /// v2 §13 : jamais de chiffre orphelin — l'utilisateur doit pouvoir
+  /// relier le score à ce qu'il a réellement fait.
+  String _explainFeatures(AppLocalizations l10n, ScoreFeatures f) {
+    return l10n.mlBasedOn(
+      f.reviews30d,
+      (f.accuracy30d * 100).round(),
+      f.streakDays,
+    );
   }
 }
 
@@ -151,10 +166,11 @@ class _BandChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final (label, color) = switch (band) {
-      ScoreBand.low => ('à risque', Colors.red.shade700),
-      ScoreBand.medium => ('moyen', Colors.amber.shade800),
-      ScoreBand.high => ('solide', Colors.green.shade700),
+      ScoreBand.low => (l10n.mlAtRisk, Colors.red.shade700),
+      ScoreBand.medium => (l10n.examsFailed, Colors.amber.shade800),
+      ScoreBand.high => (l10n.examsPassed, Colors.green.shade700),
       null => ('—', Colors.grey),
     };
     return Container(

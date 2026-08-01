@@ -1,0 +1,15 @@
+# Configuration de la génération i18n (audit P1-4).
+#
+# `flutter gen-l10n` (déclenché automatiquement par `flutter run`/`build`
+# grâce à `generate: true` dans pubspec.yaml) lit les .arb de lib/l10n/
+# et produit AppLocalizations dans .dart_tool/flutter_gen/.
+#
+# Le français est le modèle (template) : c'est la langue de rédaction du
+# produit. L'arabe et l'anglais en sont les traductions.
+arb-dir: lib/l10n
+template-arb-file: app_fr.arb
+output-localization-file: app_localizations.dart
+output-class: AppLocalizations
+nullable-getter: false
+# Une clé traduite en FR mais absente en AR/EN doit se voir.
+untranslated-messages-file: lib/l10n/untranslated.json

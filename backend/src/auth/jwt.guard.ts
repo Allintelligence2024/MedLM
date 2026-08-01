@@ -20,9 +20,11 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { Reflector } from '@nestjs/core';
-import { readFileSync, existsSync } from 'fs';
+import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import { IS_PUBLIC_KEY } from './public.decorator';
+import { createPublicKey } from 'node:crypto';
+import { resolveVerificationKey } from './jwt-config';
 
 export interface JwtPayload {
   sub: string; // userId
@@ -47,12 +49,25 @@ export class JwtGuard implements CanActivate {
     private readonly config: ConfigService,
     private readonly reflector: Reflector,
   ) {
-    const keyPath = this.config.get<string>('JWT_PUBLIC_KEY_PATH');
-    if (keyPath && existsSync(resolve(keyPath))) {
-      this.publicKey = readFileSync(resolve(keyPath), 'utf8');
-    } else {
+    // La clé publique peut être DÉRIVÉE de la clé privée : exiger les
+    // deux variables était un piège (cf. resolveVerificationKey).
+    // Signer en RS256 sans pouvoir vérifier renvoie 401 sur toutes les
+    // requêtes authentifiées — panne totale et silencieuse.
+    const resolved = resolveVerificationKey({
+      publicKeyPath: this.config.get<string>('JWT_PUBLIC_KEY_PATH'),
+      signingKeyPath: this.config.get<string>('JWT_SIGNING_KEY_PATH'),
+      readKey: (p) => readFileSync(resolve(p), 'utf8'),
+      derivePublic: (privatePem) =>
+        createPublicKey(privatePem).export({ type: 'spki', format: 'pem' }).toString(),
+    });
+    this.publicKey = resolved.publicKey;
+    if (resolved.source === 'derived') {
+      this.logger.log(
+        'JWT_PUBLIC_KEY_PATH absent : clé publique dérivée de la clé privée.',
+      );
+    } else if (resolved.source === 'none') {
       this.logger.warn(
-        'JWT_PUBLIC_KEY_PATH absent : mode dev (HS256). NE PAS UTILISER EN PROD.',
+        'Aucune clé RS256 : vérification en mode dev (HS256). NE PAS UTILISER EN PROD.',
       );
     }
   }

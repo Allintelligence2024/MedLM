@@ -17,6 +17,7 @@ import { MediaUpload, type MediaItem } from '@/components/upload/media_upload';
 import { evaluateChecklist, isReadyForApproval, failingFields } from '@/lib/checklist';
 import type { CardDetail } from '@/lib/types';
 import { Save, CheckCircle2, AlertCircle } from 'lucide-react';
+import { getToken } from '@/lib/auth';
 
 const API = process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:3000';
 
@@ -40,7 +41,7 @@ export default function CardEditPage() {
     async function load() {
       try {
         const res = await fetch(`${API}/v1/content/cards/${params.id}`, {
-          headers: { Authorization: `Bearer ${localStorage.getItem('cms_token') ?? ''}` },
+          headers: { Authorization: `Bearer ${getToken()}` },
         });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data: CardDetail = await res.json();
@@ -109,7 +110,7 @@ export default function CardEditPage() {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('cms_token') ?? ''}`,
+          Authorization: `Bearer ${getToken()}`,
         },
         body: JSON.stringify(body),
       });
@@ -136,7 +137,7 @@ export default function CardEditPage() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('cms_token') ?? ''}`,
+          Authorization: `Bearer ${getToken()}`,
         },
         body: JSON.stringify({ to: status }),
       });
@@ -221,7 +222,7 @@ export default function CardEditPage() {
         <h2 className="text-lg font-semibold">Médias</h2>
         <MediaUpload
           apiBaseUrl={API}
-          authToken={localStorage.getItem('cms_token') ?? ''}
+          authToken={getToken()}
           onUploaded={(item) => setMedia((prev) => [...prev, item])}
         />
         {media.length > 0 && (

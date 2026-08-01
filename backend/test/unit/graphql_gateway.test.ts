@@ -12,6 +12,7 @@ import {
   PERSISTED_NAMES,
 } from '../../src/gateway/persisted-operations';
 import { GatewayService } from '../../src/gateway/gateway.service';
+import { InMemoryCostBudgetStore } from '../../src/gateway/cost-budget.store';
 import type { RestBackend } from '../../src/gateway/rest-backend.port';
 
 // ── Backend REST simulé ─────────────────────────────────────────────
@@ -95,7 +96,9 @@ describe('GatewayService.execute', () => {
 
   beforeEach(() => {
     backend = new FakeRestBackend();
-    service = new GatewayService(backend);
+    // Store mémoire = comportement historique mono-instance
+    // (audit P2-2 : en production Redis prend le relais).
+    service = new GatewayService(backend, new InMemoryCostBudgetStore());
   });
 
   it('rejette une opération non persistée (400)', async () => {

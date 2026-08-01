@@ -18,7 +18,7 @@ import {
   PG_READ_POOL,
   resolveReadUrl,
 } from '../../src/db/database.module';
-import { DatabaseModule } from '../../src/db/database.module';
+import { DatabaseModule, isReadReplicaEnabled } from '../../src/db/database.module';
 
 describe('resolveReadUrl', () => {
   it('absente → null (fallback primary)', () => {
@@ -72,9 +72,24 @@ describe('DatabaseModule — providers lecture', () => {
     expect(factoryOf(PG_READ_POOL)(config({}))).toBeNull();
   });
 
-  it('PG_READ_POOL : réplica configurée → Pool (max 25, moitié primary)', () => {
+  it('PG_READ_POOL : réplica configurée MAIS flag absent → null', () => {
+    // Audit P2-1 : brancher des lectures sur un réplica dont le lag
+    // n'est pas surveillé donne des chiffres faux. L'activation est
+    // donc une décision d'exploitation explicite, pas une conséquence
+    // de la présence d'une URL.
+    expect(
+      factoryOf(PG_READ_POOL)(
+        config({ DATABASE_READ_URL: 'postgres://replica:5432/db' }),
+      ),
+    ).toBeNull();
+  });
+
+  it('PG_READ_POOL : flag + réplica → Pool (max 25, moitié primary)', () => {
     const pool = factoryOf(PG_READ_POOL)(
-      config({ DATABASE_READ_URL: 'postgres://replica:5432/db' }),
+      config({
+        DATABASE_READ_URL: 'postgres://replica:5432/db',
+        READ_REPLICA_ENABLED: 'true',
+      }),
     ) as Pool;
     expect(pool).toBeTruthy();
     expect((pool as any).options.max).toBe(25);
@@ -87,10 +102,13 @@ describe('DatabaseModule — providers lecture', () => {
     expect(readDrizzle).toBe(primaryDrizzle);
   });
 
-  it('DRIZZLE_READ avec réplica → instance drizzle distincte', () => {
+  it('DRIZZLE_READ avec réplica activée → instance drizzle distincte', () => {
     const primaryDrizzle = {} as Database;
     const readPool = factoryOf(PG_READ_POOL)(
-      config({ DATABASE_READ_URL: 'postgres://replica:5432/db' }),
+      config({
+        DATABASE_READ_URL: 'postgres://replica:5432/db',
+        READ_REPLICA_ENABLED: 'true',
+      }),
     ) as Pool;
     const readDrizzle = factoryOf(DRIZZLE_READ)(primaryDrizzle, readPool);
     expect(readDrizzle).not.toBe(primaryDrizzle);
@@ -109,5 +127,68 @@ describe('DatabaseModule — providers lecture', () => {
     expect(typeof DRIZZLE_READ).toBe('symbol');
     expect(typeof PG_READ_POOL).toBe('symbol');
     expect(String(DRIZZLE)).toContain('DRIZZLE');
+  });
+});
+
+// ── Audit P2-1 : interrupteur de consommation ─────────────────────────
+//
+// La plomberie du réplica était câblée et TESTÉE, mais aucun service
+// n'injectait DRIZZLE_READ : la consommation était nulle. Elle existe
+// désormais (stats, leaderboard, ml), et cet interrupteur décide si
+// elle touche réellement un réplica.
+describe('isReadReplicaEnabled', () => {
+  it('faux par défaut (aucune variable)', () => {
+    expect(isReadReplicaEnabled({})).toBe(false);
+  });
+
+  it('faux si le flag est activé mais aucune URL de réplica', () => {
+    // Sinon on ouvrirait une pool vers nulle part.
+    expect(isReadReplicaEnabled({ READ_REPLICA_ENABLED: 'true' })).toBe(false);
+  });
+
+  it('faux si une URL existe mais que le flag est absent', () => {
+    expect(
+      isReadReplicaEnabled({ DATABASE_READ_URL: 'postgres://r:5432/db' }),
+    ).toBe(false);
+  });
+
+  it('vrai quand les deux conditions sont réunies', () => {
+    expect(
+      isReadReplicaEnabled({
+        READ_REPLICA_ENABLED: 'true',
+        DATABASE_READ_URL: 'postgres://r:5432/db',
+      }),
+    ).toBe(true);
+  });
+
+  it('accepte « 1 » et tolère casse et espaces', () => {
+    for (const flag of ['1', 'TRUE', ' true ', 'True']) {
+      expect(
+        isReadReplicaEnabled({
+          READ_REPLICA_ENABLED: flag,
+          DATABASE_READ_URL: 'postgres://r:5432/db',
+        }),
+      ).toBe(true);
+    }
+  });
+
+  it('refuse toute autre valeur (pas de vérité approximative)', () => {
+    for (const flag of ['false', 'yes', 'on', '', 'oui']) {
+      expect(
+        isReadReplicaEnabled({
+          READ_REPLICA_ENABLED: flag,
+          DATABASE_READ_URL: 'postgres://r:5432/db',
+        }),
+      ).toBe(false);
+    }
+  });
+
+  it('fonctionne aussi avec la liste multi-réplicas', () => {
+    expect(
+      isReadReplicaEnabled({
+        READ_REPLICA_ENABLED: 'true',
+        DATABASE_READ_REPLICA_URLS: 'postgres://r1:5432/db,postgres://r2:5432/db',
+      }),
+    ).toBe(true);
   });
 });

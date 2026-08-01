@@ -1,0 +1,125 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1735689600000,
+      "tag": "0001_init",
+      "breakpoints": false
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1735689660000,
+      "tag": "0002_append_only_triggers",
+      "breakpoints": false
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1735689720000,
+      "tag": "0003_billing_rbac",
+      "breakpoints": false
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1735689780000,
+      "tag": "0004_exams",
+      "breakpoints": false
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1735689840000,
+      "tag": "0005_gamification",
+      "breakpoints": false
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1735689900000,
+      "tag": "0006_exam_templates",
+      "breakpoints": false
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1735689960000,
+      "tag": "0007_deck_key_wrapped",
+      "breakpoints": false
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1735690020000,
+      "tag": "0008_share_cards",
+      "breakpoints": false
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1735690080000,
+      "tag": "0009_group_packs",
+      "breakpoints": false
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1735690140000,
+      "tag": "0010_tenants",
+      "breakpoints": false
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1735690200000,
+      "tag": "0011_ai_generation_jobs",
+      "breakpoints": false
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1735690260000,
+      "tag": "0012_ai_difficulty_signals",
+      "breakpoints": false
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1735690320000,
+      "tag": "0013_retention_alerts",
+      "breakpoints": false
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1735690380000,
+      "tag": "0014_ai_tutor_prompts",
+      "breakpoints": false
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1735690440000,
+      "tag": "0015_partnerships",
+      "breakpoints": false
+    },
+    {
+      "idx": 15,
+      "version": "7",
+      "when": 1735690500000,
+      "tag": "0016_exam_attempts_active_unique",
+      "breakpoints": false
+    },
+    {
+      "idx": 16,
+      "version": "7",
+      "when": 1735690560000,
+      "tag": "0017_device_tokens",
+      "breakpoints": false
+    }
+  ]
+}

@@ -28,6 +28,7 @@ import '../../core/container/app_container.dart';
 import '../../data/repositories/ai/adaptive_params_cache.dart';
 import '../../domain/domain.dart';
 import '../ai/ai_speech_ports.dart';
+import '../../l10n/app_localizations.dart';
 import '../ai/hint_banner.dart';
 import '../ai/voice_dictation_sheet.dart';
 
@@ -80,7 +81,10 @@ class _StudyScreenState extends State<StudyScreen> {
   List<StudyQueueItem>? _queue;
   int _index = 0;
   bool _revealed = false;
-  String? _error;
+  /// Erreur de préparation de la session. Un booléen, pas un message :
+  /// le texte est résolu au rendu, donc il suit un changement de langue
+  /// survenu après l'échec (audit P1-4).
+  bool _hasError = false;
 
   /// Horodatage d'affichage de la carte courante — sert à mesurer
   /// durationMs (métrique FSRS/latence) sans dépendre de l'horloge
@@ -128,7 +132,7 @@ class _StudyScreenState extends State<StudyScreen> {
       unawaited(_refreshAdaptiveIfStale());
     } catch (_) {
       if (mounted) {
-        setState(() => _error = 'Impossible de préparer la session.');
+        setState(() => _hasError = true);
       }
     }
   }
@@ -192,8 +196,8 @@ class _StudyScreenState extends State<StudyScreen> {
       // casser la navigation.
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Revue non enregistrée (stockage) — réessayez.'),
+          SnackBar(
+            content: Text(AppLocalizations.of(context).studyReviewNotSaved),
           ),
         );
       }
@@ -224,7 +228,11 @@ class _StudyScreenState extends State<StudyScreen> {
     );
     if (!mounted || draft == null) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Brouillon créé — ${draft.draftId}')),
+      SnackBar(
+        content: Text(
+          AppLocalizations.of(context).studyDraftCreated(draft.draftId),
+        ),
+      ),
     );
   }
 
@@ -233,11 +241,11 @@ class _StudyScreenState extends State<StudyScreen> {
     final scheme = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(
-        title: Text(_title()),
+        title: Text(_title(context)),
         actions: [
           if (_current != null)
             IconButton(
-              tooltip: 'Dicter une carte',
+              tooltip: AppLocalizations.of(context).studyDictate,
               onPressed: _openDictation,
               icon: const Icon(Icons.mic_none),
             ),
@@ -247,30 +255,34 @@ class _StudyScreenState extends State<StudyScreen> {
     );
   }
 
-  String _title() {
-    if (_queue == null) return 'Session d\u2019étude';
-    final remaining = _queue!.length - (_finished ? 0 : _index) -
-        (_finished ? 0 : 0);
-    return '$_done faites · $remaining restantes';
+  String _title(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    if (_queue == null) return l10n.studyTitle;
+    final remaining = _queue!.length - (_finished ? 0 : _index);
+    return l10n.studyProgress(_done, remaining);
   }
 
   Widget _buildBody(ColorScheme scheme) {
-    if (_error != null) {
+    final l10n = AppLocalizations.of(context);
+    if (_hasError) {
       return Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(_error!, style: TextStyle(color: scheme.error)),
+            Text(
+              l10n.studyPrepareFailed,
+              style: TextStyle(color: scheme.error),
+            ),
             const SizedBox(height: 12),
             FilledButton(
               onPressed: () {
                 setState(() {
-                  _error = null;
+                  _hasError = false;
                   _queue = null;
                 });
                 _loadQueue();
               },
-              child: const Text('Réessayer'),
+              child: Text(l10n.actionRetry),
             ),
           ],
         ),
@@ -286,6 +298,7 @@ class _StudyScreenState extends State<StudyScreen> {
   }
 
   Widget _buildSummary(ColorScheme scheme) {
+    final l10n = AppLocalizations.of(context);
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(24),
@@ -295,23 +308,21 @@ class _StudyScreenState extends State<StudyScreen> {
             Icon(Icons.celebration, size: 48, color: scheme.primary),
             const SizedBox(height: 12),
             Text(
-              _done == 0
-                  ? 'Rien à réviser — à plus tard !'
-                  : 'Session terminée',
+              _done == 0 ? l10n.studyNothingLeft : l10n.studyDone,
               style: Theme.of(context).textTheme.titleLarge,
             ),
             if (_done > 0) ...[
               const SizedBox(height: 8),
               Text(
-                '$_done cartes revues'
-                '${_againCount > 0 ? ' · $_againCount à revoir bientôt' : ''}',
+                l10n.studyReviewed(_done) +
+                    (_againCount > 0 ? l10n.studyAgainCount(_againCount) : ''),
                 style: TextStyle(color: scheme.onSurfaceVariant),
               ),
             ],
             const SizedBox(height: 16),
             FilledButton(
               onPressed: () => Navigator.of(context).maybePop(),
-              child: const Text('Terminer'),
+              child: Text(l10n.studyFinish),
             ),
           ],
         ),
@@ -365,7 +376,7 @@ class _StudyScreenState extends State<StudyScreen> {
       width: double.infinity,
       child: FilledButton(
         onPressed: () => setState(() => _revealed = true),
-        child: const Text('Afficher la réponse'),
+        child: Text(AppLocalizations.of(context).studyShowAnswer),
       ),
     );
   }

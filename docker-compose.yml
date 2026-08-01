@@ -1,0 +1,88 @@
+# MedAnki DZ — stack de développement local.
+#
+#   docker compose up -d postgres redis      # dépendances seules
+#   docker compose up --build                # stack complète
+#
+# Ports : postgres 5432 · redis 6379 · backend 3000 · cms 3001
+
+name: medanki-dz
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: medanki
+      POSTGRES_PASSWORD: medanki
+      POSTGRES_DB: medanki_dz
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U medanki -d medanki_dz']
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: ['redis-server', '--appendonly', 'yes']
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    image: medanki/backend:latest
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      NODE_ENV: development
+      PORT: '3000'
+      DATABASE_URL: postgres://medanki:medanki@postgres:5432/medanki_dz
+      PG_SCHEMA: public
+      REDIS_URL: redis://redis:6379
+      LOG_LEVEL: debug
+      AI_LLM_PROVIDER: mock
+      AI_TRANSCRIBER_PROVIDER: mock
+      # Clés RS256 montées depuis backend/keys (générées via
+      # `openssl genrsa -out backend/keys/jwt-private.pem 2048`).
+      JWT_SIGNING_KEY_PATH: /app/keys/jwt-private.pem
+      JWT_PUBLIC_KEY_PATH: /app/keys/jwt-public.pem
+    volumes:
+      - ./backend/keys:/app/keys:ro
+    ports:
+      - '3000:3000'
+
+  cms:
+    build:
+      context: .
+      dockerfile: cms/Dockerfile
+    image: medanki/cms:latest
+    restart: unless-stopped
+    depends_on:
+      - backend
+    environment:
+      NODE_ENV: production
+      PORT: '3001'
+      NEXT_PUBLIC_API_BASE_URL: http://localhost:3000
+    ports:
+      - '3001:3001'
+
+volumes:
+  postgres-data:
+  redis-data:

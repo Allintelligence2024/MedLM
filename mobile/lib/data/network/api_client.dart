@@ -503,6 +503,231 @@ class ApiClient {
     }
   }
 
+
+  // ── Notifications (audit P1-3) ──────────────────────────────────
+  //
+  // Le backend savait envoyer des push mais n'avait aucun registre
+  // d'appareils : ces deux appels sont le maillon manquant.
+
+  /// POST /v1/notifications/devices — enregistre / rafraîchit le
+  /// jeton FCM de cet appareil. Idempotent : appelé au démarrage ET à
+  /// chaque rotation du jeton.
+  Future<void> registerDeviceToken({
+    required String token,
+    required String platform,
+    String? appVersion,
+    String? locale,
+  }) async {
+    try {
+      await _dio.post<dynamic>(
+        '/v1/notifications/devices',
+        data: {
+          'token': token,
+          'platform': platform,
+          if (appVersion != null) 'app_version': appVersion,
+          if (locale != null) 'locale': locale,
+        },
+      );
+    } on DioException catch (e) {
+      throw _translate(e);
+    }
+  }
+
+  /// DELETE /v1/notifications/devices — retire cet appareil du registre.
+  Future<void> unregisterDeviceToken() async {
+    try {
+      await _dio.delete<dynamic>('/v1/notifications/devices');
+    } on DioException catch (e) {
+      throw _translate(e);
+    }
+  }
+
+  // ── Auth : magic link + Google (Phase 6) ────────────────────────
+
+  /// POST /v1/auth/magic-link — demande un lien de connexion par email.
+  Future<void> requestMagicLink({required String email}) async {
+    try {
+      await _dio.post<dynamic>('/v1/auth/magic-link', data: {'email': email});
+    } on DioException catch (e) {
+      throw _translate(e);
+    }
+  }
+
+  /// POST /v1/auth/magic-link/verify?token=… — échange le jeton du
+  /// lien contre une paire access/refresh.
+  Future<({String accessToken, String refreshToken, String userId})>
+      verifyMagicLink({required String token}) async {
+    try {
+      final res = await _dio.post<dynamic>(
+        '/v1/auth/magic-link/verify',
+        queryParameters: {'token': token},
+        options: Options(headers: {'X-Platform': 'mobile'}),
+      );
+      final data = res.data as Map;
+      return (
+        accessToken: data['access_token'] as String,
+        refreshToken: data['refresh_token'] as String,
+        userId: data['user_id'] as String,
+      );
+    } on DioException catch (e) {
+      throw _translate(e);
+    }
+  }
+
+  // ── Onboarding (Phase 6) ────────────────────────────────────────
+
+  /// POST /v1/onboarding — soumet les réponses d'onboarding.
+  ///
+  /// Le contrat serveur (OnboardingBody, Zod) exige les six champs :
+  /// faculté, année, niveau déclaré, langue, au moins un module
+  /// d'intérêt et un objectif quotidien entre 5 et 50.
+  Future<Map<String, dynamic>> submitOnboarding({
+    required String faculty,
+    required int studyYear,
+    required String experienceLevel,
+    required String preferredLanguage,
+    required List<String> moduleInterests,
+    required int dailyGoalCards,
+  }) async {
+    try {
+      final res = await _dio.post<dynamic>(
+        '/v1/onboarding',
+        data: {
+          'faculty': faculty,
+          'study_year': studyYear,
+          'experience_level': experienceLevel,
+          'preferred_language': preferredLanguage,
+          'module_interests': moduleInterests,
+          'daily_goal_cards': dailyGoalCards,
+        },
+      );
+      return Map<String, dynamic>.from(res.data as Map);
+    } on DioException catch (e) {
+      throw _translate(e);
+    }
+  }
+
+  // ── Catalogue de decks (Phase 6) ────────────────────────────────
+
+  /// GET /v1/content/decks — catalogue (delta par version).
+  Future<List<Map<String, dynamic>>> listDecks({
+    String? moduleId,
+    int versionSince = 0,
+    int limit = 100,
+  }) async {
+    final params = <String, dynamic>{
+      'version_since': versionSince,
+      'limit': limit,
+    };
+    if (moduleId != null) params['module_id'] = moduleId;
+    try {
+      final res = await _dio.get<dynamic>(
+        '/v1/content/decks',
+        queryParameters: params,
+      );
+      final body = res.data;
+      // Le contrôleur peut répondre soit une liste nue, soit une
+      // enveloppe { decks: [...] } — on accepte les deux.
+      if (body is List) return body.cast<Map<String, dynamic>>();
+      final decks = (body as Map)['decks'];
+      return (decks as List).cast<Map<String, dynamic>>();
+    } on DioException catch (e) {
+      throw _translate(e);
+    }
+  }
+
+  // ── Examens : tentative complète (Phase 10) ─────────────────────
+
+  /// POST /v1/exams/attempts/:id/answers — sauvegarde d'une réponse.
+  Future<void> saveExamAnswer({
+    required String attemptId,
+    required String questionId,
+    required Object? answer,
+  }) async {
+    try {
+      await _dio.post<dynamic>(
+        '/v1/exams/attempts/$attemptId/answers',
+        data: {'question_id': questionId, 'answer': answer},
+      );
+    } on DioException catch (e) {
+      throw _translate(e);
+    }
+  }
+
+  /// POST /v1/exams/attempts/:id/submit — soumission finale. Le score
+  /// et l'expiration font autorité côté serveur.
+  Future<Map<String, dynamic>> submitExam({
+    required String attemptId,
+    Map<String, Object?> answers = const <String, Object?>{},
+  }) async {
+    try {
+      final res = await _dio.post<dynamic>(
+        '/v1/exams/attempts/$attemptId/submit',
+        data: {'answers': answers},
+      );
+      return Map<String, dynamic>.from(res.data as Map);
+    } on DioException catch (e) {
+      throw _translate(e);
+    }
+  }
+
+  /// GET /v1/exams/attempts/:id — état courant (reprise après crash).
+  Future<Map<String, dynamic>> fetchExamAttempt(String attemptId) async {
+    try {
+      final res = await _dio.get<dynamic>('/v1/exams/attempts/$attemptId');
+      return Map<String, dynamic>.from(res.data as Map);
+    } on DioException catch (e) {
+      throw _translate(e);
+    }
+  }
+
+  // ── Billing (Phase 7) ───────────────────────────────────────────
+
+  /// POST /v1/billing/checkout — crée une session de paiement
+  /// Chargily. Retourne l'URL à ouvrir dans le navigateur.
+  Future<Map<String, dynamic>> createCheckout({
+    required String plan,
+    String? promoCode,
+  }) async {
+    try {
+      final res = await _dio.post<dynamic>(
+        '/v1/billing/checkout',
+        data: {
+          'plan': plan,
+          if (promoCode != null) 'promo_code': promoCode,
+        },
+      );
+      return Map<String, dynamic>.from(res.data as Map);
+    } on DioException catch (e) {
+      throw _translate(e);
+    }
+  }
+
+  // ── Partage (Phase 15.5) ────────────────────────────────────────
+
+  /// POST /v1/share — crée une carte de partage pour une tentative
+  /// d'examen (v2 §11.3 : score + rang, pseudonyme obligatoire).
+  ///
+  /// Le contrat serveur (CreateShareBody) attend `attempt_id` et un
+  /// `style` parmi minimal | detailed | story.
+  Future<Map<String, dynamic>> createShare({
+    required String attemptId,
+    String style = 'minimal',
+  }) async {
+    try {
+      final res = await _dio.post<dynamic>(
+        '/v1/share',
+        data: {
+          'attempt_id': attemptId,
+          'style': style,
+        },
+      );
+      return Map<String, dynamic>.from(res.data as Map);
+    } on DioException catch (e) {
+      throw _translate(e);
+    }
+  }
+
   // ── Helpers ─────────────────────────────────────────────────────
 
   ApiException _translate(DioException e) {

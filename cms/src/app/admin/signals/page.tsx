@@ -16,6 +16,7 @@ import type {
   SignalsScanResponse,
 } from '@/lib/signals';
 import { Radar, RefreshCw } from 'lucide-react';
+import { getToken } from '@/lib/auth';
 
 const API = process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:3000';
 
@@ -27,7 +28,7 @@ export default function SignalsPage() {
   const [error, setError] = useState<string | null>(null);
   const [scanResult, setScanResult] = useState<SignalsScanResponse | null>(null);
 
-  const token = () => localStorage.getItem('cms_token') ?? '';
+  const token = () => getToken();
 
   const load = useCallback(async (s: SignalStatus) => {
     setLoading(true);

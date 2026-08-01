@@ -1,4 +1,4 @@
-import { Global, Module } from '@nestjs/common';
+import { Global, Logger, Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { readFileSync } from 'fs';
@@ -10,6 +10,7 @@ import { MagicLinkController } from './magic-link.controller';
 import { GoogleOAuthService } from './google-oauth.service';
 import { GoogleOAuthController } from './google-oauth.controller';
 import { ResendEmailSender } from './email-sender.service';
+import { buildJwtConfig } from './jwt-config';
 
 @Global()
 @Module({
@@ -18,20 +19,20 @@ import { ResendEmailSender } from './email-sender.service';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (config: ConfigService) => {
-        const keyPath = config.get<string>('JWT_SIGNING_KEY_PATH');
-        const ttl = config.get<number>('JWT_ACCESS_TTL_SECONDS') ?? 900;
-
-        if (!keyPath) {
-          return {
-            secret: 'dev-only-secret-do-not-use-in-prod',
-            signOptions: { expiresIn: ttl, algorithm: 'HS256' },
-          };
+        // Toute la règle vit dans jwt-config.ts (pure, testée) : en
+        // production, l'absence de clé RS256 fait ÉCHOUER le démarrage
+        // au lieu de retomber en silence sur un secret du dépôt.
+        const built = buildJwtConfig({
+          keyPath: config.get<string>('JWT_SIGNING_KEY_PATH'),
+          ttlSeconds: config.get<number>('JWT_ACCESS_TTL_SECONDS') ?? 900,
+          nodeEnv: config.get<string>('NODE_ENV') ?? process.env.NODE_ENV,
+          readKey: (path) => readFileSync(resolve(path), 'utf8'),
+        });
+        if (built.fallbackReason) {
+          new Logger('AuthModule').warn(built.fallbackReason);
         }
-        const key = readFileSync(resolve(keyPath), 'utf8');
-        return {
-          privateKey: key,
-          signOptions: { expiresIn: ttl, algorithm: 'RS256' },
-        };
+        const { fallbackReason: _ignored, ...jwtOptions } = built;
+        return jwtOptions;
       },
     }),
   ],

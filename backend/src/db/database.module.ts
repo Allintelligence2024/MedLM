@@ -24,6 +24,31 @@ export const PG_READ_POOL = Symbol('PG_READ_POOL');
 
 export type Database = NodePgDatabase<typeof schema>;
 
+/// Le réplica doit-il RÉELLEMENT être consommé ? (pur, testable)
+///
+/// AUDIT P2-1 : la plomberie du réplica était câblée et testée, mais
+/// aucun service n'injectait `DRIZZLE_READ` — la consommation était
+/// nulle. Elle l'est désormais (stats, leaderboard, ML), derrière cet
+/// interrupteur : brancher des lectures sur un réplica sans surveiller
+/// son lag donne des chiffres faux (un utilisateur qui vient de réviser
+/// verrait un compteur en retard).
+///
+/// Deux conditions cumulatives, dans cet ordre :
+///   1. `READ_REPLICA_ENABLED=true` — décision d'exploitation explicite ;
+///   2. une URL de réplica réellement configurée.
+/// Sinon : `DRIZZLE_READ` == primary, comportement strictement inchangé.
+export function isReadReplicaEnabled(
+  env: Partial<{
+    READ_REPLICA_ENABLED: string | undefined;
+    DATABASE_READ_URL: string | undefined;
+    DATABASE_READ_REPLICA_URLS: string | undefined;
+  }>,
+): boolean {
+  const flag = (env.READ_REPLICA_ENABLED ?? '').trim().toLowerCase();
+  if (flag !== 'true' && flag !== '1') return false;
+  return resolveReadUrl(env) !== null;
+}
+
 /// URL de connexion du réplica de lecture (pure, testable).
 ///
 /// Priorité : `DATABASE_READ_URL` (URL unique explicite) > première
@@ -89,6 +114,19 @@ export function resolveReadUrl(
       inject: [ConfigService],
       useFactory: (config: ConfigService): Pool | null => {
         const logger = new Logger('DatabaseRead');
+        // L'interrupteur d'exploitation prime : tant qu'il est à false,
+        // on n'ouvre même pas la pool (cf. isReadReplicaEnabled).
+        if (
+          !isReadReplicaEnabled({
+            READ_REPLICA_ENABLED: config.get<string>('READ_REPLICA_ENABLED'),
+            DATABASE_READ_URL: config.get<string>('DATABASE_READ_URL'),
+            DATABASE_READ_REPLICA_URLS: config.get<string>(
+              'DATABASE_READ_REPLICA_URLS',
+            ),
+          })
+        ) {
+          return null;
+        }
         const url = resolveReadUrl({
           DATABASE_READ_URL: config.get<string>('DATABASE_READ_URL'),
           DATABASE_READ_REPLICA_URLS: config.get<string>(

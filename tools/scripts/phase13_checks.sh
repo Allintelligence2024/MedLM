@@ -79,6 +79,63 @@ if [ -f tools/scripts/check_partnerships.py ]; then
     echo "  ✓ check_partnerships.py (Phase 20.4)" || \
     { echo "  ❌ check_partnerships.py"; exit 1; }
 fi
+# Gardes mobiles (audit 2026-08-01) : i18n trilingue, parité des
+# facultés avec l'allow-list serveur, Dart statiquement valide.
+if [ -f tools/scripts/check_mobile_i18n.py ]; then
+  python3 tools/scripts/check_mobile_i18n.py && \
+    echo "  ✓ check_mobile_i18n.py (i18n mobile P1-4)" || \
+    { echo "  ❌ check_mobile_i18n.py"; exit 1; }
+fi
+if [ -f tools/scripts/check_faculties_parity.py ]; then
+  python3 tools/scripts/check_faculties_parity.py && \
+    echo "  ✓ check_faculties_parity.py (allow-list facultés)" || \
+    { echo "  ❌ check_faculties_parity.py"; exit 1; }
+fi
+if [ -f tools/scripts/check_migrations_apply.py ]; then
+  python3 tools/scripts/check_migrations_apply.py && \
+    echo "  ✓ check_migrations_apply.py (schéma ↔ migrations)" || \
+    { echo "  ❌ check_migrations_apply.py"; exit 1; }
+fi
+if [ -f tools/scripts/check_workflows.py ]; then
+  python3 tools/scripts/check_workflows.py >/dev/null && \
+    echo "  ✓ check_workflows.py (workflows CI cohérents P0-3)" || \
+    { python3 tools/scripts/check_workflows.py; echo "  ❌ check_workflows.py"; exit 1; }
+fi
+if [ -f tools/scripts/check_dockerfiles.py ]; then
+  python3 tools/scripts/check_dockerfiles.py && \
+    echo "  ✓ check_dockerfiles.py (images + compose P0-4)" || \
+    { echo "  ❌ check_dockerfiles.py"; exit 1; }
+fi
+if [ -f tools/scripts/check_l10n_usage.py ]; then
+  python3 tools/scripts/check_l10n_usage.py >/dev/null && \
+    echo "  ✓ check_l10n_usage.py (clés i18n appelées ↔ déclarées)" || \
+    { python3 tools/scripts/check_l10n_usage.py; echo "  ❌ check_l10n_usage.py"; exit 1; }
+fi
+if [ -f tools/scripts/check_dart_symbols.py ]; then
+  python3 tools/scripts/check_dart_symbols.py && \
+    echo "  ✓ check_dart_symbols.py (symboles Dart résolus)" || \
+    { echo "  ❌ check_dart_symbols.py"; exit 1; }
+fi
+if [ -f tools/scripts/check_dart_static.py ]; then
+  python3 tools/scripts/check_dart_static.py && \
+    echo "  ✓ check_dart_static.py (Dart statique P0-2)" || \
+    { echo "  ❌ check_dart_static.py"; exit 1; }
+fi
+if [ -f tools/scripts/apply_android_release_config.py ]; then
+  python3 tools/scripts/apply_android_release_config.py --check && \
+    echo "  ✓ apply_android_release_config.py --check (release Android P2-8)" || \
+    { echo "  ❌ apply_android_release_config.py --check"; exit 1; }
+fi
+if [ -f tools/scripts/check_bundle_assets.py ]; then
+  python3 tools/scripts/check_bundle_assets.py && \
+    echo "  ✓ check_bundle_assets.py (bundle sans contenu démo P2-4)" || \
+    { echo "  ❌ check_bundle_assets.py"; exit 1; }
+fi
+if [ -f tools/scripts/gen_l10n.py ]; then
+  python3 tools/scripts/gen_l10n.py --check && \
+    echo "  ✓ gen_l10n.py --check (localisations à jour)" || \
+    { echo "  ❌ gen_l10n.py --check"; exit 1; }
+fi
 if [ -f tools/test_repository_logic.py ]; then
   python3 tools/test_repository_logic.py > /tmp/phase13_repo.log 2>&1 && \
     echo "  ✓ test_repository_logic.py" || \
