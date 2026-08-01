@@ -21,6 +21,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 GW = ROOT / "backend" / "src" / "gateway"
+MOBILE_OPS = (
+    ROOT / "mobile" / "lib" / "data" / "repositories" / "gateway"
+    / "graphql_operations.dart"
+)
 CONTROLLERS = list((ROOT / "backend" / "src").rglob("*.controller.ts"))
 
 # Chaque chemin REST de délégation → motifs qui doivent exister dans le
@@ -83,6 +87,34 @@ def main() -> int:
     if re.search(r"method:\s*'(?!GET')", po):
         failures.append("délégation non-GET détectée")
 
+    # 3b. Parité client mobile : toute SDL déclarée dans
+    #     graphql_operations.dart DOIT exister à l'identique dans
+    #     persisted-operations.ts — sinon le gateway rejette le client
+    #     en production (400 OPERATION_NOT_PERSISTED). Le fichier Dart
+    #     échappe `$` en `\$` (anti-interpolation) : on le dés-échappe
+    #     avant comparaison.
+    if not MOBILE_OPS.exists():
+        failures.append(f"fichier client mobile absent : {MOBILE_OPS}")
+    else:
+        dart = MOBILE_OPS.read_text(encoding="utf-8")
+        dart_sdls = {
+            m.replace("\\$", "$")
+            for m in re.findall(
+                r"static const String \w+ =\s*\n?\s*'([^']+)';", dart
+            )
+        }
+        ts_sdls = set(re.findall(r"sdl:\s*'([^']+)'", po))
+        drift = dart_sdls - ts_sdls
+        if drift:
+            failures.append(
+                "SDL mobile absente(s) de l'allow-list backend "
+                f"(dérive · rejet 400 garanti) : {sorted(drift)}"
+            )
+        if len(dart_sdls) < 5:
+            failures.append(
+                f"au moins 5 SDL attendues côté mobile, trouvé {len(dart_sdls)}"
+            )
+
     # 4. Controller gardé + Zod + feature flag.
     if "@UseGuards(JwtGuard)" not in ctrl:
         failures.append("gateway.controller.ts : @UseGuards(JwtGuard) manquant")
@@ -98,8 +130,12 @@ def main() -> int:
         for f in failures:
             print("  -", f)
         return 1
+    mobile = ""
+    if MOBILE_OPS.exists():
+        n_mobile = len(re.findall(r"static const String \w+ =\s*\n?\s*'", MOBILE_OPS.read_text(encoding="utf-8")))
+        mobile = f", {n_mobile} SDL mobiles à l'identique"
     print(f"✅ Gateway GraphQL cohérent ({len(names)} opérations persistées, "
-          "délégations vérifiées, lecture seule, gardé).")
+          f"délégations vérifiées, lecture seule, gardé{mobile}).")
     return 0
 
 

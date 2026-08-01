@@ -445,6 +445,43 @@ class ApiClient {
     }
   }
 
+  // ── Gateway GraphQL (Phase 20.2) ────────────────────────────────
+  //
+  // POST /v2/graphql — opérations persistées UNIQUEMENT (le texte de
+  // [query] doit correspondre à une empreinte de l'allow-list serveur,
+  // cf. repositories/gateway/graphql_operations.dart). Réponse nominale
+  // : { "data": { … } } — on retourne le contenu de `data`.
+  //
+  // Échecs traduits par _translate comme le REST : 400 (opération non
+  // persistée / variables), 429 (budget coût), 503 (flag OFF).
+  Future<Map<String, dynamic>> graphql(
+    String query, {
+    Map<String, dynamic>? variables,
+  }) async {
+    try {
+      final res = await _dio.post<dynamic>(
+        '/v2/graphql',
+        data: {
+          'query': query,
+          if (variables != null) 'variables': variables,
+        },
+      );
+      final body = Map<String, dynamic>.from(res.data as Map);
+      final data = body['data'];
+      if (data is! Map) {
+        // Enveloppe GraphQL sans data = erreurs non transport (rare :
+        // le gateway signale normalement par le statut HTTP).
+        throw ServerException(
+          'réponse gateway sans data',
+          cause: body['errors'],
+        );
+      }
+      return Map<String, dynamic>.from(data);
+    } on DioException catch (e) {
+      throw _translate(e);
+    }
+  }
+
   /// GET /v1/exams/templates — templates actifs.
   Future<List<Map<String, dynamic>>> listExamTemplates({
     String? moduleId,
