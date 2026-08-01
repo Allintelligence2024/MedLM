@@ -97,10 +97,17 @@ attrape les fautes commises **en volume** dans du code écrit à la main :
 | `flutter analyze` | `check_l10n_usage.py` | les 148 appels `l10n.x(…)` existent, avec la bonne arité — testé en injectant les 3 fautes typiques (clé inexistante, getter appelé, mauvais nombre d'arguments) |
 | `flutter analyze` | `check_dart_symbols.py` | méthodes et paramètres nommés d'`ApiClient`, membres d'`AppContainer`, providers, imports des tests — testé en injectant 4 fautes |
 | `docker build` | `check_dockerfiles.py` | étapes `COPY --from`, sources présentes dans le contexte, **healthcheck sondant une route qui existe vraiment**, user non-root ; compose : volumes, dépendances, `service_healthy` — testé en injectant 4 fautes |
+| exécution des workflows | `check_workflows.py` | YAML valide, `needs` déclarés, scripts et `working-directory` existants, `npm run` déclarés dans le bon package.json, 0 secret en dur — testé en injectant 4 fautes |
 
 Chaque garde a été validée en y **injectant délibérément les erreurs
-qu'elle prétend détecter**, puis en restaurant le code : une garde qui
-ne mord pas est pire qu'aucune garde.
+qu'elle prétend détecter** (15 injections au total), puis en restaurant
+le code : une garde qui ne mord pas est pire qu'aucune garde — et deux
+de mes premières versions ne mordaient pas.
+
+Les workflows méritaient ce traitement pour une raison particulière :
+ils sont en attente d'installation manuelle, donc ils ne seront exercés
+qu'après une action humaine. Une faute de frappe y serait restée
+invisible jusque-là.
 
 > À propos de `dockerfilelint` (npm) : il signale `--start-period` comme
 > invalide. C'est un faux positif connu — l'option est documentée depuis
