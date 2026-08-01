@@ -52,7 +52,7 @@ export class OtelExporter {
     const otlpSpan: OtlpSpan = {
       traceId: ctx.traceId,
       spanId: ctx.spanId,
-      parentSpanId: ctx.parentSpanId,
+      ...(ctx.parentSpanId !== undefined && { parentSpanId: ctx.parentSpanId }),
       name: ctx.operation,
       kind: 'SPAN_KIND_SERVER',
       startTimeUnixNano: String(startNs),

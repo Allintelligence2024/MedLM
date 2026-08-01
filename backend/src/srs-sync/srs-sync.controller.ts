@@ -7,21 +7,11 @@
 /// Trois endpoints :
 ///   * POST /srs-sync/push   — idempotent, batch 100 max
 ///   * GET  /srs-sync/pull?since_ms=&limit=  — paginé
-import {
-  Body,
-  Controller,
-  Get,
-  Headers,
-  HttpCode,
-  HttpStatus,
-  Post,
-  Query,
-  UseGuards,
-} from '@nestjs/common';
+import { Body, Controller, Get, Headers, HttpCode, HttpStatus, Post, Query, UseGuards } from '@nestjs/common';
 import { PullQuery, PushBody } from './srs-sync.dto';
 import { SrsSyncService } from './srs-sync.service';
 import { JwtGuard } from '../auth/jwt.guard';
-import { CurrentUser, CurrentUserId } from '../auth/jwt.decorators';
+import { CurrentUserId } from '../auth/jwt.decorators';
 
 @Controller('srs-sync')
 @UseGuards(JwtGuard)

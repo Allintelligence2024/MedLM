@@ -10,6 +10,7 @@ import { describe, it, expect, beforeEach } from 'vitest';
 import { SrsSyncService } from '../../src/srs-sync/srs-sync.service';
 import { FsrsEngine } from '../../src/common/fsrs/fsrs.engine';
 import { ReviewEventDto, PushBody, PullQuery } from '../../src/srs-sync/srs-sync.dto';
+import { CardType } from '../../src/common/fsrs/fsrs.constants';
 
 /// Fake DB : implémente juste les méthodes utilisées par le service.
 class FakeDb {
@@ -28,8 +29,19 @@ class FakeDb {
         return {
           where(_w: unknown) {
             return {
+              // Drizzle réel : le builder est thenable (await → rows[])
+              // — utilisé par la dédup du push (select id from review_logs).
+              then(cb: any) {
+                return Promise.resolve(
+                  [...self.existing].map((id) => ({ id })),
+                ).then(cb);
+              },
               orderBy(..._o: unknown[]) {
                 return {
+                  // Thenable : le fold du push attend le journal complet.
+                  then(cb: any) {
+                    return Promise.resolve(self.events).then(cb);
+                  },
                   limit(n: number) {
                     return Promise.resolve(self.events.slice(0, n));
                   },
@@ -88,7 +100,7 @@ describe('SrsSyncService', () => {
       device_id: 'd1',
       rating: 3 as const,
       duration_ms: 0,
-      card_type: 'basic' as const,
+      card_type: CardType.Basic,
       reviewed_at: 1_700_000_000_000 + i,
       exam_mode: false,
     }));
@@ -105,7 +117,7 @@ describe('SrsSyncService', () => {
       device_id: 'd1',
       rating: 3,
       duration_ms: 0,
-      card_type: 'basic',
+      card_type: CardType.Basic,
       reviewed_at: 1_700_000_000_000,
       exam_mode: false,
     };
@@ -123,7 +135,7 @@ describe('SrsSyncService', () => {
       device_id: 'd1',
       rating: 3,
       duration_ms: 0,
-      card_type: 'basic',
+      card_type: CardType.Basic,
       reviewed_at: 1_700_000_000_000,
       exam_mode: false,
     };
@@ -149,7 +161,7 @@ describe('Validation Zod', () => {
             device_id: 'd1',
             rating: 5,
             duration_ms: 0,
-            card_type: 'basic',
+            card_type: CardType.Basic,
             reviewed_at: 1_700_000_000_000,
             exam_mode: false,
           },

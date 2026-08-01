@@ -2,7 +2,7 @@
 //
 // Codes live in the `promo_codes` table (already in schema/users.ts).
 // On use, we bump `used_count` atomically and return the discounted amount.
-import { Inject, Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { eq, sql } from 'drizzle-orm';
 import { DRIZZLE, Database } from '../db/database.module';
 import { promoCodes } from '../db/schema';
@@ -17,7 +17,6 @@ export interface PromoResolution {
 
 @Injectable()
 export class PromoCodeProvider {
-  private readonly logger = new Logger(PromoCodeProvider.name);
 
   constructor(@Inject(DRIZZLE) private readonly db: Database) {}
 
@@ -28,7 +27,7 @@ export class PromoCodeProvider {
         .select()
         .from(promoCodes)
         .where(eq(promoCodes.code, code))
-        .get();
+        .then((rows) => rows[0]);
       if (!row) throw new NotFoundException('code promo inconnu');
       if (row.expiresAt && row.expiresAt < new Date()) {
         throw new NotFoundException('code promo expiré');

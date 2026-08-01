@@ -67,8 +67,8 @@ export class HealthController {
   async check() {
     const ready = await this.readiness();
     return {
-      status: ready.status === 'ready' ? 'ok' : 'degraded',
       ...ready,
+      status: ready.status === 'ready' ? 'ok' : 'degraded',
       time: new Date().toISOString(),
       uptime_s: Math.round(process.uptime()),
       version: process.env.APP_VERSION ?? 'dev',

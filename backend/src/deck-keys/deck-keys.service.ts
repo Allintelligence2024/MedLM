@@ -17,14 +17,8 @@
 // Note : la clé AES n'est JAMAIS envoyée en clair au client
 // (chiffrée par la clé publique RSA du device). Le serveur ne
 // stocke que la version wrappée.
-import {
-  Inject,
-  Injectable,
-  Logger,
-  NotFoundException,
-  BadRequestException,
-} from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { Inject, Injectable, Logger, NotFoundException, BadRequestException } from '@nestjs/common';
+
 import { and, eq, isNull } from 'drizzle-orm';
 import { randomBytes, createPublicKey, publicEncrypt, constants } from 'node:crypto';
 import { DRIZZLE, Database } from '../db/database.module';
@@ -38,7 +32,6 @@ export class DeckKeysService {
 
   constructor(
     @Inject(DRIZZLE) private readonly db: Database,
-    config: ConfigService,
   ) {}
 
   /// GET /v1/decks/:id/wrap-key?client_public_key=...&device_id=...
@@ -56,7 +49,7 @@ export class DeckKeysService {
       .select({ id: decks.id, isPremium: decks.isPremium })
       .from(decks)
       .where(eq(decks.id, args.deckId))
-      .get();
+      .then((rows) => rows[0]);
     if (!deck) throw new NotFoundException('deck introuvable');
     if (!deck.isPremium) {
       // Pas de wrap pour les decks gratuits : ils sont en clair.
@@ -71,7 +64,7 @@ export class DeckKeysService {
       throw new BadRequestException(`clé publique client invalide : ${(e as Error).message}`);
     }
     const details = clientKey.asymmetricKeyDetails;
-    if (!details || details.modulusLength < 2048) {
+    if ((details?.modulusLength ?? 0) < 2048) {
       throw new BadRequestException(
         `clé RSA trop faible (${details?.modulusLength ?? '?'} bits, minimum 2048)`,
       );
@@ -89,7 +82,7 @@ export class DeckKeysService {
           isNull(deckKeyWrapped.revokedAt),
         ),
       )
-      .get();
+      .then((rows) => rows[0]);
 
     let deckKey: Buffer;
     if (existing) {
@@ -176,7 +169,7 @@ export class DeckKeysService {
 
   private async _insert(
     args: { userId: string; deckId: string; deviceId: string },
-    deckKey: Buffer,
+    _deckKey: Buffer,
     wrapped: Buffer,
   ): Promise<string> {
     // Note : on ne stocke PAS le deckKey en clair en DB — uniquement

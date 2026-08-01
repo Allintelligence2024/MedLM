@@ -106,7 +106,7 @@ export class AiGenerateService {
       AI_GENERATE_DEFAULT_DAILY_QUOTA;
 
     // 1. Quota : on compte les jobs 'ok' du jour (UTC).
-    const [{ count: used }] = await this.db
+    const quotaRows = await this.db
       .select({ count: sql<number>`count(*)::int` })
       .from(aiGenerationJobs)
       .where(
@@ -117,6 +117,7 @@ export class AiGenerateService {
           gte(aiGenerationJobs.createdAt, AiGenerateService.todayStartUtc(now)),
         ),
       );
+    const used = quotaRows[0]?.count ?? 0;
     if (AiGenerateService.remainingQuota(used, limit) <= 0) {
       throw new HttpException(
         `quota journalier de génération IA atteint (${limit}/jour)`,
@@ -141,7 +142,7 @@ export class AiGenerateService {
       sourceText: args.body.source_text,
       count: args.body.count,
       lang: args.body.lang,
-      title: args.body.title,
+      ...(args.body.title !== undefined && { title: args.body.title }),
     });
 
     // 4. Persistance des brouillons.

@@ -10,24 +10,14 @@
 //   4. Le coordinateur paie → tous les entitlements sont activés.
 //   5. Si le pack expire (24h) sans être plein, on le marque
 //      'expired' et on notifie le coordinateur (Phase 14+).
-import {
-  Inject,
-  Injectable,
-  Logger,
-  BadRequestException,
-  NotFoundException,
-} from '@nestjs/common';
-import { and, eq, sql } from 'drizzle-orm';
+import { Inject, Injectable, Logger, BadRequestException, NotFoundException } from '@nestjs/common';
+import { eq, sql } from 'drizzle-orm';
 import { randomBytes } from 'node:crypto';
 import { DRIZZLE, Database } from '../db/database.module';
 import { groupPacks, groupPackMembers } from '../db/schema/group-packs';
 import { users } from '../db/schema/users';
-import { PLAN_PRICING_DA, PLAN_DURATION_DAYS, PlanId } from '../billing/billing.dto';
-import {
-  CreatePackBody,
-  GroupPackView,
-  JoinPackBody,
-} from './group-packs.dto';
+import { PLAN_PRICING_DA, PlanId } from '../billing/billing.dto';
+import { CreatePackBody, GroupPackView, JoinPackBody } from './group-packs.dto';
 
 const PACK_SIZE = 5;
 const DISCOUNT_PCT = 30;
@@ -82,7 +72,7 @@ export class GroupPacksService {
         .select()
         .from(groupPacks)
         .where(eq(groupPacks.inviteCode, code))
-        .get();
+        .then((rows) => rows[0]);
       if (!pack) throw new NotFoundException('code d\'invitation inconnu');
       if (pack.status !== 'pending') {
         throw new BadRequestException(`pack ${pack.status}`);
@@ -95,7 +85,7 @@ export class GroupPacksService {
         .select({ c: sql<number>`count(*)::int` })
         .from(groupPackMembers)
         .where(eq(groupPackMembers.packId, pack.id))
-        .get();
+        .then((rows) => rows[0]);
       if ((memberCount?.c ?? 0) >= PACK_SIZE) {
         throw new BadRequestException('pack complet');
       }
@@ -136,7 +126,7 @@ export class GroupPacksService {
         .select({ id: groupPacks.id })
         .from(groupPacks)
         .where(eq(groupPacks.inviteCode, args.inviteCode))
-        .get();
+        .then((rows) => rows[0]);
       if (!p) throw new NotFoundException('pack introuvable');
       packId = p.id;
     }
@@ -167,7 +157,7 @@ export class GroupPacksService {
       .select()
       .from(groupPacks)
       .where(eq(groupPacks.id, packId))
-      .get();
+      .then((rows) => rows[0]);
     if (!pack) throw new NotFoundException('pack introuvable');
     const members = await this.db
       .select({

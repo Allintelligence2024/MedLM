@@ -15,14 +15,22 @@ import { z } from 'zod';
 
 // ── Normalisation du texte de requête ────────────────────────────────────
 
-/// Supprime les commentaires (#...), collapse les espaces. Deux textes
-/// sémantiquement identiques doivent produire la même empreinte.
+/// Supprime les commentaires (#...), collapse les espaces ET
+/// canonise l'espacement autour des délimiteurs {}() : deux textes
+/// sémantiquement identiques (« pretty-printed » ou minifié) doivent
+/// produire la même empreinte. Les clients envoient le texte canonique
+/// (cf. README) — cette normalisation tolère la mise en page.
+///
+/// NB : l'ancienne version splittait le littéral « backslash-n » au
+/// lieu des vrais sauts de ligne et ses regex avaient des backslashes
+/// doublés — les deux sont corrigés ici.
 export function normalizeOperationText(text: string): string {
   return text
     .split('\n')
     .map((line) => line.replace(/#.*/, ''))
     .join(' ')
     .replace(/\s+/g, ' ')
+    .replace(/\s*([{}()])\s*/g, '$1')
     .trim();
 }
 

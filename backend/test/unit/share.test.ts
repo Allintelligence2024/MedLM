@@ -1,6 +1,7 @@
 // Tests ShareService — Phase 15.5.
 // On teste la logique pure (formatShareText) sans DB.
 import { describe, it, expect } from 'vitest';
+import { CreateShareBody } from '../../src/share/share.dto';
 import { ShareService } from '../../src/share/share.service';
 
 describe('ShareService — formatShareText', () => {
@@ -65,19 +66,16 @@ describe('ShareService — formatShareText', () => {
 describe('CreateShareBody — validation Zod', () => {
   it('rejette un body sans attempt_id', () => {
     // Import dynamique pour éviter cycle.
-    const { CreateShareBody } = require('../../src/share/share.dto');
     const r = CreateShareBody.safeParse({});
     expect(r.success).toBe(false);
   });
 
   it('rejette un attempt_id non-UUID', () => {
-    const { CreateShareBody } = require('../../src/share/share.dto');
     const r = CreateShareBody.safeParse({ attempt_id: 'not-a-uuid' });
     expect(r.success).toBe(false);
   });
 
   it('accepte un body valide avec style par défaut', () => {
-    const { CreateShareBody } = require('../../src/share/share.dto');
     const r = CreateShareBody.safeParse({
       attempt_id: '00000000-0000-0000-0000-000000000001',
     });
@@ -86,7 +84,6 @@ describe('CreateShareBody — validation Zod', () => {
   });
 
   it('rejette un style invalide', () => {
-    const { CreateShareBody } = require('../../src/share/share.dto');
     const r = CreateShareBody.safeParse({
       attempt_id: '00000000-0000-0000-0000-000000000001',
       style: 'banner',

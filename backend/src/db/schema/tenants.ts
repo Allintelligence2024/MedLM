@@ -14,7 +14,6 @@ import {
   pgTable,
   uuid,
   text,
-  integer,
   timestamp,
   boolean,
   index,

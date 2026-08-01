@@ -2,7 +2,7 @@
 ///
 /// JWT payload inclut désormais le rôle RBAC (`role: 'student' | ...`)
 /// pour permettre aux `@RbacGuard()` de décider côté contrôleur.
-import { Inject, Injectable, Logger, UnauthorizedException } from '@nestjs/common';
+import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { eq, sql } from 'drizzle-orm';
@@ -28,13 +28,12 @@ async function resolveRole(
     .select({ role: sql<string>`COALESCE(rbac_role, 'student')` })
     .from(users)
     .where(eq(users.id, userId))
-    .get();
+    .then((rows) => rows[0]);
   return (row?.role as Role) ?? 'student';
 }
 
 @Injectable()
 export class AuthService {
-  private readonly logger = new Logger(AuthService.name);
 
   constructor(
     @Inject(DRIZZLE) private readonly db: Database,
@@ -48,7 +47,7 @@ export class AuthService {
       .select({ id: users.id })
       .from(users)
       .where(eq(users.email, args.email))
-      .get();
+      .then((rows) => rows[0]);
     if (existing) {
       throw new UnauthorizedException('email déjà utilisé');
     }
@@ -56,9 +55,9 @@ export class AuthService {
       .insert(users)
       .values({
         email: args.email,
-        displayName: args.display_name,
-        faculty: args.faculty,
-        studyYear: args.study_year,
+        ...(args.display_name !== undefined && { displayName: args.display_name }),
+        ...(args.faculty !== undefined && { faculty: args.faculty }),
+        ...(args.study_year !== undefined && { studyYear: args.study_year }),
       })
       .returning();
     return this.issueTokens(user!.id, args.email, args.platform, args.appVersion);
@@ -70,7 +69,7 @@ export class AuthService {
       .select({ id: users.id, email: users.email })
       .from(users)
       .where(eq(users.email, args.email))
-      .get();
+      .then((rows) => rows[0]);
     if (!user) throw new UnauthorizedException('utilisateur inconnu');
     return this.issueTokens(user.id, user.email, args.platform, args.appVersion);
   }
@@ -81,7 +80,7 @@ export class AuthService {
       .select({ email: users.email })
       .from(users)
       .where(eq(users.id, userId))
-      .get();
+      .then((rows) => rows[0]);
     if (!user) throw new UnauthorizedException('utilisateur inconnu');
     return this.issueTokens(userId, user.email, platform);
   }
@@ -93,13 +92,13 @@ export class AuthService {
       .select({ user: refreshTokens.userId, device: refreshTokens.deviceId })
       .from(refreshTokens)
       .where(eq(refreshTokens.tokenHash, tokenHash))
-      .get();
+      .then((rows) => rows[0]);
     if (!row) throw new UnauthorizedException('refresh token invalide');
     const user = await this.db
       .select({ email: users.email })
       .from(users)
       .where(eq(users.id, row.user))
-      .get();
+      .then((rows) => rows[0]);
     if (!user) throw new UnauthorizedException('utilisateur inconnu');
     // Révoquer l'ancien (rotation, §6.1 v2).
     await this.db

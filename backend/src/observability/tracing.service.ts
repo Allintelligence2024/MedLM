@@ -75,7 +75,7 @@ export class TracingService {
     const child: TraceContext = {
       traceId: parent?.traceId ?? randomUUID().replace(/-/g, ''),
       spanId: randomUUID().slice(0, 16),
-      parentSpanId: parent?.spanId,
+      ...(parent?.spanId !== undefined && { parentSpanId: parent.spanId }),
       operation,
       startedAt: Date.now(),
       attributes,

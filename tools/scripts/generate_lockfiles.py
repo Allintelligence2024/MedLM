@@ -2,31 +2,40 @@
 """
 generate_lockfiles.py — Génère des lockfiles cohérents pour le repo.
 
-Pourquoi : la sandbox n'a ni npm, ni flutter, ni dart, ni pub. On
-produit donc des lockfiles *stub* (lockfileVersion 3 pour npm,
-version 3 pour pub) qui contiennent les résolutions des
-`package.json` / `pubspec.yaml`, marqués comme `resolved` (le vrai
-`resolved` URL sera posé par `npm install` / `flutter pub get`
-en CI ou en local dev).
+Historique : la sandbox n'avait ni npm, ni flutter, ni dart, ni pub.
+On produisait donc des lockfiles *stub* (lockfileVersion 3 pour npm,
+version 3 pour pub) qui contenaient les résolutions des
+`package.json` / `pubspec.yaml`, marqués comme `resolved`.
+
+ÉTAT ACTUEL : les lockfiles npm (backend, cms, tools) sont des
+lockfiles RÉELS (intégrités authentiques, arbre transitif complet)
+régénérés via `npm install --package-lock-only` quand la registry est
+joignable — `npm ci` fonctionne. Ce script **refuse désormais
+d'écraser un lockfile npm réel par un stub** (détection précise du
+stub : intégrité synthétique sha512(name@version) tronquée). Seul
+`mobile/pubspec.lock` reste un stub (pas de dart/flutter ici) — à
+régénérer avec `flutter pub get` hors sandbox.
 
 Ce que fait ce script :
-  1. Parse `backend/package.json` → écrit `backend/package-lock.json`.
-  2. Parse `cms/package.json` → écrit `cms/package-lock.json`.
-  3. Parse `mobile/pubspec.yaml` → écrit `mobile/pubspec.lock`.
-  4. Parse `tools/package.json` → écrit `tools/package-lock.json`
-     (déjà existant, on l'écrase pour cohérence).
+  1. Parse `backend/package.json` → écrit `backend/package-lock.json`
+     SI absent ou stub, sinon skip ;
+  2. Idem `cms/package.json` → `cms/package-lock.json` ;
+  3. Parse `mobile/pubspec.yaml` → écrit `mobile/pubspec.lock` (stub) ;
+  4. Idem `tools/package.json` → `tools/package-lock.json`.
 
-Le lockfile généré est volontairement minimal :
+Le lockfile généré en mode stub est volontairement minimal :
   * `lockfileVersion: 3` (npm) ou 3 (pub).
   * `packages` map avec la version résolue.
   * `requires: true` (régénéré par npm/pub).
-  * `integrity: ""` (placeholder — le vrai SHA est posé par npm/pub).
+  * `integrity: sha512-<synthétique>` — détectable, jamais pris pour
+    un vrai SHA.
 
 Usage :
     python3 tools/scripts/generate_lockfiles.py [--check]
 
 Mode --check : valide que les lockfiles existants sont cohérents
-avec les package.json/pubspec.yaml (CI use case).
+avec les package.json/pubspec.yaml (CI use case). Passe avec des
+lockfiles réels npm (les clés directes y sont présentes).
 """
 from __future__ import annotations
 import argparse
@@ -95,6 +104,38 @@ def resolve_semver(spec: str) -> str:
     return spec
 
 
+def synthetic_integrity(dep_name: str, version: str) -> str:
+    """Empreinte produite par NOTRE générateur de stub (détection)."""
+    digest = hashlib.sha512(f"{dep_name}@{version}".encode()).hexdigest()
+    return f"sha512-{digest[:86]}=="
+
+
+def npm_lock_is_real(out_path: Path) -> bool:
+    """Vrai si le lockfile contient une entrée qui n'est PAS notre stub.
+
+    Un lockfile réel a des intégrités authentiques du registry ; un
+    stub n'a que des empreintes synthétiques recomputables. Cette
+    détection protège les lockfiles réels d'une régression en stub.
+    """
+    if not out_path.exists():
+        return False
+    try:
+        lock = json.loads(out_path.read_text())
+    except (json.JSONDecodeError, OSError):
+        return False
+    for key, entry in lock.get("packages", {}).items():
+        if not key:
+            continue
+        # node_modules/@scope/pkg / node_modules/a/node_modules/b
+        name = key[len("node_modules/"):].split("/node_modules/")[-1]
+        if entry.get("integrity") != synthetic_integrity(
+            name, entry.get("version", "")
+        ):
+            return True
+    # Lockfile vide de toute entrée : ni stub ni réel → on régénère.
+    return False
+
+
 def generate_npm_lockfile(pkg_json_path: Path, out_path: Path) -> bool:
     pkg = parse_package_json(pkg_json_path)
     if not pkg:
@@ -119,11 +160,10 @@ def generate_npm_lockfile(pkg_json_path: Path, out_path: Path) -> bool:
         for dep_name, spec in d.items():
             key = f"node_modules/{dep_name}"
             resolved = resolve_semver(spec)
-            integrity_hash = hashlib.sha512(f"{dep_name}@{resolved}".encode()).hexdigest()
             packages[key] = {
                 "version": resolved,
                 "resolved": f"https://registry.npmjs.org/{dep_name}/-/{dep_name}-{resolved}.tgz",
-                "integrity": f"sha512-{integrity_hash[:86]}==",
+                "integrity": synthetic_integrity(dep_name, resolved),
             }
 
     lock = {
@@ -266,6 +306,12 @@ def main() -> int:
             print(f"  ⚠ {src} manquant, skip")
             continue
         if kind == "npm":
+            if npm_lock_is_real(dst_path):
+                print(
+                    f"  ✓ {dst_path.relative_to(REPO_ROOT)} déjà réel "
+                    "(npm) — NON écrasé par un stub"
+                )
+                continue
             generate_npm_lockfile(src_path, dst_path)
         else:
             generate_pubspec_lock(src_path, dst_path)

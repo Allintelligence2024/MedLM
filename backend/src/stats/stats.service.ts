@@ -8,19 +8,18 @@
 //
 // Conformité v2 §11.3 — « Dashboard KPIs SRS » : on expose
 // exactement les métriques décrites dans la section.
-import { Inject, Injectable, Logger } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { and, eq, gte, sql } from 'drizzle-orm';
 import { DRIZZLE, Database } from '../db/database.module';
 import { reviewLogs, srsCardState } from '../db/schema/srs';
-import { examAttempts, examAnswers } from '../db/schema/exams';
-import { users, userDevices, entitlements } from '../db/schema/users';
-import { cards, decks, modules } from '../db/schema/content';
+import { examAttempts } from '../db/schema/exams';
+
+import { cards, decks } from '../db/schema/content';
 import { userXpSnapshot } from '../db/schema/gamification';
 import { UserStats } from './stats.dto';
 
 @Injectable()
 export class StatsService {
-  private readonly logger = new Logger(StatsService.name);
   private readonly cache = new Map<string, { stats: UserStats; expiresAt: number }>();
   private readonly CACHE_TTL_MS = 60_000; // 60s
 
@@ -63,7 +62,7 @@ export class StatsService {
           sinceMs ? gte(reviewLogs.reviewedAt, sinceMs) : sql`true`,
         ),
       )
-      .get();
+      .then((rows) => rows[0]);
 
     const cardsReviewed = reviewAgg?.total ?? 0;
     const cardsCorrect = reviewAgg?.correct ?? 0;
@@ -102,7 +101,7 @@ export class StatsService {
           sinceMs ? gte(examAttempts.submittedAt, new Date(sinceMs)) : sql`true`,
         ),
       )
-      .get();
+      .then((rows) => rows[0]);
 
     // 4. Streak (côté serveur — le client le calcule aussi).
     // On l'estime grossièrement ici : nombre de jours consécutifs
@@ -116,7 +115,7 @@ export class StatsService {
       })
       .from(userXpSnapshot)
       .where(eq(userXpSnapshot.userId, args.userId))
-      .get();
+      .then((rows) => rows[0]);
     const xpTotal = xpRow?.total ?? 0;
 
     // 6. Niveau.
@@ -146,7 +145,7 @@ export class StatsService {
       .select({ count: sql<number>`count(*)::int` })
       .from(srsCardState)
       .where(and(eq(srsCardState.userId, args.userId), gte(srsCardState.lapses, 8)))
-      .get();
+      .then((rows) => rows[0]);
     const leechCount = leechRow?.count ?? 0;
 
     // 9. Top 5 decks.
@@ -184,7 +183,7 @@ export class StatsService {
       })
       .from(srsCardState)
       .where(and(eq(srsCardState.userId, args.userId), eq(srsCardState.state, 'review')))
-      .get();
+      .then((rows) => rows[0]);
 
     return {
       user_id: args.userId,

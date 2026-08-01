@@ -88,7 +88,7 @@ export class TutorService {
     const { question, lang, history } = args.body;
 
     // 1. Quota (jour UTC, jobs 'ok').
-    const [{ count: used }] = await this.db
+    const [usedRow] = await this.db
       .select({ count: sql<number>`count(*)::int` })
       .from(aiGenerationJobs)
       .where(
@@ -99,6 +99,8 @@ export class TutorService {
           gte(aiGenerationJobs.createdAt, AiGenerateService.todayStartUtc(now)),
         ),
       );
+
+    const used = usedRow?.count ?? 0;
     if (AiGenerateService.remainingQuota(used, limit) <= 0) {
       throw new HttpException(
         `quota journalier du tuteur atteint (${limit}/jour)`,

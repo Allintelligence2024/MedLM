@@ -44,8 +44,8 @@ export class LeaderboardController {
     return this.service.top({
       userId,
       weekIso: this.service.currentWeek(),
-      faculty: q.faculty,
-      studyYear: q.study_year,
+      ...(q.faculty !== undefined && { faculty: q.faculty }),
+      ...(q.study_year !== undefined && { studyYear: q.study_year }),
       limit: q.limit,
     });
   }

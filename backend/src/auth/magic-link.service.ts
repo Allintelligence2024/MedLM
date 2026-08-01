@@ -44,7 +44,7 @@ export class MagicLinkService {
       .select({ id: users.id })
       .from(users)
       .where(eq(users.email, args.email))
-      .get();
+      .then((rows) => rows[0]);
     if (!user) {
       this.logger.warn(`magic link demandé pour email inconnu`);
       return { sent: true };

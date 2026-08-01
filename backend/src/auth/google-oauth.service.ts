@@ -13,7 +13,7 @@
 /// dépendances transitive : un appel fetch direct à l'endpoint token
 /// suffit. La validation du `id_token` n'est pas faite ici (Phase 11,
 /// CMS) — on fait confiance à l'email retourné par l'API userinfo.
-import { Inject, Injectable, Logger, UnauthorizedException } from '@nestjs/common';
+import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { eq } from 'drizzle-orm';
 import { DRIZZLE, Database } from '../db/database.module';
@@ -23,7 +23,6 @@ import { TokenResponse } from './auth.dto';
 
 @Injectable()
 export class GoogleOAuthService {
-  private readonly logger = new Logger(GoogleOAuthService.name);
 
   constructor(
     @Inject(DRIZZLE) private readonly db: Database,
@@ -92,7 +91,7 @@ export class GoogleOAuthService {
       .select({ id: users.id })
       .from(users)
       .where(eq(users.email, ui.email))
-      .get();
+      .then((rows) => rows[0]);
     if (!user) {
       const [created] = await this.db
         .insert(users)

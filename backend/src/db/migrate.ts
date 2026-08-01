@@ -26,13 +26,14 @@ async function main(): Promise<void> {
   // eslint-disable-next-line no-console
   console.log('migrations en cours…');
   await migrate(db, { migrationsFolder: './src/db/migrations' });
-  // eslint-disable-next-line no-console
+  // eslint-disable-next-line no-console -- CLI : stdout est le canal prévu
   console.log('migrations OK');
 
   await pool.end();
 }
 
 main().catch((err) => {
+  // eslint-disable-next-line no-console -- CLI : stderr est le canal prévu
   console.error('migration échouée', err);
   process.exit(1);
 });

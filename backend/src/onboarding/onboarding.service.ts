@@ -14,7 +14,7 @@
 //   * Recommande 3 decks selon les modules d'intérêt.
 //   * Retourne la "next step" pour le client.
 import { Inject, Injectable, Logger, NotFoundException } from '@nestjs/common';
-import { and, eq, inArray, sql } from 'drizzle-orm';
+import { eq, inArray, sql } from 'drizzle-orm';
 import { DRIZZLE, Database } from '../db/database.module';
 import { users } from '../db/schema/users';
 import { decks, modules } from '../db/schema/content';
@@ -33,7 +33,7 @@ export class OnboardingService {
       .select({ id: users.id })
       .from(users)
       .where(eq(users.id, args.userId))
-      .get();
+      .then((rows) => rows[0]);
     if (!user) throw new NotFoundException('user introuvable');
 
     // 2. Mettre à jour le profil utilisateur.

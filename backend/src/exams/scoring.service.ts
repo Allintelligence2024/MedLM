@@ -28,7 +28,7 @@ export class ScoringService {
       .select()
       .from(examTemplates)
       .where(eq(examTemplates.id, args.templateId))
-      .get();
+      .then((rows) => rows[0]);
     if (!tpl) {
       throw new Error(`template ${args.templateId} introuvable`);
     }

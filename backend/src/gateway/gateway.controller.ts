@@ -44,7 +44,15 @@ export class GatewayController {
     }
 
     const parsed = GraphqlGatewayBody.parse(body ?? {});
-    const jwt = (req.headers['authorization'] ?? '').replace(/^Bearer\s+/i, '');
+    const headers = req.headers as unknown as Record<
+      string,
+      string | string[] | undefined
+    >;
+    const rawAuth = headers['authorization'];
+    const jwt = (Array.isArray(rawAuth) ? rawAuth[0] ?? '' : rawAuth ?? '').replace(
+      /^Bearer\s+/i,
+      '',
+    );
     if (!jwt) {
       throw new UnauthorizedException('jeton requis');
     }
@@ -53,7 +61,7 @@ export class GatewayController {
       userId,
       jwt,
       queryText: parsed.query,
-      variables: parsed.variables,
+      ...(parsed.variables !== undefined && { variables: parsed.variables }),
     });
     if (!result.ok) {
       return res

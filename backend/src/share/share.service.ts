@@ -16,7 +16,8 @@ import { and, eq } from 'drizzle-orm';
 import { DRIZZLE, Database } from '../db/database.module';
 import { shareCards } from '../db/schema/share';
 import { examAttempts } from '../db/schema/exams';
-import { examTemplates, modules } from '../db/schema/exam_templates';
+import { examTemplates } from '../db/schema/exam_templates';
+import { modules } from '../db/schema/content';
 import { leaderboardOptin } from '../db/schema/gamification';
 import { users } from '../db/schema/users';
 import { CreateShareBody, ShareCard, PublicShareMetadata } from './share.dto';
@@ -45,7 +46,7 @@ export class ShareService {
           eq(examAttempts.status, 'submitted'),
         ),
       )
-      .get();
+      .then((rows) => rows[0]);
     if (!attempt) {
       throw new NotFoundException('tentative introuvable ou non soumise');
     }
@@ -57,7 +58,7 @@ export class ShareService {
       .select({ pseudonym: leaderboardOptin.pseudonym })
       .from(leaderboardOptin)
       .where(eq(leaderboardOptin.userId, args.userId))
-      .get();
+      .then((rows) => rows[0]);
     const pseudonym = optin?.pseudonym ?? 'anonyme';
 
     // 3. Récupérer le module + faculté.
@@ -65,14 +66,14 @@ export class ShareService {
       .select({ moduleId: examTemplates.moduleId, faculty: examTemplates.faculty })
       .from(examTemplates)
       .where(eq(examTemplates.id, attempt.templateId))
-      .get();
+      .then((rows) => rows[0]);
     let moduleNameFr = '—';
     if (tpl?.moduleId) {
       const m = await this.db
         .select({ nameFr: modules.nameFr })
         .from(modules)
         .where(eq(modules.id, tpl.moduleId))
-        .get();
+        .then((rows) => rows[0]);
       if (m) moduleNameFr = m.nameFr;
     }
 
@@ -81,7 +82,7 @@ export class ShareService {
       .select({ faculty: users.faculty })
       .from(users)
       .where(eq(users.id, args.userId))
-      .get();
+      .then((rows) => rows[0]);
     const faculty = tpl?.faculty ?? user?.faculty ?? null;
 
     // 5. Construire le texte de partage.
@@ -135,7 +136,7 @@ export class ShareService {
       .select()
       .from(shareCards)
       .where(eq(shareCards.id, id))
-      .get();
+      .then((rows) => rows[0]);
     if (!row) throw new NotFoundException('carte introuvable');
     if (row.expiresAt.getTime() < Date.now()) {
       throw new BadRequestException('carte expirée');

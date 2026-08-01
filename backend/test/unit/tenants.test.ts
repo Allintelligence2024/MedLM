@@ -1,9 +1,10 @@
 // Tests TenantsService — Phase 16.4.
 // On teste les DTOs (validation) et les helpers purs.
 import { describe, it, expect } from 'vitest';
+import { AddUserBody } from '../../src/tenants/tenants.dto';
+import { CreateTenantBody } from '../../src/tenants/tenants.dto';
 
 describe('CreateTenantBody — validation Zod', () => {
-  const { CreateTenantBody } = require('../../src/tenants/tenants.dto');
 
   it('accepte un body minimal', () => {
     const r = CreateTenantBody.safeParse({
@@ -76,7 +77,6 @@ describe('CreateTenantBody — validation Zod', () => {
 });
 
 describe('AddUserBody — validation Zod', () => {
-  const { AddUserBody } = require('../../src/tenants/tenants.dto');
 
   it('accepte student par défaut', () => {
     const r = AddUserBody.safeParse({

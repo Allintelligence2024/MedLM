@@ -74,12 +74,25 @@ describe('ScorePredictor', () => {
   });
 
   it('bandes cohérentes avec les seuils', () => {
-    const band = (acc: number) => {
-      const p = ScorePredictor.predict(baseFeatures({ accuracy30d: acc }));
+    // Une bande se joue sur TOUTES les features réunies (le modèle
+    // additionne les contributions) : avec les autres features au
+    // niveau médian de baseFeatures, baisser seulement accuracy ne
+    // suffit pas à tomber sous BAND_LOW_MAX — c'est le comportement
+    // calibré (ml_eval.py). On teste donc des profils cohérents.
+    const bandOf = (over: Partial<ScoreFeatures>) => {
+      const p = ScorePredictor.predict(baseFeatures(over));
       return p.predictible ? p.band : null;
     };
-    expect(band(0.99)).toBe('high');
-    expect(band(0.05)).toBe('low');
+    expect(
+      bandOf({ accuracy30d: 0.99, coverageRatio: 0.99, matureRatio: 0.99, streakDays: 30 }),
+    ).toBe('high');
+    expect(
+      bandOf({ accuracy30d: 0.05, coverageRatio: 0.05, matureRatio: 0.05, streakDays: 0 }),
+    ).toBe('low');
+    // Profil médian réaliste : contribution positive mais modérée.
+    expect(
+      bandOf({ accuracy30d: 0.45, coverageRatio: 0.2, matureRatio: 0.05, streakDays: 0 }),
+    ).toBe('medium');
   });
 
   it('bornes défensives : NaN et valeurs hors [0,1] clampées', () => {

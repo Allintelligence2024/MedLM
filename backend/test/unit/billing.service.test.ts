@@ -7,6 +7,8 @@ import { describe, it, expect, beforeEach } from 'vitest';
 import { BillingService } from '../../src/billing/billing.service';
 import { PromoCodeProvider } from '../../src/billing/promo-code.provider';
 import { ChargilyPayProvider } from '../../src/billing/chargily.provider';
+import { users } from '../../src/db/schema/users';
+import { webhookEvents } from '../../src/db/schema/billing';
 
 class FakeDb {
   entitlements: any[] = [];
@@ -17,17 +19,25 @@ class FakeDb {
   select(): any {
     const self = this;
     return {
-      from(_t: any) {
+      from(t: any) {
+        const rows =
+          t === users
+            ? [{ email: self.userEmail }]
+            : t === webhookEvents
+              ? self.webhookEvents
+              : self.entitlements;
         return {
           where(_w: any) {
+            // Drizzle réel : le builder est thenable (await → rows[]).
+            const p = Promise.resolve(rows);
             return {
-              get() {
-                return Promise.resolve({ email: self.userEmail });
+              then(res: any) {
+                return p.then(res);
               },
               orderBy() {
                 return {
                   then(res: any) {
-                    return Promise.resolve(self.entitlements).then(res);
+                    return p.then(res);
                   },
                 };
               },
@@ -38,11 +48,16 @@ class FakeDb {
     };
   }
   insert(_t: any): any {
+    const self = this;
     return {
       values(v: any) {
+        const done = Promise.resolve().then(() => self.webhookEvents.push(v));
         return {
+          then(res: any) {
+            return done.then(res);
+          },
           onConflictDoUpdate() {
-            this.entitlements.push(v);
+            self.entitlements.push(v);
             return this;
           },
         };
@@ -138,8 +153,14 @@ describe('BillingService', () => {
 
 describe('PromoCodeProvider', () => {
   it('rejette un code inconnu', async () => {
-    const db = {
-      select: () => ({ from: () => ({ where: () => ({ get: async () => null }) }) }),
+    const db: any = {
+      // Thenable comme le drizzle réel : await → rows[] (ici : aucun
+      // code promo connu → liste vide → « inconnu »).
+      select: () => ({
+        from: () => ({
+          where: () => ({ then: (cb: any) => Promise.resolve([]).then(cb) }),
+        }),
+      }),
       transaction: async (fn: any) => fn(db),
       update: () => ({ set: () => ({ where: () => ({ returning: async () => [] }) }) }),
     };

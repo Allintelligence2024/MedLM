@@ -1,6 +1,8 @@
 // Tests GroupPacksService — Phase 16.3.
 // On teste les helpers purs + la logique de pricing.
 import { describe, it, expect } from 'vitest';
+import { JoinPackBody } from '../../src/group-packs/group-packs.dto';
+import { CreatePackBody } from '../../src/group-packs/group-packs.dto';
 import { GroupPacksService } from '../../src/group-packs/group-packs.service';
 
 describe('GroupPacksService — _computeSavings', () => {
@@ -12,8 +14,8 @@ describe('GroupPacksService — _computeSavings', () => {
     const { perUserCents, savingsCents } = svc._computeSavings('monthly');
     // 350 DA * 0.7 = 245 DA = 24500 centimes
     expect(perUserCents).toBe(24500);
-    // (35000 - 24500) * 5 = 105000 centimes = 1050 DA
-    expect(savingsCents).toBe(105000);
+    // (35000 - 24500) * 5 = 52500 centimes = 525 DA
+    expect(savingsCents).toBe(52500);
   });
 
   it('plan yearly (2400 DA) : per_user = 1680 DA', () => {
@@ -51,19 +53,16 @@ describe('GroupPacksService — _generateInviteCode', () => {
 describe('CreatePackBody — validation Zod', () => {
   it('accepte un plan valide', () => {
     // Import dynamique.
-    const { CreatePackBody } = require('../../src/group-packs/group-packs.dto');
     const r = CreatePackBody.safeParse({ plan: 'yearly' });
     expect(r.success).toBe(true);
   });
 
   it('rejette un plan invalide', () => {
-    const { CreatePackBody } = require('../../src/group-packs/group-packs.dto');
     const r = CreatePackBody.safeParse({ plan: 'weekly' });
     expect(r.success).toBe(false);
   });
 
   it('accepte faculty optionnelle', () => {
-    const { CreatePackBody } = require('../../src/group-packs/group-packs.dto');
     const r = CreatePackBody.safeParse({ plan: 'monthly', faculty: 'Alger' });
     expect(r.success).toBe(true);
   });
@@ -71,19 +70,16 @@ describe('CreatePackBody — validation Zod', () => {
 
 describe('JoinPackBody — validation Zod', () => {
   it('accepte un code 6 caractères A-Z0-9', () => {
-    const { JoinPackBody } = require('../../src/group-packs/group-packs.dto');
     const r = JoinPackBody.safeParse({ invite_code: 'ABC123' });
     expect(r.success).toBe(true);
   });
 
   it('rejette un code trop court', () => {
-    const { JoinPackBody } = require('../../src/group-packs/group-packs.dto');
     const r = JoinPackBody.safeParse({ invite_code: 'ABC' });
     expect(r.success).toBe(false);
   });
 
   it('rejette des caractères spéciaux', () => {
-    const { JoinPackBody } = require('../../src/group-packs/group-packs.dto');
     const r = JoinPackBody.safeParse({ invite_code: 'ABC-12' });
     expect(r.success).toBe(false);
   });

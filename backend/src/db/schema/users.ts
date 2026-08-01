@@ -9,11 +9,8 @@ import {
   text,
   integer,
   timestamp,
-  jsonb,
-  boolean,
   index,
   uniqueIndex,
-  primaryKey,
 } from 'drizzle-orm/pg-core';
 
 /// Utilisateurs — source de vérité (doc v2 §7).

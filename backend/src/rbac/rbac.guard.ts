@@ -71,8 +71,7 @@ export class RbacGuard implements CanActivate {
 
 /// Décorateur à appliquer sur les handlers / classes.
 export const RequireRole = (...roles: Role[]) => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return (target: any, key?: string | symbol, descriptor?: PropertyDescriptor) => {
+  return (target: any, _key?: string | symbol, descriptor?: PropertyDescriptor) => {
     const value = roles.length === 1 ? roles[0] : roles;
     if (descriptor) {
       Reflect.defineMetadata(REQUIRE_ROLE_KEY, value, descriptor.value);

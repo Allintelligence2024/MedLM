@@ -36,11 +36,11 @@ import { PartnershipsModule } from './partnerships/partnerships.module';
     LoggerModule.forRoot({
       pinoHttp: {
         redact: ['req.headers.authorization', 'req.headers.cookie'],
-        level: process.env.LOG_LEVEL ?? 'info',
-        transport:
-          process.env.NODE_ENV !== 'production'
-            ? { target: 'pino-pretty', options: { singleLine: true } }
-            : undefined,
+        level: (process.env.LOG_LEVEL ?? 'info') as
+          | 'fatal' | 'error' | 'warn' | 'info' | 'debug' | 'trace' | 'silent',
+        ...(process.env.NODE_ENV !== 'production'
+          ? { transport: { target: 'pino-pretty', options: { singleLine: true as const } } }
+          : {}),
       },
     }),
     ThrottlerModuleConfigured,

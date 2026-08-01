@@ -7,12 +7,11 @@
 //
 // TTL 24h. Avant l'expiration, le mobile rafraîchit via
 // GET /v1/billing/entitlement (qui retourne un nouveau JWT).
-import { Inject, Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { readFileSync, existsSync } from 'fs';
 import { resolve } from 'path';
-import { DRIZZLE, Database } from '../db/database.module';
 import { BillingService } from '../billing/billing.service';
 
 export interface EntitlementJwtPayload {
@@ -26,12 +25,10 @@ export interface EntitlementJwtPayload {
 
 @Injectable()
 export class EntitlementService {
-  private readonly logger = new Logger(EntitlementService.name);
   private readonly publicKey: string | null;
   private readonly ttlSeconds: number;
 
   constructor(
-    @Inject(DRIZZLE) private readonly db: Database,
     private readonly jwt: JwtService,
     private readonly billing: BillingService,
     private readonly config: ConfigService,
@@ -67,7 +64,7 @@ export class EntitlementService {
   /// endpoints serveur en cas de besoin).
   async verify(jwt: string): Promise<EntitlementJwtPayload> {
     return this.jwt.verifyAsync(jwt, {
-      publicKey: this.publicKey ?? undefined,
+      ...(this.publicKey !== null && this.publicKey !== undefined && { publicKey: this.publicKey }),
       algorithms: this.publicKey ? ['RS256'] : ['HS256'],
     }) as Promise<EntitlementJwtPayload>;
   }

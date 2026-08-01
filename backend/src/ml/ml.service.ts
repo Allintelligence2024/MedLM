@@ -6,7 +6,7 @@
 // GET /v1/ml/tag-focus           — focus/relax par tag (seuils
 // documentés, chiffres expliqués).
 import { Inject, Injectable } from '@nestjs/common';
-import { and, eq, gte, sql } from 'drizzle-orm';
+import { and, eq, gte } from 'drizzle-orm';
 import { DRIZZLE, Database } from '../db/database.module';
 import { reviewLogs, srsCardState } from '../db/schema/srs';
 import { cards } from '../db/schema/content';

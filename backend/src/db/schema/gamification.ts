@@ -18,7 +18,6 @@ import {
   text,
   integer,
   timestamp,
-  boolean,
   index,
   uniqueIndex,
   jsonb,

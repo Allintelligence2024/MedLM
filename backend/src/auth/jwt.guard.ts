@@ -68,7 +68,11 @@ export class JwtGuard implements CanActivate {
     }
 
     const req = context.switchToHttp().getRequest<AuthedRequest>();
-    const auth = req.headers['authorization'];
+    const headers = req.headers as unknown as Record<
+      string,
+      string | string[] | undefined
+    >;
+    const auth = headers['authorization'];
     if (!auth || Array.isArray(auth)) {
       throw new UnauthorizedException('header Authorization manquant');
     }

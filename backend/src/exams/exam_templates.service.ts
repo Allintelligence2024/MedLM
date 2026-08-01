@@ -10,23 +10,15 @@
 //     sur les événements. 0 = RAS, 1 = très suspect.
 //   * (Phase 14) detectMultiDevice() : signale les examens passés
 //     simultanément depuis plusieurs appareils (triche probable).
-import { Inject, Injectable, Logger, NotFoundException, BadRequestException } from '@nestjs/common';
-import { and, eq, sql } from 'drizzle-orm';
+import { Inject, Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import { and, eq, inArray, sql } from 'drizzle-orm';
 import { DRIZZLE, Database } from '../db/database.module';
-import {
-  examTemplates,
-  examAttemptEvents,
-  examQuestions,
-  examAttempts,
-  cards,
-  modules,
-} from '../db/schema';
+import { examTemplates, examAttemptEvents, examQuestions, examAttempts, cards } from '../db/schema';
 
 const TOLERANCE_SECONDS = 5;
 
 @Injectable()
 export class ExamTemplatesService {
-  private readonly logger = new Logger(ExamTemplatesService.name);
 
   constructor(@Inject(DRIZZLE) private readonly db: Database) {}
 
@@ -54,7 +46,7 @@ export class ExamTemplatesService {
       .select()
       .from(examTemplates)
       .where(eq(examTemplates.id, args.templateId))
-      .get();
+      .then((rows) => rows[0]);
     if (!tpl) throw new NotFoundException('template inconnu');
     if (!tpl.isActive) throw new BadRequestException('template inactif');
 
@@ -91,6 +83,7 @@ export class ExamTemplatesService {
     // 3. Crée les questions d'examen à partir des cartes piochées.
     for (let i = 0; i < picked.length; i++) {
       const card = picked[i];
+      if (!card) continue;  // noUncheckedIndexedAccess
       // On prend la carte et on sérialise son contenu (FR/EN) en
       // QCM. En l'absence d'options structurées, on génère 4
       // options (1 correcte + 3 distracteurs pris dans la même
@@ -100,7 +93,7 @@ export class ExamTemplatesService {
         .select()
         .from(cards)
         .where(eq(cards.id, card.id))
-        .get();
+        .then((rows) => rows[0]);
       if (!full) continue;
       // Le contenu est dans un JSONB, on l'extrait.
       const content = (full as any).content ?? {};
@@ -143,7 +136,7 @@ export class ExamTemplatesService {
       .select()
       .from(examAttempts)
       .where(eq(examAttempts.id, args.attemptId))
-      .get();
+      .then((rows) => rows[0]);
     if (!attempt) throw new NotFoundException('tentative inconnue');
     if (attempt.userId !== args.userId) {
       throw new BadRequestException('cette tentative n\'est pas la vôtre');
@@ -235,7 +228,7 @@ export class ExamTemplatesService {
       .select({ userId: examAttempts.userId, startedAt: examAttempts.startedAt })
       .from(examAttempts)
       .where(eq(examAttempts.id, attemptId))
-      .get();
+      .then((rows) => rows[0]);
     if (!me) return { distinctDevices: 0, deviceIds: [] };
 
     // Toutes les tentatives en cours de ce user, dans la même
@@ -261,7 +254,10 @@ export class ExamTemplatesService {
     const events = await this.db
       .select({ metadata: examAttemptEvents.metadata })
       .from(examAttemptEvents)
-      .where(sql`${examAttemptEvents.attemptId} = ANY(${sql.raw(`ARRAY[${ids.map((i) => `'${i}'`).join(',')}]::uuid[]`)}`)`);
+      // inArray : bind paramétré (= ANY($n)) — types uuid vérifiés
+      // par drizzle, aucune interpolation manuelle (injection, et le
+      // triplement imbriqué de gabarits ne compilait pas : TS1160).
+      .where(inArray(examAttemptEvents.attemptId, ids));
     const devices = new Set<string>();
     for (const e of events) {
       const m = (e.metadata as any) ?? {};

@@ -12,7 +12,7 @@
 //
 // Toutes respectent la fenêtre 8h–22h (jamais entre 22h et 8h).
 import { Injectable, Logger } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+
 import { FcmProvider } from './fcm/fcm.provider';
 import { ApnsProvider } from './apns/apns.provider';
 import type { NotificationKind, PushProvider } from './push.types';
@@ -24,7 +24,6 @@ export class NotificationsService {
   constructor(
     private readonly fcm: FcmProvider,
     private readonly apns: ApnsProvider,
-    private readonly config: ConfigService,
   ) {}
 
   /// Envoie une notif. `platform` choisit le provider.
@@ -56,7 +55,7 @@ export class NotificationsService {
         },
         data: {
           kind: args.payload.kind,
-          deeplink: args.payload.deeplink,
+          ...(args.payload.deeplink !== undefined && { deeplink: args.payload.deeplink }),
         },
       },
     });

@@ -17,8 +17,8 @@ import { Inject, Injectable, Logger, BadRequestException, NotFoundException } fr
 import { and, eq } from 'drizzle-orm';
 import { randomUUID } from 'crypto';
 import { DRIZZLE, Database } from '../db/database.module';
-import { examAttempts, examQuestions, examAnswers, studySessions, srsCardState, reviewLogs, cards } from '../db/schema';
-import { AnswerBody, ExamAttempt, ExamQuestion, ExamScoring, ExamTemplate, SubmitExamBody } from './exams.dto';
+import { examAttempts, examQuestions, examAnswers, examTemplates, studySessions, srsCardState, reviewLogs, cards } from '../db/schema';
+import { AnswerBody, ExamAttempt, ExamQuestion, ExamScoring, SubmitExamBody } from './exams.dto';
 
 const TOLERANCE_SECONDS = 5;
 const PASS_THRESHOLD = 0.5;
@@ -32,11 +32,14 @@ export class ExamsService {
   /// POST /v1/exams/attempts — démarre une tentative.
   /// Le timer est posé ICI, pas côté client.
   async start(args: { userId: string; templateId: string }): Promise<ExamAttempt> {
+    // Le sujet (durée, barème) vit dans exam_templates — PAS dans
+    // exam_questions (bug latent : durationMinutes y est undefined,
+    // expiresAt devenait NaN en production).
     const tpl = await this.db
       .select()
-      .from(examQuestions)
-      .where(eq(examQuestions.templateId, args.templateId))
-      .get();
+      .from(examTemplates)
+      .where(eq(examTemplates.id, args.templateId))
+      .then((rows) => rows[0]);
     if (!tpl) throw new NotFoundException('template de sujet inconnu');
 
     const now = Date.now();
@@ -47,8 +50,8 @@ export class ExamsService {
       id: attemptId,
       userId: args.userId,
       templateId: args.templateId,
-      startedAt: now,
-      expiresAt,
+      startedAt: new Date(now),
+      expiresAt: new Date(expiresAt),
       status: 'in_progress',
     });
 
@@ -61,7 +64,11 @@ export class ExamsService {
     const publicQuestions: ExamQuestion[] = questions.map((q) => ({
       id: q.id,
       position: q.position,
-      options: q.options.map((o) => ({ id: o.id, fr: o.fr, en: o.en })),
+      options: q.options.map((o) => ({
+        id: o.id,
+        fr: o.fr,
+        ...(o.en !== undefined && { en: o.en }),
+      })),
       correctOptionIds: [], // intentionnel : privé
       isMultiple: q.isMultiple,
     }));
@@ -87,7 +94,7 @@ export class ExamsService {
     if (attempt.status !== 'in_progress') {
       throw new BadRequestException('tentative déjà soumise ou expirée');
     }
-    if (Date.now() > attempt.expiresAt + TOLERANCE_SECONDS * 1000) {
+    if (Date.now() > attempt.expiresAt.getTime() + TOLERANCE_SECONDS * 1000) {
       throw new BadRequestException('temps écoulé');
     }
     await this.db.insert(examAnswers).values({
@@ -110,7 +117,7 @@ export class ExamsService {
     if (attempt.status !== 'in_progress') {
       throw new BadRequestException('tentative déjà soumise ou expirée');
     }
-    if (Date.now() > attempt.expiresAt + TOLERANCE_SECONDS * 1000) {
+    if (Date.now() > attempt.expiresAt.getTime() + TOLERANCE_SECONDS * 1000) {
       throw new BadRequestException('temps écoulé');
     }
 
@@ -122,7 +129,12 @@ export class ExamsService {
 
     const correctMap = new Map<string, string[]>();
     for (const q of privateQuestions) {
-      correctMap.set(q.id, q.correctOptionIds);
+      // Les bonnes réponses vivent dans options[].is_correct — jamais
+      // dans une colonne dédiée (correctOptionIds n'existe pas en base).
+      correctMap.set(
+        q.id,
+        q.options.filter((o) => o.is_correct).map((o) => o.id),
+      );
     }
 
     // Compare.
@@ -159,7 +171,7 @@ export class ExamsService {
       .update(examAttempts)
       .set({
         status: 'submitted',
-        submittedAt: Date.now(),
+        submittedAt: new Date(Date.now()),
         score: score,
         correctCount: correct,
         incorrectCount: incorrect,
@@ -172,8 +184,8 @@ export class ExamsService {
     // rejouera fold() localement. L'état SRS est mis à jour ici aussi
     // pour le serveur.
     const now = Date.now();
-    const dayKey = new Date(now).toISOString().slice(0, 10);
     let injected = 0;
+    let sessionDeckId: string | null = null;
     for (const questionId of missed) {
       // Trouve la carte associée (peut être absente si l'admin n'a
       // pas encore lié la question à une carte).
@@ -181,8 +193,9 @@ export class ExamsService {
         .select({ id: cards.id, deckId: cards.deckId })
         .from(cards)
         .where(eq(cards.examQuestionId, questionId))
-        .get();
+        .then((rows) => rows[0]);
       if (!card) continue;
+      sessionDeckId = card.deckId;
       // On insère un ReviewEvent factice (kind="exam_missed") dans
       // review_logs. Le scheduler SRS le traitera comme un Again
       // et ajustera la stabilité. C'est le pattern recommandé
@@ -220,7 +233,7 @@ export class ExamsService {
     await this.db.insert(studySessions).values({
       id: randomUUID(),
       userId: args.userId,
-      deckId: privateQuestions[0]?.deckId ?? null,
+      deckId: sessionDeckId,  // exam_questions n'a pas de deckId
       startedAt: new Date(attempt.startedAt),
       endedAt: new Date(now),
       cardsDueAtStart: total,
@@ -246,7 +259,7 @@ export class ExamsService {
       .select()
       .from(examAttempts)
       .where(and(eq(examAttempts.id, attemptId), eq(examAttempts.userId, userId)))
-      .get();
+      .then((rows) => rows[0]);
     if (!row) throw new NotFoundException('tentative inconnue');
     return row;
   }

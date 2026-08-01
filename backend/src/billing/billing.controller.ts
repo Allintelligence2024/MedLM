@@ -12,11 +12,9 @@ import {
   HttpCode,
   HttpStatus,
   Post,
-  RawBody,
   Req,
 } from '@nestjs/common';
 import type { Request } from 'express';
-import { z } from 'zod';
 import { BillingService } from './billing.service';
 import { CreateCheckoutBody, ChargilyWebhookEvent } from './billing.dto';
 import { ChargilyPayProvider } from './chargily.provider';
@@ -43,7 +41,7 @@ export class BillingController {
     return this.service.createCheckout({
       userId,
       plan: b.plan,
-      promoCode: b.promo_code,
+      ...(b.promo_code !== undefined && { promoCode: b.promo_code }),
       successUrl: b.success_url ?? `${origin ?? 'https://medanki.dz'}/billing/success`,
       cancelUrl: b.cancel_url ?? `${origin ?? 'https://medanki.dz'}/billing/cancel`,
     });
