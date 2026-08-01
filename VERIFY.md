@@ -11,6 +11,7 @@
 | `tools/scripts/security_audit.py` | 0 secret en dur, 0 print non justifié (sentinelles de linter honorées), 0 `@Body` sans Zod, 0 contrôleur sans garde |
 | `tools/scripts/generate_lockfiles.py --check` | cohérence lockfiles backend/cms/mobile/tools |
 | `tools/validate_content.py` | Content Policy : 697 cartes, règles de rejet, sources obligatoires |
+| `tools/scripts/check_syntax_guard.py` | délimiters `(){}[]` équilibrés (Dart mobile/ + Python tools/tests), 0 marqueur de conflit repo-wide ; TS exclu documenté (regex/gabarits imbriqués) |
 | `tools/scripts/phase13_checks.sh` | orchestre tout ce niveau + load-tester self-test |
 
 ## Niveau 1 — moteur SRS (python, < 2 s)
@@ -37,6 +38,15 @@
 | `tools/scripts/check_landing.py` | landing : 61 clés × 3 langues, FR inliné, 0 tracker |
 | `tools/scripts/check_store.py` | 6 fiches stores ≤ 80 c, 0 promesse médicale, labels ↔ PRIVACY.md |
 | `tools/scripts/pentest_prep.py` | périmètre pen test : rotation tokens, wrap-key, quotas IA, append-only, anti-injection, rôle admin |
+
+## Niveau 3b — livrables scale (Phase 20)
+
+| Script | Prouve |
+|---|---|
+| `tools/scripts/check_regions.py` | 3 régions DZ (alger primary, oran/constantine répliques), `timezone: 'Africa/Algiers'` partout, overlays K8s cohérents |
+| `tools/scripts/check_graphql.py` | gateway GraphQL : opérations persistées ↔ délégations réelles dans les contrôleurs REST, budget coût, GraphQL désactivable |
+| `tools/ml_eval.py` | prédicteur d'examen blanc : 100 % parité coefficients TS↔Python, MAE ≤ 10, séparation low→high ≥ 8 pts |
+| `tools/scripts/check_partnerships.py` | facultés citées dans le contenu ∈ allow-list des 10 facultés, machine d'état des partenariats |
 
 ## Niveau 4 — hors sandbox (environnements dédiés)
 

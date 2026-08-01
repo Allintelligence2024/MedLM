@@ -3,8 +3,9 @@
 #
 # 1. Cohérence des lockfiles.
 # 2. Audit sécurité statique.
-# 3. Self-test du load tester.
-# 4. (Optionnel) Tests Python tools.
+# 3. Garde-fou syntaxique (délimiters Dart/Python, marqueurs de conflit).
+# 4. Self-test du load tester.
+# 5. (Optionnel) Tests Python tools + gardes des phases 19/20 (bloquants).
 #
 # Exit code : 0 si tout passe, 1 sinon.
 
@@ -17,22 +18,27 @@ echo "=== Phase 13 — vérifications ==="
 echo
 
 # 1. Lockfiles.
-echo "[1/4] Cohérence des lockfiles..."
+echo "[1/5] Cohérence des lockfiles..."
 python3 tools/scripts/generate_lockfiles.py --check
 echo
 
 # 2. Audit sécurité.
-echo "[2/4] Audit sécurité statique..."
+echo "[2/5] Audit sécurité statique..."
 python3 tools/scripts/security_audit.py
 echo
 
-# 3. Load test self-test.
-echo "[3/4] Self-test du load tester..."
+# 3. Garde-fou syntaxique (délimiters Dart/Python, marqueurs de conflit).
+echo "[3/5] Garde-fou syntaxique statique..."
+python3 tools/scripts/check_syntax_guard.py
+echo
+
+# 4. Load test self-test.
+echo "[4/5] Self-test du load tester..."
 python3 tests/load/load_test_self_test.py
 echo
 
-# 4. Tools Python (déjà en place, on vérifie qu'ils tournent).
-echo "[4/4] Tools Python (sanity check)..."
+# 5. Tools Python (déjà en place, on vérifie qu'ils tournent).
+echo "[5/5] Tools Python (sanity check)..."
 if [ -f tools/check_schema_parity.py ]; then
   python3 tools/check_schema_parity.py > /tmp/phase13_schema.log 2>&1 && \
     echo "  ✓ check_schema_parity.py" || \
