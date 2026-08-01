@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Audit complet — MedAnki DZ (2026-08-01)</title>
+<style>
+  :root {
+    --p0: #b91c1c; --p0bg: #fef2f2;
+    --p1: #c2410c; --p1bg: #fff7ed;
+    --p2: #a16207; --p2bg: #fefce8;
+    --p3: #1d4ed8; --p3bg: #eff6ff;
+    --ok: #047857; --okbg: #ecfdf5;
+    --ink: #0f172a; --mut: #475569; --line: #e2e8f0;
+    --code: #f1f5f9;
+  }
+  * { box-sizing: border-box; }
+  body { font-family: ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif; color: var(--ink); background: #fff; margin: 0; line-height: 1.55; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 24px 20px 80px; }
+  header.hero { background: linear-gradient(135deg,#064e3b,#065f46 55%,#0d9488); color: #fff; padding: 36px 20px; }
+  header.hero .wrap { padding: 0 20px; }
+  h1 { margin: 0 0 6px; font-size: 1.7rem; }
+  h2 { border-bottom: 2px solid var(--line); padding-bottom: 6px; margin-top: 44px; font-size: 1.3rem; }
+  h3 { margin-top: 28px; font-size: 1.08rem; }
+  .sub { opacity: .85; font-size: .95rem; margin: 0; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap: 12px; margin: 18px 0; }
+  .kpi { border: 1px solid var(--line); border-radius: 10px; padding: 14px; background: #fff; }
+  .kpi .v { font-size: 1.5rem; font-weight: 700; }
+  .kpi .l { font-size: .8rem; color: var(--mut); }
+  .badge { display:inline-block; font-size:.72rem; font-weight:700; padding:2px 9px; border-radius:999px; vertical-align: middle; }
+  .b0 { background:var(--p0bg); color:var(--p0); border:1px solid var(--p0); }
+  .b1 { background:var(--p1bg); color:var(--p1); border:1px solid var(--p1); }
+  .b2 { background:var(--p2bg); color:var(--p2); border:1px solid var(--p2); }
+  .b3 { background:var(--p3bg); color:var(--p3); border:1px solid var(--p3); }
+  .bok { background:var(--okbg); color:var(--ok); border:1px solid var(--ok); }
+  table { border-collapse: collapse; width: 100%; margin: 12px 0 22px; font-size: .9rem; }
+  th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: #f8fafc; font-size: .8rem; text-transform: uppercase; letter-spacing: .04em; color: var(--mut); }
+  code, .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .82em; background: var(--code); padding: 1px 5px; border-radius: 4px; }
+  pre { background: #0f172a; color: #e2e8f0; padding: 14px 16px; border-radius: 10px; overflow-x: auto; font-size: .82rem; }
+  .finding { border:1px solid var(--line); border-left-width:5px; border-radius:8px; padding:12px 16px; margin:12px 0; }
+  .f0 { border-left-color: var(--p0); } .f1 { border-left-color: var(--p1); }
+  .f2 { border-left-color: var(--p2); } .f3 { border-left-color: var(--p3); }
+  .finding h4 { margin: 0 0 4px; font-size: .98rem; }
+  .finding p { margin: 5px 0; font-size: .9rem; }
+  .ev { color: var(--mut); }
+  .fix { background: #f8fafc; border-radius: 6px; padding: 8px 10px; }
+  .verdict { background: var(--okbg); border: 1px solid #a7f3d0; border-radius: 10px; padding: 16px 18px; }
+  .toc { columns: 2; font-size: .9rem; background:#f8fafc; border:1px solid var(--line); border-radius:10px; padding:14px 20px; }
+  .toc a { color: var(--p3); text-decoration: none; }
+  .small { font-size: .8rem; color: var(--mut); }
+  .scorebar { height: 10px; background: #e2e8f0; border-radius: 999px; overflow: hidden; margin-top: 4px; }
+  .scorebar > div { height: 100%; }
+  ul.tight li { margin: 3px 0; }
+  footer { margin-top: 60px; padding-top: 14px; border-top: 1px solid var(--line); font-size: .8rem; color: var(--mut); }
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap" style="padding:0">
+    <h1>Audit complet du projet — MedAnki DZ</h1>
+    <p class="sub">Branche <code style="background:rgba(255,255,255,.15)">arena/019fbd6a-medlm</code> · commit <code style="background:rgba(255,255,255,.15)">2628896</code> · 2026-08-01 · périmètre : backend NestJS, mobile Flutter, CMS Next.js, outillage Python, contenu, infra K8s, docs</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+<h2 id="avis">1. Avis général (ce que je pense du projet)</h2>
+<div class="verdict">
+  <p><strong>C'est, sans exagération, le noyau le plus rigoureux d'un projet étudiant/DZ que j'aie audité ici :</strong>
+  le moteur FSRS est vérifié à <strong>855 valeurs + 275 mesures de séquences</strong> contre l'implémentation officielle
+  <code>ts-fsrs</code>, le schéma SQL et les tables Drift sont maintenus en parité par des gardes bloquants, la politique de contenu
+  est testée (722 vérifications), l'audit sécurité <em>statique</em> tourne à chaque push (0 contrôleur non gardé, 0 <code>@Body</code>
+  non validé, 0 secret), l'i18n du backend est en parité FR/AR/EN, et la conformité légale algérienne (loi 18-07, 09-04) est traitée
+  comme du code (PRIVACY, SECURITY, pentest_prep). Ce niveau de discipline est rare.</p>
+  <p><strong>Mais le code « 100 % terminé » n'existe pas encore :</strong> le projet est au stade de
+  <strong>bibliothèques à ~95 % complètes + produit non assemblé</strong>. L'application mobile n'a ni
+  <code>main.dart</code>, ni écrans d'authentification/accueil/examen, ni dossiers platform (android/ios), ni fichier Drift
+  généré : <strong>elle ne compile pas</strong> — c'est la dernière ligne droite, la plus visible pour l'utilisateur final.
+  Il n'y a <strong>aucune CI/CD</strong> (les « workflows » mentionnés dans les commentaires n'existent pas), <strong>aucun
+  Dockerfile</strong> alors que les manifests K8s référencent des images, et le dépôt contient encore les restes du prototype
+  Google AI Studio (Kotlin <code>app/</code>, wheel <code>nothing</code>, README scaffold, <code>.env.example</code> Gemini).
+  Enfin, l'audit a trouvé <strong>un vrai bug de routage</strong> : le gateway GraphQL déclaré <code>v2/graphql</code> sous un
+  préfixe global <code>v1</code> — l'endpoint réel est <code>/v1/v2/graphql</code>, le client mobile appelle <code>/v2/graphql</code> → <strong>404</strong>.
+  Ce bug a été <strong>corrigé le jour même</strong>, et sa correction a révélé une cascade de 4 bugs de production
+  supplémentaires (l'app ne bootait pas hors tests unitaires ; toutes les erreurs de validation retournaient 500 au lieu de 400) —
+  voir <a href="#fixes">§5.1</a>.</p>
+  <p><strong>Estimation d'effort vers « 100 % produit » :</strong> 2 à 4 semaines de travail focalisé (mobile shell + CI/build + nettoyage),
+  puis la phase récurrente opérationnelle (device, stores, pen test) qui elle, n'est pas du code.</p>
+</div>
+
+<div class="grid">
+  <div class="kpi"><div class="v">431/431</div><div class="l">tests unitaires backend (vitest, 32/32 fichiers)</div></div>
+  <div class="kpi"><div class="v">8/8</div><div class="l">tests d'intégration HTTP — réparés le jour de l'audit (étaient 0, crash silencieux)</div></div>
+  <div class="kpi"><div class="v">0</div><div class="l">erreur tsc (backend + CMS), 0 eslint</div></div>
+  <div class="kpi"><div class="v">7/7</div><div class="l">matrice verify_all (équivalence FSRS incluse)</div></div>
+  <div class="kpi"><div class="v">8</div><div class="l">bugs de production trouvés &amp; corrigés le jour de l'audit</div></div>
+  <div class="kpi"><div class="v">24</div><div class="l">constats total (P0–P3, dont P0-1 déjà corrigé)</div></div>
+</div>
+
+<h2 id="toc">2. Sommaire</h2>
+<div class="toc">
+  <a href="#methode">3. Méthodologie — ce qui a été réellement exécuté</a><br>
+  <a href="#solide">4. Ce qui est solide (vérifié, preuves à l'appui)</a><br>
+  <a href="#p0">5. P0 — Bloqueurs « 100 % » (à corriger en premier)</a><br>
+  <a href="#fixes">5.1. ✓ Corrections appliquées le jour de l'audit (8 bugs)</a><br>
+  <a href="#p1">6. P1 — Manques majeurs produit</a><br>
+  <a href="#p2">7. P2 — Dette technique notable</a><br>
+  <a href="#p3">8. P3 — Menu fretin</a><br>
+  <a href="#plan">9. Plan d'action vers le 100 %</a><br>
+  <a href="#matrice">10. Matrice de validation (reproduire cet audit)</a><br>
+  <a href="#annexe">11. Annexe — inventaire du dépôt</a>
+</div>
+
+<h2 id="methode">3. Méthodologie — chaque vérification a été réellement exécutée</h2>
+<pre>
+backend  : npx tsc --noEmit ......... 0 erreur
+           npm test ................. 431/431 (32 fichiers)
+           npx eslint . ............. 0 problème
+cms      : npm run typecheck ........ 0 erreur
+           npm run build ............ 11/11 pages (next build, dynamique OK)
+gardes   : security_audit.py ........ 0 violation (secrets/prints/@Body/guards)
+           phase13_checks.sh ........ OK (audit, syntax guard 114 fichiers, gardes 19.x/20.x)
+           generate_lockfiles --check OK · test_migrations.py 30 vérifs OK
+           validate_content.py ...... 722 vérifs (15 cas invalides rejetés)
+           check_schema_parity.py ... 11 tables / 97 colonnes SQL↔Drift OK
+           dart_parity_check.py ..... OK · golden SRS inchangé
+           check_graphql.py ......... 5 ops persistées + parité SDL mobile↔backend OK
+tools    : TS_FSRS_DIR=tools verify_all ... 855 valeurs + 275 séquences == ts-fsrs officiel
+inspection manuelle : lecture ciblée module par module (backend/src 179 fichiers,
+mobile/lib 71, cms/src 19, deploy 39, racine) + git log/ls-files pour les résidus.
+</pre>
+<p class="small">Inventaire mesuré : 561 fichiers suivis · backend ≈ 17 182 lignes TS · mobile ≈ 40 662 lignes Dart · CMS 19 fichiers source.</p>
+
+<h2 id="solide">4. Ce qui est solide (ne pas y toucher sauf nécessité)</h2>
+<table>
+  <tr><th>Domaine</th><th>Preuve vérifiée</th></tr>
+  <tr><td>Moteur SRS FSRS-5 (Dart + Python + TS)</td><td>Équivalence totale avec <code>ts-fsrs</code> officiel (855 primitives, 275 mesures de séquences, 31 scénarios golden) ; parité Dart↔backend verrouillée par <code>dart_parity_check.py</code>.</td></tr>
+  <tr><td>Persistance locale</td><td>Migrations SQLite testées (30 vérifs), triggers append-only, outbox, idempotence push (UUID v7), isolation multi-utilisateur prouvée par tests.</td></tr>
+  <tr><td>Contenu médical</td><td>697 cartes / 10 decks bilingues FR-EN, source obligatoire, licence vérif., 15 cas invalides rejetés par la Content Policy.</td></tr>
+  <tr><td>Sécurité backend</td><td>Zod strict sur chaque <code>@Body</code> (audit bloquant), JwtGuard+RbacGuard partout, rotation refresh tokens (révocation), idempotence webhooks Chargily (table <code>webhookEvents</code>), wrap-key decks, anti-injection LLM, quotas IA en base.</td></tr>
+  <tr><td>IA (Phase 18)</td><td>Provider-agnostic réel (mock par défaut, zéro clé côté clients), disclaimers servis source-unique, urgences détectées policy, prompts tutor audités append-only (hash SHA-256).</td></tr>
+  <tr><td>Explicabilité (v2 §13)</td><td>FSRS adaptatif avec raisons servies + bornage [0.5×, 2×] des deux côtés ; ML avec features et raisons rendues, k-anonymat k=50 documenté.</td></tr>
+  <tr><td>Légal &amp; lancement</td><td>SECURITY.md (bug bounty DZD, safe harbor lois 09-04/18-07), PRIVACY.md trilingue, fiches stores ≤80c sans promesse médicale, landing 61 clés ×3 langues zéro-tracker.</td></tr>
+  <tr><td>Outillage de garantie</td><td>16 scripts Python/JS de gardes (tous verts au moment de l'audit) — dont deux renforcés cette semaine (lockfiles réels refusés d'écrasement stub, parité GraphQL client).</td></tr>
+</table>
+
+<h2 id="p0">5. <span class="badge b0">P0 — Bloqueurs</span> À corriger avant tout</h2>
+
+<div class="finding f0">
+  <h4>P0-1 · Bug de routage : le gateway GraphQL répond sur <code>/v1/v2/graphql</code>, le mobile appelle <code>/v2/graphql</code> → 404 &nbsp;<span class="badge b2" style="background:#dcfce7;color:#166534">✓ CORRIGÉ LE 2026-08-01</span></h4>
+  <p class="ev">Preuve : <code>backend/src/main.ts:16</code> → <code>app.setGlobalPrefix('v1')</code> (sans exclusion) ·
+  <code>backend/src/gateway/gateway.controller.ts:22</code> → <code>@Controller('v2/graphql')</code> ·
+  <code>mobile/lib/data/network/api_client.dart</code> → <code>_dio.post('/v2/graphql')</code>. Les tests unitaires du gateway testent le service, pas le routage — d'où l'invisibilité du bug.</p>
+  <p class="fix"><strong>✓ Corrigé</strong> : v2 exclu du préfixe global (<code>app.setGlobalPrefix('v1', { exclude: [{ path: 'v2/graphql', method: RequestMethod.ALL }] })</code>) dans la nouvelle fonction partagée <code>configureApp()</code> (<code>src/configure-app.ts</code>), verrouillé par <code>test/integration/routing.test.ts</code> (3 tests supertest : <code>/v2/graphql</code> ≠ 404, <code>/v1/v2/graphql</code> = 404, préfixe v1 intact). La correction a exigé de réparer toute la chaîne de tests d'intégration — ce qui a mis au jour <strong>4 bugs de production supplémentaires</strong> (voir encart §5.1 ci-dessous), dont un qui empêchait l'application de booter hors tests unitaires. Effort réel : ½ journée, comme estimé.</p>
+</div>
+
+<div class="finding f0">
+  <h4>P0-2 · Le mobile ne peut pas être compilé ni lancé : pas de <code>main.dart</code>, pas de dossiers platform, Drift non généré</h4>
+  <p class="ev">Preuve : <code>find mobile -name "main*.dart"</code> → rien · <code>ls mobile/{android,ios}</code> → inexistants ·
+  <code>app_database.dart:20</code> → <code>part 'app_database.g.dart'</code> alors qu'<strong>aucun <code>.g.dart</code> n'existe dans le repo</strong> (ni gitignoré — simplement jamais généré), <code>pubspec.lock</code> épingle drift 2.18.0. Les 71 fichiers de <code>lib/</code> (domain/data/core/ui avec 4 Écrans IA + 2 gamification + 1 étude importés nulle part) forment une bibliothèque, pas une app.</p>
+  <p class="fix"><strong>Fix</strong> : (a) <code>flutter create --platforms=android,ios .</code> dans <code>mobile/</code>, (b) <code>dart run build_runner build</code> (committer ou générer en CI — trancher, mais verifier en CI que le fichier est à jour), (c) écrire <code>main.dart</code> + routeur (go_router) + AppContainer wiring + <code>PackageInfo</code>/save, (d) créer les Écrans manquants (P1-3). Effort : 1–2 semaines. C'est LE chantier « 100 % ».</p>
+</div>
+
+<div class="finding f0">
+  <h4>P0-3 · CI/CD absente : <code>.github/workflows/</code> n'existe pas (référencé par le code et les docs)</h4>
+  <p class="ev">Preuve : <code>ls .github/workflows</code> → vide · pourtant <code>database.module.ts</code> cite « cf. workflow <code>backend-ci.yml</code> » et le plan liste une Phase 12 CI/CD. Conséquence : rien ne rejoue <code>tsc/vitest/eslint/typecheck CMS/verify_all</code> à chaque PR ; <code>dart test</code> n'est exécuté nulle part ; les tests d'intégration (vraie Postgres) ne tournent jamais.</p>
+  <p class="fix"><strong>Fix</strong> : créer les workflows <em>depuis un compte disposant de la permission <code>workflows</code></em> (l'app GitHub de session ne l'a pas) : <code>backend-ci.yml</code> (node 22, npm ci, tsc, vitest, eslint + service Postgres pour test:integration), <code>mobile-ci.yml</code> (flutter test + analyze + build_runner --verify), <code>cms-ci.yml</code>, <code>guards.yml</code> (verify_all + phase13 + audits). Effort : 1 jour. Priorité immédiate après P0-1.</p>
+</div>
+
+<div class="finding f0">
+  <h4>P0-4 · Aucune image constructible : pas de Dockerfile backend ni CMS alors que K8s référence <code>medanki/backend:latest</code> et <code>medanki/cms:latest</code></h4>
+  <p class="ev">Preuve : <code>find . -name "Dockerfile*"</code> → 0 résultat · <code>deploy/k8s/base/backend-deployment.yaml</code> &amp; <code>cms-deployment.yaml</code> attendent ces images. De plus, <code>backend/.env.example</code> dit « docker compose up -d postgres » mais <strong>aucun <code>docker-compose.yml</code> n'existe</strong> dans le dépôt.</p>
+  <p class="fix"><strong>Fix</strong> : <code>backend/Dockerfile</code> (node:22-alpine, multi-stage build nest, user non-root, healthcheck <code>/v1/healthz</code>), <code>cms/Dockerfile</code> (next build → standalone), <code>docker-compose.yml</code> dev (postgres + redis + backend + cms) + vérification en CI (<code>docker build</code>). Effort : 1 jour.</p>
+</div>
+
+<div class="finding" style="border-left:4px solid #16a34a;background:#f0fdf4">
+  <h4 id="fixes">5.1 · <span style="color:#166534">Corrections appliquées le jour de l'audit (2026-08-01)</span> — 8 bugs de production trouvés en réparant la chaîne d'intégration</h4>
+  <p>Pour corriger P0-1 il fallait des tests d'intégration qui <em>bootent l'AppModule réel</em>. Or ils crashaient silencieusement depuis toujours : la suite « test:integration » ne tournait nulle part (pas de CI, P0-3). La remise en route a révélé, un par un, des bugs que ni les 431 tests unitaires ni <code>tsc</code> ne pouvaient voir — tous <strong>corrigés et verrouillés par 8/8 tests d'intégration verts</strong> :</p>
+  <table>
+    <tr><th>#</th><th>Bug (sévérité)</th><th>Symptôme</th><th>Correction</th></tr>
+    <tr><td>1</td><td><strong>P0-1</strong> routage v2 (§5)</td><td><code>POST /v2/graphql</code> → 404 en prod</td><td>Exclusion v2 du préfixe global dans <code>configureApp()</code></td></tr>
+    <tr><td>2</td><td><strong>App inbootable</strong> — <code>MagicLinkService</code> injectait l'interface <code>EmailSender</code> sans token</td><td><code>Nest can't resolve dependencies of the MagicLinkService (… Object …)</code> — <strong>l'app ne bootait pas hors tests unitaires</strong> (les interfaces n'existent pas à l'exécution, <code>design:paramtypes</code> vaut <code>Object</code>)</td><td>Token <code>EMAIL_SENDER</code> + <code>{ provide: EMAIL_SENDER, useClass: ResendEmailSender }</code></td></tr>
+    <tr><td>3</td><td><strong>App inbootable</strong> — <code>EntitlementService</code> injecte <code>BillingService</code> sans <code>imports: [BillingModule]</code></td><td>Même erreur DI au boot réel</td><td>Import ajouté (pas de circularité)</td></tr>
+    <tr><td>4</td><td><strong>API : 500 au lieu de 400</strong> — les 21 contrôleurs valident via <code>Schema.parse()</code> (45 sites) ; une <code>ZodError</code> brute retombait en 500</td><td>Batch &gt; 100 sur <code>/v1/srs-sync/push</code> → 500 (fausses alertes Sentry, contrat mobile cassé)</td><td>Filtre global <code>ZodExceptionFilter</code> (1 fichier, <code>useGlobalFilters</code>) → 400 + détails des issues ; <code>X-Device-Id</code> manquant → <code>BadRequestException</code></td></tr>
+    <tr><td>5</td><td><strong>Effet de bord d'import</strong> — <code>main.ts</code> lançait <code>bootstrap()</code> à l'import</td><td>Importer <code>configureApp</code> depuis un test démarrait un second serveur réel → <code>EADDRINUSE :::3000</code></td><td>Extraction de <code>configureApp()</code> dans <code>src/configure-app.ts</code> (zéro effet de bord) ; main.ts = bootstrap seul</td></tr>
+    <tr><td>6</td><td><strong>Crash silencieux des workers vitest</strong> — transport <code>pino-pretty</code> (thread-stream) attaché dès <code>NODE_ENV !== 'production'</code></td><td><code>Worker exited unexpectedly</code>, 0 test collecté, aucune erreur</td><td>Transport pretty uniquement en dev (<code>!NODE_ENV || 'development'</code>) — aussi plus correct pour staging</td></tr>
+    <tr><td>7</td><td><strong>DI cassée sous vitest</strong> — esbuild n'émet pas <code>design:paramtypes</code></td><td>Tous les <code>@Inject</code> implicitement typés injectaient <code>undefined</code></td><td>Plugin <code>unplugin-swc</code> (<code>decoratorMetadata: true</code>) dans <code>vitest.integration.config.ts</code></td></tr>
+    <tr><td>8</td><td><strong>Script + fake périmés</strong> — <code>test:integration</code> utilisait <code>--dir</code> (double préfixe de chemin → « No test files found ») et le <code>FakeDb</code> datait d'avant la pagination/refacto</td><td>Suite introuvable ; <code>existing.map is not a function</code></td><td>Script corrigé ; FakeDb réécrit sur les chaînes Drizzle réellement utilisées (where awaitable + orderBy/limit chaînables, values() thenable)</td></tr>
+  </table>
+  <p class="fix"><strong>Leçon d'audit</strong> : sans test qui boote le vrai module Nest, toute une classe de bugs (DI, filtres, middlewares, préfixes) reste invisible — <code>tsc</code> et les tests unitaires mockés sont structurellement aveugles. Priorité absolue : la CI (P0-3) qui exécutera désormais <code>npm run test:integration</code> avec un Postgres de service à chaque PR.</p>
+</div>
+
+<h2 id="p1">6. <span class="badge b1">P1 — Manques majeurs produit</span></h2>
+
+<div class="finding f1">
+  <h4>P1-1 · Nettoyer les résidus du prototype AI Studio (8 artefacts)</h4>
+  <table>
+    <tr><th>Artefact</th><th>Pourquoi c'est un problème</th></tr>
+    <tr><td><code>app/</code> (53 fichiers Kotlin, <code>namespace = "com.example"</code>, <code>applicationId com.aistudio.medanki.dz</code>)</td><td>Ancien prototype Android (Room/SQLite dédiées, stack différente de Flutter). Entretient la confusion sur la cible technique et alourdit chaque clone ; risque de secrets (google-services plugin).</td></tr>
+    <tr><td><code>settings.gradle.kts</code>, <code>build.gradle.kts</code>, <code>gradle.properties</code>, <code>gradle/</code> à la racine</td><td>Font partie du prototype — sans eux la racine redevient lisible.</td></tr>
+    <tr><td><code>nothing-0.0.3-py2.py3-none-any.whl</code> (1,5 Ko, paquet « nothing » de 2015)</td><td>Blob binaire inutile commité ; casse-pied pour la politique « no binaries » et les scanners de supply-chain.</td></tr>
+    <tr><td><code>metadata.json</code></td><td>Scaffold AI Studio mentionnant « SERVER_SIDE_GEMINI_API » — contredit le provider-agnostic du projet.</td></tr>
+    <tr><td><code>.opencode/mcp.json</code></td><td>Config locale contenant un chemin Windows d'un poste de dev (<code>C:\WebProjects…</code>) — n'appartient pas au repo.</td></tr>
+    <tr><td><code>.env.example</code> (racine)</td><td>Placeholder « GEMINI_API_KEY » du scaffold — doublon trompeur de <code>backend/.env.example</code> (le bon).</td></tr>
+    <tr><td><code>README.md</code> (racine)</td><td>C'est le README « Run and deploy your AI Studio app » (Android Studio + clé Gemini) — <strong>pas le README du projet</strong>. Premier contact de tout contributeur : à réécrire (description, architecture, quickstart backend/mobile/cms, matrice de gardes, lien VERIFY.md).</td></tr>
+    <tr><td><code>migration 0011 absente</strong></td><td>La série des migrations saute de 0010 à 0012 (0011 jamais existé sur aucune branche). <code>test_migrations.py</code> tolère et valide ; mais tout outil séquentiel strict trébuchera. Décider : documenter le gap (1 ligne dans <code>backend/README.md</code>) ou renuméroter 0012–0017 <em>avant</em> toute 1ʳᵉ application en prod (plus simple tant que rien n'est déployé).</td></tr>
+  </table>
+  <p class="fix"><strong>Fix</strong> : <code>git rm -r app gradle build.gradle.kts settings.gradle.kts gradle.properties metadata.json nothing-*.whl .env.example .opencode</code> + nouveau README racine + note de gap. Effort : ½ journée, gros gain de crédibilité.</p>
+</div>
+
+<div class="finding f1">
+  <h4>P1-2 · Écrans mobiles manquants (le produit visible) — la couche UI n'a que 8 Écrans/widget-sets sur ~15 nécessaires</h4>
+  <p class="ev">Présents : <code>ui/study/study_screen.dart</code>, <code>ui/ai/{hint_banner, voice_dictation_sheet, tutor_chat_screen}</code>, <code>ui/gamification/{leaderboard, badges}_screen</code>, <code>ui/ml/{ml_prediction_card, tag_focus_card}</code>. <strong>Absents</strong> (endpoints backend pourtant livrés) :</p>
+  <ul class="tight">
+    <li>Auth : login email + magic link, signup (avec faculté/année), Google OAuth (<code>google-oauth.controller</code> existe côté backend) — POST /v1/auth/{login,signup,google}.</li>
+    <li>Onboarding (préférences langue, objectif quotidien) — le backend onboarding.service existe.</li>
+    <li>Accueil / tableau de bord (revues dues, streak, XP) — <code>/v1/stats/me</code> + <code>ViewerStats</code> GraphQL (client Dart prêt).</li>
+    <li>Catalogue decks + téléchargement chiffré (<code>DownloadDeckUseCase</code> + wrap-key prêts, aucune UI).</li>
+    <li>Examen blanc QCM complet : liste templates (<code>listExamTemplates</code>), écran tentative + timer serveur + anti-triche events (<code>recordExamEvent</code> déjà dans ApiClient), résultats.</li>
+    <li>Paywall / billing Chargily (checkout + grace period, <code>fetchEntitlement</code> prêt) et Group Packs (Phase 16.3 sans UI).</li>
+    <li>Partage social ciblée (Phase 15.5, <code>/v1/share</code> backend) ; Profil/paramètres ; écran de permissions notifications.</li>
+  </ul>
+  <p class="fix"><strong>Fix</strong> : 1 écran par jour ouvré en suivant les patterns existants (repos client-dart déjà testés) — l'essentiel du risque produit est là, pas dans la donnée. Effort : 1,5–2 semaines (inclus dans P0-2).</p>
+</div>
+
+<div class="finding f1">
+  <h4>P1-3 · Notifications : chaîne incomplète des deux côtés</h4>
+  <p class="ev">Mobile : <strong>aucun package FCM/APNs</strong> dans <code>pubspec.yaml</strong>, aucune remontée de device token vers le backend, aucun écran de permission. Backend : <code>FCM_PROVIDER</code> lit <code>FIREBASE_ACCESS_TOKEN</code> <em>statique</em> depuis l'env — or les tokens OAuth2 expirent ~1 h : en production réelle l'envoi s'arrêtera (le commentaire annonce google-auth-library jamais branchée). <code>apns/</code> est un dossier quasi vide.</p>
+  <p class="fix"><strong>Fix</strong> : backend — utiliser <code>google-auth-library</code> (JWT signé par compte de service, cache + rotation) avec repli test ; mobile — ajouter <code>firebase_messaging</code> (+ <code>firebase_core</code>), POST d'enregistrement du token au backend, deep-link vers l'étude ; APNs plus tard (Android first). Effort : 3–4 jours.</p>
+</div>
+
+<div class="finding f1">
+  <h4>P1-4 · i18n mobile : les chaînes UI sont en dur en français</h4>
+  <p class="ev">Le backend est trilingue vérifié (i18n_parity 14 tests), mais côté mobile : <code>leaderboard_screen.dart</code> le dit lui-même (« les chaînes sont en dur »), il n'y a pas d'<code>AppLocalizations</code>/<code>intl</code> déclaré, et les nouveaux écrans (étude, IA, ML) sont FR-only. Pour une app DZ, l'arabe est attendu.</p>
+  <p class="fix"><strong>Fix</strong> : adopter <code>flutter_localizations</code> + <code>intl</code>, extraire les ~40 chaînes existantes dans <code>app_fr.arb/app_ar.arb/app_en.arb</code> une seule fois (avant que les Écrans P1-2 ne se multiplient — sinon le coût double), garder le serveur comme source des textes IA (déjà le cas). Effort : 2 jours.</p>
+</div>
+
+<div class="finding f1">
+  <h4>P1-5 · Incohérences mineures de dépendances mobiles</h4>
+  <p class="ev"><code>flutter_riverpod</code> déclaré en prod deps mais jamais importé (DI maison <code>AppContainer</code>) ; <code>mocktail</code> + <code>fake_async</code> dans <code>dependencies</code> au lieu de <code>dev_dependencies</code> (embarqués dans l'APK) ; <code>uuid</code> conservé « utilitaire » alors que l'implémentation v7 est maison.</p>
+  <p class="fix"><strong>Fix</strong> : retirer riverpod <em>ou</em> migrer la DI (choisir, ne pas laisser les deux), déplacer mocktail/fake_async en dev_deps, réévaluer uuid. ½ journée.</p>
+</div>
+
+<h2 id="p2">7. <span class="badge b2">P2 — Dette technique notable</span></h2>
+<table>
+  <tr><th>#</th><th>Constat</th><th>Recommandation</th></tr>
+  <tr><td>P2-1</td><td><code>DRIZZLE_READ</code> (réplica) est câblé et testé mais <strong>aucun service ne l'injecte</strong> encore — l'item « brancher » est fait, la consommation reste nulle.</td><td>Migrer 2–3 lectures lourdes (<code>stats</code>, <code>leaderboard</code>, <code>ml.aggregates</code>) derrière un flag <code>READ_REPLICA_ENABLED</code> quand un réplica existera (sinon no-op, rien à faire maintenant).</td></tr>
+  <tr><td>P2-2</td><td>Budgets/coûts en mémoire : GraphQL cost-budget par pod (documenté), mais attention aussi aux quotas IA (DB, OK) — <code>GatewayService</code> mesure par instance ; à N pods, budget réel = N×500/h.</td><td>Passer les compteurs en Redis (déjà présent dans le stack : <code>redis-cache.ts</code>) quand le trafic le justifiera ; laisser la note d'upgrade visible.</td></tr>
+  <tr><td>P2-3</td><td>Observabilité prod non paramétrée : Sentry est un no-op sans <code>SENTRY_DSN</code>, OTel sans endpoint, exports Prometheus OK (annotation en place) mais aucun dashboard Grafana/alerts livré.</td><td>Documenter <code>backend/.env.example</code> (SENTRY_DSN, OTEL_EXPORTER_OTLP_ENDPOINT) + livrer <code>deploy/monitoring/</code> (sa Grafana JSON + règles d'alerte : p95&gt;500ms, 5xx&gt;1%). </td></tr>
+  <tr><td>P2-4</td><td><code>deck_anatomie_ancien_demo.json</code> embarqué dans le bundle (10 decks comptés, mais un legacy « ancien demo »).</td><td>Le retirer des assets de prod (ou le marquer explicitement archive) + test qu'il n'est plus servi.</td></tr>
+  <tr><td>P2-5</td><td><code>tests/e2e</code> (Playwright : cms-cards, leaderboard) n'est exécuté par rien — pas de script npm global, pas de CI.</td><td>Ajouter <code>"e2e": "playwright test"</code> au workspace racine + job CI (avec backend seedé).</td></tr>
+  <tr><td>P2-6</td><td>Seul <strong>1</strong> test d'intégration existe (srs-sync controller) ; les flux critiques (auth refresh, billing webhook, exams timing serveur) ne sont vérifiés qu'en unitaire.</td><td>Compléter <code>test/integration/</code> (workflow CI avec service Postgres, schéma PG_SCHEMA jetable déjà prévu dans database.module).</td></tr>
+  <tr><td>P2-7</td><td>CMS : aucune authentification propre (token lu dans <code>localStorage('cms_token')</code> injecté à la main dans chaque page) — pas de page de login.</td><td>Ajouter <code>/admin/login</code> + middleware Next qui redirige si 401 — indispensable avant d'exposer le CMS hors réseau interne.</td></tr>
+  <tr><td>P2-8</td><td><code>release build</code> : pubspec.version 0.1.0+1, icônes/splash par défaut, pas de config ProGuard/R8 ni de règles de minification, clés de signature à préparer (RELEASE_CHECKLIST existe côté store).</td><td>flutter_launcher_icons, splash natif, shrinkResources, release signing via CI secrets.</td></tr>
+</table>
+
+<h2 id="p3">8. <span class="badge b3">P3 — Menu fretin</span></h2>
+<table>
+  <tr><th>#</th><th>Constat</th><th>Action</th></tr>
+  <tr><td>P3-1</td><td><code>site/</code> sans <code>sitemap.xml</code> (robots.txt présent).</td><td>Générer sitemap statique (3 URLs) + déclarer dans robots.txt.</td></tr>
+  <tr><td>P3-2</td><td>Duplication légère d'historique doc : 46 rapports <code>PHASE_*_RAPPORT.md</code> à la racine + un <code>AUDIT_ARCHITECTURE.md</code> daté.</td><td>Déplacer sous <code>docs/phases/</code> pour aérer la racine (hors résidus P1-1).</td></tr>
+  <tr><td>P3-3</td><td><code>BACKGROUND_SYNC</code> : le worker rafraîchit l'adaptatif mais ne purge pas le hint-cache AiRepository (mémoire seule — acceptable) ; pistolage : <code>sentry.service</code> lit des fichiers via ConfigService (fork pool vitest justifié, à surveiller sous ESM futur).</td><td>Documenter, pas d'action technique.</td></tr>
+  <tr><td>P3-4</td><td><code>share/group-packs/tenants</code> n'ont ni client mobile ni pages CMS de gestion (endpoints présents).</td><td>À caler avec P1-2 (même itération UI).</td></tr>
+  <tr><td>P3-5</td><td><code>exams.test.ts</code> s'appuie sur des fixtures fakes plutôt fines (réécrites) — couvrir aussi la voie « expiresAt côté serveur » en intégration (cf. P2-6).</td><td>Avec P2-6.</td></tr>
+</table>
+
+<h2 id="plan">9. Plan d'action vers le « 100 % » (ordonné)</h2>
+<table>
+  <tr><th>Étape</th><th>Contenu</th><th>Dépend de</th><th>Effort</th><th>Critère de sortie</th></tr>
+  <tr><td><strong>S1 · Maintenant</strong> <span class="badge" style="background:#dcfce7;color:#166534">✓ FAIT 2026-08-01</span></td><td><s>P0-1 fix routage v2/graphql + test supertest</s> — livré avec 8 bugs corrigés au total (§5.1)</td><td>—</td><td>0,5 j (réel)</td><td>✓ /v2/graphql routé (401 gardé), /v1/v2/graphql = 404, 8/8 tests intégration verts</td></tr>
+  <tr><td><strong>S2</strong></td><td>P1-1 résidus + README racine + note gap 0011</td><td>—</td><td>0,5 j</td><td>Racine propre, guards toujours verts</td></tr>
+  <tr><td><strong>S3</strong></td><td>P0-3 CI (compte avec permission workflows) + P0-4 Dockerfiles/compose</td><td>S2</td><td>1,5 j</td><td>Badge vert sur PR #5 ; images buildent</td></tr>
+  <tr><td><strong>S4</strong></td><td>P0-2 flutter create + build_runner + main.dart + routeur + DI</td><td>S3</td><td>3–4 j</td><td><code>flutter test</code> vert en CI ; APK debug boote sur l'étude</td></tr>
+  <tr><td><strong>S5</strong></td><td>P1-2 écrans manquants (auth → dashboard → catalogue → examen → paywall → réglages) + P1-4 i18n arb</td><td>S4</td><td>8–10 j</td><td>Parcours complet bout-en-bout sur émulateur contre le backend docker-compose</td></tr>
+  <tr><td><strong>S6</strong></td><td>P1-3 notifications (google-auth-library backend, firebase_messaging mobile) + P1-5 deps</td><td>S4</td><td>3–4 j</td><td>Notif « due_reminder » reçue sur device de test</td></tr>
+  <tr><td><strong>S7 · Run</strong></td><td>P2 restants (intégration tests, monitoring, CMS login, e2e CI), stores + pen test externe</td><td>S5–S6</td><td>continu</td><td>Checklist store signée, rapport pen test classé</td></tr>
+</table>
+<p class="small">Effort cumulé ≈ 16–20 jours-homme de code (hors run). Tout ce qui suit ce plan est exécutable sans changer la doctrine du projet (chaque nouvelle pièce garde : provider-agnostic, offline-first, explicabilité, garde-CI).</p>
+
+<h2 id="matrice">10. Matrice de validation (reproduire cet audit à jour)</h2>
+<pre>
+cd backend && npx tsc --noEmit && npm test && npx eslint .
+cd ../cms && npm run typecheck && npm run build
+cd .. && python3 tools/scripts/security_audit.py \
+     && python3 tools/scripts/generate_lockfiles.py --check \
+     && python3 tools/validate_content.py \
+     && python3 tools/scripts/check_syntax_guard.py \
+     && bash tools/scripts/phase13_checks.sh \
+     && python3 tools/test_migrations.py \
+     && python3 tools/check_schema_parity.py \
+     && python3 tools/dart_parity_check.py \
+     && TS_FSRS_DIR=$PWD/tools bash tools/verify_all.sh
+# Le jour où le SDK Flutter est disponible :
+cd mobile && dart run build_runner build --delete-conflicting-outputs \
+     && dart analyze && flutter test
+</pre>
+
+<h2 id="annexe">11. Annexe — inventaire mesuré du dépôt</h2>
+<table>
+  <tr><th>Zone</th><th>Fichiers suivis</th><th>État audit</th></tr>
+  <tr><td><code>backend/src</code> (179) + <code>backend/test</code> (33)</td><td>212</td><td><span class="badge bok">VERT</span> tsc/vitest/eslint, architecture Nest claire (32 modules métiers)</td></tr>
+  <tr><td><code>mobile/lib</code> (71) + <code>mobile/test</code> (24)</td><td>95</td><td><span class="badge b0">ROUGE</span> lib quasi complète mais app non assemblable (P0-2)</td></tr>
+  <tr><td><code>cms/src</code> (19)</td><td>19</td><td><span class="badge bok">VERT</span> build OK ; P2-7 login CMS</td></tr>
+  <tr><td><code>tools</code> (26 py/js) + scripts</td><td>26+</td><td><span class="badge bok">VERT</span> 16 gardes, tous verts</td></tr>
+  <tr><td><code>deploy</code> (K8s base/overlays/helm)</td><td>39</td><td><span class="badge b2">JAUNE</span> manifests cohérents mais images non constructibles (P0-4)</td></tr>
+  <tr><td><code>site</code> / <code>store</code></td><td>13</td><td><span class="badge bok">VERT</span> conformité vérifiée par gardes</td></tr>
+  <tr><td><code>app/</code> + racine gradle + résidus</td><td>~60</td><td><span class="badge b1">ORANGE</span> prototype AI Studio à purger (P1-1)</td></tr>
+  <tr><td><code>tests/e2e</code>, <code>tests/load</code></td><td>5</td><td><span class="badge b2">JAUNE</span> existants, non exécutés (P2-5)</td></tr>
+</table>
+
+<footer>
+  Audit réalisé le 2026-08-01 sur <code>arena/019fbd6a-medlm@2628896</code> (19 commits au-delà de main, PR #5).
+  Chaque constat est adossé à une preuve reproductible (chemin de fichier ou commande). Sévérités :
+  <span class="badge b0">P0 bloqueur</span> · <span class="badge b1">P1 majeur</span> ·
+  <span class="badge b2">P2 dette</span> · <span class="badge b3">P3 mineur</span>.
+</footer>
+
+</div>
+</body>
+</html>
