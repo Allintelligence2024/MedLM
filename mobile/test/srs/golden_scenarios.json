@@ -2727,5 +2727,436 @@
       "lapses": 1,
       "isLeech": false
     }
+  },
+  "adaptive": {
+    "adjustmentCases": [
+      {
+        "name": "below_min_reviews_no_change",
+        "totalReviews": 99,
+        "lapseRate": 0.5,
+        "expectedChangedIndices": [],
+        "expectedWeights": [
+          0.40255,
+          1.18385,
+          3.173,
+          15.69105,
+          7.1949,
+          0.5345,
+          1.4604,
+          0.0046,
+          1.54575,
+          0.1192,
+          1.01925,
+          1.9395,
+          0.11,
+          0.29605,
+          2.2698,
+          0.2315,
+          2.9898,
+          0.51655,
+          0.6621
+        ],
+        "expectedReasons": []
+      },
+      {
+        "name": "exactly_min_reviews_fragile",
+        "totalReviews": 100,
+        "lapseRate": 0.5,
+        "expectedChangedIndices": [
+          11
+        ],
+        "expectedWeights": [
+          0.40255,
+          1.18385,
+          3.173,
+          15.69105,
+          7.1949,
+          0.5345,
+          1.4604,
+          0.0046,
+          1.54575,
+          0.1192,
+          1.01925,
+          2.230425,
+          0.11,
+          0.29605,
+          2.2698,
+          0.2315,
+          2.9898,
+          0.51655,
+          0.6621
+        ],
+        "expectedReasons": [
+          "lapse_rate élevé (50% ≥ 30%) → w11 ×1.15"
+        ]
+      },
+      {
+        "name": "fragile_adjusts_w11",
+        "totalReviews": 350,
+        "lapseRate": 0.42,
+        "expectedChangedIndices": [
+          11
+        ],
+        "expectedWeights": [
+          0.40255,
+          1.18385,
+          3.173,
+          15.69105,
+          7.1949,
+          0.5345,
+          1.4604,
+          0.0046,
+          1.54575,
+          0.1192,
+          1.01925,
+          2.230425,
+          0.11,
+          0.29605,
+          2.2698,
+          0.2315,
+          2.9898,
+          0.51655,
+          0.6621
+        ],
+        "expectedReasons": [
+          "lapse_rate élevé (42% ≥ 30%) → w11 ×1.15"
+        ]
+      },
+      {
+        "name": "fragile_edge_30pct",
+        "totalReviews": 150,
+        "lapseRate": 0.3,
+        "expectedChangedIndices": [
+          11
+        ],
+        "expectedWeights": [
+          0.40255,
+          1.18385,
+          3.173,
+          15.69105,
+          7.1949,
+          0.5345,
+          1.4604,
+          0.0046,
+          1.54575,
+          0.1192,
+          1.01925,
+          2.230425,
+          0.11,
+          0.29605,
+          2.2698,
+          0.2315,
+          2.9898,
+          0.51655,
+          0.6621
+        ],
+        "expectedReasons": [
+          "lapse_rate élevé (30% ≥ 30%) → w11 ×1.15"
+        ]
+      },
+      {
+        "name": "strong_needs_200_reviews",
+        "totalReviews": 150,
+        "lapseRate": 0.02,
+        "expectedChangedIndices": [],
+        "expectedWeights": [
+          0.40255,
+          1.18385,
+          3.173,
+          15.69105,
+          7.1949,
+          0.5345,
+          1.4604,
+          0.0046,
+          1.54575,
+          0.1192,
+          1.01925,
+          1.9395,
+          0.11,
+          0.29605,
+          2.2698,
+          0.2315,
+          2.9898,
+          0.51655,
+          0.6621
+        ],
+        "expectedReasons": []
+      },
+      {
+        "name": "strong_adjusts_w8",
+        "totalReviews": 400,
+        "lapseRate": 0.01,
+        "expectedChangedIndices": [
+          8
+        ],
+        "expectedWeights": [
+          0.40255,
+          1.18385,
+          3.173,
+          15.69105,
+          7.1949,
+          0.5345,
+          1.4604,
+          0.0046,
+          1.6230375000000001,
+          0.1192,
+          1.01925,
+          1.9395,
+          0.11,
+          0.29605,
+          2.2698,
+          0.2315,
+          2.9898,
+          0.51655,
+          0.6621
+        ],
+        "expectedReasons": [
+          "lapse_rate faible (1% ≤ 5%) → w8 ×1.05"
+        ]
+      },
+      {
+        "name": "strong_edge_5pct_200",
+        "totalReviews": 200,
+        "lapseRate": 0.05,
+        "expectedChangedIndices": [
+          8
+        ],
+        "expectedWeights": [
+          0.40255,
+          1.18385,
+          3.173,
+          15.69105,
+          7.1949,
+          0.5345,
+          1.4604,
+          0.0046,
+          1.6230375000000001,
+          0.1192,
+          1.01925,
+          1.9395,
+          0.11,
+          0.29605,
+          2.2698,
+          0.2315,
+          2.9898,
+          0.51655,
+          0.6621
+        ],
+        "expectedReasons": [
+          "lapse_rate faible (5% ≤ 5%) → w8 ×1.05"
+        ]
+      },
+      {
+        "name": "neutral_band_no_change",
+        "totalReviews": 500,
+        "lapseRate": 0.15,
+        "expectedChangedIndices": [],
+        "expectedWeights": [
+          0.40255,
+          1.18385,
+          3.173,
+          15.69105,
+          7.1949,
+          0.5345,
+          1.4604,
+          0.0046,
+          1.54575,
+          0.1192,
+          1.01925,
+          1.9395,
+          0.11,
+          0.29605,
+          2.2698,
+          0.2315,
+          2.9898,
+          0.51655,
+          0.6621
+        ],
+        "expectedReasons": []
+      }
+    ],
+    "scenarios": [
+      {
+        "name": "adaptive_fragile_lapse_recovery",
+        "description": "Profil fragile (w11 ×1.15) : la stabilité post-oubli se reconstruit plus vite",
+        "cardType": "basic",
+        "t0": 1700000000000,
+        "steps": [
+          {
+            "state": "learning",
+            "stability": 3.173,
+            "difficulty": 5.28243442,
+            "elapsedDays": 0,
+            "scheduledDays": 0,
+            "reps": 1,
+            "lapses": 0,
+            "isLeech": false,
+            "rating": 3,
+            "ratingName": "good",
+            "gapDays": 0,
+            "nowMs": 1700000000000,
+            "dueMs": 1700000600000
+          },
+          {
+            "state": "review",
+            "stability": 4.46685806,
+            "difficulty": 5.27296793,
+            "elapsedDays": 0,
+            "scheduledDays": 4,
+            "reps": 2,
+            "lapses": 0,
+            "isLeech": false,
+            "rating": 3,
+            "ratingName": "good",
+            "gapDays": 0,
+            "nowMs": 1700000000000,
+            "dueMs": 1700345600000
+          },
+          {
+            "state": "review",
+            "stability": 14.21728411,
+            "difficulty": 5.26354499,
+            "elapsedDays": 4,
+            "scheduledDays": 14,
+            "reps": 3,
+            "lapses": 0,
+            "isLeech": false,
+            "rating": 3,
+            "ratingName": "good",
+            "gapDays": 4,
+            "nowMs": 1700345600000,
+            "dueMs": 1701555200000
+          },
+          {
+            "state": "relearning",
+            "stability": 2.87979566,
+            "difficulty": 6.78423209,
+            "elapsedDays": 14,
+            "scheduledDays": 0,
+            "reps": 4,
+            "lapses": 1,
+            "isLeech": false,
+            "rating": 1,
+            "ratingName": "again",
+            "gapDays": 14,
+            "nowMs": 1701555200000,
+            "dueMs": 1701555800000
+          },
+          {
+            "state": "review",
+            "stability": 4.05409343,
+            "difficulty": 6.76785733,
+            "elapsedDays": 0,
+            "scheduledDays": 4,
+            "reps": 5,
+            "lapses": 1,
+            "isLeech": false,
+            "rating": 3,
+            "ratingName": "good",
+            "gapDays": 0,
+            "nowMs": 1701555200000,
+            "dueMs": 1701900800000
+          },
+          {
+            "state": "review",
+            "stability": 9.60932852,
+            "difficulty": 6.75155789,
+            "elapsedDays": 3,
+            "scheduledDays": 10,
+            "reps": 6,
+            "lapses": 1,
+            "isLeech": false,
+            "rating": 3,
+            "ratingName": "good",
+            "gapDays": 3,
+            "nowMs": 1701814400000,
+            "dueMs": 1702678400000
+          }
+        ]
+      },
+      {
+        "name": "adaptive_strong_spacing",
+        "description": "Profil fort (w8 ×1.05) : les rappels réussis espacent un peu plus",
+        "cardType": "basic",
+        "t0": 1700000000000,
+        "steps": [
+          {
+            "state": "learning",
+            "stability": 3.173,
+            "difficulty": 5.28243442,
+            "elapsedDays": 0,
+            "scheduledDays": 0,
+            "reps": 1,
+            "lapses": 0,
+            "isLeech": false,
+            "rating": 3,
+            "ratingName": "good",
+            "gapDays": 0,
+            "nowMs": 1700000000000,
+            "dueMs": 1700000600000
+          },
+          {
+            "state": "review",
+            "stability": 4.46685806,
+            "difficulty": 5.27296793,
+            "elapsedDays": 0,
+            "scheduledDays": 4,
+            "reps": 2,
+            "lapses": 0,
+            "isLeech": false,
+            "rating": 3,
+            "ratingName": "good",
+            "gapDays": 0,
+            "nowMs": 1700000000000,
+            "dueMs": 1700345600000
+          },
+          {
+            "state": "review",
+            "stability": 15.00075652,
+            "difficulty": 5.26354499,
+            "elapsedDays": 4,
+            "scheduledDays": 15,
+            "reps": 3,
+            "lapses": 0,
+            "isLeech": false,
+            "rating": 3,
+            "ratingName": "good",
+            "gapDays": 4,
+            "nowMs": 1700345600000,
+            "dueMs": 1701641600000
+          },
+          {
+            "state": "review",
+            "stability": 42.66857578,
+            "difficulty": 5.25416539,
+            "elapsedDays": 12,
+            "scheduledDays": 43,
+            "reps": 4,
+            "lapses": 0,
+            "isLeech": false,
+            "rating": 3,
+            "ratingName": "good",
+            "gapDays": 12,
+            "nowMs": 1701382400000,
+            "dueMs": 1705097600000
+          },
+          {
+            "state": "review",
+            "stability": 227.39553274,
+            "difficulty": 4.47828059,
+            "elapsedDays": 30,
+            "scheduledDays": 227,
+            "reps": 5,
+            "lapses": 0,
+            "isLeech": false,
+            "rating": 4,
+            "ratingName": "easy",
+            "gapDays": 30,
+            "nowMs": 1703974400000,
+            "dueMs": 1723587200000
+          }
+        ]
+      }
+    ]
   }
 }

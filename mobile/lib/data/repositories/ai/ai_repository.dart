@@ -11,6 +11,8 @@
 // une aide, pas un prérequis).
 library;
 
+import '../../../core/srs/fsrs_adaptive.dart';
+import '../../../core/srs/fsrs_parameters.dart';
 import '../../network/api_client.dart';
 import 'ai_models.dart';
 
@@ -110,6 +112,22 @@ class AiRepository {
     return TutorAnswer.fromJson(raw);
   }
 
+  // ── Profil adaptatif (Phase 19.6) ───────────────────────────────
+
+  /// Profil d'erreur + poids FSRS ajustés par le serveur.
+  Future<AdaptiveProfile> adaptiveProfile() async {
+    final raw = await api.fetchAdaptiveProfile();
+    return AdaptiveProfile.fromJson(raw);
+  }
+
+  /// [FsrsParameters] prêts pour le moteur local : on reprend les
+  /// poids servis, bornés une seconde fois côté client (défense en
+  /// profondeur — aucune dérive silencieuse ne peut casser le SRS
+  /// local, cf. FsrsAdaptive).
+  Future<FsrsParameters> adaptiveFsrsParameters() async {
+    final profile = await adaptiveProfile();
+    return FsrsAdaptive.parametersFromAdjustment(profile.fsrsAdjustment);
+  }
 }
 
 /// Un tour de conversation pour le tuteur.

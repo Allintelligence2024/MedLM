@@ -256,6 +256,58 @@ def apply_review(state, grade, now_ms, card_type="basic", request_retention=0.9,
     return new
 
 
+# --- FSRS adaptatif (Phase 19.6) ------------------------------------------
+#
+# MIROIR du backend `adaptive.service.ts` (ADAPTIVE_THRESHOLDS) et du moteur
+# Dart `fsrs_adaptive.dart`. Les trois fichiers DOIVENT rester alignés.
+
+ADAPTIVE = {
+    "ADJUST_MIN_REVIEWS": 100,
+    "STRONG_MAX_LAPSE_RATE": 0.05,
+    "STRONG_MIN_REVIEWS": 200,
+    "FRAGILE_MIN_LAPSE_RATE": 0.3,
+    "FRAGILE_W11_FACTOR": 1.15,
+    "STRONG_W8_FACTOR": 1.05,
+    "WEIGHT_MIN_FACTOR": 0.5,
+    "WEIGHT_MAX_FACTOR": 2.0,
+}
+
+
+def clamp_adaptive_weights(weights, base=None):
+    """Borne chaque poids dans [0.5×, 2×] de la base (garde-fou v2 §13)."""
+    base = base or DEFAULT_W
+    return [
+        clamp(w, base[i] * ADAPTIVE["WEIGHT_MIN_FACTOR"],
+              base[i] * ADAPTIVE["WEIGHT_MAX_FACTOR"])
+        for i, w in enumerate(weights)
+    ]
+
+
+def compute_fsrs_adjustment(total_reviews, lapse_rate, w=None):
+    """Ajustement personnalisé (conservateur, justifié) — miroir du backend.
+
+    Retourne (poids bornés, indices modifiés, raisons).
+    """
+    w = w or DEFAULT_W
+    weights = list(w)
+    changed = []
+    reasons = []
+    if total_reviews < ADAPTIVE["ADJUST_MIN_REVIEWS"]:
+        return weights, changed, reasons
+    if lapse_rate >= ADAPTIVE["FRAGILE_MIN_LAPSE_RATE"]:
+        weights[11] = w[11] * ADAPTIVE["FRAGILE_W11_FACTOR"]
+        changed.append(11)
+        reasons.append(
+            f"lapse_rate élevé ({round(lapse_rate * 100)}% ≥ 30%) → w11 ×1.15")
+    elif (lapse_rate <= ADAPTIVE["STRONG_MAX_LAPSE_RATE"]
+          and total_reviews >= ADAPTIVE["STRONG_MIN_REVIEWS"]):
+        weights[8] = w[8] * ADAPTIVE["STRONG_W8_FACTOR"]
+        changed.append(8)
+        reasons.append(
+            f"lapse_rate faible ({round(lapse_rate * 100)}% ≤ 5%) → w8 ×1.05")
+    return clamp_adaptive_weights(weights, w), changed, reasons
+
+
 def _round_half_away(x):
     """Dart `roundToDouble()` arrondit la moitié loin de zéro.
 

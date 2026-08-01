@@ -179,4 +179,12 @@ void main() {
   test('askTutor refuse une question de moins de 3 caractères', () {
     expect(() => repo.askTutor(question: 'ab'), throwsArgumentError);
   });
+
+  test('adaptiveFsrsParameters borne les poids servis (défense en '
+      'profondeur)', () async {
+    final params = await repo.adaptiveFsrsParameters();
+    // w8 servi = 15.4575 (×10) → borné à 2×1.54575 = 3.0915.
+    expect(params.weights[8], closeTo(3.0915, 1e-9));
+    expect(api.profileCalls, 1);
+  });
 }
