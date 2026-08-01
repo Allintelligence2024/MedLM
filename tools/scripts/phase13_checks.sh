@@ -68,6 +68,11 @@ if [ -f tools/ml_eval.py ]; then
     echo "  ✓ ml_eval.py (prédicteur Phase 20.3)" || \
     { echo "  ❌ ml_eval.py"; exit 1; }
 fi
+if [ -f tools/scripts/check_partnerships.py ]; then
+  python3 tools/scripts/check_partnerships.py && \
+    echo "  ✓ check_partnerships.py (Phase 20.4)" || \
+    { echo "  ❌ check_partnerships.py"; exit 1; }
+fi
 if [ -f tools/test_repository_logic.py ]; then
   python3 tools/test_repository_logic.py > /tmp/phase13_repo.log 2>&1 && \
     echo "  ✓ test_repository_logic.py" || \
