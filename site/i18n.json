@@ -1,0 +1,139 @@
+{
+  "meta.title": {
+    "fr": "MedAnki DZ — Révise mieux, retiens plus, réussis ta médecine",
+    "ar": "ميد أنكي دي زد — راجع بذكاء، تذكّر أكثر، انجح في الطب",
+    "en": "MedAnki DZ — Study smarter, retain more, succeed in medicine"
+  },
+  "meta.description": {
+    "fr": "Application de révision SRS pour étudiants en médecine algériens : cartes vérifiées, hors-ligne, hints IA sans cloud, examens blancs.",
+    "ar": "تطبيق مراجعة ذكي لطلبة الطب في الجزائر: بطاقات موثقة، يعمل دون اتصال، تلميحات ذكاء اصطناعي دون سحابة، وامتحانات تجريبية.",
+    "en": "SRS revision app for Algerian medical students: verified cards, offline-first, AI hints without the cloud, mock exams."
+  },
+  "nav.features": { "fr": "Fonctionnalités", "ar": "المميزات", "en": "Features" },
+  "nav.decks": { "fr": "Bibliothèque", "ar": "المكتبة", "en": "Library" },
+  "nav.pricing": { "fr": "Tarifs", "ar": "الأسعار", "en": "Pricing" },
+  "nav.faq": { "fr": "FAQ", "ar": "الأسئلة الشائعة", "en": "FAQ" },
+  "hero.badge": {
+    "fr": "Conçu pour les facultés de médecine d'Algérie",
+    "ar": "مصمَّم لكليات الطب في الجزائر",
+    "en": "Built for Algeria's medical schools"
+  },
+  "hero.title": {
+    "fr": "Révise mieux. Retiens plus. Réussis ta 1ère année.",
+    "ar": "راجع بذكاء. تذكّر أكثر. انجح في سنتك الأولى.",
+    "en": "Study smarter. Retain more. Ace your first year."
+  },
+  "hero.subtitle": {
+    "fr": "MedAnki DZ planifie tes révisions avec la science de la répétition espacée (FSRS-5) : 697 cartes médicales vérifiées, disponibles hors-ligne, en français, arabe et anglais.",
+    "ar": "يُنظّم ميد أنكي دي زد مراجعاتك بعلم التكرار المتباعد (FSRS-5): 697 بطاقة طبية موثقة، متاحة دون اتصال، بالفرنسية والعربية والإنجليزية.",
+    "en": "MedAnki DZ schedules your revision with spaced-repetition science (FSRS-5): 697 verified medical cards, offline-ready, in French, Arabic and English."
+  },
+  "hero.cta_primary": { "fr": "Être notifié du lancement", "ar": "أُعلمني عند الإطلاق", "en": "Notify me at launch" },
+  "hero.cta_secondary": { "fr": "Découvrir les fonctionnalités", "ar": "اكتشف المميزات", "en": "Explore features" },
+  "hero.stat_cards": { "fr": "cartes vérifiées", "ar": "بطاقة موثقة", "en": "verified cards" },
+  "hero.stat_decks": { "fr": "decks thématiques", "ar": "رزم موضوعية", "en": "themed decks" },
+  "hero.stat_langs": { "fr": "langues (FR · AR · EN)", "ar": "لغات (FR · AR · EN)", "en": "languages (FR · AR · EN)" },
+  "features.title": { "fr": "Tout ce qu'il faut pour retenir l'indispensable", "ar": "كل ما تحتاجه لتثبيت الأساسيات", "en": "Everything you need to make knowledge stick" },
+  "features.srs_title": { "fr": "Répétition espacée FSRS-5", "ar": "تكرار متباعد FSRS-5", "en": "FSRS-5 spaced repetition" },
+  "features.srs_body": {
+    "fr": "Le moteur FSRS-5 calcule le moment exact où tu es sur le point d'oublier. 19 paramètres s'ajustent à TON profil : fragile ou fort, l'algorithme s'adapte sans jamais dériver.",
+    "ar": "يحسب محرك FSRS-5 اللحظة الدقيقة التي تكاد تنسى فيها. 19 معاملًا تتكيف مع ملفك أنت: ضعيفًا أو قويًا، تتكيف الخوارزمية دون انحراف أبدًا.",
+    "en": "The FSRS-5 engine computes the exact moment you're about to forget. 19 parameters tune to YOUR profile: struggling or strong, the algorithm adapts — never drifts."
+  },
+  "features.offline_title": { "fr": "Hors-ligne d'abord", "ar": "يعمل دون اتصال أولًا", "en": "Offline-first" },
+  "features.offline_body": {
+    "fr": "Conçu pour les connexions intermittentes : decks chiffrés sur l'appareil, synchronisation en arrière-plan quand le réseau revient. Zéro friction dans l'amphi ou le bus.",
+    "ar": "مصمَّم للاتصالات المتقطعة: رزم مشفّرة على الجهاز، ومزامنة في الخلفية عند عودة الشبكة. بلا أي عوائق في المدرج أو الحافلة.",
+    "en": "Designed for spotty connectivity: encrypted decks on-device, background sync when the network returns. Zero friction in the lecture hall or on the bus."
+  },
+  "features.ai_title": { "fr": "Hints IA sans cloud", "ar": "تلميحات ذكية دون سحابة", "en": "AI hints, no cloud" },
+  "features.ai_body": {
+    "fr": "Des indices personnalisés calculés par règles à partir de ton historique — aucune donnée personnelle ne part vers un LLM externe. Explicable : chaque indice dit pourquoi il est là.",
+    "ar": "تلميحات مخصَّصة تُحسب بقواعد من سجلّك — لا تُرسل أي بيانات شخصية إلى نموذج خارجي. قابلة للتفسير: كل تلميح يوضح سبب ظهوره.",
+    "en": "Personalized hints computed by rules from your history — no personal data ever leaves for an external LLM. Explainable: every hint says why it's there."
+  },
+  "features.tutor_title": { "fr": "Tuteur vocal encadré", "ar": "مدرّس صوتي مؤطَّر", "en": "Guard-railed voice tutor" },
+  "features.tutor_body": {
+    "fr": "Pose une question de cours à voix haute : le tuteur t'aide à réviser — avec un disclaimer médical systématique et des garde-fous d'urgence (SAMU 115). Jamais de diagnostic.",
+    "ar": "اطرح سؤالًا دراسيًا بصوت عالٍ: يساعدك المدرّس على المراجعة — مع تنبيه طبي دائم وضوابط للطوارئ (الاستعجالات 115). لا تشخيص أبدًا.",
+    "en": "Ask a course question out loud: the tutor helps you revise — with a systematic medical disclaimer and emergency guardrails (SAMU 115). Never a diagnosis."
+  },
+  "features.exam_title": { "fr": "Examens blancs", "ar": "امتحانات تجريبية", "en": "Mock exams" },
+  "features.exam_body": {
+    "fr": "Entraîne-toi en conditions réelles : templates par module, anti-triche natif, corrigé détaillé et remontée des lacunes directement dans ta file de révision.",
+    "ar": "تدرّب في ظروف حقيقية: نماذج حسب المقياس، منع غش مدمج، تصحيح مفصّل، وإعادة نقاط الضعف مباشرة إلى قائمة مراجعتك.",
+    "en": "Train in real conditions: module-based templates, built-in anti-cheat, detailed corrections, and weaknesses fed straight back into your review queue."
+  },
+  "features.gamif_title": { "fr": "Motivation durable", "ar": "حافز مستدام", "en": "Durable motivation" },
+  "features.gamif_body": {
+    "fr": "Streaks, XP et classements hebdomadaires par faculté (opt-in, pseudonyme). La régularité bat le bachotage — 20 minutes par jour suffisent.",
+    "ar": "سلاسل يومية ونقاط خبرة وترتيب أسبوعي حسب الكلية (اختياري، باسم مستعار). الانتظام يتغلب على الحشو — 20 دقيقة يوميًا تكفي.",
+    "en": "Streaks, XP and weekly per-faculty leaderboards (opt-in, pseudonymous). Consistency beats cramming — 20 minutes a day is enough."
+  },
+  "decks.title": { "fr": "Une bibliothèque qui grandit chaque sprint", "ar": "مكتبة تنمو في كل مرحلة", "en": "A library that grows every sprint" },
+  "decks.subtitle": {
+    "fr": "Chaque carte est relue par pairs, sourcée (manuelles de référence DES), et atomique : 1 fait, 1 question.",
+    "ar": "كل بطاقة تخضع لمراجعة الأقران وموثقة المصدر وذرّية: حقيقة واحدة، سؤال واحد.",
+    "en": "Every card is peer-reviewed, sourced (standard medical references) and atomic: 1 fact, 1 question."
+  },
+  "decks.anat_title": { "fr": "Anatomie", "ar": "التشريح", "en": "Anatomy" },
+  "decks.anat_body": { "fr": "5 decks régionaux : thorax, abdomen, tête et cou, membres.", "ar": "5 رزم جهوية: الصدر، البطن، الرأس والعنق، الأطراف.", "en": "5 regional decks: thorax, abdomen, head & neck, limbs." },
+  "decks.histo_title": { "fr": "Histologie & embryologie", "ar": "علم الأنسجة والجنين", "en": "Histology & embryology" },
+  "decks.histo_body": { "fr": "Épithéliums et développement semaines 1-8, avec points d'examen.", "ar": "الأنسجة الطلائية والتطور في الأسابيع 1-8 مع نقاط الامتحان.", "en": "Epithelia and weeks 1-8 of development, with exam hotspots." },
+  "decks.bioch_title": { "fr": "Biochimie & biophysique", "ar": "الكيمياء الحيوية والفيزياء الحيوية", "en": "Biochemistry & biophysics" },
+  "decks.bioch_body": { "fr": "Glycolyse pas à pas, membraniques et transports, QCM pièges classiques.", "ar": "تحلّل السكر خطوة بخطوة، الأغشية والنقل، وأسئلة شائعة الأخطاء.", "en": "Step-by-step glycolysis, membranes & transport, classic trap MCQs." },
+  "pricing.title": { "fr": "Gratuit pour apprendre. Premium pour aller plus loin.", "ar": "مجاني للتعلم. بريميوم للذهاب أبعد.", "en": "Free to learn. Premium to go further." },
+  "pricing.free_name": { "fr": "Découverte — 0 DA", "ar": "اكتشاف — 0 دج", "en": "Discovery — 0 DZD" },
+  "pricing.free_1": { "fr": "5 decks fondamentaux", "ar": "5 رزم أساسية", "en": "5 core decks" },
+  "pricing.free_2": { "fr": "Révisions illimitées (SRS)", "ar": "مراجعات غير محدودة (SRS)", "en": "Unlimited SRS reviews" },
+  "pricing.free_3": { "fr": "Statistiques locales", "ar": "إحصاءات محلية", "en": "Local statistics" },
+  "pricing.pro_name": { "fr": "Premium", "ar": "بريميوم", "en": "Premium" },
+  "pricing.pro_price": { "fr": "Abonnement étudiant (prix DZ)", "ar": "اشتراك طالب (بسعر جزائري)", "en": "Student pricing (DZD)" },
+  "pricing.pro_1": { "fr": "Les 10 decks + nouveautés chaque sprint", "ar": "الرزم العشر + الجديد في كل مرحلة", "en": "All 10 decks + new content every sprint" },
+  "pricing.pro_2": { "fr": "Hints IA personnalisés et tuteur vocal", "ar": "تلميحات ذكية مخصصة ومدرس صوتي", "en": "Personalized AI hints and voice tutor" },
+  "pricing.pro_3": { "fr": "Examens blancs et poids FSRS adaptatifs", "ar": "امتحانات تجريبية وأوزان FSRS متكيفة", "en": "Mock exams and adaptive FSRS weights" },
+  "faq.title": { "fr": "Questions fréquentes", "ar": "أسئلة شائعة", "en": "Frequently asked questions" },
+  "faq.q1": { "fr": "Mes données sont-elles envoyées à un LLM ?", "ar": "هل تُرسل بياناتي إلى نموذج ذكاء اصطناعي خارجي؟", "en": "Is my data sent to an LLM?" },
+  "faq.a1": {
+    "fr": "Non par défaut. Les hints sont calculés par règles, sans LLM. Les fonctions LLM (génération, tuteur) passent par un fournisseur configurable côté serveur, jamais avec tes données personnelles identifiables — et la dictée privilégie le texte transcrit sur l'appareil, pas l'audio.",
+    "ar": "لا، افتراضيًا. التلميحات تُحسب بقواعد دون نموذج ضخم. ميزات التوليد والمدرّس تمر عبر مزوّد قابل للضبط من طرف الخادم، دون بياناتك الشخصية المعرِّفة — والإملاء يفضّل النص المفرَّغ على الجهاز لا الصوت.",
+    "en": "Not by default. Hints are rule-computed, LLM-free. LLM features (generation, tutor) go through a server-side configurable provider, never with your identifiable personal data — and dictation prefers on-device transcripts, not audio."
+  },
+  "faq.q2": { "fr": "Est-ce un avis médical ?", "ar": "هل يقدّم التطبيق استشارة طبية؟", "en": "Is this medical advice?" },
+  "faq.a2": {
+    "fr": "Non. MedAnki DZ est un outil de RÉVISION pour étudiants. Le tuteur IA affiche systématiquement un disclaimer et détecte les urgences (renvoi SAMU 115 / Protection civile 14). Pour toute décision de santé, consulte un professionnel.",
+    "ar": "لا. ميد أنكي دي زد أداة مراجعة للطلبة. يعرض المدرس الذكي تنبيهًا دائمًا ويكتشف حالات الطوارئ (إحالة إلى الاستعجالات 115 / الحماية المدنية 14). لأي قرار صحي، استشر مختصًا.",
+    "en": "No. MedAnki DZ is a REVISION tool for students. The AI tutor always shows a disclaimer and detects emergencies (referral to SAMU 115 / Civil Protection 14). For any health decision, see a professional."
+  },
+  "faq.q3": { "fr": "Ça marche sans Internet ?", "ar": "هل يعمل دون إنترنت؟", "en": "Does it work without Internet?" },
+  "faq.a3": {
+    "fr": "Oui. Les decks premium sont chiffrés sur ton appareil (AES-GCM, clé par device) et le moteur SRS tourne localement. La synchro reprend toute seule quand le réseau revient.",
+    "ar": "نعم. الرزم تُشفَّر على جهازك (AES-GCM بمفتاح لكل جهاز) ومحرك التكرار يعمل محليًا. تستأنف المزامنة تلقائيًا عند عودة الشبكة.",
+    "en": "Yes. Premium decks are encrypted on your device (AES-GCM, per-device key) and the SRS engine runs locally. Sync resumes by itself when the network is back."
+  },
+  "faq.q4": { "fr": "Quand sortent les applications ?", "ar": "متى تصدر التطبيقات؟", "en": "When do the apps ship?" },
+  "faq.a4": {
+    "fr": "La soumission App Store / Google Play est en préparation (Phase 19.8). Laisse ton email pour être notifié du lancement.",
+    "ar": "النشر على متجري التطبيقات قيد التحضير. اترك بريدك الإلكتروني لتصلك رسالة عند الإطلاق.",
+    "en": "App Store / Google Play submission is in preparation. Leave your email to be notified at launch."
+  },
+  "notify.title": { "fr": "Sois notifié du lancement", "ar": "لتصلك أخبار الإطلاق", "en": "Get notified at launch" },
+  "notify.placeholder": { "fr": "ton.email@etu.dz", "ar": "email@etu.univ.dz", "en": "your.email@student.dz" },
+  "notify.button": { "fr": "Me notifier", "ar": "أعلمني", "en": "Notify me" },
+  "notify.note": {
+    "fr": "Un seul email au lancement. Pas de spam, pas de revente.",
+    "ar": "رسالة واحدة عند الإطلاق. لا إزعاج ولا بيع للبيانات.",
+    "en": "One email at launch. No spam, no data resale."
+  },
+  "footer.disclaimer": {
+    "fr": "Outil de révision pour étudiants. Ne constitue pas un avis médical.",
+    "ar": "أداة مراجعة للطلبة. ليست استشارة طبية.",
+    "en": "A revision tool for students. Not medical advice."
+  },
+  "footer.security": { "fr": "Signaler une faille (bug bounty)", "ar": "الإبلاغ عن ثغرة (مكافأة)", "en": "Report a vulnerability (bug bounty)" },
+  "footer.made": {
+    "fr": "Fait avec rigueur pour les étudiants en médecine d'Algérie 🇩🇿",
+    "ar": "صُنع بإتقان لطلبة الطب في الجزائر 🇩🇿",
+    "en": "Carefully crafted for medical students in Algeria 🇩🇿"
+  }
+}

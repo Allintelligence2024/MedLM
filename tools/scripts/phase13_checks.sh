@@ -38,6 +38,11 @@ if [ -f tools/check_schema_parity.py ]; then
     echo "  ✓ check_schema_parity.py" || \
     echo "  ⚠ check_schema_parity.py (voir /tmp/phase13_schema.log)"
 fi
+if [ -f tools/scripts/check_landing.py ]; then
+  python3 tools/scripts/check_landing.py && \
+    echo "  ✓ check_landing.py (landing Phase 19.7)" || \
+    { echo "  ❌ check_landing.py"; exit 1; }
+fi
 if [ -f tools/test_repository_logic.py ]; then
   python3 tools/test_repository_logic.py > /tmp/phase13_repo.log 2>&1 && \
     echo "  ✓ test_repository_logic.py" || \
