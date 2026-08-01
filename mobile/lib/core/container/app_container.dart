@@ -5,6 +5,7 @@ import '../../data/network/secure_token_storage.dart';
 import '../../data/repositories/ai/ai_repository.dart';
 import '../../data/repositories/card_repository.dart';
 import '../../data/repositories/entitlement_repository.dart';
+import '../../data/repositories/ml/ml_repository.dart';
 import '../../data/repositories/rest_entitlement_repository.dart';
 import '../../data/repositories/rest_sync_repository.dart';
 import '../../data/repositories/srs_repository.dart';
@@ -51,6 +52,9 @@ class AppContainer {
 
   // Phase 19.5 : endpoints IA (hints, voice-to-card, tuteur, adaptatif).
   late final AiRepository aiRepository = AiRepository(api: apiClient);
+
+  // Phase 20.3 : ML locale (prédiction examen blanc, focus par tag).
+  late final MlRepository mlRepository = MlRepository(api: apiClient);
 
   // Refs historiques (les tests existants les utilisent directement).
   late final SrsRepository srsRepository;

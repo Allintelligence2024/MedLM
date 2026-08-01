@@ -417,6 +417,34 @@ class ApiClient {
     }
   }
 
+  // ── ML locale (Phase 20.3) ──────────────────────────────────────
+  //
+  // Calculs 100 % serveur sur agrégats déjà en base — jamais de service
+  // ML externe, jamais de données qui sortent. Réponses explicables
+  // (features + raisons rendues, v2 §13).
+
+  /// GET /v1/ml/mock-exam-prediction — prédiction du score au prochain
+  /// examen blanc (ou refus k-anonymat documenté, predictible=false).
+  Future<Map<String, dynamic>> fetchMockExamPrediction() async {
+    try {
+      final res =
+          await _dio.get<dynamic>('/v1/ml/mock-exam-prediction');
+      return Map<String, dynamic>.from(res.data as Map);
+    } on DioException catch (e) {
+      throw _translate(e);
+    }
+  }
+
+  /// GET /v1/ml/tag-focus — suggestions focus/relax par tag.
+  Future<Map<String, dynamic>> fetchTagFocus() async {
+    try {
+      final res = await _dio.get<dynamic>('/v1/ml/tag-focus');
+      return Map<String, dynamic>.from(res.data as Map);
+    } on DioException catch (e) {
+      throw _translate(e);
+    }
+  }
+
   /// GET /v1/exams/templates — templates actifs.
   Future<List<Map<String, dynamic>>> listExamTemplates({
     String? moduleId,
