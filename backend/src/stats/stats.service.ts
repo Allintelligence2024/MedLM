@@ -9,7 +9,7 @@
 // Conformité v2 §11.3 — « Dashboard KPIs SRS » : on expose
 // exactement les métriques décrites dans la section.
 import { Inject, Injectable } from '@nestjs/common';
-import { and, eq, gte, sql } from 'drizzle-orm';
+import { and, eq, gte, inArray, sql } from 'drizzle-orm';
 import { DRIZZLE_READ, Database } from '../db/database.module';
 import { reviewLogs, srsCardState } from '../db/schema/srs';
 import { examAttempts } from '../db/schema/exams';
@@ -173,8 +173,24 @@ export class StatsService {
       .orderBy(sql`count(*) DESC`)
       .limit(5);
     const deckIds = topDecks.map((d) => d.deckId);
+    // `inArray`, PAS une interpolation via `sql.raw`.
+    //
+    // L'écriture précédente construisait `ARRAY['id1','id2']::uuid[]` en
+    // concaténant les identifiants directement dans le SQL, sans
+    // échappement. Deux problèmes :
+    //   * injection : ces identifiants viennent de `cards.deckId`, donc
+    //     de la base — mais `sql.raw` court-circuite toute paramétrisation,
+    //     et la sûreté ne reposait que sur la confiance faite à la donnée
+    //     stockée. Une valeur contenant une apostrophe suffisait à casser
+    //     la requête, voire davantage ;
+    //   * robustesse : un tableau vide aurait produit `ARRAY[]::uuid[]`,
+    //     syntaxiquement valide mais fragile.
+    // `inArray` produit un bind paramétré, sûr par construction.
     const deckNames = deckIds.length
-      ? await this.db.select({ id: decks.id, nameFr: decks.nameFr }).from(decks).where(sql`${decks.id} = ANY(${sql.raw(`ARRAY[${deckIds.map((i) => `'${i}'`).join(',')}]::uuid[]`)})`)
+      ? await this.db
+          .select({ id: decks.id, nameFr: decks.nameFr })
+          .from(decks)
+          .where(inArray(decks.id, deckIds))
       : [];
     const nameMap = new Map(deckNames.map((d) => [d.id, d.nameFr]));
     const topDecksFmt = topDecks.map((d) => ({

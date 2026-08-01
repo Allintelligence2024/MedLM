@@ -21,7 +21,7 @@
 //   * Le service ne POSE PAS le snapshot — c'est un job cron qui
 //     le fait (cf. cron_helpers.ts, livré en Phase 10+).
 import { Inject, Injectable, Logger, BadRequestException, NotFoundException } from '@nestjs/common';
-import { and, desc, eq, sql } from 'drizzle-orm';
+import { and, desc, eq, isNull, sql } from 'drizzle-orm';
 import { DRIZZLE_READ, Database } from '../db/database.module';
 import { leaderboardOptin, userXpSnapshot } from '../db/schema/gamification';
 
@@ -165,7 +165,15 @@ export class LeaderboardService {
     // 1. Sous-requête : ID des users opt-in (non révoqués) qui
     //    matchent les filtres et qui ont un snapshot cette semaine.
     const conditions = [
-      eq(leaderboardOptin.revokedAt, null as never), // non révoqué
+      // `isNull`, PAS `eq(col, null)` : en SQL, `x = NULL` n'est jamais
+      // vrai (c'est UNKNOWN, donc filtré). La requête ne renvoyait donc
+      // JAMAIS aucun participant — le classement était vide pour tout le
+      // monde, en permanence. Vérifié en base : `= NULL` → 0 ligne,
+      // `IS NULL` → 1 ligne, sur la même donnée.
+      //
+      // Le `as never` qui accompagnait l'écriture était l'indice : le
+      // typage de drizzle refusait déjà cette comparaison.
+      isNull(leaderboardOptin.revokedAt),
       eq(userXpSnapshot.weekIso, args.weekIso),
     ];
     if (args.faculty) {
@@ -233,7 +241,7 @@ export class LeaderboardService {
         // Pas opt-in → myRank reste null.
       } else if (meRow) {
         const allMyConditions = [
-          eq(leaderboardOptin.revokedAt, null as never),
+          isNull(leaderboardOptin.revokedAt),
           eq(userXpSnapshot.weekIso, args.weekIso),
         ];
         if (args.faculty) allMyConditions.push(eq(leaderboardOptin.faculty, args.faculty));
@@ -251,7 +259,7 @@ export class LeaderboardService {
         if (myRow) {
           // Compte combien de users ont un meilleur score.
           const betterConditions = [
-            eq(leaderboardOptin.revokedAt, null as never),
+            isNull(leaderboardOptin.revokedAt),
             eq(userXpSnapshot.weekIso, args.weekIso),
           ];
           if (args.faculty) betterConditions.push(eq(leaderboardOptin.faculty, args.faculty));

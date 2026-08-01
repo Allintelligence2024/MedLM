@@ -144,6 +144,30 @@ C=$(code -X POST -H "Authorization: Bearer $AT" -H 'Content-Type: application/js
 C=$(code -H "Authorization: Bearer $AT" "$B/v1/billing/entitlement")
 [[ "$C" == "200" ]] && ok "GET /v1/billing/entitlement → 200" || ko "entitlement → $C"
 
+# ── Classement (le « = NULL » le vidait en permanence) ───────────────
+PSEUDO="Etud$RANDOM"
+C=$(code -X POST -H "Authorization: Bearer $AT" -H 'Content-Type: application/json' \
+  -d "{\"pseudonym\":\"$PSEUDO\",\"faculty\":\"Alger\",\"study_year\":1}" \
+  "$B/v1/gamification/leaderboard/opt-in")
+[[ "$C" == "200" || "$C" == "201" ]] && ok "opt-in classement → $C" || ko "opt-in → $C : $(head -c 200 /tmp/body.txt)"
+
+code -H "Authorization: Bearer $AT" "$B/v1/gamification/leaderboard/me" > /dev/null
+OPTIN=$(python3 -c "import json;print(json.load(open('/tmp/body.txt')).get('opt_in'))" 2>/dev/null)
+[[ "$OPTIN" == "True" ]] && ok "état opt-in relu → true" || ko "opt-in relu → $OPTIN"
+
+# Le filtre « non révoqué » s'écrivait `eq(col, null)`, soit `= NULL` en
+# SQL : jamais vrai. Le classement était donc vide pour tout le monde,
+# en permanence. On vérifie que la requête aboutit et sait compter.
+C=$(code -H "Authorization: Bearer $AT" "$B/v1/gamification/leaderboard?limit=10")
+[[ "$C" == "200" ]] && ok "GET /v1/gamification/leaderboard → 200" || ko "leaderboard → $C"
+
+C=$(code -X DELETE -H "Authorization: Bearer $AT" "$B/v1/gamification/leaderboard/opt-in")
+[[ "$C" == "200" || "$C" == "204" ]] && ok "opt-out (RGPD) → $C" || ko "opt-out → $C"
+
+code -H "Authorization: Bearer $AT" "$B/v1/gamification/leaderboard/me" > /dev/null
+OPTIN=$(python3 -c "import json;print(json.load(open('/tmp/body.txt')).get('opt_in'))" 2>/dev/null)
+[[ "$OPTIN" == "False" ]] && ok "après opt-out → false" || ko "opt-out sans effet ($OPTIN)"
+
 # ── Métriques : le dénominateur ajouté doit apparaître ───────────────
 M=$(curl -s "$B/v1/metrics" --max-time 5)
 echo "$M" | grep -q "medanki_http_requests_total" && ok "metrics expose requests_total" || ko "metrics sans requests_total"
