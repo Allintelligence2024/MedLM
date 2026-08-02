@@ -10,8 +10,8 @@
 //   4. Le coordinateur paie → tous les entitlements sont activés.
 //   5. Si le pack expire (24h) sans être plein, on le marque
 //      'expired' et on notifie le coordinateur (Phase 14+).
-import { Inject, Injectable, Logger, BadRequestException, NotFoundException } from '@nestjs/common';
-import { eq, sql } from 'drizzle-orm';
+import { Inject, Injectable, Logger, BadRequestException, ForbiddenException, NotFoundException } from '@nestjs/common';
+import { and, eq, sql } from 'drizzle-orm';
 import { randomBytes } from 'node:crypto';
 import { DRIZZLE, Database } from '../db/database.module';
 import { groupPacks, groupPackMembers } from '../db/schema/group-packs';
@@ -67,7 +67,10 @@ export class GroupPacksService {
   /// Rejoint un pack existant via son code d'invitation.
   async join(args: { userId: string; body: JoinPackBody }): Promise<GroupPackView> {
     const code = args.body.invite_code.toUpperCase();
-    return this.db.transaction(async (tx) => {
+    // La vue est construite APRÈS le commit. La construire à l'intérieur
+    // de la transaction via `this.db` utilisait une autre connexion : sous
+    // PostgreSQL elle ne voyait pas encore le membre qui venait de rejoindre.
+    const packId = await this.db.transaction(async (tx) => {
       const pack = await tx
         .select()
         .from(groupPacks)
@@ -114,8 +117,9 @@ export class GroupPacksService {
       this.logger.log(
         `pack rejoint: id=${pack.id} nouveau=${args.userId} count=${newCount}/${PACK_SIZE}`,
       );
-      return this._view(pack.id);
+      return pack.id;
     });
+    return this._view(packId);
   }
 
   /// Lit l'état d'un pack (par son id ou son invite_code).
@@ -131,6 +135,20 @@ export class GroupPacksService {
       packId = p.id;
     }
     if (!packId) throw new BadRequestException('packId ou inviteCode requis');
+
+    // La vue contient les emails des membres et le code d'invitation : elle
+    // n'est pas un annuaire pour tout utilisateur authentifié. Le code sert
+    // uniquement à rejoindre via POST /join ; après adhésion, chaque membre
+    // peut consulter l'état du pack.
+    const membership = await this.db
+      .select({ userId: groupPackMembers.userId })
+      .from(groupPackMembers)
+      .where(and(
+        eq(groupPackMembers.packId, packId),
+        eq(groupPackMembers.userId, args.userId),
+      ))
+      .then((rows) => rows[0]);
+    if (!membership) throw new ForbiddenException('réservé aux membres du pack');
     return this._view(packId);
   }
 
