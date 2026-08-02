@@ -11,6 +11,7 @@ import {
   uuid,
   text,
   integer,
+  bigint,
   timestamp,
   jsonb,
   boolean,
@@ -65,7 +66,7 @@ export const examAttemptEvents = pgTable(
     /// Métadonnées libres (durée du focus loss, longueur du paste...).
     metadata: jsonb('metadata').notNull().default({}),
     /// Timestamp côté client (avec tolérance).
-    clientTs: integer('client_ts').notNull(),
+    clientTs: bigint('client_ts', { mode: 'number' }).notNull(),
     /// Timestamp côté serveur (source de vérité).
     serverTs: timestamp('server_ts', { withTimezone: true }).notNull().defaultNow(),
   },

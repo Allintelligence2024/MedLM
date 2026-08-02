@@ -120,6 +120,13 @@
       "when": 1735690560000,
       "tag": "0017_device_tokens",
       "breakpoints": false
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1735690620000,
+      "tag": "0018_exam_events_client_ts_bigint",
+      "breakpoints": false
     }
   ]
 }

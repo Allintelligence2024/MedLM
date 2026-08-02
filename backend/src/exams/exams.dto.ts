@@ -16,7 +16,7 @@ export type StartExamBody = z.infer<typeof StartExamBody>;
 export const AnswerBody = z.object({
   question_id: z.string().uuid(),
   /// Liste des ids d'options choisies (vide = pas répondu).
-  selected: z.array(z.string().min(1).max(8)),
+  selected: z.array(z.string().min(1).max(64)),
   /// Temps passé sur la question, en ms. Pour l'analyse des patterns
   /// de réponse (étape 11 — analytics).
   duration_ms: z.number().int().nonnegative().default(0),

@@ -50,6 +50,20 @@ if [[ ! -d "$SRC" ]] || ! compgen -G "$SRC/*.yml" > /dev/null; then
   exit 1
 fi
 
+# Un push qui contient un workflow sans permission est rejeté dans son
+# intégralité. Refuser d'abord les commits ordinaires non poussés évite de
+# les entraîner dans cet échec : ils doivent être poussés séparément.
+if [[ $DO_PUSH -eq 1 ]]; then
+  BRANCH="$(git branch --show-current)"
+  git fetch -q origin "$BRANCH" || true
+  if git show-ref --verify --quiet "refs/remotes/origin/$BRANCH" &&
+     [[ -n "$(git log "origin/$BRANCH..HEAD" --oneline)" ]]; then
+    echo "❌ Des commits ne sont pas encore poussés sur origin/$BRANCH."
+    echo "   Poussez-les d'abord sans workflow, puis relancez ce script."
+    exit 1
+  fi
+fi
+
 # ── Vérifier avant de déplacer ──────────────────────────────────────────
 # Activer un workflow syntaxiquement faux, c'est peindre l'onglet
 # Actions en rouge dès le premier push.

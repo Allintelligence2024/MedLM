@@ -13,7 +13,7 @@
 import { Inject, Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import { and, eq, inArray, sql } from 'drizzle-orm';
 import { DRIZZLE, Database } from '../db/database.module';
-import { examTemplates, examAttemptEvents, examQuestions, examAttempts, cards } from '../db/schema';
+import { examTemplates, examAttemptEvents, examQuestions, examAttempts, cards, decks } from '../db/schema';
 
 const TOLERANCE_SECONDS = 5;
 
@@ -57,7 +57,8 @@ export class ExamTemplatesService {
       ? await this.db
           .select({ id: cards.id })
           .from(cards)
-          .where(eq(cards.deckId, tpl.moduleId))
+          .innerJoin(decks, eq(cards.deckId, decks.id))
+          .where(eq(decks.moduleId, tpl.moduleId))
       : await this.db.select({ id: cards.id }).from(cards);
     if (pool.length < tpl.totalQuestions) {
       throw new BadRequestException(
@@ -81,6 +82,14 @@ export class ExamTemplatesService {
     });
 
     // 3. Crée les questions d'examen à partir des cartes piochées.
+    // Les questions publiques sont renvoyées immédiatement : l'écran mobile
+    // ne peut pas démarrer un examen avec une simple liste de métadonnées.
+    const publicQuestions: Array<{
+      id: string;
+      position: number;
+      options: Array<{ id: string; fr: string }>;
+      is_multiple: boolean;
+    }> = [];
     for (let i = 0; i < picked.length; i++) {
       const card = picked[i];
       if (!card) continue;  // noUncheckedIndexedAccess
@@ -105,21 +114,29 @@ export class ExamTemplatesService {
         { id: 'opt_d2', fr: '—', is_correct: false },
         { id: 'opt_d3', fr: '—', is_correct: false },
       ];
-      await this.db.insert(examQuestions).values({
+      const [question] = await this.db.insert(examQuestions).values({
         templateId: tpl.id,
         cardId: full.id,
         position: i + 1,
         options,
         isMultiple: false,
+      }).returning({ id: examQuestions.id });
+      if (!question) throw new Error('création de question d\'examen échouée');
+      publicQuestions.push({
+        id: question.id,
+        position: i + 1,
+        options: options.map(({ id, fr }) => ({ id, fr })),
+        is_multiple: false,
       });
     }
 
     return {
-      attemptId,
+      attempt_id: attemptId,
       started_at: now,
       expires_at: expiresAt,
       duration_minutes: tpl.durationMinutes,
       total_questions: tpl.totalQuestions,
+      questions: publicQuestions,
     };
   }
 

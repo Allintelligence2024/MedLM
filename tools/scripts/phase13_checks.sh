@@ -121,6 +121,11 @@ if [ -f tools/scripts/check_dart_static.py ]; then
     echo "  ✓ check_dart_static.py (Dart statique P0-2)" || \
     { echo "  ❌ check_dart_static.py"; exit 1; }
 fi
+if [ -f tools/scripts/check_dart_widgets.py ]; then
+  python3 tools/scripts/check_dart_widgets.py && \
+    echo "  ✓ check_dart_widgets.py (constructeurs de widgets)" || \
+    { echo "  ❌ check_dart_widgets.py"; exit 1; }
+fi
 if [ -f tools/scripts/apply_android_release_config.py ]; then
   python3 tools/scripts/apply_android_release_config.py --check && \
     echo "  ✓ apply_android_release_config.py --check (release Android P2-8)" || \
