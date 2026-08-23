@@ -5,6 +5,12 @@
 > étudiants en médecine algériens : flashcards, banque de QCM, examens
 > blancs, mode hors-ligne d'abord.
 
+> ⚠️ **État au 23 août 2026 : le dépôt n'est pas encore release-ready.**
+> Le périmètre de travail et les critères de preuve sont gelés dans
+> [docs/RELEASE_SCOPE.md](docs/RELEASE_SCOPE.md). Les rapports de phases
+> historiques décrivent des lots et des intentions ; ils ne constituent pas
+> une preuve de disponibilité de bout en bout.
+
 [![backend-ci](https://github.com/Allintelligence2024/MedLM/actions/workflows/backend-ci.yml/badge.svg)](../../actions/workflows/backend-ci.yml)
 [![mobile-ci](https://github.com/Allintelligence2024/MedLM/actions/workflows/mobile-ci.yml/badge.svg)](../../actions/workflows/mobile-ci.yml)
 [![cms-ci](https://github.com/Allintelligence2024/MedLM/actions/workflows/cms-ci.yml/badge.svg)](../../actions/workflows/cms-ci.yml)
@@ -14,6 +20,7 @@
 
 ## Sommaire
 
+- [État et périmètre de livraison](#état-et-périmètre-de-livraison)
 - [Ce que fait le produit](#ce-que-fait-le-produit)
 - [Architecture](#architecture)
 - [Arborescence du dépôt](#arborescence-du-dépôt)
@@ -28,6 +35,18 @@
 - [Documentation](#documentation)
 
 ---
+
+## État et périmètre de livraison
+
+Le dépôt contient davantage de code que ce qui est aujourd'hui démontré comme
+produit fonctionnel. Le prochain objectif est une tranche verticale :
+PostgreSQL migré et seedé, authentification, contenu publié, téléchargement
+local réel, étude hors ligne et synchronisation SRS multi-appareil.
+
+Les fonctionnalités IA, examens, gamification, partenariats, multi-régions et
+optimisations de scale sont conservées hors du release gate du MVP. Voir
+[docs/RELEASE_SCOPE.md](docs/RELEASE_SCOPE.md) pour le périmètre gelé, les
+bloqueurs connus et la Definition of Done.
 
 ## Ce que fait le produit
 
@@ -198,6 +217,7 @@ npm run e2e                        # Playwright (CMS + backend seedé)
 
 | Fichier | Contenu |
 |---|---|
+| [docs/RELEASE_SCOPE.md](docs/RELEASE_SCOPE.md) | Périmètre gelé du MVP et critères de lancement |
 | [PLAN_IMPLEMENTATION.md](PLAN_IMPLEMENTATION.md) | Plan phase par phase (vision d'ensemble) |
 | [VERIFY.md](VERIFY.md) | Matrice de validation : quel script prouve quoi |
 | [SECURITY.md](SECURITY.md) | Politique de divulgation, périmètre pen test |
