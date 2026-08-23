@@ -1,0 +1,131 @@
+name: backend-ci
+
+on:
+  push:
+    branches: ['arena/01a02efa-medlm']
+  pull_request:
+    branches: ['main']
+    paths: ['backend/**', 'tools/scripts/**', '.github/workflows/backend-ci.yml']
+
+jobs:
+  postgresql-contract:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: medanki
+          POSTGRES_PASSWORD: medanki
+          POSTGRES_DB: medanki_dz
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U medanki -d medanki_dz"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+        volumes:
+          - postgres-data:/var/lib/postgresql/data
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install backend dependencies
+        working-directory: backend
+        run: npm ci
+
+      - name: Generate JWT keys for tests
+        working-directory: backend
+        run: |
+          if (!(Test-Path keys)) { New-Item -ItemType Directory -Path keys | Out-Null }
+          openssl genrsa -out keys/jwt-private.pem 2048
+          openssl rsa -in keys/jwt-private.pem -pubout -out keys/jwt-public.pem
+
+      - name: Run migrations (1st pass)
+        working-directory: backend
+        env:
+          DATABASE_URL: postgres://medanki:medanki@127.0.0.1:5432/medanki_dz
+          PG_SCHEMA: public
+        run: npm run db:migrate
+
+      - name: Run seed (1st pass)
+        working-directory: backend
+        env:
+          DATABASE_URL: postgres://medanki:medanki@127.0.0.1:5432/medanki_dz
+          PG_SCHEMA: public
+        run: npm run db:seed
+
+      - name: Run migrations (2nd pass — rejouabilité)
+        working-directory: backend
+        env:
+          DATABASE_URL: postgres://medanki:medanki@127.0.0.1:5432/medanki_dz
+          PG_SCHEMA: public
+        run: npm run db:migrate
+
+      - name: Run seed (2nd pass — idempotence)
+        working-directory: backend
+        env:
+          DATABASE_URL: postgres://medanki:medanki@127.0.0.1:5432/medanki_dz
+          PG_SCHEMA: public
+        run: npm run db:seed
+
+      - name: PostgreSQL contract check
+        working-directory: backend
+        env:
+          DATABASE_URL: postgres://medanki:medanki@127.0.0.1:5432/medanki_dz
+          PG_SCHEMA: public
+        run: bash ../tools/scripts/check_database_contract.sh
+
+      - name: Typecheck
+        working-directory: backend
+        run: npm run typecheck
+
+      - name: Lint
+        working-directory: backend
+        run: npm run lint
+
+      - name: Build
+        working-directory: backend
+        run: npm run build
+
+      - name: Unit tests
+        working-directory: backend
+        run: npm test -- --run
+
+      - name: Integration tests
+        working-directory: backend
+        env:
+          DATABASE_URL: postgres://medanki:medanki@127.0.0.1:5432/medanki_dz
+          PG_SCHEMA: public
+        run: npm run test:integration
+
+  verify-scripts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Python deps
+        run: |
+          python -m pip install --upgrade pip
+          if (Test-Path tools/requirements.txt) { pip install -r tools/requirements.txt }
+
+      - name: Check migrations apply
+        run: python3 tools/scripts/check_migrations_apply.py
+
+      - name: Check workflows
+        run: python3 tools/scripts/check_workflows.py
+
+      - name: Bash syntax guard
+        run: bash -n tools/scripts/check_database_contract.sh
+
+  volumes:
+    postgres-data:

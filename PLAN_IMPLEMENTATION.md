@@ -3,6 +3,13 @@
 > Objectif : amener le repo `MedLM` (prototype Android AI Studio) jusqu'à l'architecture cible **MedAnki DZ v2**.
 > Méthode : une phase = un lot livrable, testable, mergeable. Je vous rends compte à la fin de chaque phase avant d'enchaîner.
 
+> ⚠️ **Priorité actuelle — 23 août 2026 : ce plan est historique et ne doit
+> pas déclencher une nouvelle phase fonctionnelle.** Le périmètre actif est
+> la tranche verticale et le release gate définis dans
+> [docs/RELEASE_SCOPE.md](docs/RELEASE_SCOPE.md). Tant que cette tranche
+> n'est pas prouvée sur PostgreSQL réel, mobile compilable et CI active, les
+> phases suivantes restent gelées.
+
 ---
 
 ## 0. Décision préalable — quel client mobile ?

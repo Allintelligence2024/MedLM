@@ -17,6 +17,7 @@ import {
 } from 'drizzle-orm/pg-core';
 import { users } from './users';
 import { cards } from './content';
+import { decks } from './content';
 
 /// Journal des revues — APPEND-ONLY. Un trigger SQL refuse UPDATE et
 /// DELETE (cf. migration `0002_append_only_triggers.sql`).
@@ -91,7 +92,7 @@ export const studySessions = pgTable(
   {
     id: uuid('id').primaryKey(),
     userId: uuid('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
-    deckId: uuid('deck_id').references(() => cards.deckId, { onDelete: 'set null' }),
+    deckId: uuid('deck_id').references(() => decks.id, { onDelete: 'set null' }),
     startedAt: timestamp('started_at', { withTimezone: true }).notNull().defaultNow(),
     endedAt: timestamp('ended_at', { withTimezone: true }),
     cardsDueAtStart: integer('cards_due_at_start').notNull().default(0),
