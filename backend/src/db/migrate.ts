@@ -9,29 +9,19 @@
 ///   * en production, comme point d'entrée du release ;
 ///   * en local, via `npm run db:migrate`.
 ///
-/// Important : les triggers SQL (notamment `review_logs_no_update` et
-/// `review_logs_no_delete`) sont dans une migration séparée
-/// (`0002_append_only_triggers.sql`) parce que drizzle-kit ne sait pas
-/// les générer nativement.
+/// Important : le migrator embarqué de drizzle ne permet pas de imposer
+/// un `search_path` sur la connexion utilisée pour exécuter les SQL.
+/// On utilise donc un runner maison qui :
+///   * ouvre une connexion brute ;
+///   * bascule vers le schéma cible ;
+///   * exécute chaque fichier de migration dans une transaction ;
+///   * enregistre les migrations appliquées dans `drizzle.__drizzle_migrations`.
 import 'dotenv/config';
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { drizzle } from 'drizzle-orm/node-postgres';
-import { migrate } from 'drizzle-orm/node-postgres/migrator';
 import { Pool } from 'pg';
+import crypto from 'node:crypto';
 
-/// Localise le dossier de migrations selon le contexte d'exécution.
-///
-/// Le chemin était écrit en dur (`./src/db/migrations`) : correct en
-/// développement (`tsx src/db/migrate.ts` depuis `backend/`), FAUX dans
-/// l'image Docker, où le Dockerfile copie les `.sql` vers
-/// `dist/db/migrations` et où `src/` n'existe pas. Toute tentative de
-/// migration depuis le conteneur aurait échoué sur un dossier absent.
-///
-/// On sonde donc les emplacements connus, dans l'ordre de spécificité,
-/// et on échoue explicitement si aucun ne convient — plutôt que de
-/// laisser drizzle jeter un « Can't find meta/_journal.json » qui
-/// enverrait chercher au mauvais endroit.
 export function resolveMigrationsFolder(
   candidates: string[] = [
     process.env.MIGRATIONS_DIR ?? '',
@@ -57,29 +47,74 @@ async function main(): Promise<void> {
   const url = process.env.DATABASE_URL;
   if (!url) throw new Error('DATABASE_URL manquante');
 
+  const schemaName = process.env.PG_SCHEMA ?? 'public';
   const pool = new Pool({ connectionString: url, max: 1 });
-  const db = drizzle(pool);
+  const client = await pool.connect();
 
-  // Script CLI : sa sortie standard EST son interface utilisateur
-  // (justifié — sentinelles explicites reconnues par security_audit.py).
-  // eslint-disable-next-line no-console
-  console.log('migrations en cours…');
-  const migrationsFolder = resolveMigrationsFolder();
-  // eslint-disable-next-line no-console -- CLI : stdout est le canal prévu
-  console.log(`dossier : ${migrationsFolder}`);
-  await migrate(db, { migrationsFolder });
-  // eslint-disable-next-line no-console -- CLI : stdout est le canal prévu
-  console.log('migrations OK');
+  try {
+    if (schemaName !== 'public') {
+      await client.query(`CREATE SCHEMA IF NOT EXISTS "${schemaName}"`);
+      await client.query(`SET search_path TO "${schemaName}"`);
+    }
 
-  await pool.end();
+    await client.query('CREATE SCHEMA IF NOT EXISTS drizzle');
+    await client.query(`CREATE TABLE IF NOT EXISTS drizzle.__drizzle_migrations (
+      id SERIAL PRIMARY KEY,
+      hash text NOT NULL,
+      created_at bigint
+    )`);
+
+    const lastResult = await client.query(
+      'SELECT hash, created_at FROM drizzle.__drizzle_migrations ORDER BY created_at DESC LIMIT 1',
+    );
+    const lastApplied = lastResult.rows[0];
+
+    const migrationsFolder = resolveMigrationsFolder();
+    const journalPath = resolve(migrationsFolder, 'meta', '_journal.json');
+    const journal = JSON.parse(readFileSync(journalPath, 'utf8'));
+
+    await client.query('BEGIN');
+    await client.query(`SET search_path TO "${schemaName}"`);
+    const sp = await client.query("SELECT current_setting('search_path') AS search_path");
+    // eslint-disable-next-line no-console -- CLI : stdout est le canal prévu
+    console.log('search_path=' + sp.rows[0].search_path);
+    try {
+      for (const entry of journal.entries) {
+        if (lastApplied && Number(lastApplied.created_at) >= entry.when) {
+          continue;
+        }
+
+        const sqlPath = resolve(migrationsFolder, `${entry.tag}.sql`);
+        const sqlContent = readFileSync(sqlPath, 'utf8');
+        const statements = sqlContent.split('--> statement-breakpoint');
+
+        for (const stmt of statements) {
+          const trimmed = stmt.trim();
+          if (!trimmed) continue;
+          await client.query(trimmed);
+        }
+
+        const hash = crypto.createHash('sha256').update(sqlContent).digest('hex');
+        await client.query(
+          'INSERT INTO drizzle.__drizzle_migrations (hash, created_at) VALUES ($1, $2)',
+          [hash, entry.when],
+        );
+      }
+      await client.query('COMMIT');
+    } catch (err) {
+      await client.query('ROLLBACK');
+      throw err;
+    } finally {
+      // eslint-disable-next-line no-console -- CLI : stdout est le canal prévu
+      console.log('migrations OK');
+    }
+  } finally {
+    client.release();
+    await pool.end();
+  }
 }
 
 // N'exécuter la migration QUE si ce fichier est le point d'entrée.
-//
-// Sans cette garde, un simple `import` du module (pour réutiliser
-// `resolveMigrationsFolder` dans un test, par exemple) déclenchait une
-// connexion PostgreSQL puis un `process.exit(1)` — ce qui tuait le
-// processus appelant. Même piège que `main.ts`, qui le documente déjà.
 const isEntrypoint =
   require.main === module ||
   process.argv[1]?.endsWith('migrate.ts') === true ||
@@ -87,7 +122,6 @@ const isEntrypoint =
 
 if (isEntrypoint) {
   main().catch((err) => {
-    // eslint-disable-next-line no-console -- CLI : stderr est le canal prévu
     console.error('migration échouée', err);
     process.exit(1);
   });
