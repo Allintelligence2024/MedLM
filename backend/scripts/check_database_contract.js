@@ -13,7 +13,20 @@ if (!DATABASE_URL) {
 }
 
 const SCHEMA = process.env.PG_SCHEMA || 'public';
-const pool = new Pool({ connectionString: DATABASE_URL, max: 1 });
+
+let pool;
+try {
+  const url = new URL(DATABASE_URL);
+  pool = new Pool({
+    host: url.hostname,
+    port: Number(url.port) || 5432,
+    user: url.username,
+    password: url.password,
+    database: url.pathname.replace(/^\//, ''),
+  });
+} catch {
+  pool = new Pool({ connectionString: DATABASE_URL });
+}
 
 let FAIL = 0;
 function ko(msg) {
@@ -46,61 +59,85 @@ async function main() {
 
     // 2. Utilisateurs seedés
     for (const email of ['admin@medlm.dz', 'author@medlm.dz', 'student@medlm.dz']) {
-      const res = await client.query('SELECT 1 FROM users WHERE email = $1', [email]);
-      if (res.rowCount > 0) {
-        ok('utilisateur seedé : ' + email);
-      } else {
+      try {
+        const res = await client.query('SELECT 1 FROM users WHERE email = $1', [email]);
+        if (res.rowCount > 0) {
+          ok('utilisateur seedé : ' + email);
+        } else {
+          ko('utilisateur manquant : ' + email);
+        }
+      } catch (err) {
         ko('utilisateur manquant : ' + email);
       }
     }
 
     // 3. Rôles
     for (const role of ['admin', 'author', 'student']) {
-      const res = await client.query('SELECT 1 FROM users WHERE rbac_role = $1', [role]);
-      if (res.rowCount > 0) {
-        ok('rôle présent : ' + role);
-      } else {
+      try {
+        const res = await client.query('SELECT 1 FROM users WHERE rbac_role = $1', [role]);
+        if (res.rowCount > 0) {
+          ok('rôle présent : ' + role);
+        } else {
+          ko('rôle manquant : ' + role);
+        }
+      } catch (err) {
         ko('rôle manquant : ' + role);
       }
     }
 
     // 4. Decks gratuit et premium
-    const freeDeck = await client.query(
-      'SELECT 1 FROM decks WHERE is_premium = false AND published_at IS NOT NULL',
-    );
-    if (freeDeck.rowCount > 0) {
-      ok('deck gratuit publié');
-    } else {
+    try {
+      const freeDeck = await client.query(
+        'SELECT 1 FROM decks WHERE is_premium = false AND published_at IS NOT NULL',
+      );
+      if (freeDeck.rowCount > 0) {
+        ok('deck gratuit publié');
+      } else {
+        ko('deck gratuit publié manquant');
+      }
+    } catch (err) {
       ko('deck gratuit publié manquant');
     }
 
-    const premiumDeck = await client.query(
-      'SELECT 1 FROM decks WHERE is_premium = true AND published_at IS NOT NULL',
-    );
-    if (premiumDeck.rowCount > 0) {
-      ok('deck premium publié');
-    } else {
+    try {
+      const premiumDeck = await client.query(
+        'SELECT 1 FROM decks WHERE is_premium = true AND published_at IS NOT NULL',
+      );
+      if (premiumDeck.rowCount > 0) {
+        ok('deck premium publié');
+      } else {
+        ko('deck premium publié manquant');
+      }
+    } catch (err) {
       ko('deck premium publié manquant');
     }
 
     // 5. Cartes publiées
-    const cardRes = await client.query("SELECT count(*) AS cnt FROM cards WHERE status = 'published'");
-    const cardCount = Number(cardRes.rows[0].cnt);
-    if (cardCount >= 1) {
-      ok('cartes publiées : ' + cardCount);
-    } else {
+    try {
+      const cardRes = await client.query("SELECT count(*) AS cnt FROM cards WHERE status = 'published'");
+      const cardCount = Number(cardRes.rows[0].cnt);
+      if (cardCount >= 1) {
+        ok('cartes publiées : ' + cardCount);
+      } else {
+        ko('cartes publiées manquantes');
+      }
+    } catch (err) {
       ko('cartes publiées manquantes');
     }
 
     // 6. Entitlement premium actif
-    const entRes = await client.query(
-      `SELECT 1 FROM entitlements
-       WHERE plan = 'premium'
-         AND (expires_at IS NULL OR expires_at > now())`,
-    );
-    if (entRes.rowCount > 0) {
-      ok('entitlement premium actif');
-    } else {
+    try {
+      const entRes = await client.query(
+        `SELECT 1 FROM entitlements
+         WHERE plan = 'premium'
+           AND (expires_at IS NULL OR expires_at > now())`,
+      );
+      if (entRes.rowCount > 0) {
+        ok('entitlement premium actif');
+      } else {
+        ko('entitlement premium actif manquant');
+      }
+    } catch (err) {
       ko('entitlement premium actif manquant');
     }
 
