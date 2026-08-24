@@ -4,7 +4,6 @@
 /// PRÉREQUIS :
 ///   DATABASE_URL      URL PostgreSQL (avec droits DDL/DML)
 ///   PG_SCHEMA         Schéma cible (défaut: public)
-import 'dotenv/config';
 import { Pool } from 'pg';
 
 const DATABASE_URL = process.env.DATABASE_URL;
@@ -17,18 +16,19 @@ const SCHEMA = process.env.PG_SCHEMA || 'public';
 const pool = new Pool({ connectionString: DATABASE_URL, max: 1 });
 
 let FAIL = 0;
-function ko(msg: string) {
+function ko(msg) {
   console.error('  ❌ ' + msg);
   FAIL += 1;
 }
-function ok(msg: string) {
+function ok(msg) {
   console.log('  ✓ ' + msg);
 }
 
 async function main() {
   const client = await pool.connect();
   try {
-    await client.query(`SET search_path TO "${SCHEMA}"`);
+    const safeSchema = SCHEMA.replace(/"/g, '""');
+    await client.query('SET search_path TO "' + safeSchema + '"');
 
     // 1. 37 tables
     const tablesRes = await client.query(
@@ -167,7 +167,7 @@ async function main() {
         ok('review_logs append-only (UPDATE refusé)');
       }
     } else {
-      ko('aucun review_log pour tester l\'append-only');
+      ko("aucun review_log pour tester l'append-only");
     }
 
     console.log();

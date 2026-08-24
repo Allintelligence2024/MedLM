@@ -78,7 +78,7 @@ jobs:
         env:
           DATABASE_URL: postgres://medanki:medanki@127.0.0.1:5432/medanki_dz
           PG_SCHEMA: public
-        run: node ../../tools/scripts/check_database_contract.js
+        run: node ../../backend/scripts/check_database_contract.js
 
       - name: Typecheck
         working-directory: backend
