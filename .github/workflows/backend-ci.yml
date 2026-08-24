@@ -73,15 +73,12 @@ jobs:
           PG_SCHEMA: public
         run: npm run db:seed
 
-      - name: Install PostgreSQL client
-        run: sudo apt-get update && sudo apt-get install -y postgresql-client
-
       - name: PostgreSQL contract check
         working-directory: backend
         env:
           DATABASE_URL: postgres://medanki:medanki@127.0.0.1:5432/medanki_dz
           PG_SCHEMA: public
-        run: bash ../tools/scripts/check_database_contract.sh
+        run: node ../../tools/scripts/check_database_contract.js
 
       - name: Typecheck
         working-directory: backend
