@@ -43,7 +43,7 @@ export function resolveMigrationsFolder(
   );
 }
 
-async function main(): Promise<void> {
+export async function runMigrations(): Promise<void> {
   const url = process.env.DATABASE_URL;
   if (!url) throw new Error('DATABASE_URL manquante');
 
@@ -121,7 +121,7 @@ const isEntrypoint =
   process.argv[1]?.endsWith('migrate.js') === true;
 
 if (isEntrypoint) {
-  main().catch((err) => {
+  runMigrations().catch((err) => {
     console.error('migration échouée', err);
     process.exit(1);
   });

@@ -26,7 +26,31 @@ export function configureApp(app: INestApplication): void {
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
   // ZodError brute → 400 (et non 500) — voir zod-exception.filter.ts.
   app.useGlobalFilters(new ZodExceptionFilter());
-  app.enableCors({ origin: false });
+  // CORS : allow-list explicite via CORS_ALLOWED_ORIGINS (jamais `origin: true`
+  // en prod, jamais `*` avec credentials). En dev/test sans variable, on
+  // retombe sur un jeu localhost sûr pour ne pas casser les tests locaux.
+  const allowed = (process.env.CORS_ALLOWED_ORIGINS ?? '')
+    .split(',')
+    .map((s) => s.trim())
+    .filter(Boolean);
+  const fallback = [
+    'http://localhost:3000',
+    'http://localhost:3001',
+    'http://localhost:4200',
+    'http://127.0.0.1:3000',
+  ];
+  const origins = allowed.length > 0 ? allowed : fallback;
+  app.enableCors({
+    origin: (requestOrigin, cb) => {
+      // Les requêtes sans Origin (ex. same-origin ou outil) passent.
+      if (!requestOrigin) return cb(null, true);
+      if (origins.includes(requestOrigin)) return cb(null, true);
+      return cb(new Error(`Origine non autorisée par CORS : ${requestOrigin}`));
+    },
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Platform', 'X-App-Version', 'signature'],
+  });
   app.setGlobalPrefix('v1', {
     exclude: [{ path: 'v2/graphql', method: RequestMethod.ALL }],
   });

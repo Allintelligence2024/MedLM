@@ -1,7 +1,9 @@
 // AppModule — composition root côté serveur (Phase 10/11/12).
 import { Module } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
 import { ConfigModule } from '@nestjs/config';
 import { LoggerModule } from 'nestjs-pino';
+import { ThrottlerGuard } from '@nestjs/throttler';
 import { ThrottlerModuleConfigured } from './common/throttle';
 import { DatabaseModule } from './db/database.module';
 import { FsrsModule } from './common/fsrs/fsrs.module';
@@ -75,5 +77,6 @@ import { PartnershipsModule } from './partnerships/partnerships.module';
     MlModule, // Phase 20.3 (prédiction examen blanc + focus par tag, local)
     PartnershipsModule, // Phase 20.4 (partenariats facultés DZ)
   ],
+  providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
 })
 export class AppModule {}

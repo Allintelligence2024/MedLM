@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  GoneException,
   Headers,
   HttpCode,
   HttpStatus,
@@ -8,7 +9,6 @@ import {
 } from '@nestjs/common';
 import { z } from 'zod';
 import { AuthService } from './auth.service';
-import { LoginBody, SignupBody } from './auth.dto';
 import { Public } from './public.decorator';
 
 const RefreshBody = z.object({
@@ -21,33 +21,19 @@ export class AuthController {
   constructor(private readonly service: AuthService) {}
 
   @Post('signup')
-  @HttpCode(HttpStatus.CREATED)
-  async signup(
-    @Body() body: unknown,
-    @Headers('X-Platform') platform: string,
-    @Headers('X-App-Version') appVersion?: string,
-  ) {
-    const b = SignupBody.parse(body);
-    return this.service.signup({
-      ...b,
-      platform: platform ?? 'unknown',
-      ...(appVersion !== undefined && { appVersion }),
-    });
+  @HttpCode(HttpStatus.GONE)
+  async signup() {
+    throw new GoneException(
+      'Inscription par email désactivée : utilisez POST /auth/magic-link pour recevoir un lien de connexion.',
+    );
   }
 
   @Post('login')
-  @HttpCode(HttpStatus.OK)
-  async login(
-    @Body() body: unknown,
-    @Headers('X-Platform') platform: string,
-    @Headers('X-App-Version') appVersion?: string,
-  ) {
-    const b = LoginBody.parse(body);
-    return this.service.login({
-      ...b,
-      platform: platform ?? 'unknown',
-      ...(appVersion !== undefined && { appVersion }),
-    });
+  @HttpCode(HttpStatus.GONE)
+  async login() {
+    throw new GoneException(
+      'Connexion par email/mot de passe désactivée : utilisez POST /auth/magic-link pour recevoir un lien de connexion.',
+    );
   }
 
   @Post('refresh')
