@@ -160,13 +160,13 @@ async function main(): Promise<void> {
       [SEED_VERSION],
     );
     if ((already.rowCount ?? 0) > 0) {
-      // eslint-disable-next-line no-console -- CLI : stdout est le canal prévu
+       
       console.log(`seed v${SEED_VERSION} déjà appliqué (idempotent)`);
       await client.query('COMMIT');
       return;
     }
 
-    // eslint-disable-next-line no-console -- CLI : stdout est le canal prévu
+     
     console.log('seed en cours…');
 
     await client.query(
@@ -274,12 +274,12 @@ async function main(): Promise<void> {
       [SEED_VERSION],
     );
 
-    // eslint-disable-next-line no-console -- CLI : stdout est le canal prévu
+     
     console.log('seed OK');
     await client.query('COMMIT');
   } catch (err) {
     await client.query('ROLLBACK');
-    // eslint-disable-next-line no-console -- CLI : stderr est le canal prévu
+     
     console.error('seed échoué', err);
     process.exit(1);
   } finally {
@@ -295,7 +295,7 @@ const isEntrypoint =
 
 if (isEntrypoint) {
   main().catch((err) => {
-    // eslint-disable-next-line no-console -- CLI : stderr est le canal prévu
+     
     console.error('seed échoué', err);
     process.exit(1);
   });

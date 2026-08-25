@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable no-console */
 /// Contrat PostgreSQL MVP — vérifications réelles (Node.js, cross-platform).
 ///
 /// PRÉREQUIS :
