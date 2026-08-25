@@ -76,7 +76,7 @@ async function main(): Promise<void> {
     await client.query('BEGIN');
     await client.query(`SET search_path TO "${schemaName}"`);
     const sp = await client.query("SELECT current_setting('search_path') AS search_path");
-    // eslint-disable-next-line no-console -- CLI : stdout est le canal prévu
+     
     console.log('search_path=' + sp.rows[0].search_path);
     try {
       for (const entry of journal.entries) {
@@ -105,7 +105,7 @@ async function main(): Promise<void> {
       await client.query('ROLLBACK');
       throw err;
     } finally {
-      // eslint-disable-next-line no-console -- CLI : stdout est le canal prévu
+       
       console.log('migrations OK');
     }
   } finally {

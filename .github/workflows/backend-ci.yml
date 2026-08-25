@@ -41,7 +41,7 @@ jobs:
       - name: Generate JWT keys for tests
         working-directory: backend
         run: |
-          if (!(Test-Path keys)) { New-Item -ItemType Directory -Path keys | Out-Null }
+          mkdir -p keys
           openssl genrsa -out keys/jwt-private.pem 2048
           openssl rsa -in keys/jwt-private.pem -pubout -out keys/jwt-public.pem
 
@@ -78,7 +78,7 @@ jobs:
         env:
           DATABASE_URL: postgres://medanki:medanki@127.0.0.1:5432/medanki_dz
           PG_SCHEMA: public
-        run: bash ../tools/scripts/check_database_contract.sh
+        run: npx tsx ./scripts/check_database_contract.js
 
       - name: Typecheck
         working-directory: backend
@@ -116,7 +116,7 @@ jobs:
       - name: Install Python deps
         run: |
           python -m pip install --upgrade pip
-          if (Test-Path tools/requirements.txt) { pip install -r tools/requirements.txt }
+          if [ -f tools/requirements.txt ]; then pip install -r tools/requirements.txt; fi
 
       - name: Check migrations apply
         run: python3 tools/scripts/check_migrations_apply.py
@@ -126,6 +126,3 @@ jobs:
 
       - name: Bash syntax guard
         run: bash -n tools/scripts/check_database_contract.sh
-
-  volumes:
-    postgres-data:

@@ -50,4 +50,14 @@ export default [
       ],
     },
   },
+  {
+    // migrate.ts / seed.ts sont des points d'entrée CLI (lancés via
+    // `tsx`) : console est leur interface utilisateur, comme les
+    // scripts utilitaires de scripts/**. On désactive no-console ici
+    // plutôt que d'émailler le code de sentinelles eslint-disable.
+    files: ['src/db/migrate.ts', 'src/db/seed.ts'],
+    rules: {
+      'no-console': 'off',
+    },
+  },
 ];
