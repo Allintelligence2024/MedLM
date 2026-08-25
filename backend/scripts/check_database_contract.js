@@ -217,7 +217,7 @@ async function main() {
     }
   } finally {
     client.release();
-    await pool.end();
+    pool.end().catch(() => {});
   }
 }
 
