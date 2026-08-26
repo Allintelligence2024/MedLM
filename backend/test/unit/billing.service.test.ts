@@ -56,9 +56,34 @@ class FakeDb {
           then(res: any) {
             return done.then(res);
           },
+          onConflictDoNothing() {
+            return {
+              then(res: any) {
+                return Promise.resolve([]).then(res);
+              },
+              returning() {
+                return {
+                  then(res: any) {
+                    return Promise.resolve([]).then(res);
+                  },
+                };
+              },
+            };
+          },
           onConflictDoUpdate() {
             self.entitlements.push(v);
-            return this;
+            return {
+              then(res: any) {
+                return Promise.resolve([]).then(res);
+              },
+              returning() {
+                return {
+                  then(res: any) {
+                    return Promise.resolve([]).then(res);
+                  },
+                };
+              },
+            };
           },
         };
       },
@@ -134,6 +159,8 @@ describe('BillingService', () => {
       eventType: 'checkout.paid',
       payload: {
         id: 'co_1',
+        amount: 240000,
+        currency: 'DZD',
         metadata: { user_id: 'u1', plan: 'yearly', durationDays: '365' },
       },
     });
@@ -141,13 +168,23 @@ describe('BillingService', () => {
   });
 
   it('déduplique un webhook déjà vu', async () => {
-    db.webhookEvents.push({ eventId: 'evt_1' });
-    const r = await service.handleChargilyWebhook({
-      eventId: 'evt_1',
+    const validPayload = {
+      id: 'co_dup',
+      amount: 240000,
+      currency: 'DZD',
+      metadata: { user_id: 'u1', plan: 'yearly' },
+    };
+    await service.handleChargilyWebhook({
+      eventId: 'evt_dup',
       eventType: 'checkout.paid',
-      payload: {},
+      payload: validPayload,
     });
-    expect(r.reason).toBe('already_seen');
+    const r = await service.handleChargilyWebhook({
+      eventId: 'evt_dup',
+      eventType: 'checkout.paid',
+      payload: validPayload,
+    });
+    expect(r.reason).toBe('already_processed');
   });
 });
 

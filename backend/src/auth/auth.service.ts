@@ -60,7 +60,8 @@ export class AuthService {
         ...(args.study_year !== undefined && { studyYear: args.study_year }),
       })
       .returning();
-    return this.issueTokens(user!.id, args.email, args.platform, args.appVersion);
+    const role = await resolveRole(this.db, user!.id, args.email, this.config);
+    return this.issueTokens(user!.id, args.email, args.platform, role, true, args.appVersion);
   }
 
   /// POST /auth/login
@@ -71,18 +72,33 @@ export class AuthService {
       .where(eq(users.email, args.email))
       .then((rows) => rows[0]);
     if (!user) throw new UnauthorizedException('utilisateur inconnu');
-    return this.issueTokens(user.id, user.email, args.platform, args.appVersion);
+    const role = await resolveRole(this.db, user.id, user.email, this.config);
+    return this.issueTokens(user.id, user.email, args.platform, role, true);
   }
 
   /// Émet des tokens d'accès pour un userId connu (magic link / Google).
   async issueAccessFor(userId: string, platform: string): Promise<TokenResponse> {
+    const user = await this.db
+      .select({ email: users.email, mfaEnabled: users.mfaEnabled })
+      .from(users)
+      .where(eq(users.id, userId))
+      .then((rows) => rows[0]);
+    if (!user) throw new UnauthorizedException('utilisateur inconnu');
+    const role = await resolveRole(this.db, userId, user.email, this.config);
+    const mfaVerified = role === 'admin' && !user.mfaEnabled ? false : true;
+    return this.issueTokens(userId, user.email, platform, role, mfaVerified);
+  }
+
+  /// Émet des tokens après validation MFA (admin).
+  async issueMfaTokens(userId: string, platform: string): Promise<TokenResponse> {
     const user = await this.db
       .select({ email: users.email })
       .from(users)
       .where(eq(users.id, userId))
       .then((rows) => rows[0]);
     if (!user) throw new UnauthorizedException('utilisateur inconnu');
-    return this.issueTokens(userId, user.email, platform);
+    const role = await resolveRole(this.db, userId, user.email, this.config);
+    return this.issueTokens(userId, user.email, platform, role, true);
   }
 
   /// POST /auth/refresh — rotation du refresh token.
@@ -122,13 +138,16 @@ export class AuthService {
       .update(refreshTokens)
       .set({ revokedAt: new Date() })
       .where(eq(refreshTokens.tokenHash, tokenHash));
-    return this.issueTokens(row.user, user.email, args.platform);
+    const role = await resolveRole(this.db, row.user, user.email, this.config);
+    return this.issueTokens(row.user, user.email, args.platform, role, true);
   }
 
   private async issueTokens(
     userId: string,
-    email: string,
+    _email: string,
     platform: string,
+    role: string,
+    mfaVerified: boolean,
     appVersion?: string,
   ): Promise<TokenResponse> {
     const [device] = await this.db
@@ -138,10 +157,9 @@ export class AuthService {
 
     const accessTtl = this.config.get<number>('JWT_ACCESS_TTL_SECONDS') ?? 900;
     const refreshTtl = this.config.get<number>('JWT_REFRESH_TTL_SECONDS') ?? 2_592_000;
-    const role = await resolveRole(this.db, userId, email, this.config);
 
     const accessToken = await this.jwt.signAsync(
-      { sub: userId, kind: 'access', role },
+      { sub: userId, kind: 'access', role, mfa_verified: mfaVerified },
       { expiresIn: accessTtl },
     );
 

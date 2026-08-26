@@ -5,7 +5,7 @@ import { Inject, Injectable, Logger, BadRequestException } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config';
 import { eq, and } from 'drizzle-orm';
 import { DRIZZLE, Database } from '../db/database.module';
-import { entitlements, users, webhookEvents } from '../db/schema';
+import { entitlements, users, paymentOrders } from '../db/schema';
 import { PaymentResult } from './payment-provider';
 import { ChargilyPayProvider } from './chargily.provider';
 import { PromoCodeProvider } from './promo-code.provider';
@@ -78,50 +78,69 @@ export class BillingService {
     payload: unknown;
   }): Promise<{ processed: boolean; reason?: string }> {
     return this.db.transaction(async (tx) => {
-      // 1. Idempotence : on a déjà vu cet eventId ?
-      const seen = await tx
-        .select()
-        .from(webhookEvents)
-        .where(eq(webhookEvents.eventId, args.eventId))
-        .then((rows) => rows[0]);
-      if (seen) {
-        return { processed: true, reason: 'already_seen' };
+      const payload = args.payload as Record<string, any>;
+
+      // 0. Validation P0 : vérifier les champs critiques du payload.
+      const providerRef = payload?.id;
+      const amountCents = payload?.amount;
+      const currency = payload?.currency;
+      const plan = payload?.metadata?.plan;
+      if (!providerRef || typeof providerRef !== 'string') {
+        return { processed: false, reason: 'missing_provider_ref' };
       }
-      // 2. On log l'event AVANT traitement (audit, replay).
-      await tx.insert(webhookEvents).values({
-        eventId: args.eventId,
+      if (typeof amountCents !== 'number' || amountCents <= 0) {
+        return { processed: false, reason: 'invalid_amount' };
+      }
+      if (!currency || !['DZD', 'USD', 'EUR'].includes(currency)) {
+        return { processed: false, reason: 'invalid_currency' };
+      }
+      if (!plan || !['monthly', 'semester', 'yearly', 'group'].includes(plan)) {
+        return { processed: false, reason: 'invalid_plan' };
+      }
+
+      // 1. Créer la commande de paiement interne (idempotent via provider_ref unique).
+      const [order] = await tx.insert(paymentOrders).values({
+        userId: payload.metadata?.user_id ?? 'unknown',
         provider: 'chargily',
-        eventType: args.eventType,
-        payload: args.payload as object,
-        processed: false,
-      });
-      // 3. Délègue au provider pour l'interprétation.
+        providerRef,
+        amountCents,
+        currency,
+        plan,
+        rawPayload: payload,
+        status: 'pending',
+      }).onConflictDoNothing({
+        target: [paymentOrders.providerRef],
+      }).returning();
+
+      if (!order) {
+        return { processed: true, reason: 'already_processed' };
+      }
+
+      // 2. Délègue au provider pour l'interprétation.
       const result: PaymentResult = await this.chargily.handleWebhook({
         eventId: args.eventId,
         eventType: args.eventType,
         payload: args.payload,
         signature: null, // déjà vérifiée par le contrôleur
       });
-      // 4. Si confirmé, on crédite l'utilisateur.
+
+      // 3. Si confirmé, on crédite l'utilisateur.
       if (result.confirmed) {
-        const meta = (args.payload as { metadata?: Record<string, string> }).metadata ?? {};
-        const userId = meta['user_id'];
-        const plan = meta['plan'] ?? 'yearly';
-        const durationDays = Number(meta['durationDays'] ?? 365);
+        const durationDays = Number(payload.metadata?.durationDays ?? 365);
+        const userId = payload.metadata?.user_id;
         if (userId) {
           await this.creditEntitlement(tx as unknown as Database, {
             userId,
             plan,
             durationDays,
-            providerRef: result.providerRef,
+            providerRef,
           });
         }
+        await tx.update(paymentOrders).set({ status: 'completed', processedAt: new Date() }).where(eq(paymentOrders.id, order.id));
+      } else {
+        await tx.update(paymentOrders).set({ status: 'failed', processedAt: new Date() }).where(eq(paymentOrders.id, order.id));
       }
-      // 5. Marque l'event comme traité.
-      await tx
-        .update(webhookEvents)
-        .set({ processed: true, processedAt: new Date() })
-        .where(eq(webhookEvents.eventId, args.eventId));
+
       return { processed: true };
     });
   }

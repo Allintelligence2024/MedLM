@@ -31,6 +31,7 @@ export interface JwtPayload {
   did?: string; // deviceId
   kind: 'access' | 'refresh' | 'entitlement';
   role?: 'student' | 'author' | 'medical_reviewer' | 'editor' | 'admin';
+  mfa_verified?: boolean;
   iat?: number;
   exp?: number;
 }
@@ -109,6 +110,9 @@ export class JwtGuard implements CanActivate {
     }
     if (payload.kind !== 'access' && payload.kind !== 'entitlement') {
       throw new UnauthorizedException(`kind de token non supporté ici : ${payload.kind}`);
+    }
+    if (payload.role === 'admin' && !payload.mfa_verified) {
+      throw new UnauthorizedException('MFA requis pour les administrateurs');
     }
     req.user = payload;
     return true;

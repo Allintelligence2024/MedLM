@@ -13,6 +13,7 @@ import {
   boolean,
   index,
   uniqueIndex,
+  integer,
 } from 'drizzle-orm/pg-core';
 import { users } from './users';
 
@@ -57,5 +58,27 @@ export const auditLog = pgTable(
   (t) => ({
     actorIdx: index('audit_log_actor_idx').on(t.actorUserId, t.occurredAt),
     targetIdx: index('audit_log_target_idx').on(t.targetType, t.targetId),
+  }),
+);
+
+export const paymentOrders = pgTable(
+  'payment_orders',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    userId: uuid('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+    provider: text('provider').notNull().default('chargily'),
+    providerRef: text('provider_ref').notNull(),
+    amountCents: integer('amount_cents').notNull(),
+    currency: text('currency').notNull().default('DZD'),
+    plan: text('plan').notNull(),
+    status: text('status').notNull().default('pending'),
+    rawPayload: jsonb('raw_payload').notNull().default({}),
+    processedAt: timestamp('processed_at', { withTimezone: true }),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => ({
+    providerRefIdx: uniqueIndex('payment_orders_provider_ref_idx').on(t.providerRef),
+    userIdx: index('payment_orders_user_idx').on(t.userId),
+    statusIdx: index('payment_orders_status_idx').on(t.status),
   }),
 );

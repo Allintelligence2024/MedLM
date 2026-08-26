@@ -2,13 +2,20 @@ import {
   Controller,
   Get,
   Headers,
+  HttpCode,
+  HttpStatus,
+  Post,
   Query,
-  Res,
+  Body,
 } from '@nestjs/common';
-import type { Response } from 'express';
 import { z } from 'zod';
 import { GoogleOAuthService } from './google-oauth.service';
 import { Public } from './public.decorator';
+
+const GoogleTokenBody = z.object({
+  code: z.string().min(1),
+  state: z.string().min(1),
+});
 
 const CallbackQuery = z.object({
   code: z.string().min(1),
@@ -20,31 +27,34 @@ const CallbackQuery = z.object({
 export class GoogleOAuthController {
   constructor(private readonly service: GoogleOAuthService) {}
 
-  /// GET /v1/auth/google — renvoie l'URL d'autorisation.
-  /// Le client (mobile) ouvre cette URL dans un WebView, capture le
-  /// callback, et envoie le `code` à /v1/auth/google/callback.
+  /// GET /v1/auth/google — renvoie l'URL d'autorisation et un state
+  /// à usage unique généré côté serveur.
   @Get()
-  authorize(@Headers('X-State') state: string) {
-    return { url: this.service.authorizationUrl({ state: state ?? 'mobile' }) };
+  async authorize() {
+    const { url, state } = await this.service.authorizationUrl();
+    return { url, state };
   }
 
-  /// GET /v1/auth/google/callback?code=…&state=…
-  /// Pour les apps web (redirect depuis Google). Pour le mobile, on
-  /// utilise plutôt POST /v1/auth/google/token avec le `code` reçu.
+  /// GET /v1/auth/google/callback — utilisé par les apps web (redirect
+  /// depuis Google). Retourne les tokens en JSON (jamais en query string).
   @Get('callback')
   async callback(
-    @Query() query: unknown,
-    @Res() res: Response,
+    @Query() query: Record<string, any>,
+    @Headers('X-State') clientState: string,
   ) {
-    const { code, state } = CallbackQuery.parse(query);
-    const tokens = await this.service.handleCallback({
-      code,
-      state,
-      platform: 'web',
-    });
-    // Redirige vers le front avec les tokens en query (à améliorer :
-    // passer par un fragment ou un POST).
-    const dest = `/auth/success?access_token=${encodeURIComponent(tokens.access_token)}`;
-    res.redirect(dest);
+    const { code } = CallbackQuery.parse(query);
+    const serverState = clientState ?? query['state'];
+    const tokens = await this.service.handleCallback({ code, state: String(serverState), platform: 'web' });
+    return tokens;
+  }
+
+  /// POST /v1/auth/google/token — utilisé par le mobile après extraction
+  /// du code depuis le WebView. Pas de tokens dans l'URL.
+  @Post('token')
+  @HttpCode(HttpStatus.OK)
+  async token(@Body() body: unknown) {
+    const { code, state } = GoogleTokenBody.parse(body);
+    const tokens = await this.service.handleCallback({ code, state, platform: 'mobile' });
+    return tokens;
   }
 }

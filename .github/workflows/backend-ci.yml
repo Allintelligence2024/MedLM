@@ -2,7 +2,7 @@ name: backend-ci
 
 on:
   push:
-    branches: ['arena/01a02efa-medlm']
+    branches: ['**']
   pull_request:
     branches: ['main']
     paths: ['backend/**', 'tools/scripts/**', '.github/workflows/backend-ci.yml']

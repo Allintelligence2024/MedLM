@@ -134,6 +134,27 @@
       "when": 1766600000000,
       "tag": "0019_auth_challenges",
       "breakpoints": false
+    },
+    {
+      "idx": 19,
+      "version": "7",
+      "when": 1766601000000,
+      "tag": "0020_mfa",
+      "breakpoints": false
+    },
+    {
+      "idx": 20,
+      "version": "7",
+      "when": 1766602000000,
+      "tag": "0021_oauth_states",
+      "breakpoints": false
+    },
+    {
+      "idx": 21,
+      "version": "7",
+      "when": 1766603000000,
+      "tag": "0022_payment_orders",
+      "breakpoints": false
     }
   ]
 }

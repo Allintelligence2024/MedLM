@@ -11,6 +11,7 @@ import {
   timestamp,
   index,
   uniqueIndex,
+  boolean,
 } from 'drizzle-orm/pg-core';
 
 /// Utilisateurs — source de vérité (doc v2 §7).
@@ -27,6 +28,10 @@ export const users = pgTable(
     /// Rôle RBAC — student par défaut. Modifiable depuis le CMS (Phase 11)
     /// ou par override d'email via `ADMIN_EMAILS` (.env).
     rbacRole: text('rbac_role').notNull().default('student'),
+    /// MFA admin (TOTP + backup codes).
+    mfaEnabled: boolean('mfa_enabled').notNull().default(false),
+    mfaSecret: text('mfa_secret'),
+    mfaBackupCodes: text('mfa_backup_codes').array(),
     createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
     lastSeenAt: timestamp('last_seen_at', { withTimezone: true }),
   },
