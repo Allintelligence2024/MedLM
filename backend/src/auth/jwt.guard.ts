@@ -23,6 +23,7 @@ import { Reflector } from '@nestjs/core';
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import { IS_PUBLIC_KEY } from './public.decorator';
+import { ALLOW_UNVERIFIED_MFA_KEY } from './allow-unverified-mfa.decorator';
 import { createPublicKey } from 'node:crypto';
 import { resolveVerificationKey } from './jwt-config';
 
@@ -112,9 +113,11 @@ export class JwtGuard implements CanActivate {
       throw new UnauthorizedException(`kind de token non supporté ici : ${payload.kind}`);
     }
 
-    const path = req.url?.split('?')[0] ?? '';
-    const isMfaRoute = path.startsWith('/v1/auth/mfa');
-    if (!isMfaRoute && payload.role === 'admin' && !payload.mfa_verified) {
+    const allowUnverifiedMfa = this.reflector.getAllAndOverride<boolean>(ALLOW_UNVERIFIED_MFA_KEY, [
+      context.getHandler(),
+      context.getClass(),
+    ]);
+    if (!allowUnverifiedMfa && payload.role === 'admin' && !payload.mfa_verified) {
       throw new UnauthorizedException('MFA requis pour les administrateurs');
     }
 

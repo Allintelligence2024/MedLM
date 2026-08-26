@@ -7,8 +7,9 @@ import {
 import { z } from 'zod';
 import { MfaService } from './mfa.service';
 import { JwtGuard } from './jwt.guard';
-import { CurrentUser } from './jwt.decorators';
+import { CurrentUserId } from './jwt.decorators';
 import { BadRequestException } from '@nestjs/common';
+import { AllowUnverifiedMfa } from './allow-unverified-mfa.decorator';
 
 const SetupResponse = z.object({
   secret: z.string(),
@@ -21,7 +22,7 @@ const EnableBody = z.object({
 });
 
 const VerifyBody = z.object({
-  code: z.string().min(6).max(10),
+  code: z.string().min(6).max(20),
 });
 
 @Controller('auth/mfa')
@@ -30,20 +31,23 @@ export class MfaController {
   constructor(private readonly service: MfaService) {}
 
   @Post('setup')
-  async setup(@CurrentUser() userId: string) {
+  @AllowUnverifiedMfa()
+  async setup(@CurrentUserId() userId: string) {
     const result = await this.service.setup(userId);
     return SetupResponse.parse(result);
   }
 
   @Post('enable')
-  async enable(@CurrentUser() userId: string, @Body() body: unknown) {
+  @AllowUnverifiedMfa()
+  async enable(@CurrentUserId() userId: string, @Body() body: unknown) {
     const { code } = EnableBody.parse(body);
     await this.service.enable(userId, code);
     return { enabled: true };
   }
 
   @Post('verify')
-  async verify(@CurrentUser() userId: string, @Body() body: unknown) {
+  @AllowUnverifiedMfa()
+  async verify(@CurrentUserId() userId: string, @Body() body: unknown) {
     const { code } = VerifyBody.parse(body);
     const valid = await this.service.verify(userId, code);
     if (!valid) {
@@ -54,14 +58,14 @@ export class MfaController {
   }
 
   @Post('disable')
-  async disable(@CurrentUser() userId: string, @Body() body: unknown) {
+  async disable(@CurrentUserId() userId: string, @Body() body: unknown) {
     const { code } = EnableBody.parse(body);
     await this.service.disable(userId, code);
     return { disabled: true };
   }
 
   @Post('regenerate-backup')
-  async regenerateBackup(@CurrentUser() userId: string, @Body() body: unknown) {
+  async regenerateBackup(@CurrentUserId() userId: string, @Body() body: unknown) {
     const { code } = EnableBody.parse(body);
     const backupCodes = await this.service.regenerateBackupCodes(userId, code);
     return { backupCodes };
