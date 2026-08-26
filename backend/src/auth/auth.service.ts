@@ -177,6 +177,7 @@ export class AuthService {
       refresh_token: refreshToken,
       user_id: userId,
       expires_in: accessTtl,
+      mfa_verified: mfaVerified,
     };
   }
 }

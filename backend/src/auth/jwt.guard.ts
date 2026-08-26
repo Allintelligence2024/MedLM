@@ -111,9 +111,13 @@ export class JwtGuard implements CanActivate {
     if (payload.kind !== 'access' && payload.kind !== 'entitlement') {
       throw new UnauthorizedException(`kind de token non supporté ici : ${payload.kind}`);
     }
-    if (payload.role === 'admin' && !payload.mfa_verified) {
+
+    const path = req.url?.split('?')[0] ?? '';
+    const isMfaRoute = path.startsWith('/v1/auth/mfa');
+    if (!isMfaRoute && payload.role === 'admin' && !payload.mfa_verified) {
       throw new UnauthorizedException('MFA requis pour les administrateurs');
     }
+
     req.user = payload;
     return true;
   }

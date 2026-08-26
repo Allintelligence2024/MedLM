@@ -6,7 +6,6 @@ import {
 } from '@nestjs/common';
 import { z } from 'zod';
 import { MfaService } from './mfa.service';
-import { Public } from './public.decorator';
 import { JwtGuard } from './jwt.guard';
 import { CurrentUser } from './jwt.decorators';
 import { BadRequestException } from '@nestjs/common';
@@ -31,14 +30,12 @@ export class MfaController {
   constructor(private readonly service: MfaService) {}
 
   @Post('setup')
-  @Public()
   async setup(@CurrentUser() userId: string) {
     const result = await this.service.setup(userId);
     return SetupResponse.parse(result);
   }
 
   @Post('enable')
-  @Public()
   async enable(@CurrentUser() userId: string, @Body() body: unknown) {
     const { code } = EnableBody.parse(body);
     await this.service.enable(userId, code);
@@ -46,7 +43,6 @@ export class MfaController {
   }
 
   @Post('verify')
-  @Public()
   async verify(@CurrentUser() userId: string, @Body() body: unknown) {
     const { code } = VerifyBody.parse(body);
     const valid = await this.service.verify(userId, code);
@@ -58,7 +54,6 @@ export class MfaController {
   }
 
   @Post('disable')
-  @Public()
   async disable(@CurrentUser() userId: string, @Body() body: unknown) {
     const { code } = EnableBody.parse(body);
     await this.service.disable(userId, code);
@@ -66,7 +61,6 @@ export class MfaController {
   }
 
   @Post('regenerate-backup')
-  @Public()
   async regenerateBackup(@CurrentUser() userId: string, @Body() body: unknown) {
     const { code } = EnableBody.parse(body);
     const backupCodes = await this.service.regenerateBackupCodes(userId, code);

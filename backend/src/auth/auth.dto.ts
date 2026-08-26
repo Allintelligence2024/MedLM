@@ -18,4 +18,5 @@ export interface TokenResponse {
   refresh_token: string;
   user_id: string;
   expires_in: number;
+  mfa_verified?: boolean;
 }

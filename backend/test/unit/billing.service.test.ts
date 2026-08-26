@@ -186,6 +186,67 @@ describe('BillingService', () => {
     });
     expect(r.reason).toBe('already_processed');
   });
+
+  it('déduplique un webhook concurrent (même provider_ref)', async () => {
+    const payload = {
+      id: 'co_concurrent',
+      amount: 240000,
+      currency: 'DZD',
+      metadata: { user_id: 'u1', plan: 'yearly' },
+    };
+    const r1 = await service.handleChargilyWebhook({
+      eventId: 'evt_concurrent_1',
+      eventType: 'checkout.paid',
+      payload,
+    });
+    const r2 = await service.handleChargilyWebhook({
+      eventId: 'evt_concurrent_2',
+      eventType: 'checkout.paid',
+      payload,
+    });
+    expect(r1.processed).toBe(true);
+    expect(r2.reason).toBe('already_processed');
+  });
+
+  it('rejette un payload sans provider_ref', async () => {
+    const r = await service.handleChargilyWebhook({
+      eventId: 'evt_bad',
+      eventType: 'checkout.paid',
+      payload: { amount: 1000, currency: 'DZD', metadata: { plan: 'yearly' } },
+    });
+    expect(r.processed).toBe(false);
+    expect(r.reason).toBe('missing_provider_ref');
+  });
+
+  it('rejette un payload sans montant valide', async () => {
+    const r = await service.handleChargilyWebhook({
+      eventId: 'evt_bad2',
+      eventType: 'checkout.paid',
+      payload: { id: 'co_x', currency: 'DZD', metadata: { plan: 'yearly' } },
+    });
+    expect(r.processed).toBe(false);
+    expect(r.reason).toBe('invalid_amount');
+  });
+
+  it('rejette un payload sans devise valide', async () => {
+    const r = await service.handleChargilyWebhook({
+      eventId: 'evt_bad3',
+      eventType: 'checkout.paid',
+      payload: { id: 'co_x', amount: 1000, metadata: { plan: 'yearly' } },
+    });
+    expect(r.processed).toBe(false);
+    expect(r.reason).toBe('invalid_currency');
+  });
+
+  it('rejette un payload sans plan valide', async () => {
+    const r = await service.handleChargilyWebhook({
+      eventId: 'evt_bad4',
+      eventType: 'checkout.paid',
+      payload: { id: 'co_x', amount: 1000, currency: 'DZD', metadata: { plan: 'unknown' } },
+    });
+    expect(r.processed).toBe(false);
+    expect(r.reason).toBe('invalid_plan');
+  });
 });
 
 describe('PromoCodeProvider', () => {

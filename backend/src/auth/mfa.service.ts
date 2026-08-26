@@ -73,20 +73,17 @@ export function generateMfaSecret(): string {
 export function computeTOTP(secretBase32: string, nowMs = Date.now()): string {
   const secret = base32Decode(secretBase32);
   const epoch = Math.floor(nowMs / TOTP_PERIOD);
-  for (let i = -1; i <= 1; i++) {
-    const counterBuf = Buffer.alloc(8);
-    counterBuf.writeBigUInt64BE(BigInt(epoch + i));
-    const digest = createHash('sha1').update(secret).update(counterBuf).digest();
-    const hmac = Buffer.from(digest.buffer as ArrayBuffer, digest.byteOffset, digest.byteLength);
-    const offset = hmac[hmac.length - 1]! & 0xf;
-    const a = hmac[offset]!;
-    const b = hmac[offset + 1]!;
-    const c = hmac[offset + 2]!;
-    const d = hmac[offset + 3]!;
-    const code = ((a & 0x7f) << 24) | ((b & 0xff) << 16) | ((c & 0xff) << 8) | d;
-    return (code % 1000000).toString().padStart(TOTP_DIGITS, '0');
-  }
-  return '000000';
+  const counterBuf = Buffer.alloc(8);
+  counterBuf.writeBigUInt64BE(BigInt(epoch));
+  const digest = createHash('sha1').update(secret).update(counterBuf).digest();
+  const hmac = Buffer.from(digest.buffer as ArrayBuffer, digest.byteOffset, digest.byteLength);
+  const offset = hmac[hmac.length - 1]! & 0xf;
+  const a = hmac[offset]!;
+  const b = hmac[offset + 1]!;
+  const c = hmac[offset + 2]!;
+  const d = hmac[offset + 3]!;
+  const code = ((a & 0x7f) << 24) | ((b & 0xff) << 16) | ((c & 0xff) << 8) | d;
+  return (code % 1000000).toString().padStart(TOTP_DIGITS, '0');
 }
 
 export function verifyTOTP(secretBase32: string, token: string, nowMs = Date.now()): boolean {

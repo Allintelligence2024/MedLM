@@ -52,12 +52,12 @@ if [[ $READY -ne 1 ]]; then
 fi
 
 EMAIL="flow$RANDOM@univ-oran.dz"
-SIGNUP=$(curl -s -X POST -H 'Content-Type: application/json' -H 'X-Platform: mobile' \
-  -d "{\"email\":\"$EMAIL\"}" "$B/v1/auth/signup" --max-time 10)
-AT=$(echo "$SIGNUP" | python3 -c "import sys,json;print(json.load(sys.stdin).get('access_token',''))" 2>/dev/null)
-RT=$(echo "$SIGNUP" | python3 -c "import sys,json;print(json.load(sys.stdin).get('refresh_token',''))" 2>/dev/null)
-UID_=$(echo "$SIGNUP" | python3 -c "import sys,json;print(json.load(sys.stdin).get('user_id',''))" 2>/dev/null)
-[[ -n "$AT" ]] && ok "signup → jetons émis" || { ko "signup: $SIGNUP"; exit 1; }
+MAGIC=$(curl -s -X POST -H 'Content-Type: application/json' -H 'X-Platform: mobile' \
+  -d "{\"email\":\"$EMAIL\"}" "$B/v1/auth/magic-link" --max-time 10)
+AT=$(echo "$MAGIC" | python3 -c "import sys,json;print(json.load(sys.stdin).get('access_token',''))" 2>/dev/null)
+RT=$(echo "$MAGIC" | python3 -c "import sys,json;print(json.load(sys.stdin).get('refresh_token',''))" 2>/dev/null)
+UID_=$(echo "$MAGIC" | python3 -c "import sys,json;print(json.load(sys.stdin).get('user_id',''))" 2>/dev/null)
+[[ -n "$AT" ]] && ok "magic-link → jetons émis" || { ko "magic-link: $MAGIC"; exit 1; }
 
 # L'algorithme doit être RS256 (vérification hors-ligne, v2 §8.1).
 ALG=$(python3 -c "
