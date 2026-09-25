@@ -70,11 +70,12 @@ jobs:
       - name: Créer les plateformes natives absentes
         working-directory: mobile
         run: flutter create --overwrite --platforms=android .
-      - name: Dépendances et code généré
+      - name: Dépendances Flutter
         working-directory: mobile
-        run: |
-          flutter pub get
-          dart run build_runner build --delete-conflicting-outputs
+        run: flutter pub get
+      - name: Code généré
+        working-directory: mobile
+        run: dart run build_runner build --delete-conflicting-outputs
       - name: Analyse statique
         working-directory: mobile
         run: flutter analyze
