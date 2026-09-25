@@ -34,7 +34,7 @@ count() {
 }
 
 # ── 1. Schéma minimal ───────────────────────────────────────────────────────
-TABLES_COUNT=$(count "SELECT count(*) FROM information_schema.tables WHERE table_schema = current_setting('sschema') AND table_type = 'BASE TABLE'")
+TABLES_COUNT=$(count "SELECT count(*) FROM information_schema.tables WHERE table_schema = :'sschema' AND table_type = 'BASE TABLE'")
 if [[ "$TABLES_COUNT" -ge 37 ]]; then
   ok "au moins 37 tables présentes ($TABLES_COUNT)"
 else
@@ -92,7 +92,7 @@ else
 fi
 
 # ── 7. Clés étrangères dans pg_constraint ───────────────────────────────────
-FK_COUNT=$(count "SELECT count(*) FROM pg_constraint WHERE contype = 'f' AND connamespace = (SELECT oid FROM pg_namespace WHERE nspname = current_setting('sschema'))")
+FK_COUNT=$(count "SELECT count(*) FROM pg_constraint WHERE contype = 'f' AND connamespace = (SELECT oid FROM pg_namespace WHERE nspname = :'sschema')")
 if [[ "$FK_COUNT" -ge 20 ]]; then
   ok "clés étrangères présentes : $FK_COUNT"
 else
@@ -100,7 +100,7 @@ else
 fi
 
 # ── 8. Contraintes CHECK dans pg_constraint ────────────────────────────────
-CK_COUNT=$(count "SELECT count(*) FROM pg_constraint WHERE contype = 'c' AND connamespace = (SELECT oid FROM pg_namespace WHERE nspname = current_setting('sschema'))")
+CK_COUNT=$(count "SELECT count(*) FROM pg_constraint WHERE contype = 'c' AND connamespace = (SELECT oid FROM pg_namespace WHERE nspname = :'sschema')")
 if [[ "$CK_COUNT" -ge 10 ]]; then
   ok "contraintes CHECK présentes : $CK_COUNT"
 else
