@@ -146,7 +146,7 @@ class _AntiCheatScopeState extends State<AntiCheatScope>
     return Shortcuts(
         shortcuts: const <ShortcutActivator, Intent>{
           SingleActivator(LogicalKeyboardKey.keyC, control: true):
-              CopySelectionTextIntent(),
+              CopySelectionTextIntent.copy,
         },
         child: Actions(
           actions: <Type, Action<Intent>>{
