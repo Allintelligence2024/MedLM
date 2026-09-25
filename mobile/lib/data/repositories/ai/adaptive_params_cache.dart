@@ -20,6 +20,8 @@ library;
 
 import 'dart:convert';
 
+import 'package:drift/drift.dart';
+
 import '../../../core/srs/fsrs_adaptive.dart';
 import '../../../core/srs/fsrs_parameters.dart';
 import '../../local/app_database.dart';

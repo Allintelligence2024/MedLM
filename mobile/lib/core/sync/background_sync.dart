@@ -65,7 +65,6 @@ class BackgroundSync {
       kBackgroundSyncTaskName,
       frequency: frequency,
       constraints: constraints,
-      existingWorkPolicy: ExistingPeriodicWorkPolicy.replace,
     );
   }
 

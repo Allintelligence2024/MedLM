@@ -6,8 +6,6 @@
 // dans SQLite via Drift.
 library;
 
-import 'package:drift/drift.dart';
-
 import '../../core/gamification/gamification_constants.dart';
 import '../../core/gamification/streak_calculator.dart';
 import '../../core/gamification/xp_calculator.dart';
