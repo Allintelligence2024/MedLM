@@ -141,21 +141,12 @@ class _AntiCheatScopeState extends State<AntiCheatScope>
 
   @override
   Widget build(BuildContext context) {
-    // Wrap avec un Listener pour détecter les copies (Ctrl+C /
-    // long-press sur mobile).
-    return Listener(
-      onPointerSignal: (signal) {
-        // Souris desktop uniquement — sur mobile c'est no-op.
-        if (signal is PointerScrollEvent) {
-          // Pas un événement triche.
-        }
-      },
-      child: Shortcuts(
+    // Raccourci clavier desktop : le collage est traité par le widget
+    // d'édition lui-même, tandis que la copie est journalisée ici.
+    return Shortcuts(
         shortcuts: const <ShortcutActivator, Intent>{
           SingleActivator(LogicalKeyboardKey.keyC, control: true):
-              CopySelectionTextIntent.selectionCopy(),
-          SingleActivator(LogicalKeyboardKey.keyV, control: true):
-              CopySelectionTextIntent.selectionCopy(),
+              CopySelectionTextIntent(),
         },
         child: Actions(
           actions: <Type, Action<Intent>>{
@@ -168,7 +159,6 @@ class _AntiCheatScopeState extends State<AntiCheatScope>
           },
           child: widget.child,
         ),
-      ),
-    );
+      );
   }
 }

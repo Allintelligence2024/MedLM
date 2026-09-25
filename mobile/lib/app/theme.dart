@@ -27,7 +27,7 @@ ThemeData _base(Brightness brightness) {
       elevation: 0,
       scrolledUnderElevation: 1,
     ),
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       elevation: 0,
       margin: EdgeInsets.zero,
       shape: RoundedRectangleBorder(

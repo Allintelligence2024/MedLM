@@ -21,7 +21,6 @@ import 'package:go_router/go_router.dart';
 
 import '../core/di/providers.dart';
 import '../core/session/session_controller.dart';
-import '../core/settings/app_settings.dart';
 import '../ui/auth/login_screen.dart';
 import '../ui/auth/signup_screen.dart';
 import '../ui/auth/welcome_screen.dart';
