@@ -128,6 +128,20 @@ else
 fi
 
 # ── 11. Append-only review_logs ────────────────────────────────────────────
+# Le seed minimal ne crée pas forcément de revue. On ajoute une ligne de
+# sonde déterministe afin que le contrat teste réellement le trigger, au
+# lieu de transformer l'absence de données en faux échec.
+psql "${psql_opts[@]}" -c "
+  INSERT INTO review_logs
+    (id, user_id, card_id, device_id, rating, duration_ms, card_type,
+     exam_mode, reviewed_at, received_at)
+  SELECT 'ff000000-0000-4000-8000-000000000098',
+         (SELECT id FROM users LIMIT 1),
+         (SELECT id FROM cards LIMIT 1),
+         'contract-probe', 3, 0, 'basic', false, 1, now()
+  WHERE NOT EXISTS (SELECT 1 FROM review_logs)
+  ON CONFLICT (id) DO NOTHING
+" >/dev/null 2>&1 || true
 RLID=$(psql "${psql_opts[@]}" -c "SELECT id FROM review_logs LIMIT 1" 2>/dev/null | head -n 3 | tail -n 1 | tr -d '[:space:]')
 if [[ -n "$RLID" ]]; then
   if psql "${psql_opts[@]}" -c "UPDATE review_logs SET duration_ms = 1 WHERE id = '$RLID'" 2>/dev/null | grep -q 'ERROR'; then
