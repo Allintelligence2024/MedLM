@@ -83,14 +83,6 @@ class DeviceKeyPair {
     throw UnimplementedError('RSA-OAEP device key unwrap');
   }
 
-  Future<dynamic> _importPointyCastle() async {
-    // On utilise une implémentation minimaliste via cryptography.
-    // Si cryptography ne supporte pas OAEP, fallback sur pointycastle.
-    // En attendant, on s'appuie sur cryptography qui supporte OAEP
-    // depuis la 2.4.0.
-    throw UnimplementedError('OAEP via cryptography — Phase 14 finalisation');
-  }
-
   String _wrapPem(Uint8List key, String label) {
     final b64 = base64Encode(key);
     final lines = <String>[];

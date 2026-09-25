@@ -75,18 +75,20 @@ class JwtVerifier {
 
     // Vérification de la signature.
     final pem = await _loadPublicKeyPem();
-    final algorithm = RsaPkcs1v15Sha256();
-    final publicKey = SimplePublicKey(
-      _stripPemEnvelope(pem),
-      type: KeyPairType.rsaPublicKey,
+    final algorithm = RsaSsaPkcs1v15(Sha256());
+    final publicKey = RsaPublicKey(
+      n: _stripPemEnvelope(pem),
+      e: <int>[1, 0, 1],
     );
     final signature = base64Url.decode(base64Url.normalize(parts[2]));
     final message = utf8.encode('${parts[0]}.${parts[1]}');
 
     final ok = await algorithm.verify(
-      Uint8List.fromList(message),
-      signature: Signature(Uint8List.fromList(signature)),
-      key: publicKey,
+      message,
+      signature: Signature(
+        signature,
+        publicKey: publicKey,
+      ),
     );
     if (!ok) {
       throw JwtVerificationException('signature invalide');

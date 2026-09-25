@@ -83,7 +83,7 @@ class FsrsParameters {
     this.requestRetention = 0.9,
     this.maximumInterval = 36500,
     this.enableQcmWeighting = true,
-  }) : assert(weights.length == 19, 'FSRS-5 requiert exactement 19 poids');
+  });
 
   /// Les 19 poids du modèle.
   final List<double> weights;
