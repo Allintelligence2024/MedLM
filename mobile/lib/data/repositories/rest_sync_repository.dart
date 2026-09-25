@@ -18,6 +18,7 @@ import '../../core/srs/review_event.dart';
 import '../../core/srs/srs_models.dart';
 import '../../domain/domain.dart';
 import '../local/app_database.dart';
+import '../local/tables.dart';
 import '../network/api_client.dart';
 
 class RestSyncRepository implements ISyncRepository {
@@ -36,8 +37,8 @@ class RestSyncRepository implements ISyncRepository {
     int maxBatch = 100,
   }) async {
     // 1. Récupère les events locaux non encore synchronisés.
-    final List<ReviewLogRow> pending = await (_db.select(_db.reviewLog)
-          ..where(($t) => $t.userId.equals(userId) & $t.synced.equals(false))
+    final List<ReviewLogRow> pending = await (db.select(db.reviewLog)
+          ..where((ReviewLog t) => t.userId.equals(userId) & t.synced.equals(false))
           ..limit(maxBatch))
           .get();
     if (pending.isEmpty) {
