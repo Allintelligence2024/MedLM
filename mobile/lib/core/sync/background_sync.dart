@@ -56,13 +56,15 @@ class BackgroundSync {
         'BackgroundSync.initialize() doit être appelé avant schedule()',
       );
     }
-    final conditions = <WorkmanagerConstraint>[];
-    if (requireWifi) conditions.add(WorkmanagerConstraint.connected);
+    final constraints = Constraints(
+      networkType: requireWifi ? NetworkType.unmetered : NetworkType.connected,
+      requiresBatteryNotLow: true,
+    );
     await Workmanager().registerPeriodicTask(
       'periodic.$kBackgroundSyncTaskName',
       kBackgroundSyncTaskName,
       frequency: frequency,
-      constraints: conditions,
+      constraints: constraints,
       existingWorkPolicy: ExistingPeriodicWorkPolicy.replace,
     );
   }
