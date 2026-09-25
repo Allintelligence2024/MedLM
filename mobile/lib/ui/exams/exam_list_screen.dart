@@ -72,7 +72,9 @@ class _TemplateTileState extends ConsumerState<_TemplateTile> {
       // qu'il renvoie fait autorité (v2 §10). Le client ne décide de
       // rien, il affiche un compte à rebours.
       final attempt = await ref.read(apiClientProvider).generateExam(id);
-      if (mounted) context.push(Routes.examAttempt, extra: attempt);
+      if (mounted) {
+        unawaited(context.push(Routes.examAttempt, extra: attempt));
+      }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(

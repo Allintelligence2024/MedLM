@@ -296,7 +296,9 @@ class _QuestionBody extends StatelessWidget {
   }
 
   static Object _choiceValue(Object? choice, int index) {
-    if (choice is Map) return (choice['id'] ?? choice['value'] ?? index);
+    if (choice is Map) {
+      return (choice['id'] ?? choice['value'] ?? index) as Object;
+    }
     return index;
   }
 }

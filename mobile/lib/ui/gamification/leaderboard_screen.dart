@@ -189,7 +189,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
         _future = widget.repository.fetchTop();
       });
     } catch (e) {
-      if (!mounted) return;
+      if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(AppLocalizations.of(context).leaderboardOptInFailed),

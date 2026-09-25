@@ -8,7 +8,7 @@ library;
 
 import 'package:flutter/material.dart';
 
-import '../../core/gamification/gamification_constants.dart';
+import '../../core/gamification/gamification_constants.dart' as game;
 import '../../data/network/api_client.dart';
 
 class BadgesScreen extends StatefulWidget {
@@ -64,9 +64,9 @@ class _BadgesScreenState extends State<BadgesScreen> {
               crossAxisSpacing: 12,
               mainAxisSpacing: 12,
             ),
-            itemCount: Badges.all.length,
+            itemCount: game.Badges.all.length,
             itemBuilder: (_, i) {
-              final b = Badges.all[i];
+              final b = game.Badges.all[i];
               final isUnlocked = unlocked.contains(b.id);
               return _BadgeTile(badge: b, isUnlocked: isUnlocked);
             },
@@ -79,7 +79,7 @@ class _BadgesScreenState extends State<BadgesScreen> {
 
 class _BadgeTile extends StatelessWidget {
   const _BadgeTile({required this.badge, required this.isUnlocked});
-  final Badge badge;
+  final game.Badge badge;
   final bool isUnlocked;
 
   @override

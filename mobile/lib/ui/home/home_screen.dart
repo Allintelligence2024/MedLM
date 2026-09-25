@@ -170,7 +170,7 @@ class _StatsRow extends StatelessWidget {
         const SizedBox(width: 12),
         Expanded(
           child: _StatTile(
-            icon: Icons.target,
+            icon: Icons.track_changes,
             value: '${(stats.accuracy * 100).round()} %',
             label: l10n.homeAccuracy,
           ),
