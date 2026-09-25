@@ -197,6 +197,30 @@ jobs:
         run: docker build -f backend/Dockerfile -t medanki/backend:ci .
         working-directory: .
 
+  # P1: the CMS workflow historically lived under ci/workflows and was not
+  # executed by GitHub Actions. Keep its release checks in the active workflow.
+  cms:
+    name: CMS typecheck · build · Docker
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: cms/package-lock.json
+      - name: Dependencies
+        working-directory: cms
+        run: npm ci
+      - name: TypeScript
+        working-directory: cms
+        run: npm run typecheck
+      - name: Next build
+        working-directory: cms
+        run: npm run build
+      - name: Docker build
+        run: docker build -f cms/Dockerfile -t medanki/cms:ci .
+
   verify-scripts:
     name: verify scripts
     runs-on: ubuntu-latest
