@@ -88,7 +88,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                 ),
                 const SizedBox(height: 16),
                 DropdownButtonFormField<String>(
-                  value: _faculty,
+                  initialValue: _faculty,
                   decoration: InputDecoration(
                     labelText: l10n.authFaculty,
                     prefixIcon: const Icon(Icons.location_city_outlined),
@@ -102,7 +102,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                 ),
                 const SizedBox(height: 16),
                 DropdownButtonFormField<int>(
-                  value: _studyYear,
+                  initialValue: _studyYear,
                   decoration: InputDecoration(
                     labelText: l10n.authStudyYear,
                     prefixIcon: const Icon(Icons.calendar_today_outlined),

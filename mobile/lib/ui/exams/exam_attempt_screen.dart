@@ -54,11 +54,12 @@ class _ExamAttemptScreenState extends ConsumerState<ExamAttemptScreen> {
   }
 
   void _startTicker() {
-    if (_expiresAt == null) return;
-    _remaining = remaining(_expiresAt!, DateTime.now().toUtc());
+    final expiry = _expiresAt;
+    if (expiry == null) return;
+    _remaining = remaining(expiry, DateTime.now().toUtc());
     _ticker = Timer.periodic(const Duration(seconds: 1), (_) {
       final now = DateTime.now().toUtc();
-      if (isExpired(_expiresAt, now)) {
+      if (isExpired(expiry, now)) {
         _ticker?.cancel();
         // Le temps est écoulé : on soumet ce qu'on a. Ne rien faire
         // laisserait l'utilisateur devant un écran figé alors que le
@@ -66,7 +67,7 @@ class _ExamAttemptScreenState extends ConsumerState<ExamAttemptScreen> {
         unawaited(_submit(auto: true));
         return;
       }
-      setState(() => _remaining = remaining(_expiresAt!, now));
+      setState(() => _remaining = remaining(expiry, now));
     });
   }
 
@@ -266,7 +267,9 @@ class _QuestionBody extends StatelessWidget {
         (question['prompt'] ?? question['question'] ?? question['text'] ?? '')
             .toString();
     final rawChoices = question['choices'] ?? question['options'];
-    final choices = rawChoices is List ? rawChoices : const [];
+    final List<dynamic> choices = rawChoices is List<dynamic>
+        ? rawChoices
+        : const <dynamic>[];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
