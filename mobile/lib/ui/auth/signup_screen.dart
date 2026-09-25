@@ -47,22 +47,14 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
       _error = null;
     });
     try {
-      final result = await ref.read(apiClientProvider).signupWithEmail(
-            email: _email.text.trim(),
-            displayName: _displayName.text.trim().isEmpty
-                ? null
-                : _displayName.text.trim(),
-            faculty: _faculty,
-            studyYear: _studyYear,
-          );
-      await ref.read(sessionProvider.notifier).signIn(
-            accessToken: result.accessToken,
-            refreshToken: result.refreshToken,
-            userId: result.userId,
-            email: _email.text.trim(),
-          );
-      // Pas de navigation manuelle : le routeur enverra vers
-      // l'onboarding, qui n'est pas encore marqué comme terminé.
+      // Les informations de profil seront complétées après vérification.
+      // Ne jamais créer une session sur la seule connaissance de l'email.
+      await ref.read(apiClientProvider).requestMagicLink(email: _email.text.trim());
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(AppLocalizations.of(context).authMagicLinkSent)),
+        );
+      }
     } catch (e) {
       if (mounted) setState(() => _error = describeError(context, e));
     } finally {

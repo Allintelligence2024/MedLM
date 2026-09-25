@@ -1,93 +1,98 @@
-/// Magic link par email — Phase 6.
-///
-/// Le protocole est volontairement simple :
-///   1. L'app demande un magic link (POST /v1/auth/magic-link { email }) ;
-///   2. Le serveur génère un token à usage unique, l'envoie par email ;
-///   3. L'utilisateur clique, le serveur valide et émet access+refresh.
-///
-/// Le token est un JWT signé (kind='magic') avec une durée de vie
-/// courte (15 min) — c'est plus simple qu'une table `magic_tokens` et
-/// ça ne nécessite pas de nettoyage. La **non-répudiation** n'est pas
-/// garantie (n'importe qui ayant accès à l'email peut activer le
-/// compte), mais c'est le standard du secteur.
-import { Inject, Injectable, Logger, NotFoundException } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
+/// Magic link par email — challenge persistant, expirant et à usage unique.
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { eq } from 'drizzle-orm';
-import { randomBytes } from 'crypto';
+import { and, eq, isNull } from 'drizzle-orm';
+import { createHash, randomBytes } from 'crypto';
 import { DRIZZLE, Database } from '../db/database.module';
-import { users } from '../db/schema';
+import { authChallenges, users } from '../db/schema';
 import { TokenResponse } from './auth.dto';
 import { AuthService } from './auth.service';
 
-/// Interface minimale du fournisseur d'email. On l'interface pour pouvoir
-/// mocker en test et swap entre Resend / SendGrid / SMTP en prod.
 export interface EmailSender {
   send(args: { to: string; subject: string; html: string }): Promise<void>;
 }
 
-/// Token d'injection pour EmailSender. OBLIGATOIRE : une interface
-/// TypeScript n'existe pas à l'exécution — `design:paramtypes` émet
-/// `Object` pour ce paramètre et Nest ne peut pas le résoudre
-/// ("Nest can't resolve dependencies of the MagicLinkService").
-/// Ce bug était latent : l'application ne bootait pas hors tests unitaires.
 export const EMAIL_SENDER = Symbol('EMAIL_SENDER');
+const CHALLENGE_TTL_MS = 15 * 60 * 1000;
 
 @Injectable()
 export class MagicLinkService {
-  private readonly logger = new Logger(MagicLinkService.name);
-
   constructor(
     @Inject(DRIZZLE) private readonly db: Database,
-    private readonly jwt: JwtService,
     private readonly config: ConfigService,
     @Inject(EMAIL_SENDER) private readonly email: EmailSender,
     private readonly auth: AuthService,
   ) {}
 
   async request(args: { email: string }): Promise<{ sent: true }> {
-    // On **ne révèle pas** si l'email existe (anti-énumération).
-    const user = await this.db
-      .select({ id: users.id })
-      .from(users)
-      .where(eq(users.email, args.email))
-      .then((rows) => rows[0]);
-    if (!user) {
-      this.logger.warn(`magic link demandé pour email inconnu`);
-      return { sent: true };
-    }
-    const token = await this.jwt.signAsync(
-      {
-        sub: user.id,
-        kind: 'magic',
-        email: args.email,
-        jti: randomBytes(16).toString('hex'),
-      },
-      { expiresIn: 900 }, // 15 min
-    );
+    const email = args.email.trim().toLowerCase();
+    const token = randomBytes(32).toString('base64url');
+    const tokenHash = createHash('sha256').update(token).digest('hex');
+    await this.db.insert(authChallenges).values({
+      email,
+      tokenHash,
+      expiresAt: new Date(Date.now() + CHALLENGE_TTL_MS),
+    });
+
     const base = this.config.get<string>('MAGIC_LINK_BASE_URL') ?? 'https://medanki.dz';
     const url = `${base}/auth/magic?token=${encodeURIComponent(token)}`;
+    // Même réponse pour toute adresse : pas d'énumération de comptes.
     await this.email.send({
-      to: args.email,
+      to: email,
       subject: 'Votre lien de connexion MedAnki DZ',
       html: `<p>Cliquez sur le lien suivant pour vous connecter :</p>
 <p><a href="${url}">${url}</a></p>
-<p>Ce lien expire dans 15 minutes.</p>`,
+<p>Ce lien expire dans 15 minutes et ne peut être utilisé qu'une fois.</p>`,
     });
     return { sent: true };
   }
 
-  /// Valide un magic token et émet access + refresh.
   async verify(args: { token: string; platform: string }): Promise<TokenResponse> {
-    let payload: { sub: string; kind: string };
-    try {
-      payload = await this.jwt.verifyAsync(args.token);
-    } catch (e) {
-      throw new NotFoundException(`token invalide : ${(e as Error).message}`);
-    }
-    if (payload.kind !== 'magic') {
-      throw new NotFoundException('kind de token invalide');
-    }
-    return this.auth.issueAccessFor(payload.sub, args.platform);
+    const tokenHash = createHash('sha256').update(args.token).digest('hex');
+    const userId = await this.db.transaction(async (tx) => {
+      const challenge = await tx
+        .select()
+        .from(authChallenges)
+        .where(
+          and(
+            eq(authChallenges.tokenHash, tokenHash),
+            isNull(authChallenges.usedAt),
+          ),
+        )
+        .then((rows) => rows[0]);
+      if (!challenge || challenge.expiresAt.getTime() <= Date.now()) {
+        throw new NotFoundException('token invalide ou expiré');
+      }
+
+      // Marquage dans la même transaction : deux requêtes concurrentes ne
+      // doivent jamais pouvoir consommer le même lien.
+      const consumed = await tx
+        .update(authChallenges)
+        .set({ usedAt: new Date() })
+        .where(
+          and(
+            eq(authChallenges.id, challenge.id),
+            isNull(authChallenges.usedAt),
+          ),
+        )
+        .returning({ id: authChallenges.id });
+      if (consumed.length !== 1) throw new NotFoundException('token déjà utilisé');
+
+      let user = await tx
+        .select({ id: users.id })
+        .from(users)
+        .where(eq(users.email, challenge.email))
+        .then((rows) => rows[0]);
+      if (!user) {
+        const [created] = await tx
+          .insert(users)
+          .values({ email: challenge.email })
+          .returning({ id: users.id });
+        user = created;
+      }
+      if (!user) throw new NotFoundException('utilisateur introuvable');
+      return user.id;
+    });
+    return this.auth.issueAccessFor(userId, args.platform);
   }
 }

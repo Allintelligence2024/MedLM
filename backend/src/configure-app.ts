@@ -5,6 +5,7 @@
 /// l'importer depuis un test démarrait un second serveur réel sur le
 /// port 3000 (EADDRINUSE). Ce module n'a AUCUN effet de bord.
 import { INestApplication, RequestMethod, ValidationPipe } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import helmet from 'helmet';
 import { MetricsService } from './observability/metrics.service';
 import { HttpMetricsInterceptor } from './observability/metrics.interceptor';
@@ -26,7 +27,17 @@ export function configureApp(app: INestApplication): void {
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
   // ZodError brute → 400 (et non 500) — voir zod-exception.filter.ts.
   app.useGlobalFilters(new ZodExceptionFilter());
-  app.enableCors({ origin: false });
+  const config = app.get(ConfigService);
+  const allowedOrigins = (config.get<string>('CORS_ALLOWED_ORIGINS') ?? '')
+    .split(',')
+    .map((origin) => origin.trim())
+    .filter(Boolean);
+  app.enableCors({
+    // CORS est fermé par défaut, mais le CMS doit pouvoir parler à l'API
+    // depuis un origin explicitement autorisé.
+    origin: allowedOrigins.length > 0 ? allowedOrigins : false,
+    credentials: true,
+  });
   app.setGlobalPrefix('v1', {
     exclude: [{ path: 'v2/graphql', method: RequestMethod.ALL }],
   });

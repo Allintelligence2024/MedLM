@@ -61,9 +61,9 @@ describe('PostgreSQL MVP Contract — real engine (PGlite)', () => {
   });
 
   // ── 1. Migrations ──────────────────────────────────────────────────────
-  it('applique les 18 migrations sans erreur', async () => {
+  it('applique les migrations sans erreur', async () => {
     const journal = readJournal();
-    expect(journal).toHaveLength(18);
+    expect(journal).toHaveLength(21);
     await applyMigrations(db);
   }, 120_000);
 

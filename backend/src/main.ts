@@ -10,7 +10,12 @@ import { AppModule } from './app.module';
 import { configureApp } from './configure-app';
 
 async function bootstrap(): Promise<void> {
-  const app = await NestFactory.create(AppModule, { bufferLogs: false });
+  const app = await NestFactory.create(AppModule, {
+    bufferLogs: false,
+    // Chargily signe les octets exacts du webhook. Sans rawBody, la
+    // re-sérialisation JSON peut invalider une signature légitime.
+    rawBody: true,
+  });
   configureApp(app);
 
   const port = Number(process.env.PORT ?? 3000);

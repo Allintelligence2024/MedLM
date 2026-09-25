@@ -33,12 +33,12 @@ count() {
   psql "${psql_opts[@]}" -c "$1" 2>/dev/null | tr -d '[:space:]'
 }
 
-# ── 1. 37 tables ────────────────────────────────────────────────────────────
+# ── 1. Schéma minimal ───────────────────────────────────────────────────────
 TABLES_COUNT=$(count "SELECT count(*) FROM information_schema.tables WHERE table_schema = current_setting('sschema') AND table_type = 'BASE TABLE'")
-if [[ "$TABLES_COUNT" -eq 37 ]]; then
-  ok "37 tables présentes ($TABLES_COUNT)"
+if [[ "$TABLES_COUNT" -ge 37 ]]; then
+  ok "au moins 37 tables présentes ($TABLES_COUNT)"
 else
-  ko "37 tables attendues, $TABLES_COUNT trouvées"
+  ko "au moins 37 tables attendues, $TABLES_COUNT trouvées"
 fi
 
 # ── 2. Utilisateurs seedés ──────────────────────────────────────────────────

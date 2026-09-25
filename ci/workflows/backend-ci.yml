@@ -5,10 +5,12 @@ on:
     branches: ['**']
     paths:
       - 'backend/**'
+      - 'tools/scripts/**'
       - '.github/workflows/backend-ci.yml'
   pull_request:
     paths:
       - 'backend/**'
+      - 'tools/scripts/**'
       - '.github/workflows/backend-ci.yml'
   workflow_dispatch:
 
@@ -54,6 +56,34 @@ jobs:
       - name: Démarrage du binaire compilé
         working-directory: .
         run: ./tools/scripts/check_build_artifact.sh
+
+
+  mobile:
+    name: mobile (Flutter)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - name: Créer les plateformes natives absentes
+        working-directory: mobile
+        run: flutter create --platforms=android,ios .
+      - name: Dépendances et code généré
+        working-directory: mobile
+        run: |
+          flutter pub get
+          dart run build_runner build --delete-conflicting-outputs
+      - name: Analyse statique
+        working-directory: mobile
+        run: flutter analyze
+      - name: Tests
+        working-directory: mobile
+        run: flutter test
+      - name: APK debug
+        working-directory: mobile
+        run: flutter build apk --debug
 
   integration:
     name: integration (postgres 16)
@@ -103,6 +133,13 @@ jobs:
       - name: Migrations
         run: npm run db:migrate
 
+      - name: Seed de test (idempotent)
+        run: npm run db:seed
+
+      - name: Contrat PostgreSQL (script bash)
+        working-directory: .
+        run: ./tools/scripts/check_database_contract.sh
+
       - name: Tests d'intégration
         run: npm run test:integration
 
@@ -142,3 +179,22 @@ jobs:
       - name: Build de l'image backend
         run: docker build -f backend/Dockerfile -t medanki/backend:ci .
         working-directory: .
+
+  verify-scripts:
+    name: verify scripts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Python deps
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f tools/requirements.txt ]; then pip install -r tools/requirements.txt; fi
+      - name: Check workflows
+        run: python3 tools/scripts/check_workflows.py
+      - name: Bash syntax guard
+        run: |
+          bash -n tools/scripts/check_database_contract.sh
+          bash -n tools/scripts/check_business_flows.sh
