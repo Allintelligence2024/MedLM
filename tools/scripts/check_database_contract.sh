@@ -18,7 +18,6 @@ SCHEMA="${PG_SCHEMA:-public}"
 psql_opts=(
   "$DATABASE_URL"
   "-v" "ON_ERROR_STOP=1"
-  "-v" "sschema=$SCHEMA"
   "--no-align"
   "--tuples-only"
   "-c" "SET search_path TO \"$SCHEMA\""
@@ -34,7 +33,7 @@ count() {
 }
 
 # ── 1. Schéma minimal ───────────────────────────────────────────────────────
-TABLES_COUNT=$(count "SELECT count(*) FROM information_schema.tables WHERE table_schema = :'sschema' AND table_type = 'BASE TABLE'")
+TABLES_COUNT=$(count "SELECT count(*) FROM information_schema.tables WHERE table_schema = '$SCHEMA' AND table_type = 'BASE TABLE'")
 if [[ "$TABLES_COUNT" -ge 37 ]]; then
   ok "au moins 37 tables présentes ($TABLES_COUNT)"
 else
@@ -92,7 +91,7 @@ else
 fi
 
 # ── 7. Clés étrangères dans pg_constraint ───────────────────────────────────
-FK_COUNT=$(count "SELECT count(*) FROM pg_constraint WHERE contype = 'f' AND connamespace = (SELECT oid FROM pg_namespace WHERE nspname = :'sschema')")
+FK_COUNT=$(count "SELECT count(*) FROM pg_constraint WHERE contype = 'f' AND connamespace = (SELECT oid FROM pg_namespace WHERE nspname = '$SCHEMA')")
 if [[ "$FK_COUNT" -ge 20 ]]; then
   ok "clés étrangères présentes : $FK_COUNT"
 else
@@ -100,7 +99,7 @@ else
 fi
 
 # ── 8. Contraintes CHECK dans pg_constraint ────────────────────────────────
-CK_COUNT=$(count "SELECT count(*) FROM pg_constraint WHERE contype = 'c' AND connamespace = (SELECT oid FROM pg_namespace WHERE nspname = :'sschema')")
+CK_COUNT=$(count "SELECT count(*) FROM pg_constraint WHERE contype = 'c' AND connamespace = (SELECT oid FROM pg_namespace WHERE nspname = '$SCHEMA')")
 if [[ "$CK_COUNT" -ge 10 ]]; then
   ok "contraintes CHECK présentes : $CK_COUNT"
 else
