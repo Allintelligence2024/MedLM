@@ -25,6 +25,7 @@ import '../../core/srs/review_event.dart';
 import '../../core/srs/srs_models.dart';
 import '../../domain/domain.dart';
 import '../local/app_database.dart';
+import '../local/tables.dart';
 
 /// Paramètres historiques de construction de la file d'étude (v2 §4).
 ///

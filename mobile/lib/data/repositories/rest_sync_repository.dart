@@ -16,8 +16,6 @@ import 'dart:async';
 
 import 'package:drift/drift.dart';
 
-import '../../core/srs/review_event.dart';
-import '../../core/srs/srs_models.dart';
 import '../../domain/domain.dart';
 import '../local/app_database.dart';
 import '../local/tables.dart';
@@ -123,6 +121,7 @@ class RestSyncRepository implements ISyncRepository {
               cardType: e.cardType.wire,
               examMode: Value(e.examMode),
               reviewedAt: e.reviewedAtMs,
+              receivedAt: e.reviewedAtMs,
             ));
           } catch (_) {
             // Doublon (event.id déjà présent) : on ignore, c'est
