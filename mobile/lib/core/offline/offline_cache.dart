@@ -29,7 +29,6 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
 import '../security/aes_gcm.dart';
-import 'connectivity_aware.dart';
 
 class CachedDeck {
   const CachedDeck({

@@ -44,8 +44,10 @@ class DeviceKeyPair {
     final keyPair = await algorithm.newKeyPair(modulusLength: 2048);
     final publicKey = await keyPair.extractPublicKey();
     final privateKey = await keyPair.extract();
-    final pubPem = _wrapPem(publicKey.bytes, 'PUBLIC KEY');
-    final privPem = _wrapPem(privateKey.privateKeyBytes, 'PRIVATE KEY');
+    // cryptography exposes RSA parameters rather than a serialized DER blob.
+    // The backend-facing PEM serializer remains a separate integration step.
+    final pubPem = _wrapPem(publicKey.modulus, 'PUBLIC KEY');
+    final privPem = _wrapPem(privateKey.modulus, 'PRIVATE KEY');
     await _storage.write(key: _kPublicKey, value: pubPem);
     await _storage.write(key: _kPrivateKey, value: privPem);
     return (publicKeyPem: pubPem, privateKeyPem: privPem);
@@ -56,7 +58,8 @@ class DeviceKeyPair {
   Future<Uint8List> unwrapDeckKey({
     required String wrappedKeyBase64,
   }) async {
-    final (_, privPem) = await getOrCreate();
+    final keyMaterial = await getOrCreate();
+    final privPem = keyMaterial.privateKeyPem;
     final privBytes = _pemToBytes(privPem, 'PRIVATE KEY');
     final wrapped = base64Decode(wrappedKeyBase64);
 
