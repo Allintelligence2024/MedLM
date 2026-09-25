@@ -165,7 +165,7 @@ class OfflineCacheManager {
   /// Calcule l'espace total utilisé par le cache.
   Future<int> totalSizeBytes() async {
     final all = await listAll();
-    return all.fold(0, (sum, c) => sum + c.sizeBytes);
+    return all.fold<int>(0, (sum, c) => sum + c.sizeBytes);
   }
 
   /// Purge les bundles les plus anciens (LRU) pour rester sous

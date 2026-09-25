@@ -46,8 +46,8 @@ class DeviceKeyPair {
     final privateKey = await keyPair.extract();
     // cryptography exposes RSA parameters rather than a serialized DER blob.
     // The backend-facing PEM serializer remains a separate integration step.
-    final pubPem = _wrapPem(publicKey.modulus, 'PUBLIC KEY');
-    final privPem = _wrapPem(privateKey.modulus, 'PRIVATE KEY');
+    final pubPem = _wrapPem(publicKey.n, 'PUBLIC KEY');
+    final privPem = _wrapPem(privateKey.d, 'PRIVATE KEY');
     await _storage.write(key: _kPublicKey, value: pubPem);
     await _storage.write(key: _kPrivateKey, value: privPem);
     return (publicKeyPem: pubPem, privateKeyPem: privPem);

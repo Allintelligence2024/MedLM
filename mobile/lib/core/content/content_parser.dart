@@ -93,7 +93,7 @@ class ContentParser {
   ParsedCard parseCard(Map<String, dynamic> json, {String? defaultDeckId}) {
     final String? id = json['id'] as String?;
     if (id == null || id.isEmpty) {
-      throw ContentPolicyException('carte sans identifiant');
+      throw const ContentPolicyException('carte sans identifiant');
     }
 
     final String? deckId = (json['deck_id'] as String?) ?? defaultDeckId;
