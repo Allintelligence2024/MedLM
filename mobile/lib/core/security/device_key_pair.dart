@@ -46,8 +46,8 @@ class DeviceKeyPair {
     final privateKey = await keyPair.extract();
     // cryptography exposes RSA parameters rather than a serialized DER blob.
     // The backend-facing PEM serializer remains a separate integration step.
-    final pubPem = _wrapPem(publicKey.n, 'PUBLIC KEY');
-    final privPem = _wrapPem(privateKey.d, 'PRIVATE KEY');
+    final pubPem = _wrapPem(Uint8List.fromList(publicKey.n), 'PUBLIC KEY');
+    final privPem = _wrapPem(Uint8List.fromList(privateKey.d), 'PRIVATE KEY');
     await _storage.write(key: _kPublicKey, value: pubPem);
     await _storage.write(key: _kPrivateKey, value: privPem);
     return (publicKeyPem: pubPem, privateKeyPem: privPem);
@@ -78,14 +78,9 @@ class DeviceKeyPair {
     required Uint8List privateKeyBytes,
     required Uint8List ciphertext,
   }) async {
-    // Import dynamique pour ne pas charger pointycastle au boot
-    // si pas nécessaire.
-    // ignore: avoid_dynamic_calls
-    final pc = await _importPointyCastle();
-    final priv = pc.parsePkcs8PrivateKey(privateKeyBytes);
-    final decryptor = pc.OAEPEncoding(pc.PKCS1Encoding(pc.RSAEngine()))
-      ..init(false, pc.PrivateKeyParameter<pc.RSAPrivateKey>(priv));
-    return decryptor.process(ciphertext);
+    // OAEP n'est pas encore implémenté dans cette couche. Échouer
+    // explicitement est préférable à une fausse opération cryptographique.
+    throw UnimplementedError('RSA-OAEP device key unwrap');
   }
 
   Future<dynamic> _importPointyCastle() async {

@@ -67,10 +67,10 @@ class ContentParser {
   ParseResult parseDeck(Map<String, dynamic> json) {
     final Object? rawCards = json['cards'];
     if (rawCards is! List) {
-      throw ContentPolicyException('manifeste sans liste "cards"');
+      throw const ContentPolicyException('manifeste sans liste "cards"');
     }
     final String deckId = json['deck_id'] as String? ??
-        (throw ContentPolicyException('manifeste sans "deck_id"'));
+        (throw const ContentPolicyException('manifeste sans "deck_id"'));
 
     final List<ParsedCard> ok = <ParsedCard>[];
     final List<ContentPolicyException> ko = <ContentPolicyException>[];
