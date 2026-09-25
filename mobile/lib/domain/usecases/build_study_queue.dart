@@ -11,7 +11,6 @@
 /// (Drift) qui garantit l'atomicité des écritures.
 library;
 
-import '../entities/entities.dart';
 import '../repositories/repositories.dart';
 
 class BuildStudyQueueUseCase {
