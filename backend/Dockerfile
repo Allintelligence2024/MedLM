@@ -26,7 +26,6 @@ COPY backend/src ./src
 # nest-cli.json copie ../mobile/assets/content/*.json dans dist/ :
 # le contexte de build doit donc contenir ce dossier.
 COPY mobile/assets/content /mobile/assets/content
-RUN mkdir -p ../mobile/assets && cp -r /mobile/assets/content ../mobile/assets/content
 RUN npm run build
 
 # Deps de production seules (arbre allégé pour l'image finale).
