@@ -87,7 +87,14 @@ jobs:
           exit "$status"
       - name: Analyse statique
         working-directory: mobile
-        run: flutter analyze
+        run: |
+          set +e
+          flutter analyze 2>&1 | tee /tmp/flutter-analyze.log
+          status=${PIPESTATUS[0]}
+          while IFS= read -r line; do
+            echo "::error file=mobile::$line"
+          done < /tmp/flutter-analyze.log
+          exit "$status"
       - name: Tests
         working-directory: mobile
         run: flutter test
