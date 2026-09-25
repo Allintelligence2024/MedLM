@@ -15,12 +15,12 @@ fi
 
 SCHEMA="${PG_SCHEMA:-public}"
 
+export PGOPTIONS="-c search_path=$SCHEMA"
 psql_opts=(
   "$DATABASE_URL"
   "-v" "ON_ERROR_STOP=1"
   "--no-align"
   "--tuples-only"
-  "-c" "SET search_path TO \"$SCHEMA\""
 )
 
 FAIL=0
