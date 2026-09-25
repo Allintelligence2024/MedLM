@@ -79,7 +79,7 @@ jobs:
         working-directory: mobile
         run: |
           set +e
-          dart run build_runner build 2>&1 | tee /tmp/codegen.log
+          dart run build_runner build --build-filter=lib/data/local/app_database.g.dart 2>&1 | tee /tmp/codegen.log
           status=${PIPESTATUS[0]}
           while IFS= read -r line; do
             echo "::error file=mobile/lib/data/local/app_database.dart::$line"
