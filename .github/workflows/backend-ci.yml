@@ -71,7 +71,7 @@ jobs:
           cache: true
       - name: Créer les plateformes natives absentes
         working-directory: mobile
-        run: flutter create --overwrite --platforms=android .
+        run: flutter create --platforms=android .
       - name: Dépendances Flutter
         working-directory: mobile
         run: flutter pub upgrade
