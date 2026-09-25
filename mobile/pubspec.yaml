@@ -12,7 +12,7 @@ dependencies:
   # i18n (audit P1-4) : les chaînes UI étaient en dur en français.
   flutter_localizations:
     sdk: flutter
-  intl: ^0.19.0
+  intl: ^0.20.2
   # Phase 2 : persistance locale (source de vérité hors ligne).
   drift: ^2.18.0
   sqlite3_flutter_libs: ^0.5.20
