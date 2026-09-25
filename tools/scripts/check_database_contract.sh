@@ -111,7 +111,7 @@ fi
 if psql "${psql_opts[@]}" -c "
   INSERT INTO review_logs (id, user_id, card_id, device_id, rating, duration_ms, card_type, exam_mode, reviewed_at, received_at)
   VALUES ('ff000000-0000-4000-8000-000000000099', (SELECT id FROM users LIMIT 1), (SELECT id FROM cards LIMIT 1), 'dev', 5, 0, 'basic', false, 1, now())
-" 2>/dev/null | grep -q 'ERROR'; then
+" 2>&1 | grep -q 'ERROR'; then
   ok "rating invalide (5) rejeté"
 else
   ko "rating invalide (5) accepté — CHECK manquant"
@@ -121,7 +121,7 @@ fi
 if psql "${psql_opts[@]}" -c "
   INSERT INTO cards (id, deck_id, type, status, version, content, source_meta, tags, is_premium, created_at, updated_at)
   VALUES ('ff000000-0000-4000-8000-000000000099', 'ff000000-0000-4000-8000-000000000099', 'basic', 'published', 1, '{}', '{}', '{}', false, now(), now())
-" 2>/dev/null | grep -q 'ERROR'; then
+" 2>&1 | grep -q 'ERROR'; then
   ok "deck orphelin rejeté (FK)"
 else
   ko "deck orphelin accepté — FK manquante"
@@ -144,7 +144,7 @@ psql "${psql_opts[@]}" -c "
 " >/dev/null 2>&1 || true
 RLID=$(psql "${psql_opts[@]}" -c "SELECT id FROM review_logs LIMIT 1" 2>/dev/null | head -n 3 | tail -n 1 | tr -d '[:space:]')
 if [[ -n "$RLID" ]]; then
-  if psql "${psql_opts[@]}" -c "UPDATE review_logs SET duration_ms = 1 WHERE id = '$RLID'" 2>/dev/null | grep -q 'ERROR'; then
+  if psql "${psql_opts[@]}" -c "UPDATE review_logs SET duration_ms = 1 WHERE id = '$RLID'" 2>&1 | grep -q 'ERROR'; then
     ok "review_logs append-only (UPDATE refusé)"
   else
     ko "review_logs autorise UPDATE — trigger manquant"
