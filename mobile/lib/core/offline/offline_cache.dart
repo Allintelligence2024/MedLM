@@ -174,7 +174,7 @@ class OfflineCacheManager {
   Future<List<String>> evictLru(int maxBytes) async {
     final all = await listAll();
     all.sort((a, b) => a.lastAccessedAt.compareTo(b.lastAccessedAt));
-    let total = await totalSizeBytes();
+    var total = await totalSizeBytes();
     final evicted = <String>[];
     for (final c in all) {
       if (total <= maxBytes) break;

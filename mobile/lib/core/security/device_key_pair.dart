@@ -40,12 +40,12 @@ class DeviceKeyPair {
       return (publicKeyPem: pub, privateKeyPem: priv);
     }
     // Génération via le package cryptography.
-    final algorithm = RsaPkcs1v15Sha256();
-    final keyPair = await algorithm.newKeyPair(keySize: 2048);
+    final algorithm = RsaSsaPkcs1v15(Sha256());
+    final keyPair = await algorithm.newKeyPair(modulusLength: 2048);
     final publicKey = await keyPair.extractPublicKey();
-    final privateKey = (keyPair as RsaKeyPair).privateKey;
+    final privateKey = await keyPair.extract();
     final pubPem = _wrapPem(publicKey.bytes, 'PUBLIC KEY');
-    final privPem = _wrapPem(privateKey.bytes, 'PRIVATE KEY');
+    final privPem = _wrapPem(privateKey.privateKeyBytes, 'PRIVATE KEY');
     await _storage.write(key: _kPublicKey, value: pubPem);
     await _storage.write(key: _kPrivateKey, value: privPem);
     return (publicKeyPem: pubPem, privateKeyPem: privPem);
