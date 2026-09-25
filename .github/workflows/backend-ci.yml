@@ -77,7 +77,14 @@ jobs:
         run: flutter pub get
       - name: Code généré
         working-directory: mobile
-        run: dart run build_runner build --delete-conflicting-outputs
+        run: |
+          set +e
+          dart run build_runner build --delete-conflicting-outputs 2>&1 | tee /tmp/codegen.log
+          status=${PIPESTATUS[0]}
+          while IFS= read -r line; do
+            echo "::error file=mobile/lib/data/local/app_database.dart::$line"
+          done < /tmp/codegen.log
+          exit "$status"
       - name: Analyse statique
         working-directory: mobile
         run: flutter analyze
