@@ -69,7 +69,7 @@ jobs:
           cache: true
       - name: Créer les plateformes natives absentes
         working-directory: mobile
-        run: flutter create --platforms=android .
+        run: flutter create --overwrite --platforms=android .
       - name: Dépendances et code généré
         working-directory: mobile
         run: |
