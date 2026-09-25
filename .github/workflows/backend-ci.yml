@@ -183,6 +183,9 @@ jobs:
   verify-scripts:
     name: verify scripts
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
