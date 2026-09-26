@@ -36,9 +36,11 @@ class BackgroundSync {
   /// À appeler une seule fois au démarrage de l'app (dans
   /// `main.dart` AVANT `runApp`). `callbackDispatcher` est la
   /// fonction top-level qui sera appelée en background.
-  static void initialize({String? debugLabel}) {
+  static Future<void> initialize({String? debugLabel}) async {
     if (_initialized) return;
-    Workmanager().initialize(
+    // `initialize` est asynchrone côté plugin depuis 0.10 : l'ignorer
+    // laissait `schedule()` partir avant l'enregistrement du callback.
+    await Workmanager().initialize(
       callbackDispatcher,
       isInDebugMode: debugLabel != null,
     );

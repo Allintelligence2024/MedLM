@@ -16,10 +16,15 @@ void main() {
   });
 
   test('schedule() sans initialize() lève StateError', () async {
-    // On ne peut pas tester directement BackgroundSync.schedule()
-    // car l'état `_initialized` est statique et partagé entre tests.
-    // Le test ci-dessous documente le contrat.
-    expect(kBackgroundSyncTaskName, isNotEmpty);
+    // L'état `_initialized` est statique : ce fichier de test est le
+    // seul à démarrer un isolate sans initialize(), donc il peut
+    // vérifier le contrat pour de vrai (l'ancienne version se
+    // contentait de vérifier que la constante n'était pas vide).
+    await expectLater(BackgroundSync.schedule(), throwsStateError);
+  });
+
+  test('runOnce() sans initialize() lève StateError', () async {
+    await expectLater(BackgroundSync.runOnce(), throwsStateError);
   });
 
   test('cancel() sans initialize() ne lève pas', () async {
