@@ -1,12 +1,14 @@
 name: mobile-debug
 
-# Workflow temporaire de diagnostic : publie le détail des échecs Flutter
-# dans le résumé du job (lisible via l'API check-runs) car les logs bruts
-# ne sont pas accessibles depuis l'environnement d'audit.
+# Workflow temporaire de diagnostic (workflow_dispatch uniquement).
+# Il exécute analyse + tests Flutter puis publie le détail des échecs
+# dans la branche d'artefacts `ci-artifacts`, seule voie lisible depuis
+# l'environnement d'audit (logs Actions non accessibles).
 on:
   workflow_dispatch:
-  push:
-    branches: ['arena/01a03782-medlm']
+
+permissions:
+  contents: write
 
 defaults:
   run:
@@ -24,58 +26,109 @@ jobs:
           cache: true
       - name: Préparer le projet
         run: |
-          flutter create --platforms=android .
+          flutter create --platforms=android . >/dev/null 2>&1 || true
           rm -f test/widget_test.dart
           flutter pub upgrade
           dart run build_runner build --build-filter=lib/data/local/app_database.g.dart
+      - name: Analyse statique
+        run: |
+          set +e
+          flutter analyze > /tmp/analyze.txt 2>&1
+          echo "analyze_exit=$?"
       - name: Tests (rapport JSON)
         run: |
           set +e
           flutter test --reporter json > /tmp/tests.json 2>/tmp/tests.err
-          echo "flutter_test_exit=$?" | tee -a "$GITHUB_STEP_SUMMARY"
-          wc -c /tmp/tests.json /tmp/tests.err | tee -a "$GITHUB_STEP_SUMMARY"
-      - name: Résumé des échecs
+          echo "test_exit=$?"
+      - name: Construire le rapport
         if: always()
         run: |
-          python3 - <<'PY' >> "$GITHUB_STEP_SUMMARY"
-          import json, re
+          python3 - <<'PY'
+          import json, os
+
+          lines = []
+          lines.append('# Rapport de diagnostic Flutter\n')
+
+          try:
+              with open('/tmp/analyze.txt') as fh:
+                  analyze = fh.read().strip()
+              lines.append('## flutter analyze\n\n```\n%s\n```\n' % analyze[-8000:])
+          except Exception as exc:
+              lines.append('## flutter analyze\n\nindisponible: %s\n' % exc)
 
           tests = {}
           failures = []
+          passed = 0
 
-          def load(path):
-              try:
-                  with open(path) as fh:
-                      return [json.loads(l) for l in fh if l.strip()]
-              except Exception as exc:  # pragma: no cover
-                  return [{"type": "unparsable", "error": f"{path}: {exc}"}]
+          events = []
+          try:
+              with open('/tmp/tests.json') as fh:
+                  for line in fh:
+                      line = line.strip()
+                      if line.startswith('{'):
+                          try:
+                              events.append(json.loads(line))
+                          except Exception:
+                              pass
+          except Exception as exc:
+              lines.append('\nrapport JSON illisible: %s\n' % exc)
 
-          for ev in load('/tmp/tests.json'):
+          for ev in events:
               t = ev.get('type')
               if t == 'testStart':
-                  name = ev['test']['name']
-                  groups = ev['test'].get('groupIDs')
-                  tests[ev['test']['id']] = name
+                  tests[ev['test']['id']] = ev['test'].get('name', '?')
               elif t == 'error':
-                  tid = ev.get('testID')
-                  failures.append((tests.get(tid, f'test {tid}'),
-                                   ev.get('error', ''),
-                                   ev.get('stackTrace', '')))
-              elif t == 'testDone' and ev.get('result') != 'success':
-                  tid = ev.get('testID')
-                  if not any(tests.get(tid) == f[0] for f in failures):
-                      failures.append((tests.get(tid, f'test {tid}'),
-                                       f"result={ev.get('result')}", ''))
+                  failures.append({
+                      'name': tests.get(ev.get('testID'), '?'),
+                      'error': ev.get('error', ''),
+                      'stack': ev.get('stackTrace', ''),
+                  })
+              elif t == 'testDone':
+                  if ev.get('result') == 'success':
+                      passed += 1
+                  elif ev.get('result') == 'error':
+                      name = tests.get(ev.get('testID'), '?')
+                      if not any(f['name'] == name for f in failures):
+                          failures.append({'name': name,
+                                           'error': 'result=error (sans détail)',
+                                           'stack': ''})
 
-          print(f"### Échecs Flutter : {len(failures)}\n")
-          for name, error, stack in failures:
-              print(f"#### `{name}`\n")
-              print("```")
-              print(error.strip()[:1500])
-              frames = [l for l in stack.splitlines()
-                        if 'mobile/' in l or 'package:test' in l][:6]
-              for l in frames:
-                  print(l)
-              print("```\n")
+          lines.append('## Tests\n')
+          lines.append('%d réussis, %d en échec\n' % (passed, len(failures)))
+          for f in failures:
+              lines.append('### `%s`\n' % f['name'])
+              lines.append('```\n%s\n```\n' % f['error'].strip()[:2000])
+              frames = [l for l in f['stack'].splitlines()
+                        if 'mobile/' in l or 'package:test' in l][:8]
+              if frames:
+                  lines.append('Pile:\n\n```\n%s\n```\n' % '\n'.join(frames))
+
+          try:
+              with open('/tmp/tests.err') as fh:
+                  err = fh.read().strip()
+              if err:
+                  lines.append('## stderr\n\n```\n%s\n```\n' % err[-3000:])
+          except Exception:
+              pass
+
+          with open('/tmp/report.md', 'w') as fh:
+              fh.write('\n'.join(lines))
+          print('rapport: %d octets' % os.path.getsize('/tmp/report.md'))
           PY
-          head -c 2000 /tmp/tests.err >> "$GITHUB_STEP_SUMMARY" || true
+      - name: Publier le rapport
+        if: always()
+        working-directory: .
+        continue-on-error: true
+        run: |
+          mkdir -p /tmp/pub && cp /tmp/report.md /tmp/pub/report.md
+          cd /tmp/pub
+          git init -q -b ci-artifacts
+          git config user.email "ci@medlm.local"
+          git config user.name "mobile-debug"
+          git add report.md
+          git commit -q -m "ci: flutter diagnostics for $GITHUB_SHA"
+          git push --force \
+            "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" \
+            ci-artifacts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
