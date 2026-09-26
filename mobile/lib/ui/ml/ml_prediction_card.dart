@@ -106,7 +106,7 @@ class _MlPredictionCardState extends State<MlPredictionCard> {
           _explainFeatures(l10n, p.features),
           style: TextStyle(
             fontSize: 12,
-            color: scheme.onSecondaryContainer.withOpacity(0.75),
+            color: scheme.onSecondaryContainer.withValues(alpha: 0.75),
           ),
         ),
         const SizedBox(height: 2),
@@ -114,7 +114,7 @@ class _MlPredictionCardState extends State<MlPredictionCard> {
           l10n.mlModelWindow(p.modelVersion, p.windowDays),
           style: TextStyle(
             fontSize: 11,
-            color: scheme.onSecondaryContainer.withOpacity(0.6),
+            color: scheme.onSecondaryContainer.withValues(alpha: 0.6),
           ),
         ),
       ],
@@ -176,9 +176,9 @@ class _BandChip extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.12),
+        color: color.withValues(alpha: 0.12),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: color.withOpacity(0.4)),
+        border: Border.all(color: color.withValues(alpha: 0.4)),
       ),
       child: Text(
         label,

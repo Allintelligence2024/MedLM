@@ -112,7 +112,7 @@ class _BadgeTile extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            badge.criterion,
+            badge.description,
             textAlign: TextAlign.center,
             style: const TextStyle(fontSize: 10, color: Colors.black54),
             maxLines: 3,
