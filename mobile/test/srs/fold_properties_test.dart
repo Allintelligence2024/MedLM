@@ -266,7 +266,7 @@ void main() {
         now += gap * kMillisPerDay;
         base = engine.applyReview(base, Rating.good, now);
       }
-      const int probe = now + 10 * kMillisPerDay;
+      final int probe = now + 10 * kMillisPerDay;
       final double hard = engine.applyReview(base, Rating.hard, probe).stability;
       final double good = engine.applyReview(base, Rating.good, probe).stability;
       final double easy = engine.applyReview(base, Rating.easy, probe).stability;
