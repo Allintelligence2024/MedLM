@@ -46,79 +46,13 @@ jobs:
           echo "test_exit=$?"
       - name: Construire le rapport
         if: always()
+        working-directory: .
         run: |
-          python3 - <<'PY'
-          import json, os
-
-          lines = []
-          lines.append('# Rapport de diagnostic Flutter\n')
-
-          try:
-              with open('/tmp/analyze.txt') as fh:
-                  analyze = fh.read().strip()
-              lines.append('## flutter analyze\n\n```\n%s\n```\n' % analyze[-8000:])
-          except Exception as exc:
-              lines.append('## flutter analyze\n\nindisponible: %s\n' % exc)
-
-          tests = {}
-          failures = []
-          passed = 0
-
-          events = []
-          try:
-              with open('/tmp/tests.json') as fh:
-                  for line in fh:
-                      line = line.strip()
-                      if line.startswith('{'):
-                          try:
-                              events.append(json.loads(line))
-                          except Exception:
-                              pass
-          except Exception as exc:
-              lines.append('\nrapport JSON illisible: %s\n' % exc)
-
-          for ev in events:
-              t = ev.get('type')
-              if t == 'testStart':
-                  tests[ev['test']['id']] = ev['test'].get('name', '?')
-              elif t == 'error':
-                  failures.append({
-                      'name': tests.get(ev.get('testID'), '?'),
-                      'error': ev.get('error', ''),
-                      'stack': ev.get('stackTrace', ''),
-                  })
-              elif t == 'testDone':
-                  if ev.get('result') == 'success':
-                      passed += 1
-                  elif ev.get('result') == 'error':
-                      name = tests.get(ev.get('testID'), '?')
-                      if not any(f['name'] == name for f in failures):
-                          failures.append({'name': name,
-                                           'error': 'result=error (sans détail)',
-                                           'stack': ''})
-
-          lines.append('## Tests\n')
-          lines.append('%d réussis, %d en échec\n' % (passed, len(failures)))
-          for f in failures:
-              lines.append('### `%s`\n' % f['name'])
-              lines.append('```\n%s\n```\n' % f['error'].strip()[:2000])
-              frames = [l for l in f['stack'].splitlines()
-                        if 'mobile/' in l or 'package:test' in l][:8]
-              if frames:
-                  lines.append('Pile:\n\n```\n%s\n```\n' % '\n'.join(frames))
-
-          try:
-              with open('/tmp/tests.err') as fh:
-                  err = fh.read().strip()
-              if err:
-                  lines.append('## stderr\n\n```\n%s\n```\n' % err[-3000:])
-          except Exception:
-              pass
-
-          with open('/tmp/report.md', 'w') as fh:
-              fh.write('\n'.join(lines))
-          print('rapport: %d octets' % os.path.getsize('/tmp/report.md'))
-          PY
+          python3 tools/scripts/flutter_ci_report.py \
+            --analyze /tmp/analyze.txt \
+            --json /tmp/tests.json \
+            --stderr /tmp/tests.err \
+            --out /tmp/report.md
       - name: Publier le rapport
         if: always()
         working-directory: .
