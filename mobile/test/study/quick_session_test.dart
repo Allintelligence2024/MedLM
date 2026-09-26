@@ -76,27 +76,6 @@ class _FakeSrs implements ISrsRepository {
   }) async {}
 }
 
-class _FakeQueueBuilder {
-  _FakeQueueBuilder(this._srs);
-  final ISrsRepository _srs;
-  Future<List<StudyQueueItem>> call({
-    required String userId,
-    required int nowMs,
-    required String dayKey,
-    String? deckId,
-    int newCardsPerDay = 10,
-    int maxReviewsPerSession = 100,
-  }) {
-    return _srs.buildStudyQueue(
-      userId: userId,
-      nowMs: nowMs,
-      dayKey: dayKey,
-      deckId: deckId,
-      newCardsPerDay: newCardsPerDay,
-      maxReviewsPerSession: maxReviewsPerSession,
-    );
-  }
-}
 
 void main() {
   late QuickSession session;
@@ -173,7 +152,7 @@ void main() {
   });
 
   test('finish() échoue si durée > maxDurationMs', () async {
-    final cfg = const QuickSessionConfig(maxDurationMs: 100);
+    const cfg = QuickSessionConfig(maxDurationMs: 100);
     final short = QuickSession(
       queueBuilder: BuildStudyQueueUseCase(srs),
       srsRepo: srs,

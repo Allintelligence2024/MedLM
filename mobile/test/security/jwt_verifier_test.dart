@@ -4,7 +4,6 @@
 // dans le test, publique bundle pour vérifier). Cela évite d'avoir
 // à mocker le rootBundle.
 import 'dart:convert';
-import 'dart:typed_data';
 
 import 'package:cryptography/cryptography.dart';
 import 'package:flutter/services.dart';
@@ -44,7 +43,7 @@ Future<String> _signJwt({
 }) async {
   // Header minimal : alg=RS256.
   final header = {'alg': 'RS256', 'typ': 'JWT'};
-  final enc = (Map<String, dynamic> m) =>
+  String enc(Map<String, dynamic> m) =>
       base64Url.encode(utf8.encode(jsonEncode(m))).replaceAll('=', '');
   final signingInput = '${enc(header)}.${enc(payload)}';
   final privBytes = _pemToBytes(privatePem, 'PRIVATE KEY');
@@ -93,7 +92,7 @@ void main() {
     // On bundle la publique via rootBundle mock.
     final channel = TestDefaultBinaryMessengerBinding
         .instance.defaultBinaryMessenger;
-    final key = StringCodec();
+    const key = StringCodec();
     channel.setMockMessageHandler(
       'flutter/assets',
       (msg) async {
@@ -131,7 +130,7 @@ void main() {
     final pair = await _generateRsaPair();
     final channel = TestDefaultBinaryMessengerBinding
         .instance.defaultBinaryMessenger;
-    final key = StringCodec();
+    const key = StringCodec();
     channel.setMockMessageHandler(
       'flutter/assets',
       (msg) async {
@@ -163,7 +162,7 @@ void main() {
     final pair = await _generateRsaPair();
     final channel = TestDefaultBinaryMessengerBinding
         .instance.defaultBinaryMessenger;
-    final key = StringCodec();
+    const key = StringCodec();
     channel.setMockMessageHandler(
       'flutter/assets',
       (msg) async {
@@ -195,7 +194,7 @@ void main() {
     final pair = await _generateRsaPair();
     final channel = TestDefaultBinaryMessengerBinding
         .instance.defaultBinaryMessenger;
-    final key = StringCodec();
+    const key = StringCodec();
     channel.setMockMessageHandler(
       'flutter/assets',
       (msg) async {
@@ -223,7 +222,6 @@ void main() {
     // Pas de mock → le rootBundle.read lève.
     final channel = TestDefaultBinaryMessengerBinding
         .instance.defaultBinaryMessenger;
-    final key = StringCodec();
     channel.setMockMessageHandler(
       'flutter/assets',
       (msg) async => null,

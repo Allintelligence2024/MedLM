@@ -266,7 +266,7 @@ void main() {
         now += gap * kMillisPerDay;
         base = engine.applyReview(base, Rating.good, now);
       }
-      final int probe = now + 10 * kMillisPerDay;
+      const int probe = now + 10 * kMillisPerDay;
       final double hard = engine.applyReview(base, Rating.hard, probe).stability;
       final double good = engine.applyReview(base, Rating.good, probe).stability;
       final double easy = engine.applyReview(base, Rating.easy, probe).stability;
@@ -275,9 +275,9 @@ void main() {
     });
 
     test('la difficulté monte avec Again et baisse avec Easy', () {
-      SrsCardState base =
+      final SrsCardState base =
           engine.applyReview(SrsCardState.initial, Rating.good, t0);
-      final int probe = t0 + kMillisPerDay;
+      const int probe = t0 + kMillisPerDay;
       expect(engine.applyReview(base, Rating.again, probe).difficulty,
           greaterThan(base.difficulty));
       expect(engine.applyReview(base, Rating.easy, probe).difficulty,
