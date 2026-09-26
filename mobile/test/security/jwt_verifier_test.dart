@@ -35,10 +35,13 @@ class _RsaFixture {
   String get publicPem => encodeSpkiPem(publicKey);
 }
 
-_RsaFixture _newKeyPair() {
-  // Graine fixe : la génération est reproductible, les tests ne
-  // dépendent pas d'une source d'entropie système.
-  final seed = Uint8List.fromList(List<int>.generate(32, (i) => i + 7));
+/// [seedByte] décale la graine : deux appels avec des décalages
+/// différents produisent deux clés différentes (nécessaire au test
+/// « signé par une autre clé » — sans décalage, la graine fixe
+/// redonnait la MÊME paire, et le test passait pour de mauvaises
+/// raisons).
+_RsaFixture _newKeyPair({int seedByte = 7}) {
+  final seed = Uint8List.fromList(List<int>.generate(32, (i) => i + seedByte));
   final random = FortunaRandom()..seed(KeyParameter(seed));
   final generator = RSAKeyGenerator()
     ..init(ParametersWithRandom(
@@ -201,7 +204,9 @@ void main() {
   test('rejette un JWT signé par une autre clé', () async {
     // Même format, même algorithme, clé différente : le seul motif de
     // rejet possible est la signature.
-    final autre = _newKeyPair();
+    final autre = _newKeyPair(seedByte: 137);
+    expect(autre.publicPem, isNot(equals(fixture.publicPem)),
+        reason: 'garde-fou : les deux paires doivent différer');
     final jwt = _signJwt(
       autre,
       payload: <String, dynamic>{'plan': 'premium', 'exp': _epochSeconds()},

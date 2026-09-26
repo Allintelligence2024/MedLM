@@ -44,6 +44,12 @@ jobs:
           set +e
           flutter test --reporter json > /tmp/tests.json 2>/tmp/tests.err
           echo "test_exit=$?"
+      - name: APK debug
+        if: always()
+        run: |
+          set +e
+          flutter build apk --debug > /tmp/apk.txt 2>&1
+          echo "apk_exit=$?"
       - name: Construire le rapport
         if: always()
         working-directory: .
@@ -53,6 +59,10 @@ jobs:
             --json /tmp/tests.json \
             --stderr /tmp/tests.err \
             --out /tmp/report.md
+          if [ -f /tmp/apk.txt ]; then
+            printf '\n## flutter build apk --debug\n\n```\n%s\n```\n' \
+              "$(tail -c 4000 /tmp/apk.txt)" >> /tmp/report.md
+          fi
       - name: Publier le rapport
         if: always()
         working-directory: .
