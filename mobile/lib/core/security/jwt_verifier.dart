@@ -31,8 +31,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:cryptography/cryptography.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:pointycastle/export.dart';
 
 /// Signature d'un fournisseur de PEM (bundle d'assets, fichier, mémoire).
 typedef PemLoader = Future<String> Function(String assetPath);
@@ -74,11 +74,11 @@ class JwtVerifier {
   /// Charge et analyse la clé publique. Lève
   /// [JwtVerificationException] si l'asset est absent ou illisible —
   /// on refuse alors TOUTE vérification (fail-closed, v2 §8.1).
-  Future<RsaPublicKey> publicKey() async {
+  Future<RSAPublicKey> publicKey() async {
     final pem = _cachedPem ?? await _loadPem();
     final der = _pemToDer(pem);
     final parts = _parseSpki(der);
-    return RsaPublicKey(n: parts.modulus, e: parts.exponent);
+    return RSAPublicKey(parts.modulus, parts.exponent);
   }
 
   Future<String> _loadPem() async {
@@ -107,18 +107,16 @@ class JwtVerifier {
       throw JwtVerificationException('algorithme non supporté : ${header['alg']}');
     }
 
-    // Vérification de la signature.
+    // Vérification de la signature (RSASSA-PKCS1-v1_5 + SHA-256).
     final publicKey = await this.publicKey();
-    final algorithm = RsaSsaPkcs1v15(Sha256());
+    final signer = RSASigner(SHA256Digest(), _sha256DigestInfoPrefix)
+      ..init(false, PublicKeyParameter<RSAPublicKey>(publicKey));
     final signature = base64Url.decode(base64Url.normalize(parts[2]));
     final message = utf8.encode('${parts[0]}.${parts[1]}');
 
-    final ok = await algorithm.verify(
-      message,
-      signature: Signature(
-        signature,
-        publicKey: publicKey,
-      ),
+    final ok = signer.verifySignature(
+      Uint8List.fromList(message),
+      RSASignature(signature),
     );
     if (!ok) {
       throw JwtVerificationException('signature invalide');
@@ -165,11 +163,14 @@ class JwtVerifier {
   }
 }
 
-/// (modulus, exposant) d'une clé RSA, en big-endian non signé.
+/// Préfixe DER du DigestInfo SHA-256 (RFC 8017, EMSA-PKCS1-v1_5).
+const String _sha256DigestInfoPrefix = '0609608648016503040201';
+
+/// (modulus, exposant) d'une clé RSA.
 class RsaKeyParts {
   const RsaKeyParts(this.modulus, this.exponent);
-  final Uint8List modulus;
-  final Uint8List exponent;
+  final BigInt modulus;
+  final BigInt exponent;
 }
 
 /// OID `rsaEncryption` (1.2.840.113549.1.1.1) en DER.
@@ -223,34 +224,34 @@ RsaKeyParts _parseSpki(Uint8List der) {
     throw JwtVerificationException('clé publique illisible : INTEGER attendu');
   }
 
-  final modulus = _unsigned(der, n);
-  final exponent = _unsigned(der, e);
-  // Garde-fous : RSA-1024 minimum, exposant > 1. Une clé plus faible
-  // (ou un PEM tronqué) est refusée plutôt que « vérifiée ».
-  if (modulus.length < 128) {
+  final modulus = _unsignedToBigInt(der, n);
+  final exponent = _unsignedToBigInt(der, e);
+  // Garde-fous : RSA-1024 minimum, exposant impair > 1. Une clé plus
+  // faible (ou un PEM tronqué) est refusée plutôt que « vérifiée ».
+  if (modulus.bitLength < 1024) {
     throw JwtVerificationException(
-      'clé publique trop faible (${modulus.length * 8} bits < 1024)',
+      'clé publique trop faible (${modulus.bitLength} bits < 1024)',
     );
   }
-  // L'exposant doit être impair et > 1 (3, 17, 65537…). On le teste sur
-  // sa valeur, pas sur son dernier octet : 65537 = 01 00 01.
-  if (exponent.isEmpty ||
-      exponent.length > 8 ||
-      exponent.last.isEven ||
-      (exponent.length == 1 && exponent.first < 3)) {
+  if (exponent < BigInt.from(3) || exponent.isEven || exponent.bitLength > 64) {
     throw JwtVerificationException('clé publique illisible : exposant invalide');
   }
   return RsaKeyParts(modulus, exponent);
 }
 
-/// Retire le zéro de bourrage d'un INTEGER DER (big-endian signé).
-Uint8List _unsigned(Uint8List der, _Tlv integer) {
+/// Lit un INTEGER DER comme entier non signé (le zéro de bourrage du
+/// big-endian signé est ignoré).
+BigInt _unsignedToBigInt(Uint8List der, _Tlv integer) {
   var start = integer.contentStart;
   final end = integer.contentStart + integer.length;
   while (end - start > 1 && der[start] == 0) {
     start++;
   }
-  return Uint8List.sublistView(der, start, end);
+  var value = BigInt.zero;
+  for (var i = start; i < end; i++) {
+    value = (value << 8) | BigInt.from(der[i]);
+  }
+  return value;
 }
 
 bool _bytesEqual(Uint8List der, _Tlv tlv, List<int> expected) {

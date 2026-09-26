@@ -137,6 +137,19 @@ String _signJwt(
 int _epochSeconds({int offsetSeconds = 3600}) =>
     (DateTime.now().millisecondsSinceEpoch ~/ 1000) + offsetSeconds;
 
+// ── Fixture d'interopérabilité ──────────────────────────────────────
+//
+// Clé publique SPKI et JWT RS256 produits HORS du projet Dart, par
+// Node.js (`crypto.sign('sha256', …, RSA_PKCS1_PADDING)`) — donc par une
+// implémentation indépendante. Si le vérificateur accepte ce jeton, il
+// accepte réellement ceux du backend NestJS, qui signe de la même façon.
+// (Le reste des tests utilise `pointycastle` : les deux bibliothèques
+// produisent le même format RSASSA-PKCS1-v1_5, la preuve d'interopérabilité
+// est apportée par ce jeton externe.)
+const String _nodePem = '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwLplUOEwChoXhUykZdUZ\nzGkSlpMf6O7wium0GIeY/XL53nWPkctPC64owE8Fjo/14LUD2elA53s++tr5mYL7\n73R4/NguKz7qIRXb3Xq+J7sjSmPut1VZm7Pcr+mZxTAm4parlPjNe1tNiSngXQ4N\nEfAbL1t3G+pNX0NqwdYwueZgxqDSEjXW889M3qw7/m9hsAD2jCYSTIRKggrI4pf2\nWFBtrq30fQsT3ln61ufIZFk81qfAepNTIHwVOOrGCe+NiIQlAAkmg+x9oOeJDcSE\nT1IJk8tbxU3bu3v47VNBATKKjAQ/QikKVYpDiPgyIbpAV+TOspLfI87A1wSa3FHi\nywIDAQAB\n-----END PUBLIC KEY-----";
+
+const String _nodeJwt = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJwbGFuIjoicHJlbWl1bSIsInN1YiI6InVzZXItbm9kZSIsImV4cCI6NDEwMjQ0NDgwMH0.AWGQZyTN6rjiCraU5v-2qXqBRHtPuZBtG2xIJHuRMy_xDND5-lNLsxBmezQsX-iXq8-C2g8g_Dcg2wic7sfcYCQB5iL36XDy523v6QiLsKfh6VuykJoqHXM9C6XNiDt4K-kR6Z10g1Fr0zc8E0GHC_H7b2qj4I72kue0-yJNr4nK9knf3LacwEQp72tfAowCAl_--QRus6-4S4EgMXSAaJKTCFKuKaw9HMKv0u28RcefLIK-rMha5Ead_Vad1vsRKxSC_4Wt6RFR42TomH-9aiB31gbnSiMlpw6QKF5fH2tq7CPACezSGPUUUsfaT4LfFlvaiOLlYL3z8NcEkUr8eg";
+
 void main() {
   late _RsaFixture fixture;
   late JwtVerifier verifier;
@@ -186,6 +199,8 @@ void main() {
   });
 
   test('rejette un JWT signé par une autre clé', () async {
+    // Même format, même algorithme, clé différente : le seul motif de
+    // rejet possible est la signature.
     final autre = _newKeyPair();
     final jwt = _signJwt(
       autre,
@@ -287,10 +302,37 @@ void main() {
     );
   });
 
+  group('interopérabilité (jeton signé par Node.js)', () {
+    test('accepte un JWT RS256 émis par une implémentation externe',
+        () async {
+      final external = JwtVerifier.fromPem(_nodePem);
+      final verified = await external.verify(_nodeJwt);
+      expect(verified.payload['plan'], 'premium');
+      expect(verified.payload['sub'], 'user-node');
+      expect(verified.expiresAtMs, 4102444800 * 1000);
+    });
+
+    test('refuse ce même jeton si le payload est modifié', () async {
+      final external = JwtVerifier.fromPem(_nodePem);
+      final parts = _nodeJwt.split('.');
+      final forgedPayload = _b64Url(<String, dynamic>{
+        'plan': 'free',
+        'sub': 'user-node',
+        'exp': 4102444800,
+      });
+      await expectLater(
+        external.verify('${parts[0]}.$forgedPayload.${parts[2]}'),
+        throwsA(predicate((e) =>
+            e is JwtVerificationException && e.message.contains('invalide'))),
+      );
+    });
+  });
+
   group('clé publique', () {
     test('le PEM produit est analysé (SPKI → modulus + exposant)', () async {
       final key = await verifier.publicKey();
-      expect(key.n.length, 256, reason: 'RSA-2048 → modulus de 2048 bits');
+      expect(key.modulus!.bitLength, 2048);
+      expect(key.exponent, BigInt.from(65537));
     });
 
     test('l\'asset embarqué se parse (RSA-2048, exposant 65537)', () async {
@@ -303,7 +345,8 @@ void main() {
       expect(pem, contains('BEGIN PUBLIC KEY'));
       final bundled = JwtVerifier.fromPem(pem);
       final key = await bundled.publicKey();
-      expect(key.n.length, 256);
+      expect(key.modulus!.bitLength, 2048);
+      expect(key.exponent, BigInt.from(65537));
     });
 
     test('asset absent → refus explicite (fail-closed)', () async {
