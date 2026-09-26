@@ -191,5 +191,16 @@
   "voiceBack": "الظهر",
   "voiceRuleAndQuota": "القاعدة المطبقة: {rule} · الحصة المتبقية: {quota}",
   "actionConfirm": "تأكيد",
-  "shareFailed": "تعذر إنشاء المشاركة."
+  "shareFailed": "تعذر إنشاء المشاركة.",
+  "badgesMyTitle": "أوسمتي",
+  "leaderboardNoParticipants": "لا مشاركين هذا الأسبوع.",
+  "leaderboardWeek": "الأسبوع {week}",
+  "leaderboardSeeRankPrompt": "انضم إلى الترتيب لترى ترتيبك.",
+  "@leaderboardWeek": {
+    "placeholders": {
+      "week": {
+        "type": "String"
+      }
+    }
+  }
 }

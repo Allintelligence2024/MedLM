@@ -229,6 +229,10 @@ abstract class AppLocalizations {
   String voiceRuleAndQuota(String rule, int quota);
   String get actionConfirm;
   String get shareFailed;
+  String get badgesMyTitle;
+  String get leaderboardNoParticipants;
+  String leaderboardWeek(String week);
+  String get leaderboardSeeRankPrompt;
 }
 
 class _AppLocalizationsDelegate
@@ -826,6 +830,18 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get shareFailed => 'Le partage n\'a pas pu être créé.';
 
+  @override
+  String get badgesMyTitle => 'Mes badges';
+
+  @override
+  String get leaderboardNoParticipants => 'Aucun participant cette semaine.';
+
+  @override
+  String leaderboardWeek(String week) => 'Semaine ${week}';
+
+  @override
+  String get leaderboardSeeRankPrompt => 'Participez au classement pour voir votre rang.';
+
 }
 
 class AppLocalizationsAr extends AppLocalizations {
@@ -1394,6 +1410,18 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get shareFailed => 'تعذر إنشاء المشاركة.';
 
+  @override
+  String get badgesMyTitle => 'أوسمتي';
+
+  @override
+  String get leaderboardNoParticipants => 'لا مشاركين هذا الأسبوع.';
+
+  @override
+  String leaderboardWeek(String week) => 'الأسبوع ${week}';
+
+  @override
+  String get leaderboardSeeRankPrompt => 'انضم إلى الترتيب لترى ترتيبك.';
+
 }
 
 class AppLocalizationsEn extends AppLocalizations {
@@ -1961,5 +1989,17 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get shareFailed => 'Couldn\'t create the share.';
+
+  @override
+  String get badgesMyTitle => 'My badges';
+
+  @override
+  String get leaderboardNoParticipants => 'No participants this week.';
+
+  @override
+  String leaderboardWeek(String week) => 'Week ${week}';
+
+  @override
+  String get leaderboardSeeRankPrompt => 'Join the leaderboard to see your rank.';
 
 }

@@ -77,8 +77,8 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
             children: [
               _Header(weekIso: board.weekIso, myRank: board.myRank, isOptIn: _isOptIn),
               if (board.entries.isEmpty)
-                const Expanded(
-                  child: Center(child: Text('Aucun participant cette semaine.')),
+                Expanded(
+                  child: Center(child: Text(l10n.leaderboardNoParticipants)),
                 )
               else
                 Expanded(
@@ -207,6 +207,7 @@ class _Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(16),
@@ -214,13 +215,13 @@ class _Header extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Semaine $weekIso', style: Theme.of(context).textTheme.titleMedium),
+          Text(l10n.leaderboardWeek(weekIso), style: Theme.of(context).textTheme.titleMedium),
           if (isOptIn && myRank != null) ...[
             const SizedBox(height: 4),
-            Text('Votre rang : #$myRank'),
+            Text(l10n.leaderboardMyRank(myRank!)),
           ] else if (!isOptIn) ...[
             const SizedBox(height: 4),
-            const Text("Participez au classement pour voir votre rang."),
+            Text(l10n.leaderboardSeeRankPrompt),
           ],
         ],
       ),

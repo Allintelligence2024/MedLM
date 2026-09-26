@@ -373,5 +373,16 @@
     }
   },
   "actionConfirm": "Confirmer",
-  "shareFailed": "Le partage n'a pas pu être créé."
+  "shareFailed": "Le partage n'a pas pu être créé.",
+  "badgesMyTitle": "Mes badges",
+  "leaderboardNoParticipants": "Aucun participant cette semaine.",
+  "leaderboardWeek": "Semaine {week}",
+  "leaderboardSeeRankPrompt": "Participez au classement pour voir votre rang.",
+  "@leaderboardWeek": {
+    "placeholders": {
+      "week": {
+        "type": "String"
+      }
+    }
+  }
 }

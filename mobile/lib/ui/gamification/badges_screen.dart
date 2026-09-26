@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/gamification/gamification_constants.dart' as game;
 import '../../data/network/api_client.dart';
+import '../../l10n/app_localizations.dart';
 
 class BadgesScreen extends StatefulWidget {
   const BadgesScreen({super.key, required this.api});
@@ -44,7 +45,7 @@ class _BadgesScreenState extends State<BadgesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Mes badges'),
+        title: Text(AppLocalizations.of(context).badgesMyTitle),
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),

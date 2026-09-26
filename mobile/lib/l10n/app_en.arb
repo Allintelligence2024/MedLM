@@ -191,5 +191,16 @@
   "voiceBack": "Back",
   "voiceRuleAndQuota": "Rule applied: {rule} · quota left: {quota}",
   "actionConfirm": "Confirm",
-  "shareFailed": "Couldn't create the share."
+  "shareFailed": "Couldn't create the share.",
+  "badgesMyTitle": "My badges",
+  "leaderboardNoParticipants": "No participants this week.",
+  "leaderboardWeek": "Week {week}",
+  "leaderboardSeeRankPrompt": "Join the leaderboard to see your rank.",
+  "@leaderboardWeek": {
+    "placeholders": {
+      "week": {
+        "type": "String"
+      }
+    }
+  }
 }
