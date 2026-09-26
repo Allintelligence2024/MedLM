@@ -71,7 +71,11 @@ jobs:
           cache: true
       - name: Créer les plateformes natives absentes
         working-directory: mobile
-        run: flutter create --platforms=android .
+        run: |
+          flutter create --platforms=android .
+          # flutter create adds a template test/widget_test.dart referring
+          # to MyApp, which does not exist in this application.
+          rm -f test/widget_test.dart
       - name: Dépendances Flutter
         working-directory: mobile
         run: flutter pub upgrade
