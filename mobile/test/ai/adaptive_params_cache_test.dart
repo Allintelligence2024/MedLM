@@ -142,8 +142,8 @@ void main() {
   group('user_prefs (drift)', () {
     test('absent → null ; écrit puis relu ; clear', () async {
       expect(await cache.read(), isNull);
-      final entry = CachedAdaptiveParams(
-        parameters: const FsrsParameters(),
+      const entry = CachedAdaptiveParams(
+        parameters: FsrsParameters(),
         fetchedAtMs: 42,
         active: true,
         reasons: const ['r'],

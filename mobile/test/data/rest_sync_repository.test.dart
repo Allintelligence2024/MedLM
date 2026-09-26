@@ -11,7 +11,6 @@ import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:medanki_dz/core/srs/review_event.dart';
-import 'package:medanki_dz/core/srs/srs_models.dart';
 import 'package:medanki_dz/data/local/app_database.dart';
 import 'package:medanki_dz/data/network/api_client.dart';
 import 'package:medanki_dz/data/network/secure_token_storage.dart';
@@ -60,12 +59,10 @@ class _NoopStorage extends SecureTokenStorage {
 void main() {
   late AppDatabase db;
   late FakeApiClient api;
-  late RestSyncRepository repo;
 
   setUp(() async {
     db = AppDatabase(NativeDatabase.memory());
     api = FakeApiClient();
-    repo = RestSyncRepository(api: api, db: db);
     await db.into(db.deckMeta).insert(DeckMetaCompanion.insert(
           deckId: 'd1',
           moduleId: 'm1',
