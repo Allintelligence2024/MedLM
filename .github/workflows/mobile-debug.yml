@@ -1,0 +1,81 @@
+name: mobile-debug
+
+# Workflow temporaire de diagnostic : publie le détail des échecs Flutter
+# dans le résumé du job (lisible via l'API check-runs) car les logs bruts
+# ne sont pas accessibles depuis l'environnement d'audit.
+on:
+  workflow_dispatch:
+  push:
+    branches: ['arena/01a03782-medlm']
+
+defaults:
+  run:
+    working-directory: mobile
+
+jobs:
+  diagnose:
+    name: mobile failures detail
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - name: Préparer le projet
+        run: |
+          flutter create --platforms=android .
+          rm -f test/widget_test.dart
+          flutter pub upgrade
+          dart run build_runner build --build-filter=lib/data/local/app_database.g.dart
+      - name: Tests (rapport JSON)
+        run: |
+          set +e
+          flutter test --reporter json > /tmp/tests.json 2>/tmp/tests.err
+          echo "flutter_test_exit=$?" | tee -a "$GITHUB_STEP_SUMMARY"
+          wc -c /tmp/tests.json /tmp/tests.err | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Résumé des échecs
+        if: always()
+        run: |
+          python3 - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json, re
+
+          tests = {}
+          failures = []
+
+          def load(path):
+              try:
+                  with open(path) as fh:
+                      return [json.loads(l) for l in fh if l.strip()]
+              except Exception as exc:  # pragma: no cover
+                  return [{"type": "unparsable", "error": f"{path}: {exc}"}]
+
+          for ev in load('/tmp/tests.json'):
+              t = ev.get('type')
+              if t == 'testStart':
+                  name = ev['test']['name']
+                  groups = ev['test'].get('groupIDs')
+                  tests[ev['test']['id']] = name
+              elif t == 'error':
+                  tid = ev.get('testID')
+                  failures.append((tests.get(tid, f'test {tid}'),
+                                   ev.get('error', ''),
+                                   ev.get('stackTrace', '')))
+              elif t == 'testDone' and ev.get('result') != 'success':
+                  tid = ev.get('testID')
+                  if not any(tests.get(tid) == f[0] for f in failures):
+                      failures.append((tests.get(tid, f'test {tid}'),
+                                       f"result={ev.get('result')}", ''))
+
+          print(f"### Échecs Flutter : {len(failures)}\n")
+          for name, error, stack in failures:
+              print(f"#### `{name}`\n")
+              print("```")
+              print(error.strip()[:1500])
+              frames = [l for l in stack.splitlines()
+                        if 'mobile/' in l or 'package:test' in l][:6]
+              for l in frames:
+                  print(l)
+              print("```\n")
+          PY
+          head -c 2000 /tmp/tests.err >> "$GITHUB_STEP_SUMMARY" || true
