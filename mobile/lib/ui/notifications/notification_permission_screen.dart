@@ -12,7 +12,6 @@ import 'package:go_router/go_router.dart';
 
 import '../../core/di/providers.dart';
 import '../../core/notifications/push_notifications.dart';
-import '../../core/settings/app_settings.dart';
 import '../../l10n/app_localizations.dart';
 
 class NotificationPermissionScreen extends ConsumerStatefulWidget {

@@ -25,14 +25,14 @@ Map<String, dynamic> _profilePayload({required bool active}) {
     'total_reviews': 250,
     'lapses': 80,
     'lapse_rate': 0.32,
-    'leech_cards': const [],
-    'hot_tags': const [],
+    'leech_cards': const <dynamic>[],
+    'hot_tags': const <dynamic>[],
     'fsrs_adjustment': {
       'weights': List<double>.from(kDefaultFsrsWeights)
         ..[11] = kDefaultFsrsWeights[11] * 1.15,
-      'changed_indices': active ? const [11] : const [],
+      'changed_indices': active ? const <int>[11] : const <int>[],
       'reasons':
-          active ? const ['lapse_rate élevé (32% ≥ 30%) → w11 ×1.15'] : const [],
+          active ? const <String>['lapse_rate élevé (32% ≥ 30%) → w11 ×1.15'] : const <String>[],
       'active': active,
     },
   };
