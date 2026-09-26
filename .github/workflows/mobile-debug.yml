@@ -34,6 +34,9 @@ jobs:
           rm -f test/widget_test.dart
           flutter pub upgrade
           dart run build_runner build --build-filter=lib/data/local/app_database.g.dart
+      - name: Configurer l'hôte Android généré
+        working-directory: .
+        run: python3 tools/scripts/apply_android_release_config.py
       - name: Analyse statique
         run: |
           set +e

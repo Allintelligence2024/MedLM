@@ -37,6 +37,10 @@ ROOT = Path(__file__).resolve().parents[2]
 GRADLE = ROOT / "mobile" / "android" / "app" / "build.gradle.kts"
 APPLICATION_ID = "dz.medanki.app"
 
+# Version documentée par flutter_local_notifications (module qui exige le
+# desugaring) ; toute 2.x récente convient avec AGP 8+.
+DESUGAR_VERSION = "2.1.4"
+
 SIGNING_BLOCK = """
     // ── Signature de release (audit P2-8) ─────────────────────────────
     // Les secrets viennent de l'environnement (secrets CI), jamais du
@@ -71,6 +75,28 @@ RELEASE_BUILD_TYPE = """
             signingConfig = signingConfigs.getByName("release")
         }
 """
+
+
+COMPILE_OPTIONS_BLOCK = """    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+        // flutter_local_notifications utilise java.time : sans
+        // desugaring, `:app:checkDebugAarMetadata` échoue et aucun
+        // APK ne peut être produit.
+        isCoreLibraryDesugaringEnabled = true
+    }
+"""
+
+DESUGARING_DEPENDENCIES = """
+
+// ── Core library desugaring ───────────────────────────────────────────
+// Dépendance runtime du desugaring java.time activé ci-dessus.
+// `dependencies {}` peut être déclaré plusieurs fois dans un script
+// Gradle : on ne touche pas au bloc éventuellement présent.
+dependencies {
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:%s")
+}
+""" % DESUGAR_VERSION
 
 
 def patch(text: str) -> tuple[str, list[str]]:
@@ -120,6 +146,39 @@ def patch(text: str) -> tuple[str, list[str]]:
         )
         changes.append("buildTypes.release ajouté (R8 + shrink)")
 
+    # 4. Core library desugaring (java.time) — sans elle, le build APK
+    #    échoue sur `:app:checkDebugAarMetadata` dès qu'un plugin
+    #    (flutter_local_notifications, ici) utilise java.time.
+    if "isCoreLibraryDesugaringEnabled" not in text:
+        if re.search(r"compileOptions\s*\{", text):
+            text = re.sub(
+                r"(compileOptions\s*\{)",
+                r"\1\n        isCoreLibraryDesugaringEnabled = true",
+                text,
+                count=1,
+            )
+        else:
+            text = re.sub(
+                r"(android\s*\{)",
+                r"\1\n" + COMPILE_OPTIONS_BLOCK,
+                text,
+                count=1,
+            )
+        changes.append("core library desugaring activé (java.time)")
+
+    if "coreLibraryDesugaring(" not in text:
+        if re.search(r"dependencies\s*\{", text):
+            text = re.sub(
+                r"(dependencies\s*\{)",
+                r'\1\n    coreLibraryDesugaring('
+                f'"com.android.tools:desugar_jdk_libs:{DESUGAR_VERSION}")',
+                text,
+                count=1,
+            )
+        else:
+            text = text.rstrip() + DESUGARING_DEPENDENCIES
+        changes.append(f"dépendance desugar_jdk_libs {DESUGAR_VERSION} ajoutée")
+
     return text, changes
 
 
@@ -135,6 +194,13 @@ def verify(text: str) -> list[str]:
         problems.append("retrait des ressources inutilisées désactivé")
     if "proguard-rules.pro" not in text:
         problems.append("proguard-rules.pro non référencé")
+    if "isCoreLibraryDesugaringEnabled = true" not in text:
+        problems.append(
+            "core library desugaring désactivé — le build APK échouera "
+            "(flutter_local_notifications utilise java.time)"
+        )
+    if "coreLibraryDesugaring(" not in text:
+        problems.append("dépendance desugar_jdk_libs absente")
     rules = (ROOT / "mobile" / "proguard-rules.pro").read_text(encoding="utf-8")
     active = [
         line.strip()

@@ -81,8 +81,7 @@ Future<AppDatabase> _openDatabase() async {
 /// Enregistre la tâche périodique de synchronisation.
 Future<void> _scheduleBackgroundSync() async {
   try {
-    await BackgroundSync.initialize(
-        debugLabel: kDebugMode ? 'medanki' : null);
+    await BackgroundSync.initialize();
     await BackgroundSync.schedule();
   } catch (e) {
     debugPrint('Sync de fond indisponible: $e');

@@ -76,6 +76,14 @@ jobs:
           # flutter create adds a template test/widget_test.dart referring
           # to MyApp, which does not exist in this application.
           rm -f test/widget_test.dart
+
+      - name: Configurer l'hôte Android généré
+        # `mobile/android/` n'est pas versionné : `flutter create` produit
+        # un hôte de démonstration, et le desugaring java.time (exigé par
+        # flutter_local_notifications) n'y est pas activé — sans ce
+        # script, `:app:checkDebugAarMetadata` fait échouer le build APK.
+        working-directory: .
+        run: python3 tools/scripts/apply_android_release_config.py
       - name: Dépendances Flutter
         working-directory: mobile
         run: flutter pub upgrade
