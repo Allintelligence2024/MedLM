@@ -6,6 +6,10 @@ name: mobile-debug
 # l'environnement d'audit (logs Actions non accessibles).
 on:
   workflow_dispatch:
+  push:
+    # Uniquement la branche de travail : la branche d'artefacts
+    # `ci-artifacts` ne doit pas relancer ce workflow.
+    branches: ['arena/01a03782-medlm']
 
 permissions:
   contents: write
