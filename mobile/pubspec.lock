@@ -11,10 +11,10 @@ packages:
     version: 1.0.0
   intl:
     dependency: "direct main"
-    version: 0.19.0
+    version: 0.20.2
   drift:
     dependency: "direct main"
-    version: 2.18.0
+    version: 2.34.2
   sqlite3_flutter_libs:
     dependency: "direct main"
     version: 0.5.20
@@ -36,9 +36,12 @@ packages:
   flutter_secure_storage:
     dependency: "direct main"
     version: 9.2.2
+  uuid:
+    dependency: "direct main"
+    version: 4.5.1
   workmanager:
     dependency: "direct main"
-    version: 0.5.2
+    version: 0.10.10
   cryptography:
     dependency: "direct main"
     version: 2.7.0
@@ -80,10 +83,10 @@ packages:
     version: 1.25.0
   drift_dev:
     dependency: "direct main"
-    version: 2.18.0
+    version: 2.34.2
   build_runner:
     dependency: "direct main"
-    version: 2.4.9
+    version: 2.10.5
   mocktail:
     dependency: "direct main"
     version: 1.0.4
