@@ -10,6 +10,7 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:medanki_dz/data/network/api_client.dart';
+import 'package:medanki_dz/data/network/secure_token_storage.dart';
 import 'package:medanki_dz/data/repositories/ai/ai_models.dart';
 import 'package:medanki_dz/data/repositories/ai/ai_repository.dart';
 import 'package:medanki_dz/ui/ai/ai_speech_ports.dart';
@@ -87,9 +88,11 @@ class FakeApiClient extends ApiClient {
   }
 }
 
-class _NoopStorage implements dynamic {
+class _NoopStorage extends SecureTokenStorage {
+  _NoopStorage() : super();
+
   @override
-  noSuchMethod(Invocation invocation) async => null;
+  Future<String> getOrCreateDeviceId() async => 'test-device';
 }
 
 /// STT scripté : disponible, produit un texte fixe à l'arrêt.
