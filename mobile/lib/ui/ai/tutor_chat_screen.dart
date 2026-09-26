@@ -205,7 +205,7 @@ class _TutorChatScreenState extends State<TutorChatScreen> {
               child: Padding(
                 padding: const EdgeInsets.only(right: 12),
                 child: Text(
-                  l10n.tutorQuotaRemaining(_remainingQuota),
+                  l10n.tutorQuotaRemaining(_remainingQuota!),
                   style: TextStyle(fontSize: 12, color: scheme.outline),
                 ),
               ),

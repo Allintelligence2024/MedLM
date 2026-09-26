@@ -51,8 +51,8 @@ _RsaFixture _newKeyPair() {
 /// Encode une clé publique RSA en PEM SubjectPublicKeyInfo (DER).
 String encodeSpkiPem(RSAPublicKey key) {
   final rsaKey = _tlv(0x30, <int>[
-    ..._integerDer(key.modulus),
-    ..._integerDer(key.exponent),
+    ..._integerDer(key.modulus!),
+    ..._integerDer(key.exponent!),
   ]);
   final algorithmIdentifier = _tlv(0x30, <int>[
     0x06, 0x09, // OID
@@ -90,10 +90,22 @@ List<int> _lengthDer(int length) {
   return <int>[0x80 | bytes.length, ...bytes];
 }
 
+/// Encodage big-endian non signé d'un BigInt (`BigInt.toBytes` n'existe
+/// pas dans dart:core).
+Uint8List _unsignedBytes(BigInt value) {
+  var hex = value.toRadixString(16);
+  if (hex.length.isOdd) hex = '0$hex';
+  final bytes = Uint8List(hex.length ~/ 2);
+  for (var i = 0; i < bytes.length; i++) {
+    bytes[i] = int.parse(hex.substring(i * 2, i * 2 + 2), radix: 16);
+  }
+  return bytes;
+}
+
 /// INTEGER DER non signé (avec zéro de bourrage si le bit de poids fort
 /// est à 1 — c'est le cas de tous les modulus RSA réels).
 List<int> _integerDer(BigInt value) {
-  var bytes = Uint8List.fromList(value.toBytes());
+  var bytes = _unsignedBytes(value);
   if (bytes.isNotEmpty && bytes[0] & 0x80 != 0) {
     bytes = Uint8List.fromList(<int>[0x00, ...bytes]);
   }
@@ -118,9 +130,7 @@ String _signJwt(
   final signingInput = '${_b64Url(header ?? _rs256Header)}.${_b64Url(payload)}';
   final signer = RSASigner(SHA256Digest(), '0609608648016503040201')
     ..init(true, PrivateKeyParameter<RSAPrivateKey>(fixture.privateKey));
-  final signature =
-      (signer.generateSignature(utf8.encode(signingInput)) as RSASignature)
-          .bytes;
+  final signature = signer.generateSignature(utf8.encode(signingInput)).bytes;
   return '$signingInput.${base64Url.encode(signature).replaceAll('=', '')}';
 }
 
@@ -131,7 +141,8 @@ void main() {
   late _RsaFixture fixture;
   late JwtVerifier verifier;
 
-  setUp(() {
+
+  setUpAll(() {
     fixture = _newKeyPair();
     verifier = JwtVerifier.fromPem(fixture.publicPem);
   });
