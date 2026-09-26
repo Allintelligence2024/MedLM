@@ -112,7 +112,7 @@ void main() {
       final SyncOutboxUseCase useCase =
           SyncOutboxUseCase(fakeSrs, fakeSync);
 
-      fakeSync.pullEvents.add(ReviewEvent(
+      fakeSync.pullEvents.add(const ReviewEvent(
         id: 'e1',
         cardId: 'c1',
         userId: 'u1',
@@ -150,7 +150,7 @@ void main() {
 
     test('autorise pendant la grace period', () async {
       final FakeEntitlementRepository fake = FakeEntitlementRepository(
-        EntitlementState(
+        const EntitlementState(
           plan: EntitlementPlan.premium,
           isValid: false,
           expiresAtMs: 1000,

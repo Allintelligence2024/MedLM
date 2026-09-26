@@ -58,11 +58,9 @@ class _NoopStorage extends SecureTokenStorage {
 
 void main() {
   late AppDatabase db;
-  late FakeApiClient api;
 
   setUp(() async {
     db = AppDatabase(NativeDatabase.memory());
-    api = FakeApiClient();
     await db.into(db.deckMeta).insert(DeckMetaCompanion.insert(
           deckId: 'd1',
           moduleId: 'm1',

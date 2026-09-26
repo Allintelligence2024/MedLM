@@ -75,7 +75,7 @@ void main() {
     test('round-trip : poids, active, raisons, fraîcheur préservés', () {
       final now = DateTime.now().millisecondsSinceEpoch;
       final entry = CachedAdaptiveParams(
-        parameters: FsrsParameters(),
+        parameters: const FsrsParameters(),
         fetchedAtMs: now,
         active: true,
         reasons: ['w11 ×1.15'],
