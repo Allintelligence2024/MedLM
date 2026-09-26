@@ -384,5 +384,28 @@
         "type": "String"
       }
     }
-  }
+  },
+  "levelP1": "Étudiant P1",
+  "levelP2": "Étudiant P2",
+  "levelInterne": "Interne",
+  "levelResident": "Résident",
+  "levelPractitioner": "Praticien",
+  "badgeStreak7Name": "Semaine parfaite",
+  "badgeStreak7Desc": "7 jours de streak",
+  "badgeStreak30Name": "Mois de fer",
+  "badgeStreak30Desc": "30 jours de streak",
+  "badgeStreak100Name": "Centenaire",
+  "badgeStreak100Desc": "100 jours de streak",
+  "badgeModuleCompleteName": "Module complété",
+  "badgeModuleCompleteDesc": "Toutes les cartes d'un module sont en révision",
+  "badgeMock80Name": "As du mock exam",
+  "badgeMock80Desc": "Mock exam à plus de 80% (sera tracked en Phase 10)",
+  "badgeCards500Name": "500 cartes maîtrisées",
+  "badgeCards500Desc": "500 cartes avec reps >= 5 et lapses < 3",
+  "badgeCards2500Name": "2 500 cartes maîtrisées",
+  "badgeCards2500Desc": "2 500 cartes maîtrisées",
+  "badgeZeroDue7dName": "Zéro carte due",
+  "badgeZeroDue7dDesc": "7 jours consécutifs sans carte due en retard",
+  "badgeEnglishEnabledName": "Bilingue",
+  "badgeEnglishEnabledDesc": "Terme médical EN activé en plus du français"
 }
