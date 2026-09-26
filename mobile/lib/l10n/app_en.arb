@@ -123,6 +123,17 @@
   "notifPermissionDeny": "No thanks",
   "notifDenied": "Notifications are off. You can re-enable them in your phone settings.",
   "aiHintLabel": "Personalised hint",
+  "aiHintWhy": "Why this hint?",
+  "tutorSend": "Send",
+  "tutorInputHint": "Your course question…",
+  "tutorQuotaRemaining": "{remaining} left",
+  "@tutorQuotaRemaining": {
+    "placeholders": {
+      "remaining": {
+        "type": "int"
+      }
+    }
+  },
   "aiHintDismiss": "Hide hint",
   "tutorQuotaReached": "Daily tutor quota reached — try again tomorrow.",
   "tutorOffline": "No connection — the tutor needs to be online.",
@@ -150,6 +161,9 @@
   "leaderboardYearRange": "Year (1-10)",
   "leaderboardOptInFailed": "Couldn't join the leaderboard.",
   "leaderboardOptOutGdpr": "Leave the leaderboard (GDPR)",
+  "mlBandLow": "at risk",
+  "mlBandMedium": "medium",
+  "mlBandHigh": "on track",
   "mlPredictionTitle": "Mock exam: estimated score",
   "mlModelWindow": "Model {version} · {days}-day window",
   "mlNotEnoughData": "Not enough data to predict yet.",
@@ -177,5 +191,40 @@
   "voiceBack": "Back",
   "voiceRuleAndQuota": "Rule applied: {rule} · quota left: {quota}",
   "actionConfirm": "Confirm",
-  "shareFailed": "Couldn't create the share."
+  "shareFailed": "Couldn't create the share.",
+  "badgesMyTitle": "My badges",
+  "leaderboardNoParticipants": "No participants this week.",
+  "leaderboardWeek": "Week {week}",
+  "leaderboardSeeRankPrompt": "Join the leaderboard to see your rank.",
+  "@leaderboardWeek": {
+    "placeholders": {
+      "week": {
+        "type": "String"
+      }
+    }
+  },
+  "levelP1": "Student P1",
+  "levelP2": "Student P2",
+  "levelInterne": "Intern",
+  "levelResident": "Resident",
+  "levelPractitioner": "Practitioner",
+  "badgeStreak7Name": "Perfect week",
+  "badgeStreak7Desc": "7-day streak",
+  "badgeStreak30Name": "Iron month",
+  "badgeStreak30Desc": "30-day streak",
+  "badgeStreak100Name": "Centurion",
+  "badgeStreak100Desc": "100-day streak",
+  "badgeModuleCompleteName": "Module completed",
+  "badgeModuleCompleteDesc": "All cards in a module are in review",
+  "badgeMock80Name": "Mock exam ace",
+  "badgeMock80Desc": "Mock exam over 80% (tracked in Phase 10)",
+  "badgeCards500Name": "500 cards mastered",
+  "badgeCards500Desc": "500 cards with reps >= 5 and lapses < 3",
+  "badgeCards2500Name": "2,500 cards mastered",
+  "badgeCards2500Desc": "2,500 cards mastered",
+  "badgeZeroDue7dName": "Zero due",
+  "badgeZeroDue7dDesc": "7 consecutive days with no overdue cards",
+  "badgeEnglishEnabledName": "Bilingual",
+  "badgeEnglishEnabledDesc": "Medical EN term enabled in addition to French",
+  "errorRouteNotFound": "Route not found"
 }

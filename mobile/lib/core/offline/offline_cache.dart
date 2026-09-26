@@ -29,7 +29,6 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
 import '../security/aes_gcm.dart';
-import 'connectivity_aware.dart';
 
 class CachedDeck {
   const CachedDeck({
@@ -166,7 +165,7 @@ class OfflineCacheManager {
   /// Calcule l'espace total utilisé par le cache.
   Future<int> totalSizeBytes() async {
     final all = await listAll();
-    return all.fold(0, (sum, c) => sum + c.sizeBytes);
+    return all.fold<int>(0, (sum, c) => sum + c.sizeBytes);
   }
 
   /// Purge les bundles les plus anciens (LRU) pour rester sous
@@ -174,7 +173,7 @@ class OfflineCacheManager {
   Future<List<String>> evictLru(int maxBytes) async {
     final all = await listAll();
     all.sort((a, b) => a.lastAccessedAt.compareTo(b.lastAccessedAt));
-    let total = await totalSizeBytes();
+    var total = await totalSizeBytes();
     final evicted = <String>[];
     for (final c in all) {
       if (total <= maxBytes) break;

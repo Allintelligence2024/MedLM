@@ -123,7 +123,7 @@ void main() {
         rating: Rating.good, nowMs: t0, dayKey: '2023-11-14',
       );
 
-      final List<ReviewLogRow> pending = await repo.pendingForPush(user);
+      final List<ReviewEvent> pending = await repo.pendingForPush(user);
       expect(pending, hasLength(1));
 
       await repo.markSynced(<String>[pending.single.id]);

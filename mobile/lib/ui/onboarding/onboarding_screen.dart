@@ -146,8 +146,10 @@ class _LanguagePage extends ConsumerWidget {
           for (final lang in AppLanguage.values)
             RadioListTile<AppLanguage>(
               value: lang,
+              // ignore: deprecated_member_use
               groupValue: settings.language,
               title: Text(_languageLabel(lang)),
+              // ignore: deprecated_member_use
               onChanged: (v) {
                 if (v != null) {
                   // ignore: discarded_futures
@@ -164,8 +166,8 @@ class _LanguagePage extends ConsumerWidget {
   // arabophone doit reconnaître son option sans lire le français.
   static String _languageLabel(AppLanguage lang) => switch (lang) {
         AppLanguage.fr => 'Français',  // ignore: hardcoded-string — endonyme
-        AppLanguage.ar => 'العربية',
-        AppLanguage.en => 'English',
+        AppLanguage.ar => 'العربية',  // ignore: hardcoded-string — endonyme
+        AppLanguage.en => 'English',  // ignore: hardcoded-string — endonyme
       };
 }
 
@@ -185,8 +187,10 @@ class _GoalPage extends ConsumerWidget {
           for (final goal in AppSettings.goalChoices)
             RadioListTile<int>(
               value: goal,
+              // ignore: deprecated_member_use
               groupValue: settings.dailyGoalCards,
               title: Text(l10n.onboardingGoalCards(goal)),
+              // ignore: deprecated_member_use
               onChanged: (v) {
                 if (v != null) {
                   // ignore: discarded_futures

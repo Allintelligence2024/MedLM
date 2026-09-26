@@ -6,7 +6,7 @@
 /// repository (ça, c'est dans `test/data/`).
 library;
 
-import 'package:medanki_dz/core/srs/srs_models.dart';
+
 import 'package:medanki_dz/domain/domain.dart';
 
 /// Fake de `ISrsRepository` : file d'attente en mémoire, journal non

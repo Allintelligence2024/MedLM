@@ -4,13 +4,11 @@ import '../../data/network/api_client.dart';
 import '../../data/network/secure_token_storage.dart';
 import '../../data/repositories/ai/ai_repository.dart';
 import '../../data/repositories/card_repository.dart';
-import '../../data/repositories/entitlement_repository.dart';
 import '../../data/repositories/gateway/graphql_gateway_repository.dart';
 import '../../data/repositories/ml/ml_repository.dart';
 import '../../data/repositories/rest_entitlement_repository.dart';
 import '../../data/repositories/rest_sync_repository.dart';
 import '../../data/repositories/srs_repository.dart';
-import '../../data/repositories/sync_repository.dart';
 import '../../domain/domain.dart';
 
 class AppContainer {
@@ -19,11 +17,11 @@ class AppContainer {
     required this.apiBaseUrl,
     ISyncRepository? syncRepository,
     IEntitlementRepository? entitlementRepository,
-  })  : tokenStorage = SecureTokenStorage(),
-        apiClient = ApiClient(
-          baseUrl: apiBaseUrl,
-          tokenStorage: tokenStorage,
-        ) {
+  }) : tokenStorage = SecureTokenStorage() {
+    apiClient = ApiClient(
+      baseUrl: apiBaseUrl,
+      tokenStorage: tokenStorage,
+    );
     // Si un repo custom n'est pas passé, on prend l'impl REST par défaut.
     this.syncRepository = syncRepository ??
         RestSyncRepository(api: apiClient, db: database);
@@ -35,7 +33,7 @@ class AppContainer {
   final AppDatabase database;
   final String apiBaseUrl;
   final SecureTokenStorage tokenStorage;
-  final ApiClient apiClient;
+  late final ApiClient apiClient;
 
   // Use cases (instanciés paresseusement).
   late final BuildStudyQueueUseCase buildStudyQueue =

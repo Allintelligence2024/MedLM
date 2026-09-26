@@ -15,6 +15,7 @@ import 'package:drift/drift.dart';
 
 import '../../domain/domain.dart';
 import '../local/app_database.dart';
+import '../local/tables.dart';
 
 class EntitlementRepository implements IEntitlementRepository {
   EntitlementRepository(this._db);

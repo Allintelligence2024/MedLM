@@ -10,8 +10,9 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:medanki_dz/data/network/api_client.dart';
-import 'package:medanki_dz/data/repositories/ai/ai_models.dart';
+import 'package:medanki_dz/data/network/secure_token_storage.dart';
 import 'package:medanki_dz/data/repositories/ai/ai_repository.dart';
+import 'package:medanki_dz/l10n/app_localizations.dart';
 import 'package:medanki_dz/ui/ai/ai_speech_ports.dart';
 import 'package:medanki_dz/ui/ai/hint_banner.dart';
 import 'package:medanki_dz/ui/ai/tutor_chat_screen.dart';
@@ -87,9 +88,11 @@ class FakeApiClient extends ApiClient {
   }
 }
 
-class _NoopStorage implements dynamic {
+class _NoopStorage extends SecureTokenStorage {
+  _NoopStorage() : super();
+
   @override
-  noSuchMethod(Invocation invocation) async => null;
+  Future<String> getOrCreateDeviceId() async => 'test-device';
 }
 
 /// STT scripté : disponible, produit un texte fixe à l'arrêt.
@@ -135,7 +138,15 @@ class RecordingTextToSpeech implements TextToSpeechPort {
   Future<void> stop() async {}
 }
 
-Widget _wrap(Widget child) => MaterialApp(home: Scaffold(body: child));
+/// Les écrans testés exigent un ancêtre AppLocalizations (audit P1-4) :
+/// sans délégué, `AppLocalizations.of(context)` lève. On fixe le locale
+/// français car les assertions portent sur les chaînes FR.
+Widget _wrap(Widget child) => MaterialApp(
+      locale: const Locale('fr'),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      home: Scaffold(body: child),
+    );
 
 void main() {
   group('HintBanner', () {

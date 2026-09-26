@@ -50,20 +50,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     }
   }
 
-  Future<void> _login() => _run(() async {
-        final api = ref.read(apiClientProvider);
-        final result = await api.loginWithEmail(email: _email.text.trim());
-        await ref.read(sessionProvider.notifier).signIn(
-              accessToken: result.accessToken,
-              refreshToken: result.refreshToken,
-              userId: result.userId,
-              email: _email.text.trim(),
-            );
-        // La redirection est pilotée par le routeur : dès que la
-        // session passe à `authenticated`, il oriente vers l'accueil
-        // ou l'onboarding. On ne navigue pas à la main ici, sinon les
-        // deux logiques se contrediraient.
-      });
+  // La connexion par email seul est interdite côté serveur. Le seul flux
+  // autorisé est le magic link, qui prouve la possession de la boîte mail.
+  Future<void> _login() => _magicLink();
 
   Future<void> _magicLink() => _run(() async {
         await ref

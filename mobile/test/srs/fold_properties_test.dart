@@ -275,9 +275,9 @@ void main() {
     });
 
     test('la difficulté monte avec Again et baisse avec Easy', () {
-      SrsCardState base =
+      final SrsCardState base =
           engine.applyReview(SrsCardState.initial, Rating.good, t0);
-      final int probe = t0 + kMillisPerDay;
+      const int probe = t0 + kMillisPerDay;
       expect(engine.applyReview(base, Rating.again, probe).difficulty,
           greaterThan(base.difficulty));
       expect(engine.applyReview(base, Rating.easy, probe).difficulty,

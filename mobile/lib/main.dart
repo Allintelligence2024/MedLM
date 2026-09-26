@@ -23,7 +23,6 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:drift/native.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -81,7 +80,7 @@ Future<AppDatabase> _openDatabase() async {
 /// Enregistre la tâche périodique de synchronisation.
 Future<void> _scheduleBackgroundSync() async {
   try {
-    BackgroundSync.initialize(debugLabel: kDebugMode ? 'medanki' : null);
+    await BackgroundSync.initialize();
     await BackgroundSync.schedule();
   } catch (e) {
     debugPrint('Sync de fond indisponible: $e');

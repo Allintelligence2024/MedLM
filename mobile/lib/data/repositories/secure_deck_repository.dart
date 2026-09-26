@@ -13,7 +13,6 @@
 //      usage futur.
 library;
 
-import 'dart:convert';
 import 'dart:typed_data';
 
 import '../../core/security/aes_gcm.dart';

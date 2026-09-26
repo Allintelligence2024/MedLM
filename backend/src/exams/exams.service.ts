@@ -128,16 +128,19 @@ export class ExamsService {
       .where(eq(examQuestions.templateId, attempt.templateId));
 
     const correctMap = new Map<string, string[]>();
+    const optionMap = new Map<string, Set<string>>();
     for (const q of privateQuestions) {
       // Les bonnes réponses vivent dans options[].is_correct — jamais
       // dans une colonne dédiée (correctOptionIds n'existe pas en base).
-      correctMap.set(
-        q.id,
-        q.options.filter((o) => o.is_correct).map((o) => o.id),
-      );
+      correctMap.set(q.id, q.options.filter((o) => o.is_correct).map((o) => o.id));
+      optionMap.set(q.id, new Set(q.options.map((o) => o.id)));
     }
 
-    // Compare.
+    // Le sujet serveur est la seule source de vérité du dénominateur.
+    // Une réponse inconnue ou dupliquée est une requête invalide, pas une
+    // question à ignorer : sinon un client peut obtenir 100 % en n'envoyant
+    // qu'une seule réponse correcte.
+    const answered = new Set<string>();
     let correct = 0;
     let incorrect = 0;
     let unanswered = 0;
@@ -145,7 +148,19 @@ export class ExamsService {
 
     for (const a of args.body.answers) {
       const truth = correctMap.get(a.question_id);
-      if (!truth) continue;
+      const allowedOptions = optionMap.get(a.question_id);
+      if (!truth || !allowedOptions) {
+        throw new BadRequestException(`question inconnue : ${a.question_id}`);
+      }
+      if (answered.has(a.question_id)) {
+        throw new BadRequestException(`question dupliquée : ${a.question_id}`);
+      }
+      answered.add(a.question_id);
+      const selected = new Set(a.selected);
+      if (selected.size !== a.selected.length ||
+          [...selected].some((id) => !allowedOptions.has(id))) {
+        throw new BadRequestException(`option invalide : ${a.question_id}`);
+      }
       if (a.selected.length === 0) {
         unanswered++;
         missed.push(a.question_id);
@@ -162,7 +177,15 @@ export class ExamsService {
       }
     }
 
-    const total = correct + incorrect + unanswered;
+    // Les questions non envoyées comptent comme non répondues.
+    for (const q of privateQuestions) {
+      if (!answered.has(q.id)) {
+        unanswered++;
+        missed.push(q.id);
+      }
+    }
+
+    const total = privateQuestions.length;
     const score = total === 0 ? 0 : correct / total;
     const pct = Math.round(score * 100);
     const pass = score >= PASS_THRESHOLD;

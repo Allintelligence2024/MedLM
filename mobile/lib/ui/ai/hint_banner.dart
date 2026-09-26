@@ -111,11 +111,11 @@ class _HintBannerState extends State<HintBanner> {
                         childrenPadding: EdgeInsets.zero,
                         dense: true,
                         title: Text(
-                          'Pourquoi cet indice ?',
+                          l10n.aiHintWhy,
                           style: TextStyle(
                             fontSize: 12,
                             color: scheme.onTertiaryContainer
-                                .withOpacity(0.75),
+                                .withValues(alpha: 0.75),
                           ),
                         ),
                         children: [
@@ -127,7 +127,7 @@ class _HintBannerState extends State<HintBanner> {
                                 style: TextStyle(
                                   fontSize: 12,
                                   color: scheme.onTertiaryContainer
-                                      .withOpacity(0.75),
+                                      .withValues(alpha: 0.75),
                                 ),
                               ),
                             ),

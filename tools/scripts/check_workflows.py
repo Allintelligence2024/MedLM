@@ -28,7 +28,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 # Les workflows vivent dans ci/workflows/ tant que l'app GitHub n'a pas
 # la permission de les écrire sous .github/ (cf. ci/README.md).
-CANDIDATE_DIRS = [ROOT / ".github" / "workflows", ROOT / "ci" / "workflows"]
+CANDIDATE_DIRS = [ROOT / ".github" / "workflows"]
 
 failures: list[str] = []
 warnings: list[str] = []
@@ -181,12 +181,6 @@ def main() -> int:
     for f in files:
         check_workflow(f, yaml)
 
-    installed = (ROOT / ".github" / "workflows").is_dir()
-    if not installed:
-        warnings.append(
-            "workflows encore dans ci/workflows/ — à déplacer vers "
-            ".github/workflows/ pour qu'ils s'exécutent (cf. ci/README.md)"
-        )
 
     for w in warnings:
         print(f"  ⚠  {w}")

@@ -32,18 +32,43 @@ class GamificationConstants {
 
 /// Niveaux (v2 §9.2).
 class Level {
-  const Level(this.name, this.minXp, this.color);
-  final String name;
+  const Level(this.name, this.minXp, this.color, {this.id = ''});
+  final String id;
+  final String name; // FR fallback — l10n via localizedName()
   final int minXp;
   final int color; // ARGB
 
   static const List<Level> tiers = <Level>[
-    Level('Étudiant P1', 0, 0xFF607D8B),
-    Level('Étudiant P2', 500, 0xFF1976D2),
-    Level('Interne', 2000, 0xFF388E3C),
-    Level('Résident', 5000, 0xFF7B1FA2),
-    Level('Praticien', 10000, 0xFFFF8F00),
+    Level('Étudiant P1', 0, 0xFF607D8B, id: 'p1'),
+    Level('Étudiant P2', 500, 0xFF1976D2, id: 'p2'),
+    Level('Interne', 2000, 0xFF388E3C, id: 'interne'),
+    Level('Résident', 5000, 0xFF7B1FA2, id: 'resident'),
+    Level('Praticien', 10000, 0xFFFF8F00, id: 'practitioner'),
   ];
+
+  /// Nom localisé — à utiliser dans l'UI, pas `name` directement.
+  String localizedName(dynamic l10n) {
+    // l10n est AppLocalizations mais on évite l'import circulaire
+    // en le typant dynamic et en utilisant les getters par nom.
+    try {
+      switch (id) {
+        case 'p1':
+          return (l10n as dynamic).levelP1 as String;
+        case 'p2':
+          return (l10n as dynamic).levelP2 as String;
+        case 'interne':
+          return (l10n as dynamic).levelInterne as String;
+        case 'resident':
+          return (l10n as dynamic).levelResident as String;
+        case 'practitioner':
+          return (l10n as dynamic).levelPractitioner as String;
+        default:
+          return name;
+      }
+    } catch (_) {
+      return name;
+    }
+  }
 
   static Level forXp(int xp) {
     Level current = tiers.first;

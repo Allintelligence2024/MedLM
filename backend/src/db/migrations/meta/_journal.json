@@ -127,6 +127,34 @@
       "when": 1735690620000,
       "tag": "0018_mvp_integrity",
       "breakpoints": false
+    },
+    {
+      "idx": 18,
+      "version": "7",
+      "when": 1760000000000,
+      "tag": "0019_auth_challenges",
+      "breakpoints": true
+    },
+    {
+      "idx": 19,
+      "version": "7",
+      "when": 1760000100000,
+      "tag": "0020_rbac_roles",
+      "breakpoints": true
+    },
+    {
+      "idx": 20,
+      "version": "7",
+      "when": 1760000200000,
+      "tag": "0021_payment_orders",
+      "breakpoints": true
+    },
+    {
+      "idx": 21,
+      "version": "7",
+      "when": 1760000300000,
+      "tag": "0022_card_workflow_statuses",
+      "breakpoints": true
     }
   ]
 }

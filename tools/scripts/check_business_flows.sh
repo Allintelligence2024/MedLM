@@ -32,9 +32,12 @@ FAIL=0
 ko() { echo "  ❌ $1"; FAIL=$((FAIL+1)); }
 ok() { echo "  ✓ $1"; }
 
+MAGIC_FILE=/tmp/medanki-e2e-magic-link.html
+rm -f "$MAGIC_FILE"
 DATABASE_URL="${DATABASE_URL:-postgres://medanki@127.0.0.1:55432/medanki_dz}" \
   NODE_ENV=test LOG_LEVEL=error PORT=$PORT \
   JWT_SIGNING_KEY_PATH=./keys/jwt-private.pem \
+  E2E_MAGIC_LINK_FILE="$MAGIC_FILE" \
   node dist/main.js > /tmp/e2e2.log 2>&1 &
 PID=$!
 trap "kill $PID 2>/dev/null" EXIT
@@ -52,12 +55,26 @@ if [[ $READY -ne 1 ]]; then
 fi
 
 EMAIL="flow$RANDOM@univ-oran.dz"
-SIGNUP=$(curl -s -X POST -H 'Content-Type: application/json' -H 'X-Platform: mobile' \
+# L'authentification email/password est volontairement désactivée : le
+# parcours doit prouver le refus HTTP puis utiliser le vrai magic-link.
+SIGNUP_CODE=$(curl -s -o /tmp/body.txt -w "%{http_code}" -X POST \
+  -H 'Content-Type: application/json' -H 'X-Platform: mobile' \
   -d "{\"email\":\"$EMAIL\"}" "$B/v1/auth/signup" --max-time 10)
-AT=$(echo "$SIGNUP" | python3 -c "import sys,json;print(json.load(sys.stdin).get('access_token',''))" 2>/dev/null)
-RT=$(echo "$SIGNUP" | python3 -c "import sys,json;print(json.load(sys.stdin).get('refresh_token',''))" 2>/dev/null)
-UID_=$(echo "$SIGNUP" | python3 -c "import sys,json;print(json.load(sys.stdin).get('user_id',''))" 2>/dev/null)
-[[ -n "$AT" ]] && ok "signup → jetons émis" || { ko "signup: $SIGNUP"; exit 1; }
+[[ "$SIGNUP_CODE" == "410" ]] && ok "signup email-only → 410 (désactivé)" || { ko "signup email-only → $SIGNUP_CODE (410 attendu)"; exit 1; }
+
+MAGIC_CODE=$(curl -s -o /tmp/body.txt -w "%{http_code}" -X POST \
+  -H 'Content-Type: application/json' \
+  -d "{\"email\":\"$EMAIL\"}" "$B/v1/auth/magic-link" --max-time 10)
+[[ "$MAGIC_CODE" == "202" ]] && ok "demande magic-link → 202" || { ko "magic-link → $MAGIC_CODE : $(head -c 200 /tmp/body.txt)"; exit 1; }
+for _ in $(seq 1 20); do [[ -s "$MAGIC_FILE" ]] && break; sleep 0.25; done
+MAGIC_TOKEN=$(grep -oP 'token=\K[^&" ]+' "$MAGIC_FILE" | head -1)
+[[ -n "$MAGIC_TOKEN" ]] || { ko "magic-link non capturé en environnement E2E"; exit 1; }
+TOKENS=$(curl -s -X POST -H 'X-Platform: mobile' \
+  "$B/v1/auth/magic-link/verify?token=$MAGIC_TOKEN" --max-time 10)
+AT=$(echo "$TOKENS" | python3 -c "import sys,json;print(json.load(sys.stdin).get('access_token',''))" 2>/dev/null)
+RT=$(echo "$TOKENS" | python3 -c "import sys,json;print(json.load(sys.stdin).get('refresh_token',''))" 2>/dev/null)
+UID_=$(echo "$TOKENS" | python3 -c "import sys,json;print(json.load(sys.stdin).get('user_id',''))" 2>/dev/null)
+[[ -n "$AT" && -n "$RT" && -n "$UID_" ]] && ok "magic-link verify → jetons émis" || { ko "magic-link verify: $TOKENS"; exit 1; }
 
 # L'algorithme doit être RS256 (vérification hors-ligne, v2 §8.1).
 ALG=$(python3 -c "

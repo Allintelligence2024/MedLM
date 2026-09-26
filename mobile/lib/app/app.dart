@@ -2,14 +2,31 @@
 library;
 
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../core/di/providers.dart';
-import '../core/settings/app_settings.dart';
 import '../l10n/app_localizations.dart';
 import 'router.dart';
 import 'theme.dart';
+
+/// Langue effectivement servie à partir des langues demandées par le
+/// système et de celles du produit.
+///
+/// Le français est le repli du produit (langue de rédaction, public
+/// algérien) : le résultat ne doit donc PAS dépendre de l'ordre de
+/// `AppLocalizations.supportedLocales`, qui est produit par le
+/// générateur Flutter (aujourd'hui `ar`, `en`, `fr`). Sans cette
+/// fonction, un téléphone dans une langue non supportée tombait sur
+/// la première langue du bundle généré — c'est-à-dire l'arabe.
+Locale resolveAppLocale(List<Locale>? preferred, Iterable<Locale> supported) {
+  final supportedList = supported.toList(growable: false);
+  for (final wanted in preferred ?? const <Locale>[]) {
+    for (final candidate in supportedList) {
+      if (candidate.languageCode == wanted.languageCode) return candidate;
+    }
+  }
+  return const Locale('fr');
+}
 
 class MedAnkiApp extends ConsumerWidget {
   const MedAnkiApp({super.key});
@@ -26,9 +43,10 @@ class MedAnkiApp extends ConsumerWidget {
       darkTheme: buildDarkTheme(),
       routerConfig: router,
       // La langue choisie par l'utilisateur prime ; sinon on suit le
-      // système, et `supportedLocales` fait la résolution (arabe pour
-      // un téléphone en arabe, français par défaut en Algérie).
+      // système, et `resolveAppLocale` garantit le repli français
+      // (l'ordre du bundle généré n'est pas un contrat produit).
       locale: settings?.language.locale,
+      localeListResolutionCallback: resolveAppLocale,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       builder: (context, child) {

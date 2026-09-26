@@ -9,10 +9,12 @@ import { PromoCodeProvider } from '../../src/billing/promo-code.provider';
 import { ChargilyPayProvider } from '../../src/billing/chargily.provider';
 import { users } from '../../src/db/schema/users';
 import { webhookEvents } from '../../src/db/schema/billing';
+import { paymentOrders } from '../../src/db/schema/payment-orders';
 
 class FakeDb {
   entitlements: any[] = [];
   webhookEvents: any[] = [];
+  paymentOrders: any[] = [];
   userEmail = 'alice@medanki.dz';
 
   transaction = async (fn: (tx: FakeDb) => Promise<unknown>) => fn(this);
@@ -25,7 +27,9 @@ class FakeDb {
             ? [{ email: self.userEmail }]
             : t === webhookEvents
               ? self.webhookEvents
-              : self.entitlements;
+              : t === paymentOrders
+                ? self.paymentOrders
+                : self.entitlements;
         return {
           where(_w: any) {
             // Drizzle réel : le builder est thenable (await → rows[]).
@@ -47,14 +51,18 @@ class FakeDb {
       },
     };
   }
-  insert(_t: any): any {
+  insert(t: any): any {
     const self = this;
     return {
       values(v: any) {
-        const done = Promise.resolve().then(() => self.webhookEvents.push(v));
+        const target = t === paymentOrders ? self.paymentOrders : self.webhookEvents;
+        const done = Promise.resolve().then(() => target.push({ ...v, id: v.id ?? 'order-1' }));
         return {
           then(res: any) {
             return done.then(res);
+          },
+          returning() {
+            return Promise.resolve([{ id: 'order-1' }]);
           },
           onConflictDoUpdate() {
             self.entitlements.push(v);
@@ -129,6 +137,10 @@ describe('BillingService', () => {
   });
 
   it('traite un webhook checkout.paid comme confirmé', async () => {
+    db.paymentOrders.push({
+      id: 'order-1', userId: 'u1', providerRef: 'co_paid', plan: 'yearly',
+      amountCents: 240000, currency: 'DZD', status: 'pending',
+    });
     const r = await service.handleChargilyWebhook({
       eventId: 'evt_1',
       eventType: 'checkout.paid',

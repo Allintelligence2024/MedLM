@@ -36,12 +36,15 @@ class BackgroundSync {
   /// À appeler une seule fois au démarrage de l'app (dans
   /// `main.dart` AVANT `runApp`). `callbackDispatcher` est la
   /// fonction top-level qui sera appelée en background.
-  static void initialize({String? debugLabel}) {
+  ///
+  /// `isInDebugMode` a été retiré en workmanager 0.10 (déprécié, sans
+  /// effet) : la notification de debug se configure désormais par les
+  /// handlers `WorkmanagerDebug`, pas par ce paramètre.
+  static Future<void> initialize() async {
     if (_initialized) return;
-    Workmanager().initialize(
-      callbackDispatcher,
-      isInDebugMode: debugLabel != null,
-    );
+    // `initialize` est asynchrone côté plugin depuis 0.10 : l'ignorer
+    // laissait `schedule()` partir avant l'enregistrement du callback.
+    await Workmanager().initialize(callbackDispatcher);
     _initialized = true;
   }
 
@@ -56,14 +59,15 @@ class BackgroundSync {
         'BackgroundSync.initialize() doit être appelé avant schedule()',
       );
     }
-    final conditions = <WorkmanagerConstraint>[];
-    if (requireWifi) conditions.add(WorkmanagerConstraint.connected);
+    final constraints = Constraints(
+      networkType: requireWifi ? NetworkType.unmetered : NetworkType.connected,
+      requiresBatteryNotLow: true,
+    );
     await Workmanager().registerPeriodicTask(
       'periodic.$kBackgroundSyncTaskName',
       kBackgroundSyncTaskName,
       frequency: frequency,
-      constraints: conditions,
-      existingWorkPolicy: ExistingPeriodicWorkPolicy.replace,
+      constraints: constraints,
     );
   }
 

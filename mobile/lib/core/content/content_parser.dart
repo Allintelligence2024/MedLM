@@ -67,10 +67,10 @@ class ContentParser {
   ParseResult parseDeck(Map<String, dynamic> json) {
     final Object? rawCards = json['cards'];
     if (rawCards is! List) {
-      throw ContentPolicyException('manifeste sans liste "cards"');
+      throw const ContentPolicyException('manifeste sans liste "cards"');
     }
     final String deckId = json['deck_id'] as String? ??
-        (throw ContentPolicyException('manifeste sans "deck_id"'));
+        (throw const ContentPolicyException('manifeste sans "deck_id"'));
 
     final List<ParsedCard> ok = <ParsedCard>[];
     final List<ContentPolicyException> ko = <ContentPolicyException>[];
@@ -93,7 +93,7 @@ class ContentParser {
   ParsedCard parseCard(Map<String, dynamic> json, {String? defaultDeckId}) {
     final String? id = json['id'] as String?;
     if (id == null || id.isEmpty) {
-      throw ContentPolicyException('carte sans identifiant');
+      throw const ContentPolicyException('carte sans identifiant');
     }
 
     final String? deckId = (json['deck_id'] as String?) ?? defaultDeckId;

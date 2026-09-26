@@ -93,7 +93,7 @@ class ExamResultScreen extends ConsumerWidget {
               ),
               const SizedBox(height: 24),
               Text(
-                l10n.examsScore(percent),
+                l10n.examsScore(percent.toString()),
                 style: theme.textTheme.headlineMedium,
                 textAlign: TextAlign.center,
               ),

@@ -5,7 +5,7 @@ import { Inject, Injectable, Logger, BadRequestException } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config';
 import { eq, and } from 'drizzle-orm';
 import { DRIZZLE, Database } from '../db/database.module';
-import { entitlements, users, webhookEvents } from '../db/schema';
+import { entitlements, paymentOrders, users, webhookEvents } from '../db/schema';
 import { PaymentResult } from './payment-provider';
 import { ChargilyPayProvider } from './chargily.provider';
 import { PromoCodeProvider } from './promo-code.provider';
@@ -58,6 +58,18 @@ export class BillingService {
       .then((rows) => rows[0]);
     if (!user) throw new BadRequestException('utilisateur inconnu');
 
+    const [order] = await this.db
+      .insert(paymentOrders)
+      .values({
+        userId: args.userId,
+        provider: 'chargily',
+        plan,
+        amountCents: baseCents,
+        currency: 'DZD',
+      })
+      .returning({ id: paymentOrders.id });
+    if (!order) throw new Error('commande de paiement non créée');
+
     const checkout = await this.chargily.createPayment({
       userId: args.userId,
       userEmail: user.email,
@@ -65,8 +77,16 @@ export class BillingService {
       amount_cents: baseCents,
       ...(args.successUrl !== undefined && { successUrl: args.successUrl }),
       ...(args.cancelUrl !== undefined && { cancelUrl: args.cancelUrl }),
-      metadata: { plan, durationDays: String(durationDays) },
+      metadata: {
+        plan,
+        durationDays: String(durationDays),
+        order_id: order.id,
+      },
     });
+    await this.db
+      .update(paymentOrders)
+      .set({ providerRef: checkout.providerRef })
+      .where(eq(paymentOrders.id, order.id));
     return { url: checkout.url, providerRef: checkout.providerRef, finalCents: baseCents };
   }
 
@@ -102,19 +122,33 @@ export class BillingService {
         payload: args.payload,
         signature: null, // déjà vérifiée par le contrôleur
       });
-      // 4. Si confirmé, on crédite l'utilisateur.
+      // 4. Si confirmé, on crédite uniquement une commande interne
+      // existante. Le metadata du provider n'est pas une source de vérité.
       if (result.confirmed) {
-        const meta = (args.payload as { metadata?: Record<string, string> }).metadata ?? {};
-        const userId = meta['user_id'];
-        const plan = meta['plan'] ?? 'yearly';
-        const durationDays = Number(meta['durationDays'] ?? 365);
-        if (userId) {
+        const order = await tx
+          .select()
+          .from(paymentOrders)
+          .where(eq(paymentOrders.providerRef, result.providerRef))
+          .then((rows) => rows[0]);
+        if (!order) throw new BadRequestException('commande de paiement inconnue');
+        const payload = args.payload as { amount?: number; currency?: string };
+        if (payload.amount !== undefined && payload.amount !== order.amountCents) {
+          throw new BadRequestException('montant du webhook différent de la commande');
+        }
+        if (payload.currency !== undefined && payload.currency.toUpperCase() !== order.currency) {
+          throw new BadRequestException('devise du webhook différente de la commande');
+        }
+        if (order.status !== 'paid') {
           await this.creditEntitlement(tx as unknown as Database, {
-            userId,
-            plan,
-            durationDays,
+            userId: order.userId,
+            plan: order.plan,
+            durationDays: PLAN_DURATION_DAYS[order.plan as PlanId] ?? 365,
             providerRef: result.providerRef,
           });
+          await tx
+            .update(paymentOrders)
+            .set({ status: 'paid', paidAt: new Date() })
+            .where(and(eq(paymentOrders.id, order.id), eq(paymentOrders.status, 'pending')));
         }
       }
       // 5. Marque l'event comme traité.

@@ -4,7 +4,6 @@ import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:medanki_dz/core/offline/offline_cache.dart';
-import 'package:path/path.dart' as p;
 
 void main() {
   late Directory tempDir;
@@ -53,7 +52,7 @@ void main() {
   test('loadBundle échoue si mauvaise clé', () async {
     await cache.saveBundle(
       deckId: 'd1',
-      bundle: {'cards': []},
+      bundle: <String, dynamic>{'cards': <dynamic>[]},
       encryptionKey: key,
     );
     final wrongKey = Uint8List.fromList(List<int>.generate(32, (i) => 99));
@@ -66,7 +65,7 @@ void main() {
   test('evict supprime le bundle et la meta', () async {
     await cache.saveBundle(
       deckId: 'd1',
-      bundle: {'cards': []},
+      bundle: <String, dynamic>{'cards': <dynamic>[]},
       encryptionKey: key,
     );
     expect(await cache.canServeOffline('d1'), isTrue);
@@ -75,9 +74,9 @@ void main() {
   });
 
   test('listAll retourne tous les decks cachés', () async {
-    await cache.saveBundle(deckId: 'd1', bundle: {'cards': []}, encryptionKey: key);
-    await cache.saveBundle(deckId: 'd2', bundle: {'cards': []}, encryptionKey: key);
-    await cache.saveBundle(deckId: 'd3', bundle: {'cards': []}, encryptionKey: key);
+    await cache.saveBundle(deckId: 'd1', bundle: <String, dynamic>{'cards': <dynamic>[]}, encryptionKey: key);
+    await cache.saveBundle(deckId: 'd2', bundle: <String, dynamic>{'cards': <dynamic>[]}, encryptionKey: key);
+    await cache.saveBundle(deckId: 'd3', bundle: <String, dynamic>{'cards': <dynamic>[]}, encryptionKey: key);
     final all = await cache.listAll();
     expect(all.length, equals(3));
     final ids = all.map((c) => c.deckId).toSet();
@@ -85,17 +84,17 @@ void main() {
   });
 
   test('totalSizeBytes est la somme des tailles', () async {
-    await cache.saveBundle(deckId: 'd1', bundle: {'cards': []}, encryptionKey: key);
+    await cache.saveBundle(deckId: 'd1', bundle: <String, dynamic>{'cards': <dynamic>[]}, encryptionKey: key);
     await cache.saveBundle(deckId: 'd2', bundle: {'cards': [{'x': 'y'}]}, encryptionKey: key);
     final total = await cache.totalSizeBytes();
     expect(total, greaterThan(0));
   });
 
   test('evictLru purge les plus anciens', () async {
-    await cache.saveBundle(deckId: 'old', bundle: {'cards': []}, encryptionKey: key);
+    await cache.saveBundle(deckId: 'old', bundle: <String, dynamic>{'cards': <dynamic>[]}, encryptionKey: key);
     // Force un sleep pour avoir un lastAccessedAt différent.
     await Future<void>.delayed(const Duration(milliseconds: 10));
-    await cache.saveBundle(deckId: 'new', bundle: {'cards': []}, encryptionKey: key);
+    await cache.saveBundle(deckId: 'new', bundle: <String, dynamic>{'cards': <dynamic>[]}, encryptionKey: key);
     // maxBytes = 0 → on doit tout purger.
     final evicted = await cache.evictLru(0);
     expect(evicted, isNotEmpty);
@@ -103,7 +102,7 @@ void main() {
   });
 
   test('evictLru garde tout si sous le seuil', () async {
-    await cache.saveBundle(deckId: 'd1', bundle: {'cards': []}, encryptionKey: key);
+    await cache.saveBundle(deckId: 'd1', bundle: <String, dynamic>{'cards': <dynamic>[]}, encryptionKey: key);
     final evicted = await cache.evictLru(1024 * 1024); // 1 Mo
     expect(evicted, isEmpty);
     expect(await cache.canServeOffline('d1'), isTrue);

@@ -8,8 +8,9 @@ library;
 
 import 'package:flutter/material.dart';
 
-import '../../core/gamification/gamification_constants.dart';
+import '../../core/gamification/gamification_constants.dart' as game;
 import '../../data/network/api_client.dart';
+import '../../l10n/app_localizations.dart';
 
 class BadgesScreen extends StatefulWidget {
   const BadgesScreen({super.key, required this.api});
@@ -44,7 +45,7 @@ class _BadgesScreenState extends State<BadgesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Mes badges'),
+        title: Text(AppLocalizations.of(context).badgesMyTitle),
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
@@ -64,9 +65,9 @@ class _BadgesScreenState extends State<BadgesScreen> {
               crossAxisSpacing: 12,
               mainAxisSpacing: 12,
             ),
-            itemCount: Badges.all.length,
+            itemCount: game.Badges.all.length,
             itemBuilder: (_, i) {
-              final b = Badges.all[i];
+              final b = game.Badges.all[i];
               final isUnlocked = unlocked.contains(b.id);
               return _BadgeTile(badge: b, isUnlocked: isUnlocked);
             },
@@ -79,11 +80,62 @@ class _BadgesScreenState extends State<BadgesScreen> {
 
 class _BadgeTile extends StatelessWidget {
   const _BadgeTile({required this.badge, required this.isUnlocked});
-  final Badge badge;
+  final game.Badge badge;
   final bool isUnlocked;
+
+  String _localizedName(AppLocalizations l10n) {
+    switch (badge.id) {
+      case 'streak_7':
+        return l10n.badgeStreak7Name;
+      case 'streak_30':
+        return l10n.badgeStreak30Name;
+      case 'streak_100':
+        return l10n.badgeStreak100Name;
+      case 'module_complete':
+        return l10n.badgeModuleCompleteName;
+      case 'mock_80':
+        return l10n.badgeMock80Name;
+      case 'cards_500':
+        return l10n.badgeCards500Name;
+      case 'cards_2500':
+        return l10n.badgeCards2500Name;
+      case 'zero_due_7d':
+        return l10n.badgeZeroDue7dName;
+      case 'english_enabled':
+        return l10n.badgeEnglishEnabledName;
+      default:
+        return badge.name;
+    }
+  }
+
+  String _localizedDesc(AppLocalizations l10n) {
+    switch (badge.id) {
+      case 'streak_7':
+        return l10n.badgeStreak7Desc;
+      case 'streak_30':
+        return l10n.badgeStreak30Desc;
+      case 'streak_100':
+        return l10n.badgeStreak100Desc;
+      case 'module_complete':
+        return l10n.badgeModuleCompleteDesc;
+      case 'mock_80':
+        return l10n.badgeMock80Desc;
+      case 'cards_500':
+        return l10n.badgeCards500Desc;
+      case 'cards_2500':
+        return l10n.badgeCards2500Desc;
+      case 'zero_due_7d':
+        return l10n.badgeZeroDue7dDesc;
+      case 'english_enabled':
+        return l10n.badgeEnglishEnabledDesc;
+      default:
+        return badge.description;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Container(
       decoration: BoxDecoration(
         color: isUnlocked
@@ -106,13 +158,13 @@ class _BadgeTile extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            badge.name,
+            _localizedName(l10n),
             textAlign: TextAlign.center,
             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
           ),
           const SizedBox(height: 4),
           Text(
-            badge.criterion,
+            _localizedDesc(l10n),
             textAlign: TextAlign.center,
             style: const TextStyle(fontSize: 10, color: Colors.black54),
             maxLines: 3,

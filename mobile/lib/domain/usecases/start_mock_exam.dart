@@ -15,7 +15,6 @@ library;
 
 import 'dart:math';
 
-import '../entities/entities.dart';
 import '../repositories/repositories.dart';
 
 class MockExamSession {
@@ -30,7 +29,7 @@ class MockExamSession {
 }
 
 class StartMockExamUseCase {
-  const StartMockExamUseCase(this._srs, {Random? random})
+  StartMockExamUseCase(this._srs, {Random? random})
       : _random = random ?? Random.secure();
 
   final ISrsRepository _srs;

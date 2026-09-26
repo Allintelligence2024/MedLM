@@ -355,7 +355,7 @@ class _StudyScreenState extends State<StudyScreen> {
                   Divider(color: scheme.outlineVariant),
                   const SizedBox(height: 16),
                   Text(
-                    item.backTextFr,
+                    item.backTextFr ?? '',
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
                 ],

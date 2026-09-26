@@ -224,6 +224,17 @@
   "notifPermissionDeny": "Non merci",
   "notifDenied": "Les notifications sont désactivées. Tu peux les réactiver dans les réglages du téléphone.",
   "aiHintLabel": "Indice personnalisé",
+  "aiHintWhy": "Pourquoi cet indice ?",
+  "tutorSend": "Envoyer",
+  "tutorInputHint": "Votre question de cours…",
+  "tutorQuotaRemaining": "{remaining} restant(s)",
+  "@tutorQuotaRemaining": {
+    "placeholders": {
+      "remaining": {
+        "type": "int"
+      }
+    }
+  },
   "aiHintDismiss": "Masquer l'indice",
   "tutorQuotaReached": "Quota tuteur du jour atteint — réessayez demain.",
   "tutorOffline": "Pas de réseau — le tuteur nécessite une connexion.",
@@ -258,6 +269,9 @@
   "leaderboardYearRange": "Année (1-10)",
   "leaderboardOptInFailed": "Échec de l'inscription au classement.",
   "leaderboardOptOutGdpr": "Se désinscrire du classement (RGPD)",
+  "mlBandLow": "à risque",
+  "mlBandMedium": "moyen",
+  "mlBandHigh": "prometteur",
   "mlPredictionTitle": "Examen blanc : score estimé",
   "mlModelWindow": "Modèle {version} · fenêtre {days} j",
   "@mlModelWindow": {
@@ -359,5 +373,40 @@
     }
   },
   "actionConfirm": "Confirmer",
-  "shareFailed": "Le partage n'a pas pu être créé."
+  "shareFailed": "Le partage n'a pas pu être créé.",
+  "badgesMyTitle": "Mes badges",
+  "leaderboardNoParticipants": "Aucun participant cette semaine.",
+  "leaderboardWeek": "Semaine {week}",
+  "leaderboardSeeRankPrompt": "Participez au classement pour voir votre rang.",
+  "@leaderboardWeek": {
+    "placeholders": {
+      "week": {
+        "type": "String"
+      }
+    }
+  },
+  "levelP1": "Étudiant P1",
+  "levelP2": "Étudiant P2",
+  "levelInterne": "Interne",
+  "levelResident": "Résident",
+  "levelPractitioner": "Praticien",
+  "badgeStreak7Name": "Semaine parfaite",
+  "badgeStreak7Desc": "7 jours de streak",
+  "badgeStreak30Name": "Mois de fer",
+  "badgeStreak30Desc": "30 jours de streak",
+  "badgeStreak100Name": "Centenaire",
+  "badgeStreak100Desc": "100 jours de streak",
+  "badgeModuleCompleteName": "Module complété",
+  "badgeModuleCompleteDesc": "Toutes les cartes d'un module sont en révision",
+  "badgeMock80Name": "As du mock exam",
+  "badgeMock80Desc": "Mock exam à plus de 80% (sera tracked en Phase 10)",
+  "badgeCards500Name": "500 cartes maîtrisées",
+  "badgeCards500Desc": "500 cartes avec reps >= 5 et lapses < 3",
+  "badgeCards2500Name": "2 500 cartes maîtrisées",
+  "badgeCards2500Desc": "2 500 cartes maîtrisées",
+  "badgeZeroDue7dName": "Zéro carte due",
+  "badgeZeroDue7dDesc": "7 jours consécutifs sans carte due en retard",
+  "badgeEnglishEnabledName": "Bilingue",
+  "badgeEnglishEnabledDesc": "Terme médical EN activé en plus du français",
+  "errorRouteNotFound": "Route inconnue"
 }

@@ -123,6 +123,17 @@
   "notifPermissionDeny": "لا شكرًا",
   "notifDenied": "الإشعارات معطلة. يمكنك تفعيلها من إعدادات الهاتف.",
   "aiHintLabel": "تلميح مخصص",
+  "aiHintWhy": "لماذا هذا التلميح؟",
+  "tutorSend": "إرسال",
+  "tutorInputHint": "سؤال الدرس…",
+  "tutorQuotaRemaining": "المتبقي {remaining}",
+  "@tutorQuotaRemaining": {
+    "placeholders": {
+      "remaining": {
+        "type": "int"
+      }
+    }
+  },
   "aiHintDismiss": "إخفاء التلميح",
   "tutorQuotaReached": "بلغت حصة المعلم اليومية — أعد المحاولة غدًا.",
   "tutorOffline": "لا يوجد اتصال — يحتاج المعلم إلى الإنترنت.",
@@ -150,6 +161,9 @@
   "leaderboardYearRange": "السنة (1-10)",
   "leaderboardOptInFailed": "تعذر الانضمام إلى الترتيب.",
   "leaderboardOptOutGdpr": "الانسحاب من الترتيب (RGPD)",
+  "mlBandLow": "معرّض للخطر",
+  "mlBandMedium": "متوسط",
+  "mlBandHigh": "مرشّح للنجاح",
   "mlPredictionTitle": "الامتحان التجريبي: النتيجة المتوقعة",
   "mlModelWindow": "النموذج {version} · نافذة {days} يومًا",
   "mlNotEnoughData": "لا توجد بيانات كافية للتنبؤ بعد.",
@@ -177,5 +191,40 @@
   "voiceBack": "الظهر",
   "voiceRuleAndQuota": "القاعدة المطبقة: {rule} · الحصة المتبقية: {quota}",
   "actionConfirm": "تأكيد",
-  "shareFailed": "تعذر إنشاء المشاركة."
+  "shareFailed": "تعذر إنشاء المشاركة.",
+  "badgesMyTitle": "أوسمتي",
+  "leaderboardNoParticipants": "لا مشاركين هذا الأسبوع.",
+  "leaderboardWeek": "الأسبوع {week}",
+  "leaderboardSeeRankPrompt": "انضم إلى الترتيب لترى ترتيبك.",
+  "@leaderboardWeek": {
+    "placeholders": {
+      "week": {
+        "type": "String"
+      }
+    }
+  },
+  "levelP1": "طالب سنة أولى",
+  "levelP2": "طالب سنة ثانية",
+  "levelInterne": "داخلي",
+  "levelResident": "مقيم",
+  "levelPractitioner": "ممارس",
+  "badgeStreak7Name": "أسبوع مثالي",
+  "badgeStreak7Desc": "7 أيام متتالية",
+  "badgeStreak30Name": "شهر حديدي",
+  "badgeStreak30Desc": "30 يومًا متتاليًا",
+  "badgeStreak100Name": "مئوي",
+  "badgeStreak100Desc": "100 يوم متتالي",
+  "badgeModuleCompleteName": "وحدة مكتملة",
+  "badgeModuleCompleteDesc": "جميع بطاقات الوحدة قيد المراجعة",
+  "badgeMock80Name": "خبير الامتحان التجريبي",
+  "badgeMock80Desc": "امتحان تجريبي فوق 80% (سيتم تتبعه في المرحلة 10)",
+  "badgeCards500Name": "500 بطاقة متقنة",
+  "badgeCards500Desc": "500 بطاقة مع تكرار >=5 وزلات <3",
+  "badgeCards2500Name": "2500 بطاقة متقنة",
+  "badgeCards2500Desc": "2500 بطاقة متقنة",
+  "badgeZeroDue7dName": "لا بطاقات مستحقة",
+  "badgeZeroDue7dDesc": "7 أيام متتالية بدون بطاقات متأخرة",
+  "badgeEnglishEnabledName": "ثنائي اللغة",
+  "badgeEnglishEnabledDesc": "تم تفعيل المصطلح الطبي الإنجليزي بالإضافة إلى الفرنسية",
+  "errorRouteNotFound": "المسار غير معروف"
 }

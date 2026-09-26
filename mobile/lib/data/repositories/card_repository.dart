@@ -22,6 +22,7 @@ import '../../core/content/content_parser.dart';
 import '../../core/content/source_meta.dart';
 import '../../domain/domain.dart';
 import '../local/app_database.dart';
+import '../local/tables.dart';
 
 class CardRepository implements ICardRepository {
   CardRepository(this._db, {ContentParser parser = const ContentParser()})

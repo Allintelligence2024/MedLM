@@ -132,14 +132,20 @@ class QuickSession {
   }
 
   /// Termine la session. Retourne le résultat agrégé.
-  QuickSessionResult finish() {
+  ///
+  /// [nowMs] est l'horloge de l'appelant (même convention que
+  /// [start]) : la durée est la différence entre les deux instants
+  /// fournis, et non `DateTime.now()`. Sans cette couture, une session
+  /// démarrée avec une horloge injectée (test, replay) produisait une
+  /// durée arbitraire — et un `success` non déterministe.
+  QuickSessionResult finish({int? nowMs}) {
     if (!_running) {
       throw StateError('QuickSession non démarrée');
     }
-    final now = DateTime.now();
-    final durationMs = _startedAt == null
-        ? 0
-        : now.difference(_startedAt!).inMilliseconds;
+    final int endMs = nowMs ?? DateTime.now().millisecondsSinceEpoch;
+    final int? startedMs = _startedAt?.millisecondsSinceEpoch;
+    final int durationMs =
+        (startedMs == null || endMs <= startedMs) ? 0 : endMs - startedMs;
     _running = false;
     _startedAt = null;
     final completed = _reviews.where((r) => r.completed).length;

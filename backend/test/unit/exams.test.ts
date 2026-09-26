@@ -129,6 +129,50 @@ describe('ExamsService', () => {
     ).rejects.toThrow(/temps écoulé/);
   });
 
+  it('ne peut pas obtenir 100% en omettant les questions', async () => {
+    db.attempts.push({
+      id: 'a1', userId: 'u1', templateId: 't1',
+      startedAt: new Date(Date.now() - 60_000),
+      expiresAt: new Date(Date.now() + 30 * 60_000),
+      status: 'in_progress',
+    });
+    db.questions = [
+      { id: 'q1', templateId: 't1', position: 1, options: [{ id: 'A', fr: 'o', is_correct: true }] },
+      { id: 'q2', templateId: 't1', position: 2, options: [{ id: 'B', fr: 'o', is_correct: true }] },
+    ];
+    const out = await service.submit({
+      userId: 'u1', attemptId: 'a1',
+      body: { answers: [{ question_id: 'q1', selected: ['A'], duration_ms: 0 }] },
+    });
+    expect(out.scoring.totalQuestions).toBe(2);
+    expect(out.scoring.correct).toBe(1);
+    expect(out.scoring.unanswered).toBe(1);
+    expect(out.scoring.score).toBe(0.5);
+  });
+
+  it('rejette une question inconnue et une réponse dupliquée', async () => {
+    db.attempts.push({
+      id: 'a1', userId: 'u1', templateId: 't1',
+      startedAt: new Date(Date.now() - 60_000),
+      expiresAt: new Date(Date.now() + 30 * 60_000),
+      status: 'in_progress',
+    });
+    db.questions = [
+      { id: 'q1', templateId: 't1', position: 1, options: [{ id: 'A', fr: 'o', is_correct: true }] },
+    ];
+    await expect(service.submit({
+      userId: 'u1', attemptId: 'a1',
+      body: { answers: [
+        { question_id: 'q1', selected: ['A'], duration_ms: 0 },
+        { question_id: 'q1', selected: ['A'], duration_ms: 0 },
+      ] },
+    })).rejects.toThrow(/dupliquée/);
+    await expect(service.submit({
+      userId: 'u1', attemptId: 'a1',
+      body: { answers: [{ question_id: '00000000-0000-0000-0000-000000000099', selected: [], duration_ms: 0 }] },
+    })).rejects.toThrow(/inconnue/);
+  });
+
   it('scoring = correct / total', async () => {
     db.attempts.push({
       id: 'a1',

@@ -14,10 +14,11 @@ library;
 
 import 'dart:async';
 
-import '../../core/srs/review_event.dart';
-import '../../core/srs/srs_models.dart';
+import 'package:drift/drift.dart';
+
 import '../../domain/domain.dart';
 import '../local/app_database.dart';
+import '../local/tables.dart';
 import '../network/api_client.dart';
 
 class RestSyncRepository implements ISyncRepository {
@@ -36,8 +37,8 @@ class RestSyncRepository implements ISyncRepository {
     int maxBatch = 100,
   }) async {
     // 1. Récupère les events locaux non encore synchronisés.
-    final List<ReviewLogRow> pending = await (_db.select(_db.reviewLog)
-          ..where(($t) => $t.userId.equals(userId) & $t.synced.equals(false))
+    final List<ReviewLogRow> pending = await (db.select(db.reviewLog)
+          ..where((ReviewLog t) => t.userId.equals(userId) & t.synced.equals(false))
           ..limit(maxBatch))
           .get();
     if (pending.isEmpty) {
@@ -70,10 +71,11 @@ class RestSyncRepository implements ISyncRepository {
     final List<String> acceptedIds =
         accepted.map((dynamic e) => e as String).toList();
     if (acceptedIds.isNotEmpty) {
-      await _db.transaction(() async {
+      await db.transaction(() async {
         for (final String id in acceptedIds) {
-          await (_db.update(_db.reviewLog)..where(($t) => $t.id.equals(id)))
-              .write(const ReviewLogCompanion(synced: Value<bool>(true)));
+          await (db.update(db.reviewLog)
+                ..where((ReviewLog t) => t.id.equals(id)))
+              .write(const ReviewLogCompanion(synced: Value(true)));
         }
       });
     }
@@ -106,10 +108,10 @@ class RestSyncRepository implements ISyncRepository {
       events.add(ReviewEvent.fromJson(m));
     }
     if (events.isNotEmpty) {
-      await _db.transaction(() async {
+      await db.transaction(() async {
         for (final ReviewEvent e in events) {
           try {
-            await _db.into(_db.reviewLog).insert(ReviewLogCompanion.insert(
+            await db.into(db.reviewLog).insert(ReviewLogCompanion.insert(
               id: e.id,
               userId: e.userId,
               cardId: e.cardId,
@@ -117,8 +119,9 @@ class RestSyncRepository implements ISyncRepository {
               rating: e.rating.value,
               durationMs: Value<int>(e.durationMs),
               cardType: e.cardType.wire,
-              examMode: Value<bool>(e.examMode),
+              examMode: Value(e.examMode),
               reviewedAt: e.reviewedAtMs,
+              receivedAt: e.reviewedAtMs,
             ));
           } catch (_) {
             // Doublon (event.id déjà présent) : on ignore, c'est
@@ -134,7 +137,7 @@ class RestSyncRepository implements ISyncRepository {
   Future<void> markAllSynced(String userId, Iterable<String> eventIds) async {
     final List<String> ids = eventIds.toList();
     if (ids.isEmpty) return;
-    await (_db.update(_db.reviewLog)..where(($t) => $t.id.isIn(ids)))
-        .write(const ReviewLogCompanion(synced: Value<bool>(true)));
+    await (db.update(db.reviewLog)..where((ReviewLog t) => t.id.isIn(ids)))
+        .write(const ReviewLogCompanion(synced: Value(true)));
   }
 }

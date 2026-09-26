@@ -10,8 +10,11 @@
 /// le use case `SyncOutboxUseCase` ne dépend que de `ISyncRepository`.
 library;
 
+import 'package:drift/drift.dart';
+
 import '../../domain/domain.dart';
 import '../local/app_database.dart';
+import '../local/tables.dart';
 
 class LocalSyncRepository implements ISyncRepository {
   LocalSyncRepository(this._db);
@@ -35,7 +38,7 @@ class LocalSyncRepository implements ISyncRepository {
     await (_db.update(_db.reviewLog)
           ..where((ReviewLog t) =>
               t.userId.equals(userId) & t.id.isIn(pending.map((ReviewLogRow r) => r.id))))
-        .write(const ReviewLogCompanion(synced: Value<bool>(true)));
+        .write(const ReviewLogCompanion(synced: Value(true)));
     return SyncPushOutcome(
       acceptedIds: pending.map((ReviewLogRow r) => r.id).toList(),
     );
@@ -58,6 +61,6 @@ class LocalSyncRepository implements ISyncRepository {
     if (ids.isEmpty) return;
     await (_db.update(_db.reviewLog)
           ..where((ReviewLog t) => t.id.isIn(ids)))
-        .write(const ReviewLogCompanion(synced: Value<bool>(true)));
+        .write(const ReviewLogCompanion(synced: Value(true)));
   }
 }

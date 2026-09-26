@@ -1,5 +1,7 @@
 // AppModule — composition root côté serveur (Phase 10/11/12).
 import { Module } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
+import { ThrottlerGuard } from '@nestjs/throttler';
 import { ConfigModule } from '@nestjs/config';
 import { LoggerModule } from 'nestjs-pino';
 import { ThrottlerModuleConfigured } from './common/throttle';
@@ -31,6 +33,7 @@ import { MlModule } from './ml/ml.module';
 import { PartnershipsModule } from './partnerships/partnerships.module';
 
 @Module({
+  providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     LoggerModule.forRoot({

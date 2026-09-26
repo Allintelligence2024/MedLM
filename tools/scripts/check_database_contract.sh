@@ -15,13 +15,12 @@ fi
 
 SCHEMA="${PG_SCHEMA:-public}"
 
+export PGOPTIONS="-c search_path=$SCHEMA"
 psql_opts=(
   "$DATABASE_URL"
   "-v" "ON_ERROR_STOP=1"
-  "-v" "sschema=$SCHEMA"
   "--no-align"
   "--tuples-only"
-  "-c" "SET search_path TO \"$SCHEMA\""
 )
 
 FAIL=0
@@ -33,12 +32,12 @@ count() {
   psql "${psql_opts[@]}" -c "$1" 2>/dev/null | tr -d '[:space:]'
 }
 
-# ── 1. 37 tables ────────────────────────────────────────────────────────────
-TABLES_COUNT=$(count "SELECT count(*) FROM information_schema.tables WHERE table_schema = current_setting('sschema') AND table_type = 'BASE TABLE'")
-if [[ "$TABLES_COUNT" -eq 37 ]]; then
-  ok "37 tables présentes ($TABLES_COUNT)"
+# ── 1. Schéma minimal ───────────────────────────────────────────────────────
+TABLES_COUNT=$(count "SELECT count(*) FROM information_schema.tables WHERE table_schema = '$SCHEMA' AND table_type = 'BASE TABLE'")
+if [[ "$TABLES_COUNT" -ge 37 ]]; then
+  ok "au moins 37 tables présentes ($TABLES_COUNT)"
 else
-  ko "37 tables attendues, $TABLES_COUNT trouvées"
+  ko "au moins 37 tables attendues, $TABLES_COUNT trouvées"
 fi
 
 # ── 2. Utilisateurs seedés ──────────────────────────────────────────────────
@@ -92,7 +91,7 @@ else
 fi
 
 # ── 7. Clés étrangères dans pg_constraint ───────────────────────────────────
-FK_COUNT=$(count "SELECT count(*) FROM pg_constraint WHERE contype = 'f' AND connamespace = (SELECT oid FROM pg_namespace WHERE nspname = current_setting('sschema'))")
+FK_COUNT=$(count "SELECT count(*) FROM pg_constraint WHERE contype = 'f' AND connamespace = (SELECT oid FROM pg_namespace WHERE nspname = '$SCHEMA')")
 if [[ "$FK_COUNT" -ge 20 ]]; then
   ok "clés étrangères présentes : $FK_COUNT"
 else
@@ -100,7 +99,7 @@ else
 fi
 
 # ── 8. Contraintes CHECK dans pg_constraint ────────────────────────────────
-CK_COUNT=$(count "SELECT count(*) FROM pg_constraint WHERE contype = 'c' AND connamespace = (SELECT oid FROM pg_namespace WHERE nspname = current_setting('sschema'))")
+CK_COUNT=$(count "SELECT count(*) FROM pg_constraint WHERE contype = 'c' AND connamespace = (SELECT oid FROM pg_namespace WHERE nspname = '$SCHEMA')")
 if [[ "$CK_COUNT" -ge 10 ]]; then
   ok "contraintes CHECK présentes : $CK_COUNT"
 else
@@ -110,30 +109,44 @@ fi
 # ── 9. Rejet d'un rating invalide ─────────────────────────────────────────
 if psql "${psql_opts[@]}" -c "
   INSERT INTO review_logs (id, user_id, card_id, device_id, rating, duration_ms, card_type, exam_mode, reviewed_at, received_at)
-  VALUES ('ff000000-0000-4000-8000-000000000099', (SELECT id FROM users LIMIT 1), (SELECT id FROM cards LIMIT 1), 'dev', 5, 0, 'basic', false, 1, now())
-" 2>/dev/null | grep -q 'ERROR'; then
-  ok "rating invalide (5) rejeté"
-else
+  VALUES ('ff000000-0000-0000-0000-000000000099', (SELECT id FROM users LIMIT 1), (SELECT id FROM cards LIMIT 1), 'dev', 5, 0, 'basic', false, 1, now())
+" >/dev/null 2>&1; then
   ko "rating invalide (5) accepté — CHECK manquant"
+else
+  ok "rating invalide (5) rejeté"
 fi
 
 # ── 10. Rejet d'un deck orphelin (FK) ──────────────────────────────────────
 if psql "${psql_opts[@]}" -c "
   INSERT INTO cards (id, deck_id, type, status, version, content, source_meta, tags, is_premium, created_at, updated_at)
-  VALUES ('ff000000-0000-4000-8000-000000000099', 'ff000000-0000-4000-8000-000000000099', 'basic', 'published', 1, '{}', '{}', '{}', false, now(), now())
-" 2>/dev/null | grep -q 'ERROR'; then
-  ok "deck orphelin rejeté (FK)"
-else
+  VALUES ('ff000000-0000-0000-0000-000000000099', 'ff000000-0000-0000-0000-000000000099', 'basic', 'published', 1, '{}', '{}', '{}', false, now(), now())
+" >/dev/null 2>&1; then
   ko "deck orphelin accepté — FK manquante"
+else
+  ok "deck orphelin rejeté (FK)"
 fi
 
 # ── 11. Append-only review_logs ────────────────────────────────────────────
+# Le seed minimal ne crée pas forcément de revue. On ajoute une ligne de
+# sonde déterministe afin que le contrat teste réellement le trigger, au
+# lieu de transformer l'absence de données en faux échec.
+psql "${psql_opts[@]}" -c "
+  INSERT INTO review_logs
+    (id, user_id, card_id, device_id, rating, duration_ms, card_type,
+     exam_mode, reviewed_at, received_at)
+  SELECT 'ff000000-0000-4000-8000-000000000098',
+         (SELECT id FROM users LIMIT 1),
+         (SELECT id FROM cards LIMIT 1),
+         'contract-probe', 3, 0, 'basic', false, 1, now()
+  WHERE NOT EXISTS (SELECT 1 FROM review_logs)
+  ON CONFLICT (id) DO NOTHING
+" >/dev/null 2>&1 || true
 RLID=$(psql "${psql_opts[@]}" -c "SELECT id FROM review_logs LIMIT 1" 2>/dev/null | head -n 3 | tail -n 1 | tr -d '[:space:]')
 if [[ -n "$RLID" ]]; then
-  if psql "${psql_opts[@]}" -c "UPDATE review_logs SET duration_ms = 1 WHERE id = '$RLID'" 2>/dev/null | grep -q 'ERROR'; then
-    ok "review_logs append-only (UPDATE refusé)"
-  else
+  if psql "${psql_opts[@]}" -c "UPDATE review_logs SET duration_ms = 1 WHERE id = '$RLID'" >/dev/null 2>&1; then
     ko "review_logs autorise UPDATE — trigger manquant"
+  else
+    ok "review_logs append-only (UPDATE refusé)"
   fi
 else
   ko "aucun review_log pour tester l'append-only"

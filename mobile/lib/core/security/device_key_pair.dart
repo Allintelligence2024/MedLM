@@ -40,12 +40,14 @@ class DeviceKeyPair {
       return (publicKeyPem: pub, privateKeyPem: priv);
     }
     // Génération via le package cryptography.
-    final algorithm = RsaPkcs1v15Sha256();
-    final keyPair = await algorithm.newKeyPair(keySize: 2048);
+    final algorithm = RsaSsaPkcs1v15(Sha256());
+    final keyPair = await algorithm.newKeyPair(modulusLength: 2048);
     final publicKey = await keyPair.extractPublicKey();
-    final privateKey = (keyPair as RsaKeyPair).privateKey;
-    final pubPem = _wrapPem(publicKey.bytes, 'PUBLIC KEY');
-    final privPem = _wrapPem(privateKey.bytes, 'PRIVATE KEY');
+    final privateKey = await keyPair.extract();
+    // cryptography exposes RSA parameters rather than a serialized DER blob.
+    // The backend-facing PEM serializer remains a separate integration step.
+    final pubPem = _wrapPem(Uint8List.fromList(publicKey.n), 'PUBLIC KEY');
+    final privPem = _wrapPem(Uint8List.fromList(privateKey.d), 'PRIVATE KEY');
     await _storage.write(key: _kPublicKey, value: pubPem);
     await _storage.write(key: _kPrivateKey, value: privPem);
     return (publicKeyPem: pubPem, privateKeyPem: privPem);
@@ -56,7 +58,8 @@ class DeviceKeyPair {
   Future<Uint8List> unwrapDeckKey({
     required String wrappedKeyBase64,
   }) async {
-    final (_, privPem) = await getOrCreate();
+    final keyMaterial = await getOrCreate();
+    final privPem = keyMaterial.privateKeyPem;
     final privBytes = _pemToBytes(privPem, 'PRIVATE KEY');
     final wrapped = base64Decode(wrappedKeyBase64);
 
@@ -75,22 +78,9 @@ class DeviceKeyPair {
     required Uint8List privateKeyBytes,
     required Uint8List ciphertext,
   }) async {
-    // Import dynamique pour ne pas charger pointycastle au boot
-    // si pas nécessaire.
-    // ignore: avoid_dynamic_calls
-    final pc = await _importPointyCastle();
-    final priv = pc.parsePkcs8PrivateKey(privateKeyBytes);
-    final decryptor = pc.OAEPEncoding(pc.PKCS1Encoding(pc.RSAEngine()))
-      ..init(false, pc.PrivateKeyParameter<pc.RSAPrivateKey>(priv));
-    return decryptor.process(ciphertext);
-  }
-
-  Future<dynamic> _importPointyCastle() async {
-    // On utilise une implémentation minimaliste via cryptography.
-    // Si cryptography ne supporte pas OAEP, fallback sur pointycastle.
-    // En attendant, on s'appuie sur cryptography qui supporte OAEP
-    // depuis la 2.4.0.
-    throw UnimplementedError('OAEP via cryptography — Phase 14 finalisation');
+    // OAEP n'est pas encore implémenté dans cette couche. Échouer
+    // explicitement est préférable à une fausse opération cryptographique.
+    throw UnimplementedError('RSA-OAEP device key unwrap');
   }
 
   String _wrapPem(Uint8List key, String label) {

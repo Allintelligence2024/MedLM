@@ -2,7 +2,7 @@
 ///
 /// JWT payload inclut désormais le rôle RBAC (`role: 'student' | ...`)
 /// pour permettre aux `@RbacGuard()` de décider côté contrôleur.
-import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
+import { GoneException, Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { and, eq, gt, isNull, sql } from 'drizzle-orm';
@@ -41,37 +41,14 @@ export class AuthService {
     private readonly config: ConfigService,
   ) {}
 
-  /// POST /auth/signup
-  async signup(args: SignupBody & { platform: string; appVersion?: string }): Promise<TokenResponse> {
-    const existing = await this.db
-      .select({ id: users.id })
-      .from(users)
-      .where(eq(users.email, args.email))
-      .then((rows) => rows[0]);
-    if (existing) {
-      throw new UnauthorizedException('email déjà utilisé');
-    }
-    const [user] = await this.db
-      .insert(users)
-      .values({
-        email: args.email,
-        ...(args.display_name !== undefined && { displayName: args.display_name }),
-        ...(args.faculty !== undefined && { faculty: args.faculty }),
-        ...(args.study_year !== undefined && { studyYear: args.study_year }),
-      })
-      .returning();
-    return this.issueTokens(user!.id, args.email, args.platform, args.appVersion);
+  /// Les anciens endpoints email-only sont volontairement supprimés :
+  /// ils permettaient de se connecter en connaissant seulement l'adresse.
+  async signup(_args: SignupBody & { platform: string; appVersion?: string }): Promise<TokenResponse> {
+    throw new GoneException('inscription par email désactivée : utilisez le magic link');
   }
 
-  /// POST /auth/login
-  async login(args: LoginBody & { platform: string; appVersion?: string }): Promise<TokenResponse> {
-    const user = await this.db
-      .select({ id: users.id, email: users.email })
-      .from(users)
-      .where(eq(users.email, args.email))
-      .then((rows) => rows[0]);
-    if (!user) throw new UnauthorizedException('utilisateur inconnu');
-    return this.issueTokens(user.id, user.email, args.platform, args.appVersion);
+  async login(_args: LoginBody & { platform: string; appVersion?: string }): Promise<TokenResponse> {
+    throw new GoneException('connexion par email désactivée : utilisez le magic link');
   }
 
   /// Émet des tokens d'accès pour un userId connu (magic link / Google).

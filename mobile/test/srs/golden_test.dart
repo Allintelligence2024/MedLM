@@ -222,7 +222,7 @@ void main() {
     });
 
     test('preview ne modifie pas l\'état courant', () {
-      SrsCardState state = engine.applyReview(
+      final SrsCardState state = engine.applyReview(
           SrsCardState.initial, Rating.good, 1700000000000);
       final SrsCardState before = state;
       engine.preview(state, 1700000000000 + kMillisPerDay);

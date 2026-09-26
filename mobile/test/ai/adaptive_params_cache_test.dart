@@ -15,6 +15,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:medanki_dz/core/srs/fsrs_parameters.dart';
 import 'package:medanki_dz/data/local/app_database.dart';
 import 'package:medanki_dz/data/network/api_client.dart';
+import 'package:medanki_dz/data/network/secure_token_storage.dart';
 import 'package:medanki_dz/data/repositories/ai/adaptive_params_cache.dart';
 import 'package:medanki_dz/data/repositories/ai/ai_repository.dart';
 
@@ -25,14 +26,14 @@ Map<String, dynamic> _profilePayload({required bool active}) {
     'total_reviews': 250,
     'lapses': 80,
     'lapse_rate': 0.32,
-    'leech_cards': const [],
-    'hot_tags': const [],
+    'leech_cards': const <dynamic>[],
+    'hot_tags': const <dynamic>[],
     'fsrs_adjustment': {
       'weights': List<double>.from(kDefaultFsrsWeights)
         ..[11] = kDefaultFsrsWeights[11] * 1.15,
-      'changed_indices': active ? const [11] : const [],
+      'changed_indices': active ? const <int>[11] : const <int>[],
       'reasons':
-          active ? const ['lapse_rate élevé (32% ≥ 30%) → w11 ×1.15'] : const [],
+          active ? const <String>['lapse_rate élevé (32% ≥ 30%) → w11 ×1.15'] : const <String>[],
       'active': active,
     },
   };
@@ -52,9 +53,11 @@ class FakeApiClient extends ApiClient {
   }
 }
 
-class _NoopStorage implements dynamic {
+class _NoopStorage extends SecureTokenStorage {
+  _NoopStorage() : super();
+
   @override
-  noSuchMethod(Invocation invocation) async => null;
+  Future<String> getOrCreateDeviceId() async => 'test-device';
 }
 
 void main() {
@@ -75,7 +78,7 @@ void main() {
         parameters: const FsrsParameters(),
         fetchedAtMs: now,
         active: true,
-        reasons: const ['w11 ×1.15'],
+        reasons: ['w11 ×1.15'],
       );
       final decoded =
           AdaptiveParamsCache.decodeAdaptiveParams(
@@ -139,11 +142,11 @@ void main() {
   group('user_prefs (drift)', () {
     test('absent → null ; écrit puis relu ; clear', () async {
       expect(await cache.read(), isNull);
-      final entry = CachedAdaptiveParams(
-        parameters: const FsrsParameters(),
+      const entry = CachedAdaptiveParams(
+        parameters: FsrsParameters(),
         fetchedAtMs: 42,
         active: true,
-        reasons: const ['r'],
+        reasons: ['r'],
       );
       await cache.write(entry);
       final read = await cache.read();

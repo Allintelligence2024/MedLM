@@ -10,8 +10,6 @@
 /// langue demandée — c'était déjà le cas et on ne change rien.
 library;
 
-import 'package:drift/drift.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

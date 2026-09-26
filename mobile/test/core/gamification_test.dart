@@ -156,13 +156,20 @@ void main() {
       expect(s.atRisk, isTrue);
     });
 
-    test('3 jours d\'écart → streak cassé', () {
+    test('3 jours d\'écart : quota de freeze épuisé → streak cassé', () {
+      // Un trou est couvert par un freeze tant qu'il en reste dans le
+      // mois (maxFreezesPerMonth = 2, cf. StreakCalculator). Les deux
+      // tests ci-dessus et ci-dessous décrivent les deux branches :
+      // freeze consommé, puis quota épuisé. Le cas « freezesUsed: 0 »
+      // est couvert par « freeze consommé automatiquement si dispo ».
       final s = calc.compute(
         reviewDayKeys: const ['2026-07-27'],
-        freezesUsedThisMonth: 0,
+        freezesUsedThisMonth: GamificationConstants.maxFreezesPerMonth,
         now: DateTime(2026, 7, 30),
       );
       expect(s.currentDays, 0);
+      expect(s.freezesUsedThisMonth, GamificationConstants.maxFreezesPerMonth);
+      expect(s.atRisk, isFalse);
     });
 
     test('freeze consommé automatiquement si dispo', () {
@@ -177,19 +184,25 @@ void main() {
       expect(s.atRisk, isTrue);
     });
 
-    test('pas de freeze dispo → 0', () {
+    test('trou dans l\'historique : remontée stoppée, aucun freeze gaspillé',
+        () {
+      // Réviser aujourd'hui après un trou d'une semaine : le streak vaut
+      // 1 (la journée du jour), la remontée s'arrête au premier jour
+      // manquant, et aucun freeze n'est consommé (il ne servirait à rien).
       final s = calc.compute(
-        reviewDayKeys: const ['2026-07-27'],
-        freezesUsedThisMonth: 2, // quota épuisé
+        reviewDayKeys: const ['2026-07-20', '2026-07-30'],
+        freezesUsedThisMonth: 0,
         now: DateTime(2026, 7, 30),
       );
-      expect(s.currentDays, 0);
+      expect(s.currentDays, 1);
+      expect(s.freezesUsedThisMonth, 0);
+      expect(s.atRisk, isFalse);
     });
   });
 
   group('Badges', () {
     test('streak 7j débloque le badge "Semaine parfaite"', () {
-      final ctx = BadgeContext(
+      const ctx = BadgeContext(
         streakDays: 7,
         totalXp: 0,
         cardsMastered: 0,
@@ -202,7 +215,7 @@ void main() {
     });
 
     test('streak 30j débloque "Mois de fer"', () {
-      final ctx = BadgeContext(
+      const ctx = BadgeContext(
         streakDays: 30,
         totalXp: 0,
         cardsMastered: 0,
@@ -215,7 +228,7 @@ void main() {
     });
 
     test('EN activé débloque "Bilingue"', () {
-      final ctx = BadgeContext(
+      const ctx = BadgeContext(
         streakDays: 0,
         totalXp: 0,
         cardsMastered: 0,
@@ -228,7 +241,7 @@ void main() {
     });
 
     test('500 cartes maîtrisées débloque "500 cartes maîtrisées"', () {
-      final ctx = BadgeContext(
+      const ctx = BadgeContext(
         streakDays: 0,
         totalXp: 0,
         cardsMastered: 500,

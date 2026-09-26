@@ -28,7 +28,6 @@ import '../../data/network/secure_token_storage.dart';
 import '../../data/repositories/ai/adaptive_params_cache.dart';
 import '../../data/repositories/ai/ai_repository.dart';
 import '../../data/repositories/rest_sync_repository.dart';
-import '../container/app_container.dart' show AppContainer;
 import 'background_sync.dart';
 
 class BackgroundSyncService {
@@ -45,14 +44,28 @@ class BackgroundSyncService {
         'API_BASE_URL',
         defaultValue: 'http://10.0.2.2:3000',
       );
+      const userId = String.fromEnvironment('MEDANKI_USER_ID');
+      const deviceId = String.fromEnvironment('MEDANKI_DEVICE_ID');
+      if (userId.isEmpty || deviceId.isEmpty) {
+        // A background isolate cannot safely invent an identity. The host
+        // application must provide both values through secure bootstrap.
+        return false;
+      }
 
       final db = await _openDatabase();
       final storage = SecureTokenStorage();
       final api = ApiClient(baseUrl: apiBaseUrl, tokenStorage: storage);
       final sync = RestSyncRepository(api: api, db: db);
       try {
-        final pushed = await sync.pushPending();
-        final pulled = await sync.pullSince(0);
+        final pushed = await sync.pushPending(
+          userId: userId,
+          deviceId: deviceId,
+        );
+        final pulled = await sync.pullSince(
+          userId: userId,
+          deviceId: deviceId,
+          sinceMs: 0,
+        );
 
         // Poids FSRS adaptatifs (Phase 19.6) : refresh périodique si
         // le cache est périmé (> 6 h) — best-effort absolu, un échec

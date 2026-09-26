@@ -167,6 +167,10 @@ abstract class AppLocalizations {
   String get notifPermissionDeny;
   String get notifDenied;
   String get aiHintLabel;
+  String get aiHintWhy;
+  String get tutorSend;
+  String get tutorInputHint;
+  String tutorQuotaRemaining(int remaining);
   String get aiHintDismiss;
   String get tutorQuotaReached;
   String get tutorOffline;
@@ -194,6 +198,9 @@ abstract class AppLocalizations {
   String get leaderboardYearRange;
   String get leaderboardOptInFailed;
   String get leaderboardOptOutGdpr;
+  String get mlBandLow;
+  String get mlBandMedium;
+  String get mlBandHigh;
   String get mlPredictionTitle;
   String mlModelWindow(String version, int days);
   String get mlNotEnoughData;
@@ -222,6 +229,34 @@ abstract class AppLocalizations {
   String voiceRuleAndQuota(String rule, int quota);
   String get actionConfirm;
   String get shareFailed;
+  String get badgesMyTitle;
+  String get leaderboardNoParticipants;
+  String leaderboardWeek(String week);
+  String get leaderboardSeeRankPrompt;
+  String get levelP1;
+  String get levelP2;
+  String get levelInterne;
+  String get levelResident;
+  String get levelPractitioner;
+  String get badgeStreak7Name;
+  String get badgeStreak7Desc;
+  String get badgeStreak30Name;
+  String get badgeStreak30Desc;
+  String get badgeStreak100Name;
+  String get badgeStreak100Desc;
+  String get badgeModuleCompleteName;
+  String get badgeModuleCompleteDesc;
+  String get badgeMock80Name;
+  String get badgeMock80Desc;
+  String get badgeCards500Name;
+  String get badgeCards500Desc;
+  String get badgeCards2500Name;
+  String get badgeCards2500Desc;
+  String get badgeZeroDue7dName;
+  String get badgeZeroDue7dDesc;
+  String get badgeEnglishEnabledName;
+  String get badgeEnglishEnabledDesc;
+  String get errorRouteNotFound;
 }
 
 class _AppLocalizationsDelegate
@@ -634,6 +669,18 @@ class AppLocalizationsFr extends AppLocalizations {
   String get aiHintLabel => 'Indice personnalisé';
 
   @override
+  String get aiHintWhy => 'Pourquoi cet indice ?';
+
+  @override
+  String get tutorSend => 'Envoyer';
+
+  @override
+  String get tutorInputHint => 'Votre question de cours…';
+
+  @override
+  String tutorQuotaRemaining(int remaining) => '${remaining} restant(s)';
+
+  @override
   String get aiHintDismiss => 'Masquer l\'indice';
 
   @override
@@ -713,6 +760,15 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get leaderboardOptOutGdpr => 'Se désinscrire du classement (RGPD)';
+
+  @override
+  String get mlBandLow => 'à risque';
+
+  @override
+  String get mlBandMedium => 'moyen';
+
+  @override
+  String get mlBandHigh => 'prometteur';
 
   @override
   String get mlPredictionTitle => 'Examen blanc : score estimé';
@@ -797,6 +853,90 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get shareFailed => 'Le partage n\'a pas pu être créé.';
+
+  @override
+  String get badgesMyTitle => 'Mes badges';
+
+  @override
+  String get leaderboardNoParticipants => 'Aucun participant cette semaine.';
+
+  @override
+  String leaderboardWeek(String week) => 'Semaine ${week}';
+
+  @override
+  String get leaderboardSeeRankPrompt => 'Participez au classement pour voir votre rang.';
+
+  @override
+  String get levelP1 => 'Étudiant P1';
+
+  @override
+  String get levelP2 => 'Étudiant P2';
+
+  @override
+  String get levelInterne => 'Interne';
+
+  @override
+  String get levelResident => 'Résident';
+
+  @override
+  String get levelPractitioner => 'Praticien';
+
+  @override
+  String get badgeStreak7Name => 'Semaine parfaite';
+
+  @override
+  String get badgeStreak7Desc => '7 jours de streak';
+
+  @override
+  String get badgeStreak30Name => 'Mois de fer';
+
+  @override
+  String get badgeStreak30Desc => '30 jours de streak';
+
+  @override
+  String get badgeStreak100Name => 'Centenaire';
+
+  @override
+  String get badgeStreak100Desc => '100 jours de streak';
+
+  @override
+  String get badgeModuleCompleteName => 'Module complété';
+
+  @override
+  String get badgeModuleCompleteDesc => 'Toutes les cartes d\'un module sont en révision';
+
+  @override
+  String get badgeMock80Name => 'As du mock exam';
+
+  @override
+  String get badgeMock80Desc => 'Mock exam à plus de 80% (sera tracked en Phase 10)';
+
+  @override
+  String get badgeCards500Name => '500 cartes maîtrisées';
+
+  @override
+  String get badgeCards500Desc => '500 cartes avec reps >= 5 et lapses < 3';
+
+  @override
+  String get badgeCards2500Name => '2 500 cartes maîtrisées';
+
+  @override
+  String get badgeCards2500Desc => '2 500 cartes maîtrisées';
+
+  @override
+  String get badgeZeroDue7dName => 'Zéro carte due';
+
+  @override
+  String get badgeZeroDue7dDesc => '7 jours consécutifs sans carte due en retard';
+
+  @override
+  String get badgeEnglishEnabledName => 'Bilingue';
+
+  @override
+  String get badgeEnglishEnabledDesc => 'Terme médical EN activé en plus du français';
+
+  @override
+  String get errorRouteNotFound => 'Route inconnue';
 
 }
 
@@ -1181,6 +1321,18 @@ class AppLocalizationsAr extends AppLocalizations {
   String get aiHintLabel => 'تلميح مخصص';
 
   @override
+  String get aiHintWhy => 'لماذا هذا التلميح؟';
+
+  @override
+  String get tutorSend => 'إرسال';
+
+  @override
+  String get tutorInputHint => 'سؤال الدرس…';
+
+  @override
+  String tutorQuotaRemaining(int remaining) => 'المتبقي ${remaining}';
+
+  @override
   String get aiHintDismiss => 'إخفاء التلميح';
 
   @override
@@ -1260,6 +1412,15 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get leaderboardOptOutGdpr => 'الانسحاب من الترتيب (RGPD)';
+
+  @override
+  String get mlBandLow => 'معرّض للخطر';
+
+  @override
+  String get mlBandMedium => 'متوسط';
+
+  @override
+  String get mlBandHigh => 'مرشّح للنجاح';
 
   @override
   String get mlPredictionTitle => 'الامتحان التجريبي: النتيجة المتوقعة';
@@ -1344,6 +1505,90 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get shareFailed => 'تعذر إنشاء المشاركة.';
+
+  @override
+  String get badgesMyTitle => 'أوسمتي';
+
+  @override
+  String get leaderboardNoParticipants => 'لا مشاركين هذا الأسبوع.';
+
+  @override
+  String leaderboardWeek(String week) => 'الأسبوع ${week}';
+
+  @override
+  String get leaderboardSeeRankPrompt => 'انضم إلى الترتيب لترى ترتيبك.';
+
+  @override
+  String get levelP1 => 'طالب سنة أولى';
+
+  @override
+  String get levelP2 => 'طالب سنة ثانية';
+
+  @override
+  String get levelInterne => 'داخلي';
+
+  @override
+  String get levelResident => 'مقيم';
+
+  @override
+  String get levelPractitioner => 'ممارس';
+
+  @override
+  String get badgeStreak7Name => 'أسبوع مثالي';
+
+  @override
+  String get badgeStreak7Desc => '7 أيام متتالية';
+
+  @override
+  String get badgeStreak30Name => 'شهر حديدي';
+
+  @override
+  String get badgeStreak30Desc => '30 يومًا متتاليًا';
+
+  @override
+  String get badgeStreak100Name => 'مئوي';
+
+  @override
+  String get badgeStreak100Desc => '100 يوم متتالي';
+
+  @override
+  String get badgeModuleCompleteName => 'وحدة مكتملة';
+
+  @override
+  String get badgeModuleCompleteDesc => 'جميع بطاقات الوحدة قيد المراجعة';
+
+  @override
+  String get badgeMock80Name => 'خبير الامتحان التجريبي';
+
+  @override
+  String get badgeMock80Desc => 'امتحان تجريبي فوق 80% (سيتم تتبعه في المرحلة 10)';
+
+  @override
+  String get badgeCards500Name => '500 بطاقة متقنة';
+
+  @override
+  String get badgeCards500Desc => '500 بطاقة مع تكرار >=5 وزلات <3';
+
+  @override
+  String get badgeCards2500Name => '2500 بطاقة متقنة';
+
+  @override
+  String get badgeCards2500Desc => '2500 بطاقة متقنة';
+
+  @override
+  String get badgeZeroDue7dName => 'لا بطاقات مستحقة';
+
+  @override
+  String get badgeZeroDue7dDesc => '7 أيام متتالية بدون بطاقات متأخرة';
+
+  @override
+  String get badgeEnglishEnabledName => 'ثنائي اللغة';
+
+  @override
+  String get badgeEnglishEnabledDesc => 'تم تفعيل المصطلح الطبي الإنجليزي بالإضافة إلى الفرنسية';
+
+  @override
+  String get errorRouteNotFound => 'المسار غير معروف';
 
 }
 
@@ -1728,6 +1973,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get aiHintLabel => 'Personalised hint';
 
   @override
+  String get aiHintWhy => 'Why this hint?';
+
+  @override
+  String get tutorSend => 'Send';
+
+  @override
+  String get tutorInputHint => 'Your course question…';
+
+  @override
+  String tutorQuotaRemaining(int remaining) => '${remaining} left';
+
+  @override
   String get aiHintDismiss => 'Hide hint';
 
   @override
@@ -1807,6 +2064,15 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get leaderboardOptOutGdpr => 'Leave the leaderboard (GDPR)';
+
+  @override
+  String get mlBandLow => 'at risk';
+
+  @override
+  String get mlBandMedium => 'medium';
+
+  @override
+  String get mlBandHigh => 'on track';
 
   @override
   String get mlPredictionTitle => 'Mock exam: estimated score';
@@ -1891,5 +2157,89 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get shareFailed => 'Couldn\'t create the share.';
+
+  @override
+  String get badgesMyTitle => 'My badges';
+
+  @override
+  String get leaderboardNoParticipants => 'No participants this week.';
+
+  @override
+  String leaderboardWeek(String week) => 'Week ${week}';
+
+  @override
+  String get leaderboardSeeRankPrompt => 'Join the leaderboard to see your rank.';
+
+  @override
+  String get levelP1 => 'Student P1';
+
+  @override
+  String get levelP2 => 'Student P2';
+
+  @override
+  String get levelInterne => 'Intern';
+
+  @override
+  String get levelResident => 'Resident';
+
+  @override
+  String get levelPractitioner => 'Practitioner';
+
+  @override
+  String get badgeStreak7Name => 'Perfect week';
+
+  @override
+  String get badgeStreak7Desc => '7-day streak';
+
+  @override
+  String get badgeStreak30Name => 'Iron month';
+
+  @override
+  String get badgeStreak30Desc => '30-day streak';
+
+  @override
+  String get badgeStreak100Name => 'Centurion';
+
+  @override
+  String get badgeStreak100Desc => '100-day streak';
+
+  @override
+  String get badgeModuleCompleteName => 'Module completed';
+
+  @override
+  String get badgeModuleCompleteDesc => 'All cards in a module are in review';
+
+  @override
+  String get badgeMock80Name => 'Mock exam ace';
+
+  @override
+  String get badgeMock80Desc => 'Mock exam over 80% (tracked in Phase 10)';
+
+  @override
+  String get badgeCards500Name => '500 cards mastered';
+
+  @override
+  String get badgeCards500Desc => '500 cards with reps >= 5 and lapses < 3';
+
+  @override
+  String get badgeCards2500Name => '2,500 cards mastered';
+
+  @override
+  String get badgeCards2500Desc => '2,500 cards mastered';
+
+  @override
+  String get badgeZeroDue7dName => 'Zero due';
+
+  @override
+  String get badgeZeroDue7dDesc => '7 consecutive days with no overdue cards';
+
+  @override
+  String get badgeEnglishEnabledName => 'Bilingual';
+
+  @override
+  String get badgeEnglishEnabledDesc => 'Medical EN term enabled in addition to French';
+
+  @override
+  String get errorRouteNotFound => 'Route not found';
 
 }

@@ -6,8 +6,6 @@
 // dans SQLite via Drift.
 library;
 
-import 'package:drift/drift.dart';
-
 import '../../core/gamification/gamification_constants.dart';
 import '../../core/gamification/streak_calculator.dart';
 import '../../core/gamification/xp_calculator.dart';
@@ -22,7 +20,6 @@ class GamificationRepository {
   static const _kFreezes = 'freezes_used_month';
   static const _kStreakLastDay = 'streak_last_day';
   static const _kEnglishEnabled = 'english_enabled';
-  static const _kBadges = 'badges_unlocked';
 
   Future<int> totalXp() async {
     final row = await _readPref(_kXp);
@@ -30,7 +27,7 @@ class GamificationRepository {
   }
 
   Future<StreakState> currentStreak({DateTime? now}) async {
-    final s = const StreakCalculator();
+    const s = StreakCalculator();
     // Pour Phase 9, on reconstruit la liste des dayKeys à partir
     // des study_sessions (un sessionId = un dayKey si ≥ 10 cartes).
     // Version simplifiée : on lit les `day_key` depuis daily_counters.

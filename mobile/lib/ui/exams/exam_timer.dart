@@ -54,7 +54,10 @@ bool isUrgent(Duration remaining) =>
 List<Map<String, dynamic>> parseQuestions(Map<String, dynamic> attempt) {
   final raw = attempt['questions'];
   if (raw is List) {
-    return raw.whereType<Map>().map(Map<String, dynamic>.from).toList();
+    return raw
+        .whereType<Map<Object?, Object?>>()
+        .map((m) => Map<String, dynamic>.from(m))
+        .toList();
   }
   return const [];
 }

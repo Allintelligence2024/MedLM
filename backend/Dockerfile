@@ -21,12 +21,11 @@ FROM node:22-alpine AS build
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY backend/package.json backend/package-lock.json ./
-COPY backend/tsconfig.json backend/nest-cli.json ./
+COPY backend/tsconfig.json backend/tsconfig.build.json backend/nest-cli.json ./
 COPY backend/src ./src
 # nest-cli.json copie ../mobile/assets/content/*.json dans dist/ :
 # le contexte de build doit donc contenir ce dossier.
 COPY mobile/assets/content /mobile/assets/content
-RUN mkdir -p ../mobile/assets && cp -r /mobile/assets/content ../mobile/assets/content
 RUN npm run build
 
 # Deps de production seules (arbre allégé pour l'image finale).

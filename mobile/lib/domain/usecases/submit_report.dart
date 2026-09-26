@@ -10,7 +10,6 @@
 /// deviceId.
 library;
 
-import '../entities/entities.dart';
 import '../repositories/repositories.dart';
 
 class SubmitReportUseCase {
