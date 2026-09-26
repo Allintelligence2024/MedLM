@@ -407,5 +407,6 @@
   "badgeZeroDue7dName": "Zéro carte due",
   "badgeZeroDue7dDesc": "7 jours consécutifs sans carte due en retard",
   "badgeEnglishEnabledName": "Bilingue",
-  "badgeEnglishEnabledDesc": "Terme médical EN activé en plus du français"
+  "badgeEnglishEnabledDesc": "Terme médical EN activé en plus du français",
+  "errorRouteNotFound": "Route inconnue"
 }

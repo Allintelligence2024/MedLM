@@ -21,6 +21,7 @@ import 'package:go_router/go_router.dart';
 
 import '../core/di/providers.dart';
 import '../core/session/session_controller.dart';
+import '../l10n/app_localizations.dart';
 import '../ui/auth/login_screen.dart';
 import '../ui/auth/signup_screen.dart';
 import '../ui/auth/welcome_screen.dart';
@@ -225,7 +226,12 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
     ],
     errorBuilder: (context, state) => Scaffold(
-      body: Center(child: Text(state.error?.toString() ?? 'Route inconnue')),
+      body: Center(
+        child: Text(
+          state.error?.toString() ??
+              AppLocalizations.of(context).errorRouteNotFound,
+        ),
+      ),
     ),
   );
 });

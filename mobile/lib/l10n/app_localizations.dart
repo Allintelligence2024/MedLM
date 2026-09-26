@@ -256,6 +256,7 @@ abstract class AppLocalizations {
   String get badgeZeroDue7dDesc;
   String get badgeEnglishEnabledName;
   String get badgeEnglishEnabledDesc;
+  String get errorRouteNotFound;
 }
 
 class _AppLocalizationsDelegate
@@ -934,6 +935,9 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get badgeEnglishEnabledDesc => 'Terme médical EN activé en plus du français';
 
+  @override
+  String get errorRouteNotFound => 'Route inconnue';
+
 }
 
 class AppLocalizationsAr extends AppLocalizations {
@@ -1583,6 +1587,9 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get badgeEnglishEnabledDesc => 'تم تفعيل المصطلح الطبي الإنجليزي بالإضافة إلى الفرنسية';
 
+  @override
+  String get errorRouteNotFound => 'المسار غير معروف';
+
 }
 
 class AppLocalizationsEn extends AppLocalizations {
@@ -2231,5 +2238,8 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get badgeEnglishEnabledDesc => 'Medical EN term enabled in addition to French';
+
+  @override
+  String get errorRouteNotFound => 'Route not found';
 
 }

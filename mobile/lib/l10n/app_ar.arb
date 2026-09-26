@@ -225,5 +225,6 @@
   "badgeZeroDue7dName": "لا بطاقات مستحقة",
   "badgeZeroDue7dDesc": "7 أيام متتالية بدون بطاقات متأخرة",
   "badgeEnglishEnabledName": "ثنائي اللغة",
-  "badgeEnglishEnabledDesc": "تم تفعيل المصطلح الطبي الإنجليزي بالإضافة إلى الفرنسية"
+  "badgeEnglishEnabledDesc": "تم تفعيل المصطلح الطبي الإنجليزي بالإضافة إلى الفرنسية",
+  "errorRouteNotFound": "المسار غير معروف"
 }

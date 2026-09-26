@@ -166,8 +166,8 @@ class _LanguagePage extends ConsumerWidget {
   // arabophone doit reconnaître son option sans lire le français.
   static String _languageLabel(AppLanguage lang) => switch (lang) {
         AppLanguage.fr => 'Français',  // ignore: hardcoded-string — endonyme
-        AppLanguage.ar => 'العربية',
-        AppLanguage.en => 'English',
+        AppLanguage.ar => 'العربية',  // ignore: hardcoded-string — endonyme
+        AppLanguage.en => 'English',  // ignore: hardcoded-string — endonyme
       };
 }
 

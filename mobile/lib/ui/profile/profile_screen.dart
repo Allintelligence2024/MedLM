@@ -102,11 +102,11 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 ),
                 DropdownMenuItem(
                   value: AppLanguage.ar,
-                  child: Text('العربية'),
+                  child: Text('العربية'),  // ignore: hardcoded-string — endonyme
                 ),
                 DropdownMenuItem(
                   value: AppLanguage.en,
-                  child: Text('English'),
+                  child: Text('English'),  // ignore: hardcoded-string — endonyme
                 ),
               ],
               onChanged: (v) {
