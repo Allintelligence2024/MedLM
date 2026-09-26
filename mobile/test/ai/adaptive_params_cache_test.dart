@@ -15,6 +15,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:medanki_dz/core/srs/fsrs_parameters.dart';
 import 'package:medanki_dz/data/local/app_database.dart';
 import 'package:medanki_dz/data/network/api_client.dart';
+import 'package:medanki_dz/data/network/secure_token_storage.dart';
 import 'package:medanki_dz/data/repositories/ai/adaptive_params_cache.dart';
 import 'package:medanki_dz/data/repositories/ai/ai_repository.dart';
 
@@ -52,9 +53,11 @@ class FakeApiClient extends ApiClient {
   }
 }
 
-class _NoopStorage implements dynamic {
+class _NoopStorage extends SecureTokenStorage {
+  _NoopStorage() : super();
+
   @override
-  noSuchMethod(Invocation invocation) async => null;
+  Future<String> getOrCreateDeviceId() async => 'test-device';
 }
 
 void main() {
