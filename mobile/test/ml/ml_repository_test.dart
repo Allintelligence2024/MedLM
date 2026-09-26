@@ -6,6 +6,7 @@ library;
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:medanki_dz/data/network/api_client.dart';
+import 'package:medanki_dz/data/network/secure_token_storage.dart';
 import 'package:medanki_dz/data/network/api_exceptions.dart';
 import 'package:medanki_dz/data/repositories/ml/ml_models.dart';
 import 'package:medanki_dz/data/repositories/ml/ml_repository.dart';
@@ -56,16 +57,18 @@ class FakeApiClient extends ApiClient {
           'reason': "taux d'échec 40% ≥ 35% sur 30 revues",
         },
       ],
-      'relax': const [],
+      'relax': const <dynamic>[],
     };
   }
 }
 
 // Même astuce que les tests IA : pas de flutter_secure_storage en
 // environnement de test (canal plateforme absent).
-class _NoopStorage implements dynamic {
+class _NoopStorage extends SecureTokenStorage {
+  _NoopStorage() : super();
+
   @override
-  noSuchMethod(Invocation invocation) async => null;
+  Future<String> getOrCreateDeviceId() async => 'test-device';
 }
 
 void main() {

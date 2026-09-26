@@ -4,7 +4,6 @@ import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:medanki_dz/core/offline/offline_cache.dart';
-import 'package:path/path.dart' as p;
 
 void main() {
   late Directory tempDir;

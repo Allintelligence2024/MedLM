@@ -108,7 +108,7 @@ void main() {
         expect(greeting, contains('Yasmine'));
         expect(greeting, isNot(contains('{')));
 
-        final score = l10n.examsScore(87);
+        final score = l10n.examsScore('87');
         expect(score, contains('87'));
         expect(score, isNot(contains('{')));
 

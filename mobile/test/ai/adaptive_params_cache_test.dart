@@ -74,11 +74,11 @@ void main() {
   group('sérialisation (pure)', () {
     test('round-trip : poids, active, raisons, fraîcheur préservés', () {
       final now = DateTime.now().millisecondsSinceEpoch;
-      const entry = CachedAdaptiveParams(
-        parameters: const FsrsParameters(),
+      final entry = CachedAdaptiveParams(
+        parameters: FsrsParameters(),
         fetchedAtMs: now,
         active: true,
-        reasons: const ['w11 ×1.15'],
+        reasons: ['w11 ×1.15'],
       );
       final decoded =
           AdaptiveParamsCache.decodeAdaptiveParams(
@@ -146,7 +146,7 @@ void main() {
         parameters: FsrsParameters(),
         fetchedAtMs: 42,
         active: true,
-        reasons: const ['r'],
+        reasons: ['r'],
       );
       await cache.write(entry);
       final read = await cache.read();

@@ -7,6 +7,7 @@ library;
 
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
+import 'package:medanki_dz/core/srs/review_event.dart';
 import 'package:medanki_dz/core/srs/srs_models.dart';
 import 'package:medanki_dz/data/local/app_database.dart';
 import 'package:medanki_dz/data/repositories/srs_repository.dart';
@@ -122,7 +123,7 @@ void main() {
         rating: Rating.good, nowMs: t0, dayKey: '2023-11-14',
       );
 
-      final List<ReviewLogRow> pending = await repo.pendingForPush(user);
+      final List<ReviewEvent> pending = await repo.pendingForPush(user);
       expect(pending, hasLength(1));
 
       await repo.markSynced(<String>[pending.single.id]);

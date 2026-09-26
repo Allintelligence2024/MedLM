@@ -18,11 +18,11 @@ class _RsaPair {
 }
 
 Future<_RsaPair> _generateRsaPair() async {
-  final rsa = RsaPkcs1v15Sha256();
+  final rsa = RsaSsaPkcs1v15(Sha256());
   final kp = await rsa.newKeyPair();
   final pub = await kp.extractPublicKey();
-  final pubBytes = pub.bytes;
-  final privBytes = (kp as RsaKeyPair).privateKey.bytes;
+  final pubBytes = Uint8List.fromList(pub.n);
+  final privBytes = Uint8List.fromList((await kp.extract()).d);
   String toPem(Uint8List b, String label) {
     final b64 = base64Encode(b);
     final lines = <String>[];
