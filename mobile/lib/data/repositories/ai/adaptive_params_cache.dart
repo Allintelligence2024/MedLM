@@ -160,13 +160,20 @@ Future<bool> refreshAdaptiveFsrsParameters({
 }) async {
   try {
     final profile = await ai.adaptiveProfile();
+    final adjustment = profile.fsrsAdjustment;
+    // Le drapeau `active` est la clé de voûte : le serveur peut
+    // renvoyer un tableau de poids complet (non ajusté) avec
+    // `active:false`. On ne l'utilise JAMAIS dans ce cas — le moteur
+    // reste aux poids par défaut (doc v2 §13 : pas de dérive
+    // silencieuse, cf. FsrsAdjustment « poids ajustés si active »).
     await cache.write(
       CachedAdaptiveParams(
-        parameters:
-            FsrsAdaptive.parametersFromAdjustment(profile.fsrsAdjustment),
+        parameters: adjustment.active
+            ? FsrsAdaptive.parametersFromAdjustment(adjustment)
+            : const FsrsParameters(),
         fetchedAtMs: nowMs ?? DateTime.now().millisecondsSinceEpoch,
-        active: profile.fsrsAdjustment.active,
-        reasons: profile.fsrsAdjustment.reasons,
+        active: adjustment.active,
+        reasons: adjustment.reasons,
       ),
       userId: userId,
     );

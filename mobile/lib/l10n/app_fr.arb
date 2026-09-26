@@ -224,6 +224,17 @@
   "notifPermissionDeny": "Non merci",
   "notifDenied": "Les notifications sont désactivées. Tu peux les réactiver dans les réglages du téléphone.",
   "aiHintLabel": "Indice personnalisé",
+  "aiHintWhy": "Pourquoi cet indice ?",
+  "tutorSend": "Envoyer",
+  "tutorInputHint": "Votre question de cours…",
+  "tutorQuotaRemaining": "{remaining} restant(s)",
+  "@tutorQuotaRemaining": {
+    "placeholders": {
+      "remaining": {
+        "type": "int"
+      }
+    }
+  },
   "aiHintDismiss": "Masquer l'indice",
   "tutorQuotaReached": "Quota tuteur du jour atteint — réessayez demain.",
   "tutorOffline": "Pas de réseau — le tuteur nécessite une connexion.",
@@ -258,6 +269,9 @@
   "leaderboardYearRange": "Année (1-10)",
   "leaderboardOptInFailed": "Échec de l'inscription au classement.",
   "leaderboardOptOutGdpr": "Se désinscrire du classement (RGPD)",
+  "mlBandLow": "à risque",
+  "mlBandMedium": "moyen",
+  "mlBandHigh": "prometteur",
   "mlPredictionTitle": "Examen blanc : score estimé",
   "mlModelWindow": "Modèle {version} · fenêtre {days} j",
   "@mlModelWindow": {

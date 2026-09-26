@@ -167,6 +167,10 @@ abstract class AppLocalizations {
   String get notifPermissionDeny;
   String get notifDenied;
   String get aiHintLabel;
+  String get aiHintWhy;
+  String get tutorSend;
+  String get tutorInputHint;
+  String tutorQuotaRemaining(int remaining);
   String get aiHintDismiss;
   String get tutorQuotaReached;
   String get tutorOffline;
@@ -194,6 +198,9 @@ abstract class AppLocalizations {
   String get leaderboardYearRange;
   String get leaderboardOptInFailed;
   String get leaderboardOptOutGdpr;
+  String get mlBandLow;
+  String get mlBandMedium;
+  String get mlBandHigh;
   String get mlPredictionTitle;
   String mlModelWindow(String version, int days);
   String get mlNotEnoughData;
@@ -634,6 +641,18 @@ class AppLocalizationsFr extends AppLocalizations {
   String get aiHintLabel => 'Indice personnalisé';
 
   @override
+  String get aiHintWhy => 'Pourquoi cet indice ?';
+
+  @override
+  String get tutorSend => 'Envoyer';
+
+  @override
+  String get tutorInputHint => 'Votre question de cours…';
+
+  @override
+  String tutorQuotaRemaining(int remaining) => '${remaining} restant(s)';
+
+  @override
   String get aiHintDismiss => 'Masquer l\'indice';
 
   @override
@@ -713,6 +732,15 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get leaderboardOptOutGdpr => 'Se désinscrire du classement (RGPD)';
+
+  @override
+  String get mlBandLow => 'à risque';
+
+  @override
+  String get mlBandMedium => 'moyen';
+
+  @override
+  String get mlBandHigh => 'prometteur';
 
   @override
   String get mlPredictionTitle => 'Examen blanc : score estimé';
@@ -1181,6 +1209,18 @@ class AppLocalizationsAr extends AppLocalizations {
   String get aiHintLabel => 'تلميح مخصص';
 
   @override
+  String get aiHintWhy => 'لماذا هذا التلميح؟';
+
+  @override
+  String get tutorSend => 'إرسال';
+
+  @override
+  String get tutorInputHint => 'سؤال الدرس…';
+
+  @override
+  String tutorQuotaRemaining(int remaining) => 'المتبقي ${remaining}';
+
+  @override
   String get aiHintDismiss => 'إخفاء التلميح';
 
   @override
@@ -1260,6 +1300,15 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get leaderboardOptOutGdpr => 'الانسحاب من الترتيب (RGPD)';
+
+  @override
+  String get mlBandLow => 'معرّض للخطر';
+
+  @override
+  String get mlBandMedium => 'متوسط';
+
+  @override
+  String get mlBandHigh => 'مرشّح للنجاح';
 
   @override
   String get mlPredictionTitle => 'الامتحان التجريبي: النتيجة المتوقعة';
@@ -1728,6 +1777,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get aiHintLabel => 'Personalised hint';
 
   @override
+  String get aiHintWhy => 'Why this hint?';
+
+  @override
+  String get tutorSend => 'Send';
+
+  @override
+  String get tutorInputHint => 'Your course question…';
+
+  @override
+  String tutorQuotaRemaining(int remaining) => '${remaining} left';
+
+  @override
   String get aiHintDismiss => 'Hide hint';
 
   @override
@@ -1807,6 +1868,15 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get leaderboardOptOutGdpr => 'Leave the leaderboard (GDPR)';
+
+  @override
+  String get mlBandLow => 'at risk';
+
+  @override
+  String get mlBandMedium => 'medium';
+
+  @override
+  String get mlBandHigh => 'on track';
 
   @override
   String get mlPredictionTitle => 'Mock exam: estimated score';

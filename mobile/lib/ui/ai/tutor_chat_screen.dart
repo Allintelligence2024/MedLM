@@ -205,7 +205,7 @@ class _TutorChatScreenState extends State<TutorChatScreen> {
               child: Padding(
                 padding: const EdgeInsets.only(right: 12),
                 child: Text(
-                  '$_remainingQuota restant(s)',
+                  l10n.tutorQuotaRemaining(_remainingQuota),
                   style: TextStyle(fontSize: 12, color: scheme.outline),
                 ),
               ),
@@ -276,9 +276,9 @@ class _TutorChatScreenState extends State<TutorChatScreen> {
                       maxLines: 4,
                       maxLength: 1000,
                       enabled: !_inputDisabled,
-                      decoration: const InputDecoration(
-                        hintText: 'Votre question de cours…',
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        hintText: l10n.tutorInputHint,
+                        border: const OutlineInputBorder(),
                         counterText: '',
                       ),
                       onSubmitted: (_) => _send(),
@@ -286,7 +286,7 @@ class _TutorChatScreenState extends State<TutorChatScreen> {
                   ),
                   const SizedBox(width: 8),
                   IconButton.filled(
-                    tooltip: 'Envoyer',
+                    tooltip: l10n.tutorSend,
                     onPressed: _inputDisabled ? null : _send,
                     icon: _sending
                         ? const SizedBox(

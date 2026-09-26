@@ -143,7 +143,9 @@ void main() {
       nowMs: 1300,
       dayKey: '2025-01-01',
     );
-    final result = session.finish();
+    // Horloge injectée : 300 ms après le début (< maxDurationMs).
+    final result = session.finish(nowMs: 1400);
+    expect(result.durationMs, equals(400));
     expect(result.cardsReviewed, equals(3));
     expect(result.cardsCompleted, equals(2)); // hard + good >= 2
     expect(result.cardsAbandoned, equals(1));
@@ -159,12 +161,12 @@ void main() {
       config: cfg,
     );
     await short.start(userId: 'u1', nowMs: 1000, dayKey: '2025-01-01');
-    // On ne peut pas vraiment dormir 100ms dans un test unitaire, mais
-    // on triche en injectant un _startedAt dans le passé.
-    // Cf. QuickSession : la durée est calculée à finish().
-    // Ici on documente simplement le contrat.
-    final result = short.finish();
-    expect(result.durationMs, greaterThanOrEqualTo(0));
+    // Le contrat est vérifiable sans dormir : on avance l'horloge
+    // injectée de 2 000 ms pour un plafond de 100 ms.
+    final result = short.finish(nowMs: 3000);
+    expect(result.durationMs, equals(2000));
+    expect(result.completed, isFalse);
+    expect(result.success, isFalse);
   });
 
   test('start() avec pile vide retourne error: empty_queue', () async {

@@ -6,6 +6,7 @@
 // côté source).
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:medanki_dz/app/app.dart' show resolveAppLocale;
 import 'package:medanki_dz/l10n/app_localizations.dart';
 
 /// Monte un widget qui capture l'instance de localisation résolue.
@@ -17,6 +18,7 @@ Future<AppLocalizations> _localizationsFor(
   await tester.pumpWidget(
     MaterialApp(
       locale: locale,
+      localeListResolutionCallback: resolveAppLocale,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       home: Builder(
@@ -33,9 +35,17 @@ Future<AppLocalizations> _localizationsFor(
 
 void main() {
   testWidgets('les trois langues du produit sont déclarées', (tester) async {
+    // L'ORDRE du bundle n'est pas un contrat : `supportedLocales` est
+    // généré par l'outillage Flutter (arb-dir → ordre des .arb), il a
+    // déjà été observé en `ar, en, fr`. Ce qui est contractuel, c'est
+    // le contenu, et le repli français (test ci-dessous).
     expect(
-      AppLocalizations.supportedLocales.map((l) => l.languageCode).toList(),
-      ['fr', 'ar', 'en'],
+      AppLocalizations.supportedLocales.map((l) => l.languageCode).toSet(),
+      {'fr', 'ar', 'en'},
+    );
+    expect(
+      AppLocalizations.supportedLocales.map((l) => l.languageCode),
+      isNot(contains('es')),
     );
   });
 
@@ -66,8 +76,20 @@ void main() {
   testWidgets('une langue non supportée retombe sur le français',
       (tester) async {
     // Le produit s'adresse à l'Algérie : le français est le repli
-    // naturel, jamais l'anglais.
-    final l10n = await _localizationsFor(tester, const Locale('es'));
+    // naturel, jamais l'arabe ni l'anglais.
+    expect(
+      resolveAppLocale(
+        const [Locale('es')],
+        AppLocalizations.supportedLocales,
+      ).languageCode,
+      'fr',
+    );
+    // … et le widget monté applique bien ce repli (MaterialApp réel
+    // du produit : `localeListResolutionCallback: resolveAppLocale`).
+    final l10n = await _localizationsFor(
+      tester,
+      const Locale('es'),
+    );
     expect(l10n.navStudy, 'Étudier');
   });
 

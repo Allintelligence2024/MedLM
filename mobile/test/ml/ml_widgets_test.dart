@@ -14,6 +14,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:medanki_dz/data/network/api_client.dart';
 import 'package:medanki_dz/data/network/secure_token_storage.dart';
 import 'package:medanki_dz/data/repositories/ml/ml_repository.dart';
+import 'package:medanki_dz/l10n/app_localizations.dart';
 import 'package:medanki_dz/ui/ml/ml_prediction_card.dart';
 import 'package:medanki_dz/ui/ml/tag_focus_card.dart';
 
@@ -83,8 +84,16 @@ class _NoopStorage extends SecureTokenStorage {
   Future<String> getOrCreateDeviceId() async => 'test-device';
 }
 
+/// Les cartes utilisent l10n (audit P1-4) : sans délégué,
+/// `AppLocalizations.of(context)` lève. Locale FR car les assertions
+/// portent sur les libellés français.
 Widget _wrap(Widget child) {
-  return MaterialApp(home: Scaffold(body: SingleChildScrollView(child: child)));
+  return MaterialApp(
+    locale: const Locale('fr'),
+    localizationsDelegates: AppLocalizations.localizationsDelegates,
+    supportedLocales: AppLocalizations.supportedLocales,
+    home: Scaffold(body: SingleChildScrollView(child: child)),
+  );
 }
 
 void main() {

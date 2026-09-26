@@ -1,237 +1,343 @@
-// Tests de JwtVerifier.
+// Tests de JwtVerifier — vraie cryptographie RS256.
 //
-// On génère une paire RSA en mémoire (clé privée pour signer
-// dans le test, publique bundle pour vérifier). Cela évite d'avoir
-// à mocker le rootBundle.
-import 'dart:convert';
+// Historique : ces tests mockaient le canal `flutter/assets` et
+// signaient en HMAC, ce qui (a) levait `UnimplementedError` sur les
+// versions récentes de Flutter et (b) ne prouvait rien : aucune clé
+// RSA réelle n'était utilisée, et le « PEM » produit contenait le
+// modulus brut, format que le vérificateur ne sait pas lire en
+// production (clé SPKI du bundle). Les tests ci-dessous signent de
+// vrais JWT RS256 (PKCS#1 v1.5 + SHA-256) avec `pointycastle`, en
+// exposant la clé publique au format EXACT du bundle
+// (`-----BEGIN PUBLIC KEY-----`, SubjectPublicKeyInfo), et injectent
+// cette clé via `JwtVerifier.fromPem` : aucun canal de plateforme,
+// aucune dépendance au rootBundle.
+library;
 
-import 'package:cryptography/cryptography.dart';
-import 'package:flutter/services.dart';
+import 'dart:convert';
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:medanki_dz/core/security/jwt_verifier.dart';
+import 'package:pointycastle/export.dart';
 
-class _RsaPair {
-  _RsaPair(this.publicPem, this.privatePem);
-  final String publicPem;
-  final String privatePem;
+// ── Génération de clé + signature RS256 (pointycastle) ──────────────
+
+class _RsaFixture {
+  _RsaFixture(this.keyPair);
+
+  final AsymmetricKeyPair<PublicKey, PrivateKey> keyPair;
+
+  RSAPublicKey get publicKey => keyPair.publicKey as RSAPublicKey;
+  RSAPrivateKey get privateKey => keyPair.privateKey as RSAPrivateKey;
+
+  /// PEM SubjectPublicKeyInfo — même format que l'asset embarqué.
+  String get publicPem => encodeSpkiPem(publicKey);
 }
 
-Future<_RsaPair> _generateRsaPair() async {
-  final rsa = RsaSsaPkcs1v15(Sha256());
-  final kp = await rsa.newKeyPair();
-  final pub = await kp.extractPublicKey();
-  final pubBytes = Uint8List.fromList(pub.n);
-  final privBytes = Uint8List.fromList((await kp.extract()).d);
-  String toPem(Uint8List b, String label) {
-    final b64 = base64Encode(b);
-    final lines = <String>[];
-    for (var i = 0; i < b64.length; i += 64) {
-      lines.add(b64.substring(i, i + 64 > b64.length ? b64.length : i + 64));
-    }
-    return '-----BEGIN $label-----\n${lines.join('\n')}\n-----END $label-----\n';
+_RsaFixture _newKeyPair() {
+  // Graine fixe : la génération est reproductible, les tests ne
+  // dépendent pas d'une source d'entropie système.
+  final seed = Uint8List.fromList(List<int>.generate(32, (i) => i + 7));
+  final random = FortunaRandom()..seed(KeyParameter(seed));
+  final generator = RSAKeyGenerator()
+    ..init(ParametersWithRandom(
+        RSAKeyGeneratorParameters(BigInt.from(65537), 2048, 64),
+      random,
+    ));
+  return _RsaFixture(generator.generateKeyPair());
+}
+
+/// Encode une clé publique RSA en PEM SubjectPublicKeyInfo (DER).
+String encodeSpkiPem(RSAPublicKey key) {
+  final rsaKey = _tlv(0x30, <int>[
+    ..._integerDer(key.modulus),
+    ..._integerDer(key.exponent),
+  ]);
+  final algorithmIdentifier = _tlv(0x30, <int>[
+    0x06, 0x09, // OID
+    0x2a, 0x86, 0x48, 0x86, 0xf7, 0x0d, 0x01, 0x01, 0x01, // rsaEncryption
+    0x05, 0x00, // NULL
+  ]);
+  final spki = _tlv(0x30, <int>[
+    ...algorithmIdentifier,
+    0x03, // BIT STRING
+    ..._lengthDer(rsaKey.length + 1),
+    0x00, // 0 bit inutilisé
+    ...rsaKey,
+  ]);
+  final b64 = base64Encode(spki);
+  final lines = <String>[];
+  for (var i = 0; i < b64.length; i += 64) {
+    lines.add(b64.substring(i, i + 64 > b64.length ? b64.length : i + 64));
   }
-
-  return _RsaPair(
-    toPem(pubBytes, 'PUBLIC KEY'),
-    toPem(privBytes, 'PRIVATE KEY'),
-  );
+  return '-----BEGIN PUBLIC KEY-----\n'
+      '${lines.join('\n')}\n'
+      '-----END PUBLIC KEY-----\n';
 }
 
-Future<String> _signJwt({
-  required String privatePem,
+Uint8List _tlv(int tag, List<int> content) =>
+    Uint8List.fromList(<int>[tag, ..._lengthDer(content.length), ...content]);
+
+List<int> _lengthDer(int length) {
+  if (length < 0x80) return <int>[length];
+  final bytes = <int>[];
+  var value = length;
+  while (value > 0) {
+    bytes.insert(0, value & 0xff);
+    value >>= 8;
+  }
+  return <int>[0x80 | bytes.length, ...bytes];
+}
+
+/// INTEGER DER non signé (avec zéro de bourrage si le bit de poids fort
+/// est à 1 — c'est le cas de tous les modulus RSA réels).
+List<int> _integerDer(BigInt value) {
+  var bytes = Uint8List.fromList(value.toBytes());
+  if (bytes.isNotEmpty && bytes[0] & 0x80 != 0) {
+    bytes = Uint8List.fromList(<int>[0x00, ...bytes]);
+  }
+  return _tlv(0x02, bytes);
+}
+
+/// En-tête produit par le backend (`alg=RS256`).
+const Map<String, dynamic> _rs256Header = <String, dynamic>{
+  'alg': 'RS256',
+  'typ': 'JWT',
+};
+
+String _b64Url(Map<String, dynamic> json) =>
+    base64Url.encode(utf8.encode(jsonEncode(json))).replaceAll('=', '');
+
+/// Signe un JWT RS256 réel (PKCS#1 v1.5 + SHA-256).
+String _signJwt(
+  _RsaFixture fixture, {
+  Map<String, dynamic>? header,
   required Map<String, dynamic> payload,
-}) async {
-  // Header minimal : alg=RS256.
-  final header = {'alg': 'RS256', 'typ': 'JWT'};
-  String enc(Map<String, dynamic> m) =>
-      base64Url.encode(utf8.encode(jsonEncode(m))).replaceAll('=', '');
-  final signingInput = '${enc(header)}.${enc(payload)}';
-  final privBytes = _pemToBytes(privatePem, 'PRIVATE KEY');
-
-  // ⚠️ L'API `cryptography` n'expose pas la signature RSA directe
-  // avec clé PKCS8. Pour ce test, on utilise une approche simplifiée
-  // — on signe avec un HMAC-SHA256 au-dessus de la signing input +
-  // un tag `alg=HS256`. C'est moche, mais ça reste dans le scope
-  // "test de JwtVerifier" qui doit savoir rejeter les alg != RS256.
-  //
-  // Pour tester la vraie vérif RS256, on a aussi un test qui injecte
-  // une signature bidon forgée (le test attend `signature invalide`).
-  final hmac = Hmac.sha256();
-  final secret = SecretKey(privBytes);
-  final mac = await hmac.calculateMac(utf8.encode(signingInput + privBytes.toString()), secretKey: secret);
-  final signature = base64Url.encode(mac.bytes).replaceAll('=', '');
-  return '$signingInput.$signature';
+}) {
+  final signingInput = '${_b64Url(header ?? _rs256Header)}.${_b64Url(payload)}';
+  final signer = RSASigner(SHA256Digest(), '0609608648016503040201')
+    ..init(true, PrivateKeyParameter<RSAPrivateKey>(fixture.privateKey));
+  final signature =
+      (signer.generateSignature(utf8.encode(signingInput)) as RSASignature)
+          .bytes;
+  return '$signingInput.${base64Url.encode(signature).replaceAll('=', '')}';
 }
 
-Uint8List _pemToBytes(String pem, String label) {
-  final start = pem.indexOf('-----BEGIN $label-----') + ('-----BEGIN $label-----').length;
-  final end = pem.indexOf('-----END $label-----');
-  final b64 = pem.substring(start, end).replaceAll('\n', '').trim();
-  return Uint8List.fromList(base64Decode(b64));
-}
+int _epochSeconds({int offsetSeconds = 3600}) =>
+    (DateTime.now().millisecondsSinceEpoch ~/ 1000) + offsetSeconds;
 
 void main() {
-  TestWidgetsFlutterBinding.ensureInitialized();
+  late _RsaFixture fixture;
+  late JwtVerifier verifier;
 
-  setUp(() async {
-    // On génère une paire fraîche à chaque setUp — chaque test
-    // est indépendant.
+  setUp(() {
+    fixture = _newKeyPair();
+    verifier = JwtVerifier.fromPem(fixture.publicPem);
+  });
+
+  test('accepte un JWT RS256 réellement signé et expose les claims', () async {
+    final jwt = _signJwt(
+      fixture,
+      payload: <String, dynamic>{
+        'plan': 'premium',
+        'sub': 'user-1',
+        'exp': _epochSeconds(),
+      },
+    );
+
+    final verified = await verifier.verify(jwt);
+    expect(verified.payload['plan'], 'premium');
+    expect(verified.payload['sub'], 'user-1');
+    expect(verified.expiresAtMs, (verified.payload['exp'] as int) * 1000,
+        reason: 'exp (secondes) doit être exposé en millisecondes');
+  });
+
+  test('rejette un JWT dont un octet du payload a été modifié', () async {
+    final jwt = _signJwt(
+      fixture,
+      payload: <String, dynamic>{'plan': 'free', 'exp': _epochSeconds()},
+    );
+    final parts = jwt.split('.');
+    // Payload réécrit en `premium` : la signature ne couvre plus le
+    // contenu (attaque « paywall bypass » de la v2 §8.1).
+    final forgedPayload = _b64Url(<String, dynamic>{
+      'plan': 'premium',
+      'exp': _epochSeconds(),
+    });
+    final forged = '${parts[0]}.$forgedPayload.${parts[2]}';
+
+    await expectLater(
+      verifier.verify(forged),
+      throwsA(predicate((e) =>
+          e is JwtVerificationException && e.message.contains('invalide'))),
+    );
+  });
+
+  test('rejette un JWT signé par une autre clé', () async {
+    final autre = _newKeyPair();
+    final jwt = _signJwt(
+      autre,
+      payload: <String, dynamic>{'plan': 'premium', 'exp': _epochSeconds()},
+    );
+
+    await expectLater(
+      verifier.verify(jwt),
+      throwsA(predicate((e) =>
+          e is JwtVerificationException && e.message.contains('invalide'))),
+    );
   });
 
   test('rejette un JWT mal formé (pas 3 parties)', () async {
-    final v = JwtVerifier();
-    expect(
-      () => v.verify('a.b'),
+    await expectLater(
+      verifier.verify('a.b'),
       throwsA(isA<JwtVerificationException>()),
     );
   });
 
-  test('rejette un JWT avec alg ≠ RS256', () async {
-    final v = JwtVerifier();
-    final pair = await _generateRsaPair();
-    // On bundle la publique via rootBundle mock.
-    final channel = TestDefaultBinaryMessengerBinding
-        .instance.defaultBinaryMessenger;
-    const key = StringCodec();
-    channel.setMockMessageHandler(
-      'flutter/assets',
-      (msg) async {
-        final call = key.decodeMessage(msg) as Map<String, Object?>?;
-        final name = call?['asset'] as String?;
-        if (name == 'assets/keys/entitlement_public.pem') {
-          return key.encodeMessage(pair.publicPem);
-        }
-        return null;
-      },
+  test('rejette un JWT avec alg ≠ RS256 (confusion d\'algorithme)', () async {
+    // En-tête HS256 : le vérificateur doit refuser AVANT de toucher à
+    // la clé (aucune signature HMAC ne doit être acceptée).
+    final jwt = _signJwt(
+      fixture,
+      header: <String, dynamic>{'alg': 'HS256', 'typ': 'JWT'},
+      payload: <String, dynamic>{'plan': 'premium', 'exp': _epochSeconds()},
     );
 
-    final jwt = await _signJwt(
-      privatePem: pair.privatePem,
-      payload: {
+    await expectLater(
+      verifier.verify(jwt),
+      throwsA(predicate((e) =>
+          e is JwtVerificationException && e.message.contains('non supporté'))),
+    );
+  });
+
+  test('rejette un JWT expiré (signature pourtant valide)', () async {
+    final jwt = _signJwt(
+      fixture,
+      payload: <String, dynamic>{
         'plan': 'premium',
-        'exp': (DateTime.now().millisecondsSinceEpoch ~/ 1000) + 3600,
+        'exp': _epochSeconds(offsetSeconds: -100),
       },
     );
-    // On patche le header pour avoir alg=HS256 (le body est le
-    // même, mais le vérif doit refuser avant même d'essayer).
-    final parts = jwt.split('.');
-    final newHeader = base64Url.encode(utf8.encode('{"alg":"HS256","typ":"JWT"}')).replaceAll('=', '');
-    final forged = '$newHeader.${parts[1]}.${parts[2]}';
-    expect(
-      () => v.verify(forged),
+
+    await expectLater(
+      verifier.verify(jwt),
       throwsA(predicate(
-        (e) => e is JwtVerificationException && e.message.contains('non supporté'),
-      )),
+          (e) => e is JwtVerificationException && e.message.contains('expiré'))),
     );
   });
 
-  test('rejette un JWT dont la signature est invalide', () async {
-    final v = JwtVerifier();
-    final pair = await _generateRsaPair();
-    final channel = TestDefaultBinaryMessengerBinding
-        .instance.defaultBinaryMessenger;
-    const key = StringCodec();
-    channel.setMockMessageHandler(
-      'flutter/assets',
-      (msg) async {
-        final call = key.decodeMessage(msg) as Map<String, Object?>?;
-        final name = call?['asset'] as String?;
-        if (name == 'assets/keys/entitlement_public.pem') {
-          return key.encodeMessage(pair.publicPem);
-        }
-        return null;
-      },
+  test('rejette un JWT sans claim exp (signature pourtant valide)', () async {
+    final jwt = _signJwt(
+      fixture,
+      payload: <String, dynamic>{'plan': 'premium'},
     );
-    // Header et payload OK, signature bidon (forgée).
-    final header = base64Url.encode(utf8.encode('{"alg":"RS256","typ":"JWT"}')).replaceAll('=', '');
-    final payload = base64Url.encode(utf8.encode(jsonEncode({
-      'plan': 'premium',
-      'exp': (DateTime.now().millisecondsSinceEpoch ~/ 1000) + 3600,
-    }))).replaceAll('=', '');
-    final forged = '$header.$payload.${base64Url.encode(List<int>.filled(256, 0xAB)).replaceAll('=', '')}';
-    expect(
-      () => v.verify(forged),
-      throwsA(predicate(
-        (e) => e is JwtVerificationException && e.message.contains('invalide'),
-      )),
+
+    await expectLater(
+      verifier.verify(jwt),
+      throwsA(predicate((e) =>
+          e is JwtVerificationException && e.message.contains('exp'))),
     );
   });
 
-  test('rejette un JWT expiré', () async {
-    final v = JwtVerifier();
-    final pair = await _generateRsaPair();
-    final channel = TestDefaultBinaryMessengerBinding
-        .instance.defaultBinaryMessenger;
-    const key = StringCodec();
-    channel.setMockMessageHandler(
-      'flutter/assets',
-      (msg) async {
-        final call = key.decodeMessage(msg) as Map<String, Object?>?;
-        final name = call?['asset'] as String?;
-        if (name == 'assets/keys/entitlement_public.pem') {
-          return key.encodeMessage(pair.publicPem);
-        }
-        return null;
+  test('rejette un JWT pas encore valide (nbf futur)', () async {
+    final jwt = _signJwt(
+      fixture,
+      payload: <String, dynamic>{
+        'plan': 'premium',
+        'exp': _epochSeconds(),
+        'nbf': _epochSeconds(offsetSeconds: 600),
       },
     );
-    final header = base64Url.encode(utf8.encode('{"alg":"RS256","typ":"JWT"}')).replaceAll('=', '');
-    final payload = base64Url.encode(utf8.encode(jsonEncode({
-      'plan': 'premium',
-      'exp': (DateTime.now().millisecondsSinceEpoch ~/ 1000) - 100, // expiré il y a 100s
-    }))).replaceAll('=', '');
-    final sig = base64Url.encode(List<int>.filled(256, 0x42)).replaceAll('=', '');
-    final jwt = '$header.$payload.$sig';
-    expect(
-      () => v.verify(jwt),
-      throwsA(predicate(
-        (e) => e is JwtVerificationException && e.message.contains('expiré'),
-      )),
+
+    await expectLater(
+      verifier.verify(jwt),
+      throwsA(predicate((e) =>
+          e is JwtVerificationException && e.message.contains('valide'))),
     );
   });
 
-  test('rejette un JWT sans claim exp', () async {
-    final v = JwtVerifier();
-    final pair = await _generateRsaPair();
-    final channel = TestDefaultBinaryMessengerBinding
-        .instance.defaultBinaryMessenger;
-    const key = StringCodec();
-    channel.setMockMessageHandler(
-      'flutter/assets',
-      (msg) async {
-        final call = key.decodeMessage(msg) as Map<String, Object?>?;
-        final name = call?['asset'] as String?;
-        if (name == 'assets/keys/entitlement_public.pem') {
-          return key.encodeMessage(pair.publicPem);
-        }
-        return null;
+  test('rejette un JWT expiré même avec une signature valide et une '
+      'horloge injectée', () async {
+    final jwt = _signJwt(
+      fixture,
+      payload: <String, dynamic>{
+        'plan': 'premium',
+        'exp': _epochSeconds(offsetSeconds: 60),
       },
     );
-    final header = base64Url.encode(utf8.encode('{"alg":"RS256","typ":"JWT"}')).replaceAll('=', '');
-    final payload = base64Url.encode(utf8.encode('{"plan":"premium"}')).replaceAll('=', '');
-    final sig = base64Url.encode(List<int>.filled(256, 0x42)).replaceAll('=', '');
-    expect(
-      () => v.verify('$header.$payload.$sig'),
+    // `now` injecté 2 h plus tard : le contrat temporel doit être
+    // testable sans attendre.
+    final later = DateTime.now().add(const Duration(hours: 2));
+    await expectLater(
+      verifier.verify(jwt, now: later),
       throwsA(predicate(
-        (e) => e is JwtVerificationException && e.message.contains('exp'),
-      )),
+          (e) => e is JwtVerificationException && e.message.contains('expiré'))),
     );
   });
 
-  test('rejette si la clé publique bundle est absente', () async {
-    final v = JwtVerifier();
-    // Pas de mock → le rootBundle.read lève.
-    final channel = TestDefaultBinaryMessengerBinding
-        .instance.defaultBinaryMessenger;
-    channel.setMockMessageHandler(
-      'flutter/assets',
-      (msg) async => null,
-    );
-    final header = base64Url.encode(utf8.encode('{"alg":"RS256","typ":"JWT"}')).replaceAll('=', '');
-    final payload = base64Url.encode(utf8.encode('{"plan":"premium","exp":9999999999}')).replaceAll('=', '');
-    final sig = base64Url.encode(List<int>.filled(256, 0x42)).replaceAll('=', '');
-    expect(
-      () => v.verify('$header.$payload.$sig'),
-      throwsA(isA<JwtVerificationException>()),
-    );
+  group('clé publique', () {
+    test('le PEM produit est analysé (SPKI → modulus + exposant)', () async {
+      final key = await verifier.publicKey();
+      expect(key.n.length, 256, reason: 'RSA-2048 → modulus de 2048 bits');
+    });
+
+    test('l\'asset embarqué se parse (RSA-2048, exposant 65537)', () async {
+      // La clé réellement livrée dans l'app : si son format changeait
+      // (DER, corps brut, PKCS#1…), ce test le dirait — c'était
+      // précisément le trou : le vérificateur lisait le DER SPKI comme
+      // s'il s'agissait du modulus, donc AUCUN JWT du backend n'était
+      // vérifiable.
+      final pem = File('assets/keys/entitlement_public.pem').readAsStringSync();
+      expect(pem, contains('BEGIN PUBLIC KEY'));
+      final bundled = JwtVerifier.fromPem(pem);
+      final key = await bundled.publicKey();
+      expect(key.n.length, 256);
+    });
+
+    test('asset absent → refus explicite (fail-closed)', () async {
+      final absent = JwtVerifier(
+        pemLoader: (_) async => throw StateError('asset introuvable'),
+      );
+      final jwt = _signJwt(
+        fixture,
+        payload: <String, dynamic>{'plan': 'premium', 'exp': _epochSeconds()},
+      );
+      await expectLater(
+        absent.verify(jwt),
+        throwsA(predicate((e) =>
+            e is JwtVerificationException &&
+            e.message.contains('clé publique manquante'))),
+      );
+    });
+
+    test('PEM illisible → refus explicite', () async {
+      final corrompu = JwtVerifier.fromPem('-----BEGIN PUBLIC KEY-----\n'
+          'ceci-n-est-pas-du-base64!!\n'
+          '-----END PUBLIC KEY-----');
+      final jwt = _signJwt(
+        fixture,
+        payload: <String, dynamic>{'plan': 'premium', 'exp': _epochSeconds()},
+      );
+      await expectLater(
+        corrompu.verify(jwt),
+        throwsA(isA<JwtVerificationException>()),
+      );
+    });
+
+    test('clé non RSA (corps sans OID rsaEncryption) → refus explicite',
+        () async {
+      final pasRsa = JwtVerifier.fromPem('-----BEGIN PUBLIC KEY-----\n'
+          '${base64Encode(<int>[0x30, 0x03, 0x02, 0x01, 0x01])}\n'
+          '-----END PUBLIC KEY-----');
+      final jwt = _signJwt(
+        fixture,
+        payload: <String, dynamic>{'plan': 'premium', 'exp': _epochSeconds()},
+      );
+      await expectLater(
+        pasRsa.verify(jwt),
+        throwsA(isA<JwtVerificationException>()),
+      );
+    });
   });
 }

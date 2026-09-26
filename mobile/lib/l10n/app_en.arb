@@ -123,6 +123,17 @@
   "notifPermissionDeny": "No thanks",
   "notifDenied": "Notifications are off. You can re-enable them in your phone settings.",
   "aiHintLabel": "Personalised hint",
+  "aiHintWhy": "Why this hint?",
+  "tutorSend": "Send",
+  "tutorInputHint": "Your course question…",
+  "tutorQuotaRemaining": "{remaining} left",
+  "@tutorQuotaRemaining": {
+    "placeholders": {
+      "remaining": {
+        "type": "int"
+      }
+    }
+  },
   "aiHintDismiss": "Hide hint",
   "tutorQuotaReached": "Daily tutor quota reached — try again tomorrow.",
   "tutorOffline": "No connection — the tutor needs to be online.",
@@ -150,6 +161,9 @@
   "leaderboardYearRange": "Year (1-10)",
   "leaderboardOptInFailed": "Couldn't join the leaderboard.",
   "leaderboardOptOutGdpr": "Leave the leaderboard (GDPR)",
+  "mlBandLow": "at risk",
+  "mlBandMedium": "medium",
+  "mlBandHigh": "on track",
   "mlPredictionTitle": "Mock exam: estimated score",
   "mlModelWindow": "Model {version} · {days}-day window",
   "mlNotEnoughData": "Not enough data to predict yet.",

@@ -123,6 +123,17 @@
   "notifPermissionDeny": "لا شكرًا",
   "notifDenied": "الإشعارات معطلة. يمكنك تفعيلها من إعدادات الهاتف.",
   "aiHintLabel": "تلميح مخصص",
+  "aiHintWhy": "لماذا هذا التلميح؟",
+  "tutorSend": "إرسال",
+  "tutorInputHint": "سؤال الدرس…",
+  "tutorQuotaRemaining": "المتبقي {remaining}",
+  "@tutorQuotaRemaining": {
+    "placeholders": {
+      "remaining": {
+        "type": "int"
+      }
+    }
+  },
   "aiHintDismiss": "إخفاء التلميح",
   "tutorQuotaReached": "بلغت حصة المعلم اليومية — أعد المحاولة غدًا.",
   "tutorOffline": "لا يوجد اتصال — يحتاج المعلم إلى الإنترنت.",
@@ -150,6 +161,9 @@
   "leaderboardYearRange": "السنة (1-10)",
   "leaderboardOptInFailed": "تعذر الانضمام إلى الترتيب.",
   "leaderboardOptOutGdpr": "الانسحاب من الترتيب (RGPD)",
+  "mlBandLow": "معرّض للخطر",
+  "mlBandMedium": "متوسط",
+  "mlBandHigh": "مرشّح للنجاح",
   "mlPredictionTitle": "الامتحان التجريبي: النتيجة المتوقعة",
   "mlModelWindow": "النموذج {version} · نافذة {days} يومًا",
   "mlNotEnoughData": "لا توجد بيانات كافية للتنبؤ بعد.",

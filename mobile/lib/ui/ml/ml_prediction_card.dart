@@ -168,9 +168,9 @@ class _BandChip extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final (label, color) = switch (band) {
-      ScoreBand.low => (l10n.mlAtRisk, Colors.red.shade700),
-      ScoreBand.medium => (l10n.examsFailed, Colors.amber.shade800),
-      ScoreBand.high => (l10n.examsPassed, Colors.green.shade700),
+      ScoreBand.low => (l10n.mlBandLow, Colors.red.shade700),
+      ScoreBand.medium => (l10n.mlBandMedium, Colors.amber.shade800),
+      ScoreBand.high => (l10n.mlBandHigh, Colors.green.shade700),
       null => ('—', Colors.grey),
     };
     return Container(

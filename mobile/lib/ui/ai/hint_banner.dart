@@ -111,7 +111,7 @@ class _HintBannerState extends State<HintBanner> {
                         childrenPadding: EdgeInsets.zero,
                         dense: true,
                         title: Text(
-                          'Pourquoi cet indice ?',
+                          l10n.aiHintWhy,
                           style: TextStyle(
                             fontSize: 12,
                             color: scheme.onTertiaryContainer
