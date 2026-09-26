@@ -146,9 +146,9 @@ int _epochSeconds({int offsetSeconds = 3600}) =>
 // (Le reste des tests utilise `pointycastle` : les deux bibliothèques
 // produisent le même format RSASSA-PKCS1-v1_5, la preuve d'interopérabilité
 // est apportée par ce jeton externe.)
-const String _nodePem = '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwLplUOEwChoXhUykZdUZ\nzGkSlpMf6O7wium0GIeY/XL53nWPkctPC64owE8Fjo/14LUD2elA53s++tr5mYL7\n73R4/NguKz7qIRXb3Xq+J7sjSmPut1VZm7Pcr+mZxTAm4parlPjNe1tNiSngXQ4N\nEfAbL1t3G+pNX0NqwdYwueZgxqDSEjXW889M3qw7/m9hsAD2jCYSTIRKggrI4pf2\nWFBtrq30fQsT3ln61ufIZFk81qfAepNTIHwVOOrGCe+NiIQlAAkmg+x9oOeJDcSE\nT1IJk8tbxU3bu3v47VNBATKKjAQ/QikKVYpDiPgyIbpAV+TOspLfI87A1wSa3FHi\nywIDAQAB\n-----END PUBLIC KEY-----";
+const String _nodePem = '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwLplUOEwChoXhUykZdUZ\nzGkSlpMf6O7wium0GIeY/XL53nWPkctPC64owE8Fjo/14LUD2elA53s++tr5mYL7\n73R4/NguKz7qIRXb3Xq+J7sjSmPut1VZm7Pcr+mZxTAm4parlPjNe1tNiSngXQ4N\nEfAbL1t3G+pNX0NqwdYwueZgxqDSEjXW889M3qw7/m9hsAD2jCYSTIRKggrI4pf2\nWFBtrq30fQsT3ln61ufIZFk81qfAepNTIHwVOOrGCe+NiIQlAAkmg+x9oOeJDcSE\nT1IJk8tbxU3bu3v47VNBATKKjAQ/QikKVYpDiPgyIbpAV+TOspLfI87A1wSa3FHi\nywIDAQAB\n-----END PUBLIC KEY-----';
 
-const String _nodeJwt = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJwbGFuIjoicHJlbWl1bSIsInN1YiI6InVzZXItbm9kZSIsImV4cCI6NDEwMjQ0NDgwMH0.AWGQZyTN6rjiCraU5v-2qXqBRHtPuZBtG2xIJHuRMy_xDND5-lNLsxBmezQsX-iXq8-C2g8g_Dcg2wic7sfcYCQB5iL36XDy523v6QiLsKfh6VuykJoqHXM9C6XNiDt4K-kR6Z10g1Fr0zc8E0GHC_H7b2qj4I72kue0-yJNr4nK9knf3LacwEQp72tfAowCAl_--QRus6-4S4EgMXSAaJKTCFKuKaw9HMKv0u28RcefLIK-rMha5Ead_Vad1vsRKxSC_4Wt6RFR42TomH-9aiB31gbnSiMlpw6QKF5fH2tq7CPACezSGPUUUsfaT4LfFlvaiOLlYL3z8NcEkUr8eg";
+const String _nodeJwt = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJwbGFuIjoicHJlbWl1bSIsInN1YiI6InVzZXItbm9kZSIsImV4cCI6NDEwMjQ0NDgwMH0.AWGQZyTN6rjiCraU5v-2qXqBRHtPuZBtG2xIJHuRMy_xDND5-lNLsxBmezQsX-iXq8-C2g8g_Dcg2wic7sfcYCQB5iL36XDy523v6QiLsKfh6VuykJoqHXM9C6XNiDt4K-kR6Z10g1Fr0zc8E0GHC_H7b2qj4I72kue0-yJNr4nK9knf3LacwEQp72tfAowCAl_--QRus6-4S4EgMXSAaJKTCFKuKaw9HMKv0u28RcefLIK-rMha5Ead_Vad1vsRKxSC_4Wt6RFR42TomH-9aiB31gbnSiMlpw6QKF5fH2tq7CPACezSGPUUUsfaT4LfFlvaiOLlYL3z8NcEkUr8eg';
 
 void main() {
   late _RsaFixture fixture;
