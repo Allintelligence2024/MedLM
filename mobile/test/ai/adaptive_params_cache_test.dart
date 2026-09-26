@@ -74,7 +74,7 @@ void main() {
   group('sérialisation (pure)', () {
     test('round-trip : poids, active, raisons, fraîcheur préservés', () {
       final now = DateTime.now().millisecondsSinceEpoch;
-      final entry = CachedAdaptiveParams(
+      const entry = CachedAdaptiveParams(
         parameters: const FsrsParameters(),
         fetchedAtMs: now,
         active: true,

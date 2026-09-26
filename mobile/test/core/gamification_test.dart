@@ -189,7 +189,7 @@ void main() {
 
   group('Badges', () {
     test('streak 7j débloque le badge "Semaine parfaite"', () {
-      final ctx = BadgeContext(
+      const ctx = BadgeContext(
         streakDays: 7,
         totalXp: 0,
         cardsMastered: 0,
@@ -202,7 +202,7 @@ void main() {
     });
 
     test('streak 30j débloque "Mois de fer"', () {
-      final ctx = BadgeContext(
+      const ctx = BadgeContext(
         streakDays: 30,
         totalXp: 0,
         cardsMastered: 0,
@@ -215,7 +215,7 @@ void main() {
     });
 
     test('EN activé débloque "Bilingue"', () {
-      final ctx = BadgeContext(
+      const ctx = BadgeContext(
         streakDays: 0,
         totalXp: 0,
         cardsMastered: 0,
@@ -228,7 +228,7 @@ void main() {
     });
 
     test('500 cartes maîtrisées débloque "500 cartes maîtrisées"', () {
-      final ctx = BadgeContext(
+      const ctx = BadgeContext(
         streakDays: 0,
         totalXp: 0,
         cardsMastered: 500,

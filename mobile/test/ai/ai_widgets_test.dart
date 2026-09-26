@@ -11,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:medanki_dz/data/network/api_client.dart';
 import 'package:medanki_dz/data/network/secure_token_storage.dart';
-import 'package:medanki_dz/data/repositories/ai/ai_models.dart';
 import 'package:medanki_dz/data/repositories/ai/ai_repository.dart';
 import 'package:medanki_dz/ui/ai/ai_speech_ports.dart';
 import 'package:medanki_dz/ui/ai/hint_banner.dart';

@@ -14,6 +14,7 @@ import 'package:medanki_dz/core/srs/review_event.dart';
 import 'package:medanki_dz/core/srs/srs_models.dart';
 import 'package:medanki_dz/data/local/app_database.dart';
 import 'package:medanki_dz/data/network/api_client.dart';
+import 'package:medanki_dz/data/network/secure_token_storage.dart';
 import 'package:medanki_dz/data/repositories/rest_sync_repository.dart';
 
 class FakeApiClient extends ApiClient {
@@ -33,7 +34,7 @@ class FakeApiClient extends ApiClient {
   ) async {
     pushCalls++;
     lastPushed = events;
-    return pushResponse ?? <String, dynamic>{'accepted': [], 'rejected': []};
+    return pushResponse ?? <String, dynamic>{'accepted': <dynamic>[], 'rejected': <dynamic>[]};
   }
 
   @override
@@ -49,9 +50,11 @@ class FakeApiClient extends ApiClient {
 }
 
 // Storage no-op pour le fake.
-class _NoopStorage implements dynamic {
+class _NoopStorage extends SecureTokenStorage {
+  _NoopStorage() : super();
+
   @override
-  noSuchMethod(Invocation invocation) async => null;
+  Future<String> getOrCreateDeviceId() async => 'test-device';
 }
 
 void main() {
