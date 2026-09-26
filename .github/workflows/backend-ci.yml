@@ -240,3 +240,16 @@ jobs:
         run: |
           bash -n tools/scripts/check_database_contract.sh
           bash -n tools/scripts/check_business_flows.sh
+      # Ces gardes existaient dans le dépôt mais n'étaient exécutées par
+      # AUCUN job : elles ne prouvaient donc rien. Elles tournent
+      # désormais ici (l10n mobile déjà régénéré, donc `--check` est
+      # déterministe).
+      - name: Gardes l10n mobile
+        run: |
+          python3 tools/scripts/gen_l10n.py --check
+          python3 tools/scripts/check_mobile_i18n.py
+          python3 tools/scripts/check_l10n_usage.py
+      - name: Configuration Android (release + desugaring)
+        # Sans effet si mobile/android n'existe pas (il est généré par
+        # `flutter create` dans le job mobile).
+        run: python3 tools/scripts/apply_android_release_config.py --check
