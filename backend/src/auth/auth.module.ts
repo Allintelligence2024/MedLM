@@ -14,10 +14,12 @@ import { GoogleOAuthService } from './google-oauth.service';
 import { GoogleOAuthController } from './google-oauth.controller';
 import { ResendEmailSender } from './email-sender.service';
 import { buildJwtConfig } from './jwt-config';
+import { I18nModule } from '../i18n/i18n.module';
 
 @Global()
 @Module({
   imports: [
+    I18nModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],

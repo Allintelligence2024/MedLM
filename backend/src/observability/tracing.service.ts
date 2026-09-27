@@ -85,7 +85,8 @@ export class TracingService {
     return child;
   }
 
-  /// Middleware Express (utilisé par `main.ts`).
+  /// Middleware Express. `next()` est synchrone : ne jamais await le
+  /// cycle de vie de la réponse ici (ça a coincé le parcours HTTP réel).
   middleware() {
     return (req: { method?: string; path?: string; route?: { path?: string } }, res: {
       statusCode: number;
@@ -93,24 +94,22 @@ export class TracingService {
       on: (ev: string, cb: (...args: unknown[]) => void) => void;
     }, next: () => void) => {
       const op = `${req.method ?? 'GET'} ${req.route?.path ?? req.path ?? '/'}`;
-      this.run(op, async (ctx) => {
-        ctx.attributes['http.method'] = req.method ?? 'GET';
-        ctx.attributes['http.route'] = String(req.route?.path ?? req.path ?? '/');
-        res.setHeader('x-trace-id', ctx.traceId);
-        try {
-          await new Promise<void>((resolve, reject) => {
-            res.on('finish', () => resolve());
-            res.on('close', () => resolve());
-            res.on('error', reject);
-            next();
-          });
-          ctx.attributes['http.status_code'] = res.statusCode;
-          this.finish(ctx, res.statusCode >= 500 ? 'error' : 'ok');
-        } catch (e) {
-          this.finish(ctx, 'error');
-          throw e;
-        }
+      const ctx: TraceContext = {
+        traceId: randomUUID().replace(/-/g, ''),
+        spanId: randomUUID().slice(0, 16),
+        operation: op,
+        startedAt: Date.now(),
+        attributes: {
+          'http.method': req.method ?? 'GET',
+          'http.route': String(req.route?.path ?? req.path ?? '/'),
+        },
+      };
+      res.setHeader('x-trace-id', ctx.traceId);
+      res.on('finish', () => {
+        ctx.attributes['http.status_code'] = res.statusCode;
+        this.finish(ctx, res.statusCode >= 500 ? 'error' : 'ok');
       });
+      next();
     };
   }
 }
