@@ -1,0 +1,23 @@
+# Requires kube-state-metrics. Load into the Prometheus rules configuration,
+# or wrap this group in a PrometheusRule if using the Prometheus Operator.
+groups:
+  - name: billing-reconciliation
+    rules:
+      - alert: BillingReconciliationNoSuccessfulRun
+        expr: |
+          (
+            time() - (
+              kube_cronjob_status_last_successful_time{cronjob=~".*-billing-reconcile"}
+              or on (namespace, cronjob)
+              kube_cronjob_created{cronjob=~".*-billing-reconcile"}
+            ) > 900
+          )
+          and on (namespace, cronjob)
+          (kube_cronjob_spec_suspend{cronjob=~".*-billing-reconcile"} == 0)
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Payment reconciliation has no recent successful execution"
+          description: "Inspect job logs, unresolved order IDs, provider availability and backlog. Never release reservations solely by age."
+          runbook: "docs/remediation/PHASE_1_CLOSURE.md"

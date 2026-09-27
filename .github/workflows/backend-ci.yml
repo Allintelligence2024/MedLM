@@ -93,8 +93,20 @@ jobs:
       - name: Analyse statique
         working-directory: mobile
         run: flutter analyze
-      - name: Tests
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Generate ephemeral backend entitlement fixtures
+        working-directory: backend
+        env:
+          NODE_ENV: test
+        run: |
+          npm ci
+          npx tsx src/entitlement/generate-interop-fixture.cli.ts "$RUNNER_TEMP/entitlement-interop.json"
+      - name: Tests (including backend RSA interoperability)
         working-directory: mobile
+        env:
+          ENTITLEMENT_INTEROP_FIXTURE: ${{ runner.temp }}/entitlement-interop.json
         run: flutter test
       - name: APK debug
         working-directory: mobile
@@ -234,6 +246,11 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           if [ -f tools/requirements.txt ]; then pip install -r tools/requirements.txt; fi
+      - uses: azure/setup-helm@v4
+        with:
+          version: v3.17.3
+      - name: Billing reconciliation Helm contract
+        run: python3 tools/scripts/check_billing_reconciliation.py
       - name: Check workflows
         run: python3 tools/scripts/check_workflows.py
       - name: Bash syntax guard

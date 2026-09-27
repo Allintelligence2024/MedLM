@@ -97,3 +97,15 @@ otel:
   enabled: true
   endpoint: "http://otel-collector.observability:4317"
   serviceName: "medanki-backend"
+
+# Explicit opt-in; no real financial effects from the default chart.
+billingReconciliation:
+  enabled: false
+  suspend: true
+  qualificationApproved: false
+  schedule: "*/5 * * * *"
+  environment: sandbox
+  # Dedicated externally provisioned Secret containing DATABASE_URL,
+  # CHARGILY_API_SECRET and BILLING_RECONCILE_ACTOR_ID. No literal credentials.
+  existingSecret: ""
+  minimumAgeMinutes: 35

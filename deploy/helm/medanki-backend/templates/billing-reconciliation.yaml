@@ -1,0 +1,56 @@
+{{- if .Values.billingReconciliation.enabled }}
+{{- if and (not .Values.billingReconciliation.suspend) (not .Values.billingReconciliation.qualificationApproved) }}
+{{- fail "billing reconciliation requires explicit qualification approval before unsuspending" }}
+{{- end }}
+{{- if not (has .Values.billingReconciliation.environment (list "sandbox" "production")) }}
+{{- fail "billing reconciliation environment must be sandbox or production" }}
+{{- end }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "medanki-backend.fullname" . }}-billing-reconcile
+  labels:
+    {{- include "medanki-backend.labels" . | nindent 4 }}
+spec:
+  schedule: {{ .Values.billingReconciliation.schedule | quote }}
+  suspend: {{ .Values.billingReconciliation.suspend }}
+  concurrencyPolicy: Forbid
+  startingDeadlineSeconds: 120
+  successfulJobsHistoryLimit: 2
+  failedJobsHistoryLimit: 5
+  jobTemplate:
+    spec:
+      backoffLimit: 0
+      activeDeadlineSeconds: 600
+      template:
+        spec:
+          restartPolicy: Never
+          automountServiceAccountToken: false
+          {{- with .Values.imagePullSecrets }}
+          imagePullSecrets:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          securityContext:
+            {{- toYaml .Values.podSecurityContext | nindent 12 }}
+          containers:
+            - name: reconcile
+              image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+              imagePullPolicy: {{ .Values.image.pullPolicy }}
+              command: ["node", "dist/billing/reconcile.cli.js", "--apply"]
+              securityContext:
+                {{- toYaml .Values.securityContext | nindent 16 }}
+              resources:
+                {{- toYaml .Values.resources | nindent 16 }}
+              envFrom:
+                - secretRef:
+                    name: {{ required "billingReconciliation.existingSecret is required" .Values.billingReconciliation.existingSecret | quote }}
+              env:
+                - name: NODE_ENV
+                  value: {{ ternary "production" "test" (eq .Values.billingReconciliation.environment "production") | quote }}
+                - name: CHARGILY_ENV
+                  value: {{ .Values.billingReconciliation.environment | quote }}
+                - name: CHARGILY_DRY_RUN
+                  value: "false"
+                - name: BILLING_RECONCILE_MIN_AGE_MINUTES
+                  value: {{ .Values.billingReconciliation.minimumAgeMinutes | quote }}
+{{- end }}

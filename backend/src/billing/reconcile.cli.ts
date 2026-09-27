@@ -4,7 +4,7 @@ import 'reflect-metadata';
 import { ConfigService } from '@nestjs/config';
 import { Pool } from 'pg';
 import { drizzle } from 'drizzle-orm/node-postgres';
-import { and, asc, eq, gt } from 'drizzle-orm';
+import { and, asc, eq, gt, lte } from 'drizzle-orm';
 import { BillingService } from './billing.service';
 import { ChargilyPayProvider } from './chargily.provider';
 import { PromoCodeProvider } from './promo-code.provider';
@@ -27,6 +27,12 @@ async function main() {
   const actorId = process.env.BILLING_RECONCILE_ACTOR_ID;
   if (apply && (!actorId || !/^[0-9a-f-]{36}$/i.test(actorId)))
     throw new Error('admin actor UUID required');
+  const minimumAge = Number(
+    process.env.BILLING_RECONCILE_MIN_AGE_MINUTES ?? 35,
+  );
+  if (!Number.isSafeInteger(minimumAge) || minimumAge < 0 || minimumAge > 10080)
+    throw new Error('invalid minimum age');
+  const cutoff = new Date(Date.now() - minimumAge * 60000);
   const pool = new Pool({ connectionString: process.env.DATABASE_URL, max: 2 });
   try {
     const db = drizzle(pool, { schema });
@@ -58,6 +64,7 @@ async function main() {
         .where(
           and(
             eq(schema.paymentOrders.status, 'pending'),
+            lte(schema.paymentOrders.createdAt, cutoff),
             cursor ? gt(schema.paymentOrders.id, cursor) : undefined,
           ),
         )
