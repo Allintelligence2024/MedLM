@@ -5,6 +5,7 @@ on:
     branches: ['**']
     paths:
       - 'backend/**'
+      - 'cms/**'
       - 'tools/scripts/**'
       - 'tools/requirements.txt'
       - 'deploy/helm/**'
@@ -13,6 +14,7 @@ on:
   pull_request:
     paths:
       - 'backend/**'
+      - 'cms/**'
       - 'tools/scripts/**'
       - 'tools/requirements.txt'
       - 'deploy/helm/**'
