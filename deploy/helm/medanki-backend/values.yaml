@@ -72,11 +72,11 @@ autoscaling:
 
 probes:
   readiness:
-    path: /readyz
+    path: /v1/readyz
     initialDelaySeconds: 10
     periodSeconds: 10
   liveness:
-    path: /healthz
+    path: /v1/healthz
     initialDelaySeconds: 30
     periodSeconds: 30
 
