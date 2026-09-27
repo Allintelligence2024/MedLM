@@ -13,6 +13,7 @@ import {
   Injectable,
   Logger,
   NotFoundException,
+  Optional,
 } from "@nestjs/common";
 import { and, desc, eq, gte, isNotNull, isNull } from "drizzle-orm";
 import { cards, cardReports, cardVersions, decks, modules } from "../db/schema";
@@ -29,6 +30,12 @@ import {
   type AccessDecision,
   type ContentActor,
 } from "./content-policy";
+import {
+  MEDIA_PRESIGNER,
+  MediaStorageError,
+  envMediaPresigner,
+  type MediaPresigner,
+} from "./media-storage";
 
 export interface DeckListItem {
   id: string;
@@ -47,11 +54,17 @@ export interface DeckListItem {
 @Injectable()
 export class ContentService {
   private readonly logger = new Logger(ContentService.name);
+  private readonly media: MediaPresigner;
 
   constructor(
     @Inject(DRIZZLE) private readonly db: Database,
     private readonly billing: BillingService,
-  ) {}
+    @Optional()
+    @Inject(MEDIA_PRESIGNER)
+    media: MediaPresigner | null = null,
+  ) {
+    this.media = media ?? envMediaPresigner();
+  }
 
   /// GET /content/decks — catalogue apprenant : decks effectivement publiés.
   /// Un deck premium reste visible (paywall) ; son contenu est refusé plus bas.
@@ -526,18 +539,36 @@ export class ContentService {
     return { id: args.id, status: args.status };
   }
 
-  /// POST /content/media/presign — pas de R2 provisionné (phase 5).
-  /// On refuse plutôt que de renvoyer une URL publique fictive.
-  async presignMedia(_args: {
+  /// POST /content/media/presign — SigV4 si R2_* est posé, sinon 501.
+  /// Jamais d'URL publique fictive.
+  async presignMedia(args: {
     userId: string;
     filename: string;
     content_type: string;
     size_bytes: number;
-  }): Promise<never> {
-    throw new HttpException(
-      'stockage média non provisionné',
-      HttpStatus.NOT_IMPLEMENTED,
-    );
+  }) {
+    if (!this.media.provisioned) {
+      throw new HttpException(
+        "stockage média non provisionné",
+        HttpStatus.NOT_IMPLEMENTED,
+      );
+    }
+    try {
+      return this.media.presign({
+        userId: args.userId,
+        filename: args.filename,
+        contentType: args.content_type,
+        sizeBytes: args.size_bytes,
+      });
+    } catch (err) {
+      if (err instanceof MediaStorageError) {
+        if (err.code === "not_provisioned") {
+          throw new HttpException(err.message, HttpStatus.NOT_IMPLEMENTED);
+        }
+        throw new BadRequestException(err.message);
+      }
+      throw err;
+    }
   }
 
   private async isEntitled(userId: string): Promise<boolean> {

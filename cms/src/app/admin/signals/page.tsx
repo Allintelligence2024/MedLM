@@ -17,6 +17,7 @@ import type {
 } from '@/lib/signals';
 import { Radar, RefreshCw } from 'lucide-react';
 import { apiFetch } from '@/lib/api';
+import { OutOfScopeBanner } from '@/components/admin/out_of_scope';
 
 export default function SignalsPage() {
   const [signals, setSignals] = useState<DifficultySignal[]>([]);
@@ -64,6 +65,7 @@ export default function SignalsPage() {
 
   return (
     <div className="space-y-4 p-6">
+      <OutOfScopeBanner feature="Les signaux IA de difficulté" />
       <header className="flex items-start justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold">Signaux de difficulté IA</h1>

@@ -15,6 +15,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { Building2, PlusCircle, UserMinus, UserPlus } from 'lucide-react';
 import { apiFetch } from '@/lib/api';
 import { Dialog, Field, describe } from '@/components/admin/ui';
+import { OutOfScopeBanner } from '@/components/admin/out_of_scope';
 
 interface TenantMember {
   user_id: string;
@@ -67,6 +68,9 @@ export default function TenantsPage() {
 
   return (
     <div>
+      <div className="mb-4">
+        <OutOfScopeBanner feature="Le multi-établissements / tenants" />
+      </div>
       <header className="mb-6 flex items-center gap-3">
         <Building2 className="h-5 w-5 text-slate-500" />
         <h1 className="text-xl font-semibold">Établissements</h1>

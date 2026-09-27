@@ -297,6 +297,26 @@ def check_compose() -> None:
                 )
 
 
+def check_helm_jwt_probes() -> None:
+    """R12 — manifests seulement. Un cluster réel n'est pas exercé ici."""
+    values = ROOT / "deploy/helm/medanki-backend/values.yaml"
+    helm_dep = ROOT / "deploy/helm/medanki-backend/templates/deployment.yaml"
+    k8s = ROOT / "deploy/k8s/base/backend-deployment.yaml"
+    text_values = values.read_text(encoding="utf-8")
+    if "/v1/readyz" not in text_values or "/v1/healthz" not in text_values:
+        fail("helm values : probes doivent être /v1/readyz et /v1/healthz")
+    text_helm = helm_dep.read_text(encoding="utf-8")
+    if "JWT_SIGNING_KEY_PATH" not in text_helm:
+        fail("helm deployment : JWT_SIGNING_KEY_PATH manquant")
+    if "/var/run/secrets/jwt/jwt-private.pem" not in text_helm:
+        fail("helm deployment : JWT doit être un fichier monté")
+    text_k8s = k8s.read_text(encoding="utf-8")
+    if "/v1/healthz" not in text_k8s or "/v1/readyz" not in text_k8s:
+        fail("k8s base : probes /v1/healthz et /v1/readyz requis")
+    if "JWT_SIGNING_KEY_PATH" not in text_k8s:
+        fail("k8s base : JWT_SIGNING_KEY_PATH manquant")
+
+
 def main() -> int:
     dockerfiles = sorted(ROOT.glob("*/Dockerfile"))
     if not dockerfiles:
@@ -308,6 +328,7 @@ def main() -> int:
         # Les routes ne concernent que le backend ; le CMS sonde « / ».
         check_dockerfile(df, routes if df.parent.name == "backend" else set())
     check_compose()
+    check_helm_jwt_probes()
 
     for w in warnings:
         print(f"  ⚠  {w}")

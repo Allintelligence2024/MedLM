@@ -12,18 +12,18 @@
     "ci": "next build && tsc --noEmit"
   },
   "dependencies": {
-    "next": "^14.2.15",
+    "next": "14.2.35",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "@radix-ui/react-dialog": "^1.1.2",
     "@radix-ui/react-select": "^2.1.2",
     "@radix-ui/react-tabs": "^1.1.1",
     "@radix-ui/react-toast": "^1.2.2",
-    "@tiptap/react": "^2.8.0",
-    "@tiptap/pm": "^2.8.0",
-    "@tiptap/starter-kit": "^2.8.0",
-    "@tiptap/extension-link": "^2.8.0",
-    "@tiptap/extension-placeholder": "^2.8.0",
+    "@tiptap/react": "2.27.3",
+    "@tiptap/pm": "2.27.3",
+    "@tiptap/starter-kit": "2.27.3",
+    "@tiptap/extension-link": "2.27.3",
+    "@tiptap/extension-placeholder": "2.27.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.453.0",
@@ -39,5 +39,8 @@
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.14",
     "typescript": "^5.6.2"
+  },
+  "overrides": {
+    "nanoid": "3.3.18"
   }
 }

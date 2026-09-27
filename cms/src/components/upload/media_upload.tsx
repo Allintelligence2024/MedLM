@@ -1,21 +1,11 @@
 'use client';
 
-// MediaUpload — upload vers R2 (S3-compatible) via presigned URL.
-//
-// Flow :
-//   1. L'utilisateur choisit un fichier.
-//   2. On demande au backend un `presignedUrl` (PUT).
-//   3. On upload directement à R2 (le serveur ne voit pas le
-//      contenu, juste les métadonnées).
-//   4. Le backend retourne l'URL publique du média.
-//   5. On l'ajoute à la carte (côté client, en attente de save).
-//
-// Conformité : on envoie au serveur uniquement le `key` et
-// l'`alt_text` après upload. Le serveur n'a pas accès au binaire.
+// MediaUpload — PUT signé vers R2 si le backend est provisionné.
+// Sans R2_* : le backend répond 501 ; on l'affiche, on n'invente pas d'URL.
 
 import { useState, useRef } from 'react';
 import { Upload, X } from 'lucide-react';
-import { apiFetch } from '@/lib/api';
+import { ApiError, apiFetch } from '@/lib/api';
 
 export interface MediaItem {
   key: string;
@@ -88,7 +78,11 @@ export function MediaUpload({ onUploaded }: Props) {
         type,
       });
     } catch (e) {
-      setError((e as Error).message);
+      if (e instanceof ApiError && e.status === 501) {
+        setError("Stockage média non provisionné (R2). Pas d'URL fictive.");
+      } else {
+        setError((e as Error).message);
+      }
     } finally {
       setBusy(false);
       if (inputRef.current) inputRef.current.value = '';
@@ -127,7 +121,7 @@ export function MediaUpload({ onUploaded }: Props) {
         )}
       </div>
       <p className="text-xs text-slate-500">
-        Images, audio, vidéo. Max 20 Mo. Stocké sur R2 (S3-compatible).
+        Images, audio, vidéo. Max 20 Mo. Upload réel seulement si R2 est configuré côté API ; sinon 501.
       </p>
     </div>
   );

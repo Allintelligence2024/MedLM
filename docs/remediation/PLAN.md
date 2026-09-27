@@ -131,32 +131,37 @@ instances, observabilité exercée et panne Redis documentée.
 
 ### Phase 5 — Dépendances, CMS et déploiement (R10, R11, R12)
 
-L'analyse et les mises à jour de dépendances peuvent commencer en parallèle de
-phase 1 ; leurs régressions doivent être testées avec les phases précédentes.
+**R10 fermé** (triage + exclusions documentées). **R11 in_progress** (presign
+code + catalogue cookie ; pas de R2 live). **R12 in_progress** (manifests
+`/v1/*` + JWT fichier ; pas de cluster). Voir [PHASE_5.md](PHASE_5.md) et
+[advisories.md](advisories.md). Pas de GO.
 
-1. Trier les advisories par exposition runtime/dev, chemin exploitable et version.
-   Mettre à jour par lots réduits avec lockfiles et tests.
-2. Corriger transmission de session du catalogue CMS et vrai upload signé.
-3. Achever ou retirer de l'interface les pages hors périmètre, sans promesse trompeuse.
-4. Monter la clé JWT au chemin attendu ; corriger probes `/v1/*`, variables et droits FS.
-5. Tester images/Helm/K8s, migrations, restauration backup, rollback et secrets.
+1. [x] Trier les advisories ; lots réduits (`nanoid` 3.3.18, pins Next/TipTap).
+   Pas de `npm audit fix --force`. Nest 12 / Next 15 / drizzle 0.45 exclus.
+2. [x] Session CMS (phase 3) + catalogue cookie + presign SigV4 si `R2_*`.
+   [ ] Upload R2 réel / E2E navigateur — manuel.
+3. [x] Pages hors MVP sorties de la nav primaire, bannière honnête.
+4. [x] JWT fichier + probes `/v1/*` (manifests `7188eca` + garde statique).
+5. [ ] Cluster, restore backup, rollback, secrets live — manuel.
 
-**Sortie :** advisories bloquants corrigés ou analyse documentée acceptée, build et
-parcours CMS réels, probes vertes sur déploiement, secrets absents des images/logs,
-restauration prouvée. Le résultat d'un checker statique ne suffit pas.
+**Sortie partielle :** analyse npm écrite, CMS sans promesse R2/partenariat,
+probes dans les manifests. Restauration et probes **sur déploiement** absentes.
 
 ### Phase 6 — Mobile et qualification de livraison (R13, R14)
 
-1. Générer Drift en CI et corriger le README ; builds Flutter reproductibles.
-2. Tests appareil : login, achat sandbox, téléchargement, stockage protégé,
-   expiration/grâce, révision hors ligne, sync multi-appareil et reprise après panne.
-3. Tests concurrence/pagination/perte réseau, contrôle d'accès et restauration.
-4. Retirer les affirmations non démontrées (« validation scientifique », partenaires
-   réels, sécurité médicale) ; revue humaine du contenu si diffusé.
-5. Vérification indépendante des scénarios d'abus et revue de sortie.
+**R14 fermé** (promesses retirées, pas « validées »). **R13 in_progress**
+(CI Drift + README). Voir [PHASE_6.md](PHASE_6.md). **NO-GO.**
 
-**Sortie :** parcours vertical complet avec artefacts, SHA de release, zéro bloqueur
-non traité. Décision GO explicite après revue humaine, pas moyenne de notes sur 10.
+1. [x] Drift généré en CI ; README aligné (pas de `*.g.dart` commité, un
+   seul workflow `.github/workflows/backend-ci.yml`).
+2. [ ] Tests appareil — manuel.
+3. [ ] Concurrence/pagination/perte réseau sur appareil — manuel.
+4. [x] Reformulation README / `site/` / `store/`. [ ] Revue humaine du
+   contenu pédagogique si diffusion.
+5. [ ] Revue d'abus indépendante et GO.
+
+**Sortie :** pas de GO. SHA de release store absent. Bloqueurs manuels
+restants listés, pas niés.
 
 ## Règles d'exécution
 

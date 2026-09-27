@@ -1,9 +1,7 @@
-// Page d'administration des cartes.
-//
-// Phase 11 : on liste les cartes du backend. L'édition / création
-// sera branchée en Phase 11 bis.
+// Catalogue CMS : liste via cookie HttpOnly (serverBackendFetch).
 import { type CardSummary } from '@/lib/api';
 import { serverBackendFetch } from '@/lib/server-api';
+import Link from 'next/link';
 
 export default async function CardsAdminPage() {
   let cards: CardSummary[] = [];
@@ -19,14 +17,13 @@ export default async function CardsAdminPage() {
 
   return (
     <div className="space-y-6">
-      <header className="flex items-end justify-between">
-        <div>
-          <h1 className="text-2xl font-bold">Cartes</h1>
-          <p className="text-slate-600">{cards.length} carte(s) — deck par deck, module par module.</p>
-        </div>
-        <button className="bg-emerald-600 text-white px-4 py-2 rounded-md hover:bg-emerald-700" disabled>
-          Nouvelle carte (Phase 11 bis)
-        </button>
+      <header>
+        <h1 className="text-2xl font-bold">Cartes</h1>
+        <p className="text-slate-600">
+          {cards.length} carte(s) — session cookie, pas de jeton dans le JS.
+          La création n&apos;est pas livrée ; l&apos;édition d&apos;une carte
+          existante l&apos;est.
+        </p>
       </header>
 
       {error ? (
@@ -53,7 +50,11 @@ export default async function CardsAdminPage() {
           <tbody className="text-sm">
             {cards.map((c) => (
               <tr key={c.id} className="border-t border-slate-200">
-                <td className="px-4 py-2 font-mono text-xs">{c.id.slice(0, 8)}…</td>
+                <td className="px-4 py-2 font-mono text-xs">
+                  <Link href={`/admin/cards/${c.id}`} className="text-emerald-700 hover:underline">
+                    {c.id.slice(0, 8)}…
+                  </Link>
+                </td>
                 <td className="px-4 py-2 font-mono text-xs">{c.deck_id.slice(0, 8)}…</td>
                 <td className="px-4 py-2">{c.type}</td>
                 <td className="px-4 py-2">
@@ -69,7 +70,7 @@ export default async function CardsAdminPage() {
             {cards.length === 0 && !error && (
               <tr>
                 <td colSpan={7} className="px-4 py-8 text-center text-slate-500">
-                  Aucune carte — lance une migration Drizzle puis seed le contenu de départ.
+                  Aucune carte — lancer une migration puis le seed.
                 </td>
               </tr>
             )}

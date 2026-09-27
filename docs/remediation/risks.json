@@ -141,9 +141,12 @@
       "evidence_level": "reproduced-npm-audit",
       "scope": "checkout",
       "phase": 5,
-      "evidence": "53 backend (31 runtime), 29 CMS lors de revue initiale",
+      "evidence": "53 backend, 29 CMS ; nanoid 3.3.18 ; exclusions Nest12/Next15/drizzle 0.45/vitest5",
       "closure_criteria": "Advisories triés, versions corrigées, tests et justification des exclusions",
-      "status": "open"
+      "status": "closed",
+      "remediation": "Triage runtime vs dev. Override nanoid 3.3.18. Pins next 14.2.35 et tiptap 2.27.3. Pas de audit fix --force. Nest 10, drizzle 0.36, vitest 2, Next 14 conservés avec justification.",
+      "verification": "PHASE_5.md ; advisories.md ; package-lock overrides",
+      "closure_scope": "Triage et exclusions documentées. Ne vaut pas absence de CVE ni GO. Revoir drizzle 0.45 et Next 15 avant exposition internet."
     },
     {
       "id": "R11",
@@ -152,9 +155,10 @@
       "evidence_level": "confirmed-static",
       "scope": "checkout",
       "phase": 5,
-      "evidence": "Presign média toujours 501. Cookie CMS HttpOnly+CSRF livrés en phase 3 (voir PHASE_3.md) ; catalogue/upload R2 E2E absents.",
+      "evidence": "HttpOnly+CSRF phase 3. Catalogue cookie + liens édition. Presign SigV4 si R2_* sinon 501. Pas d'E2E R2 live.",
       "closure_criteria": "Catalogue authentifié E2E et upload signé réel ; HttpOnly et CSRF traités",
-      "status": "open"
+      "status": "in_progress",
+      "verification": "PHASE_5.md ; media_storage.test.ts ; content-access.postgres.test.ts"
     },
     {
       "id": "R12",
@@ -163,9 +167,10 @@
       "evidence_level": "confirmed-static",
       "scope": "checkout",
       "phase": 5,
-      "evidence": "/healthz vs /v1/healthz ; JWT_SIGNING_KEY vs JWT_SIGNING_KEY_PATH",
+      "evidence": "Manifests 7188eca : /v1/healthz /v1/readyz, JWT_SIGNING_KEY_PATH fichier. Garde statique check_dockerfiles. Pas de cluster.",
       "closure_criteria": "Déploiement réellement démarré, probes et montage secrets validés",
-      "status": "open"
+      "status": "in_progress",
+      "verification": "PHASE_5.md ; deploy/helm ; deploy/k8s/base/backend-deployment.yaml"
     },
     {
       "id": "R13",
@@ -174,10 +179,10 @@
       "evidence_level": "ci-built-not-device-qualified",
       "scope": "checkout",
       "phase": 6,
-      "evidence": "CI 36319139969 : génération Drift, Flutter analyze/tests et APK debug réussis. Qualification physique et parcours offline complet encore absents.",
+      "evidence": "CI génère Drift puis analyze/tests/APK. README ne prétend plus que g.dart est commité ni que mobile-ci.yml existe. Appareil physique absent.",
       "closure_criteria": "Build CI/appareil, génération déterministe et parcours hors ligne complet",
       "status": "in_progress",
-      "verification": "PHASE_1_CLOSURE.md ; phase1-ci/final-run.json"
+      "verification": "PHASE_6.md ; .github/workflows/backend-ci.yml job mobile"
     },
     {
       "id": "R14",
@@ -186,9 +191,12 @@
       "evidence_level": "confirmed-evidence-gap",
       "scope": "reports",
       "phase": 6,
-      "evidence": "ML synthétique, disclaimers != sûreté, allow-list != partenariats",
+      "evidence": "README, site/, store/ reformulés : plus de 697 cartes, partenariats, validation scientifique, E2E crypto, tuteur médical.",
       "closure_criteria": "Reformuler et fournir validation adéquate avant toute promesse",
-      "status": "open"
+      "status": "closed",
+      "remediation": "Promesses retirées plutôt que validées. Landing et stores disent NO-GO. Outil de révision, pas un avis médical.",
+      "verification": "PHASE_6.md ; README.md ; site/i18n.json ; store/play ; store/apple",
+      "closure_scope": "Surfaces produit alignées sur l'absence de preuve. Ne vaut pas revue humaine du corpus ni GO. Une nouvelle promesse sans preuve rouvre R14."
     },
     {
       "id": "R15",

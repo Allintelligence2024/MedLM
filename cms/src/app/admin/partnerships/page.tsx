@@ -10,6 +10,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { Handshake, PlusCircle } from 'lucide-react';
 import { CreatePartnershipDialog } from './create_partnership_dialog';
 import { apiFetch } from '@/lib/api';
+import { OutOfScopeBanner } from '@/components/admin/out_of_scope';
 
 type PartnershipStatus = 'draft' | 'active' | 'suspended' | 'terminated';
 
@@ -74,15 +75,16 @@ export default function PartnershipsPage() {
 
   return (
     <div className="space-y-4 p-6">
+      <OutOfScopeBanner feature="Les partenariats facultés" />
       <header className="flex items-start justify-between gap-4">
         <div>
           <h1 className="flex items-center gap-2 text-2xl font-bold">
             <Handshake className="h-6 w-6" /> Partenariats facultés
           </h1>
           <p className="text-slate-600">
-            Accords de co-production de contenu avec les facultés de
-            médecine (redevance en DZD, périmètre par module). Un seul
-            partenariat <strong>actif</strong> par faculté.
+            Écran technique. Aucun accord faculté n&apos;est signé ni
+            qualifié. Un seul statut <strong>actif</strong> par faculté
+            côté API, pas une preuve de partenariat réel.
           </p>
         </div>
         <button
