@@ -38,6 +38,8 @@ def cron(docs):
 assert not cron(render()), 'default chart must not create a financial job'
 enabled = ('billingReconciliation.enabled=true', 'billingReconciliation.existingSecret=ci-existing-secret')
 job, = cron(render(*enabled))
+long_job, = cron(render(*enabled, 'fullnameOverride=' + 'a' * 63))
+assert len(long_job['metadata']['name']) <= 52, 'CronJob name exceeds Kubernetes limit'
 assert job['spec']['suspend'] is True
 assert job['spec']['concurrencyPolicy'] == 'Forbid'
 assert job['spec']['jobTemplate']['spec']['backoffLimit'] == 0

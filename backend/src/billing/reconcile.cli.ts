@@ -16,7 +16,7 @@ async function main() {
   const args = process.argv.slice(2);
   if (args.includes('--help')) {
     report(
-      'Usage: npm run billing:reconcile -- [--apply]\nDefault: list pending order IDs, no provider request or credit.\nEnvironment: DATABASE_URL; --apply also requires BILLING_RECONCILE_ACTOR_ID (existing admin UUID), CHARGILY_ENV, CHARGILY_API_SECRET.\nScans at most 1000 pending orders per run. Exit 2 means unresolved orders/backlog; exit 1 means execution/configuration failed.',
+      'Usage: npm run billing:reconcile -- [--apply]\nDefault: list pending order IDs, no provider request or credit.\nEnvironment: DATABASE_URL; --apply also requires BILLING_RECONCILE_ACTOR_ID (existing admin UUID), CHARGILY_ENV, CHARGILY_API_SECRET.\nPG_SCHEMA selects the target schema (default public). Only orders older than BILLING_RECONCILE_MIN_AGE_MINUTES (default 35) are scanned. Scans at most 1000 pending orders per run. Exit 2 means unresolved orders/backlog; exit 1 means execution/configuration failed.',
     );
     return;
   }
@@ -33,7 +33,15 @@ async function main() {
   if (!Number.isSafeInteger(minimumAge) || minimumAge < 0 || minimumAge > 10080)
     throw new Error('invalid minimum age');
   const cutoff = new Date(Date.now() - minimumAge * 60000);
-  const pool = new Pool({ connectionString: process.env.DATABASE_URL, max: 2 });
+  const pgSchema = process.env.PG_SCHEMA ?? 'public';
+  if (!/^[a-z_][a-z0-9_]{0,62}$/.test(pgSchema))
+    throw new Error('invalid PG_SCHEMA');
+  const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    max: 2,
+    connectionTimeoutMillis: 5000,
+    options: `-c search_path=${pgSchema}`,
+  });
   try {
     const db = drizzle(pool, { schema });
     const config = new ConfigService();

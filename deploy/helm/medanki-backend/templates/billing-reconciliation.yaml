@@ -8,7 +8,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: {{ include "medanki-backend.fullname" . }}-billing-reconcile
+  name: {{ include "medanki-backend.fullname" . | trunc 34 | trimSuffix "-" }}-billing-reconcile
   labels:
     {{- include "medanki-backend.labels" . | nindent 4 }}
 spec:

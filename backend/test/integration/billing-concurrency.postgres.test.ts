@@ -2,6 +2,8 @@
 // CI integration job supplies DATABASE_URL. Local runs without it explicitly skip.
 import { beforeAll, afterAll, describe, it, expect, vi } from 'vitest';
 import { Pool } from 'pg';
+import { execFile } from 'node:child_process';
+import { promisify } from 'node:util';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { ConfigService } from '@nestjs/config';
 import { readFileSync } from 'node:fs';
@@ -323,20 +325,66 @@ suite(
         'SELECT id FROM group_packs WHERE id=$1 FOR UPDATE',
         [pack.id],
         () =>
-          members
-            .slice(4)
-            .map((member) =>
-              groups.join({
-                userId: member.id,
-                body: { invite_code: pack.invite_code },
-              }),
-            ),
+          members.slice(4).map((member) =>
+            groups.join({
+              userId: member.id,
+              body: { invite_code: pack.invite_code },
+            }),
+          ),
       );
       expect(results.filter((r) => r.status === 'fulfilled')).toHaveLength(1);
       expect(results.filter((r) => r.status === 'rejected')).toHaveLength(1);
       expect(
         await groups.get({ userId: members[0]!.id, packId: pack.id }),
       ).toMatchObject({ status: 'full', member_count: 5 });
+    });
+    it('the real reconciliation CLI reads only the configured PostgreSQL schema without writing', async () => {
+      const env: NodeJS.ProcessEnv = {
+        ...process.env,
+        DATABASE_URL: url!,
+        PG_SCHEMA: namespace,
+        BILLING_RECONCILE_MIN_AGE_MINUTES: '0',
+        NODE_ENV: 'test',
+      };
+      const before = await db.select().from(schema.entitlements);
+      const { stdout } = await promisify(execFile)(
+        process.execPath,
+        ['--import', 'tsx', 'src/billing/reconcile.cli.ts'],
+        { cwd: process.cwd(), env },
+      );
+      const lines = stdout
+        .trim()
+        .split('\n')
+        .map((line) => JSON.parse(line));
+      expect(lines.some((line) => line.orderId === legacyOrderId)).toBe(true);
+      expect(lines.at(-1)).toMatchObject({ apply: false, unresolved: 0 });
+      expect(await db.select().from(schema.entitlements)).toEqual(before);
+    });
+
+    it('the real CLI refuses --apply for a non-admin before any provider call', async () => {
+      const [student] = await db
+        .insert(schema.users)
+        .values({ email: `${randomUUID()}@cli.invalid` })
+        .returning();
+      const env: NodeJS.ProcessEnv = {
+        ...process.env,
+        DATABASE_URL: url!,
+        PG_SCHEMA: namespace,
+        BILLING_RECONCILE_ACTOR_ID: student!.id,
+        BILLING_RECONCILE_MIN_AGE_MINUTES: '0',
+        NODE_ENV: 'test',
+        CHARGILY_ENV: 'sandbox',
+        CHARGILY_DRY_RUN: 'false',
+        CHARGILY_API_SECRET: '',
+      };
+      delete env.CHARGILY_API_URL;
+      await expect(
+        promisify(execFile)(
+          process.execPath,
+          ['--import', 'tsx', 'src/billing/reconcile.cli.ts', '--apply'],
+          { cwd: process.cwd(), env },
+        ),
+      ).rejects.toMatchObject({ code: 1 });
     });
   },
 );
