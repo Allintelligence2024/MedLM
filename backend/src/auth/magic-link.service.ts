@@ -72,7 +72,7 @@ export class MagicLinkService {
     await this.email.send({
       to: email,
       subject,
-      html: `<p>${body}</p><p><a href="${url}">${url}</a></p>`,
+      html: `<p><a href="${url}">${url}</a></p><p>${body}</p>`,
     });
     return { sent: true };
   }

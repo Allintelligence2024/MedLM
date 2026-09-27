@@ -67,7 +67,7 @@ MAGIC_CODE=$(curl -s -o /tmp/body.txt -w "%{http_code}" -X POST \
   -d "{\"email\":\"$EMAIL\"}" "$B/v1/auth/magic-link" --max-time 10)
 [[ "$MAGIC_CODE" == "202" ]] && ok "demande magic-link → 202" || { ko "magic-link → $MAGIC_CODE : $(head -c 200 /tmp/body.txt)"; exit 1; }
 for _ in $(seq 1 20); do [[ -s "$MAGIC_FILE" ]] && break; sleep 0.25; done
-MAGIC_TOKEN=$(grep -oP 'token=\K[^&" ]+' "$MAGIC_FILE" | head -1)
+MAGIC_TOKEN=$(python3 -c 'import re,sys; html=open(sys.argv[1]).read(); m=re.search(r"token=([A-Za-z0-9_-]+)", html); print(m.group(1) if m else "")' "$MAGIC_FILE")
 [[ -n "$MAGIC_TOKEN" ]] || { ko "magic-link non capturé en environnement E2E"; exit 1; }
 TOKENS=$(curl -s -X POST -H 'X-Platform: mobile' \
   "$B/v1/auth/magic-link/verify?token=$MAGIC_TOKEN" --max-time 10)
