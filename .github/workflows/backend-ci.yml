@@ -6,12 +6,16 @@ on:
     paths:
       - 'backend/**'
       - 'tools/scripts/**'
+      - 'tools/requirements.txt'
+      - 'deploy/helm/**'
       - 'mobile/**'
       - '.github/workflows/backend-ci.yml'
   pull_request:
     paths:
       - 'backend/**'
       - 'tools/scripts/**'
+      - 'tools/requirements.txt'
+      - 'deploy/helm/**'
       - 'mobile/**'
       - '.github/workflows/backend-ci.yml'
   workflow_dispatch:

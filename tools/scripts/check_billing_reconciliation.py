@@ -2,7 +2,22 @@
 """Render the real Helm chart and assert financial-job safety controls. Requires Helm + PyYAML."""
 from pathlib import Path
 import subprocess
-import yaml
+import os
+import sys
+import traceback
+
+
+def report_failure(kind, value, tb):
+    if os.environ.get('GITHUB_ACTIONS') == 'true':
+        message = ''.join(traceback.format_exception(kind, value, tb))
+        message = message.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
+        print(f'::error title=Billing reconciliation contract::{message}')
+    sys.__excepthook__(kind, value, tb)
+
+
+sys.excepthook = report_failure
+import yaml  # Required dependency, pinned in tools/requirements.txt; never skip this check.
+
 
 ROOT = Path(__file__).resolve().parents[2]
 BASE = ['helm', 'template', 'test', str(ROOT / 'deploy/helm/medanki-backend'),
