@@ -55,14 +55,17 @@ class FakeDb {
     const self = this;
     return {
       values(v: any) {
-        const target = t === paymentOrders ? self.paymentOrders : self.webhookEvents;
-        const done = Promise.resolve().then(() => target.push({ ...v, id: v.id ?? 'order-1' }));
+        const target =
+          t === paymentOrders ? self.paymentOrders : self.webhookEvents;
+        const done = Promise.resolve().then(() =>
+          target.push({ ...v, id: v.id ?? 'order-1' }),
+        );
         return {
           then(res: any) {
             return done.then(res);
           },
           returning() {
-            return Promise.resolve([{ id: 'order-1' }]);
+            return Promise.resolve([{ ...v, id: 'order-1' }]);
           },
           onConflictDoUpdate() {
             self.entitlements.push(v);
@@ -73,7 +76,15 @@ class FakeDb {
     };
   }
   update(): any {
-    return { set() { return { where() { return this; } }; } };
+    return {
+      set() {
+        return {
+          where() {
+            return this;
+          },
+        };
+      },
+    };
   }
 }
 
@@ -93,7 +104,11 @@ class FakeChargily {
 }
 
 class FakePromo {
-  resolve = async (args: { code: string; plan: string; baseCents: number }) => ({
+  resolve = async (args: {
+    code: string;
+    plan: string;
+    baseCents: number;
+  }) => ({
     baseCents: args.baseCents,
     discountPct: 50,
     finalCents: Math.round(args.baseCents * 0.5),
@@ -109,7 +124,12 @@ describe('BillingService', () => {
 
   beforeEach(() => {
     db = new FakeDb();
-    service = new BillingService(db as any, new FakeChargily() as any, new FakePromo() as any, config);
+    service = new BillingService(
+      db as any,
+      new FakeChargily() as any,
+      new FakePromo() as any,
+      config,
+    );
   });
 
   it('crée un checkout sans promo', async () => {
@@ -136,31 +156,7 @@ describe('BillingService', () => {
     ).rejects.toThrow(/plan inconnu/);
   });
 
-  it('traite un webhook checkout.paid comme confirmé', async () => {
-    db.paymentOrders.push({
-      id: 'order-1', userId: 'u1', providerRef: 'co_paid', plan: 'yearly',
-      amountCents: 240000, currency: 'DZD', status: 'pending',
-    });
-    const r = await service.handleChargilyWebhook({
-      eventId: 'evt_1',
-      eventType: 'checkout.paid',
-      payload: {
-        id: 'co_1',
-        metadata: { user_id: 'u1', plan: 'yearly', durationDays: '365' },
-      },
-    });
-    expect(r.processed).toBe(true);
-  });
-
-  it('déduplique un webhook déjà vu', async () => {
-    db.webhookEvents.push({ eventId: 'evt_1' });
-    const r = await service.handleChargilyWebhook({
-      eventId: 'evt_1',
-      eventType: 'checkout.paid',
-      payload: {},
-    });
-    expect(r.reason).toBe('already_seen');
-  });
+  // Webhook attribution/replay now tested against real SQL in billing-postgres.test.ts.
 });
 
 describe('PromoCodeProvider', () => {
@@ -170,11 +166,13 @@ describe('PromoCodeProvider', () => {
       // code promo connu → liste vide → « inconnu »).
       select: () => ({
         from: () => ({
-          where: () => ({ then: (cb: any) => Promise.resolve([]).then(cb) }),
+          where: () => ({ for: () => Promise.resolve([]) }),
         }),
       }),
       transaction: async (fn: any) => fn(db),
-      update: () => ({ set: () => ({ where: () => ({ returning: async () => [] }) }) }),
+      update: () => ({
+        set: () => ({ where: () => ({ returning: async () => [] }) }),
+      }),
     };
     const p = new PromoCodeProvider(db as any);
     await expect(
@@ -185,7 +183,10 @@ describe('PromoCodeProvider', () => {
 
 describe('ChargilyPayProvider.verifyWebhookSignature', () => {
   it('rejette un body non signé', () => {
-    const p = new ChargilyPayProvider({ get: () => 'dummy' } as any);
+    const p = new ChargilyPayProvider({
+      get: (key: string) =>
+        key === 'CHARGILY_API_SECRET' ? 'dummy' : undefined,
+    } as any);
     // apiSecret = 'dummy' (4 bytes) — le HMAC donnera un hex de 8 chars.
     expect(p.verifyWebhookSignature('{"a":1}', null)).toBe(false);
     expect(p.verifyWebhookSignature('{"a":1}', '00')).toBe(false);

@@ -1,0 +1,188 @@
+{
+  "schema_version": 1,
+  "reference_commit": "228d3d62ee6f1156543e0786fa7cbdf1e42dbc12",
+  "release_decision": "NO_GO",
+  "priority_definition": {
+    "P0": "bloque le parcours ou la frontière de confiance visés ; pas une note CVSS",
+    "P1": "à traiter avant livraison du périmètre affecté",
+    "P2": "dette ou preuve manquante ; fermer avant promesse correspondante"
+  },
+  "risks": [
+    {
+      "id": "R01",
+      "priority": "P0",
+      "title": "Paiement confirmé rejeté par entitlements_plan_check",
+      "evidence_level": "reproduced",
+      "scope": "checkout",
+      "phase": 1,
+      "evidence": "SKU commerciaux incompatibles avec free/premium en SQL",
+      "closure_criteria": "Quatre plans et promos créditent premium une seule fois, tests SQL et concurrence",
+      "status": "in_progress",
+      "remediation": "Mapping premium, contrat v2 explicite, réservations promo, cinq bénéficiaires groupe, rapprochement admin audité et CLI livrés. Tests SQL/HTTP/concurrence verts. Qualification sandbox, anciennes commandes et exploitation restent bloquantes.",
+      "verification": "PHASE_1_LOT_2.md ; phase1-lot2/unit.txt ; phase1-lot2/integration.txt ; phase1-lot2/source-manifest.json"
+    },
+    {
+      "id": "R02",
+      "priority": "P0",
+      "title": "Lecture premium/brouillon sans autorisation métier",
+      "evidence_level": "reproduced-service-and-guard",
+      "scope": "checkout",
+      "phase": 2,
+      "evidence": "ContentService.listDeckCards et handlers de lecture",
+      "closure_criteria": "Tests HTTP student/free/premium/editor, filtrage publié et entitlement partout",
+      "status": "open"
+    },
+    {
+      "id": "R03",
+      "priority": "P0",
+      "title": "Auteur autorisé à approuver et publier seul",
+      "evidence_level": "reproduced-service-and-guard",
+      "scope": "checkout",
+      "phase": 2,
+      "evidence": "ContentController.transitionCard et ContentService",
+      "closure_criteria": "Rôles par transition et séparation auteur/relecteur testés",
+      "status": "open"
+    },
+    {
+      "id": "R04",
+      "priority": "P1",
+      "title": "Redis non connecté, budget par instance",
+      "evidence_level": "confirmed-static",
+      "scope": "checkout",
+      "phase": 4,
+      "evidence": "CacheModule et GatewayModule",
+      "closure_criteria": "Connexion avant DI budget, deux instances et panne testées",
+      "status": "open"
+    },
+    {
+      "id": "R05",
+      "priority": "P1",
+      "title": "Clés étrangères manquantes",
+      "evidence_level": "reproduced-sql",
+      "scope": "checkout",
+      "phase": 4,
+      "evidence": "46 references Drizzle, 31 FK dans catalogue PGlite",
+      "closure_criteria": "Contrat nominatif et migrations/backfill/effacement testés",
+      "status": "open"
+    },
+    {
+      "id": "R06",
+      "priority": "P1",
+      "title": "Configuration vérificateur entitlement incohérente",
+      "evidence_level": "reproduced",
+      "scope": "checkout",
+      "phase": 1,
+      "evidence": "EntitlementService.verify échoue sans PUBLIC_KEY_PATH malgré signature RS256",
+      "closure_criteria": "Clé dérivée ou exigée, RS256 vérifié, HS256 rejeté ; appelants identifiés",
+      "status": "in_progress",
+      "remediation": "RS256 et claims vérifiés, dates abonnement/JWT séparées. Mobile : identité/appareil/kind, refresh avant cache, grâce plafonnée à exp, ancien cache Drift fail-closed. Tests backend verts ; tests Flutter ajoutés mais non exécutables ici.",
+      "verification": "PHASE_1_LOT_2.md ; phase1-lot2/unit.txt ; mobile/test/data/rest_entitlement_repository_test.dart (NON EXECUTE)"
+    },
+    {
+      "id": "R07",
+      "priority": "P1",
+      "title": "Rotation refresh non atomique",
+      "evidence_level": "confirmed-static",
+      "scope": "checkout",
+      "phase": 3,
+      "evidence": "AuthService.refresh SELECT puis UPDATE sans CAS",
+      "closure_criteria": "Test concurrent : un seul refresh accepté ; rejeu et révocation testés",
+      "status": "open"
+    },
+    {
+      "id": "R08",
+      "priority": "P0-if-deployed",
+      "title": "MFA Drive incompatible RFC, absent du checkout",
+      "evidence_level": "confirmed-batch-and-independent-calculation",
+      "scope": "drive-batch-only",
+      "phase": 3,
+      "evidence": "batch_P3: SHA1 simple, nowMs/30, secret brut ; aucun MFA dans checkout",
+      "closure_criteria": "Ne pas réintroduire ; MFA admin éprouvé, vecteurs RFC et récupération testés",
+      "status": "open"
+    },
+    {
+      "id": "R09",
+      "priority": "P2",
+      "title": "Tracing et helpers non consommés",
+      "evidence_level": "confirmed-static",
+      "scope": "checkout",
+      "phase": 4,
+      "evidence": "TracingService middleware, I18n, CDN, router health",
+      "closure_criteria": "Brancher et vérifier, ou retirer les promesses et le code inutile",
+      "status": "open"
+    },
+    {
+      "id": "R10",
+      "priority": "P1",
+      "title": "Dépendances vulnérables",
+      "evidence_level": "reproduced-npm-audit",
+      "scope": "checkout",
+      "phase": 5,
+      "evidence": "53 backend (31 runtime), 29 CMS lors de revue initiale",
+      "closure_criteria": "Advisories triés, versions corrigées, tests et justification des exclusions",
+      "status": "open"
+    },
+    {
+      "id": "R11",
+      "priority": "P1",
+      "title": "CMS session serveur et upload R2 incomplets",
+      "evidence_level": "confirmed-static",
+      "scope": "checkout",
+      "phase": 5,
+      "evidence": "apiFetch document.cookie côté serveur ; presignMedia stub",
+      "closure_criteria": "Catalogue authentifié E2E et upload signé réel ; HttpOnly et CSRF traités",
+      "status": "open"
+    },
+    {
+      "id": "R12",
+      "priority": "P1",
+      "title": "Manifests probes et configuration JWT incohérents",
+      "evidence_level": "confirmed-static",
+      "scope": "checkout",
+      "phase": 5,
+      "evidence": "/healthz vs /v1/healthz ; JWT_SIGNING_KEY vs JWT_SIGNING_KEY_PATH",
+      "closure_criteria": "Déploiement réellement démarré, probes et montage secrets validés",
+      "status": "open"
+    },
+    {
+      "id": "R13",
+      "priority": "P1",
+      "title": "Mobile non qualifié, documentation généré fausse",
+      "evidence_level": "confirmed-static-not-built",
+      "scope": "checkout",
+      "phase": 6,
+      "evidence": "g.dart absent, Flutter non exécuté dans sandbox",
+      "closure_criteria": "Build CI/appareil, génération déterministe et parcours hors ligne complet",
+      "status": "open"
+    },
+    {
+      "id": "R14",
+      "priority": "P2",
+      "title": "Promesses scientifiques/médicales et produit non prouvées",
+      "evidence_level": "confirmed-evidence-gap",
+      "scope": "reports",
+      "phase": 6,
+      "evidence": "ML synthétique, disclaimers != sûreté, allow-list != partenariats",
+      "closure_criteria": "Reformuler et fournir validation adéquate avant toute promesse",
+      "status": "open"
+    }
+  ],
+  "excluded_claims": [
+    {
+      "claim": "Absence de commande préalable dans checkout actuel",
+      "reason": "Commande créée et rapprochée ; constat valable pour batch_P6 uniquement"
+    },
+    {
+      "claim": "Clé privée committée",
+      "reason": "Non démontré ; git ls-files backend/keys vide"
+    },
+    {
+      "claim": "Exploitation HS256 arbitraire prouvée en production",
+      "reason": "Reproduction rejette les tokens ; défaut de configuration confirmé, exploitation non démontrée"
+    },
+    {
+      "claim": "Next.js vulnérable dans backend",
+      "reason": "Absent audit backend ; critique observée Vitest dev"
+    }
+  ]
+}

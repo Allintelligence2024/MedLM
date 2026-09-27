@@ -28,7 +28,11 @@ export default defineConfig({
   test: {
     // Les tests d'intégration bootent l'app réelle : sans ça, pino
     // déverse une ligne JSON par requête et noie la sortie.
-    env: { LOG_LEVEL: 'silent', NODE_ENV: 'test' },
+    env: {
+      LOG_LEVEL: 'silent', NODE_ENV: 'test',
+      // Freeze the real database URL before HTTP suites set their dummy URL.
+      BILLING_TEST_DATABASE_URL: process.env.BILLING_TEST_DATABASE_URL ?? process.env.DATABASE_URL ?? '',
+    },
     globals: false,
     environment: 'node',
     pool: 'forks',

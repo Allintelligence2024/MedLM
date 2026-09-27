@@ -1,0 +1,50 @@
+
+> medanki-dz-cms@0.1.0 build
+> next build
+
+Attention: Next.js now collects completely anonymous telemetry regarding usage.
+This information is used to shape Next.js' roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://nextjs.org/telemetry
+
+  ▲ Next.js 14.2.35
+  - Experiments (use with caution):
+    · typedRoutes
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/14) ...
+   Generating static pages (3/14) 
+   Generating static pages (6/14) 
+   Generating static pages (10/14) 
+ ✓ Generating static pages (14/14)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                              Size     First Load JS
+┌ ○ /                                    150 B          87.5 kB
+├ ○ /_not-found                          873 B          88.2 kB
+├ ○ /admin/cards                         150 B          87.5 kB
+├ ƒ /admin/cards/[id]                    120 kB          208 kB
+├ ○ /admin/exams                         150 B          87.5 kB
+├ ○ /admin/group-packs                   4.26 kB        91.6 kB
+├ ○ /admin/login                         2.61 kB        89.9 kB
+├ ○ /admin/partnerships                  5.1 kB         92.4 kB
+├ ○ /admin/reports                       3.5 kB         90.8 kB
+├ ○ /admin/signals                       4.02 kB        91.3 kB
+├ ○ /admin/tenants                       4.78 kB        92.1 kB
+├ ○ /admin/users                         150 B          87.5 kB
+└ ○ /admin/workflow                      2.83 kB        90.2 kB
++ First Load JS shared by all            87.3 kB
+  ├ chunks/117-e74cded9c934e5f0.js       31.7 kB
+  ├ chunks/fd9d1056-cf380bc59e96bc68.js  53.6 kB
+  └ other shared chunks (total)          1.95 kB
+
+
+ƒ Middleware                             26.6 kB
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

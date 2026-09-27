@@ -1,7 +1,7 @@
 {
   "name": "medanki-dz-backend",
   "version": "0.1.0",
-  "description": "MedAnki DZ — backend NestJS (Phase 5 du plan d'implémentation)",
+  "description": "MedAnki DZ \u2014 backend NestJS (Phase 5 du plan d'impl\u00e9mentation)",
   "private": true,
   "license": "UNLICENSED",
   "engines": {
@@ -23,7 +23,8 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "tsx src/db/migrate.ts",
     "db:seed": "tsx src/db/seed.ts",
-    "db:drop": "drizzle-kit drop"
+    "db:drop": "drizzle-kit drop",
+    "billing:reconcile": "tsx src/billing/reconcile.cli.ts"
   },
   "dependencies": {
     "@nestjs/common": "^10.4.0",

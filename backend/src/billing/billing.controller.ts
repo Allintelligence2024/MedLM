@@ -6,6 +6,7 @@
 //   POST /v1/billing/webhook/chargily — public, signé HMAC
 import {
   Body,
+  ForbiddenException,
   Controller,
   Get,
   Headers,
@@ -14,6 +15,8 @@ import {
   Post,
   Req,
 } from '@nestjs/common';
+import { z } from 'zod';
+import { RbacGuard, RequireRole } from '../rbac/rbac.guard';
 import type { Request } from 'express';
 import { BillingService } from './billing.service';
 import { CreateCheckoutBody, ChargilyWebhookEvent } from './billing.dto';
@@ -32,18 +35,34 @@ export class BillingController {
   @Post('checkout')
   @UseGuards(JwtGuard)
   @HttpCode(HttpStatus.CREATED)
-  async checkout(
-    @CurrentUserId() userId: string,
-    @Body() body: unknown,
-    @Headers('origin') origin?: string,
-  ) {
+  async checkout(@CurrentUserId() userId: string, @Body() body: unknown) {
     const b = CreateCheckoutBody.parse(body);
     return this.service.createCheckout({
       userId,
       plan: b.plan,
       ...(b.promo_code !== undefined && { promoCode: b.promo_code }),
-      successUrl: b.success_url ?? `${origin ?? 'https://medanki.dz'}/billing/success`,
-      cancelUrl: b.cancel_url ?? `${origin ?? 'https://medanki.dz'}/billing/cancel`,
+      ...(b.group_pack_id !== undefined && { groupPackId: b.group_pack_id }),
+      ...(b.success_url !== undefined && { successUrl: b.success_url }),
+      ...(b.cancel_url !== undefined && { cancelUrl: b.cancel_url }),
+    });
+  }
+
+  @Post('reconcile')
+  @UseGuards(JwtGuard, RbacGuard)
+  @RequireRole('admin')
+  async reconcile(@CurrentUserId() actorUserId: string, @Body() body: unknown) {
+    const b = z
+      .object({
+        order_id: z.string().uuid(),
+        provider_ref: z.string().min(1).max(255).optional(),
+        reason: z.string().trim().min(10).max(1000),
+      })
+      .parse(body);
+    return this.service.reconcile({
+      actorUserId,
+      orderId: b.order_id,
+      reason: b.reason,
+      ...(b.provider_ref !== undefined && { providerRef: b.provider_ref }),
     });
   }
 
@@ -62,9 +81,10 @@ export class BillingController {
     @Body() body: unknown,
   ) {
     const raw = (req as unknown as { rawBody?: Buffer }).rawBody;
-    const rawStr = raw ? raw.toString('utf8') : JSON.stringify(body);
+    if (!raw) throw new ForbiddenException('raw body requis');
+    const rawStr = raw.toString('utf8');
     if (!this.chargily.verifyWebhookSignature(rawStr, signature ?? null)) {
-      return { processed: false, reason: 'bad_signature' };
+      throw new ForbiddenException('bad_signature');
     }
     const evt = ChargilyWebhookEvent.parse(body);
     return this.service.handleChargilyWebhook({

@@ -1,0 +1,2 @@
+  ⚠  lib/data/local/app_database.dart : `part 'app_database.g.dart'` mais le fichier n'existe pas — lancer `dart run build_runner build` et committer le résultat
+✅ Dart statique OK (129 fichiers : 0 déclaration imbriquée, 0 extension instanciée, imports résolus) (1 avertissement(s)).

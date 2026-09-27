@@ -1,0 +1,14 @@
+22 migrations applied to PGlite; only CREATE EXTENSION pgcrypto omitted (native UUID generation).
+SQL foreign keys: [{"table_name":"ai_difficulty_signals","count":2},{"table_name":"ai_generation_jobs","count":1},{"table_name":"ai_tutor_prompts","count":1},{"table_name":"audit_log","count":1},{"table_name":"badge_unlocks","count":1},{"table_name":"card_versions","count":1},{"table_name":"cards","count":1},{"table_name":"deck_key_wrapped","count":2},{"table_name":"decks","count":1},{"table_name":"device_tokens","count":1},{"table_name":"exam_answers","count":2},{"table_name":"exam_attempt_events","count":2},{"table_name":"exam_attempts","count":1},{"table_name":"exam_questions","count":1},{"table_name":"exam_templates","count":1},{"table_name":"group_pack_members","count":2},{"table_name":"group_packs","count":1},{"table_name":"leaderboard_optin","count":1},{"table_name":"modules","count":1},{"table_name":"payment_orders","count":1},{"table_name":"retention_alerts","count":1},{"table_name":"share_cards","count":1},{"table_name":"study_sessions","count":1},{"table_name":"user_tenants","count":2},{"table_name":"user_xp_snapshot","count":1}]
+SQL FK total: 31
+Actual BillingService payment credit: 23514 entitlements_plan_check new row for relation "entitlements" violates check constraint "entitlements_plan_check"
+ContentService listDeckCards returns premium draft without user/entitlement: [{"id":"0293491a-b58a-427c-9a39-28769e9a0f59","deck_id":"cdb7a2c4-1882-409c-ab8e-88ce2e331041","type":"basic","version":1,"content":{"back_fr":"ANSWER","front_fr":"PRIVATE DRAFT"},"source_meta":{},"tags":[],"difficulty_hint":null,"is_premium":true,"published_at":null}]
+RbacGuard student reading deck cards: true
+RbacGuard author transitioning cards: true
+[Nest] 2653  - 09/26/2026, 6:55:10 PM     LOG [ContentService] card transition: 0293491a-b58a-427c-9a39-28769e9a0f59 draft → review by user=11111111-1111-4111-8111-111111111111
+[Nest] 2653  - 09/26/2026, 6:55:10 PM     LOG [ContentService] card transition: 0293491a-b58a-427c-9a39-28769e9a0f59 review → approved by user=11111111-1111-4111-8111-111111111111
+[Nest] 2653  - 09/26/2026, 6:55:10 PM     LOG [ContentService] card transition: 0293491a-b58a-427c-9a39-28769e9a0f59 approved → published by user=11111111-1111-4111-8111-111111111111
+Same author completed draft -> review -> approved -> published via actual service.
+Entitlement.verify RS256 without explicit PUBLIC path: secret or public key must be provided
+Forged HS256 rejected with production module options: secret or public key must be provided
+All expected findings reproduced.

@@ -1,0 +1,43 @@
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+
+ RUN  v2.1.9 /home/user/MedLM/backend
+
+[32m[Nest] 1553  - [39m09/26/2026, 7:16:35 PM [32m    LOG[39m [38;5;3m[ChargilyPayProvider] [39m[32mwebhook: eventId=7a3af9fd-21f8-4c51-a15e-1a155c304a07 type=checkout.paid ref=57062fbc-f7fc-4332-9c1e-ed8aa651e056[39m
+[32m[Nest] 1553  - [39m09/26/2026, 7:16:35 PM [32m    LOG[39m [38;5;3m[ChargilyPayProvider] [39m[32mwebhook: eventId=86b01190-fe92-4005-b6e9-084586398825 type=checkout.paid ref=12d63af2-3e9b-4091-95ef-14f1f2ae5da6[39m
+[32m[Nest] 1553  - [39m09/26/2026, 7:16:35 PM [32m    LOG[39m [38;5;3m[ChargilyPayProvider] [39m[32mwebhook: eventId=ff9a7d2a-271a-49df-b382-91eed0ce6c03 type=checkout.paid ref=8c4294a0-442e-44cb-bfa8-3ad8e1cf41ba[39m
+[32m[Nest] 1553  - [39m09/26/2026, 7:16:35 PM [32m    LOG[39m [38;5;3m[ChargilyPayProvider] [39m[32mwebhook: eventId=19fd0f29-37f4-4361-98d7-bc8ef3967d56 type=checkout.paid ref=9bd92f60-a505-4366-97f0-3f3bd0ef50bf[39m
+ ❯ test/integration/billing-postgres.test.ts (4 tests | 4 failed) 5331ms
+   × Billing — PostgreSQL execution (PGlite) > monthly credits premium, never the commercial SKU 66ms
+     → new row for relation "entitlements" violates check constraint "entitlements_plan_check"
+   × Billing — PostgreSQL execution (PGlite) > semester credits premium, never the commercial SKU 14ms
+     → new row for relation "entitlements" violates check constraint "entitlements_plan_check"
+   × Billing — PostgreSQL execution (PGlite) > yearly credits premium, never the commercial SKU 14ms
+     → new row for relation "entitlements" violates check constraint "entitlements_plan_check"
+   × Billing — PostgreSQL execution (PGlite) > group credits premium, never the commercial SKU 23ms
+     → new row for relation "entitlements" violates check constraint "entitlements_plan_check"
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  test/integration/billing-postgres.test.ts > Billing — PostgreSQL execution (PGlite) > monthly credits premium, never the commercial SKU
+ FAIL  test/integration/billing-postgres.test.ts > Billing — PostgreSQL execution (PGlite) > semester credits premium, never the commercial SKU
+ FAIL  test/integration/billing-postgres.test.ts > Billing — PostgreSQL execution (PGlite) > yearly credits premium, never the commercial SKU
+ FAIL  test/integration/billing-postgres.test.ts > Billing — PostgreSQL execution (PGlite) > group credits premium, never the commercial SKU
+error: new row for relation "entitlements" violates check constraint "entitlements_plan_check"
+ ❯ pe.Ue node_modules/@electric-sql/pg-protocol/src/parser.ts:442:11
+ ❯ pe.tt node_modules/@electric-sql/pg-protocol/src/parser.ts:220:16
+ ❯ pe.parse node_modules/@electric-sql/pg-protocol/src/parser.ts:104:21
+ ❯ N.qe node_modules/@electric-sql/pglite/src/pglite.ts:753:26
+ ❯ node_modules/@electric-sql/pglite/src/pglite.ts:706:14
+ ❯ null.<anonymous> wasm:/wasm/0267bb86:1:5922000
+ ❯ null.<anonymous> wasm:/wasm/0267bb86:1:2616044
+ ❯ null.<anonymous> wasm:/wasm/0267bb86:1:2648530
+ ❯ null.<anonymous> wasm:/wasm/0267bb86:1:2649134
+ ❯ null.<anonymous> wasm:/wasm/0267bb86:1:5569870
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ Test Files  1 failed (1)
+      Tests  4 failed (4)
+   Start at  19:16:28
+   Duration  6.91s (transform 314ms, setup 0ms, collect 1.27s, tests 5.33s, environment 0ms, prepare 82ms)
+

@@ -1,0 +1,1 @@
+✅ Migrations complètes (39 tables du schéma toutes créées, 23 fichiers tous exécutables).

@@ -12,11 +12,10 @@ describe('ChargilyPayProvider — configuration', () => {
       new ChargilyPayProvider(
         baseConfig({
           CHARGILY_ENV: 'production',
-          CHARGILY_API_KEY: undefined,
-          CHARGILY_API_SECRET: 'sec',
+          CHARGILY_API_SECRET: undefined,
         }) as any,
       );
-    }).toThrow(/CHARGILY_API_KEY obligatoire/);
+    }).toThrow(/CHARGILY_API_SECRET obligatoire/);
   });
 
   it('refuse prod + dry_run', () => {
@@ -25,7 +24,7 @@ describe('ChargilyPayProvider — configuration', () => {
         baseConfig({
           CHARGILY_ENV: 'production',
           CHARGILY_DRY_RUN: 'true',
-          CHARGILY_API_KEY: 'key',
+          CHARGILY_API_SECRET: 'key',
         }) as any,
       );
     }).toThrow(/Incohérence/);
@@ -47,7 +46,7 @@ describe('ChargilyPayProvider — configuration', () => {
       new ChargilyPayProvider(
         baseConfig({
           CHARGILY_ENV: 'production',
-          CHARGILY_API_KEY: 'pk_live_xxx',
+          CHARGILY_API_SECRET: 'pk_live_xxx',
         }) as any,
       );
     }).not.toThrow();
@@ -68,7 +67,7 @@ describe('ChargilyPayProvider — defaultBaseUrl', () => {
     const p = new ChargilyPayProvider(
       baseConfig({
         CHARGILY_ENV: 'production',
-        CHARGILY_API_KEY: 'pk_live_factice',
+        CHARGILY_API_SECRET: 'pk_live_factice',
       }) as any,
     );
     expect((p as any)._defaultBaseUrl('production')).toContain('/api/v2');
@@ -95,7 +94,7 @@ describe('ChargilyPayProvider — healthCheck', () => {
     );
     const h = await p.healthCheck();
     expect(h.ok).toBe(false);
-    expect(h.reason).toContain('CHARGILY_API_KEY');
+    expect(h.reason).toContain('CHARGILY_API_SECRET');
   });
 });
 

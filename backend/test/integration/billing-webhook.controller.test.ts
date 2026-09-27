@@ -28,7 +28,10 @@ const VALID_EVENT = {
     amount: 1200,
     currency: 'dzd',
     status: 'paid',
-    metadata: { user_id: '11111111-1111-1111-1111-111111111111', plan: 'premium' },
+    metadata: {
+      user_id: '11111111-1111-1111-1111-111111111111',
+      plan: 'premium',
+    },
   },
 };
 
@@ -38,9 +41,8 @@ describe('POST /v1/billing/webhook/chargily (intégration)', () => {
   beforeAll(async () => {
     const { AppModule } = await import('../../src/app.module');
     const { configureApp } = await import('../../src/configure-app');
-    const { DRIZZLE, DRIZZLE_READ } = await import(
-      '../../src/db/database.module'
-    );
+    const { DRIZZLE, DRIZZLE_READ } =
+      await import('../../src/db/database.module');
 
     const chain = (): any => {
       const rows: any[] = [];
@@ -84,7 +86,7 @@ describe('POST /v1/billing/webhook/chargily (intégration)', () => {
       .useValue(fakeDb)
       .compile();
 
-    app = moduleRef.createNestApplication();
+    app = moduleRef.createNestApplication({ rawBody: true });
     configureApp(app);
     await app.init();
   });
@@ -103,22 +105,22 @@ describe('POST /v1/billing/webhook/chargily (intégration)', () => {
     expect(res.status).not.toBe(401);
   });
 
-  it('sans signature : rien n\'est accordé', async () => {
+  it("sans signature : rien n'est accordé", async () => {
     const res = await request(app.getHttpServer())
       .post('/v1/billing/webhook/chargily')
       .send(VALID_EVENT);
-    expect(res.status).toBe(200); // on répond 200 pour éviter les retries
-    expect(res.body.processed).toBe(false);
-    expect(res.body.reason).toBe('bad_signature');
+    expect(res.status).toBe(403);
+    expect(res.status).toBe(403);
+    expect(res.body.message).toBe('bad_signature');
   });
 
-  it('avec une signature fausse : rien n\'est accordé', async () => {
+  it("avec une signature fausse : rien n'est accordé", async () => {
     const res = await request(app.getHttpServer())
       .post('/v1/billing/webhook/chargily')
       .set('signature', 'deadbeef'.repeat(8))
       .send(VALID_EVENT);
-    expect(res.body.processed).toBe(false);
-    expect(res.body.reason).toBe('bad_signature');
+    expect(res.status).toBe(403);
+    expect(res.body.message).toBe('bad_signature');
   });
 
   it('la signature est refusée AVANT toute lecture du corps', async () => {
@@ -128,11 +130,11 @@ describe('POST /v1/billing/webhook/chargily (intégration)', () => {
     const res = await request(app.getHttpServer())
       .post('/v1/billing/webhook/chargily')
       .send({ n_importe_quoi: true });
-    expect(res.status).toBe(200);
-    expect(res.body.reason).toBe('bad_signature');
+    expect(res.status).toBe(403);
+    expect(res.body.message).toBe('bad_signature');
   });
 
-  it('l\'endpoint de checkout, lui, EXIGE un JWT', async () => {
+  it("l'endpoint de checkout, lui, EXIGE un JWT", async () => {
     // Symétrie du point précédent : le webhook est public, la création
     // de session de paiement ne l'est pas.
     const res = await request(app.getHttpServer())
@@ -141,8 +143,10 @@ describe('POST /v1/billing/webhook/chargily (intégration)', () => {
     expect(res.status).toBe(401);
   });
 
-  it('l\'entitlement exige un JWT', async () => {
-    const res = await request(app.getHttpServer()).get('/v1/billing/entitlement');
+  it("l'entitlement exige un JWT", async () => {
+    const res = await request(app.getHttpServer()).get(
+      '/v1/billing/entitlement',
+    );
     expect(res.status).toBe(401);
   });
 

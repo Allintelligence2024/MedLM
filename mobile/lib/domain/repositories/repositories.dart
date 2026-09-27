@@ -71,7 +71,7 @@ class EntitlementState {
   /// Signature vérifiée et non expirée (ou grace period active).
   final bool isValid;
 
-  /// Timestamp d'expiration du JWT, en ms epoch.
+  /// Échéance d'accès en ms, plafonnée par la validité du JWT.
   final int expiresAtMs;
 
   /// Timestamp de fin de grace period (null = pas de grace).
@@ -79,7 +79,8 @@ class EntitlementState {
 
   /// L'utilisateur peut-il accéder aux decks premium à [nowMs] ?
   bool canAccessPremiumAt(int nowMs) {
-    if (isValid && expiresAtMs > nowMs) return true;
+    if (!isValid || plan == EntitlementPlan.free) return false;
+    if (expiresAtMs > nowMs) return true;
     if (graceUntilMs != null && graceUntilMs! > nowMs) return true;
     return false;
   }
