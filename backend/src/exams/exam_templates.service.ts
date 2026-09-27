@@ -57,8 +57,11 @@ export class ExamTemplatesService {
       ? await this.db
           .select({ id: cards.id })
           .from(cards)
-          .where(eq(cards.deckId, tpl.moduleId))
-      : await this.db.select({ id: cards.id }).from(cards);
+          .where(and(eq(cards.deckId, tpl.moduleId), eq(cards.status, 'published')))
+      : await this.db
+          .select({ id: cards.id })
+          .from(cards)
+          .where(eq(cards.status, 'published'));
     if (pool.length < tpl.totalQuestions) {
       throw new BadRequestException(
         `pool insuffisant : ${pool.length} cartes pour ${tpl.totalQuestions} demandées`,

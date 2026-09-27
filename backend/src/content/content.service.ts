@@ -1,14 +1,33 @@
-/// Service Content — GET decks, delta de cartes, signalements,
-/// édition CMS (Phase 11 bis).
+/// Service Content — lectures apprenant, CMS, signalements, workflow.
 ///
-/// Toutes les requêtes sont scopées par utilisateur. Les decks premium
-/// sont filtrés selon l'entitlement (Phase 7 câblera la vérification).
-import { Inject, Injectable, Logger, NotFoundException, BadRequestException } from '@nestjs/common';
-import { and, desc, eq, gte } from 'drizzle-orm';
-import { randomUUID } from 'crypto';
-import { cards, cardReports, decks, modules } from '../db/schema';
-import { DRIZZLE, Database } from '../db/database.module';
-import type { UpdateCardBody } from './content.dto';
+/// Phase 2 : les lectures apprenant ne voient que du publié ; le premium
+/// exige un entitlement actif. Les transitions sont autorisées par rôle.
+/// L'auto-approbation est interdite, y compris pour un administrateur
+/// sauf dérogation explicite et auditée.
+import {
+  BadRequestException,
+  ForbiddenException,
+  Inject,
+  Injectable,
+  Logger,
+  NotFoundException,
+} from "@nestjs/common";
+import { and, desc, eq, gte, isNotNull, isNull } from "drizzle-orm";
+import { randomUUID } from "crypto";
+import { cards, cardReports, cardVersions, decks, modules } from "../db/schema";
+import { auditLog } from "../db/schema/billing";
+import { DRIZZLE, Database } from "../db/database.module";
+import type { UpdateCardBody } from "./content.dto";
+import { BillingService } from "../billing/billing.service";
+import {
+  cmsListScope,
+  decideCardEdit,
+  decideCardRead,
+  decideLearnerDeckRead,
+  decideTransition,
+  type AccessDecision,
+  type ContentActor,
+} from "./content-policy";
 
 export interface DeckListItem {
   id: string;
@@ -24,21 +43,17 @@ export interface DeckListItem {
   published_at: string | null;
 }
 
-const ALLOWED_TRANSITIONS: Record<string, string[]> = {
-  draft: ['review', 'retired'],
-  review: ['approved', 'draft', 'retired'],
-  approved: ['published', 'review', 'retired'],
-  published: ['retired'],
-  retired: ['draft'],
-};
-
 @Injectable()
 export class ContentService {
   private readonly logger = new Logger(ContentService.name);
 
-  constructor(@Inject(DRIZZLE) private readonly db: Database) {}
+  constructor(
+    @Inject(DRIZZLE) private readonly db: Database,
+    private readonly billing: BillingService,
+  ) {}
 
-  /// GET /content/decks
+  /// GET /content/decks — catalogue apprenant : decks effectivement publiés.
+  /// Un deck premium reste visible (paywall) ; son contenu est refusé plus bas.
   async listDecks(args: {
     moduleId?: string;
     versionSince: number;
@@ -46,10 +61,14 @@ export class ContentService {
   }): Promise<{ items: DeckListItem[]; next_cursor_version: number }> {
     const where = args.moduleId
       ? and(
+          isNotNull(decks.publishedAt),
           gte(decks.version, args.versionSince),
           eq(decks.moduleId, args.moduleId),
         )
-      : gte(decks.version, args.versionSince);
+      : and(
+          isNotNull(decks.publishedAt),
+          gte(decks.version, args.versionSince),
+        );
 
     const rows = await this.db
       .select({
@@ -88,12 +107,15 @@ export class ContentService {
         cover_image_key: r.coverImageKey,
         published_at: r.publishedAt?.toISOString() ?? null,
       })),
-      next_cursor_version: hasMore ? page[page.length - 1]!.version : args.versionSince,
+      next_cursor_version: hasMore
+        ? page[page.length - 1]!.version
+        : args.versionSince,
     };
   }
 
-  /// GET /content/decks/:id/cards?version_since=
+  /// GET /content/decks/:id/cards — cartes PUBLIÉES uniquement.
   async listDeckCards(args: {
+    actor: ContentActor;
     deckId: string;
     versionSince: number;
     limit: number;
@@ -113,17 +135,36 @@ export class ContentService {
     next_cursor_version: number;
   }> {
     const deck = await this.db
-      .select({ id: decks.id, version: decks.version })
+      .select({
+        id: decks.id,
+        version: decks.version,
+        isPremium: decks.isPremium,
+        publishedAt: decks.publishedAt,
+      })
       .from(decks)
       .where(eq(decks.id, args.deckId))
       .then((rows) => rows[0]);
     if (!deck) throw new NotFoundException(`deck ${args.deckId} introuvable`);
 
+    const entitled = await this.isEntitled(args.actor.userId);
+    this.enforce(
+      decideLearnerDeckRead(
+        args.actor,
+        { publishedAt: deck.publishedAt, isPremium: deck.isPremium },
+        entitled,
+      ),
+      "deck introuvable",
+    );
+
     const rows = await this.db
       .select()
       .from(cards)
       .where(
-        and(eq(cards.deckId, args.deckId), gte(cards.version, args.versionSince)),
+        and(
+          eq(cards.deckId, args.deckId),
+          eq(cards.status, "published"),
+          gte(cards.version, args.versionSince),
+        ),
       )
       .orderBy(cards.version)
       .limit(args.limit + 1);
@@ -144,28 +185,46 @@ export class ContentService {
         is_premium: r.isPremium,
         published_at: r.publishedAt?.toISOString() ?? null,
       })),
-      next_cursor_version: hasMore ? page[page.length - 1]!.version : args.versionSince,
+      next_cursor_version: hasMore
+        ? page[page.length - 1]!.version
+        : args.versionSince,
     };
   }
 
-  /// GET /content/cards/list?limit=
-  /// Vue CMS : retourne un résumé de toutes les cartes (id, deck, statut, version...).
-  async listCardsForCms(args: { moduleId?: string; limit: number }) {
-    const rows = await this.db
-      .select({
-        id: cards.id,
-        deckId: cards.deckId,
-        type: cards.type,
-        status: cards.status,
-        version: cards.version,
-        isPremium: cards.isPremium,
-        publishedAt: cards.publishedAt,
-        updatedAt: cards.updatedAt,
-        content: cards.content,
-      })
-      .from(cards)
-      .orderBy(desc(cards.updatedAt))
-      .limit(args.limit);
+  /// GET /content/cards/list — vue CMS. Un auteur ne voit que SES cartes.
+  async listCardsForCms(args: {
+    actor: ContentActor;
+    moduleId?: string;
+    limit: number;
+  }) {
+    const scope = cmsListScope(args.actor);
+    if (scope === "none") {
+      throw new ForbiddenException("lecture éditoriale réservée au staff");
+    }
+    const projection = {
+      id: cards.id,
+      deckId: cards.deckId,
+      type: cards.type,
+      status: cards.status,
+      version: cards.version,
+      isPremium: cards.isPremium,
+      publishedAt: cards.publishedAt,
+      updatedAt: cards.updatedAt,
+      content: cards.content,
+    };
+    const rows =
+      scope === "own"
+        ? await this.db
+            .select(projection)
+            .from(cards)
+            .where(eq(cards.createdBy, args.actor.userId))
+            .orderBy(desc(cards.updatedAt))
+            .limit(args.limit)
+        : await this.db
+            .select(projection)
+            .from(cards)
+            .orderBy(desc(cards.updatedAt))
+            .limit(args.limit);
     return {
       items: rows.map((r) => ({
         id: r.id,
@@ -181,16 +240,26 @@ export class ContentService {
     };
   }
 
-  /// GET /content/cards/:id — détail complet.
-  async getCard(cardId: string) {
-    const row = await this.db
-      .select()
-      .from(cards)
-      .where(eq(cards.id, cardId))
-      .then((rows) => rows[0]);
-    if (!row) throw new NotFoundException('carte introuvable');
-    const c = (row.content as any) ?? {};
-    const s = (row.sourceMeta as any) ?? {};
+  /// GET /content/cards/:id
+  async getCard(args: { actor: ContentActor; cardId: string }) {
+    const row = await this.loadCardWithDeck(args.cardId);
+    if (!row) throw new NotFoundException("carte introuvable");
+    const entitled = await this.isEntitled(args.actor.userId);
+    this.enforce(
+      decideCardRead(
+        args.actor,
+        {
+          status: row.status,
+          isPremium: row.isPremium,
+          createdBy: row.createdBy,
+          deckIsPremium: row.deckIsPremium,
+        },
+        entitled,
+      ),
+      "carte introuvable",
+    );
+    const c = (row.content as Record<string, unknown> | null) ?? {};
+    const s = (row.sourceMeta as Record<string, unknown> | null) ?? {};
     return {
       id: row.id,
       deck_id: row.deckId,
@@ -201,109 +270,228 @@ export class ContentService {
       published_at: row.publishedAt?.toISOString() ?? null,
       updated_at: row.updatedAt?.toISOString() ?? new Date().toISOString(),
       content: {
-        front_fr: c.front_fr ?? '',
-        back_fr: c.back_fr ?? '',
-        front_en: c.front_en ?? '',
-        back_en: c.back_en ?? '',
-        explanation_fr: c.explanation_fr ?? '',
-        explanation_en: c.explanation_en ?? '',
+        front_fr: typeof c.front_fr === "string" ? c.front_fr : "",
+        back_fr: typeof c.back_fr === "string" ? c.back_fr : "",
+        front_en: typeof c.front_en === "string" ? c.front_en : "",
+        back_en: typeof c.back_en === "string" ? c.back_en : "",
+        explanation_fr:
+          typeof c.explanation_fr === "string" ? c.explanation_fr : "",
+        explanation_en:
+          typeof c.explanation_en === "string" ? c.explanation_en : "",
         media: Array.isArray(c.media) ? c.media : [],
       },
       source: {
-        type: s.type ?? 'original',
-        faculty: s.faculty ?? '',
-        year: s.year ?? null,
-        can_distribute_offline: s.can_distribute_offline ?? true,
-        license: s.license ?? '',
+        type: typeof s.type === "string" ? s.type : "original",
+        faculty: typeof s.faculty === "string" ? s.faculty : "",
+        year: typeof s.year === "number" ? s.year : null,
+        can_distribute_offline:
+          typeof s.can_distribute_offline === "boolean"
+            ? s.can_distribute_offline
+            : true,
+        license: typeof s.license === "string" ? s.license : "",
       },
       tags: row.tags ?? [],
     };
   }
 
-  /// PATCH /content/cards/:id — édition CMS.
-  async updateCard(args: { userId: string; cardId: string; body: UpdateCardBody }) {
+  /// PATCH /content/cards/:id
+  async updateCard(args: {
+    actor: ContentActor;
+    cardId: string;
+    body: UpdateCardBody;
+  }) {
     const existing = await this.db
-      .select({ id: cards.id, version: cards.version, status: cards.status })
+      .select({
+        id: cards.id,
+        version: cards.version,
+        status: cards.status,
+        createdBy: cards.createdBy,
+        content: cards.content,
+      })
       .from(cards)
       .where(eq(cards.id, args.cardId))
       .then((rows) => rows[0]);
-    if (!existing) throw new NotFoundException('carte introuvable');
-    if (existing.status === 'published') {
-      // Édition d'une carte publiée : on incrémente la version et
-      // on remet en draft pour re-revue.
-      // (Stratégie safe par défaut ; un override admin sera possible.)
-    }
-    await this.db
-      .update(cards)
-      .set({
-        content: args.body.content as any,
-        sourceMeta: args.body.source as any,
-        tags: args.body.tags,
-        version: existing.version + 1,
-        updatedAt: new Date(),
-        status: existing.status === 'published' ? 'draft' : existing.status,
-      })
-      .where(eq(cards.id, args.cardId));
-    this.logger.log(
-      `card updated: ${args.cardId} v${existing.version + 1} by user=${args.userId}`,
+    if (!existing) throw new NotFoundException("carte introuvable");
+    this.enforce(
+      decideCardEdit(args.actor, {
+        status: existing.status,
+        createdBy: existing.createdBy,
+      }),
+      "carte introuvable",
     );
-    return { id: args.cardId, version: existing.version + 1 };
+
+    const nextStatus =
+      existing.status === "published" ? "draft" : existing.status;
+    const nextVersion = existing.version + 1;
+    await this.db.transaction(async (tx) => {
+      await tx.insert(cardVersions).values({
+        cardId: existing.id,
+        version: existing.version,
+        contentSnapshot: existing.content,
+        changedBy: args.actor.userId,
+      });
+      await tx
+        .update(cards)
+        .set({
+          content: args.body.content,
+          sourceMeta: args.body.source,
+          tags: args.body.tags,
+          version: nextVersion,
+          updatedAt: new Date(),
+          status: nextStatus,
+        })
+        .where(eq(cards.id, args.cardId));
+      await tx.insert(auditLog).values({
+        actorUserId: args.actor.userId,
+        action: "content.card.update",
+        targetType: "card",
+        targetId: args.cardId,
+        metadata: { version: nextVersion, status: nextStatus },
+      });
+    });
+    this.logger.log(
+      `card updated: ${args.cardId} v${nextVersion} by user=${args.actor.userId}`,
+    );
+    return { id: args.cardId, version: nextVersion };
   }
 
-  /// POST /content/cards/:id/transition — transition workflow.
+  /// POST /content/cards/:id/transition
   async transitionCard(args: {
-    userId: string;
+    actor: ContentActor;
     cardId: string;
     to: string;
     comment?: string;
+    adminOverride?: boolean;
   }) {
     const existing = await this.db
-      .select({ id: cards.id, status: cards.status, version: cards.version })
+      .select({
+        id: cards.id,
+        status: cards.status,
+        version: cards.version,
+        createdBy: cards.createdBy,
+        reviewedBy: cards.reviewedBy,
+        publishedAt: cards.publishedAt,
+        content: cards.content,
+        deckId: cards.deckId,
+      })
       .from(cards)
       .where(eq(cards.id, args.cardId))
       .then((rows) => rows[0]);
-    if (!existing) throw new NotFoundException('carte introuvable');
-    const allowed = ALLOWED_TRANSITIONS[existing.status] ?? [];
-    if (!allowed.includes(args.to)) {
-      throw new BadRequestException(
-        `transition ${existing.status} → ${args.to} interdite`,
-      );
+    if (!existing) throw new NotFoundException("carte introuvable");
+
+    const decision = decideTransition({
+      from: existing.status,
+      to: args.to,
+      actor: args.actor,
+      ownerId: existing.createdBy,
+      adminOverride: Boolean(args.adminOverride),
+    });
+    if (!decision.ok) {
+      switch (decision.reason) {
+        case "illegal_transition":
+          throw new BadRequestException(
+            `transition ${existing.status} → ${args.to} interdite`,
+          );
+        case "self_approval":
+          throw new ForbiddenException("auto-approbation interdite");
+        case "override_forbidden":
+          throw new ForbiddenException(
+            "dérogation réservée à un administrateur",
+          );
+        default:
+          throw new ForbiddenException("transition non autorisée pour ce rôle");
+      }
     }
-    await this.db
-      .update(cards)
-      .set({
-        status: args.to as any,
-        version: existing.version + 1,
-        updatedAt: new Date(),
-        publishedAt: args.to === 'published' ? new Date() : null,
-      })
-      .where(eq(cards.id, args.cardId));
+
+    const now = new Date();
+    const nextVersion = existing.version + 1;
+    const publishedAt =
+      args.to === "published"
+        ? now
+        : args.to === "retired"
+          ? existing.publishedAt
+          : null;
+    await this.db.transaction(async (tx) => {
+      await tx.insert(cardVersions).values({
+        cardId: existing.id,
+        version: existing.version,
+        contentSnapshot: existing.content,
+        changedBy: args.actor.userId,
+      });
+      await tx
+        .update(cards)
+        .set({
+          status: args.to,
+          version: nextVersion,
+          updatedAt: now,
+          publishedAt,
+          reviewedBy:
+            args.to === "approved" ? args.actor.userId : existing.reviewedBy,
+        })
+        .where(eq(cards.id, args.cardId));
+      if (args.to === "published") {
+        await tx
+          .update(decks)
+          .set({ publishedAt: now })
+          .where(and(eq(decks.id, existing.deckId), isNull(decks.publishedAt)));
+      }
+      await tx.insert(auditLog).values({
+        actorUserId: args.actor.userId,
+        action: decision.requiresOverride
+          ? "content.card.admin_override"
+          : "content.card.transition",
+        targetType: "card",
+        targetId: args.cardId,
+        metadata: {
+          from: existing.status,
+          to: args.to,
+          comment: args.comment ?? null,
+          admin_override: Boolean(args.adminOverride),
+        },
+      });
+    });
     this.logger.log(
-      `card transition: ${args.cardId} ${existing.status} → ${args.to} by user=${args.userId}`,
+      `card transition: ${args.cardId} ${existing.status} → ${args.to} by user=${args.actor.userId}`,
     );
     return { id: args.cardId, from: existing.status, to: args.to };
   }
 
-  /// POST /content/cards/:id/report
+  /// POST /content/cards/:id/report — uniquement sur une carte lisible.
   async reportCard(args: {
-    userId: string;
+    actor: ContentActor;
     cardId: string;
     reason: string;
     comment: string;
   }): Promise<{ id: string }> {
-    const [row] = await this.db
+    const row = await this.loadCardWithDeck(args.cardId);
+    if (!row) throw new NotFoundException("carte introuvable");
+    const entitled = await this.isEntitled(args.actor.userId);
+    this.enforce(
+      decideCardRead(
+        args.actor,
+        {
+          status: row.status,
+          isPremium: row.isPremium,
+          createdBy: row.createdBy,
+          deckIsPremium: row.deckIsPremium,
+        },
+        entitled,
+      ),
+      "carte introuvable",
+    );
+    const [inserted] = await this.db
       .insert(cardReports)
       .values({
         cardId: args.cardId,
-        userId: args.userId,
+        userId: args.actor.userId,
         reason: args.reason,
         comment: args.comment,
       })
       .returning({ id: cardReports.id });
-    return { id: row!.id };
+    return { id: inserted!.id };
   }
 
-  /// GET /content/reports — liste pour le CMS.
+  /// GET /content/reports
   async listReports() {
     const rows = await this.db
       .select()
@@ -322,19 +510,23 @@ export class ContentService {
     };
   }
 
-  /// PATCH /content/reports/:id — résolution.
+  /// PATCH /content/reports/:id
   async updateReport(args: { id: string; status: string; comment?: string }) {
+    const existing = await this.db
+      .select({ id: cardReports.id })
+      .from(cardReports)
+      .where(eq(cardReports.id, args.id))
+      .then((rows) => rows[0]);
+    if (!existing) throw new NotFoundException("signalement introuvable");
     await this.db
       .update(cardReports)
-      .set({ status: args.status as any })
+      .set({ status: args.status })
       .where(eq(cardReports.id, args.id));
     return { id: args.id, status: args.status };
   }
 
-  /// POST /content/media/presign — génère une presigned URL pour R2.
-  /// NOTE : implémentation stub. En production, on utilise le SDK
-  /// AWS S3 (`@aws-sdk/client-s3` + `@aws-sdk/s3-request-presigner`)
-  /// avec les credentials R2.
+  /// POST /content/media/presign — stub d'URL. Ce n'est PAS un stockage R2
+  /// réel (phase 5) et ce n'est PAS un canal de lecture apprenant.
   async presignMedia(args: {
     userId: string;
     filename: string;
@@ -348,17 +540,51 @@ export class ContentService {
       key,
       upload_url: uploadUrl,
       public_url: publicUrl,
-      expires_in: 600, // 10 min
+      expires_in: 600,
     };
   }
 
+  private async isEntitled(userId: string): Promise<boolean> {
+    const state = await this.billing.currentEntitlement(userId);
+    return state.isActive;
+  }
+
+  private enforce(decision: AccessDecision, hiddenMessage: string): void {
+    if (decision === "allow") return;
+    if (decision === "not_found") throw new NotFoundException(hiddenMessage);
+    throw new ForbiddenException("entitlement premium requis");
+  }
+
+  private async loadCardWithDeck(cardId: string) {
+    const row = await this.db
+      .select({
+        id: cards.id,
+        deckId: cards.deckId,
+        type: cards.type,
+        status: cards.status,
+        version: cards.version,
+        isPremium: cards.isPremium,
+        createdBy: cards.createdBy,
+        publishedAt: cards.publishedAt,
+        updatedAt: cards.updatedAt,
+        content: cards.content,
+        sourceMeta: cards.sourceMeta,
+        tags: cards.tags,
+        deckIsPremium: decks.isPremium,
+      })
+      .from(cards)
+      .innerJoin(decks, eq(decks.id, cards.deckId))
+      .where(eq(cards.id, cardId))
+      .then((rows) => rows[0]);
+    return row ?? null;
+  }
+
   private _extractTitle(content: unknown): string {
-    const c = content as any;
-    if (!c) return '—';
-    const fr = c.front_fr ?? '';
-    if (typeof fr === 'string') {
-      return fr.replace(/<[^>]+>/g, '').slice(0, 60);
+    if (!content || typeof content !== "object") return "—";
+    const fr = (content as { front_fr?: unknown }).front_fr ?? "";
+    if (typeof fr === "string") {
+      return fr.replace(/<[^>]+>/g, "").slice(0, 60);
     }
-    return '—';
+    return "—";
   }
 }

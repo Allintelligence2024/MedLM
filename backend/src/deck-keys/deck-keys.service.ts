@@ -17,7 +17,7 @@
 // Note : la clé AES n'est JAMAIS envoyée en clair au client
 // (chiffrée par la clé publique RSA du device). Le serveur ne
 // stocke que la version wrappée.
-import { Inject, Injectable, Logger, NotFoundException, BadRequestException } from '@nestjs/common';
+import { Inject, Injectable, Logger, NotFoundException, BadRequestException, ForbiddenException } from '@nestjs/common';
 
 import { and, eq, isNull } from 'drizzle-orm';
 import { randomBytes, createPublicKey, publicEncrypt, constants } from 'node:crypto';
@@ -25,6 +25,7 @@ import { DRIZZLE, Database } from '../db/database.module';
 import { decks } from '../db/schema/content';
 import { deckKeyWrapped } from '../db/schema/deck-keys';
 import { WrappedDeckKey } from './deck-keys.dto';
+import { BillingService } from '../billing/billing.service';
 
 @Injectable()
 export class DeckKeysService {
@@ -32,6 +33,7 @@ export class DeckKeysService {
 
   constructor(
     @Inject(DRIZZLE) private readonly db: Database,
+    private readonly billing: BillingService,
   ) {}
 
   /// GET /v1/decks/:id/wrap-key?client_public_key=...&device_id=...
@@ -44,16 +46,26 @@ export class DeckKeysService {
     clientPublicKeyPem: string;
     deviceId: string;
   }): Promise<WrappedDeckKey> {
-    // 1. Vérifier que le deck existe et est premium.
+    // 1. Vérifier que le deck existe, est publié et premium.
+    // Les cartes sont servies en JSON clair (TLS). Cette clé AES n'est
+    // PAS utilisée pour chiffrer le contenu en base : affirmer un
+    // chiffrement de bout en bout serait faux.
     const deck = await this.db
-      .select({ id: decks.id, isPremium: decks.isPremium })
+      .select({
+        id: decks.id,
+        isPremium: decks.isPremium,
+        publishedAt: decks.publishedAt,
+      })
       .from(decks)
       .where(eq(decks.id, args.deckId))
       .then((rows) => rows[0]);
-    if (!deck) throw new NotFoundException('deck introuvable');
+    if (!deck || !deck.publishedAt) throw new NotFoundException('deck introuvable');
     if (!deck.isPremium) {
-      // Pas de wrap pour les decks gratuits : ils sont en clair.
       throw new BadRequestException('deck gratuit, pas de wrap nécessaire');
+    }
+    const entitlement = await this.billing.currentEntitlement(args.userId);
+    if (!entitlement.isActive) {
+      throw new ForbiddenException('entitlement premium requis');
     }
 
     // 2. Vérifier la clé publique RSA du client (parsing + taille).

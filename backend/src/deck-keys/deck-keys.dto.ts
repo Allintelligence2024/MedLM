@@ -15,6 +15,7 @@ export const WrapKeyQuery = z.object({
   /// Clé publique RSA du client au format PEM (SubjectPublicKeyInfo).
   client_public_key: z
     .string()
+    .trim()
     .min(64)
     .max(8192)
     .regex(/^-----BEGIN PUBLIC KEY-----[\s\S]+-----END PUBLIC KEY-----$/),

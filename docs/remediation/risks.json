@@ -31,7 +31,10 @@
       "phase": 2,
       "evidence": "ContentService.listDeckCards et handlers de lecture",
       "closure_criteria": "Tests HTTP student/free/premium/editor, filtrage publié et entitlement partout",
-      "status": "open"
+      "status": "closed",
+      "remediation": "Lectures apprenant limitées au publié ; 404 sur brouillon ; 403 premium sans entitlement ; CMS réservé au staff avec filtre propriétaire pour les auteurs ; wrap-key exige publication et entitlement.",
+      "verification": "PHASE_2.md ; test/unit/content_policy.test.ts ; test/integration/content-access.postgres.test.ts",
+      "closure_scope": "Défaut de lecture non autorisée corrigé et testé. N'implique ni chiffrement des cartes, ni isolation multi-tenant du catalogue, ni GO production."
     },
     {
       "id": "R03",
@@ -42,7 +45,10 @@
       "phase": 2,
       "evidence": "ContentController.transitionCard et ContentService",
       "closure_criteria": "Rôles par transition et séparation auteur/relecteur testés",
-      "status": "open"
+      "status": "closed",
+      "remediation": "Graphe de workflow + permissions par rôle ; interdiction d'auto-approbation/publication ; dérogation admin commentée et écrite dans audit_log ; snapshots card_versions.",
+      "verification": "PHASE_2.md ; test/unit/content_policy.test.ts ; test/integration/content-access.postgres.test.ts",
+      "closure_scope": "Séparation auteur/relecteur/éditeur testée. Ne vaut pas qualification CMS production ni GO."
     },
     {
       "id": "R04",

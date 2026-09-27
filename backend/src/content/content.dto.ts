@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 /// Query : lister les decks depuis une version.
 export const ListDecksQuery = z.object({
@@ -18,13 +18,13 @@ export type DeckCardsQuery = z.infer<typeof DeckCardsQuery>;
 /// Body : signalement d'erreur.
 export const ReportBody = z.object({
   reason: z.enum([
-    'wrong_answer',
-    'typo',
-    'outdated',
-    'missing_explanation',
-    'other',
+    "wrong_answer",
+    "typo",
+    "outdated",
+    "missing_explanation",
+    "other",
   ]),
-  comment: z.string().max(2000).default(''),
+  comment: z.string().max(2000).default(""),
 });
 export type ReportBody = z.infer<typeof ReportBody>;
 
@@ -42,13 +42,13 @@ export const UpdateCardBody = z.object({
         z.object({
           url: z.string().url(),
           alt_text: z.string().max(500),
-          type: z.enum(['image', 'audio', 'video']),
+          type: z.enum(["image", "audio", "video"]),
         }),
       )
       .default([]),
   }),
   source: z.object({
-    type: z.enum(['original', 'inspired', 'partnership']),
+    type: z.enum(["original", "inspired", "partnership"]),
     faculty: z.string().max(100).optional(),
     year: z.number().int().min(1900).max(2100).optional(),
     can_distribute_offline: z.boolean(),
@@ -58,24 +58,44 @@ export const UpdateCardBody = z.object({
 });
 export type UpdateCardBody = z.infer<typeof UpdateCardBody>;
 
-/// Body : transition de workflow (Phase 11 bis).
-export const TransitionBody = z.object({
-  to: z.enum(['draft', 'review', 'approved', 'published', 'retired']),
-  comment: z.string().max(500).optional(),
-});
+/// Body : transition de workflow (Phase 11 bis / phase 2).
+/// `admin_override` n'est accepté que pour un administrateur, avec commentaire,
+/// et uniquement pour lever l'interdiction d'auto-approbation / auto-publication.
+export const TransitionBody = z
+  .object({
+    to: z.enum(["draft", "review", "approved", "published", "retired"]),
+    comment: z.string().max(500).optional(),
+    admin_override: z.boolean().optional(),
+  })
+  .superRefine((value, ctx) => {
+    if (
+      value.admin_override &&
+      !(value.comment && value.comment.trim().length > 0)
+    ) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "commentaire obligatoire pour une dérogation administrateur",
+        path: ["comment"],
+      });
+    }
+  });
 export type TransitionBody = z.infer<typeof TransitionBody>;
 
 /// Body : presigned URL pour upload média (Phase 11 bis).
 export const PresignBody = z.object({
   filename: z.string().min(1).max(200),
   content_type: z.string().min(1).max(100),
-  size_bytes: z.number().int().positive().max(20 * 1024 * 1024),
+  size_bytes: z
+    .number()
+    .int()
+    .positive()
+    .max(20 * 1024 * 1024),
 });
 export type PresignBody = z.infer<typeof PresignBody>;
 
 /// Body : mise à jour d'un signalement.
 export const UpdateReportBody = z.object({
-  status: z.enum(['pending', 'investigating', 'resolved', 'dismissed']),
+  status: z.enum(["pending", "investigating", "resolved", "dismissed"]),
   comment: z.string().max(1000).optional(),
 });
 export type UpdateReportBody = z.infer<typeof UpdateReportBody>;

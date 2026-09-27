@@ -10,7 +10,7 @@
 // Le niveau d'expérience est recalculé à chaque demande : il suit
 // naturellement la progression de l'étudiant (doc v2 §11.3).
 import { Inject, Injectable, Logger, NotFoundException } from '@nestjs/common';
-import { eq, sql } from 'drizzle-orm';
+import { and, eq, sql } from 'drizzle-orm';
 import { DRIZZLE, Database } from '../../db/database.module';
 import { cards } from '../../db/schema/content';
 import { reviewLogs, srsCardState } from '../../db/schema/srs';
@@ -181,7 +181,7 @@ export class HintsService {
         examQuestionId: cards.examQuestionId,
       })
       .from(cards)
-      .where(eq(cards.id, args.cardId));
+      .where(and(eq(cards.id, args.cardId), eq(cards.status, 'published')));
     if (!card) throw new NotFoundException('carte introuvable');
 
     // 3. Profil d'expérience : agrégat global sur le journal de revues.

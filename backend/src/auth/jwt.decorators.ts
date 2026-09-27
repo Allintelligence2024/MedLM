@@ -6,6 +6,7 @@
 ///   me(@CurrentUser() user: JwtPayload) { return user; }
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 import { AuthedRequest, JwtPayload } from './jwt.guard';
+import type { Role } from '../rbac/roles';
 
 export const CurrentUser = createParamDecorator(
   (_data: unknown, ctx: ExecutionContext): JwtPayload | undefined => {
@@ -20,5 +21,14 @@ export const CurrentUserId = createParamDecorator(
     const req = ctx.switchToHttp().getRequest<AuthedRequest>();
     if (!req.user) throw new Error('CurrentUserId utilisé sans JwtGuard');
     return req.user.sub;
+  },
+);
+
+/// Rôle RBAC du jeton. Absent → student (le plus restrictif).
+export const CurrentUserRole = createParamDecorator(
+  (_data: unknown, ctx: ExecutionContext): Role => {
+    const req = ctx.switchToHttp().getRequest<AuthedRequest>();
+    if (!req.user) throw new Error('CurrentUserRole utilisé sans JwtGuard');
+    return req.user.role ?? 'student';
   },
 );
