@@ -76,14 +76,13 @@ paiement validé sans droit. Test Chargily sandbox de bout en bout ensuite, avan
 
 ### Phase 2 — Autorisations du contenu et workflow (R02, R03)
 
-**Implémentation et tests HTTP+SQL validés.** Voir [PHASE_2.md](PHASE_2.md).
-R02 et R03 sont fermés pour leurs défauts précis : lectures apprenant filtrées
-(publié + entitlement), CMS séparé, auteur incapable d'approuver/publier seul,
-auto-approbation admin seulement via dérogation auditée. Le catalogue contenu
-est global (pas de `tenant_id`) ; l'isolation cross-user des brouillons est testée.
-**Pas de chiffrement de bout en bout** : les cartes restent du JSON clair ; wrap-key
-est désormais conditionné à l'entitlement mais n'enveloppe aucun ciphertext de carte.
-Médias R2, hints/exams premium et hors-ligne appareil restent hors de cette clôture.
+**Critères d'autorisation de la phase 2 couverts.** Voir [PHASE_2.md](PHASE_2.md).
+R02 et R03 fermés : lectures apprenant (publié + entitlement), CMS séparé,
+workflow par rôle, auto-approbation interdite hors dérogation admin auditée.
+Hints, génération d'examen, onboarding, wrap-key et médias suivent la même
+frontière. Catalogue global (pas de `tenant_id`). **Pas de chiffrement de
+bout en bout** — vérifié : wrap-key n'enveloppe pas le JSON des cartes.
+R2 réel, appareil physique et Chargily sandbox restent hors phase 2.
 
 1. Définir la matrice student/author/medical_reviewer/editor/admin et propriété.
 2. Séparer les endpoints de lecture apprenant des lectures éditoriales.

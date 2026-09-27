@@ -14,6 +14,12 @@ import { ContentController } from "../../src/content/content.controller";
 import { ContentService } from "../../src/content/content.service";
 import { DeckKeysController } from "../../src/deck-keys/deck-keys.controller";
 import { DeckKeysService } from "../../src/deck-keys/deck-keys.service";
+import { HintsController } from "../../src/ai/hints/hints.controller";
+import { HintsService } from "../../src/ai/hints/hints.service";
+import { ExamsController } from "../../src/exams/exams.controller";
+import { ExamsService } from "../../src/exams/exams.service";
+import { ExamTemplatesService } from "../../src/exams/exam_templates.service";
+import { OnboardingService } from "../../src/onboarding/onboarding.service";
 import { JwtGuard } from "../../src/auth/jwt.guard";
 import { BillingService } from "../../src/billing/billing.service";
 import { ChargilyPayProvider } from "../../src/billing/chargily.provider";
@@ -26,6 +32,7 @@ describe("Content — accès et workflow (PGlite)", () => {
   let app: INestApplication;
   let pg: PGlite;
   let db: Database;
+  let onboarding: OnboardingService;
   const session = {
     userId: "",
     role: "student" as Role,
@@ -72,11 +79,23 @@ describe("Content — accès et workflow (PGlite)", () => {
     );
     const content = new ContentService(db, billing);
     const keys = new DeckKeysService(db, billing);
+    const hints = new HintsService(db, billing);
+    const templates = new ExamTemplatesService(db, billing);
+    const exams = new ExamsService(db);
+    onboarding = new OnboardingService(db);
     const module = await Test.createTestingModule({
-      controllers: [ContentController, DeckKeysController],
+      controllers: [
+        ContentController,
+        DeckKeysController,
+        HintsController,
+        ExamsController,
+      ],
       providers: [
         { provide: ContentService, useValue: content },
         { provide: DeckKeysService, useValue: keys },
+        { provide: HintsService, useValue: hints },
+        { provide: ExamTemplatesService, useValue: templates },
+        { provide: ExamsService, useValue: exams },
       ],
     })
       .overrideGuard(JwtGuard)
@@ -164,7 +183,7 @@ describe("Content — accès et workflow (PGlite)", () => {
         publishedAt: published ? new Date() : null,
       })
       .returning();
-    return { author, deck: deck!, card: card! };
+    return { author, module: mod!, deck: deck!, card: card! };
   }
 
   function asUser(id: string, role: Role) {
@@ -367,5 +386,93 @@ describe("Content — accès et workflow (PGlite)", () => {
     expect(ok.status).toBe(200);
     expect(typeof ok.body.wrapped_key).toBe("string");
     expect(ok.body.algorithm).toBe("rsa-oaep-sha256");
+
+    const cards = await request(app.getHttpServer()).get(
+      `/v1/content/decks/${published.deck.id}/cards`,
+    );
+    expect(cards.status).toBe(200);
+    expect(cards.body.items[0].content).toEqual({ front_fr: "Q", back_fr: "A" });
+  });
+
+  it("hints, examens et médias appliquent la même frontière premium", async () => {
+    const published = await graph({ premium: true, published: true });
+    const draft = await graph({ premium: true, published: false });
+    const student = await user("student");
+    asUser(student.id, "student");
+
+    const hintDraft = await request(app.getHttpServer()).get(
+      `/v1/ai/hints/${draft.card.id}`,
+    );
+    expect(hintDraft.status).toBe(404);
+    const hintPaid = await request(app.getHttpServer()).get(
+      `/v1/ai/hints/${published.card.id}`,
+    );
+    expect(hintPaid.status).toBe(403);
+
+    const [tpl] = await db
+      .insert(schema.examTemplates)
+      .values({
+        nameFr: "Anatomie",
+        moduleId: published.module.id,
+        totalQuestions: 1,
+        durationMinutes: 10,
+      })
+      .returning();
+    const examDenied = await request(app.getHttpServer()).post(
+      `/v1/exams/templates/${tpl!.id}/generate`,
+    );
+    expect(examDenied.status).toBe(403);
+
+    const mediaStudent = await request(app.getHttpServer())
+      .post("/v1/content/media/presign")
+      .send({
+        filename: "x.png",
+        content_type: "image/png",
+        size_bytes: 12,
+      });
+    expect(mediaStudent.status).toBe(403);
+
+    await entitle(student.id);
+    const hintOk = await request(app.getHttpServer()).get(
+      `/v1/ai/hints/${published.card.id}`,
+    );
+    expect(hintOk.status).toBe(200);
+    expect(hintOk.body.card_id).toBe(published.card.id);
+
+    const examOk = await request(app.getHttpServer()).post(
+      `/v1/exams/templates/${tpl!.id}/generate`,
+    );
+    expect([200, 201]).toContain(examOk.status);
+
+    asUser((await user("author")).id, "author");
+    const mediaStaff = await request(app.getHttpServer())
+      .post("/v1/content/media/presign")
+      .send({
+        filename: "x.png",
+        content_type: "image/png",
+        size_bytes: 12,
+      });
+    expect(mediaStaff.status).toBe(501);
+    expect(mediaStaff.body.message).toBe("stockage média non provisionné");
+  });
+
+  it("l'onboarding ne recommande pas un deck non publié", async () => {
+    const live = await graph({ premium: false, published: true });
+    const hidden = await graph({ premium: false, published: false });
+    const student = await user("student");
+    const result = await onboarding.submit({
+      userId: student.id,
+      body: {
+        faculty: "Oran",
+        study_year: 1,
+        experience_level: "beginner",
+        preferred_language: "fr",
+        module_interests: [live.module.id, hidden.module.id],
+        daily_goal_cards: 10,
+      },
+    });
+    const ids = result.recommended_decks.map((d) => d.deck_id);
+    expect(ids).toContain(live.deck.id);
+    expect(ids).not.toContain(hidden.deck.id);
   });
 });

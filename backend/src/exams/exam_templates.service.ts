@@ -10,17 +10,21 @@
 //     sur les événements. 0 = RAS, 1 = très suspect.
 //   * (Phase 14) detectMultiDevice() : signale les examens passés
 //     simultanément depuis plusieurs appareils (triche probable).
-import { Inject, Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException, BadRequestException, ForbiddenException } from '@nestjs/common';
 import { and, eq, inArray, sql } from 'drizzle-orm';
 import { DRIZZLE, Database } from '../db/database.module';
-import { examTemplates, examAttemptEvents, examQuestions, examAttempts, cards } from '../db/schema';
+import { examTemplates, examAttemptEvents, examQuestions, examAttempts, cards, decks } from '../db/schema';
+import { BillingService } from '../billing/billing.service';
 
 const TOLERANCE_SECONDS = 5;
 
 @Injectable()
 export class ExamTemplatesService {
 
-  constructor(@Inject(DRIZZLE) private readonly db: Database) {}
+  constructor(
+    @Inject(DRIZZLE) private readonly db: Database,
+    private readonly billing: BillingService,
+  ) {}
 
   /// GET /v1/exams/templates — liste filtrée.
   async listTemplates(args: {
@@ -50,19 +54,25 @@ export class ExamTemplatesService {
     if (!tpl) throw new NotFoundException('template inconnu');
     if (!tpl.isActive) throw new BadRequestException('template inactif');
 
-    // 1. Pioche aléatoire des cartes du module.
-    // Drizzle better-sqlite3 ne supporte pas `ORDER BY random()`
-    // portable. On fait un SELECT puis shuffle en mémoire.
-    const pool = tpl.moduleId
-      ? await this.db
-          .select({ id: cards.id })
-          .from(cards)
-          .where(and(eq(cards.deckId, tpl.moduleId), eq(cards.status, 'published')))
-      : await this.db
-          .select({ id: cards.id })
-          .from(cards)
-          .where(eq(cards.status, 'published'));
+    // 1. Pioche : cartes publiées du module (deck.module_id), pas
+    // deck_id = module_id (le template référence un module).
+    const publishedConds = [eq(cards.status, 'published')];
+    if (tpl.moduleId) publishedConds.push(eq(decks.moduleId, tpl.moduleId));
+    const published = await this.db
+      .select({
+        id: cards.id,
+        isPremium: cards.isPremium,
+        deckIsPremium: decks.isPremium,
+      })
+      .from(cards)
+      .innerJoin(decks, eq(decks.id, cards.deckId))
+      .where(and(...publishedConds));
+    const entitled = (await this.billing.currentEntitlement(args.userId)).isActive;
+    const pool = published.filter((c) => entitled || !(c.isPremium || c.deckIsPremium));
     if (pool.length < tpl.totalQuestions) {
+      if (!entitled && published.some((c) => c.isPremium || c.deckIsPremium)) {
+        throw new ForbiddenException('entitlement premium requis');
+      }
       throw new BadRequestException(
         `pool insuffisant : ${pool.length} cartes pour ${tpl.totalQuestions} demandées`,
       );

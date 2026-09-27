@@ -9,12 +9,15 @@
 //
 // Le niveau d'expérience est recalculé à chaque demande : il suit
 // naturellement la progression de l'étudiant (doc v2 §11.3).
-import { Inject, Injectable, Logger, NotFoundException } from '@nestjs/common';
-import { and, eq, sql } from 'drizzle-orm';
+import { ForbiddenException, Inject, Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { eq, sql } from 'drizzle-orm';
 import { DRIZZLE, Database } from '../../db/database.module';
-import { cards } from '../../db/schema/content';
+import { cards, decks } from '../../db/schema/content';
 import { reviewLogs, srsCardState } from '../../db/schema/srs';
 import { users } from '../../db/schema/users';
+import { BillingService } from '../../billing/billing.service';
+import { actorOf, decideCardRead } from '../../content/content-policy';
+import type { Role } from '../../rbac/roles';
 import { FSRS_MILLIS_PER_DAY } from '../../common/fsrs/fsrs.constants';
 import {
   ExperienceLevel,
@@ -55,7 +58,10 @@ const GENERIC_TAGS = new Set([
 export class HintsService {
   private readonly logger = new Logger(HintsService.name);
 
-  constructor(@Inject(DRIZZLE) private readonly db: Database) {}
+  constructor(
+    @Inject(DRIZZLE) private readonly db: Database,
+    private readonly billing: BillingService,
+  ) {}
 
   // ────────────────────────── Logique pure (testée unitairement) ──────────
 
@@ -160,6 +166,7 @@ export class HintsService {
   async getHintForCard(args: {
     userId: string;
     cardId: string;
+    role?: Role;
     langOverride?: HintLang;
     now?: Date;
   }): Promise<HintResponse> {
@@ -172,17 +179,35 @@ export class HintsService {
       .where(eq(users.id, args.userId));
     if (!user) throw new NotFoundException('user introuvable');
 
-    // 2. Carte : tags, hint éditorial, lien examen.
+    // 2. Carte : même politique que les lectures apprenant.
     const [card] = await this.db
       .select({
         id: cards.id,
         tags: cards.tags,
         difficultyHint: cards.difficultyHint,
         examQuestionId: cards.examQuestionId,
+        status: cards.status,
+        isPremium: cards.isPremium,
+        createdBy: cards.createdBy,
+        deckIsPremium: decks.isPremium,
       })
       .from(cards)
-      .where(and(eq(cards.id, args.cardId), eq(cards.status, 'published')));
+      .innerJoin(decks, eq(decks.id, cards.deckId))
+      .where(eq(cards.id, args.cardId));
     if (!card) throw new NotFoundException('carte introuvable');
+    const entitled = (await this.billing.currentEntitlement(args.userId)).isActive;
+    const access = decideCardRead(
+      actorOf(args.userId, args.role),
+      {
+        status: card.status,
+        isPremium: card.isPremium,
+        createdBy: card.createdBy,
+        deckIsPremium: card.deckIsPremium,
+      },
+      entitled,
+    );
+    if (access === 'not_found') throw new NotFoundException('carte introuvable');
+    if (access === 'forbidden') throw new ForbiddenException('entitlement premium requis');
 
     // 3. Profil d'expérience : agrégat global sur le journal de revues.
     const [agg] = await this.db

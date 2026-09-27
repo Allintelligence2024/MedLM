@@ -7,13 +7,14 @@
 import {
   BadRequestException,
   ForbiddenException,
+  HttpException,
+  HttpStatus,
   Inject,
   Injectable,
   Logger,
   NotFoundException,
 } from "@nestjs/common";
 import { and, desc, eq, gte, isNotNull, isNull } from "drizzle-orm";
-import { randomUUID } from "crypto";
 import { cards, cardReports, cardVersions, decks, modules } from "../db/schema";
 import { auditLog } from "../db/schema/billing";
 import { DRIZZLE, Database } from "../db/database.module";
@@ -525,23 +526,18 @@ export class ContentService {
     return { id: args.id, status: args.status };
   }
 
-  /// POST /content/media/presign — stub d'URL. Ce n'est PAS un stockage R2
-  /// réel (phase 5) et ce n'est PAS un canal de lecture apprenant.
-  async presignMedia(args: {
+  /// POST /content/media/presign — pas de R2 provisionné (phase 5).
+  /// On refuse plutôt que de renvoyer une URL publique fictive.
+  async presignMedia(_args: {
     userId: string;
     filename: string;
     content_type: string;
     size_bytes: number;
-  }) {
-    const key = `media/${args.userId}/${Date.now()}-${randomUUID().slice(0, 8)}-${args.filename}`;
-    const uploadUrl = `https://r2.example.com/${key}?X-Amz-Stub=1`;
-    const publicUrl = `https://media.medanki-dz.com/${key}`;
-    return {
-      key,
-      upload_url: uploadUrl,
-      public_url: publicUrl,
-      expires_in: 600,
-    };
+  }): Promise<never> {
+    throw new HttpException(
+      'stockage média non provisionné',
+      HttpStatus.NOT_IMPLEMENTED,
+    );
   }
 
   private async isEntitled(userId: string): Promise<boolean> {

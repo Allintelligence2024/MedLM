@@ -9,6 +9,7 @@
 //   18.6 voice tutoring     (TutorService — disclaimer obligatoire + audit) ✅
 import { Module } from '@nestjs/common';
 import { NotificationsModule } from '../notifications/notifications.module';
+import { BillingModule } from '../billing/billing.module';
 import { HintsService } from './hints/hints.service';
 import { HintsController } from './hints/hints.controller';
 import { LlmProviderFactory } from './llm/llm.factory';
@@ -25,7 +26,7 @@ import { TutorService } from './tutor/tutor.service';
 import { TutorController } from './tutor/tutor.controller';
 
 @Module({
-  imports: [NotificationsModule], // Phase 14 : FCM/APNs pour 18.5
+  imports: [NotificationsModule, BillingModule],
   providers: [
     HintsService,
     LlmProviderFactory,

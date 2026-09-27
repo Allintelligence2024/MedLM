@@ -36,10 +36,9 @@ export class DeckKeysService {
     private readonly billing: BillingService,
   ) {}
 
-  /// GET /v1/decks/:id/wrap-key?client_public_key=...&device_id=...
-  /// Wrap la clé de déchiffrement du deck pour l'appareil client.
-  /// Si aucune clé n'existe encore pour ce (deck, device), on en
-  /// génère une nouvelle.
+  /// GET /v1/decks/:id/wrap-key — délivre une clé AES aléatoire wrappée
+  /// RSA-OAEP pour (user, device, deck), après contrôle d'entitlement.
+  /// Cette clé n'est PAS la clé de chiffrement du JSON des cartes.
   async wrapKey(args: {
     userId: string;
     deckId: string;

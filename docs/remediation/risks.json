@@ -32,7 +32,7 @@
       "evidence": "ContentService.listDeckCards et handlers de lecture",
       "closure_criteria": "Tests HTTP student/free/premium/editor, filtrage publié et entitlement partout",
       "status": "closed",
-      "remediation": "Lectures apprenant limitées au publié ; 404 sur brouillon ; 403 premium sans entitlement ; CMS réservé au staff avec filtre propriétaire pour les auteurs ; wrap-key exige publication et entitlement.",
+      "remediation": "Lectures apprenant, hints, examens et wrap-key : publié + entitlement. CMS staff, auteur = ses cartes. Presign média : 501 sans URL fictive.",
       "verification": "PHASE_2.md ; test/unit/content_policy.test.ts ; test/integration/content-access.postgres.test.ts",
       "closure_scope": "Défaut de lecture non autorisée corrigé et testé. N'implique ni chiffrement des cartes, ni isolation multi-tenant du catalogue, ni GO production."
     },

@@ -1,8 +1,8 @@
 // DTOs pour l'échange de clés de deck (Phase 14).
 //
-// Conformité v2 §8.1 — chiffrement des decks premium téléchargés
-// pour offline. La clé AES-256-GCM (deckKey) est livrée au client
-// chiffrée en RSA-OAEP avec la clé publique de l'appareil.
+// Échange de clé AES wrappée RSA-OAEP pour un appareil autorisé.
+// Les cartes restent du JSON en clair (TLS) : cette clé n'enveloppe
+// pas un ciphertext de deck. Ne pas l'appeler chiffrement bout en bout.
 //
 // Pourquoi RSA-OAEP et pas RSA-PKCS1v1.5 : OAEP est plus sûr
 // contre les attaques à chiffré choisi (IND-CCA2). On utilise
