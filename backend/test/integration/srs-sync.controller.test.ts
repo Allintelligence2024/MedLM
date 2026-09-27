@@ -26,6 +26,9 @@ class FakeDb {
   async transaction<T>(fn: (tx: FakeDb) => Promise<T>): Promise<T> {
     return fn(this);
   }
+  async execute(): Promise<void> {
+    return undefined;
+  }
 
   /// Tableau augmenté des chaînes drizzle (orderBy/limit) — awaitable
   /// tel quel (le service fait parfois `await ...where(...)` sans

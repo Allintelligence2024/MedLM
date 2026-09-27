@@ -21,6 +21,7 @@ class FakeDb {
   events: any[] = [];
 
   transaction = async (fn: (tx: FakeDb) => Promise<unknown>) => fn(this);
+  execute = async () => undefined;
 
   select = (..._args: unknown[]): any => {
     const self = this;

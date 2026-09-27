@@ -51,6 +51,8 @@ cursors, séances. Pas d'endpoint HTTP public (trop dangereux) : service
 - Pas de MFA étudiant. R11 CMS 501. R10/R12/R13/R14 ouverts. Pas de GO.
 - Drizzle `onDelete: cascade` sur `review_logs` **ment** ; PostgreSQL 0027
   est RESTRICT. La source de vérité est SQL.
+- Un push SRS d'une carte inconnue : SAVEPOINT par événement, sinon
+  PostgreSQL abortait toute la transaction (le `catch` JS ne suffit pas).
 
 ## Preuves
 
