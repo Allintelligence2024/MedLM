@@ -29,7 +29,7 @@ cd "$(dirname "${BASH_SOURCE[0]}")/../../backend"
 PORT=3992
 B="http://127.0.0.1:$PORT"
 FAIL=0
-ko() { echo "  ❌ $1"; FAIL=$((FAIL+1)); }
+ko() { echo "  ❌ $1"; echo "::error::$1"; FAIL=$((FAIL+1)); }
 ok() { echo "  ✓ $1"; }
 
 MAGIC_FILE=/tmp/medanki-e2e-magic-link.html
@@ -224,4 +224,5 @@ head -c 400 /tmp/body.txt 2>/dev/null || true
 echo
 echo "--- /tmp/e2e2.log ---"
 tail -50 /tmp/e2e2.log 2>/dev/null || true
+echo "::error::parcours FAIL=$FAIL body=$(head -c 180 /tmp/body.txt 2>/dev/null) log=$(tail -c 300 /tmp/e2e2.log 2>/dev/null)"
 exit $FAIL
