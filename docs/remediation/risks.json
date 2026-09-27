@@ -90,23 +90,29 @@
       "id": "R07",
       "priority": "P1",
       "title": "Rotation refresh non atomique",
-      "evidence_level": "confirmed-static",
+      "evidence_level": "reproduced-service-and-guard",
       "scope": "checkout",
       "phase": 3,
-      "evidence": "AuthService.refresh SELECT puis UPDATE sans CAS",
+      "evidence": "UPDATE RETURNING atomique ; concurrence deux connexions PostgreSQL",
       "closure_criteria": "Test concurrent : un seul refresh accepté ; rejeu et révocation testés",
-      "status": "open"
+      "status": "closed",
+      "remediation": "CAS UPDATE WHERE revoked_at IS NULL ; rejeu révoque la famille ; plafond 3 appareils.",
+      "verification": "PHASE_3.md ; auth-refresh-concurrency.postgres.test.ts ; auth-mfa.postgres.test.ts",
+      "closure_scope": "Rotation refresh testée. Ne vaut pas qualification mobile multi-appareil ni GO."
     },
     {
       "id": "R08",
       "priority": "P0-if-deployed",
       "title": "MFA Drive incompatible RFC, absent du checkout",
-      "evidence_level": "confirmed-batch-and-independent-calculation",
-      "scope": "drive-batch-only",
+      "evidence_level": "reproduced-rfc-and-http",
+      "scope": "checkout",
       "phase": 3,
-      "evidence": "batch_P3: SHA1 simple, nowMs/30, secret brut ; aucun MFA dans checkout",
+      "evidence": "HMAC-SHA1 RFC 6238 t=59s=287082 ; Drive SHA1 simple=119679 rejeté en test",
       "closure_criteria": "Ne pas réintroduire ; MFA admin éprouvé, vecteurs RFC et récupération testés",
-      "status": "open"
+      "status": "closed",
+      "remediation": "TOTP admin obligatoire à l'émission de session, secret AES-GCM, backups atomiques, pas de bypass d'enrôlement une fois actif.",
+      "verification": "PHASE_3.md ; totp.test.ts ; auth-mfa.postgres.test.ts",
+      "closure_scope": "MFA admin du checkout seulement. Pas de MFA étudiant, pas de replace self-service, pas de GO."
     },
     {
       "id": "R09",
@@ -137,7 +143,7 @@
       "evidence_level": "confirmed-static",
       "scope": "checkout",
       "phase": 5,
-      "evidence": "apiFetch document.cookie côté serveur ; presignMedia stub",
+      "evidence": "Presign média toujours 501. Cookie CMS HttpOnly+CSRF livrés en phase 3 (voir PHASE_3.md) ; catalogue/upload R2 E2E absents.",
       "closure_criteria": "Catalogue authentifié E2E et upload signé réel ; HttpOnly et CSRF traités",
       "status": "open"
     },

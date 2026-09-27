@@ -29,7 +29,7 @@ import { resolveVerificationKey } from './jwt-config';
 export interface JwtPayload {
   sub: string; // userId
   did?: string; // deviceId
-  kind: 'access' | 'refresh' | 'entitlement';
+  kind: 'access' | 'refresh' | 'entitlement' | 'mfa_pending' | 'mfa_enroll';
   role?: 'student' | 'author' | 'medical_reviewer' | 'editor' | 'admin';
   iat?: number;
   exp?: number;

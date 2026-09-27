@@ -5,7 +5,7 @@ import { and, eq, isNull } from 'drizzle-orm';
 import { createHash, randomBytes } from 'crypto';
 import { DRIZZLE, Database } from '../db/database.module';
 import { authChallenges, users } from '../db/schema';
-import { TokenResponse } from './auth.dto';
+import { AuthSession } from './auth.service';
 import { AuthService } from './auth.service';
 
 export interface EmailSender {
@@ -47,7 +47,11 @@ export class MagicLinkService {
     return { sent: true };
   }
 
-  async verify(args: { token: string; platform: string }): Promise<TokenResponse> {
+  async verify(args: {
+    token: string;
+    platform: string;
+    deviceToken?: string;
+  }): Promise<AuthSession> {
     const tokenHash = createHash('sha256').update(args.token).digest('hex');
     const userId = await this.db.transaction(async (tx) => {
       const challenge = await tx
@@ -93,6 +97,6 @@ export class MagicLinkService {
       if (!user) throw new NotFoundException('utilisateur introuvable');
       return user.id;
     });
-    return this.auth.issueAccessFor(userId, args.platform);
+    return this.auth.issueAccessFor(userId, args.platform, args.deviceToken);
   }
 }

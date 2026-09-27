@@ -13,6 +13,7 @@
 
 import { useState } from 'react';
 import { X } from 'lucide-react';
+import { apiFetch } from '@/lib/api';
 
 /// Miroir de FACULTIES_DZ (backend/src/partnerships/faculties.ts).
 /// Le backend reste l'autorité : valeur inconnue → 400 explicite.
@@ -30,15 +31,11 @@ const FACULTIES = [
 ] as const;
 
 interface Props {
-  apiBaseUrl: string;
-  token: string;
   onClose: () => void;
   onCreated: () => void;
 }
 
 export function CreatePartnershipDialog({
-  apiBaseUrl,
-  token,
   onClose,
   onCreated,
 }: Props) {
@@ -68,17 +65,10 @@ export function CreatePartnershipDialog({
           ? { signed_at: new Date(`${signedAt}T00:00:00.000Z`).toISOString() }
           : {}),
       };
-      const res = await fetch(`${apiBaseUrl}/v1/partnerships`, {
+      await apiFetch('/v1/partnerships', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
         body: JSON.stringify(body),
       });
-      if (!res.ok) {
-        throw new Error(await readError(res));
-      }
       onCreated();
     } catch (e) {
       setError((e as Error).message);
@@ -209,18 +199,4 @@ export function CreatePartnershipDialog({
       </div>
     </div>
   );
-}
-
-/// Lit le corps d'erreur JSON NestJS ({ message: string | string[] })
-/// ou retombe sur le texte brut / le statut HTTP.
-async function readError(res: Response): Promise<string> {
-  const text = await res.text();
-  try {
-    const json = JSON.parse(text) as { message?: string | string[] };
-    if (Array.isArray(json.message)) return json.message.join(' ; ');
-    if (typeof json.message === 'string') return json.message;
-  } catch {
-    // pas du JSON — on garde le texte brut
-  }
-  return `HTTP ${res.status}${text ? ` — ${text}` : ''}`;
 }

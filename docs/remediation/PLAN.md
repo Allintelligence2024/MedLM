@@ -99,17 +99,19 @@ accès cross-user refusés selon la politique, audit et versions persistés.
 
 ### Phase 3 — Authentification et session admin (R07, R08)
 
-1. Rotation refresh atomique avec tests de concurrence et traitement du rejeu.
-2. Politique de cycle de vie des appareils et des jetons expirés.
-3. MFA admin : choisir une implémentation éprouvée ; vecteurs RFC 6238,
-   secondes/millisecondes, protection du secret au repos, consommation atomique
-   des backups et récupération protégée. Ne pas recopier l'implémentation Drive.
-4. Tests d'enrôlement/remplacement sans contournement, rate limiting et audit.
-5. Session CMS côté serveur via proxy et cookie HttpOnly/Secure/SameSite adapté ;
-   traiter CSRF et vérifier les rôles au backend, pas seulement présence du cookie.
+**Implémentation couverte ; voir [PHASE_3.md](PHASE_3.md).** R07 et R08 fermés
+pour leurs défauts précis. Session CMS HttpOnly+CSRF (item 5) livrée ; **R11
+(R2 / catalogue E2E) reste ouvert en phase 5.** Pas de GO.
 
-**Sortie :** flux de connexion/récupération/admin testés en HTTP ; un seul refresh
-concurrent accepté, aucun bypass MFA ; aucune clé/token dans les journaux.
+1. [x] Rotation refresh atomique avec tests de concurrence et traitement du rejeu.
+2. [x] Politique de cycle de vie des appareils et des jetons expirés (max 3, reuse, logout).
+3. [x] MFA admin RFC 6238 (HMAC-SHA1, 30 s, AES-GCM, backups atomiques). Pas le batch Drive.
+4. [x] Enrôlement sans contournement, rate limiting et audit. Remplacement self-service non livré.
+5. [x] Proxy CMS + cookie HttpOnly/Secure/SameSite + CSRF ; rôles via `/v1/auth/me`.
+
+**Sortie :** login magic-link / MFA admin HTTP ; un seul refresh concurrent
+accepté sur PostgreSQL réel ; pas de bypass MFA ; secrets TOTP absents des
+journaux applicatifs. Non-revendications phase 2 inchangées.
 
 ### Phase 4 — Données et infrastructures applicatives (R04, R05, R09)
 

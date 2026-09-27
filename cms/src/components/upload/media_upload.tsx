@@ -15,6 +15,7 @@
 
 import { useState, useRef } from 'react';
 import { Upload, X } from 'lucide-react';
+import { apiFetch } from '@/lib/api';
 
 export interface MediaItem {
   key: string;
@@ -24,33 +25,22 @@ export interface MediaItem {
 }
 
 interface Props {
-  apiBaseUrl: string;
-  authToken: string;
   onUploaded: (item: MediaItem) => void;
 }
 
-async function presign(apiBaseUrl: string, authToken: string, file: File) {
-  const res = await fetch(`${apiBaseUrl}/v1/media/presign`, {
+async function presign(file: File) {
+  return apiFetch<{
+    key: string;
+    upload_url: string;
+    public_url: string;
+  }>('/v1/content/media/presign', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${authToken}`,
-    },
     body: JSON.stringify({
       filename: file.name,
       content_type: file.type,
       size_bytes: file.size,
     }),
   });
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error(`presign ${res.status}: ${text}`);
-  }
-  return res.json() as Promise<{
-    key: string;
-    upload_url: string;
-    public_url: string;
-  }>;
 }
 
 async function uploadToR2(presigned: { upload_url: string }, file: File) {
@@ -71,7 +61,7 @@ function detectType(mime: string): 'image' | 'audio' | 'video' | null {
   return null;
 }
 
-export function MediaUpload({ apiBaseUrl, authToken, onUploaded }: Props) {
+export function MediaUpload({ onUploaded }: Props) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -89,7 +79,7 @@ export function MediaUpload({ apiBaseUrl, authToken, onUploaded }: Props) {
     }
     setBusy(true);
     try {
-      const ps = await presign(apiBaseUrl, authToken, file);
+      const ps = await presign(file);
       await uploadToR2(ps, file);
       onUploaded({
         key: ps.key,

@@ -1,4 +1,5 @@
 import {
+  All,
   Body,
   Controller,
   Headers,
@@ -31,14 +32,19 @@ export class MagicLinkController {
     return this.service.request({ email });
   }
 
-  /// GET /v1/auth/magic-link/verify?token=…  — vérifie et émet tokens.
-  @Post('verify')
+  /// GET|POST /v1/auth/magic-link/verify?token=… — vérifie et émet tokens.
+  @All('verify')
   @HttpCode(HttpStatus.OK)
   async verify(
     @Query() query: unknown,
     @Headers('X-Platform') platform: string,
+    @Headers('X-Device-Id') deviceId?: string,
   ) {
     const { token } = MagicLinkVerifyQuery.parse(query);
-    return this.service.verify({ token, platform: platform ?? 'web' });
+    return this.service.verify({
+      token,
+      platform: platform ?? 'web',
+      ...(deviceId ? { deviceToken: deviceId } : {}),
+    });
   }
 }

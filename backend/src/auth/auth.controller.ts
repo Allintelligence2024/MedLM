@@ -59,4 +59,11 @@ export class AuthController {
     const { refresh_token } = RefreshBody.parse(body);
     return this.service.refresh({ refreshToken: refresh_token, platform: platform ?? 'web' });
   }
+
+  @Post('logout')
+  @HttpCode(HttpStatus.OK)
+  async logout(@Body() body: unknown) {
+    const { refresh_token } = RefreshBody.parse(body);
+    return this.service.logout(refresh_token);
+  }
 }

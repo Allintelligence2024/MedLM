@@ -9,9 +9,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Handshake, PlusCircle } from 'lucide-react';
 import { CreatePartnershipDialog } from './create_partnership_dialog';
-import { getToken } from '@/lib/auth';
-
-const API = process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:3000';
+import { apiFetch } from '@/lib/api';
 
 type PartnershipStatus = 'draft' | 'active' | 'suspended' | 'terminated';
 
@@ -40,17 +38,11 @@ export default function PartnershipsPage() {
   const [filter, setFilter] = useState<string>('all');
   const [creating, setCreating] = useState(false);
 
-  const token = () => getToken();
-
   const load = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch(`${API}/v1/partnerships`, {
-        headers: { Authorization: `Bearer ${token()}` },
-      });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json();
+      const data = await apiFetch<{ items?: Partnership[] }>('/v1/partnerships');
       setItems((data.items ?? []) as Partnership[]);
     } catch (e) {
       setError((e as Error).message);
@@ -65,18 +57,10 @@ export default function PartnershipsPage() {
 
   async function transition(id: string, status: PartnershipStatus) {
     try {
-      const res = await fetch(`${API}/v1/partnerships/${id}/status`, {
+      await apiFetch(`/v1/partnerships/${id}/status`, {
         method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token()}`,
-        },
         body: JSON.stringify({ status }),
       });
-      if (!res.ok) {
-        const text = await res.text();
-        throw new Error(`HTTP ${res.status} — ${text}`);
-      }
       await load();
     } catch (e) {
       setError((e as Error).message);
@@ -134,8 +118,6 @@ export default function PartnershipsPage() {
 
       {creating && (
         <CreatePartnershipDialog
-          apiBaseUrl={API}
-          token={token()}
           onClose={() => setCreating(false)}
           onCreated={() => {
             setCreating(false);

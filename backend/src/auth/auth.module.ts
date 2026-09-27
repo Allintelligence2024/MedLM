@@ -5,6 +5,9 @@ import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
+import { AuthSessionController } from './auth-session.controller';
+import { MfaService } from './mfa.service';
+import { MfaController } from './mfa.controller';
 import { EMAIL_SENDER, MagicLinkService } from './magic-link.service';
 import { MagicLinkController } from './magic-link.controller';
 import { GoogleOAuthService } from './google-oauth.service';
@@ -38,6 +41,7 @@ import { buildJwtConfig } from './jwt-config';
   ],
   providers: [
     AuthService,
+    MfaService,
     MagicLinkService,
     GoogleOAuthService,
     // Token EMAIL_SENDER (pas la classe) : MagicLinkService injecte
@@ -46,9 +50,11 @@ import { buildJwtConfig } from './jwt-config';
   ],
   controllers: [
     AuthController,
+    AuthSessionController,
+    MfaController,
     MagicLinkController,
     GoogleOAuthController,
   ],
-  exports: [AuthService, JwtModule],
+  exports: [AuthService, MfaService, JwtModule],
 })
 export class AuthModule {}

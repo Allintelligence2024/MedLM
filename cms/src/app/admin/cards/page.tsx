@@ -2,15 +2,16 @@
 //
 // Phase 11 : on liste les cartes du backend. L'édition / création
 // sera branchée en Phase 11 bis.
-import { apiFetch, type CardSummary } from '@/lib/api';
+import { type CardSummary } from '@/lib/api';
+import { serverBackendFetch } from '@/lib/server-api';
 
 export default async function CardsAdminPage() {
-  // Note : on appelle le backend. Si l'auth échoue, on affiche un
-  // message clair (le CMS ne hardcode pas de token).
   let cards: CardSummary[] = [];
   let error: string | null = null;
   try {
-    const res = await apiFetch<{ items: CardSummary[] }>('/v1/content/cards/list?limit=50');
+    const res = await serverBackendFetch<{ items: CardSummary[] }>(
+      '/v1/content/cards/list?limit=50',
+    );
     cards = res.items;
   } catch (e) {
     error = (e as Error).message;
@@ -33,7 +34,7 @@ export default async function CardsAdminPage() {
           <p className="font-medium">Impossible de joindre le backend</p>
           <p className="text-sm mt-1">{error}</p>
           <p className="text-xs mt-2 text-amber-700">
-            Vérifier NEXT_PUBLIC_API_BASE_URL et que le backend NestJS tourne.
+            Vérifier API_BASE_URL (proxy CMS → Nest) et que le backend tourne.
           </p>
         </div>
       ) : (

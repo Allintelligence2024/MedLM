@@ -15,3 +15,4 @@ export * from './tenants';
 export * from './ai';
 export * from './partnerships';
 export * from './notifications';
+export * from './mfa';

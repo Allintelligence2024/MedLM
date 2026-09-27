@@ -8,7 +8,7 @@
 import { useEffect, useState } from 'react';
 import { WorkflowBoard } from '@/components/workflow/workflow_board';
 import type { CardStatus } from '@/lib/types';
-import { getToken } from '@/lib/auth';
+import { apiFetch } from '@/lib/api';
 
 interface Card {
   id: string;
@@ -18,8 +18,6 @@ interface Card {
   updatedAt: string;
 }
 
-const API = process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:3000';
-
 export default function WorkflowPage() {
   const [cards, setCards] = useState<Card[]>([]);
   const [loading, setLoading] = useState(true);
@@ -28,11 +26,9 @@ export default function WorkflowPage() {
   useEffect(() => {
     async function load() {
       try {
-        const res = await fetch(`${API}/v1/content/cards/list?limit=200`, {
-          headers: { Authorization: `Bearer ${getToken()}` },
-        });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = await res.json();
+        const data = await apiFetch<{ items?: Array<Record<string, string>> }>(
+          '/v1/content/cards/list?limit=200',
+        );
         const items = (data.items ?? []) as any[];
         setCards(
           items.map((c) => ({
@@ -54,18 +50,10 @@ export default function WorkflowPage() {
 
   async function onTransition(id: string, to: CardStatus) {
     try {
-      const res = await fetch(`${API}/v1/content/cards/${id}/transition`, {
+      await apiFetch(`/v1/content/cards/${id}/transition`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${getToken()}`,
-        },
         body: JSON.stringify({ to }),
       });
-      if (!res.ok) {
-        const text = await res.text();
-        throw new Error(`HTTP ${res.status}: ${text}`);
-      }
     } catch (e) {
       setError((e as Error).message);
     }

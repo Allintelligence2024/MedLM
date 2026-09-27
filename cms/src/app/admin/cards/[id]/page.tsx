@@ -17,9 +17,7 @@ import { MediaUpload, type MediaItem } from '@/components/upload/media_upload';
 import { evaluateChecklist, isReadyForApproval, failingFields } from '@/lib/checklist';
 import type { CardDetail } from '@/lib/types';
 import { Save, CheckCircle2, AlertCircle } from 'lucide-react';
-import { getToken } from '@/lib/auth';
-
-const API = process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:3000';
+import { apiFetch } from '@/lib/api';
 
 export default function CardEditPage() {
   const params = useParams<{ id: string }>();
@@ -40,11 +38,7 @@ export default function CardEditPage() {
   useEffect(() => {
     async function load() {
       try {
-        const res = await fetch(`${API}/v1/content/cards/${params.id}`, {
-          headers: { Authorization: `Bearer ${getToken()}` },
-        });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data: CardDetail = await res.json();
+        const data = await apiFetch<CardDetail>(`/v1/content/cards/${params.id}`);
         setCard(data);
         setFront({ fr: data.content.front_fr ?? '', en: data.content.front_en ?? '' });
         setBack({ fr: data.content.back_fr ?? '', en: data.content.back_en ?? '' });
@@ -106,18 +100,10 @@ export default function CardEditPage() {
         },
         tags: tags.split(',').map((t) => t.trim()).filter(Boolean),
       };
-      const res = await fetch(`${API}/v1/content/cards/${card.id}`, {
+      await apiFetch(`/v1/content/cards/${card.id}`, {
         method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${getToken()}`,
-        },
         body: JSON.stringify(body),
       });
-      if (!res.ok) {
-        const text = await res.text();
-        throw new Error(`HTTP ${res.status}: ${text}`);
-      }
       setSaved(true);
     } catch (e) {
       setError((e as Error).message);
@@ -133,18 +119,10 @@ export default function CardEditPage() {
       return;
     }
     try {
-      const res = await fetch(`${API}/v1/content/cards/${card.id}/transition`, {
+      await apiFetch(`/v1/content/cards/${card.id}/transition`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${getToken()}`,
-        },
         body: JSON.stringify({ to: status }),
       });
-      if (!res.ok) {
-        const text = await res.text();
-        throw new Error(`HTTP ${res.status}: ${text}`);
-      }
       router.push('/admin/workflow');
     } catch (e) {
       setError((e as Error).message);
@@ -221,8 +199,6 @@ export default function CardEditPage() {
       <section className="space-y-4">
         <h2 className="text-lg font-semibold">Médias</h2>
         <MediaUpload
-          apiBaseUrl={API}
-          authToken={getToken()}
           onUploaded={(item) => setMedia((prev) => [...prev, item])}
         />
         {media.length > 0 && (

@@ -169,6 +169,13 @@
       "when": 1790450000000,
       "tag": "0024_payment_fulfillment",
       "breakpoints": true
+    },
+    {
+      "idx": 24,
+      "version": "7",
+      "when": 1790451000000,
+      "tag": "0025_admin_mfa",
+      "breakpoints": true
     }
   ]
 }
