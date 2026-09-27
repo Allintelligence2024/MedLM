@@ -1,11 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { csrfAllowed } from '@/lib/csrf';
-import {
-  ACCESS_COOKIE,
-  applySessionCookies,
-  clearSessionCookies,
-  REFRESH_COOKIE,
-} from '@/lib/session-cookies';
+import { ACCESS_COOKIE } from '@/lib/session-cookies';
 
 const MUTATING = new Set(['POST', 'PUT', 'PATCH', 'DELETE']);
 
@@ -71,6 +66,3 @@ export async function PATCH(req: NextRequest, ctx: { params: { path: string[] } 
 export async function DELETE(req: NextRequest, ctx: { params: { path: string[] } }) {
   return proxy(req, ctx.params.path);
 }
-
-// Utilisé par /api/auth/refresh — pas un leak, les cookies restent HttpOnly.
-export { applySessionCookies, clearSessionCookies, REFRESH_COOKIE };
