@@ -50,11 +50,15 @@ serveur, cluster et providers réels restent des critères de phases ultérieure
 
 ### Phase 1 — Paiements et droits premium (R01, R06)
 
-**En cours — corrections locales livrées :** [lot 1](PHASE_1.md), puis [lot 2](PHASE_1_LOT_2.md).
-Dernière preuve : 549 tests unitaires, 93 intégration sans skip, dont concurrence
-PostgreSQL serveur et upgrade peuplé. Qualification Chargily réelle, Flutter/appareils,
-données historiques et mise en service du rapprochement restent bloquantes.
-Aucune clôture production déduite des mocks.
+**Implémentation et réception technique validées ; qualification Chargily bloquée.**
+Voir la [réception finale](PHASE_1_CLOSURE.md) et la CI verte sur `591cc00`.
+549 tests unitaires et 95 tests d'intégration locaux sans skip ; CI PostgreSQL 16,
+Flutter analyze/tests/interops RS256/APK, Docker backend et contrat Helm validés.
+Le propriétaire confirme l'absence de clients/paiements historiques réels.
+R01 et R06 sont fermés pour leurs défauts précis. **La réserve R15 reste ouverte :
+aucun accès sandbox ni mise en service du rapprochement qualifiée.** La clôture
+complète du paiement réel ne peut donc pas être déclarée. Les tests sur appareils
+et le parcours mobile de release complet restent en phase 6.
 
 1. Écrire des tests de régression métier sur Drizzle + moteur PostgreSQL.
 2. Séparer SKU commercial (`monthly/semester/yearly/group`) et droit (`premium`).

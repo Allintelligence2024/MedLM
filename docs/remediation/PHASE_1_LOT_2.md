@@ -1,5 +1,7 @@
 # Phase 1 — Deuxième lot : livraison et qualification restante
 
+> Bilan historique du lot 2. La validation Flutter/CI et le statut courant sont décrits dans [la réception finale](PHASE_1_CLOSURE.md).
+
 **26 septembre 2026 — corrections locales livrées ; phase non clôturée pour production.**
 Branche : `arena/01a0defd-medlm`. Aucun déploiement, paiement réel ni migration de production.
 Ce bilan remplace les travaux restants du [premier lot](PHASE_1.md), sans modifier ses preuves historiques.

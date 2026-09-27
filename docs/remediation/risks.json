@@ -17,9 +17,10 @@
       "phase": 1,
       "evidence": "SKU commerciaux incompatibles avec free/premium en SQL",
       "closure_criteria": "Quatre plans et promos créditent premium une seule fois, tests SQL et concurrence",
-      "status": "in_progress",
-      "remediation": "Mapping premium, contrat v2 explicite, réservations promo, cinq bénéficiaires groupe, rapprochement admin audité et CLI livrés. Tests SQL/HTTP/concurrence verts. Qualification sandbox, anciennes commandes et exploitation restent bloquantes.",
-      "verification": "PHASE_1_LOT_2.md ; phase1-lot2/unit.txt ; phase1-lot2/integration.txt ; phase1-lot2/source-manifest.json"
+      "status": "closed",
+      "remediation": "Attribution premium, contrat persistant, promotions réservées, groupe de cinq bénéficiaires, idempotence/concurrence et rapprochement audité testés sur PostgreSQL 16. CLI réelle testée dans son schéma.",
+      "verification": "PHASE_1_CLOSURE.md ; phase1-ci/final-run.json ; phase1-ci/source-manifest.json ; CI 36319139969",
+      "closure_scope": "Défaut précis corrigé et testé. Ne vaut pas qualification Chargily réelle ni GO production ; voir R15 et phases 2–6."
     },
     {
       "id": "R02",
@@ -74,9 +75,10 @@
       "phase": 1,
       "evidence": "EntitlementService.verify échoue sans PUBLIC_KEY_PATH malgré signature RS256",
       "closure_criteria": "Clé dérivée ou exigée, RS256 vérifié, HS256 rejeté ; appelants identifiés",
-      "status": "in_progress",
-      "remediation": "RS256 et claims vérifiés, dates abonnement/JWT séparées. Mobile : identité/appareil/kind, refresh avant cache, grâce plafonnée à exp, ancien cache Drift fail-closed. Tests backend verts ; tests Flutter ajoutés mais non exécutables ici.",
-      "verification": "PHASE_1_LOT_2.md ; phase1-lot2/unit.txt ; mobile/test/data/rest_entitlement_repository_test.dart (NON EXECUTE)"
+      "status": "closed",
+      "remediation": "Clé publique dérivée/configurée, RS256 strict et claims vérifiés. Expiration abonnement/JWT distincte, liaison utilisateur/appareil et cache fail-closed. Interop émetteur Nest réel → vérificateur Dart réel et APK debug validés en CI.",
+      "verification": "PHASE_1_CLOSURE.md ; phase1-ci/final-run.json ; phase1-ci/source-manifest.json ; CI 36319139969",
+      "closure_scope": "Défaut précis corrigé et testé. Ne vaut pas qualification Chargily réelle ni GO production ; voir R15 et phases 2–6."
     },
     {
       "id": "R07",
@@ -148,12 +150,13 @@
       "id": "R13",
       "priority": "P1",
       "title": "Mobile non qualifié, documentation généré fausse",
-      "evidence_level": "confirmed-static-not-built",
+      "evidence_level": "ci-built-not-device-qualified",
       "scope": "checkout",
       "phase": 6,
-      "evidence": "g.dart absent, Flutter non exécuté dans sandbox",
+      "evidence": "CI 36319139969 : génération Drift, Flutter analyze/tests et APK debug réussis. Qualification physique et parcours offline complet encore absents.",
       "closure_criteria": "Build CI/appareil, génération déterministe et parcours hors ligne complet",
-      "status": "open"
+      "status": "in_progress",
+      "verification": "PHASE_1_CLOSURE.md ; phase1-ci/final-run.json"
     },
     {
       "id": "R14",
@@ -165,6 +168,18 @@
       "evidence": "ML synthétique, disclaimers != sûreté, allow-list != partenariats",
       "closure_criteria": "Reformuler et fournir validation adéquate avant toute promesse",
       "status": "open"
+    },
+    {
+      "id": "R15",
+      "priority": "P0",
+      "title": "Qualification Chargily externe et exploitation du rapprochement non réalisées",
+      "evidence_level": "confirmed-environment-blocker",
+      "scope": "checkout",
+      "phase": 1,
+      "evidence": "Propriétaire : aucun accès sandbox disponible. Contrat HTTP testé avec réponses substituées. CronJob/alertes fournis mais non déployés.",
+      "closure_criteria": "Paiement sandbox au montant affiché attendu, frais/metadata/HMAC vérifiés, reprise après réponse perdue, cinq bénéficiaires, promotions, job et alertes observés en staging ; validation des choix commerciaux.",
+      "status": "blocked",
+      "verification": "PHASE_1_CLOSURE.md ; aucune preuve sandbox déclarée"
     }
   ],
   "excluded_claims": [
