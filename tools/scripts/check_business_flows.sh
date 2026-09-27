@@ -138,14 +138,7 @@ C=$(code -X POST -H "Authorization: Bearer $AT" -H 'Content-Type: application/js
 # review_logs_card_id_fkey (0027) et n'exerce pas le journal.
 CARD_ID=$(psql "$DATABASE_URL" -tAc "SELECT id FROM cards WHERE status = 'published' LIMIT 1" | tr -d '[:space:]')
 [[ -n "$CARD_ID" ]] || { ko "aucune carte published pour le push SRS"; exit 1; }
-EV=$(python3 -c "
-import json,uuid,time
-print(json.dumps({'events':[{
-  'id': str(uuid.uuid4()), 'card_id': '$CARD_ID',
-  'user_id': '$UID_', 'device_id': 'device-e2e-0001',
-  'rating': 3, 'reviewed_at': int(time.time()*1000),
-  'duration_ms': 1500, 'card_type': 'basic', 'exam_mode': False,
-}]}))"))
+EV=$(CARD_ID="$CARD_ID" UID_="$UID_" python3 -c 'import json, os, time, uuid; print(json.dumps({"events":[{"id": str(uuid.uuid4()), "card_id": os.environ["CARD_ID"], "user_id": os.environ["UID_"], "device_id": "device-e2e-0001", "rating": 3, "reviewed_at": int(time.time()*1000), "duration_ms": 1500, "card_type": "basic", "exam_mode": False}]}))')
 C=$(code -X POST -H "Authorization: Bearer $AT" -H 'Content-Type: application/json' \
   -H 'X-Device-Id: device-e2e-0001' -d "$EV" "$B/v1/srs-sync/push")
 [[ "$C" == "200" || "$C" == "201" ]] && ok "srs push 1 événement → $C" || ko "srs push réel → $C : $(head -c 250 /tmp/body.txt)"
