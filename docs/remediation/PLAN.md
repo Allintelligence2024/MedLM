@@ -115,14 +115,15 @@ journaux applicatifs. Non-revendications phase 2 inchangées.
 
 ### Phase 4 — Données et infrastructures applicatives (R04, R05, R09)
 
-1. Ajouter des migrations pour les FK réellement manquantes après inventaire
-   table/colonne ; détecter les orphelins avant ajout, définir réparation/backfill.
-2. Définir effacement/anonymisation et rétention compatibles avec append-only.
-   Ne pas activer naïvement des cascades qui cassent les triggers.
-3. Connecter Redis avant construction du budget partagé ; cycle de vie/fermeture,
-   panne et reconnexion testés. Choisir explicitement fail-open/fail-closed des quotas.
-4. Brancher le tracing et prouver réception d'une trace sans données sensibles.
-5. Supprimer, documenter ou connecter i18n/CDN/router de réplica inutilisés.
+**Implémentation couverte ; voir [PHASE_4.md](PHASE_4.md).** R04, R05, R09
+fermés pour leurs défauts précis. CDN / `ReadReplicaRouter` documentés
+inutilisés (pas fake-wire). Pas de GO.
+
+1. [x] Migrations FK nominatives après inventaire ; orphelins avant ADD ; backfill NULL/DELETE.
+2. [x] Effacement = anonymisation, RESTRICT sur journaux append-only, pas de CASCADE naïf.
+3. [x] `connect()` Redis avant DI budget ; fail-open/fail-closed explicite ; `close()` shutdown.
+4. [x] Tracing HTTP (`x-trace-id`) + redaction ; i18n magic-link branché.
+5. [x] CDN headers et `ReadReplicaRouter` documentés inutilisés (`DRIZZLE_READ` à la place).
 
 **Sortie :** contrat SQL nominatif (pas seulement un nombre minimal de FK), migrations
 sur base neuve et existante, scénario d'effacement testé, budget cohérent sur deux

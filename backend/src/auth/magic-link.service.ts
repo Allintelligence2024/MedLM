@@ -7,6 +7,7 @@ import { DRIZZLE, Database } from '../db/database.module';
 import { authChallenges, users } from '../db/schema';
 import { AuthSession } from './auth.service';
 import { AuthService } from './auth.service';
+import { DEFAULT_LANG, I18n, isSupported, type Lang } from '../i18n/i18n';
 
 export interface EmailSender {
   send(args: { to: string; subject: string; html: string }): Promise<void>;
@@ -38,6 +39,7 @@ export class MagicLinkService {
     private readonly config: ConfigService,
     @Inject(EMAIL_SENDER) private readonly email: EmailSender,
     private readonly auth: AuthService,
+    private readonly i18n: I18n,
   ) {}
 
   async request(args: { email: string; platform?: string }): Promise<{ sent: true }> {
@@ -57,13 +59,20 @@ export class MagicLinkService {
       appBase: this.config.get<string>('MAGIC_LINK_BASE_URL') ?? 'https://medanki.dz',
       ...(cmsBase ? { cmsBase } : {}),
     });
+    const existing = await this.db
+      .select({ langPref: users.langPref })
+      .from(users)
+      .where(eq(users.email, email))
+      .then((rows) => rows[0]);
+    const lang: Lang =
+      existing && isSupported(existing.langPref) ? existing.langPref : DEFAULT_LANG;
+    const subject = this.i18n.t(lang, 'auth.magic_link.subject');
+    const body = this.i18n.t(lang, 'auth.magic_link.body', { url });
     // Même réponse pour toute adresse : pas d'énumération de comptes.
     await this.email.send({
       to: email,
-      subject: 'Votre lien de connexion MedAnki DZ',
-      html: `<p>Cliquez sur le lien suivant pour vous connecter :</p>
-<p><a href="${url}">${url}</a></p>
-<p>Ce lien expire dans 15 minutes et ne peut être utilisé qu'une fois.</p>`,
+      subject,
+      html: `<p>${body}</p><p><a href="${url}">${url}</a></p>`,
     });
     return { sent: true };
   }

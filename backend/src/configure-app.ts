@@ -11,6 +11,7 @@ import { MetricsService } from './observability/metrics.service';
 import { HttpMetricsInterceptor } from './observability/metrics.interceptor';
 import { SentryService } from './observability/sentry.service';
 import { ZodExceptionFilter } from './common/zod-exception.filter';
+import { TracingService } from './observability/tracing.service';
 
 /// Configuration HTTP commune à bootstrap() ET aux tests (routing,
 /// srs-sync) — extraite pour qu'aucune dérive ne puisse réintroduire
@@ -24,6 +25,7 @@ import { ZodExceptionFilter } from './common/zod-exception.filter';
 /// test/integration/routing.test.ts.
 export function configureApp(app: INestApplication): void {
   app.use(helmet());
+  app.use(app.get(TracingService).middleware());
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
   // ZodError brute → 400 (et non 500) — voir zod-exception.filter.ts.
   app.useGlobalFilters(new ZodExceptionFilter());

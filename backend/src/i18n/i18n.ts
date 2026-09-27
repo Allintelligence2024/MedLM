@@ -46,6 +46,8 @@ export interface Messages {
 export const DEFAULT_CATALOG: Messages = {
   fr: {
     'auth.login.success': 'Connexion réussie',
+    'auth.magic_link.subject': 'Votre lien de connexion MedAnki DZ',
+    'auth.magic_link.body': 'Cliquez pour vous connecter : {url}',
     'auth.login.invalid_credentials': 'Email ou mot de passe incorrect',
     'auth.signup.email_taken': 'Cet email est déjà utilisé',
     'billing.checkout.created': 'Checkout créé avec succès',
@@ -86,6 +88,8 @@ export const DEFAULT_CATALOG: Messages = {
   },
   ar: {
     'auth.login.success': 'تم تسجيل الدخول بنجاح',
+    'auth.magic_link.subject': 'رابط تسجيل الدخول MedAnki DZ',
+    'auth.magic_link.body': 'انقر لتسجيل الدخول: {url}',
     'auth.login.invalid_credentials': 'البريد الإلكتروني أو كلمة المرور غير صحيحة',
     'auth.signup.email_taken': 'هذا البريد الإلكتروني مستخدم بالفعل',
     'billing.checkout.created': 'تم إنشاء الدفع بنجاح',
@@ -123,6 +127,8 @@ export const DEFAULT_CATALOG: Messages = {
   },
   en: {
     'auth.login.success': 'Login successful',
+    'auth.magic_link.subject': 'Your MedAnki DZ sign-in link',
+    'auth.magic_link.body': 'Click to sign in: {url}',
     'auth.login.invalid_credentials': 'Invalid email or password',
     'auth.signup.email_taken': 'This email is already in use',
     'billing.checkout.created': 'Checkout created successfully',

@@ -1,23 +1,31 @@
-// CacheModule — Phase 18.
-//
-// Expose `RedisCache` comme provider injectable. En production,
-// configuré avec REDIS_URL. En dev/test, mode no-op mémoire.
-//
-// À câbler dans `app.module.ts` et utiliser dans StatsService,
-// LeaderboardService, JwtGuard (rate limiting), etc.
-import { Global, Module } from '@nestjs/common';
+// CacheModule — Redis connecté AVANT injection du budget gateway (R04).
+import { Global, Inject, Injectable, Module, OnModuleDestroy } from '@nestjs/common';
 import { RedisCache } from './redis-cache';
+
+export const REDIS_CACHE = RedisCache;
+
+async function buildRedisCache(): Promise<RedisCache> {
+  const cache = new RedisCache(process.env.REDIS_URL, {
+    defaultTtlSeconds: 60,
+    keyPrefix: 'medanki:',
+  });
+  await cache.connect();
+  return cache;
+}
+
+@Injectable()
+class RedisCacheShutdown implements OnModuleDestroy {
+  constructor(@Inject(RedisCache) private readonly cache: RedisCache) {}
+  async onModuleDestroy(): Promise<void> {
+    await this.cache.close();
+  }
+}
 
 @Global()
 @Module({
   providers: [
-    {
-      provide: RedisCache,
-      useFactory: () => new RedisCache(process.env.REDIS_URL, {
-        defaultTtlSeconds: 60,
-        keyPrefix: 'medanki:',
-      }),
-    },
+    { provide: RedisCache, useFactory: buildRedisCache },
+    RedisCacheShutdown,
   ],
   exports: [RedisCache],
 })

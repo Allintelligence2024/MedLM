@@ -5,11 +5,7 @@ import { GatewayService } from './gateway.service';
 import { REST_BACKEND, LoopbackRestBackend } from './rest-backend.port';
 import { RedisCache } from '../cache/redis-cache';
 import { COST_BUDGET_STORE } from './cost-budget.tokens';
-import {
-  InMemoryCostBudgetStore,
-  RedisCostBudgetStore,
-  type CostBudgetStore,
-} from './cost-budget.store';
+import { selectCostBudgetStore, type CostBudgetStore } from './cost-budget.store';
 
 @Module({
   controllers: [GatewayController],
@@ -28,9 +24,13 @@ import {
       provide: COST_BUDGET_STORE,
       inject: [RedisCache],
       useFactory: (cache: RedisCache): CostBudgetStore =>
-        cache.client
-          ? new RedisCostBudgetStore(cache.client)
-          : new InMemoryCostBudgetStore(),
+        selectCostBudgetStore({
+          client: cache.client,
+          failMode:
+            process.env.GATEWAY_BUDGET_ON_REDIS_ERROR === 'fail-closed'
+              ? 'fail-closed'
+              : 'fail-open',
+        }),
     },
   ],
 })

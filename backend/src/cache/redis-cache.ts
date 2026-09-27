@@ -68,53 +68,48 @@ export class RedisCache {
   /// down, on log et on continue (mode dégradé). NE LANCE JAMAIS.
   async connect(): Promise<void> {
     if (!this.url || this.options.forceNoop) {
-      // Mode dev / test : pas de Redis, on utilise un Map mémoire.
       this.connected = false;
       return;
     }
     try {
-      // Import dynamique d'ioredis — chargé uniquement quand
-      // REDIS_URL est configuré (économie mémoire en dev).
-      const RedisModule = await import('ioredis' as string).catch(() => null);
-      if (!RedisModule) {
-        // ioredis non installé : fallback mémoire.
-        this.connected = false;
-        return;
-      }
-      const Redis = (RedisModule as any).default ?? RedisModule;
-      const client = new Redis(this.url, {
-        maxRetriesPerRequest: 2,
+      const RedisModule = await import('ioredis');
+      const RedisCtor = (RedisModule as { default?: unknown }).default ?? RedisModule;
+      const client = new (RedisCtor as new (
+        url: string,
+        opts: Record<string, unknown>,
+      ) => RedisLike)(this.url, {
+        maxRetriesPerRequest: 1,
         enableReadyCheck: true,
+        enableOfflineQueue: false,
         lazyConnect: true,
-        // Reconnect intelligent.
-        retryStrategy: (times: number) => Math.min(times * 200, 2000),
-      }) as RedisLike;
-      // Tentative de connexion.
+        connectTimeout: 1500,
+        retryStrategy: (times: number) => (times > 2 ? null : Math.min(times * 200, 2000)),
+      });
+      // Le client est gardé même si le ping initial échoue : le budget
+      // gateway peut alors choisir fail-open / fail-closed, au lieu de
+      // rester coincé sur une Map d'instance.
+      this.redis = client;
       try {
+        const connectable = client as RedisLike & { connect?: () => Promise<void> };
+        if (typeof connectable.connect === 'function') {
+          await connectable.connect();
+        }
         await client.get('__medanki_healthcheck__');
-        this.redis = client;
         this.connected = true;
       } catch {
-        // Redis injoignable : fallback mémoire.
         this.connected = false;
         this.stats.errors++;
       }
     } catch {
-      // L'exception n'est pas propagée volontairement : Redis est un
-      // cache best-effort — on bascule en mémoire locale.
       this.connected = false;
       this.stats.errors++;
     }
   }
 
-  /// Client Redis brut, ou `null` en mode dégradé/mémoire.
-  ///
-  /// Exposé pour les usages qui ne sont PAS du cache : le budget de
-  /// coût du gateway a besoin de compteurs atomiques partagés
-  /// (audit P2-2) et réutilise cette connexion plutôt que d'en ouvrir
-  /// une seconde.
+  /// Client ioredis si REDIS_URL a été fourni, même avant le premier ping.
+  /// `null` uniquement en mode mémoire (pas d'URL / forceNoop).
   get client(): RedisLike | null {
-    return this.connected ? this.redis : null;
+    return this.redis;
   }
 
   async get<T>(key: string): Promise<T | null> {

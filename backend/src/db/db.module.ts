@@ -1,5 +1,10 @@
 // DbModule — Phase 18.
 //
+// `ReadReplicaRouter` est fourni mais AUCUN service ne l'injecte (R09).
+// Les lectures répliquées passent par `DRIZZLE_READ` (database.module).
+// Conservé pour ne pas casser les tests unitaires du routeur ; ne pas
+// fake-wire sur le chemin HTTP.
+//
 // Expose `ReadReplicaRouter` comme provider injectable. Configuré
 // à partir des variables d'environnement (DATABASE_URL primary,
 // DATABASE_READ_REPLICA_URLS comma-separated).

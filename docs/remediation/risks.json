@@ -57,9 +57,12 @@
       "evidence_level": "confirmed-static",
       "scope": "checkout",
       "phase": 4,
-      "evidence": "CacheModule et GatewayModule",
+      "evidence": "connect() avant factory budget ; FakeRedis deux pods ; fail-open/fail-closed",
       "closure_criteria": "Connexion avant DI budget, deux instances et panne testées",
-      "status": "open"
+      "status": "closed",
+      "remediation": "CacheModule await connect() ; client ioredis conservé si ping KO ; GATEWAY_BUDGET_ON_REDIS_ERROR fail-open|fail-closed ; close() au shutdown.",
+      "verification": "PHASE_4.md ; cost_budget_store.test.ts ; redis_cache.test.ts",
+      "closure_scope": "Budget partagé dès REDIS_URL. CI sans Redis réel. Ne vaut pas qualification prod ni GO."
     },
     {
       "id": "R05",
@@ -68,9 +71,12 @@
       "evidence_level": "reproduced-sql",
       "scope": "checkout",
       "phase": 4,
-      "evidence": "46 references Drizzle, 31 FK dans catalogue PGlite",
+      "evidence": "REQUIRED_FOREIGN_KEYS + 0027_missing_fkeys ; RESTRICT review_logs",
       "closure_criteria": "Contrat nominatif et migrations/backfill/effacement testés",
-      "status": "open"
+      "status": "closed",
+      "remediation": "Inventaire nominatif ; orphelins avant ADD ; RESTRICT sur journaux ; ErasureService anonymise, ne DELETE pas users.",
+      "verification": "PHASE_4.md ; postgres-contract.test.ts ; erasure.postgres.test.ts ; fk-inventory.ts",
+      "closure_scope": "FK du contrat présentes en PGlite. Base sale avec review_logs orphelins échoue fort. Pas de GO."
     },
     {
       "id": "R06",
@@ -121,9 +127,12 @@
       "evidence_level": "confirmed-static",
       "scope": "checkout",
       "phase": 4,
-      "evidence": "TracingService middleware, I18n, CDN, router health",
+      "evidence": "configureApp tracing + x-trace-id ; i18n magic-link ; CDN/router documentés inutilisés",
       "closure_criteria": "Brancher et vérifier, ou retirer les promesses et le code inutile",
-      "status": "open"
+      "status": "closed",
+      "remediation": "Middleware tracing + redaction ; magic-link i18n ; CDN et ReadReplicaRouter documentés non branchés (DRIZZLE_READ).",
+      "verification": "PHASE_4.md ; tracing.test.ts ; routing.test.ts ; i18n.test.ts",
+      "closure_scope": "Observabilité HTTP exercée sans secrets. Pas d'OTLP réel en CI. Pas de GO."
     },
     {
       "id": "R10",

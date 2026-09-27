@@ -69,5 +69,13 @@ describe('RedisCache — mode prod (URL fournie)', () => {
     const cache = new RedisCache(undefined);
     await cache.connect();
     expect(cache.isConnected()).toBe(false);
+    expect(cache.client).toBeNull();
+  });
+
+  it('forceNoop n ouvre pas de client meme avec une URL', async () => {
+    const cache = new RedisCache('redis://127.0.0.1:1', { forceNoop: true });
+    await cache.connect();
+    expect(cache.client).toBeNull();
+    expect(cache.isConnected()).toBe(false);
   });
 });
