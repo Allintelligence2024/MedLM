@@ -1,6 +1,7 @@
 # Phase 4 — Données et infrastructures applicatives (R04, R05, R09)
 
-Date : 2026-09-27. Branche : `arena/01a0defd-medlm`.
+Date : 2026-09-27. Branche : `arena/01a0defd-medlm` (`3ce4b9f`).
+CI **36333681319** verte (parcours métier inclus).
 Décision inchangée : **NO-GO production**. Pas de déploiement, pas de Chargily.
 
 ## Ce qui est fermé ici
@@ -64,3 +65,4 @@ cursors, séances. Pas d'endpoint HTTP public (trop dangereux) : service
 - `backend/test/integration/erasure.postgres.test.ts`
 - `backend/src/db/fk-inventory.ts`
 - migration `0027_missing_fkeys.sql`
+- CI `36333681319` (parcours réel : magic-link, SRS push d'une carte seed, refresh)
