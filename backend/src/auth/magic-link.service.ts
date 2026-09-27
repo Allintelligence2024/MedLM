@@ -15,6 +15,22 @@ export interface EmailSender {
 export const EMAIL_SENDER = Symbol('EMAIL_SENDER');
 const CHALLENGE_TTL_MS = 15 * 60 * 1000;
 
+/// Construit l'URL cliquable. Le CMS n'écoute pas `/auth/magic`.
+export function magicLinkHref(args: {
+  token: string;
+  platform: string;
+  appBase: string;
+  cmsBase?: string;
+}): string {
+  const token = encodeURIComponent(args.token);
+  if (args.platform === 'cms') {
+    const base = (args.cmsBase || args.appBase).replace(/\/$/, '');
+    return `${base}/admin/login?token=${token}`;
+  }
+  const base = args.appBase.replace(/\/$/, '');
+  return `${base}/auth/magic?token=${token}`;
+}
+
 @Injectable()
 export class MagicLinkService {
   constructor(
@@ -24,7 +40,7 @@ export class MagicLinkService {
     private readonly auth: AuthService,
   ) {}
 
-  async request(args: { email: string }): Promise<{ sent: true }> {
+  async request(args: { email: string; platform?: string }): Promise<{ sent: true }> {
     const email = args.email.trim().toLowerCase();
     const token = randomBytes(32).toString('base64url');
     const tokenHash = createHash('sha256').update(token).digest('hex');
@@ -34,8 +50,13 @@ export class MagicLinkService {
       expiresAt: new Date(Date.now() + CHALLENGE_TTL_MS),
     });
 
-    const base = this.config.get<string>('MAGIC_LINK_BASE_URL') ?? 'https://medanki.dz';
-    const url = `${base}/auth/magic?token=${encodeURIComponent(token)}`;
+    const cmsBase = this.config.get<string>('MAGIC_LINK_CMS_URL');
+    const url = magicLinkHref({
+      token,
+      platform: args.platform ?? 'web',
+      appBase: this.config.get<string>('MAGIC_LINK_BASE_URL') ?? 'https://medanki.dz',
+      ...(cmsBase ? { cmsBase } : {}),
+    });
     // Même réponse pour toute adresse : pas d'énumération de comptes.
     await this.email.send({
       to: email,

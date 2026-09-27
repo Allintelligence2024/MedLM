@@ -23,6 +23,11 @@ export function SessionMenu() {
           {role}
         </span>
       )}
+      {role === 'admin' && (
+        <a href="/admin/security" className="text-slate-600 hover:text-slate-900">
+          Sécurité
+        </a>
+      )}
       <button
         type="button"
         onClick={() => {

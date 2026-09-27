@@ -9,7 +9,7 @@ import {
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { createCipheriv, createDecipheriv, createHash, randomBytes } from 'node:crypto';
-import { and, eq, isNull } from 'drizzle-orm';
+import { and, eq, isNull, sql } from 'drizzle-orm';
 import { DRIZZLE, Database } from '../db/database.module';
 import { adminMfa, adminMfaBackupCodes, users } from '../db/schema';
 import { auditLog } from '../db/schema/billing';
@@ -143,6 +143,100 @@ export class MfaService {
     return { userId: user.sub };
   }
 
+  /// Rotation TOTP : l'ancien secret reste actif jusqu'à confirmation.
+  async beginReplace(args: {
+    userId: string;
+    currentCode: string;
+  }): Promise<{ otpauth_url: string; secret_base32: string }> {
+    const row = await this.load(args.userId);
+    if (!row?.enabled) throw new ForbiddenException('MFA inactif');
+    const secret = this.open(row);
+    const check = verifyTotp({
+      secret,
+      code: args.currentCode,
+      nowMs: Date.now(),
+      lastCounter: row.lastCounter != null ? BigInt(row.lastCounter) : null,
+    });
+    if (!check.ok) throw new UnauthorizedException('code TOTP invalide');
+    const next = generateSecret();
+    const sealed = this.seal(next);
+    const email = await this.emailOf(args.userId);
+    await this.db
+      .update(adminMfa)
+      .set({
+        lastCounter: check.counter,
+        pendingCiphertext: sealed.ciphertext,
+        pendingIv: sealed.iv,
+        pendingTag: sealed.tag,
+        pendingCreatedAt: new Date(),
+      })
+      .where(eq(adminMfa.userId, args.userId));
+    await this.audit(args.userId, 'mfa.replace_begin', {});
+    return {
+      otpauth_url: otpauthUrl({ email, secret: next }),
+      secret_base32: base32Encode(next),
+    };
+  }
+
+  async confirmReplace(args: {
+    userId: string;
+    newCode: string;
+  }): Promise<{ backup_codes: string[] }> {
+    const row = await this.load(args.userId);
+    if (!row?.enabled) throw new ForbiddenException('MFA inactif');
+    const pendingCiphertext = row.pendingCiphertext;
+    const pendingIv = row.pendingIv;
+    const pendingTag = row.pendingTag;
+    const pendingCreatedAt = row.pendingCreatedAt;
+    if (!pendingCiphertext || !pendingIv || !pendingTag || !pendingCreatedAt) {
+      throw new UnauthorizedException('aucun remplacement en cours');
+    }
+    const ageMs = Date.now() - pendingCreatedAt.getTime();
+    if (ageMs > 10 * 60 * 1000) {
+      throw new UnauthorizedException('remplacement expiré');
+    }
+    const pending = this.open({
+      secretCiphertext: pendingCiphertext,
+      secretIv: pendingIv,
+      secretTag: pendingTag,
+    });
+    const check = verifyTotp({ secret: pending, code: args.newCode, nowMs: Date.now() });
+    if (!check.ok) throw new UnauthorizedException('nouveau code TOTP invalide');
+    const backups = this.generateBackupCodes();
+    await this.db.transaction(async (tx) => {
+      await tx
+        .update(adminMfa)
+        .set({
+          secretCiphertext: pendingCiphertext,
+          secretIv: pendingIv,
+          secretTag: pendingTag,
+          lastCounter: check.counter,
+          pendingCiphertext: sql`NULL`,
+          pendingIv: sql`NULL`,
+          pendingTag: sql`NULL`,
+          pendingCreatedAt: sql`NULL`,
+          confirmedAt: new Date(),
+          enabled: true,
+        })
+        .where(eq(adminMfa.userId, args.userId));
+      await tx.delete(adminMfaBackupCodes).where(eq(adminMfaBackupCodes.userId, args.userId));
+      await tx.insert(adminMfaBackupCodes).values(
+        backups.map((code) => ({
+          userId: args.userId,
+          codeHash: this.hashBackup(code),
+        })),
+      );
+      await tx.insert(auditLog).values({
+        actorUserId: args.userId,
+        action: 'mfa.replace_confirm',
+        targetType: 'user',
+        targetId: args.userId,
+        metadata: {},
+      });
+    });
+    return { backup_codes: backups };
+  }
+
   private async consumeBackup(userId: string, code: string): Promise<void> {
     const hash = this.hashBackup(code.trim());
     const consumed = await this.db
@@ -191,6 +285,16 @@ export class MfaService {
       .from(adminMfa)
       .where(eq(adminMfa.userId, userId))
       .then((rows) => rows[0]);
+  }
+
+  private async emailOf(userId: string): Promise<string> {
+    const row = await this.db
+      .select({ email: users.email })
+      .from(users)
+      .where(eq(users.id, userId))
+      .then((rows) => rows[0]);
+    if (!row) throw new UnauthorizedException('utilisateur inconnu');
+    return row.email;
   }
 
   private kek(): Buffer {

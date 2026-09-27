@@ -5,12 +5,15 @@ import {
   HttpCode,
   HttpStatus,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { Throttle } from '@nestjs/throttler';
 import { z } from 'zod';
 import { Public } from './public.decorator';
 import { MfaService } from './mfa.service';
 import { AuthService } from './auth.service';
+import { JwtGuard } from './jwt.guard';
+import { CurrentUserId } from './jwt.decorators';
 
 const SetupBody = z.object({
   enrollment_token: z.string().min(20),
@@ -24,15 +27,21 @@ const VerifyBody = z.object({
   code: z.string().regex(/^[0-9]{6}$/).optional(),
   backup_code: z.string().min(6).max(32).optional(),
 });
+const ReplaceBeginBody = z.object({
+  current_code: z.string().regex(/^[0-9]{6}$/),
+});
+const ReplaceConfirmBody = z.object({
+  new_code: z.string().regex(/^[0-9]{6}$/),
+});
 
 @Controller('auth/mfa')
-@Public()
 export class MfaController {
   constructor(
     private readonly mfa: MfaService,
     private readonly auth: AuthService,
   ) {}
 
+  @Public()
   @Post('setup')
   @HttpCode(HttpStatus.OK)
   @Throttle({ long: { limit: 5, ttl: 900_000 } })
@@ -41,6 +50,7 @@ export class MfaController {
     return this.mfa.setup({ enrollmentToken: b.enrollment_token });
   }
 
+  @Public()
   @Post('enable')
   @HttpCode(HttpStatus.OK)
   @Throttle({ long: { limit: 5, ttl: 900_000 } })
@@ -62,6 +72,7 @@ export class MfaController {
     return { ...session, backup_codes };
   }
 
+  @Public()
   @Post('verify')
   @HttpCode(HttpStatus.OK)
   @Throttle({ long: { limit: 5, ttl: 900_000 } })
@@ -81,5 +92,23 @@ export class MfaController {
       platform: platform ?? 'web',
       ...(deviceId ? { deviceToken: deviceId } : {}),
     });
+  }
+
+  @UseGuards(JwtGuard)
+  @Post('replace/begin')
+  @HttpCode(HttpStatus.OK)
+  @Throttle({ long: { limit: 5, ttl: 900_000 } })
+  async replaceBegin(@CurrentUserId() userId: string, @Body() body: unknown) {
+    const b = ReplaceBeginBody.parse(body);
+    return this.mfa.beginReplace({ userId, currentCode: b.current_code });
+  }
+
+  @UseGuards(JwtGuard)
+  @Post('replace/confirm')
+  @HttpCode(HttpStatus.OK)
+  @Throttle({ long: { limit: 5, ttl: 900_000 } })
+  async replaceConfirm(@CurrentUserId() userId: string, @Body() body: unknown) {
+    const b = ReplaceConfirmBody.parse(body);
+    return this.mfa.confirmReplace({ userId, newCode: b.new_code });
   }
 }

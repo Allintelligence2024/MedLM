@@ -176,6 +176,13 @@
       "when": 1790451000000,
       "tag": "0025_admin_mfa",
       "breakpoints": true
+    },
+    {
+      "idx": 25,
+      "version": "7",
+      "when": 1790452000000,
+      "tag": "0026_admin_mfa_pending",
+      "breakpoints": true
     }
   ]
 }

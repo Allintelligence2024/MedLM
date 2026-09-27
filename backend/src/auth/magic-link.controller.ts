@@ -27,9 +27,12 @@ export class MagicLinkController {
   /// POST /v1/auth/magic-link — demande un lien par email.
   @Post()
   @HttpCode(HttpStatus.ACCEPTED)
-  async request(@Body() body: unknown) {
+  async request(
+    @Body() body: unknown,
+    @Headers('X-Platform') platform?: string,
+  ) {
     const { email } = MagicLinkRequestBody.parse(body);
-    return this.service.request({ email });
+    return this.service.request({ email, platform: platform ?? 'web' });
   }
 
   /// GET|POST /v1/auth/magic-link/verify?token=… — vérifie et émet tokens.

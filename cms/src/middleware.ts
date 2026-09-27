@@ -1,18 +1,27 @@
-// Middleware Next — protège /admin/* (présence du cookie HttpOnly).
-// La signature JWT reste validée par Nest ; un cookie posé à la main
-// sans signature correcte donne 401 sur le proxy.
+// Middleware Next — /admin/* exige un access token que Nest accepte.
+// Un cookie HttpOnly posé à la main sans signature correcte ne passe plus.
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { ACCESS_COOKIE, clearSessionCookies } from '@/lib/session-cookies';
+import { accessTokenAccepted } from '@/lib/verify-access';
 
-const AUTH_COOKIE = 'cms_access';
-const LEGACY_COOKIE = 'cms_token';
 const LOGIN_PATH = '/admin/login';
 
-export function middleware(request: NextRequest) {
+function loginRedirect(request: NextRequest, from?: string) {
+  const url = request.nextUrl.clone();
+  url.pathname = LOGIN_PATH;
+  url.search = from ? `?from=${encodeURIComponent(from)}` : '';
+  const res = NextResponse.redirect(url);
+  clearSessionCookies(res);
+  return res;
+}
+
+export async function middleware(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
+  const token = request.cookies.get(ACCESS_COOKIE)?.value ?? '';
 
   if (pathname === LOGIN_PATH) {
-    if (request.cookies.get(AUTH_COOKIE)?.value) {
+    if (token && (await accessTokenAccepted(token))) {
       const url = request.nextUrl.clone();
       url.pathname = '/admin/cards';
       url.search = '';
@@ -21,14 +30,8 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  const token =
-    request.cookies.get(AUTH_COOKIE)?.value ??
-    request.cookies.get(LEGACY_COOKIE)?.value;
-  if (!token) {
-    const url = request.nextUrl.clone();
-    url.pathname = LOGIN_PATH;
-    url.search = `?from=${encodeURIComponent(pathname + search)}`;
-    return NextResponse.redirect(url);
+  if (!token || !(await accessTokenAccepted(token))) {
+    return loginRedirect(request, pathname + search);
   }
 
   return NextResponse.next();

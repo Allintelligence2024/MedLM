@@ -23,6 +23,11 @@ export const adminMfa = pgTable('admin_mfa', {
   lastCounter: bigint('last_counter', { mode: 'bigint' }),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   confirmedAt: timestamp('confirmed_at', { withTimezone: true }),
+  /// Secret de remplacement, inactif tant que le nouveau TOTP n'est pas confirmé.
+  pendingCiphertext: bytea('pending_ciphertext'),
+  pendingIv: bytea('pending_iv'),
+  pendingTag: bytea('pending_tag'),
+  pendingCreatedAt: timestamp('pending_created_at', { withTimezone: true }),
 });
 
 export const adminMfaBackupCodes = pgTable(

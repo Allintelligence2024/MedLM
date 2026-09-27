@@ -112,7 +112,7 @@
       "status": "closed",
       "remediation": "TOTP admin obligatoire à l'émission de session, secret AES-GCM, backups atomiques, pas de bypass d'enrôlement une fois actif.",
       "verification": "PHASE_3.md ; totp.test.ts ; auth-mfa.postgres.test.ts",
-      "closure_scope": "MFA admin du checkout seulement. Pas de MFA étudiant, pas de replace self-service, pas de GO."
+      "closure_scope": "MFA admin du checkout seulement, y compris replace en deux étapes. Pas de MFA étudiant, pas de GO."
     },
     {
       "id": "R09",

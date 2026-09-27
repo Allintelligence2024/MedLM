@@ -21,6 +21,7 @@ import { MfaService } from '../../src/auth/mfa.service';
 import { MfaController } from '../../src/auth/mfa.controller';
 import { JwtGuard } from '../../src/auth/jwt.guard';
 import { totp, base32Decode } from '../../src/auth/totp';
+import { createDecipheriv } from 'node:crypto';
 
 const MFA_KEK = 'ab'.repeat(32);
 
@@ -226,5 +227,91 @@ describe('Auth — MFA / devices / refresh (PGlite)', () => {
       .post('/v1/auth/refresh')
       .send({ refresh_token: session.refresh_token })
       .expect(401);
+  });
+
+  it('replace MFA : JWT requis, TOTP actuel, ancien secret jusqu’à confirm', async () => {
+    await request(app.getHttpServer())
+      .post('/v1/auth/mfa/replace/begin')
+      .send({ current_code: '123456' })
+      .expect(401);
+    const student = await auth.issueFullSession({
+      userId: studentId,
+      platform: 'web',
+      deviceToken: 'phone-a',
+    });
+    await request(app.getHttpServer())
+      .post('/v1/auth/mfa/replace/begin')
+      .set('Authorization', `Bearer ${student.access_token}`)
+      .send({ current_code: '123456' })
+      .expect(403);
+
+    const row = await db
+      .select()
+      .from(adminMfa)
+      .where(eq(adminMfa.userId, adminId))
+      .then((rows) => rows[0]);
+    expect(row?.enabled).toBe(true);
+    const kek = Buffer.from(MFA_KEK, 'hex');
+    const decipher = createDecipheriv('aes-256-gcm', kek, row!.secretIv);
+    decipher.setAuthTag(row!.secretTag);
+    const oldSecret = Buffer.concat([decipher.update(row!.secretCiphertext), decipher.final()]);
+    await db.update(adminMfa).set({ lastCounter: 0n }).where(eq(adminMfa.userId, adminId));
+    const admin = await auth.issueFullSession({
+      userId: adminId,
+      platform: 'web',
+      deviceToken: 'cms-admin-1',
+    });
+    await request(app.getHttpServer())
+      .post('/v1/auth/mfa/replace/begin')
+      .set('Authorization', `Bearer ${admin.access_token}`)
+      .send({ current_code: '000000' })
+      .expect(401);
+    const begin = await request(app.getHttpServer())
+      .post('/v1/auth/mfa/replace/begin')
+      .set('Authorization', `Bearer ${admin.access_token}`)
+      .send({ current_code: totp(oldSecret, Date.now()) })
+      .expect(200);
+    expect(begin.body.secret_base32).toMatch(/^[A-Z2-7]+$/);
+    expect(begin.body.otpauth_url).toMatch(/^otpauth:\/\/totp\//);
+
+    await db.update(adminMfa).set({ lastCounter: 0n }).where(eq(adminMfa.userId, adminId));
+    const pending = await auth.issueAccessFor(adminId, 'web');
+    expect(pending).toMatchObject({ status: 'mfa_required' });
+    if (!('mfa_token' in pending)) throw new Error('expected pending');
+    await request(app.getHttpServer())
+      .post('/v1/auth/mfa/verify')
+      .set('X-Platform', 'web')
+      .set('X-Device-Id', 'cms-admin-1')
+      .send({ mfa_token: pending.mfa_token, code: totp(oldSecret, Date.now()) })
+      .expect(200);
+
+    await request(app.getHttpServer())
+      .post('/v1/auth/mfa/replace/confirm')
+      .set('Authorization', `Bearer ${admin.access_token}`)
+      .send({ new_code: '000000' })
+      .expect(401);
+    const nextSecret = base32Decode(begin.body.secret_base32 as string);
+    const confirmed = await request(app.getHttpServer())
+      .post('/v1/auth/mfa/replace/confirm')
+      .set('Authorization', `Bearer ${admin.access_token}`)
+      .send({ new_code: totp(nextSecret, Date.now()) })
+      .expect(200);
+    expect(confirmed.body.backup_codes).toHaveLength(8);
+
+    await db.update(adminMfa).set({ lastCounter: 0n }).where(eq(adminMfa.userId, adminId));
+    const after = await auth.issueAccessFor(adminId, 'web');
+    if (!('mfa_token' in after)) throw new Error('expected pending');
+    await request(app.getHttpServer())
+      .post('/v1/auth/mfa/verify')
+      .set('X-Platform', 'web')
+      .set('X-Device-Id', 'cms-admin-1')
+      .send({ mfa_token: after.mfa_token, code: totp(oldSecret, Date.now()) })
+      .expect(401);
+    await request(app.getHttpServer())
+      .post('/v1/auth/mfa/verify')
+      .set('X-Platform', 'web')
+      .set('X-Device-Id', 'cms-admin-1')
+      .send({ mfa_token: after.mfa_token, code: totp(nextSecret, Date.now()) })
+      .expect(200);
   });
 });

@@ -106,8 +106,8 @@ pour leurs défauts précis. Session CMS HttpOnly+CSRF (item 5) livrée ; **R11
 1. [x] Rotation refresh atomique avec tests de concurrence et traitement du rejeu.
 2. [x] Politique de cycle de vie des appareils et des jetons expirés (max 3, reuse, logout).
 3. [x] MFA admin RFC 6238 (HMAC-SHA1, 30 s, AES-GCM, backups atomiques). Pas le batch Drive.
-4. [x] Enrôlement sans contournement, rate limiting et audit. Remplacement self-service non livré.
-5. [x] Proxy CMS + cookie HttpOnly/Secure/SameSite + CSRF ; rôles via `/v1/auth/me`.
+4. [x] Enrôlement sans contournement, rate limiting, audit, remplacement TOTP sans désactiver l'ancien secret.
+5. [x] Proxy CMS + cookie HttpOnly/Secure/SameSite + CSRF ; middleware qui interroge `/v1/auth/me`.
 
 **Sortie :** login magic-link / MFA admin HTTP ; un seul refresh concurrent
 accepté sur PostgreSQL réel ; pas de bypass MFA ; secrets TOTP absents des
