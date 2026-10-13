@@ -14,7 +14,7 @@
 //   * Recommande 3 decks selon les modules d'intérêt.
 //   * Retourne la "next step" pour le client.
 import { Inject, Injectable, Logger, NotFoundException } from '@nestjs/common';
-import { eq, inArray, sql } from 'drizzle-orm';
+import { and, eq, inArray, isNotNull, sql } from 'drizzle-orm';
 import { DRIZZLE, Database } from '../db/database.module';
 import { users } from '../db/schema/users';
 import { decks, modules } from '../db/schema/content';
@@ -116,7 +116,7 @@ export class OnboardingService {
       })
       .from(decks)
       .innerJoin(modules, eq(modules.id, decks.moduleId))
-      .where(inArray(decks.moduleId, moduleIds))
+      .where(and(inArray(decks.moduleId, moduleIds), isNotNull(decks.publishedAt)))
       .orderBy(sql`${decks.cardCount} DESC`)
       .limit(3);
     return rows.map((r) => ({

@@ -1,0 +1,69 @@
+
+> medanki-dz-backend@0.1.0 test
+> vitest run
+
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+
+ RUN  v2.1.9 /home/user/MedLM/backend
+
+ ✓ test/unit/ai_adaptive.test.ts (19 tests) 12ms
+ ✓ test/unit/fsrs.parity.test.ts (85 tests) 94ms
+ ✓ test/unit/ai_generate.test.ts (24 tests) 14ms
+ ✓ test/unit/ai_hints.test.ts (31 tests) 11ms
+ ✓ test/unit/ai_tutor.test.ts (24 tests) 13ms
+[32m[Nest] 1774  - [39m09/26/2026, 6:41:20 PM [32m    LOG[39m [38;5;3m[ExamsService] [39m[32mexam a1 user=u1 score=50% (1/2) pass=true injected=1[39m
+[32m[Nest] 1774  - [39m09/26/2026, 6:41:20 PM [32m    LOG[39m [38;5;3m[ExamsService] [39m[32mexam a1 user=u1 score=33% (1/3) pass=false injected=2[39m
+ ✓ test/unit/exams.test.ts (6 tests) 10ms
+[33m[Nest] 1794  - [39m09/26/2026, 6:41:20 PM [33m   WARN[39m [38;5;3m[GatewayService] [39m[33mgateway DeckCatalog: REST /content/decks → HTTP 500[39m
+ ✓ test/unit/graphql_gateway.test.ts (15 tests) 14ms
+[33m[Nest] 1814  - [39m09/26/2026, 6:41:21 PM [33m   WARN[39m [38;5;3m[RedisCostBudgetStore] [39m[33mbudget Redis non incrémenté (redis down) — repli mémoire[39m
+[33m[Nest] 1814  - [39m09/26/2026, 6:41:21 PM [33m   WARN[39m [38;5;3m[RedisCostBudgetStore] [39m[33mbudget Redis illisible (redis down) — repli mémoire[39m
+ ✓ test/unit/cost_budget_store.test.ts (18 tests) 95ms
+ ✓ test/unit/read_replica.test.ts (17 tests) 13ms
+ ✓ test/unit/fcm_oauth.test.ts (18 tests) 18ms
+ ✓ test/unit/voice_to_card.test.ts (15 tests) 59ms
+[32m[Nest] 1898  - [39m09/26/2026, 6:41:25 PM [32m    LOG[39m [38;5;3m[BillingService] [39m[32mentitlement credited: user=u1 plan=yearly expires=2027-09-26T18:41:25.586Z[39m
+ ✓ test/unit/billing.service.test.ts (7 tests) 11ms
+ ✓ test/unit/ml_score.test.ts (12 tests) 9ms
+ ✓ test/unit/srs-sync.service.test.ts (6 tests) 10ms
+[33m[Nest] 1977  - [39m09/26/2026, 6:41:27 PM [33m   WARN[39m [38;5;3m[ChargilyPayProvider] [39m[33mCHARGILY_DRY_RUN=true : aucun appel réel à Chargily. À ne JAMAIS utiliser en production.[39m
+[33m[Nest] 1977  - [39m09/26/2026, 6:41:27 PM [33m   WARN[39m [38;5;3m[ChargilyPayProvider] [39m[33mCHARGILY_DRY_RUN=true : aucun appel réel à Chargily. À ne JAMAIS utiliser en production.[39m
+[33m[Nest] 1977  - [39m09/26/2026, 6:41:27 PM [33m   WARN[39m [38;5;3m[ChargilyPayProvider] [39m[33mCHARGILY_DRY_RUN=true : aucun appel réel à Chargily. À ne JAMAIS utiliser en production.[39m
+[33m[Nest] 1977  - [39m09/26/2026, 6:41:27 PM [33m   WARN[39m [38;5;3m[ChargilyPayProvider] [39m[33mCHARGILY_API_SECRET absent — webhook non vérifié[39m
+[32m[Nest] 1977  - [39m09/26/2026, 6:41:27 PM [32m    LOG[39m [38;5;3m[ChargilyPayProvider] [39m[32mwebhook: eventId=e1 type=checkout.paid ref=co_1[39m
+[32m[Nest] 1977  - [39m09/26/2026, 6:41:27 PM [32m    LOG[39m [38;5;3m[ChargilyPayProvider] [39m[32mwebhook: eventId=e2 type=checkout.failed ref=co_2[39m
+[32m[Nest] 1977  - [39m09/26/2026, 6:41:27 PM [32m    LOG[39m [38;5;3m[ChargilyPayProvider] [39m[32mwebhook: eventId=e3 type=mystery.event ref=e3[39m
+[33m[Nest] 1977  - [39m09/26/2026, 6:41:27 PM [33m   WARN[39m [38;5;3m[ChargilyPayProvider] [39m[33mChargily webhook event type inconnu: mystery.event[39m
+ ✓ test/unit/chargily_prod.test.ts (15 tests) 17ms
+ ✓ test/unit/ai_retention.test.ts (21 tests) 7ms
+ ✓ test/unit/jwt_config.test.ts (12 tests) 7ms
+ ✓ test/unit/unreachable.test.ts (20 tests) 10ms
+ ✓ test/unit/i18n_parity.test.ts (14 tests) 36ms
+ ✓ test/unit/migrations_journal.test.ts (11 tests) 61ms
+ ✓ test/unit/leaderboard.test.ts (6 tests) 447ms
+   ✓ LeaderboardService.currentWeek > retourne une chaîne au format YYYY-Www 444ms
+ ✓ test/unit/partnerships.test.ts (9 tests) 11ms
+ ✓ test/unit/onboarding.test.ts (9 tests) 9ms
+ ✓ test/unit/device_tokens.test.ts (13 tests) 9ms
+ ✓ test/unit/stats.test.ts (8 tests) 5ms
+ ✓ test/unit/i18n.test.ts (15 tests) 17ms
+ ✓ test/unit/group_packs.test.ts (11 tests) 8ms
+ ✓ test/unit/cdn_headers.test.ts (17 tests) 7ms
+ ✓ test/unit/share.test.ts (8 tests) 8ms
+ ✓ test/unit/deck_keys.test.ts (3 tests) 124ms
+ ✓ test/unit/tenants.test.ts (10 tests) 8ms
+ ✓ test/unit/redis_cache.test.ts (9 tests) 6ms
+ ✓ test/unit/exam_templates.test.ts (2 tests) 4ms
+ ✓ test/unit/regions.test.ts (9 tests) 12ms
+[95m[Nest] 2416  - [39m09/26/2026, 6:41:39 PM [95m  DEBUG[39m [38;5;3m[OtelExporter] [39m[95mOTel exporter disabled (no endpoint set)[39m
+[32m[Nest] 2416  - [39m09/26/2026, 6:41:40 PM [32m    LOG[39m [38;5;3m[OtelExporter] [39m[32mOTel exporter enabled → http://otel.example[39m
+ ✓ test/unit/otel_exporter.test.ts (2 tests) 5ms
+ ✓ test/unit/tracing.test.ts (4 tests) 14ms
+ ✓ test/unit/rbac.test.ts (6 tests) 6ms
+ ✓ test/unit/metrics.test.ts (2 tests) 3ms
+
+ Test Files  38 passed (38)
+      Tests  533 passed (533)
+   Start at  18:41:13
+   Duration  27.64s (transform 1.06s, setup 0ms, collect 14.81s, tests 1.22s, environment 8ms, prepare 3.54s)
+

@@ -31,6 +31,7 @@ import { AiModule } from './ai/ai.module';
 import { GatewayModule } from './gateway/gateway.module';
 import { MlModule } from './ml/ml.module';
 import { PartnershipsModule } from './partnerships/partnerships.module';
+import { PrivacyModule } from './privacy/privacy.module';
 
 @Module({
   providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
@@ -77,6 +78,7 @@ import { PartnershipsModule } from './partnerships/partnerships.module';
     GatewayModule, // Phase 20.2 (passerelle GraphQL, opérations persistées)
     MlModule, // Phase 20.3 (prédiction examen blanc + focus par tag, local)
     PartnershipsModule, // Phase 20.4 (partenariats facultés DZ)
+    PrivacyModule, // Phase 4 / R05 (anonymisation, pas DELETE users)
   ],
 })
 export class AppModule {}

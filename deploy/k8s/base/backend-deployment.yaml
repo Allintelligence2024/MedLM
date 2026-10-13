@@ -36,11 +36,8 @@ spec:
                 secretKeyRef:
                   name: backend-secrets
                   key: database-url
-            - name: JWT_SIGNING_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: backend-secrets
-                  key: jwt-signing-key
+            - name: JWT_SIGNING_KEY_PATH
+              value: /var/run/secrets/jwt/jwt-private.pem
             - name: SENTRY_DSN
               valueFrom:
                 secretKeyRef:
@@ -53,9 +50,13 @@ spec:
                   name: medanki-config
                   key: otel-endpoint
                   optional: true
+          volumeMounts:
+            - name: jwt-signing
+              mountPath: /var/run/secrets/jwt
+              readOnly: true
           readinessProbe:
             httpGet:
-              path: /readyz
+              path: /v1/readyz
               port: 3000
             initialDelaySeconds: 10
             periodSeconds: 10
@@ -63,7 +64,7 @@ spec:
             failureThreshold: 3
           livenessProbe:
             httpGet:
-              path: /healthz
+              path: /v1/healthz
               port: 3000
             initialDelaySeconds: 30
             periodSeconds: 30
@@ -84,6 +85,13 @@ spec:
             capabilities:
               drop:
                 - ALL
+      volumes:
+        - name: jwt-signing
+          secret:
+            secretName: backend-secrets
+            items:
+              - key: jwt-signing-key
+                path: jwt-private.pem
       securityContext:
         runAsNonRoot: true
         fsGroup: 1001

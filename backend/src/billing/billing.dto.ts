@@ -24,6 +24,7 @@ export const CreateCheckoutBody = z.object({
   plan: z.enum(PLANS),
   success_url: z.string().url().optional(),
   cancel_url: z.string().url().optional(),
+  group_pack_id: z.string().uuid().optional(),
   promo_code: z.string().max(64).optional(),
 });
 export type CreateCheckoutBody = z.infer<typeof CreateCheckoutBody>;

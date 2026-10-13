@@ -1,0 +1,20 @@
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+
+ RUN  v2.1.9 /home/user/MedLM/backend
+
+[32m[Nest] 2903  - [39m09/26/2026, 7:21:25 PM [32m    LOG[39m [38;5;3m[ChargilyPayProvider] [39m[32mwebhook: eventId=1fadda2b-617c-40d5-8c24-bac705c988d6 type=checkout.paid ref=aad2dfb8-328b-4e45-962c-1359dbcb8e23[39m
+[32m[Nest] 2903  - [39m09/26/2026, 7:21:25 PM [32m    LOG[39m [38;5;3m[BillingService] [39m[32mentitlement credited: user=0c0e7ad3-889a-4be9-a8c1-bfd9b6a8cdde plan=premium expires=2026-10-26T19:21:25.692Z[39m
+[32m[Nest] 2903  - [39m09/26/2026, 7:21:25 PM [32m    LOG[39m [38;5;3m[ChargilyPayProvider] [39m[32mwebhook: eventId=b9a7b328-8aca-4bdf-8ba8-ae07d4573428 type=checkout.paid ref=a8daecba-957b-4606-8a5d-1bb91d1cc21d[39m
+[32m[Nest] 2903  - [39m09/26/2026, 7:21:25 PM [32m    LOG[39m [38;5;3m[ChargilyPayProvider] [39m[32mwebhook: eventId=bc37982c-483f-40bd-9634-7207b04e8def type=checkout.paid ref=a8daecba-957b-4606-8a5d-1bb91d1cc21d[39m
+[32m[Nest] 2903  - [39m09/26/2026, 7:21:25 PM [32m    LOG[39m [38;5;3m[BillingService] [39m[32mentitlement credited: user=144c0bac-2e5c-49a7-9239-d96959481626 plan=premium expires=2026-10-26T19:21:25.737Z[39m
+[32m[Nest] 2903  - [39m09/26/2026, 7:21:25 PM [32m    LOG[39m [38;5;3m[ChargilyPayProvider] [39m[32mwebhook: eventId=3587439e-5a48-4164-bf5f-ce4a24a92e2d type=checkout.paid ref=6dceab02-4e12-48df-b97a-b1e05316d8f5[39m
+[32m[Nest] 2903  - [39m09/26/2026, 7:21:25 PM [32m    LOG[39m [38;5;3m[ChargilyPayProvider] [39m[32mwebhook: eventId=b5104e6e-7885-4a05-b25c-da9ba7682a8c type=checkout.paid ref=99779410-69f5-4335-aa5e-868502390c85[39m
+[32m[Nest] 2903  - [39m09/26/2026, 7:21:25 PM [32m    LOG[39m [38;5;3m[BillingService] [39m[32mentitlement credited: user=344bef76-2158-470a-85a7-da56dbd89047 plan=premium expires=2026-10-26T19:21:25.777Z[39m
+[32m[Nest] 2903  - [39m09/26/2026, 7:21:25 PM [32m    LOG[39m [38;5;3m[BillingService] [39m[32mentitlement credited: user=344bef76-2158-470a-85a7-da56dbd89047 plan=premium expires=2026-11-25T19:21:25.777Z[39m
+ ✓ test/integration/billing-concurrency.postgres.test.ts (3 tests) 536ms
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  19:21:23
+   Duration  2.17s (transform 354ms, setup 0ms, collect 1.29s, tests 536ms, environment 0ms, prepare 104ms)
+

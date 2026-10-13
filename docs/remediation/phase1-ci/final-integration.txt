@@ -1,0 +1,24 @@
+
+> medanki-dz-backend@0.1.0 test:integration
+> vitest run --config vitest.integration.config.ts
+
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+
+ RUN  v2.1.9 /home/user/MedLM/backend
+
+ ✓ test/integration/billing-postgres.test.ts (35 tests) 4575ms
+ ✓ test/integration/postgres-contract.test.ts (24 tests) 2203ms
+ ✓ test/integration/billing-concurrency.postgres.test.ts (8 tests) 1661ms
+   ✓ Billing — concurrent PostgreSQL connections (requires BILLING_TEST_DATABASE_URL) > the real reconciliation CLI reads only the configured PostgreSQL schema without writing 692ms
+   ✓ Billing — concurrent PostgreSQL connections (requires BILLING_TEST_DATABASE_URL) > the real CLI refuses --apply for a non-admin before any provider call 516ms
+ ✓ test/integration/exams-timing.controller.test.ts (7 tests) 1432ms
+ ✓ test/integration/billing-webhook.controller.test.ts (7 tests) 271ms
+ ✓ test/integration/srs-sync.controller.test.ts (5 tests) 58ms
+ ✓ test/integration/auth-refresh.controller.test.ts (6 tests) 219ms
+ ✓ test/integration/routing.test.ts (3 tests) 240ms
+
+ Test Files  8 passed (8)
+      Tests  95 passed (95)
+   Start at  12:28:53
+   Duration  12.79s (transform 915ms, setup 0ms, collect 1.84s, tests 10.66s, environment 0ms, prepare 65ms)
+

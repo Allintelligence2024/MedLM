@@ -1,20 +1,14 @@
 # MedAnki DZ
 
-> **Révise mieux, retiens plus, réussis en 1ʳᵉ année.**
-> Application de révision par répétition espacée (FSRS-5) pour les
-> étudiants en médecine algériens : flashcards, banque de QCM, examens
-> blancs, mode hors-ligne d'abord.
+> Outil de **révision** pour étudiants en médecine. Pas un dispositif
+> médical, pas un avis clinique, pas une validation scientifique.
 
-> ⚠️ **État au 23 août 2026 : le dépôt n'est pas encore release-ready.**
-> Le périmètre de travail et les critères de preuve sont gelés dans
-> [docs/RELEASE_SCOPE.md](docs/RELEASE_SCOPE.md). Les rapports de phases
-> historiques décrivent des lots et des intentions ; ils ne constituent pas
-> une preuve de disponibilité de bout en bout.
+> ⚠️ **NO-GO production** (2026-09-27). Paiements réels, Chargily sandbox,
+> cluster K8s et appareil physique ne sont pas qualifiés. Le plan courant
+> est [docs/remediation/PLAN.md](docs/remediation/PLAN.md). Les rapports
+> historiques ne prouvent pas un lancement.
 
-[![backend-ci](https://github.com/Allintelligence2024/MedLM/actions/workflows/backend-ci.yml/badge.svg)](../../actions/workflows/backend-ci.yml)
-[![mobile-ci](https://github.com/Allintelligence2024/MedLM/actions/workflows/mobile-ci.yml/badge.svg)](../../actions/workflows/mobile-ci.yml)
-[![cms-ci](https://github.com/Allintelligence2024/MedLM/actions/workflows/cms-ci.yml/badge.svg)](../../actions/workflows/cms-ci.yml)
-[![guards](https://github.com/Allintelligence2024/MedLM/actions/workflows/guards.yml/badge.svg)](../../actions/workflows/guards.yml)
+[![ci](https://github.com/Allintelligence2024/MedLM/actions/workflows/backend-ci.yml/badge.svg)](../../actions/workflows/backend-ci.yml)
 
 ---
 
@@ -48,17 +42,16 @@ optimisations de scale sont conservées hors du release gate du MVP. Voir
 [docs/RELEASE_SCOPE.md](docs/RELEASE_SCOPE.md) pour le périmètre gelé, les
 bloqueurs connus et la Definition of Done.
 
-## Ce que fait le produit
+## Ce que le dépôt contient (pas ce qui est lancé)
 
-| Domaine | Contenu |
+| Domaine | État réel |
 |---|---|
-| **SRS** | FSRS-5 réel (`ts-fsrs` 4.7.1 côté serveur, portage Dart vérifié par parité stricte côté client), event log **append-only**, sync déterministe hors-ligne d'abord |
-| **Contenu** | Decks versionnés, chiffrés à la livraison (wrap-key par appareil), Content Policy appliquée par CI (sources obligatoires, 0 promesse médicale) |
-| **Examens** | Templates de QCM, tentatives chronométrées **côté serveur**, événements anti-triche, prédicteur de score ML |
-| **IA** | Indices adaptatifs, dictée vocale → carte, tuteur conversationnel — provider-agnostique (`mock` par défaut, tout endpoint OpenAI-compatible ensuite), quotas journaliers en base |
-| **Gamification** | XP, streaks (avec gel), badges, classements |
-| **Monétisation** | Chargily (paiement DZ), entitlement JWT vérifiable **hors-ligne**, grace period 14 j, packs de groupe |
-| **i18n** | FR · AR · EN — parité vérifiée par test côté serveur |
+| **SRS** | Moteur `ts-fsrs` 4.7.1 + portage Dart, journal append-only. Pas une preuve d'efficacité pédagogique. |
+| **Contenu** | Decks versionnés, lectures apprenant = publié + entitlement. wrap-key par appareil : **pas** un chiffrement de bout en bout des cartes. |
+| **Examens / IA / ML** | Code présent, hors critère MVP. Provider IA = `mock` par défaut. |
+| **Monétisation** | Checkout + entitlement JWT RS256 testés en CI. **Pas** de Chargily sandbox ni de paiement réel. |
+| **CMS** | Session HttpOnly + CSRF. Catalogue staff. Upload média = 501 sans R2. |
+| **i18n** | FR · AR · EN côté serveur. |
 
 ## Architecture
 
@@ -150,17 +143,11 @@ npm run test:integration      # nécessite une vraie PostgreSQL
 ```bash
 cd mobile
 flutter pub get
-dart run build_runner build --delete-conflicting-outputs   # code Drift généré
-flutter run
+dart run build_runner build --delete-conflicting-outputs
+flutter analyze && flutter test
 ```
 
-Le code généré (`*.g.dart`) **est commité** : le dépôt reste compilable
-sans lancer `build_runner`, et la CI vérifie qu'il est à jour.
-
-```bash
-flutter analyze
-flutter test
-```
+`app_database.g.dart` n'est pas commité : la CI le génère avant analyze/tests/APK.
 
 ### CMS
 
@@ -190,17 +177,17 @@ npm run e2e                        # Playwright (CMS + backend seedé)
 
 ## Intégration continue
 
-> ⚠️ **Les workflows attendent leur activation** : ils vivent dans
-> [`ci/workflows/`](ci/workflows/) et doivent être déplacés vers
-> `.github/workflows/` par un compte disposant de la permission
-> `workflows` — voir [ci/README.md](ci/README.md).
+Un seul workflow actif : [`.github/workflows/backend-ci.yml`](.github/workflows/backend-ci.yml).
+Les badges `mobile-ci.yml` / `cms-ci.yml` / `guards.yml` n'existent pas.
 
-| Workflow | Déclencheur | Contenu |
-|---|---|---|
-| `backend-ci.yml` | `backend/**` | tsc · eslint · vitest · nest build · **intégration sur PostgreSQL 16** (schéma jetable) · `docker build` |
-| `mobile-ci.yml` | `mobile/**` | format · analyze · `build_runner` (fraîcheur du code généré) · `flutter test` · APK debug |
-| `cms-ci.yml` | `cms/**` | tsc · next lint · next build · `docker build` |
-| `guards.yml` | tout push/PR | `verify_all.sh` · `phase13_checks.sh` · audit sécurité · E2E Playwright |
+| Job | Contenu |
+|---|---|
+| static | tsc · eslint · vitest · nest build |
+| mobile | `build_runner` Drift · analyze · tests (dont interop RS256) · APK debug |
+| integration | PostgreSQL 16, migrations, seed, contrat SQL, parcours métier |
+| docker | validation Dockerfiles + `docker build` backend |
+| cms | tsc · `next build` |
+| verify-scripts | Helm rapprochement, workflows, gardes l10n |
 
 ## Conventions
 

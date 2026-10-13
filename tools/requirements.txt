@@ -1,0 +1,2 @@
+# Required by the CI YAML/workflow and rendered Helm contract checks.
+PyYAML==6.0.2

@@ -688,6 +688,7 @@ class ApiClient {
   Future<Map<String, dynamic>> createCheckout({
     required String plan,
     String? promoCode,
+    String? groupPackId,
   }) async {
     try {
       final res = await _dio.post<dynamic>(
@@ -695,6 +696,7 @@ class ApiClient {
         data: {
           'plan': plan,
           if (promoCode != null) 'promo_code': promoCode,
+          if (groupPackId != null) 'group_pack_id': groupPackId,
         },
       );
       return Map<String, dynamic>.from(res.data as Map);

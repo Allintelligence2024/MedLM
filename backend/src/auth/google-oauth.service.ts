@@ -18,8 +18,7 @@ import { ConfigService } from '@nestjs/config';
 import { eq } from 'drizzle-orm';
 import { DRIZZLE, Database } from '../db/database.module';
 import { users } from '../db/schema';
-import { AuthService } from './auth.service';
-import { TokenResponse } from './auth.dto';
+import { AuthService, AuthSession } from './auth.service';
 
 @Injectable()
 export class GoogleOAuthService {
@@ -54,7 +53,7 @@ export class GoogleOAuthService {
     code: string;
     state: string;
     platform: string;
-  }): Promise<TokenResponse> {
+  }): Promise<AuthSession> {
     // 1. Échange code → tokens Google
     const clientId = this.config.get<string>('GOOGLE_CLIENT_ID')!;
     const clientSecret = this.config.get<string>('GOOGLE_CLIENT_SECRET')!;

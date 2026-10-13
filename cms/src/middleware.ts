@@ -1,28 +1,27 @@
-// Middleware Next — protège /admin/* (audit P2-7).
-//
-// S'exécute côté serveur AVANT le rendu : une page d'administration
-// n'est jamais servie à quelqu'un sans session, même le temps d'un
-// flash. C'est ce qui manquait pour pouvoir exposer le CMS hors du
-// réseau interne.
-//
-// Le middleware ne VALIDE pas le jeton (il ne connaît pas la clé
-// publique RS256 du backend) : il vérifie sa présence. La validation
-// reste faite par le backend, qui répond 401 — traité côté client par
-// `handleUnauthorized`.
+// Middleware Next — /admin/* exige un access token que Nest accepte.
+// Un cookie HttpOnly posé à la main sans signature correcte ne passe plus.
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { ACCESS_COOKIE, clearSessionCookies } from '@/lib/session-cookies';
+import { accessTokenAccepted } from '@/lib/verify-access';
 
-const AUTH_COOKIE = 'cms_token';
 const LOGIN_PATH = '/admin/login';
 
-export function middleware(request: NextRequest) {
-  const { pathname, search } = request.nextUrl;
+function loginRedirect(request: NextRequest, from?: string) {
+  const url = request.nextUrl.clone();
+  url.pathname = LOGIN_PATH;
+  url.search = from ? `?from=${encodeURIComponent(from)}` : '';
+  const res = NextResponse.redirect(url);
+  clearSessionCookies(res);
+  return res;
+}
 
-  // La page de login doit rester atteignable, sinon plus personne
-  // ne peut se connecter.
+export async function middleware(request: NextRequest) {
+  const { pathname, search } = request.nextUrl;
+  const token = request.cookies.get(ACCESS_COOKIE)?.value ?? '';
+
   if (pathname === LOGIN_PATH) {
-    // Déjà connecté ? On évite de redemander un mot de passe.
-    if (request.cookies.get(AUTH_COOKIE)?.value) {
+    if (token && (await accessTokenAccepted(token))) {
       const url = request.nextUrl.clone();
       url.pathname = '/admin/cards';
       url.search = '';
@@ -31,18 +30,13 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  const token = request.cookies.get(AUTH_COOKIE)?.value;
-  if (!token) {
-    const url = request.nextUrl.clone();
-    url.pathname = LOGIN_PATH;
-    url.search = `?from=${encodeURIComponent(pathname + search)}`;
-    return NextResponse.redirect(url);
+  if (!token || !(await accessTokenAccepted(token))) {
+    return loginRedirect(request, pathname + search);
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  // Tout /admin/*, hors ressources statiques.
   matcher: ['/admin/:path*'],
 };

@@ -1,0 +1,12 @@
+
+> medanki-dz-backend@0.1.0 billing:reconcile
+> tsx src/billing/reconcile.cli.ts --help
+
+Usage: npm run billing:reconcile -- [--apply]
+Default: list pending order IDs, no provider request or credit.
+Environment: DATABASE_URL; --apply also requires BILLING_RECONCILE_ACTOR_ID (existing admin UUID), CHARGILY_ENV, CHARGILY_API_SECRET.
+Scans at most 1000 pending orders per run. Exit 2 means unresolved orders/backlog; exit 1 means execution/configuration failed.
+Usage: npm run billing:reconcile -- [--apply]
+Default: list pending order IDs, no provider request or credit.
+Environment: DATABASE_URL; --apply also requires BILLING_RECONCILE_ACTOR_ID (existing admin UUID), CHARGILY_ENV, CHARGILY_API_SECRET.
+Scans at most 1000 pending orders per run. Exit 2 means unresolved orders/backlog; exit 1 means execution/configuration failed.

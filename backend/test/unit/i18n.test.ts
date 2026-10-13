@@ -26,6 +26,19 @@ describe('I18n.t — résolution simple', () => {
     expect(i18n.t('fr', 'error.not_found')).toBe('Ressource introuvable');
   });
 
+  it('magic-link FR/AR/EN substitue {url}', () => {
+    expect(i18n.t('fr', 'auth.magic_link.subject')).toContain('MedAnki');
+    expect(i18n.t('fr', 'auth.magic_link.body', { url: 'https://x' })).toContain(
+      'https://x',
+    );
+    expect(i18n.t('ar', 'auth.magic_link.body', { url: 'https://x' })).toContain(
+      'https://x',
+    );
+    expect(i18n.t('en', 'auth.magic_link.body', { url: 'https://x' })).toContain(
+      'https://x',
+    );
+  });
+
   it('résout une clé en AR', () => {
     expect(i18n.t('ar', 'error.not_found')).toBe('المورد غير موجود');
   });

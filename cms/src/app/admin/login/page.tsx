@@ -1,27 +1,19 @@
 'use client';
 
-// Page de connexion du CMS (audit P2-7).
-//
-// Il n'y en avait aucune : le jeton devait être posé à la main dans
-// `localStorage` depuis la console du navigateur. C'était le principal
-// obstacle à exposer le CMS hors du réseau interne.
+// Login CMS : magic link + MFA admin. Le JWT n'est jamais stocké en JS.
 
-import { Suspense, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { setSession, safeRedirectTarget } from '@/lib/auth';
+import { safeRedirectTarget } from '@/lib/auth';
+import { apiFetch, ApiError } from '@/lib/api';
 
-const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:3000';
-
-/// Rôles autorisés à entrer dans le CMS.
-///
-/// Le backend fait respecter les permissions endpoint par endpoint ;
-/// ce contrôle-ci évite seulement d'ouvrir une interface d'édition à un
-/// étudiant, ce qui serait déroutant et donnerait des 403 partout.
-const CMS_ROLES = ['admin', 'editor', 'reviewer', 'moderator'];
+type Gate =
+  | { kind: 'idle' }
+  | { kind: 'link_sent' }
+  | { kind: 'enroll'; enrollment_token: string; otpauth_url: string; secret_base32: string }
+  | { kind: 'mfa'; mfa_token: string };
 
 export default function LoginPage() {
-  // `useSearchParams` force le rendu côté client : sans cette
-  // frontière Suspense, le prérendu statique de Next échoue.
   return (
     <Suspense fallback={<div className="mx-auto max-w-sm py-16">Chargement…</div>}>
       <LoginForm />
@@ -29,53 +21,148 @@ export default function LoginPage() {
   );
 }
 
+async function establishSession(tokens: {
+  access_token: string;
+  refresh_token?: string;
+  expires_in?: number;
+}): Promise<void> {
+  const res = await fetch('/api/auth/session', {
+    method: 'POST',
+    credentials: 'include',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(tokens),
+  });
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(text || `session ${res.status}`);
+  }
+}
+
+async function consumeAuthPayload(
+  data: Record<string, unknown>,
+  setGate: (g: Gate) => void,
+  onSession: () => void,
+): Promise<void> {
+  if (typeof data.access_token === 'string') {
+    await establishSession({
+      access_token: data.access_token,
+      ...(typeof data.refresh_token === 'string' ? { refresh_token: data.refresh_token } : {}),
+      ...(typeof data.expires_in === 'number' ? { expires_in: data.expires_in } : {}),
+    });
+    onSession();
+    return;
+  }
+  if (data.status === 'mfa_enrollment_required' && typeof data.enrollment_token === 'string') {
+    const setup = await apiFetch<{ otpauth_url: string; secret_base32: string }>(
+      '/v1/auth/mfa/setup',
+      {
+        method: 'POST',
+        body: JSON.stringify({ enrollment_token: data.enrollment_token }),
+      },
+    );
+    setGate({
+      kind: 'enroll',
+      enrollment_token: data.enrollment_token,
+      otpauth_url: setup.otpauth_url,
+      secret_base32: setup.secret_base32,
+    });
+    return;
+  }
+  if (data.status === 'mfa_required' && typeof data.mfa_token === 'string') {
+    setGate({ kind: 'mfa', mfa_token: data.mfa_token });
+    return;
+  }
+  throw new Error('Réponse inattendue du serveur.');
+}
+
 function LoginForm() {
   const params = useSearchParams();
   const [email, setEmail] = useState('');
+  const [magicToken, setMagicToken] = useState(params.get('token') ?? '');
+  const [totp, setTotp] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [gate, setGate] = useState<Gate>({ kind: 'idle' });
+  const [autoTried, setAutoTried] = useState(false);
 
-  async function onSubmit(event: React.FormEvent) {
+  function go() {
+    window.location.assign(safeRedirectTarget(params.get('from')));
+  }
+
+  useEffect(() => {
+    if (autoTried || !magicToken.trim()) return;
+    setAutoTried(true);
+    void (async () => {
+      setBusy(true);
+      try {
+        const data = await apiFetch<Record<string, unknown>>(
+          `/v1/auth/magic-link/verify?token=${encodeURIComponent(magicToken.trim())}`,
+        );
+        await consumeAuthPayload(data, setGate, go);
+      } catch {
+        /* l'utilisateur pourra coller le jeton à la main */
+      } finally {
+        setBusy(false);
+      }
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [magicToken, autoTried]);
+
+  async function requestLink(event: React.FormEvent) {
     event.preventDefault();
     setBusy(true);
     setError(null);
     try {
-      const res = await fetch(`${baseUrl}/v1/auth/login`, {
+      await apiFetch('/v1/auth/magic-link', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Platform': 'cms',
-        },
         body: JSON.stringify({ email: email.trim() }),
       });
-      if (!res.ok) {
-        setError(
-          res.status === 401
-            ? 'Identifiants refusés.'
-            : `Connexion impossible (HTTP ${res.status}).`,
-        );
+      setGate({ kind: 'link_sent' });
+    } catch (e) {
+      setError(e instanceof ApiError ? e.message : 'Serveur injoignable.');
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function verifyToken(event: React.FormEvent) {
+    event.preventDefault();
+    setBusy(true);
+    setError(null);
+    try {
+      const data = await apiFetch<Record<string, unknown>>(
+        `/v1/auth/magic-link/verify?token=${encodeURIComponent(magicToken.trim())}`,
+      );
+      await consumeAuthPayload(data, setGate, go);
+    } catch (e) {
+      setError(e instanceof ApiError ? e.message : 'Jeton refusé.');
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function submitTotp(event: React.FormEvent) {
+    event.preventDefault();
+    setBusy(true);
+    setError(null);
+    try {
+      if (gate.kind === 'enroll') {
+        const data = await apiFetch<Record<string, unknown>>('/v1/auth/mfa/enable', {
+          method: 'POST',
+          body: JSON.stringify({ enrollment_token: gate.enrollment_token, code: totp }),
+        });
+        await consumeAuthPayload(data, setGate, go);
         return;
       }
-      const data = (await res.json()) as {
-        access_token?: string;
-        role?: string;
-      };
-      if (!data.access_token) {
-        setError('Réponse inattendue du serveur.');
-        return;
+      if (gate.kind === 'mfa') {
+        const data = await apiFetch<Record<string, unknown>>('/v1/auth/mfa/verify', {
+          method: 'POST',
+          body: JSON.stringify({ mfa_token: gate.mfa_token, code: totp }),
+        });
+        await consumeAuthPayload(data, setGate, go);
       }
-      if (data.role && !CMS_ROLES.includes(data.role)) {
-        setError("Ce compte n'a pas accès au CMS.");
-        return;
-      }
-      setSession(data.access_token, data.role);
-      // Navigation dure plutôt que `router.replace` : la destination
-      // est calculée à l'exécution, donc incompatible avec les routes
-      // typées de Next. Un rechargement complet garantit aussi que le
-      // middleware relit le cookie fraîchement posé.
-      window.location.assign(safeRedirectTarget(params.get('from')));
-    } catch {
-      setError('Serveur injoignable.');
+    } catch (e) {
+      setError(e instanceof ApiError ? e.message : 'Code refusé.');
     } finally {
       setBusy(false);
     }
@@ -85,40 +172,131 @@ function LoginForm() {
     <div className="mx-auto max-w-sm py-16">
       <h1 className="text-xl font-semibold">Connexion au CMS</h1>
       <p className="mt-2 text-sm text-slate-600">
-        Réservé aux comptes éditoriaux MedAnki DZ.
+        Magic link. Les comptes admin exigent un TOTP RFC 6238. Le jeton
+        d&apos;accès n&apos;est pas lisible par le JavaScript.
       </p>
 
-      <form onSubmit={onSubmit} className="mt-8 space-y-4">
-        <div>
-          <label htmlFor="email" className="block text-sm font-medium">
-            Adresse e-mail
-          </label>
-          <input
-            id="email"
-            type="email"
-            required
-            autoComplete="username"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            disabled={busy}
-            className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 disabled:bg-slate-100"
-          />
-        </div>
+      {(gate.kind === 'idle' || gate.kind === 'link_sent') && (
+        <>
+          <form onSubmit={requestLink} className="mt-8 space-y-4">
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium">
+                Adresse e-mail
+              </label>
+              <input
+                id="email"
+                type="email"
+                required
+                autoComplete="username"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={busy}
+                className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 disabled:bg-slate-100"
+              />
+            </div>
+            <button
+              type="submit"
+              disabled={busy || email.trim().length === 0}
+              className="w-full rounded-md bg-slate-900 px-4 py-2 text-white disabled:bg-slate-400"
+            >
+              {busy ? 'Envoi…' : 'Envoyer le lien'}
+            </button>
+          </form>
+          <form onSubmit={verifyToken} className="mt-8 space-y-4">
+            <div>
+              <label htmlFor="token" className="block text-sm font-medium">
+                Jeton magic link
+              </label>
+              <input
+                id="token"
+                type="text"
+                value={magicToken}
+                onChange={(e) => setMagicToken(e.target.value)}
+                disabled={busy}
+                className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 disabled:bg-slate-100"
+              />
+            </div>
+            <button
+              type="submit"
+              disabled={busy || magicToken.trim().length === 0}
+              className="w-full rounded-md border border-slate-300 px-4 py-2 disabled:bg-slate-100"
+            >
+              Valider le jeton
+            </button>
+          </form>
+        </>
+      )}
 
-        {error && (
-          <p role="alert" className="text-sm text-red-600">
-            {error}
+      {gate.kind === 'link_sent' && (
+        <p className="mt-8 text-sm text-slate-700">
+          Si le compte existe, un lien a été envoyé. Collez le jeton ci-dessus
+          si votre mail pointe vers l&apos;API plutôt que vers le CMS.
+        </p>
+      )}
+
+      {gate.kind === 'enroll' && (
+        <form onSubmit={submitTotp} className="mt-8 space-y-4">
+          <p className="text-sm">
+            Scannez ce secret dans une appli TOTP (SHA1, 30s, 6 chiffres) :
           </p>
-        )}
+          <code className="block break-all rounded bg-slate-100 p-2 text-xs">
+            {gate.secret_base32}
+          </code>
+          <p className="break-all text-xs text-slate-500">{gate.otpauth_url}</p>
+          <TotpField value={totp} onChange={setTotp} busy={busy} />
+          <button
+            type="submit"
+            disabled={busy || totp.length !== 6}
+            className="w-full rounded-md bg-slate-900 px-4 py-2 text-white disabled:bg-slate-400"
+          >
+            Activer la MFA
+          </button>
+        </form>
+      )}
 
-        <button
-          type="submit"
-          disabled={busy || email.trim().length === 0}
-          className="w-full rounded-md bg-slate-900 px-4 py-2 text-white disabled:bg-slate-400"
-        >
-          {busy ? 'Connexion…' : 'Se connecter'}
-        </button>
-      </form>
+      {gate.kind === 'mfa' && (
+        <form onSubmit={submitTotp} className="mt-8 space-y-4">
+          <TotpField value={totp} onChange={setTotp} busy={busy} />
+          <button
+            type="submit"
+            disabled={busy || totp.length !== 6}
+            className="w-full rounded-md bg-slate-900 px-4 py-2 text-white disabled:bg-slate-400"
+          >
+            Vérifier
+          </button>
+        </form>
+      )}
+
+      {error && (
+        <p role="alert" className="mt-4 text-sm text-red-600">
+          {error}
+        </p>
+      )}
+    </div>
+  );
+}
+
+function TotpField(props: {
+  value: string;
+  onChange: (v: string) => void;
+  busy: boolean;
+}) {
+  return (
+    <div>
+      <label htmlFor="totp" className="block text-sm font-medium">
+        Code TOTP
+      </label>
+      <input
+        id="totp"
+        inputMode="numeric"
+        autoComplete="one-time-code"
+        pattern="[0-9]{6}"
+        maxLength={6}
+        value={props.value}
+        onChange={(e) => props.onChange(e.target.value.replace(/\D/g, '').slice(0, 6))}
+        disabled={props.busy}
+        className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 disabled:bg-slate-100"
+      />
     </div>
   );
 }

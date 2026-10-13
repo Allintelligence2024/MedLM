@@ -50,11 +50,8 @@ spec:
                 secretKeyRef:
                   name: {{ include "medanki-backend.fullname" . }}-secrets
                   key: database-url
-            - name: JWT_SIGNING_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: {{ include "medanki-backend.fullname" . }}-secrets
-                  key: jwt-signing-key
+            - name: JWT_SIGNING_KEY_PATH
+              value: /var/run/secrets/jwt/jwt-private.pem
             {{- if .Values.otel.enabled }}
             - name: OTEL_EXPORTER_OTLP_ENDPOINT
               value: {{ .Values.otel.endpoint | quote }}
@@ -82,8 +79,19 @@ spec:
             periodSeconds: {{ .Values.probes.liveness.periodSeconds }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: jwt-signing
+              mountPath: /var/run/secrets/jwt
+              readOnly: true
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
+      volumes:
+        - name: jwt-signing
+          secret:
+            secretName: {{ include "medanki-backend.fullname" . }}-secrets
+            items:
+              - key: jwt-signing-key
+                path: jwt-private.pem
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

@@ -1,4 +1,5 @@
 import {
+  All,
   Body,
   Controller,
   Headers,
@@ -26,19 +27,27 @@ export class MagicLinkController {
   /// POST /v1/auth/magic-link — demande un lien par email.
   @Post()
   @HttpCode(HttpStatus.ACCEPTED)
-  async request(@Body() body: unknown) {
+  async request(
+    @Body() body: unknown,
+    @Headers('X-Platform') platform?: string,
+  ) {
     const { email } = MagicLinkRequestBody.parse(body);
-    return this.service.request({ email });
+    return this.service.request({ email, platform: platform ?? 'web' });
   }
 
-  /// GET /v1/auth/magic-link/verify?token=…  — vérifie et émet tokens.
-  @Post('verify')
+  /// GET|POST /v1/auth/magic-link/verify?token=… — vérifie et émet tokens.
+  @All('verify')
   @HttpCode(HttpStatus.OK)
   async verify(
     @Query() query: unknown,
     @Headers('X-Platform') platform: string,
+    @Headers('X-Device-Id') deviceId?: string,
   ) {
     const { token } = MagicLinkVerifyQuery.parse(query);
-    return this.service.verify({ token, platform: platform ?? 'web' });
+    return this.service.verify({
+      token,
+      platform: platform ?? 'web',
+      ...(deviceId ? { deviceToken: deviceId } : {}),
+    });
   }
 }

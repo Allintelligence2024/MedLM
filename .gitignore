@@ -62,3 +62,7 @@ mobile/macos/
 mobile/windows/
 mobile/web/
 mobile/.flutter-plugins*
+
+# Local remediation diagnostics and Python environment
+/.venv/
+/.cache/remediation/

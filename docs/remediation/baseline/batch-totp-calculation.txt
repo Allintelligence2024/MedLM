@@ -1,0 +1,3 @@
+RFC-compatible 6-digit result at 59s: 287082
+Algorithm transcribed from batch_P3, nowMs=59000: 119679
+Mismatch confirmed: plain hash instead of HMAC, milliseconds instead of seconds.

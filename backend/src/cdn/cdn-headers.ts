@@ -1,5 +1,9 @@
 // CdnHeaders — Phase 17.4.
 //
+// NON BRANCHÉ sur le HTTP Nest (R09 / Phase 4). Conservé comme helper
+// testé ; l'API auth JSON ne pose pas ces headers. Ne pas « fake-wire »
+// pour fermer le risque.
+//
 // Helper pour configurer les headers HTTP de cache statique.
 // Le CDN (Cloudflare) lit ces headers et applique la politique
 // de cache appropriée.

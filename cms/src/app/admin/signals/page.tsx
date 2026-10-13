@@ -16,9 +16,8 @@ import type {
   SignalsScanResponse,
 } from '@/lib/signals';
 import { Radar, RefreshCw } from 'lucide-react';
-import { getToken } from '@/lib/auth';
-
-const API = process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:3000';
+import { apiFetch } from '@/lib/api';
+import { OutOfScopeBanner } from '@/components/admin/out_of_scope';
 
 export default function SignalsPage() {
   const [signals, setSignals] = useState<DifficultySignal[]>([]);
@@ -28,17 +27,13 @@ export default function SignalsPage() {
   const [error, setError] = useState<string | null>(null);
   const [scanResult, setScanResult] = useState<SignalsScanResponse | null>(null);
 
-  const token = () => getToken();
-
   const load = useCallback(async (s: SignalStatus) => {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch(`${API}/v1/ai/adaptive/signals?status=${s}&limit=100`, {
-        headers: { Authorization: `Bearer ${token()}` },
-      });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = (await res.json()) as SignalsListResponse;
+      const data = await apiFetch<SignalsListResponse>(
+        `/v1/ai/adaptive/signals?status=${s}&limit=100`,
+      );
       setSignals(data.signals ?? []);
     } catch (e) {
       setError((e as Error).message);
@@ -55,16 +50,10 @@ export default function SignalsPage() {
     setScanning(true);
     setError(null);
     try {
-      const res = await fetch(`${API}/v1/ai/adaptive/signals/scan`, {
+      const data = await apiFetch<SignalsScanResponse>('/v1/ai/adaptive/signals/scan', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token()}`,
-        },
         body: JSON.stringify({}),
       });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = (await res.json()) as SignalsScanResponse;
       setScanResult(data);
       await load(status);
     } catch (e) {
@@ -76,6 +65,7 @@ export default function SignalsPage() {
 
   return (
     <div className="space-y-4 p-6">
+      <OutOfScopeBanner feature="Les signaux IA de difficulté" />
       <header className="flex items-start justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold">Signaux de difficulté IA</h1>

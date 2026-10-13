@@ -15,8 +15,9 @@
 ///   * `InMemoryCostBudgetStore` — comportement historique, utilisé
 ///     quand `REDIS_URL` est absent (dev, test, mono-instance).
 ///
-/// La sélection est automatique : présence de Redis = budget global.
-/// Aucun changement de configuration à faire pour en bénéficier.
+/// La sélection : `cache.connect()` AVANT le factory Nest, puis
+/// `cache.client`. Sans REDIS_URL → mémoire. REDIS_URL + panne :
+/// GATEWAY_BUDGET_ON_REDIS_ERROR=fail-open (défaut) | fail-closed.
 import { Logger } from '@nestjs/common';
 import {
   GATEWAY_COST_BUDGET_PER_HOUR,
@@ -91,15 +92,28 @@ export interface RedisBudgetClient {
   expire(key: string, seconds: number): Promise<unknown>;
 }
 
+export type BudgetFailMode = 'fail-open' | 'fail-closed';
+
+/// Choisit le store APRÈS connexion Redis (R04). Sans client → mémoire.
+export function selectCostBudgetStore(args: {
+  client: RedisBudgetClient | null;
+  failMode?: BudgetFailMode;
+}): CostBudgetStore {
+  if (!args.client) return new InMemoryCostBudgetStore();
+  return new RedisCostBudgetStore(args.client, new InMemoryCostBudgetStore(), args.failMode ?? 'fail-open');
+}
+
 /// Implémentation Redis — budget partagé entre tous les pods.
 export class RedisCostBudgetStore implements CostBudgetStore {
   private readonly logger = new Logger(RedisCostBudgetStore.name);
 
   constructor(
     private readonly client: RedisBudgetClient,
-    /// Repli utilisé si Redis répond une erreur : mieux vaut un budget
-    /// par pod qu'un gateway indisponible.
+    /// Repli fail-open : mieux vaut un budget par pod qu'un gateway down.
     private readonly fallback: CostBudgetStore = new InMemoryCostBudgetStore(),
+    /// fail-closed : Redis down → remaining=0 (refuse). Explicitement
+    /// GATEWAY_BUDGET_ON_REDIS_ERROR=fail-closed.
+    private readonly failMode: BudgetFailMode = 'fail-open',
   ) {}
 
   async remaining(userId: string, now: number): Promise<number> {
@@ -107,8 +121,14 @@ export class RedisCostBudgetStore implements CostBudgetStore {
       const raw = await this.client.mget(...bucketKeys(userId, now));
       return remainingFromBuckets(raw.map((v) => (v === null ? null : Number(v))));
     } catch (e) {
+      if (this.failMode === 'fail-closed') {
+        this.logger.warn(
+          `budget Redis illisible (${(e as Error).message}) — fail-closed`,
+        );
+        return 0;
+      }
       this.logger.warn(
-        `budget Redis illisible (${(e as Error).message}) — repli mémoire`,
+        `budget Redis illisible (${(e as Error).message}) — fail-open mémoire`,
       );
       return this.fallback.remaining(userId, now);
     }
@@ -118,12 +138,16 @@ export class RedisCostBudgetStore implements CostBudgetStore {
     const key = `gw:budget:${userId}:${bucketFor(now)}`;
     try {
       await this.client.incrby(key, cost);
-      // Le seau expire une fenêtre après sa fin : pas de purge à
-      // écrire, Redis s'en charge.
       await this.client.expire(key, Math.ceil(GATEWAY_WINDOW_MS / 1000) + 60);
     } catch (e) {
+      if (this.failMode === 'fail-closed') {
+        this.logger.warn(
+          `budget Redis non incrémenté (${(e as Error).message}) — fail-closed, ignore`,
+        );
+        return;
+      }
       this.logger.warn(
-        `budget Redis non incrémenté (${(e as Error).message}) — repli mémoire`,
+        `budget Redis non incrémenté (${(e as Error).message}) — fail-open mémoire`,
       );
       await this.fallback.consume(userId, cost, now);
     }

@@ -11,6 +11,7 @@ import {
   BUCKET_MS,
   InMemoryCostBudgetStore,
   RedisCostBudgetStore,
+  selectCostBudgetStore,
   bucketFor,
   bucketKeys,
   remainingFromBuckets,
@@ -199,6 +200,32 @@ describe('RedisCostBudgetStore — le budget devient global', () => {
     await expect(store.consume('u1', 100, NOW)).resolves.toBeUndefined();
     await expect(store.remaining('u1', NOW)).resolves.toBe(
       GATEWAY_COST_BUDGET_PER_HOUR - 100,
+    );
+  });
+
+  it('fail-closed : Redis down → remaining = 0', async () => {
+    const redis = new FakeRedis();
+    redis.failNext = true;
+    const store = new RedisCostBudgetStore(
+      redis,
+      new InMemoryCostBudgetStore(),
+      'fail-closed',
+    );
+    expect(await store.remaining('u1', NOW)).toBe(0);
+    await expect(store.consume('u1', 10, NOW)).resolves.toBeUndefined();
+  });
+});
+
+describe('selectCostBudgetStore', () => {
+  it('sans client Redis → mémoire (un pod)', () => {
+    expect(selectCostBudgetStore({ client: null })).toBeInstanceOf(
+      InMemoryCostBudgetStore,
+    );
+  });
+
+  it('avec client → Redis (budget partagé)', () => {
+    expect(selectCostBudgetStore({ client: new FakeRedis() })).toBeInstanceOf(
+      RedisCostBudgetStore,
     );
   });
 });

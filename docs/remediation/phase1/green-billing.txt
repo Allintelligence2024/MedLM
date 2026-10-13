@@ -1,0 +1,11 @@
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+
+ RUN  v2.1.9 /home/user/MedLM/backend
+
+ ✓ test/integration/billing-postgres.test.ts (26 tests) 3906ms
+
+ Test Files  1 passed (1)
+      Tests  26 passed (26)
+   Start at  19:22:13
+   Duration  5.30s (transform 268ms, setup 0ms, collect 1.16s, tests 3.91s, environment 0ms, prepare 59ms)
+

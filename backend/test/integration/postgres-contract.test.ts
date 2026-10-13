@@ -63,7 +63,7 @@ describe('PostgreSQL MVP Contract — real engine (PGlite)', () => {
   // ── 1. Migrations ──────────────────────────────────────────────────────
   it('applique les migrations sans erreur', async () => {
     const journal = readJournal();
-    expect(journal).toHaveLength(22);
+    expect(journal.length).toBeGreaterThanOrEqual(24);
     await applyMigrations(db);
   }, 120_000);
 
@@ -105,6 +105,31 @@ describe('PostgreSQL MVP Contract — real engine (PGlite)', () => {
     );
     const count = parseInt(result.rows[0]!.cnt, 10);
     expect(count).toBeGreaterThanOrEqual(20);
+  });
+
+  it('honore le contrat nominatif REQUIRED_FOREIGN_KEYS (pas un compteur)', async () => {
+    const { REQUIRED_FOREIGN_KEYS } = await import('../../src/db/fk-inventory');
+    const delMap: Record<string, string> = {
+      a: 'NO ACTION',
+      r: 'RESTRICT',
+      c: 'CASCADE',
+      n: 'SET NULL',
+      d: 'SET DEFAULT',
+    };
+    const result = await db.query<{ conname: string; confdeltype: string; def: string }>(
+      `SELECT conname, confdeltype::text AS confdeltype, pg_get_constraintdef(oid) AS def
+       FROM pg_constraint
+       WHERE contype = 'f'
+         AND connamespace = (SELECT oid FROM pg_namespace WHERE nspname = 'public')`,
+    );
+    const byName = new Map(result.rows.map((row) => [row.conname, row]));
+    for (const spec of REQUIRED_FOREIGN_KEYS) {
+      const row = byName.get(spec.name);
+      expect(row, `FK manquante : ${spec.name}`).toBeDefined();
+      expect(delMap[row!.confdeltype], spec.name).toBe(spec.onDelete);
+      expect(row!.def.toLowerCase()).toContain(`(${spec.column})`);
+      expect(row!.def.toLowerCase()).toContain(`references ${spec.foreignTable}(${spec.foreignColumn})`);
+    }
   });
 
   // ── 4. Contraintes CHECK ──────────────────────────────────────────────
@@ -271,6 +296,16 @@ describe('PostgreSQL MVP Contract — real engine (PGlite)', () => {
   });
 
   // ── 8. Append-only review_logs ────────────────────────────────────────
+  it('refuse DELETE dun utilisateur qui a des review_logs (RESTRICT, pas CASCADE)', async () => {
+    await db.exec(
+      `INSERT INTO review_logs (id, user_id, card_id, device_id, rating, duration_ms, card_type, exam_mode, reviewed_at, received_at)
+       VALUES ('aa000000-0000-4000-8000-000000000001', '00000000-0000-4000-8000-000000000003', '00000000-0000-4000-8000-000000000040', 'dev', 3, 100, 'basic', false, 1700000001000, now())`,
+    );
+    await expect(
+      db.exec(`DELETE FROM users WHERE id = '00000000-0000-4000-8000-000000000003'`),
+    ).rejects.toThrow();
+  });
+
   it('refuse UPDATE sur review_logs (append-only trigger)', async () => {
     await db.exec(
       `INSERT INTO review_logs (id, user_id, card_id, device_id, rating, duration_ms, card_type, exam_mode, reviewed_at, received_at)

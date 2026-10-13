@@ -10,12 +10,20 @@
 //   4. Le coordinateur paie → tous les entitlements sont activés.
 //   5. Si le pack expire (24h) sans être plein, on le marque
 //      'expired' et on notifie le coordinateur (Phase 14+).
-import { Inject, Injectable, Logger, BadRequestException, NotFoundException } from '@nestjs/common';
-import { eq, sql } from 'drizzle-orm';
+import {
+  Inject,
+  Injectable,
+  Logger,
+  BadRequestException,
+  NotFoundException,
+} from '@nestjs/common';
+import { eq, sql, and } from 'drizzle-orm';
 import { randomBytes } from 'node:crypto';
 import { DRIZZLE, Database } from '../db/database.module';
 import { groupPacks, groupPackMembers } from '../db/schema/group-packs';
 import { users } from '../db/schema/users';
+import { paymentOrders } from '../db/schema/payment-orders';
+type Transaction = Parameters<Parameters<Database['transaction']>[0]>[0];
 import { PLAN_PRICING_DA, PlanId } from '../billing/billing.dto';
 import { CreatePackBody, GroupPackView, JoinPackBody } from './group-packs.dto';
 
@@ -31,54 +39,62 @@ export class GroupPacksService {
   constructor(@Inject(DRIZZLE) private readonly db: Database) {}
 
   /// Crée un pack et y ajoute le coordinateur comme 1er membre.
-  async create(args: { userId: string; body: CreatePackBody }): Promise<GroupPackView> {
+  async create(args: {
+    userId: string;
+    body: CreatePackBody;
+  }): Promise<GroupPackView> {
     const baseCents = PLAN_PRICING_DA[args.body.plan] * 100;
     const perUserCents = Math.round(baseCents * (1 - DISCOUNT_PCT / 100));
     const inviteCode = this._generateInviteCode();
 
     const expiresAt = new Date(Date.now() + TTL_HOURS * 60 * 60 * 1000);
-    const inserted = await this.db
-      .insert(groupPacks)
-      .values({
-        coordinatorUserId: args.userId,
-        plan: args.body.plan,
-        faculty: args.body.faculty ?? null,
-        inviteCode,
-        status: 'pending',
-        perUserCents,
-        expiresAt,
-      })
-      .returning({ id: groupPacks.id });
-    const packId = inserted[0]!.id;
+    return this.db.transaction(async (tx) => {
+      const inserted = await tx
+        .insert(groupPacks)
+        .values({
+          coordinatorUserId: args.userId,
+          plan: args.body.plan,
+          faculty: args.body.faculty ?? null,
+          inviteCode,
+          status: 'pending',
+          perUserCents,
+          expiresAt,
+        })
+        .returning({ id: groupPacks.id });
+      const packId = inserted[0]!.id;
 
-    // Ajoute le coordinateur comme membre.
-    await this.db.insert(groupPackMembers).values({
-      packId,
-      userId: args.userId,
-      isCoordinator: 'true',
+      // Ajoute le coordinateur comme membre.
+      await tx.insert(groupPackMembers).values({
+        packId,
+        userId: args.userId,
+        isCoordinator: 'true',
+      });
+
+      this.logger.log(
+        `pack créé: id=${packId} coordinateur=${args.userId} plan=${args.body.plan} code=${inviteCode}`,
+      );
+      return this._view(packId, tx);
     });
-
-    this.logger.log(
-      `pack créé: id=${packId} coordinateur=${args.userId} plan=${args.body.plan} code=${inviteCode}`,
-    );
-    return this._view(packId);
   }
 
   /// Rejoint un pack existant via son code d'invitation.
-  async join(args: { userId: string; body: JoinPackBody }): Promise<GroupPackView> {
+  async join(args: {
+    userId: string;
+    body: JoinPackBody;
+  }): Promise<GroupPackView> {
     const code = args.body.invite_code.toUpperCase();
     return this.db.transaction(async (tx) => {
       const pack = await tx
         .select()
         .from(groupPacks)
         .where(eq(groupPacks.inviteCode, code))
+        .for('update')
         .then((rows) => rows[0]);
-      if (!pack) throw new NotFoundException('code d\'invitation inconnu');
+      if (!pack) throw new NotFoundException("code d'invitation inconnu");
       if (pack.status !== 'pending') {
         throw new BadRequestException(`pack ${pack.status}`);
       }
       if (pack.expiresAt.getTime() < Date.now()) {
-        await tx.update(groupPacks).set({ status: 'expired' }).where(eq(groupPacks.id, pack.id));
         throw new BadRequestException('pack expiré');
       }
       const memberCount = await tx
@@ -97,7 +113,10 @@ export class GroupPacksService {
           isCoordinator: 'false',
         });
       } catch (e) {
-        if ((e as Error).message?.includes('UNIQUE') || (e as Error).message?.includes('unique')) {
+        if (
+          (e as Error).message?.includes('UNIQUE') ||
+          (e as Error).message?.includes('unique')
+        ) {
           throw new BadRequestException('déjà membre de ce pack');
         }
         throw e;
@@ -114,12 +133,16 @@ export class GroupPacksService {
       this.logger.log(
         `pack rejoint: id=${pack.id} nouveau=${args.userId} count=${newCount}/${PACK_SIZE}`,
       );
-      return this._view(pack.id);
+      return this._view(pack.id, tx);
     });
   }
 
   /// Lit l'état d'un pack (par son id ou son invite_code).
-  async get(args: { packId?: string; inviteCode?: string; userId: string }): Promise<GroupPackView> {
+  async get(args: {
+    packId?: string;
+    inviteCode?: string;
+    userId: string;
+  }): Promise<GroupPackView> {
     let packId = args.packId;
     if (!packId && args.inviteCode) {
       const p = await this.db
@@ -131,11 +154,24 @@ export class GroupPacksService {
       packId = p.id;
     }
     if (!packId) throw new BadRequestException('packId ou inviteCode requis');
+    const members = await this.db
+      .select()
+      .from(groupPackMembers)
+      .where(
+        and(
+          eq(groupPackMembers.packId, packId),
+          eq(groupPackMembers.userId, args.userId),
+        ),
+      );
+    if (!members.length) throw new NotFoundException('pack introuvable');
     return this._view(packId);
   }
 
   /// Calcule le prix par user + l'économie totale.
-  _computeSavings(plan: PlanId): { perUserCents: number; savingsCents: number } {
+  _computeSavings(plan: PlanId): {
+    perUserCents: number;
+    savingsCents: number;
+  } {
     const baseCents = PLAN_PRICING_DA[plan] * 100;
     const perUserCents = Math.round(baseCents * (1 - DISCOUNT_PCT / 100));
     const savingsCents = (baseCents - perUserCents) * PACK_SIZE;
@@ -152,14 +188,17 @@ export class GroupPacksService {
   }
 
   /// Construit la vue publique d'un pack.
-  private async _view(packId: string): Promise<GroupPackView> {
-    const pack = await this.db
+  private async _view(
+    packId: string,
+    db: Database | Transaction = this.db,
+  ): Promise<GroupPackView> {
+    const pack = await db
       .select()
       .from(groupPacks)
       .where(eq(groupPacks.id, packId))
       .then((rows) => rows[0]);
     if (!pack) throw new NotFoundException('pack introuvable');
-    const members = await this.db
+    const members = await db
       .select({
         userId: groupPackMembers.userId,
         isCoordinator: groupPackMembers.isCoordinator,
@@ -171,6 +210,15 @@ export class GroupPacksService {
       .where(eq(groupPackMembers.packId, packId));
     const baseCents = PLAN_PRICING_DA[pack.plan as PlanId] * 100;
     const savingsCents = (baseCents - pack.perUserCents) * PACK_SIZE;
+    const [order] = await db
+      .select()
+      .from(paymentOrders)
+      .where(
+        and(
+          eq(paymentOrders.groupPackId, pack.id),
+          eq(paymentOrders.status, 'pending'),
+        ),
+      );
     return {
       id: pack.id,
       plan: pack.plan,
@@ -188,7 +236,7 @@ export class GroupPacksService {
       per_user_cents: pack.perUserCents,
       total_savings_cents: savingsCents,
       expires_at: pack.expiresAt.toISOString(),
-      payment_url: null, // à brancher Phase 16+ avec Chargily
+      payment_url: order?.checkoutUrl ?? null,
       created_at: pack.createdAt.toISOString(),
     };
   }

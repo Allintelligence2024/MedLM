@@ -15,7 +15,7 @@
 ///   1. lire `review_logs` depuis le curseur ;
 ///   2. le client rejoue `fold` localement (c'est sa responsabilité).
 import { Inject, Injectable, Logger, BadRequestException } from '@nestjs/common';
-import { and, eq, gte, asc, inArray } from 'drizzle-orm';
+import { and, eq, gte, asc, inArray, sql } from 'drizzle-orm';
 import { reviewLogs, srsCardState, syncCursors } from '../db/schema';
 import { DRIZZLE, Database } from '../db/database.module';
 import { FsrsEngine } from '../common/fsrs/fsrs.engine';
@@ -79,6 +79,9 @@ export class SrsSyncService {
           accepted.push(e.id);
           continue;
         }
+        // SAVEPOINT : un FK (carte inconnue) abortait toute la
+        // transaction PostgreSQL — le catch JS ne suffisait pas.
+        await tx.execute(sql`SAVEPOINT srs_event`);
         try {
           await tx.insert(reviewLogs).values({
             id: e.id,
@@ -91,9 +94,12 @@ export class SrsSyncService {
             examMode: e.exam_mode,
             reviewedAt: e.reviewed_at,
           });
+          await tx.execute(sql`RELEASE SAVEPOINT srs_event`);
           accepted.push(e.id);
           cardsToRebuild.add(e.card_id);
         } catch (err) {
+          await tx.execute(sql`ROLLBACK TO SAVEPOINT srs_event`);
+          await tx.execute(sql`RELEASE SAVEPOINT srs_event`);
           this.logger.warn(`rejet event ${e.id}: ${(err as Error).message}`);
           rejected.push({ id: e.id, reason: (err as Error).message });
         }

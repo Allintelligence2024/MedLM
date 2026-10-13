@@ -1,0 +1,232 @@
+{
+  "schema_version": 1,
+  "reference_commit": "228d3d62ee6f1156543e0786fa7cbdf1e42dbc12",
+  "release_decision": "NO_GO",
+  "priority_definition": {
+    "P0": "bloque le parcours ou la frontière de confiance visés ; pas une note CVSS",
+    "P1": "à traiter avant livraison du périmètre affecté",
+    "P2": "dette ou preuve manquante ; fermer avant promesse correspondante"
+  },
+  "risks": [
+    {
+      "id": "R01",
+      "priority": "P0",
+      "title": "Paiement confirmé rejeté par entitlements_plan_check",
+      "evidence_level": "reproduced",
+      "scope": "checkout",
+      "phase": 1,
+      "evidence": "SKU commerciaux incompatibles avec free/premium en SQL",
+      "closure_criteria": "Quatre plans et promos créditent premium une seule fois, tests SQL et concurrence",
+      "status": "closed",
+      "remediation": "Attribution premium, contrat persistant, promotions réservées, groupe de cinq bénéficiaires, idempotence/concurrence et rapprochement audité testés sur PostgreSQL 16. CLI réelle testée dans son schéma.",
+      "verification": "PHASE_1_CLOSURE.md ; phase1-ci/final-run.json ; phase1-ci/source-manifest.json ; CI 36319139969",
+      "closure_scope": "Défaut précis corrigé et testé. Ne vaut pas qualification Chargily réelle ni GO production ; voir R15 et phases 2–6."
+    },
+    {
+      "id": "R02",
+      "priority": "P0",
+      "title": "Lecture premium/brouillon sans autorisation métier",
+      "evidence_level": "reproduced-service-and-guard",
+      "scope": "checkout",
+      "phase": 2,
+      "evidence": "ContentService.listDeckCards et handlers de lecture",
+      "closure_criteria": "Tests HTTP student/free/premium/editor, filtrage publié et entitlement partout",
+      "status": "closed",
+      "remediation": "Lectures apprenant, hints, examens et wrap-key : publié + entitlement. CMS staff, auteur = ses cartes. Presign média : 501 sans URL fictive.",
+      "verification": "PHASE_2.md ; test/unit/content_policy.test.ts ; test/integration/content-access.postgres.test.ts",
+      "closure_scope": "Défaut de lecture non autorisée corrigé et testé. N'implique ni chiffrement des cartes, ni isolation multi-tenant du catalogue, ni GO production."
+    },
+    {
+      "id": "R03",
+      "priority": "P0",
+      "title": "Auteur autorisé à approuver et publier seul",
+      "evidence_level": "reproduced-service-and-guard",
+      "scope": "checkout",
+      "phase": 2,
+      "evidence": "ContentController.transitionCard et ContentService",
+      "closure_criteria": "Rôles par transition et séparation auteur/relecteur testés",
+      "status": "closed",
+      "remediation": "Graphe de workflow + permissions par rôle ; interdiction d'auto-approbation/publication ; dérogation admin commentée et écrite dans audit_log ; snapshots card_versions.",
+      "verification": "PHASE_2.md ; test/unit/content_policy.test.ts ; test/integration/content-access.postgres.test.ts",
+      "closure_scope": "Séparation auteur/relecteur/éditeur testée. Ne vaut pas qualification CMS production ni GO."
+    },
+    {
+      "id": "R04",
+      "priority": "P1",
+      "title": "Redis non connecté, budget par instance",
+      "evidence_level": "confirmed-static",
+      "scope": "checkout",
+      "phase": 4,
+      "evidence": "connect() avant factory budget ; FakeRedis deux pods ; fail-open/fail-closed",
+      "closure_criteria": "Connexion avant DI budget, deux instances et panne testées",
+      "status": "closed",
+      "remediation": "CacheModule await connect() ; client ioredis conservé si ping KO ; GATEWAY_BUDGET_ON_REDIS_ERROR fail-open|fail-closed ; close() au shutdown.",
+      "verification": "PHASE_4.md ; cost_budget_store.test.ts ; redis_cache.test.ts",
+      "closure_scope": "Budget partagé dès REDIS_URL. CI sans Redis réel. Ne vaut pas qualification prod ni GO."
+    },
+    {
+      "id": "R05",
+      "priority": "P1",
+      "title": "Clés étrangères manquantes",
+      "evidence_level": "reproduced-sql",
+      "scope": "checkout",
+      "phase": 4,
+      "evidence": "REQUIRED_FOREIGN_KEYS + 0027_missing_fkeys ; RESTRICT review_logs",
+      "closure_criteria": "Contrat nominatif et migrations/backfill/effacement testés",
+      "status": "closed",
+      "remediation": "Inventaire nominatif ; orphelins avant ADD ; RESTRICT sur journaux ; ErasureService anonymise, ne DELETE pas users.",
+      "verification": "PHASE_4.md ; postgres-contract.test.ts ; erasure.postgres.test.ts ; fk-inventory.ts",
+      "closure_scope": "FK du contrat présentes en PGlite. Base sale avec review_logs orphelins échoue fort. Pas de GO."
+    },
+    {
+      "id": "R06",
+      "priority": "P1",
+      "title": "Configuration vérificateur entitlement incohérente",
+      "evidence_level": "reproduced",
+      "scope": "checkout",
+      "phase": 1,
+      "evidence": "EntitlementService.verify échoue sans PUBLIC_KEY_PATH malgré signature RS256",
+      "closure_criteria": "Clé dérivée ou exigée, RS256 vérifié, HS256 rejeté ; appelants identifiés",
+      "status": "closed",
+      "remediation": "Clé publique dérivée/configurée, RS256 strict et claims vérifiés. Expiration abonnement/JWT distincte, liaison utilisateur/appareil et cache fail-closed. Interop émetteur Nest réel → vérificateur Dart réel et APK debug validés en CI.",
+      "verification": "PHASE_1_CLOSURE.md ; phase1-ci/final-run.json ; phase1-ci/source-manifest.json ; CI 36319139969",
+      "closure_scope": "Défaut précis corrigé et testé. Ne vaut pas qualification Chargily réelle ni GO production ; voir R15 et phases 2–6."
+    },
+    {
+      "id": "R07",
+      "priority": "P1",
+      "title": "Rotation refresh non atomique",
+      "evidence_level": "reproduced-service-and-guard",
+      "scope": "checkout",
+      "phase": 3,
+      "evidence": "UPDATE RETURNING atomique ; concurrence deux connexions PostgreSQL",
+      "closure_criteria": "Test concurrent : un seul refresh accepté ; rejeu et révocation testés",
+      "status": "closed",
+      "remediation": "CAS UPDATE WHERE revoked_at IS NULL ; rejeu révoque la famille ; plafond 3 appareils.",
+      "verification": "PHASE_3.md ; auth-refresh-concurrency.postgres.test.ts ; auth-mfa.postgres.test.ts",
+      "closure_scope": "Rotation refresh testée. Ne vaut pas qualification mobile multi-appareil ni GO."
+    },
+    {
+      "id": "R08",
+      "priority": "P0-if-deployed",
+      "title": "MFA Drive incompatible RFC, absent du checkout",
+      "evidence_level": "reproduced-rfc-and-http",
+      "scope": "checkout",
+      "phase": 3,
+      "evidence": "HMAC-SHA1 RFC 6238 t=59s=287082 ; Drive SHA1 simple=119679 rejeté en test",
+      "closure_criteria": "Ne pas réintroduire ; MFA admin éprouvé, vecteurs RFC et récupération testés",
+      "status": "closed",
+      "remediation": "TOTP admin obligatoire à l'émission de session, secret AES-GCM, backups atomiques, pas de bypass d'enrôlement une fois actif.",
+      "verification": "PHASE_3.md ; totp.test.ts ; auth-mfa.postgres.test.ts",
+      "closure_scope": "MFA admin du checkout seulement, y compris replace en deux étapes. Pas de MFA étudiant, pas de GO."
+    },
+    {
+      "id": "R09",
+      "priority": "P2",
+      "title": "Tracing et helpers non consommés",
+      "evidence_level": "confirmed-static",
+      "scope": "checkout",
+      "phase": 4,
+      "evidence": "configureApp tracing + x-trace-id ; i18n magic-link ; CDN/router documentés inutilisés",
+      "closure_criteria": "Brancher et vérifier, ou retirer les promesses et le code inutile",
+      "status": "closed",
+      "remediation": "Middleware tracing + redaction ; magic-link i18n ; CDN et ReadReplicaRouter documentés non branchés (DRIZZLE_READ).",
+      "verification": "PHASE_4.md ; tracing.test.ts ; routing.test.ts ; i18n.test.ts",
+      "closure_scope": "Observabilité HTTP exercée sans secrets. Pas d'OTLP réel en CI. Pas de GO."
+    },
+    {
+      "id": "R10",
+      "priority": "P1",
+      "title": "Dépendances vulnérables",
+      "evidence_level": "reproduced-npm-audit",
+      "scope": "checkout",
+      "phase": 5,
+      "evidence": "53 backend, 29 CMS ; nanoid 3.3.18 ; exclusions Nest12/Next15/drizzle 0.45/vitest5",
+      "closure_criteria": "Advisories triés, versions corrigées, tests et justification des exclusions",
+      "status": "closed",
+      "remediation": "Triage runtime vs dev. Override nanoid 3.3.18. Pins next 14.2.35 et tiptap 2.27.3. Pas de audit fix --force. Nest 10, drizzle 0.36, vitest 2, Next 14 conservés avec justification.",
+      "verification": "PHASE_5.md ; advisories.md ; package-lock overrides",
+      "closure_scope": "Triage et exclusions documentées. Ne vaut pas absence de CVE ni GO. Revoir drizzle 0.45 et Next 15 avant exposition internet."
+    },
+    {
+      "id": "R11",
+      "priority": "P1",
+      "title": "CMS session serveur et upload R2 incomplets",
+      "evidence_level": "confirmed-static",
+      "scope": "checkout",
+      "phase": 5,
+      "evidence": "HttpOnly+CSRF phase 3. Catalogue cookie + liens édition. Presign SigV4 si R2_* sinon 501. Pas d'E2E R2 live.",
+      "closure_criteria": "Catalogue authentifié E2E et upload signé réel ; HttpOnly et CSRF traités",
+      "status": "in_progress",
+      "verification": "PHASE_5.md ; media_storage.test.ts ; content-access.postgres.test.ts"
+    },
+    {
+      "id": "R12",
+      "priority": "P1",
+      "title": "Manifests probes et configuration JWT incohérents",
+      "evidence_level": "confirmed-static",
+      "scope": "checkout",
+      "phase": 5,
+      "evidence": "Manifests 7188eca : /v1/healthz /v1/readyz, JWT_SIGNING_KEY_PATH fichier. Garde statique check_dockerfiles. Pas de cluster.",
+      "closure_criteria": "Déploiement réellement démarré, probes et montage secrets validés",
+      "status": "in_progress",
+      "verification": "PHASE_5.md ; deploy/helm ; deploy/k8s/base/backend-deployment.yaml"
+    },
+    {
+      "id": "R13",
+      "priority": "P1",
+      "title": "Mobile non qualifié, documentation généré fausse",
+      "evidence_level": "ci-built-not-device-qualified",
+      "scope": "checkout",
+      "phase": 6,
+      "evidence": "CI génère Drift puis analyze/tests/APK. README ne prétend plus que g.dart est commité ni que mobile-ci.yml existe. Appareil physique absent.",
+      "closure_criteria": "Build CI/appareil, génération déterministe et parcours hors ligne complet",
+      "status": "in_progress",
+      "verification": "PHASE_6.md ; .github/workflows/backend-ci.yml job mobile"
+    },
+    {
+      "id": "R14",
+      "priority": "P2",
+      "title": "Promesses scientifiques/médicales et produit non prouvées",
+      "evidence_level": "confirmed-evidence-gap",
+      "scope": "reports",
+      "phase": 6,
+      "evidence": "README, site/, store/ reformulés : plus de 697 cartes, partenariats, validation scientifique, E2E crypto, tuteur médical.",
+      "closure_criteria": "Reformuler et fournir validation adéquate avant toute promesse",
+      "status": "closed",
+      "remediation": "Promesses retirées plutôt que validées. Landing et stores disent NO-GO. Outil de révision, pas un avis médical.",
+      "verification": "PHASE_6.md ; README.md ; site/i18n.json ; store/play ; store/apple",
+      "closure_scope": "Surfaces produit alignées sur l'absence de preuve. Ne vaut pas revue humaine du corpus ni GO. Une nouvelle promesse sans preuve rouvre R14."
+    },
+    {
+      "id": "R15",
+      "priority": "P0",
+      "title": "Qualification Chargily externe et exploitation du rapprochement non réalisées",
+      "evidence_level": "confirmed-environment-blocker",
+      "scope": "checkout",
+      "phase": 1,
+      "evidence": "Propriétaire : aucun accès sandbox disponible. Contrat HTTP testé avec réponses substituées. CronJob/alertes fournis mais non déployés.",
+      "closure_criteria": "Paiement sandbox au montant affiché attendu, frais/metadata/HMAC vérifiés, reprise après réponse perdue, cinq bénéficiaires, promotions, job et alertes observés en staging ; validation des choix commerciaux.",
+      "status": "blocked",
+      "verification": "PHASE_1_CLOSURE.md ; aucune preuve sandbox déclarée"
+    }
+  ],
+  "excluded_claims": [
+    {
+      "claim": "Absence de commande préalable dans checkout actuel",
+      "reason": "Commande créée et rapprochée ; constat valable pour batch_P6 uniquement"
+    },
+    {
+      "claim": "Clé privée committée",
+      "reason": "Non démontré ; git ls-files backend/keys vide"
+    },
+    {
+      "claim": "Exploitation HS256 arbitraire prouvée en production",
+      "reason": "Reproduction rejette les tokens ; défaut de configuration confirmé, exploitation non démontrée"
+    },
+    {
+      "claim": "Next.js vulnérable dans backend",
+      "reason": "Absent audit backend ; critique observée Vitest dev"
+    }
+  ]
+}

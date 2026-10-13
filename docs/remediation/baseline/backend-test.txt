@@ -1,0 +1,68 @@
+
+> medanki-dz-backend@0.1.0 test
+> vitest run
+
+
+ RUN  v2.1.9 /home/user/MedLM/backend
+
+ ✓ test/unit/ai_adaptive.test.ts (19 tests) 12ms
+ ✓ test/unit/fsrs.parity.test.ts (85 tests) 58ms
+ ✓ test/unit/ai_generate.test.ts (24 tests) 14ms
+ ✓ test/unit/ai_hints.test.ts (31 tests) 11ms
+ ✓ test/unit/ai_tutor.test.ts (24 tests) 10ms
+[Nest] 1731  - 09/26/2026, 6:53:52 PM     LOG [ExamsService] exam a1 user=u1 score=50% (1/2) pass=true injected=1
+[Nest] 1731  - 09/26/2026, 6:53:52 PM     LOG [ExamsService] exam a1 user=u1 score=33% (1/3) pass=false injected=2
+ ✓ test/unit/exams.test.ts (6 tests) 10ms
+[Nest] 1751  - 09/26/2026, 6:53:52 PM    WARN [GatewayService] gateway DeckCatalog: REST /content/decks → HTTP 500
+ ✓ test/unit/graphql_gateway.test.ts (15 tests) 12ms
+[Nest] 1771  - 09/26/2026, 6:53:53 PM    WARN [RedisCostBudgetStore] budget Redis non incrémenté (redis down) — repli mémoire
+[Nest] 1771  - 09/26/2026, 6:53:53 PM    WARN [RedisCostBudgetStore] budget Redis illisible (redis down) — repli mémoire
+ ✓ test/unit/cost_budget_store.test.ts (18 tests) 12ms
+ ✓ test/unit/read_replica.test.ts (17 tests) 11ms
+ ✓ test/unit/fcm_oauth.test.ts (18 tests) 12ms
+ ✓ test/unit/voice_to_card.test.ts (15 tests) 11ms
+[Nest] 1855  - 09/26/2026, 6:53:55 PM     LOG [BillingService] entitlement credited: user=u1 plan=yearly expires=2027-09-26T18:53:55.584Z
+ ✓ test/unit/billing.service.test.ts (7 tests) 9ms
+ ✓ test/unit/ml_score.test.ts (12 tests) 9ms
+ ✓ test/unit/srs-sync.service.test.ts (6 tests) 10ms
+[Nest] 1915  - 09/26/2026, 6:53:56 PM    WARN [ChargilyPayProvider] CHARGILY_DRY_RUN=true : aucun appel réel à Chargily. À ne JAMAIS utiliser en production.
+[Nest] 1915  - 09/26/2026, 6:53:56 PM    WARN [ChargilyPayProvider] CHARGILY_DRY_RUN=true : aucun appel réel à Chargily. À ne JAMAIS utiliser en production.
+[Nest] 1915  - 09/26/2026, 6:53:56 PM    WARN [ChargilyPayProvider] CHARGILY_DRY_RUN=true : aucun appel réel à Chargily. À ne JAMAIS utiliser en production.
+[Nest] 1915  - 09/26/2026, 6:53:56 PM    WARN [ChargilyPayProvider] CHARGILY_API_SECRET absent — webhook non vérifié
+[Nest] 1915  - 09/26/2026, 6:53:56 PM     LOG [ChargilyPayProvider] webhook: eventId=e1 type=checkout.paid ref=co_1
+[Nest] 1915  - 09/26/2026, 6:53:56 PM     LOG [ChargilyPayProvider] webhook: eventId=e2 type=checkout.failed ref=co_2
+[Nest] 1915  - 09/26/2026, 6:53:56 PM     LOG [ChargilyPayProvider] webhook: eventId=e3 type=mystery.event ref=e3
+[Nest] 1915  - 09/26/2026, 6:53:56 PM    WARN [ChargilyPayProvider] Chargily webhook event type inconnu: mystery.event
+ ✓ test/unit/chargily_prod.test.ts (15 tests) 10ms
+ ✓ test/unit/ai_retention.test.ts (21 tests) 7ms
+ ✓ test/unit/jwt_config.test.ts (12 tests) 7ms
+ ✓ test/unit/unreachable.test.ts (20 tests) 6ms
+ ✓ test/unit/i18n_parity.test.ts (14 tests) 21ms
+ ✓ test/unit/migrations_journal.test.ts (11 tests) 42ms
+ ✓ test/unit/leaderboard.test.ts (6 tests) 228ms
+ ✓ test/unit/partnerships.test.ts (9 tests) 10ms
+ ✓ test/unit/onboarding.test.ts (9 tests) 8ms
+ ✓ test/unit/device_tokens.test.ts (13 tests) 9ms
+ ✓ test/unit/stats.test.ts (8 tests) 4ms
+ ✓ test/unit/i18n.test.ts (15 tests) 7ms
+ ✓ test/unit/group_packs.test.ts (11 tests) 7ms
+ ✓ test/unit/cdn_headers.test.ts (17 tests) 6ms
+ ✓ test/unit/share.test.ts (8 tests) 6ms
+ ✓ test/unit/deck_keys.test.ts (3 tests) 150ms
+ ✓ test/unit/tenants.test.ts (10 tests) 7ms
+ ✓ test/unit/redis_cache.test.ts (9 tests) 6ms
+ ✓ test/unit/exam_templates.test.ts (2 tests) 3ms
+ ✓ test/unit/regions.test.ts (9 tests) 7ms
+[Nest] 2315  - 09/26/2026, 6:54:03 PM   DEBUG [OtelExporter] OTel exporter disabled (no endpoint set)
+[Nest] 2315  - 09/26/2026, 6:54:03 PM     LOG [OtelExporter] OTel exporter enabled → http://otel.example
+ ✓ test/unit/otel_exporter.test.ts (2 tests) 6ms
+ ✓ test/unit/tracing.test.ts (4 tests) 10ms
+ ✓ test/unit/rbac.test.ts (6 tests) 4ms
+ ✓ test/unit/metrics.test.ts (2 tests) 3ms
+
+ Test Files  38 passed (38)
+      Tests  533 passed (533)
+   Start at  18:53:48
+   Duration  16.39s (transform 774ms, setup 0ms, collect 8.81s, tests 774ms, environment 7ms, prepare 2.05s)
+
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m

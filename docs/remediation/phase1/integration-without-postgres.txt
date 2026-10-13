@@ -1,0 +1,22 @@
+
+> medanki-dz-backend@0.1.0 test:integration
+> vitest run --config vitest.integration.config.ts
+
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+
+ RUN  v2.1.9 /home/user/MedLM/backend
+
+ ✓ test/integration/postgres-contract.test.ts (24 tests) 3424ms
+ ✓ test/integration/billing-postgres.test.ts (26 tests) 2700ms
+ ✓ test/integration/exams-timing.controller.test.ts (7 tests) 1510ms
+ ✓ test/integration/billing-webhook.controller.test.ts (7 tests) 316ms
+ ✓ test/integration/srs-sync.controller.test.ts (5 tests) 115ms
+ ✓ test/integration/auth-refresh.controller.test.ts (6 tests) 267ms
+ ↓ test/integration/billing-concurrency.postgres.test.ts (3 tests | 3 skipped)
+ ✓ test/integration/routing.test.ts (3 tests) 240ms
+
+ Test Files  7 passed | 1 skipped (8)
+      Tests  78 passed | 3 skipped (81)
+   Start at  19:26:19
+   Duration  10.11s (transform 791ms, setup 0ms, collect 1.27s, tests 8.57s, environment 0ms, prepare 59ms)
+

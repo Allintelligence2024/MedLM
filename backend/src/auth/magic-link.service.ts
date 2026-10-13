@@ -5,8 +5,9 @@ import { and, eq, isNull } from 'drizzle-orm';
 import { createHash, randomBytes } from 'crypto';
 import { DRIZZLE, Database } from '../db/database.module';
 import { authChallenges, users } from '../db/schema';
-import { TokenResponse } from './auth.dto';
+import { AuthSession } from './auth.service';
 import { AuthService } from './auth.service';
+import { DEFAULT_LANG, I18n, isSupported, type Lang } from '../i18n/i18n';
 
 export interface EmailSender {
   send(args: { to: string; subject: string; html: string }): Promise<void>;
@@ -15,6 +16,22 @@ export interface EmailSender {
 export const EMAIL_SENDER = Symbol('EMAIL_SENDER');
 const CHALLENGE_TTL_MS = 15 * 60 * 1000;
 
+/// Construit l'URL cliquable. Le CMS n'écoute pas `/auth/magic`.
+export function magicLinkHref(args: {
+  token: string;
+  platform: string;
+  appBase: string;
+  cmsBase?: string;
+}): string {
+  const token = encodeURIComponent(args.token);
+  if (args.platform === 'cms') {
+    const base = (args.cmsBase || args.appBase).replace(/\/$/, '');
+    return `${base}/admin/login?token=${token}`;
+  }
+  const base = args.appBase.replace(/\/$/, '');
+  return `${base}/auth/magic?token=${token}`;
+}
+
 @Injectable()
 export class MagicLinkService {
   constructor(
@@ -22,9 +39,10 @@ export class MagicLinkService {
     private readonly config: ConfigService,
     @Inject(EMAIL_SENDER) private readonly email: EmailSender,
     private readonly auth: AuthService,
+    private readonly i18n: I18n,
   ) {}
 
-  async request(args: { email: string }): Promise<{ sent: true }> {
+  async request(args: { email: string; platform?: string }): Promise<{ sent: true }> {
     const email = args.email.trim().toLowerCase();
     const token = randomBytes(32).toString('base64url');
     const tokenHash = createHash('sha256').update(token).digest('hex');
@@ -34,20 +52,36 @@ export class MagicLinkService {
       expiresAt: new Date(Date.now() + CHALLENGE_TTL_MS),
     });
 
-    const base = this.config.get<string>('MAGIC_LINK_BASE_URL') ?? 'https://medanki.dz';
-    const url = `${base}/auth/magic?token=${encodeURIComponent(token)}`;
+    const cmsBase = this.config.get<string>('MAGIC_LINK_CMS_URL');
+    const url = magicLinkHref({
+      token,
+      platform: args.platform ?? 'web',
+      appBase: this.config.get<string>('MAGIC_LINK_BASE_URL') ?? 'https://medanki.dz',
+      ...(cmsBase ? { cmsBase } : {}),
+    });
+    const existing = await this.db
+      .select({ langPref: users.langPref })
+      .from(users)
+      .where(eq(users.email, email))
+      .then((rows) => rows[0]);
+    const lang: Lang =
+      existing && isSupported(existing.langPref) ? existing.langPref : DEFAULT_LANG;
+    const subject = this.i18n.t(lang, 'auth.magic_link.subject');
+    const body = this.i18n.t(lang, 'auth.magic_link.body', { url });
     // Même réponse pour toute adresse : pas d'énumération de comptes.
     await this.email.send({
       to: email,
-      subject: 'Votre lien de connexion MedAnki DZ',
-      html: `<p>Cliquez sur le lien suivant pour vous connecter :</p>
-<p><a href="${url}">${url}</a></p>
-<p>Ce lien expire dans 15 minutes et ne peut être utilisé qu'une fois.</p>`,
+      subject,
+      html: `<p><a href="${url}">${url}</a></p><p>${body}</p>`,
     });
     return { sent: true };
   }
 
-  async verify(args: { token: string; platform: string }): Promise<TokenResponse> {
+  async verify(args: {
+    token: string;
+    platform: string;
+    deviceToken?: string;
+  }): Promise<AuthSession> {
     const tokenHash = createHash('sha256').update(args.token).digest('hex');
     const userId = await this.db.transaction(async (tx) => {
       const challenge = await tx
@@ -93,6 +127,6 @@ export class MagicLinkService {
       if (!user) throw new NotFoundException('utilisateur introuvable');
       return user.id;
     });
-    return this.auth.issueAccessFor(userId, args.platform);
+    return this.auth.issueAccessFor(userId, args.platform, args.deviceToken);
   }
 }

@@ -1,0 +1,15 @@
+[audit] Scan des secrets en dur...
+  ✓ aucun secret en dur
+[audit] Scan des console.log / print...
+  ⚠ backend/src/db/migrate.ts:80 — print/console.log en prod
+  ⚠ backend/src/db/migrate.ts:109 — print/console.log en prod
+  ⚠ backend/src/db/seed.ts:164 — print/console.log en prod
+  ⚠ backend/src/db/seed.ts:170 — print/console.log en prod
+  ⚠ backend/src/db/seed.ts:278 — print/console.log en prod
+[audit] Scan des @Body sans Zod parse...
+  ✓ tous les @Body validés par Zod
+[audit] Scan des contrôleurs sans @UseGuards...
+  ✓ tous les contrôleurs protégés
+
+[audit] 0 secrets, 5 print, 0 @Body non validés, 0 contrôleurs non protégés
+[audit] ✓ réussi

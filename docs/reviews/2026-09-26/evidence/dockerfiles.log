@@ -1,0 +1,1 @@
+✅ Docker validé statiquement (2 images : étapes, sources du contexte, healthchecks ↔ routes réelles, user non-root ; compose cohérent).

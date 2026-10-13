@@ -148,7 +148,7 @@ void main() {
       expect(await useCase.canAccessPremiumAt(1700000000000), isFalse);
     });
 
-    test('autorise pendant la grace period', () async {
+    test('refuse une grace period sans signature valide', () async {
       final FakeEntitlementRepository fake = FakeEntitlementRepository(
         const EntitlementState(
           plan: EntitlementPlan.premium,
@@ -159,7 +159,7 @@ void main() {
       );
       final ValidateEntitlementUseCase useCase =
           ValidateEntitlementUseCase(fake);
-      expect(await useCase.canAccessPremiumAt(2000), isTrue);
+      expect(await useCase.canAccessPremiumAt(2000), isFalse);
     });
   });
 

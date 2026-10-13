@@ -29,7 +29,7 @@ cd "$(dirname "${BASH_SOURCE[0]}")/../../backend"
 PORT=3992
 B="http://127.0.0.1:$PORT"
 FAIL=0
-ko() { echo "  ❌ $1"; FAIL=$((FAIL+1)); }
+ko() { echo "  ❌ $1"; echo "::error::$1"; FAIL=$((FAIL+1)); }
 ok() { echo "  ✓ $1"; }
 
 MAGIC_FILE=/tmp/medanki-e2e-magic-link.html
@@ -67,7 +67,7 @@ MAGIC_CODE=$(curl -s -o /tmp/body.txt -w "%{http_code}" -X POST \
   -d "{\"email\":\"$EMAIL\"}" "$B/v1/auth/magic-link" --max-time 10)
 [[ "$MAGIC_CODE" == "202" ]] && ok "demande magic-link → 202" || { ko "magic-link → $MAGIC_CODE : $(head -c 200 /tmp/body.txt)"; exit 1; }
 for _ in $(seq 1 20); do [[ -s "$MAGIC_FILE" ]] && break; sleep 0.25; done
-MAGIC_TOKEN=$(grep -oP 'token=\K[^&" ]+' "$MAGIC_FILE" | head -1)
+MAGIC_TOKEN=$(python3 -c 'import re,sys; html=open(sys.argv[1]).read(); m=re.search(r"token=([A-Za-z0-9_-]+)", html); print(m.group(1) if m else "")' "$MAGIC_FILE")
 [[ -n "$MAGIC_TOKEN" ]] || { ko "magic-link non capturé en environnement E2E"; exit 1; }
 TOKENS=$(curl -s -X POST -H 'X-Platform: mobile' \
   "$B/v1/auth/magic-link/verify?token=$MAGIC_TOKEN" --max-time 10)
@@ -134,15 +134,12 @@ C=$(code -X POST -H "Authorization: Bearer $AT" -H 'Content-Type: application/js
   -H 'X-Device-Id: device-e2e-0001' -d '{"events":[]}' "$B/v1/srs-sync/push")
 [[ "$C" == "400" ]] && ok "srs push batch vide → 400 (refusé par Zod)" || ko "srs push vide → $C"
 
-# Batch réel : l'événement doit être accepté et journalisé.
-EV=$(python3 -c "
-import json,uuid,time
-print(json.dumps({'events':[{
-  'id': str(uuid.uuid4()), 'card_id': str(uuid.uuid4()),
-  'user_id': '$UID_', 'device_id': 'device-e2e-0001',
-  'rating': 3, 'reviewed_at': int(time.time()*1000),
-  'duration_ms': 1500, 'card_type': 'basic', 'exam_mode': False,
-}]}))")
+# Batch réel : carte published du seed — un UUID inventé viole
+# review_logs_card_id_fkey (0027) et n'exerce pas le journal.
+SCHEMA="${PG_SCHEMA:-public}"
+CARD_ID=$(psql "$DATABASE_URL" -tAc "SELECT id FROM \"$SCHEMA\".cards WHERE status = 'published' LIMIT 1;" | tr -d '[:space:]')
+[[ "$CARD_ID" =~ ^[0-9a-fA-F-]{36}$ ]] || { ko "card_id seed invalide ($CARD_ID) schema=$SCHEMA"; echo "--- e2e2.log ---"; tail -40 /tmp/e2e2.log; exit 1; }
+EV=$(CARD_ID="$CARD_ID" UID_="$UID_" python3 -c 'import json, os, time, uuid; print(json.dumps({"events":[{"id": str(uuid.uuid4()), "card_id": os.environ["CARD_ID"], "user_id": os.environ["UID_"], "device_id": "device-e2e-0001", "rating": 3, "reviewed_at": int(time.time()*1000), "duration_ms": 1500, "card_type": "basic", "exam_mode": False}]}))')
 C=$(code -X POST -H "Authorization: Bearer $AT" -H 'Content-Type: application/json' \
   -H 'X-Device-Id: device-e2e-0001' -d "$EV" "$B/v1/srs-sync/push")
 [[ "$C" == "200" || "$C" == "201" ]] && ok "srs push 1 événement → $C" || ko "srs push réel → $C : $(head -c 250 /tmp/body.txt)"
@@ -217,5 +214,15 @@ echo "$M" | grep -q "medanki_http_requests_total" && ok "metrics expose requests
 echo "$M" | grep -q "medanki_auth_logins_total" && ok "metrics expose auth_logins_total" || ko "metrics sans auth_logins"
 
 echo
-[[ $FAIL -eq 0 ]] && echo "✅ Parcours métier : tout passe." || echo "❌ Parcours métier : $FAIL échec(s)."
+if [[ $FAIL -eq 0 ]]; then
+  echo "✅ Parcours métier : tout passe."
+  exit 0
+fi
+echo "❌ Parcours métier : $FAIL échec(s)."
+echo "--- /tmp/body.txt ---"
+head -c 400 /tmp/body.txt 2>/dev/null || true
+echo
+echo "--- /tmp/e2e2.log ---"
+tail -50 /tmp/e2e2.log 2>/dev/null || true
+echo "::error::parcours FAIL=$FAIL body=$(head -c 180 /tmp/body.txt 2>/dev/null) log=$(tail -c 300 /tmp/e2e2.log 2>/dev/null)"
 exit $FAIL

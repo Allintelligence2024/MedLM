@@ -14,6 +14,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { AsyncLocalStorage } from 'node:async_hooks';
 import { randomUUID } from 'node:crypto';
 import { OtelExporter } from './otel.exporter';
+import { sanitizeTraceAttributes } from './trace-sanitize';
 
 export interface TraceContext {
   traceId: string;
@@ -54,18 +55,19 @@ export class TracingService {
   /// Termine un span : log + export OTLP.
   finish(ctx: TraceContext, status: 'ok' | 'error'): void {
     const durationMs = Date.now() - ctx.startedAt;
+    const attributes = sanitizeTraceAttributes(ctx.attributes);
+    const safe: TraceContext = { ...ctx, attributes };
     setImmediate(() => {
       this.logger.log({
         trace: 'span.finish',
-        traceId: ctx.traceId,
-        spanId: ctx.spanId,
-        op: ctx.operation,
+        traceId: safe.traceId,
+        spanId: safe.spanId,
+        op: safe.operation,
         durationMs,
         status,
-        ...ctx.attributes,
+        ...attributes,
       });
-      // Export OTLP (no-op si l'endpoint n'est pas configuré).
-      this.exporter.enqueue(ctx, status);
+      this.exporter.enqueue(safe, status);
     });
   }
 
@@ -83,25 +85,31 @@ export class TracingService {
     return child;
   }
 
-  /// Middleware Express (utilisé par `main.ts`).
+  /// Middleware Express. `next()` est synchrone : ne jamais await le
+  /// cycle de vie de la réponse ici (ça a coincé le parcours HTTP réel).
   middleware() {
-    return (req: any, res: any, next: any) => {
-      const op = `${req.method} ${req.route?.path ?? req.path}`;
-      this.run(op, async (ctx) => {
-        res.setHeader('x-trace-id', ctx.traceId);
-        try {
-          await new Promise<void>((resolve, reject) => {
-            res.on('finish', () => resolve());
-            res.on('close', () => resolve());
-            res.on('error', reject);
-            next();
-          });
-          this.finish(ctx, res.statusCode >= 500 ? 'error' : 'ok');
-        } catch (e) {
-          this.finish(ctx, 'error');
-          throw e;
-        }
+    return (req: { method?: string; path?: string; route?: { path?: string } }, res: {
+      statusCode: number;
+      setHeader: (k: string, v: string) => void;
+      on: (ev: string, cb: (...args: unknown[]) => void) => void;
+    }, next: () => void) => {
+      const op = `${req.method ?? 'GET'} ${req.route?.path ?? req.path ?? '/'}`;
+      const ctx: TraceContext = {
+        traceId: randomUUID().replace(/-/g, ''),
+        spanId: randomUUID().slice(0, 16),
+        operation: op,
+        startedAt: Date.now(),
+        attributes: {
+          'http.method': req.method ?? 'GET',
+          'http.route': String(req.route?.path ?? req.path ?? '/'),
+        },
+      };
+      res.setHeader('x-trace-id', ctx.traceId);
+      res.on('finish', () => {
+        ctx.attributes['http.status_code'] = res.statusCode;
+        this.finish(ctx, res.statusCode >= 500 ? 'error' : 'ok');
       });
+      next();
     };
   }
 }

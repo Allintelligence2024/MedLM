@@ -1,0 +1,66 @@
+
+$ python3 tools/scripts/check_workflows.py
+EXIT 0
+⏭  PyYAML absent — validation des workflows ignorée
+
+$ python3 tools/scripts/check_dart_static.py
+EXIT 0
+  ⚠  lib/data/local/app_database.dart : `part 'app_database.g.dart'` mais le fichier n'existe pas — lancer `dart run build_runner build` et committer le résultat
+✅ Dart statique OK (129 fichiers : 0 déclaration imbriquée, 0 extension instanciée, imports résolus) (1 avertissement(s)).
+
+$ python3 tools/scripts/security_audit.py
+EXIT 0
+[audit] Scan des secrets en dur...
+  ✓ aucun secret en dur
+[audit] Scan des console.log / print...
+  ⚠ backend/src/db/migrate.ts:80 — print/console.log en prod
+  ⚠ backend/src/db/migrate.ts:109 — print/console.log en prod
+  ⚠ backend/src/db/seed.ts:164 — print/console.log en prod
+  ⚠ backend/src/db/seed.ts:170 — print/console.log en prod
+  ⚠ backend/src/db/seed.ts:278 — print/console.log en prod
+[audit] Scan des @Body sans Zod parse...
+  ✓ tous les @Body validés par Zod
+[audit] Scan des contrôleurs sans @UseGuards...
+  ✓ tous les contrôleurs protégés
+
+[audit] 0 secrets, 5 print, 0 @Body non validés, 0 contrôleurs non protégés
+[audit] ✓ réussi
+
+$ python3 tools/scripts/check_migrations_apply.py
+EXIT 0
+✅ Migrations complètes (39 tables du schéma toutes créées, 22 fichiers tous exécutables).
+
+$ python3 tools/dart_parity_check.py
+EXIT 0
+✅ Parité Dart/référence vérifiée (poids, formules critiques, pureté, invariants du fold).
+
+$ python3 tools/validate_content.py
+EXIT 0
+717 vérifications — 9 decks, 693 cartes, 15 cas invalides testés
+✅ Contenu conforme à la Content Policy et règles de rejet actives.
+
+$ python3 tools/ml_eval.py
+EXIT 0
+[ml_eval] cohorte synthétique : 4000 sujets
+[ml_eval] coefficients TS : {'logStreak': 0.3, 'matureRatio': 0.8, 'accuracy30d': 2.6, 'coverageRatio': 1.1, 'intercept': -1.2}
+[ml_eval] MAE=2.93 (max 10.0)
+[ml_eval] vrai score moyen par bande prédite : low=45.1, medium=59.6, high=83.8
+✅ Prédicteur validé offline (parité, calibration, séparation).
+
+$ python3 tools/scripts/check_mobile_i18n.py
+EXIT 0
+✅ i18n mobile conforme (213 clés × 3 langues, placeholders alignés, 0 chaîne en dur dans lib/ui/).
+
+$ python3 tools/scripts/check_regions.py
+EXIT 0
+✅ Multi-régions cohérent (3 régions DZ, 1 primary alger, overlays complets, aucun secret régional).
+
+$ python3 tools/scripts/check_dockerfiles.py
+EXIT 0
+  ⚠  docker-compose.yml : PyYAML absent — vérification structurelle ignorée
+✅ Docker validé statiquement (2 images : étapes, sources du contexte, healthchecks ↔ routes réelles, user non-root ; compose cohérent).
+
+$ python3 tools/scripts/generate_lockfiles.py --check
+EXIT 0
+[check] Vérification de la cohérence des lockfiles...
+[check] ✓ tous les lockfiles sont cohérents

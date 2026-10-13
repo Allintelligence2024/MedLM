@@ -1,14 +1,6 @@
-/// Adaptateur `IEntitlementRepository` (couche data).
-///
-/// Phase 4 : on stocke/relit le JWT dans la table `entitlement` (déjà
-/// présente dans le schéma v2). La vérification de signature RS256 viendra
-/// avec la Phase 7 — pour l'instant on lit le token tel quel et on expose
-/// un `EntitlementState` dérivé des colonnes `plan` / `expires_at` / `grace_until`.
-///
-/// Important : le serveur reste l'unique source de vérité du premium
-/// (doc v2 §8.1). Cette classe n'effectue aucun appel réseau ; elle
-/// n'est qu'un **cache** dont la fraîcheur est gérée par la couche de
-/// synchronisation.
+/// Legacy Drift cache retained for compatibility, NOT an authority for premium.
+/// It has no authenticated user/device binding or cryptographic verification.
+/// Fail closed; the production AppContainer uses RestEntitlementRepository.
 library;
 
 import 'package:drift/drift.dart';
@@ -17,6 +9,7 @@ import '../../domain/domain.dart';
 import '../local/app_database.dart';
 import '../local/tables.dart';
 
+@Deprecated('Use RestEntitlementRepository with signed, identity-bound claims')
 class EntitlementRepository implements IEntitlementRepository {
   EntitlementRepository(this._db);
 
@@ -30,7 +23,7 @@ class EntitlementRepository implements IEntitlementRepository {
     if (row == null) return EntitlementState.freeDefault;
     return EntitlementState(
       plan: _planFromWire(row.plan),
-      isValid: row.expiresAt != null && row.expiresAt! > _nowMs(),
+      isValid: false, // Unverified legacy rows cannot grant access, even in grace.
       expiresAtMs: row.expiresAt ?? 0,
       graceUntilMs: row.graceUntil,
     );
@@ -55,8 +48,6 @@ class EntitlementRepository implements IEntitlementRepository {
           ),
         );
   }
-
-  static int _nowMs() => DateTime.now().millisecondsSinceEpoch;
 
   static EntitlementPlan _planFromWire(String wire) {
     switch (wire) {

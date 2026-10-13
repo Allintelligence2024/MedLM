@@ -14,7 +14,8 @@ import {
 import { HintsService } from './hints.service';
 import { HintQuery } from './hints.dto';
 import { JwtGuard } from '../../auth/jwt.guard';
-import { CurrentUserId } from '../../auth/jwt.decorators';
+import { CurrentUserId, CurrentUserRole } from '../../auth/jwt.decorators';
+import type { Role } from '../../rbac/roles';
 
 @Controller('ai/hints')
 @UseGuards(JwtGuard)
@@ -24,6 +25,7 @@ export class HintsController {
   @Get(':cardId')
   async getHint(
     @CurrentUserId() userId: string,
+    @CurrentUserRole() role: Role,
     @Param('cardId', new ParseUUIDPipe()) cardId: string,
     @Query() query: unknown,
   ) {
@@ -31,6 +33,7 @@ export class HintsController {
     return this.service.getHintForCard({
       userId,
       cardId,
+      role,
       ...(q.lang !== undefined && { langOverride: q.lang }),
     });
   }

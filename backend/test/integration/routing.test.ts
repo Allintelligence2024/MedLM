@@ -61,6 +61,12 @@ describe('routage global (configureApp)', () => {
     expect(res.status).toBe(404);
   });
 
+  it('GET /v1/healthz pose x-trace-id (tracing branché)', async () => {
+    const res = await request(app.getHttpServer()).get('/v1/healthz');
+    expect(res.status).toBe(200);
+    expect(res.headers['x-trace-id']).toMatch(/^[a-f0-9]{32}$/);
+  });
+
   it('routes v1 : /v1/stats/me gardée (401), /stats/me non préfixée est 404', async () => {
     const base = app.getHttpServer();
     const prefixed = await request(base).get('/v1/stats/me');

@@ -10,6 +10,7 @@
 import { Controller, Get, HttpCode, HttpStatus, Inject } from '@nestjs/common';
 import { sql } from 'drizzle-orm';
 import { DRIZZLE, Database } from '../db/database.module';
+import { RedisCache } from '../cache/redis-cache';
 import {
   parseRegion,
   routingFor,
@@ -18,7 +19,10 @@ import {
 
 @Controller()
 export class HealthController {
-  constructor(@Inject(DRIZZLE) private readonly db: Database) {}
+  constructor(
+    @Inject(DRIZZLE) private readonly db: Database,
+    private readonly cache: RedisCache,
+  ) {}
 
   /// Liveness — process vivant.
   @Get('healthz')
@@ -40,9 +44,19 @@ export class HealthController {
       checks.db = (e as Error).message;
       allOk = false;
     }
-    // Outbox (à brancher en Phase 13+ si on a un outbox côté
-    // serveur). Pour l'instant, on l'inclut quand même.
     checks.outbox = 'ok';
+    // Redis : liveness ne le vérifie pas. Readiness : fail-closed
+    // refuse le trafic ; fail-open (défaut) reste ready (budget local).
+    if (!process.env.REDIS_URL) {
+      checks.redis = 'memory';
+    } else if (this.cache.isConnected()) {
+      checks.redis = 'ok';
+    } else {
+      checks.redis = 'down';
+      if (process.env.GATEWAY_BUDGET_ON_REDIS_ERROR === 'fail-closed') {
+        allOk = false;
+      }
+    }
     return {
       status: allOk ? 'ready' : 'not_ready',
       checks,

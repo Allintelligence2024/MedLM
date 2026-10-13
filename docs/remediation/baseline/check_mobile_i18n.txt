@@ -1,0 +1,1 @@
+✅ i18n mobile conforme (213 clés × 3 langues, placeholders alignés, 0 chaîne en dur dans lib/ui/).

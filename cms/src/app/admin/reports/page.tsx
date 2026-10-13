@@ -5,9 +5,7 @@
 import { useEffect, useState } from 'react';
 import type { CardReport } from '@/lib/types';
 import { CheckCircle2, X } from 'lucide-react';
-import { getToken } from '@/lib/auth';
-
-const API = process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:3000';
+import { apiFetch } from '@/lib/api';
 
 export default function ReportsPage() {
   const [reports, setReports] = useState<CardReport[]>([]);
@@ -18,11 +16,7 @@ export default function ReportsPage() {
   useEffect(() => {
     async function load() {
       try {
-        const res = await fetch(`${API}/v1/content/reports`, {
-          headers: { Authorization: `Bearer ${getToken()}` },
-        });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = await res.json();
+        const data = await apiFetch<{ items?: CardReport[] }>('/v1/content/reports');
         setReports((data.items ?? []) as CardReport[]);
       } catch (e) {
         setError((e as Error).message);
@@ -35,15 +29,10 @@ export default function ReportsPage() {
 
   async function updateStatus(id: string, status: 'investigating' | 'resolved' | 'dismissed') {
     try {
-      const res = await fetch(`${API}/v1/content/reports/${id}`, {
+      await apiFetch(`/v1/content/reports/${id}`, {
         method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${getToken()}`,
-        },
         body: JSON.stringify({ status }),
       });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
       setReports((prev) => prev.map((r) => (r.id === id ? { ...r, status } : r)));
     } catch (e) {
       setError((e as Error).message);

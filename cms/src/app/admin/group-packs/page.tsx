@@ -11,6 +11,7 @@ import { useState } from 'react';
 import { Search, Users } from 'lucide-react';
 import { apiFetch } from '@/lib/api';
 import { Field, describe } from '@/components/admin/ui';
+import { OutOfScopeBanner } from '@/components/admin/out_of_scope';
 
 interface PackMember {
   user_id: string;
@@ -59,6 +60,9 @@ export default function GroupPacksPage() {
 
   return (
     <div>
+      <div className="mb-4">
+        <OutOfScopeBanner feature="La gestion packs de groupe dans le CMS" />
+      </div>
       <header className="mb-6 flex items-center gap-3">
         <Users className="h-5 w-5 text-slate-500" />
         <h1 className="text-xl font-semibold">Packs de groupe</h1>

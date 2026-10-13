@@ -128,7 +128,7 @@ class JwtVerifier {
     if (exp == null) {
       throw JwtVerificationException('claim "exp" manquant');
     }
-    if (exp * 1000 < currentMs) {
+    if (exp * 1000 <= currentMs) {
       throw JwtVerificationException('JWT expiré');
     }
     final nbf = (payload['nbf'] as num?)?.toInt();

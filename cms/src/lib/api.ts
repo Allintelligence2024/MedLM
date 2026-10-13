@@ -1,16 +1,7 @@
-// Client API côté CMS — parle au backend NestJS.
-//
-// Audit P2-7 : l'authentification est désormais centralisée ici. Avant,
-// chaque page collait `localStorage.getItem('cms_token')` dans ses
-// en-têtes à la main, et un 401 se traduisait par une page vide sans
-// explication. `apiFetch` pose le jeton et redirige vers le login quand
-// la session est expirée.
-import { authHeaders, clearSession, redirectToLogin } from './auth';
+// Client API CMS — toutes les requêtes Nest passent par le proxy
+// same-origin `/api/backend` pour que le cookie HttpOnly voyage.
+import { clearSession, isAuthenticated, redirectToLogin } from './auth';
 
-const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:3000';
-
-/// Erreur d'API typée — permet aux appelants de distinguer un 404
-/// d'une panne réseau.
 export class ApiError extends Error {
   constructor(
     readonly status: number,
@@ -21,18 +12,30 @@ export class ApiError extends Error {
   }
 }
 
-export async function apiFetch<T>(path: string, init?: RequestInit): Promise<T> {
-  const res = await fetch(`${baseUrl}${path}`, {
+async function raw(path: string, init?: RequestInit): Promise<Response> {
+  return fetch(`/api/backend${path.startsWith('/') ? path : `/${path}`}`, {
     ...init,
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
-      ...authHeaders(),
+      'X-Platform': 'cms',
       ...(init?.headers ?? {}),
     },
   });
-  if (res.status === 401) {
-    // Session expirée ou révoquée : on nettoie et on renvoie vers le
-    // login plutôt que d'afficher une page vide.
+}
+
+export async function apiFetch<T>(path: string, init?: RequestInit): Promise<T> {
+  let res = await raw(path, init);
+  if (res.status === 401 && isAuthenticated()) {
+    const refreshed = await fetch('/api/auth/refresh', {
+      method: 'POST',
+      credentials: 'include',
+    });
+    if (refreshed.ok) {
+      res = await raw(path, init);
+    }
+  }
+  if (res.status === 401 && isAuthenticated()) {
     clearSession();
     redirectToLogin();
     throw new ApiError(401, 'session expirée');
@@ -41,7 +44,6 @@ export async function apiFetch<T>(path: string, init?: RequestInit): Promise<T> 
     const text = await res.text();
     throw new ApiError(res.status, `API ${res.status}: ${text}`);
   }
-  // 204 No Content : `res.json()` jetterait sur un corps vide.
   if (res.status === 204) return undefined as T;
   return res.json() as Promise<T>;
 }
